@@ -1,4 +1,5 @@
-var bandsGeneresInfo = {
+var bandsGeneresInfo = 
+{
 "bands_generes": [
 	{
 		"id_band" : "0020f19414b5f2874a0bfacd9d511b84",
@@ -2875,9 +2876,65 @@ var bandsGeneresInfo = {
 	{
 		"id_band" : "94ca28ea8d99549c2280bcc93f98c853",
 		"id_genere" : "17b8dff9566f6c98062ad5811c762f44"
+	},
+	{
+		"id_band" : "6d89517dbd1a634b097f81f5bdbb07a2",
+		"id_genere" : "8a055a3739ca4b38b9c5a188d6295830"
+	},
+	{
+		"id_band" : "eb3bfb5a3ccdd4483aabc307ae236066",
+		"id_genere" : "eaa57a9b4248ce3968e718895e1c2f04"
+	},
+	{
+		"id_band" : "0ab20b5ad4d15b445ed94fa4eebb18d8",
+		"id_genere" : "7a3808eef413b514776a7202fd2cb94f"
+	},
+	{
+		"id_band" : "12e93f5fab5f7d16ef37711ef264d282",
+		"id_genere" : "a29864963573d7bb061691ff823b97dd"
+	},
+	{
+		"id_band" : "33f03dd57f667d41ac77c6baec352a81",
+		"id_genere" : "bb273189d856ee630d92fbc0274178bb"
+	},
+	{
+		"id_band" : "399033f75fcf47d6736c9c5209222ab8",
+		"id_genere" : "d5a9c37bc91d6d5d55a3c2e38c3bf97d"
+	},
+	{
+		"id_band" : "399033f75fcf47d6736c9c5209222ab8",
+		"id_genere" : "0cf6ece7453aa814e08cb7c33bd39846"
+	},
+	{
+		"id_band" : "399033f75fcf47d6736c9c5209222ab8",
+		"id_genere" : "885ba57d521cd859bacf6f76fb37ef7c"
+	},
+	{
+		"id_band" : "d9bc1db8c13da3a131d853237e1f05b2",
+		"id_genere" : "17b8dff9566f6c98062ad5811c762f44"
+	},
+	{
+		"id_band" : "d9bc1db8c13da3a131d853237e1f05b2",
+		"id_genere" : "a29864963573d7bb061691ff823b97dd"
+	},
+	{
+		"id_band" : "d9bc1db8c13da3a131d853237e1f05b2",
+		"id_genere" : "ea9565886c02dbdc4892412537e607d7"
+	},
+	{
+		"id_band" : "1197a69404ee9475146f3d631de12bde",
+		"id_genere" : "885ba57d521cd859bacf6f76fb37ef7c"
+	},
+	{
+		"id_band" : "1197a69404ee9475146f3d631de12bde",
+		"id_genere" : "9c093ec7867ba1df61e27a5943168b90"
+	},
+	{
+		"id_band" : "1197a69404ee9475146f3d631de12bde",
+		"id_genere" : "ff7aa8ca226e1b753b0a71d7f0f2e174"
 	}
-]};
-
+]}
+;
 function loadBandsGeneres(){
-  return (bandsGeneresInfo);
+  return(bandsGeneresInfo);
 }

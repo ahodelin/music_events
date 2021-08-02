@@ -1,4 +1,5 @@
-var bandsEventsInfo = {
+var bandsEventsInfo = 
+{
 "bands_events": [
 	{
 		"id_band" : "0020f19414b5f2874a0bfacd9d511b84",
@@ -2139,9 +2140,49 @@ var bandsEventsInfo = {
 	{
 		"id_band" : "24ff2b4548c6bc357d9d9ab47882661e",
 		"id_event" : "73d6ec35ad0e4ef8f213ba89d8bfd7d7"
+	},
+	{
+		"id_band" : "fd85bfffd5a0667738f6110281b25db8",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "1cdd53cece78d6e8dffcf664fa3d1be2",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "6d89517dbd1a634b097f81f5bdbb07a2",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "eb3bfb5a3ccdd4483aabc307ae236066",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "0ab20b5ad4d15b445ed94fa4eebb18d8",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "33f03dd57f667d41ac77c6baec352a81",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "399033f75fcf47d6736c9c5209222ab8",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "d9bc1db8c13da3a131d853237e1f05b2",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "1197a69404ee9475146f3d631de12bde",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "12e93f5fab5f7d16ef37711ef264d282",
+		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
 	}
-]};
-
+]}
+;
 function loadBandsEvents(){
-  return (bandsEventsInfo);
+  return(bandsEventsInfo);
 }

@@ -1,10 +1,11 @@
-var countriesInfo = {
+var countriesInfo = 
+{
 "countries": [
 	{
 		"id_country" : "d8b00929dec65d422303256336ada04f",
 		"country" : "Germany",
 		"flag" : "de",
-		"bands" : 186
+		"bands" : 194
 	},
 	{
 		"id_country" : "f75d91cdd36b85cc4a8dfeca4f24fa14",
@@ -210,8 +211,8 @@ var countriesInfo = {
 		"flag" : "mx",
 		"bands" : 1
 	}
-]};
-
+]}
+;
 function loadCountries(){
-  return (countriesInfo);
+  return(countriesInfo);
 }

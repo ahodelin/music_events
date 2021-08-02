@@ -1,4 +1,5 @@
-var bandsInfo ={
+var bandsInfo = 
+{
 "bands": [
 	{
 		"id_band" : "8b427a493fc39574fc801404bc032a2f",
@@ -982,6 +983,15 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
+		"id_band" : "0ab20b5ad4d15b445ed94fa4eebb18d8",
+		"band" : "Defocus",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 1,
+		"events" : 1
+	},
+	{
 		"id_band" : "7fc454efb6df96e012e0f937723d24aa",
 		"band" : "Demored",
 		"country" : "Germany",
@@ -1078,6 +1088,15 @@ var bandsInfo ={
 		"flag" : "no",
 		"likes" : "y",
 		"generes" : 1,
+		"events" : 1
+	},
+	{
+		"id_band" : "d9bc1db8c13da3a131d853237e1f05b2",
+		"band" : "Disbelief",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 3,
 		"events" : 1
 	},
 	{
@@ -1258,6 +1277,15 @@ var bandsInfo ={
 		"flag" : "de",
 		"likes" : "y",
 		"generes" : 2,
+		"events" : 1
+	},
+	{
+		"id_band" : "1197a69404ee9475146f3d631de12bde",
+		"band" : "End of Green",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 3,
 		"events" : 1
 	},
 	{
@@ -2509,6 +2537,15 @@ var bandsInfo ={
 		"flag" : "de",
 		"likes" : "y",
 		"generes" : 2,
+		"events" : 2
+	},
+	{
+		"id_band" : "33f03dd57f667d41ac77c6baec352a81",
+		"band" : "need2destroy",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 1,
 		"events" : 1
 	},
 	{
@@ -2563,6 +2600,15 @@ var bandsInfo ={
 		"flag" : "de",
 		"likes" : "y",
 		"generes" : 2,
+		"events" : 1
+	},
+	{
+		"id_band" : "eb3bfb5a3ccdd4483aabc307ae236066",
+		"band" : "No Brainer",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 1,
 		"events" : 1
 	},
 	{
@@ -2845,6 +2891,15 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
+		"id_band" : "12e93f5fab5f7d16ef37711ef264d282",
+		"band" : "Raw Ensemble",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 1,
+		"events" : 1
+	},
+	{
 		"id_band" : "4094ffd492ba473a2a7bea1b19b1662d",
 		"band" : "Reactory",
 		"country" : "Germany",
@@ -2896,7 +2951,7 @@ var bandsInfo ={
 		"flag" : "de",
 		"likes" : "y",
 		"generes" : 1,
-		"events" : 4
+		"events" : 5
 	},
 	{
 		"id_band" : "1e88302efcfc873691f0c31be4e2a388",
@@ -3646,6 +3701,15 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
+		"id_band" : "399033f75fcf47d6736c9c5209222ab8",
+		"band" : "Undertow",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 3,
+		"events" : 1
+	},
+	{
 		"id_band" : "6f195d8f9fe09d45d2e680f7d7157541",
 		"band" : "Une Misere",
 		"country" : "Iceland",
@@ -3844,6 +3908,15 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
+		"id_band" : "6d89517dbd1a634b097f81f5bdbb07a2",
+		"band" : "Witchhunter",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "m",
+		"generes" : 1,
+		"events" : 1
+	},
+	{
 		"id_band" : "db46d9a37b31baa64cb51604a2e4939a",
 		"band" : "Within Destruction",
 		"country" : "Slovenia",
@@ -3915,8 +3988,8 @@ var bandsInfo ={
 		"generes" : 2,
 		"events" : 1
 	}
-]};
-
+]}
+;
 function loadBands(){
   return(bandsInfo);
 }
