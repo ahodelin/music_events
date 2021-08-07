@@ -1776,6 +1776,10 @@ var bandsCountriesInfo =
 	{
 		"id_band" : "1197a69404ee9475146f3d631de12bde",
 		"id_country" : "d8b00929dec65d422303256336ada04f"
+	},
+	{
+		"id_band" : "fdcbfded0aaf369d936a70324b39c978",
+		"id_country" : "d8b00929dec65d422303256336ada04f"
 	}
 ]}
 ;

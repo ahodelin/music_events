@@ -794,6 +794,15 @@ var bandsInfo =
 		"events" : 1
 	},
 	{
+		"id_band" : "fdcbfded0aaf369d936a70324b39c978",
+		"band" : "Crossplane",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 2,
+		"events" : 1
+	},
+	{
 		"id_band" : "47b23e889175dde5d6057db61cb52847",
 		"band" : "Crowbar",
 		"country" : "USA",
@@ -1709,7 +1718,7 @@ var bandsInfo =
 		"flag" : "de",
 		"likes" : "y",
 		"generes" : 2,
-		"events" : 3
+		"events" : 4
 	},
 	{
 		"id_band" : "4f48e858e9ed95709458e17027bb94bf",

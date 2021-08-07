@@ -2180,6 +2180,14 @@ var bandsEventsInfo =
 	{
 		"id_band" : "12e93f5fab5f7d16ef37711ef264d282",
 		"id_event" : "441306dd21b61d9a52e04b9e177cc9b5"
+	},
+	{
+		"id_band" : "fdcbfded0aaf369d936a70324b39c978",
+		"id_event" : "13afebb96e2d2d27345bd3b1fefc4db0"
+	},
+	{
+		"id_band" : "52ee4c6902f6ead006b0fb2f3e2d7771",
+		"id_event" : "13afebb96e2d2d27345bd3b1fefc4db0"
 	}
 ]}
 ;

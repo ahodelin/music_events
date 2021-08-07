@@ -768,6 +768,14 @@ var eventsInfo =
 		"event" : "Jubiläumswoche 25 Jahre Hexenhaus",
 		"place" : "Ulm (Hexenhaus)",
 		"bands" : 10
+	},
+	{
+		"id_event" : "13afebb96e2d2d27345bd3b1fefc4db0",
+		"year" : 2021.0,
+		"date" : "7.8.2021",
+		"event" : "Crossplane & Hängerbänd",
+		"place" : "Mainz (KUZ - Kulturzentrum)",
+		"bands" : 2
 	}
 ]}
 ;

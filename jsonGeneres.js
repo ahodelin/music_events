@@ -114,7 +114,7 @@ var generesInfo =
 	{
 		"id_genere" : "eaa57a9b4248ce3968e718895e1c2f04",
 		"genere" : "Metal",
-		"bands" : 6
+		"bands" : 7
 	},
 	{
 		"id_genere" : "ff7aa8ca226e1b753b0a71d7f0f2e174",
@@ -219,7 +219,7 @@ var generesInfo =
 	{
 		"id_genere" : "6add228b14f132e14ae9da754ef070c5",
 		"genere" : "Rock'n'Roll",
-		"bands" : 3
+		"bands" : 4
 	},
 	{
 		"id_genere" : "239401e2c0d502df7c9009439bdb5bd3",

@@ -2930,8 +2930,12 @@ var bandsGeneresInfo =
 		"id_genere" : "9c093ec7867ba1df61e27a5943168b90"
 	},
 	{
-		"id_band" : "1197a69404ee9475146f3d631de12bde",
-		"id_genere" : "ff7aa8ca226e1b753b0a71d7f0f2e174"
+		"id_band" : "fdcbfded0aaf369d936a70324b39c978",
+		"id_genere" : "eaa57a9b4248ce3968e718895e1c2f04"
+	},
+	{
+		"id_band" : "fdcbfded0aaf369d936a70324b39c978",
+		"id_genere" : "6add228b14f132e14ae9da754ef070c5"
 	}
 ]}
 ;

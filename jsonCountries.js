@@ -5,7 +5,7 @@ var countriesInfo =
 		"id_country" : "d8b00929dec65d422303256336ada04f",
 		"country" : "Germany",
 		"flag" : "de",
-		"bands" : 194
+		"bands" : 195
 	},
 	{
 		"id_country" : "f75d91cdd36b85cc4a8dfeca4f24fa14",
