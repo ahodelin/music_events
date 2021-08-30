@@ -455,7 +455,7 @@ var eventsInfo =
 		"date" : "12.4.2019",
 		"event" : "Taunus Metal Festival XI",
 		"place" : "Oberursel",
-		"bands" : 20
+		"bands" : 21
 	},
 	{
 		"id_event" : "a2cc2bc245b90654e721d7040c028647",
@@ -776,6 +776,14 @@ var eventsInfo =
 		"event" : "Crossplane & Hängerbänd",
 		"place" : "Mainz (KUZ - Kulturzentrum)",
 		"bands" : 2
+	},
+	{
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8",
+		"year" : 2021.0,
+		"date" : "28.8.2021",
+		"event" : "Wild Board Wars III",
+		"place" : "Frankfurt (Das Bett)",
+		"bands" : 9
 	}
 ]}
 ;

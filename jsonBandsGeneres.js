@@ -1346,10 +1346,6 @@ var bandsGeneresInfo =
 		"id_genere" : "04ae76937270105919847d05aee582b4"
 	},
 	{
-		"id_band" : "754230e2c158107a2e93193c829e9e59",
-		"id_genere" : "a29864963573d7bb061691ff823b97dd"
-	},
-	{
 		"id_band" : "75ab0270163731ee05f35640d56ef473",
 		"id_genere" : "c08ed51a7772c1f8352ad69071187515"
 	},
@@ -1762,15 +1758,15 @@ var bandsGeneresInfo =
 		"id_genere" : "a68d5b72c2f98613f511337a59312f78"
 	},
 	{
-		"id_band" : "91a9663d4fd5739494148a52d827fa36",
+		"id_band" : "4bb93d90453dd63cc1957a033f7855c7",
 		"id_genere" : "17b8dff9566f6c98062ad5811c762f44"
 	},
 	{
-		"id_band" : "91a9663d4fd5739494148a52d827fa36",
+		"id_band" : "4bb93d90453dd63cc1957a033f7855c7",
 		"id_genere" : "7a3808eef413b514776a7202fd2cb94f"
 	},
 	{
-		"id_band" : "91a9663d4fd5739494148a52d827fa36",
+		"id_band" : "4bb93d90453dd63cc1957a033f7855c7",
 		"id_genere" : "a29864963573d7bb061691ff823b97dd"
 	},
 	{
@@ -2936,6 +2932,42 @@ var bandsGeneresInfo =
 	{
 		"id_band" : "fdcbfded0aaf369d936a70324b39c978",
 		"id_genere" : "6add228b14f132e14ae9da754ef070c5"
+	},
+	{
+		"id_band" : "a8759e3cf148ceb4f7ad82b68cdaf5a8",
+		"id_genere" : "04ae76937270105919847d05aee582b4"
+	},
+	{
+		"id_band" : "470f3f69a2327481d26309dc65656f44",
+		"id_genere" : "17b8dff9566f6c98062ad5811c762f44"
+	},
+	{
+		"id_band" : "470f3f69a2327481d26309dc65656f44",
+		"id_genere" : "885ba57d521cd859bacf6f76fb37ef7c"
+	},
+	{
+		"id_band" : "e254616b4a5bd5aaa54f90a3985ed184",
+		"id_genere" : "17b8dff9566f6c98062ad5811c762f44"
+	},
+	{
+		"id_band" : "e254616b4a5bd5aaa54f90a3985ed184",
+		"id_genere" : "a68d5b72c2f98613f511337a59312f78"
+	},
+	{
+		"id_band" : "302ebe0389198972c223f4b72894780a",
+		"id_genere" : "a29864963573d7bb061691ff823b97dd"
+	},
+	{
+		"id_band" : "eaeaed2d9f3137518a5c8c7e6733214f",
+		"id_genere" : "36e61931478cf781e59da3b5ae2ee64e"
+	},
+	{
+		"id_band" : "8ccd65d7f0f028405867991ae3eaeb56",
+		"id_genere" : "04ae76937270105919847d05aee582b4"
+	},
+	{
+		"id_band" : "8ccd65d7f0f028405867991ae3eaeb56",
+		"id_genere" : "585f02a68092351a078fc43a21a56564"
 	}
 ]}
 ;

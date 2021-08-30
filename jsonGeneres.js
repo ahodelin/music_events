@@ -4,7 +4,7 @@ var generesInfo =
 	{
 		"id_genere" : "17b8dff9566f6c98062ad5811c762f44",
 		"genere" : "Death Metal",
-		"bands" : 93
+		"bands" : 95
 	},
 	{
 		"id_genere" : "a29864963573d7bb061691ff823b97dd",
@@ -14,12 +14,12 @@ var generesInfo =
 	{
 		"id_genere" : "a68d5b72c2f98613f511337a59312f78",
 		"genere" : "Black Metal",
-		"bands" : 40
+		"bands" : 41
 	},
 	{
 		"id_genere" : "04ae76937270105919847d05aee582b4",
 		"genere" : "Heavy Metal",
-		"bands" : 34
+		"bands" : 36
 	},
 	{
 		"id_genere" : "7fa69773873856d74f68a6824ca4b691",
@@ -27,13 +27,13 @@ var generesInfo =
 		"bands" : 26
 	},
 	{
-		"id_genere" : "01864d382accf1cdb077e42032b16340",
-		"genere" : "Melodic Death Metal",
+		"id_genere" : "d5a9c37bc91d6d5d55a3c2e38c3bf97d",
+		"genere" : "Groove Metal",
 		"bands" : 24
 	},
 	{
-		"id_genere" : "d5a9c37bc91d6d5d55a3c2e38c3bf97d",
-		"genere" : "Groove Metal",
+		"id_genere" : "01864d382accf1cdb077e42032b16340",
+		"genere" : "Melodic Death Metal",
 		"bands" : 24
 	},
 	{
@@ -49,7 +49,7 @@ var generesInfo =
 	{
 		"id_genere" : "885ba57d521cd859bacf6f76fb37ef7c",
 		"genere" : "Doom Metal",
-		"bands" : 17
+		"bands" : 18
 	},
 	{
 		"id_genere" : "dcd00c11302e3b16333943340d6b4a6b",
@@ -64,7 +64,7 @@ var generesInfo =
 	{
 		"id_genere" : "585f02a68092351a078fc43a21a56564",
 		"genere" : "Speed Metal",
-		"bands" : 12
+		"bands" : 13
 	},
 	{
 		"id_genere" : "4fb2ada7c5440a256ed0e03c967fce74",
@@ -107,28 +107,18 @@ var generesInfo =
 		"bands" : 8
 	},
 	{
-		"id_genere" : "4cfbb125e9878528bab91d12421134d8",
-		"genere" : "Rock",
-		"bands" : 7
-	},
-	{
 		"id_genere" : "eaa57a9b4248ce3968e718895e1c2f04",
 		"genere" : "Metal",
 		"bands" : 7
 	},
 	{
-		"id_genere" : "ff7aa8ca226e1b753b0a71d7f0f2e174",
-		"genere" : "Alternative Rock",
-		"bands" : 6
+		"id_genere" : "4cfbb125e9878528bab91d12421134d8",
+		"genere" : "Rock",
+		"bands" : 7
 	},
 	{
 		"id_genere" : "924ae2289369a9c1d279d1d59088be64",
 		"genere" : "Slamming Brutal Death Metal",
-		"bands" : 6
-	},
-	{
-		"id_genere" : "8c42e2739ed83a54e5b2781b504c92de",
-		"genere" : "Folk Metal",
 		"bands" : 6
 	},
 	{
@@ -147,18 +137,13 @@ var generesInfo =
 		"bands" : 6
 	},
 	{
-		"id_genere" : "deb8040131c3f6a3caf6a616b34ac482",
-		"genere" : "Goregrind",
-		"bands" : 5
+		"id_genere" : "8c42e2739ed83a54e5b2781b504c92de",
+		"genere" : "Folk Metal",
+		"bands" : 6
 	},
 	{
-		"id_genere" : "60e1fa5bfa060b5fff1db1ca1bae4f99",
-		"genere" : "Post-Metal",
-		"bands" : 5
-	},
-	{
-		"id_genere" : "7349da19c2ad6654280ecf64ce42b837",
-		"genere" : "Oi!",
+		"id_genere" : "36e61931478cf781e59da3b5ae2ee64e",
+		"genere" : "Melodic Heavy Metal",
 		"bands" : 5
 	},
 	{
@@ -167,13 +152,33 @@ var generesInfo =
 		"bands" : 5
 	},
 	{
+		"id_genere" : "5bf88dc6f6501943cc5bc4c42c71b36b",
+		"genere" : "Punk",
+		"bands" : 5
+	},
+	{
+		"id_genere" : "ff7aa8ca226e1b753b0a71d7f0f2e174",
+		"genere" : "Alternative Rock",
+		"bands" : 5
+	},
+	{
 		"id_genere" : "34d8a5e79a59df217c6882ee766c850a",
 		"genere" : "Industrial Metal",
 		"bands" : 5
 	},
 	{
-		"id_genere" : "5bf88dc6f6501943cc5bc4c42c71b36b",
-		"genere" : "Punk",
+		"id_genere" : "deb8040131c3f6a3caf6a616b34ac482",
+		"genere" : "Goregrind",
+		"bands" : 5
+	},
+	{
+		"id_genere" : "7349da19c2ad6654280ecf64ce42b837",
+		"genere" : "Oi!",
+		"bands" : 5
+	},
+	{
+		"id_genere" : "60e1fa5bfa060b5fff1db1ca1bae4f99",
+		"genere" : "Post-Metal",
 		"bands" : 5
 	},
 	{
@@ -187,13 +192,13 @@ var generesInfo =
 		"bands" : 4
 	},
 	{
-		"id_genere" : "d5d0458ada103152d94ff3828bf33909",
-		"genere" : "Progressive Rock",
+		"id_genere" : "6add228b14f132e14ae9da754ef070c5",
+		"genere" : "Rock'n'Roll",
 		"bands" : 4
 	},
 	{
-		"id_genere" : "36e61931478cf781e59da3b5ae2ee64e",
-		"genere" : "Melodic Heavy Metal",
+		"id_genere" : "d5d0458ada103152d94ff3828bf33909",
+		"genere" : "Progressive Rock",
 		"bands" : 4
 	},
 	{
@@ -207,38 +212,13 @@ var generesInfo =
 		"bands" : 4
 	},
 	{
-		"id_genere" : "97a6395e2906e8f41d27e53a40aebae4",
-		"genere" : "Symphonic Death Metal",
-		"bands" : 3
-	},
-	{
-		"id_genere" : "de62af4f3af4adf9e8c8791071ddafe3",
-		"genere" : "Symphonic Black Metal",
-		"bands" : 3
-	},
-	{
-		"id_genere" : "6add228b14f132e14ae9da754ef070c5",
-		"genere" : "Rock'n'Roll",
-		"bands" : 4
-	},
-	{
-		"id_genere" : "239401e2c0d502df7c9009439bdb5bd3",
-		"genere" : "Post-Black Metal",
-		"bands" : 3
-	},
-	{
-		"id_genere" : "6de7f9aa9c912bf8c81a9ce2bfc062bd",
-		"genere" : "Heavy Hardcore",
+		"id_genere" : "bbc90d6701da0aa2bf7f6f2acb79e18c",
+		"genere" : "Blues Rock",
 		"bands" : 3
 	},
 	{
 		"id_genere" : "2bd0f5e2048d09734470145332ecdd24",
 		"genere" : "Epic Doom Metal",
-		"bands" : 3
-	},
-	{
-		"id_genere" : "1d67aeafcd3b898e05a75da0fdc01365",
-		"genere" : "Crust Metal",
 		"bands" : 3
 	},
 	{
@@ -252,8 +232,8 @@ var generesInfo =
 		"bands" : 3
 	},
 	{
-		"id_genere" : "bbc90d6701da0aa2bf7f6f2acb79e18c",
-		"genere" : "Blues Rock",
+		"id_genere" : "97a6395e2906e8f41d27e53a40aebae4",
+		"genere" : "Symphonic Death Metal",
 		"bands" : 3
 	},
 	{
@@ -262,33 +242,38 @@ var generesInfo =
 		"bands" : 3
 	},
 	{
+		"id_genere" : "1d67aeafcd3b898e05a75da0fdc01365",
+		"genere" : "Crust Metal",
+		"bands" : 3
+	},
+	{
+		"id_genere" : "6de7f9aa9c912bf8c81a9ce2bfc062bd",
+		"genere" : "Heavy Hardcore",
+		"bands" : 3
+	},
+	{
+		"id_genere" : "239401e2c0d502df7c9009439bdb5bd3",
+		"genere" : "Post-Black Metal",
+		"bands" : 3
+	},
+	{
+		"id_genere" : "de62af4f3af4adf9e8c8791071ddafe3",
+		"genere" : "Symphonic Black Metal",
+		"bands" : 3
+	},
+	{
 		"id_genere" : "8dae638cc517185f1e6f065fcd5e8af3",
 		"genere" : "Melodic Hardcore",
 		"bands" : 3
 	},
 	{
-		"id_genere" : "a279b219de7726798fc2497d48bc0402",
-		"genere" : "Southern Metal",
-		"bands" : 2
-	},
-	{
-		"id_genere" : "b86219c2df5a0d889f490f88ff22e228",
-		"genere" : "Avant-garde Black Metal",
-		"bands" : 2
-	},
-	{
-		"id_genere" : "72616c6de7633d9ac97165fc7887fa3a",
-		"genere" : "Rap Rock",
-		"bands" : 2
-	},
-	{
-		"id_genere" : "781f547374aef3a99c113ad5a9c12981",
-		"genere" : "Pornogrind",
-		"bands" : 2
-	},
-	{
 		"id_genere" : "4c4f4d32429ac8424cb110b4117036e4",
 		"genere" : "Beatdown",
+		"bands" : 2
+	},
+	{
+		"id_genere" : "a279b219de7726798fc2497d48bc0402",
+		"genere" : "Southern Metal",
 		"bands" : 2
 	},
 	{
@@ -302,8 +287,23 @@ var generesInfo =
 		"bands" : 2
 	},
 	{
-		"id_genere" : "c1bfb800f95ae493952b6db9eb4f0209",
-		"genere" : "Space Rock",
+		"id_genere" : "e7faf05839e2f549fb3455df7327942b",
+		"genere" : "Ska Punk",
+		"bands" : 2
+	},
+	{
+		"id_genere" : "b86219c2df5a0d889f490f88ff22e228",
+		"genere" : "Avant-garde Black Metal",
+		"bands" : 2
+	},
+	{
+		"id_genere" : "781f547374aef3a99c113ad5a9c12981",
+		"genere" : "Pornogrind",
+		"bands" : 2
+	},
+	{
+		"id_genere" : "72616c6de7633d9ac97165fc7887fa3a",
+		"genere" : "Rap Rock",
 		"bands" : 2
 	},
 	{
@@ -312,19 +312,24 @@ var generesInfo =
 		"bands" : 2
 	},
 	{
-		"id_genere" : "1eef6db16bfc0aaf8904df1503895979",
-		"genere" : "Dark Rock",
-		"bands" : 2
-	},
-	{
 		"id_genere" : "c08ed51a7772c1f8352ad69071187515",
 		"genere" : "Post-Grunge",
 		"bands" : 2
 	},
 	{
-		"id_genere" : "e7faf05839e2f549fb3455df7327942b",
-		"genere" : "Ska Punk",
+		"id_genere" : "1eef6db16bfc0aaf8904df1503895979",
+		"genere" : "Dark Rock",
 		"bands" : 2
+	},
+	{
+		"id_genere" : "c1bfb800f95ae493952b6db9eb4f0209",
+		"genere" : "Space Rock",
+		"bands" : 2
+	},
+	{
+		"id_genere" : "8de5a5b30fc3e013e9b52811fe6f3356",
+		"genere" : "Epic Heavy Metal",
+		"bands" : 1
 	},
 	{
 		"id_genere" : "2e9dfd2e07792b56179212f5b8f473e6",
@@ -552,8 +557,18 @@ var generesInfo =
 		"bands" : 1
 	},
 	{
+		"id_genere" : "fbe238aca6c496dcd05fb8d6d98f275b",
+		"genere" : "Symphonic Melodic Death Metal",
+		"bands" : 1
+	},
+	{
 		"id_genere" : "fad6ee4f3b0aded7d0974703e35ae032",
 		"genere" : "Trancecore",
+		"bands" : 1
+	},
+	{
+		"id_genere" : "fa20a7164233ec73db640970dae420cf",
+		"genere" : "Symphonic Power Metal",
 		"bands" : 1
 	},
 	{
@@ -562,13 +577,8 @@ var generesInfo =
 		"bands" : 1
 	},
 	{
-		"id_genere" : "fbe238aca6c496dcd05fb8d6d98f275b",
-		"genere" : "Symphonic Melodic Death Metal",
-		"bands" : 1
-	},
-	{
-		"id_genere" : "fa20a7164233ec73db640970dae420cf",
-		"genere" : "Symphonic Power Metal",
+		"id_genere" : "a178914dea39e23c117e164b05b43995",
+		"genere" : "Drone",
 		"bands" : 1
 	},
 	{
@@ -589,11 +599,6 @@ var generesInfo =
 	{
 		"id_genere" : "4144b216bf706803a5f17d7d0a9cf4a3",
 		"genere" : "Goth'n'Roll",
-		"bands" : 1
-	},
-	{
-		"id_genere" : "6fb9bf02fc5d663c1de8c117382bed0b",
-		"genere" : "Agressive Rock",
 		"bands" : 1
 	},
 	{
@@ -622,8 +627,8 @@ var generesInfo =
 		"bands" : 1
 	},
 	{
-		"id_genere" : "1e612d6c48bc9652afeb616536fced51",
-		"genere" : "Metal Covers",
+		"id_genere" : "6fb9bf02fc5d663c1de8c117382bed0b",
+		"genere" : "Agressive Rock",
 		"bands" : 1
 	},
 	{
@@ -632,8 +637,8 @@ var generesInfo =
 		"bands" : 1
 	},
 	{
-		"id_genere" : "a178914dea39e23c117e164b05b43995",
-		"genere" : "Drone",
+		"id_genere" : "1e612d6c48bc9652afeb616536fced51",
+		"genere" : "Metal Covers",
 		"bands" : 1
 	},
 	{
@@ -669,11 +674,6 @@ var generesInfo =
 	{
 		"id_genere" : "303d6389f4089fe9a87559515b84156d",
 		"genere" : "Symphonic Metal",
-		"bands" : 1
-	},
-	{
-		"id_genere" : "8de5a5b30fc3e013e9b52811fe6f3356",
-		"genere" : "Epic Heavy Metal",
 		"bands" : 1
 	}
 ]}
