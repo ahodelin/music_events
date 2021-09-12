@@ -126,6 +126,10 @@ var bandsEventsInfo =
 		"id_event" : "abefb7041d2488eadeedba9a0829b753"
 	},
 	{
+		"id_band" : "1056b63fdc3c5015cc4591aa9989c14f",
+		"id_event" : "f3603438cf79ee848cb2f5e4a5884663"
+	},
+	{
 		"id_band" : "108c58fc39b79afc55fac7d9edf4aa2a",
 		"id_event" : "43bcb284a3d1a0eea2c7923d45b7f14e"
 	},
@@ -1428,6 +1432,10 @@ var bandsEventsInfo =
 	{
 		"id_band" : "96682d9c9f1bed695dbf9176d3ee234c",
 		"id_event" : "eb2330cf8b87aa13aad89f32d6cfda18"
+	},
+	{
+		"id_band" : "96682d9c9f1bed695dbf9176d3ee234c",
+		"id_event" : "f3603438cf79ee848cb2f5e4a5884663"
 	},
 	{
 		"id_band" : "97ee29f216391d19f8769f79a1218a71",

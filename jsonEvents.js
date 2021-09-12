@@ -784,6 +784,14 @@ var eventsInfo =
 		"event" : "Wild Board Wars III",
 		"place" : "Frankfurt (Das Bett)",
 		"bands" : 9
+	},
+	{
+		"id_event" : "f3603438cf79ee848cb2f5e4a5884663",
+		"year" : 2021.0,
+		"date" : "11.9.2021",
+		"event" : "Alexander the Great in Exil",
+		"place" : "Mainz (Kulturcafé auf dem Campus)",
+		"bands" : 2
 	}
 ]}
 ;

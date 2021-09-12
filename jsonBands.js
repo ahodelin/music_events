@@ -817,7 +817,7 @@ var bandsInfo = {
 		"flag" : "de",
 		"likes" : "y",
 		"generes" : 1,
-		"events" : 4
+		"events" : 5
 	},
 	{
 		"id_band" : "b5d9c5289fe97968a5634b3e138bf9e2",
@@ -2923,7 +2923,7 @@ var bandsInfo = {
 		"flag" : "de",
 		"likes" : "y",
 		"generes" : 1,
-		"events" : 6
+		"events" : 7
 	},
 	{
 		"id_band" : "7f29efc2495ce308a8f4aa7bfc11d701",
