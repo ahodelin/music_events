@@ -1777,8 +1777,28 @@ var bandsCountriesInfo ={
 		"id_country" : "f75d91cdd36b85cc4a8dfeca4f24fa14"
 	},
 	{
-		"id_band" : "754230e2c158107a2e93193c829e9e59",
-		"id_country" : "907eba32d950bfab68227fd7ea22999b"
+		"id_band" : "8ccd65d7f0f028405867991ae3eaeb56",
+		"id_country" : "d8b00929dec65d422303256336ada04f"
+	},
+	{
+		"id_band" : "a8759e3cf148ceb4f7ad82b68cdaf5a8",
+		"id_country" : "d8b00929dec65d422303256336ada04f"
+	},
+	{
+		"id_band" : "470f3f69a2327481d26309dc65656f44",
+		"id_country" : "d8b00929dec65d422303256336ada04f"
+	},
+	{
+		"id_band" : "e254616b4a5bd5aaa54f90a3985ed184",
+		"id_country" : "d8b00929dec65d422303256336ada04f"
+	},
+	{
+		"id_band" : "302ebe0389198972c223f4b72894780a",
+		"id_country" : "d8b00929dec65d422303256336ada04f"
+	},
+	{
+		"id_band" : "eaeaed2d9f3137518a5c8c7e6733214f",
+		"id_country" : "d8b00929dec65d422303256336ada04f"
 	}
 ]}
 ;

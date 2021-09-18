@@ -1,4 +1,4 @@
-var bandsInfo ={
+var bandsInfo = {
 "bands": [
 	{
 		"id_band" : "8b427a493fc39574fc801404bc032a2f",
@@ -88,7 +88,7 @@ var bandsInfo ={
 		"flag" : "de",
 		"likes" : "m",
 		"generes" : 1,
-		"events" : 2
+		"events" : 4
 	},
 	{
 		"id_band" : "fe5b73c2c2cd2d9278c3835c791289b6",
@@ -784,15 +784,6 @@ var bandsInfo ={
 		"events" : 2
 	},
 	{
-		"id_band" : "754230e2c158107a2e93193c829e9e59",
-		"band" : "Crisix",
-		"country" : "Spain",
-		"flag" : "es",
-		"likes" : "y",
-		"generes" : 1,
-		"events" : 1
-	},
-	{
 		"id_band" : "9f19396638dd8111f2cee938fdf4e455",
 		"band" : "Critical Mess",
 		"country" : "Germany",
@@ -1243,6 +1234,15 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
+		"id_band" : "eaeaed2d9f3137518a5c8c7e6733214f",
+		"band" : "Elmsfire",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "n",
+		"generes" : 1,
+		"events" : 1
+	},
+	{
 		"id_band" : "c4ddbffb73c1c34d20bd5b3f425ce4b1",
 		"band" : "Elvenking",
 		"country" : "Italy",
@@ -1585,13 +1585,22 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
+		"id_band" : "e254616b4a5bd5aaa54f90a3985ed184",
+		"band" : "Goath",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 2,
+		"events" : 1
+	},
+	{
 		"id_band" : "d0a1fd0467dc892f0dc27711637c864e",
 		"band" : "God Dethroned",
 		"country" : "Netherlands",
 		"flag" : "nl",
 		"likes" : "y",
 		"generes" : 1,
-		"events" : 1
+		"events" : 2
 	},
 	{
 		"id_band" : "e271e871e304f59e62a263ffe574ea2d",
@@ -2041,7 +2050,7 @@ var bandsInfo ={
 		"flag" : "at",
 		"likes" : "m",
 		"generes" : 2,
-		"events" : 3
+		"events" : 2
 	},
 	{
 		"id_band" : "5f992768f7bb9592bed35b07197c87d0",
@@ -2050,7 +2059,7 @@ var bandsInfo ={
 		"flag" : "de",
 		"likes" : "m",
 		"generes" : 3,
-		"events" : 1
+		"events" : 2
 	},
 	{
 		"id_band" : "ca5a010309ffb20190558ec20d97e5b2",
@@ -2203,6 +2212,15 @@ var bandsInfo ={
 		"flag" : "de",
 		"likes" : "m",
 		"generes" : 2,
+		"events" : 1
+	},
+	{
+		"id_band" : "a8759e3cf148ceb4f7ad82b68cdaf5a8",
+		"band" : "Law Männer",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "m",
+		"generes" : 1,
 		"events" : 1
 	},
 	{
@@ -2800,6 +2818,15 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
+		"id_band" : "8ccd65d7f0f028405867991ae3eaeb56",
+		"band" : "Poisöned Speed",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 2,
+		"events" : 1
+	},
+	{
 		"id_band" : "db38e12f9903b156f9dc91fce2ef3919",
 		"band" : "Pokerface",
 		"country" : "Russia",
@@ -3331,6 +3358,15 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
+		"id_band" : "302ebe0389198972c223f4b72894780a",
+		"band" : "Stagewar",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 1,
+		"events" : 1
+	},
+	{
 		"id_band" : "0af74c036db52f48ad6cbfef6fee2999",
 		"band" : "Stam1na",
 		"country" : "Finland",
@@ -3531,6 +3567,15 @@ var bandsInfo ={
 	{
 		"id_band" : "4a7d9e528dada8409e88865225fb27c4",
 		"band" : "The Feelgood McLouds",
+		"country" : "Germany",
+		"flag" : "de",
+		"likes" : "y",
+		"generes" : 2,
+		"events" : 1
+	},
+	{
+		"id_band" : "470f3f69a2327481d26309dc65656f44",
+		"band" : "The Fog",
 		"country" : "Germany",
 		"flag" : "de",
 		"likes" : "y",

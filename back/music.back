@@ -259,7 +259,15 @@ ALTER TABLE music.v_countries OWNER TO postgres;
 CREATE VIEW music.v_events AS
  SELECT e.id_event,
     date_part('year'::text, e.date_event) AS year,
-    ((((date_part('day'::text, e.date_event) || '.'::text) || date_part('month'::text, e.date_event)) || '.'::text) || date_part('year'::text, e.date_event)) AS date,
+    ((((
+        CASE
+            WHEN (date_part('day'::text, e.date_event) < (10)::double precision) THEN ('0'::text || (date_part('day'::text, e.date_event))::text)
+            ELSE (date_part('day'::text, e.date_event))::text
+        END || '.'::text) ||
+        CASE
+            WHEN (date_part('month'::text, e.date_event) < (10)::double precision) THEN ('0'::text || (date_part('month'::text, e.date_event))::text)
+            ELSE (date_part('month'::text, e.date_event))::text
+        END) || '.'::text) || date_part('year'::text, e.date_event)) AS date,
     e.event,
     p.place,
     count(DISTINCT be.id_band) AS bands
@@ -390,7 +398,6 @@ ef3388cc5659bccb742fb8af762f1bfd	Colombia	co
 f01fc92b23faa973f3492a23d5a705c5	Ukraine	ua
 f75d91cdd36b85cc4a8dfeca4f24fa14	USA	us
 fa79c3005daec47ecff84a116a0927a1	Hungary	hu
-f13d2458f0fdc34fa96621ea44c46663	España	es
 \.
 
 
@@ -1343,7 +1350,7 @@ db46d9a37b31baa64cb51604a2e4939a	00247297c394dd443dc97067830c35f4
 5952dff7a6b1b3c94238ad3c6a42b904	f75d91cdd36b85cc4a8dfeca4f24fa14
 deaccc41a952e269107cc9a507dfa131	d8b00929dec65d422303256336ada04f
 bb4cc149e8027369e71eb1bb36cd98e0	f75d91cdd36b85cc4a8dfeca4f24fa14
-754230e2c158107a2e93193c829e9e59	f13d2458f0fdc34fa96621ea44c46663
+754230e2c158107a2e93193c829e9e59	907eba32d950bfab68227fd7ea22999b
 \.
 
 
@@ -2750,8 +2757,8 @@ d0f1ffdb2d3a20a41f9c0f10df3b9386	Südpfalz Metalfest	2020-09-25	875ec5037fe25fad
 441306dd21b61d9a52e04b9e177cc9b5	Jubiläumswoche 25 Jahre Hexenhaus	2021-07-31	012d8da36e8518d229988fe061f3c376
 13afebb96e2d2d27345bd3b1fefc4db0	Crossplane & Hängerbänd	2021-08-07	f3c1ffc50f4f8d0a857533164e8da867
 dd50d5dcc02ea12c31e0ff495891dc22	"Still Cyco Punk" World Wide Tour 2018	2018-11-04	c6e9ff60da2342ba2a0ce4d9b6fc6ff1
-f3603438cf79ee848cb2f5e4a5884663	Alexander the Great in Exil	2021-11-09	14b82c93c42422209e5b5aad5b7b772e
 3c61b014201d6f62468d72d0363f7725	Crisix, Insanity Alert	2021-09-16	0b186d7eb0143e60ced4af3380f5faa8
+f3603438cf79ee848cb2f5e4a5884663	Alexander the Great in Exil	2021-09-11	14b82c93c42422209e5b5aad5b7b772e
 \.
 
 

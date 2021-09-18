@@ -1,4 +1,5 @@
-var bandsEventsInfo ={
+var bandsEventsInfo = 
+{
 "bands_events": [
 	{
 		"id_band" : "0020f19414b5f2874a0bfacd9d511b84",
@@ -123,6 +124,10 @@ var bandsEventsInfo ={
 	{
 		"id_band" : "1056b63fdc3c5015cc4591aa9989c14f",
 		"id_event" : "abefb7041d2488eadeedba9a0829b753"
+	},
+	{
+		"id_band" : "1056b63fdc3c5015cc4591aa9989c14f",
+		"id_event" : "f3603438cf79ee848cb2f5e4a5884663"
 	},
 	{
 		"id_band" : "108c58fc39b79afc55fac7d9edf4aa2a",
@@ -1429,6 +1434,10 @@ var bandsEventsInfo ={
 		"id_event" : "eb2330cf8b87aa13aad89f32d6cfda18"
 	},
 	{
+		"id_band" : "96682d9c9f1bed695dbf9176d3ee234c",
+		"id_event" : "f3603438cf79ee848cb2f5e4a5884663"
+	},
+	{
 		"id_band" : "97ee29f216391d19f8769f79a1218a71",
 		"id_event" : "d5cd210a82be3dd1a7879b83ba5657c0"
 	},
@@ -2189,20 +2198,44 @@ var bandsEventsInfo ={
 		"id_event" : "13afebb96e2d2d27345bd3b1fefc4db0"
 	},
 	{
-		"id_band" : "96682d9c9f1bed695dbf9176d3ee234c",
-		"id_event" : "f3603438cf79ee848cb2f5e4a5884663"
+		"id_band" : "8ccd65d7f0f028405867991ae3eaeb56",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
 	},
 	{
-		"id_band" : "1056b63fdc3c5015cc4591aa9989c14f",
-		"id_event" : "f3603438cf79ee848cb2f5e4a5884663"
+		"id_band" : "a8759e3cf148ceb4f7ad82b68cdaf5a8",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
 	},
 	{
-		"id_band" : "754230e2c158107a2e93193c829e9e59",
-		"id_event" : "3c61b014201d6f62468d72d0363f7725"
+		"id_band" : "470f3f69a2327481d26309dc65656f44",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
 	},
 	{
-		"id_band" : "1ac0c8e8c04cf2d6f02fdb8292e74588",
-		"id_event" : "3c61b014201d6f62468d72d0363f7725"
+		"id_band" : "e254616b4a5bd5aaa54f90a3985ed184",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
+	},
+	{
+		"id_band" : "302ebe0389198972c223f4b72894780a",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
+	},
+	{
+		"id_band" : "eaeaed2d9f3137518a5c8c7e6733214f",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
+	},
+	{
+		"id_band" : "5f992768f7bb9592bed35b07197c87d0",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
+	},
+	{
+		"id_band" : "d0a1fd0467dc892f0dc27711637c864e",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
+	},
+	{
+		"id_band" : "b1bdad87bd3c4ac2c22473846d301a9e",
+		"id_event" : "975d89662d23568c3c4c961ecc6fb5e8"
+	},
+	{
+		"id_band" : "b1bdad87bd3c4ac2c22473846d301a9e",
+		"id_event" : "abefb7041d2488eadeedba9a0829b753"
 	}
 ]}
 ;
