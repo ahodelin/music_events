@@ -2935,15 +2935,6 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
-		"id_band" : "a29c1c4f0a97173007be3b737e8febcc",
-		"band" : "Redgrin",
-		"country" : "Germany",
-		"flag" : "de",
-		"likes" : "y",
-		"generes" : 1,
-		"events" : 1
-	},
-	{
 		"id_band" : "9ab8f911c74597493400602dc4d2b412",
 		"band" : "Refuge",
 		"country" : "Germany",
@@ -3673,15 +3664,6 @@ var bandsInfo ={
 		"events" : 1
 	},
 	{
-		"id_band" : "4fab532a185610bb854e0946f4def6a4",
-		"band" : "Torment of Souls",
-		"country" : "Germany",
-		"flag" : "de",
-		"likes" : "y",
-		"generes" : 1,
-		"events" : 1
-	},
-	{
 		"id_band" : "36cbc41c1c121f2c68f5776a118ea027",
 		"band" : "Tornado",
 		"country" : "Finland",
@@ -3877,7 +3859,7 @@ var bandsInfo ={
 		"flag" : "de",
 		"likes" : "y",
 		"generes" : 1,
-		"events" : 4
+		"events" : 3
 	},
 	{
 		"id_band" : "b1d465aaf3ccf8701684211b1623adf2",

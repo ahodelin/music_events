@@ -791,14 +791,6 @@ var eventsInfo = {
 		"event" : "Crisix, Insanity Alert",
 		"place" : "Weinheim (Café Central)",
 		"bands" : 2
-	},
-	{
-		"id_event" : "a71ac13634cd0b6d26e52d11c76f0a63",
-		"year" : 2021.0,
-		"date" : "02.10.2021",
-		"event" : "Warfield\/Torment of Souls\/Redgrin",
-		"place" : "Kaiserslautern (Irish House)",
-		"bands" : 3
 	}
 ]}
 ;

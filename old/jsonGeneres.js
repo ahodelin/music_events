@@ -3,7 +3,7 @@ var generesInfo = {
 	{
 		"id_genere" : "17b8dff9566f6c98062ad5811c762f44",
 		"genere" : "Death Metal",
-		"bands" : 95
+		"bands" : 93
 	},
 	{
 		"id_genere" : "a29864963573d7bb061691ff823b97dd",

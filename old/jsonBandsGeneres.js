@@ -2935,14 +2935,6 @@ var bandsGeneresInfo = {
 	{
 		"id_band" : "754230e2c158107a2e93193c829e9e59",
 		"id_genere" : "a29864963573d7bb061691ff823b97dd"
-	},
-	{
-		"id_band" : "a29c1c4f0a97173007be3b737e8febcc",
-		"id_genere" : "17b8dff9566f6c98062ad5811c762f44"
-	},
-	{
-		"id_band" : "4fab532a185610bb854e0946f4def6a4",
-		"id_genere" : "17b8dff9566f6c98062ad5811c762f44"
 	}
 ]}
 ;

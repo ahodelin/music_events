@@ -2203,18 +2203,6 @@ var bandsEventsInfo ={
 	{
 		"id_band" : "1ac0c8e8c04cf2d6f02fdb8292e74588",
 		"id_event" : "3c61b014201d6f62468d72d0363f7725"
-	},
-	{
-		"id_band" : "f042da2a954a1521114551a6f9e22c75",
-		"id_event" : "a71ac13634cd0b6d26e52d11c76f0a63"
-	},
-	{
-		"id_band" : "4fab532a185610bb854e0946f4def6a4",
-		"id_event" : "a71ac13634cd0b6d26e52d11c76f0a63"
-	},
-	{
-		"id_band" : "a29c1c4f0a97173007be3b737e8febcc",
-		"id_event" : "a71ac13634cd0b6d26e52d11c76f0a63"
 	}
 ]}
 ;
