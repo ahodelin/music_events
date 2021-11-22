@@ -743,6 +743,7 @@ var bandsGeneresInfo = {
 {"id_band":"da29e297c23e7868f1d50ec5a6a4359b","id_genere":"a68d5b72c2f98613f511337a59312f78"},
 {"id_band":"da29e297c23e7868f1d50ec5a6a4359b","id_genere":"885ba57d521cd859bacf6f76fb37ef7c"},
 {"id_band":"96048e254d2e02ba26f53edd271d3f88","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
+{"id_band":"c2275e8ac71d308946a63958bc7603a1","id_genere":"a29864963573d7bb061691ff823b97dd"},
 ]};
 function loadBandsGeneres(){
   return(bandsGeneresInfo);

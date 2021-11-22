@@ -101,6 +101,8 @@ var eventsInfo = {
 {"id_event":"3c61b014201d6f62468d72d0363f7725","year":2021,"date":"16.09.2021","event":"Crisix, Insanity Alert","place":"Weinheim (Café Central)","bands":2},
 {"id_event":"a71ac13634cd0b6d26e52d11c76f0a63","year":2021,"date":"02.10.2021","event":"Warfield/Torment of Souls/Redgrin","place":"Kaiserslautern (Irish House)","bands":3},
 {"id_event":"8d821ce4aedb7300e067cfa9eb7f1eee","year":2021,"date":"13.11.2021","event":"The Path of Death 9","place":"Mainz (M8 im Haus der Jugend)","bands":6},
+{"id_event":"fce1fb772d7bd71211bb915625ac11af","year":2021,"date":"19.11.2021","event":"World needs mosh (Wiesbaden)","place":"Wiesbaden (Schlachthof)","bands":2},
+{"id_event":"95f89582ba9dcfbed475ebb3c06162db","year":2021,"date":"21.11.2021","event":"World needs mosh (Bonn)","place":"Bonn (Bla)","bands":2},
 ]};
 function loadEvents(){
   return(eventsInfo);
