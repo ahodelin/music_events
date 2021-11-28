@@ -564,3 +564,5 @@
 {"id_band":"c2275e8ac71d308946a63958bc7603a1","id_event":"95f89582ba9dcfbed475ebb3c06162db"}
 {"id_band":"dde3e0b0cc344a7b072bbab8c429f4ff","id_event":"9f1a399c301132b273f595b1cfc5e99d"}
 {"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","id_event":"9f1a399c301132b273f595b1cfc5e99d"}
+{"id_band":"b785a5ffad5e7e36ccac25c51d5d8908","id_event":"23fcfcbd4fa686b213960a04f49856f4"}
+{"id_band":"2aae4f711c09481c8353003202e05359","id_event":"23fcfcbd4fa686b213960a04f49856f4"}

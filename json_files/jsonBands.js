@@ -99,7 +99,7 @@
 {"id_band":"dddb04bc0d058486d0ef0212c6ea0682","band":"Darkall Slaves","country":"France","flag":"fr","likes":"y","generes":1,"events":1}
 {"id_band":"0e2ea6aa669710389cf4d6e2ddf408c4","band":"Darkened Nocturn Slaughtercult","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"63ad3072dc5472bb44c2c42ede26d90f","band":"Darkness","country":"Germany","flag":"de","likes":"m","generes":1,"events":2}
-{"id_band":"2aae4f711c09481c8353003202e05359","band":"Dark Zodiak","country":"Germany","flag":"de","likes":"y","generes":2,"events":1}
+{"id_band":"2aae4f711c09481c8353003202e05359","band":"Dark Zodiak","country":"Germany","flag":"de","likes":"y","generes":2,"events":2}
 {"id_band":"28f843fa3a493a3720c4c45942ad970e","band":"Dawn of Disease","country":"Germany","flag":"de","likes":"y","generes":1,"events":4}
 {"id_band":"9bc2ca9505a273b06aa0b285061cd1de","band":"Dead Congregation","country":"Greece","flag":"gr","likes":"y","generes":1,"events":2}
 {"id_band":"9138c2cc0326412f2515623f4c850eb3","band":"Dead Eyed Sleeper (Legacy)","country":"Germany","flag":"de","likes":"y","generes":1,"events":2}
@@ -276,6 +276,7 @@
 {"id_band":"0780d2d1dbd538fec3cdd8699b08ea02","band":"Morasth","country":"Germany","flag":"de","likes":"y","generes":4,"events":1}
 {"id_band":"4a45ac6d83b85125b4163a40364e7b2c","band":"More Than A Thousand","country":"Portugal","flag":"pt","likes":"m","generes":3,"events":1}
 {"id_band":"58db028cf01dd425e5af6c7d511291c1","band":"Moronic","country":"Germany","flag":"de","likes":"y","generes":1,"events":2}
+{"id_band":"b785a5ffad5e7e36ccac25c51d5d8908","band":"Mortal Peril","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"2252d763a2a4ac815b122a0176e3468f","band":"Mosaic","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"11d396b078f0ae37570c8ef0f45937ad","band":"Motörblast","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"585b13106ecfd7ede796242aeaed4ea8","band":"Motorowl","country":"Germany","flag":"de","likes":"y","generes":5,"events":1}
@@ -342,8 +343,7 @@
 {"id_band":"4cabe475dd501f3fd4da7273b5890c33","band":"Samael","country":"Switzerland","flag":"ch","likes":"y","generes":2,"events":1}
 {"id_band":"f8e7112b86fcd9210dfaf32c00d6d375","band":"Sanguine","country":"UK","flag":"gb","likes":"n","generes":1,"events":1}
 {"id_band":"91c9ed0262dea7446a4f3a3e1cdd0698","band":"Satan's Fall","country":"Finland","flag":"fi","likes":"n","generes":2,"events":1}
-{"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","band":"Satan Worship","country":"Germany","flag":"de","likes":"y","generes":2,"events":1}
-{"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","band":"Satan Worship","country":"Brazil","flag":"br","likes":"y","generes":2,"events":1}
+{"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","band":"Satan Worship","country":"International","flag":"un","likes":"y","generes":2,"events":1}
 {"id_band":"79ce9bd96a3184b1ee7c700aa2927e67","band":"Schizophrenia","country":"Belgium","flag":"be","likes":"y","generes":2,"events":1}
 {"id_band":"218f2bdae8ad3bb60482b201e280ffdc","band":"Scordatura","country":"UK","flag":"gb","likes":"y","generes":1,"events":1}
 {"id_band":"4927f3218b038c780eb795766dfd04ee","band":"Scornebeke","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}

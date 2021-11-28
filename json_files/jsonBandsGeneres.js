@@ -747,3 +747,4 @@
 {"id_band":"dde3e0b0cc344a7b072bbab8c429f4ff","id_genere":"a29864963573d7bb061691ff823b97dd"}
 {"id_band":"dde3e0b0cc344a7b072bbab8c429f4ff","id_genere":"a68d5b72c2f98613f511337a59312f78"}
 {"id_band":"dde3e0b0cc344a7b072bbab8c429f4ff","id_genere":"17b8dff9566f6c98062ad5811c762f44"}
+{"id_band":"b785a5ffad5e7e36ccac25c51d5d8908","id_genere":"a29864963573d7bb061691ff823b97dd"}

@@ -15,18 +15,18 @@
 {"id_country":"ea71b362e3ea9969db085abfccdeb10d","country":"Portugal","flag":"pt","bands":5}
 {"id_country":"907eba32d950bfab68227fd7ea22999b","country":"Spain","flag":"es","bands":4}
 {"id_country":"424214945ba5615eca039bfe5d731c09","country":"Denmark","flag":"dk","bands":4}
-{"id_country":"42537f0fb56e31e20ab9c2305752087d","country":"Brazil","flag":"br","bands":4}
 {"id_country":"51802d8bb965d0e5be697f07d16922e8","country":"Czech Republic","flag":"cz","bands":4}
 {"id_country":"6b718641741f992e68ec3712718561b8","country":"Greece","flag":"gr","bands":4}
 {"id_country":"94880bda83bda77c5692876700711f15","country":"Poland","flag":"pl","bands":4}
-{"id_country":"b78edab0f52e0d6c195fd0d8c5709d26","country":"Iceland","flag":"is","bands":3}
 {"id_country":"33cac763789c407f405b2cf0dce7df89","country":"Cuba","flag":"cu","bands":3}
+{"id_country":"b78edab0f52e0d6c195fd0d8c5709d26","country":"Iceland","flag":"is","bands":3}
+{"id_country":"42537f0fb56e31e20ab9c2305752087d","country":"Brazil","flag":"br","bands":3}
 {"id_country":"fa79c3005daec47ecff84a116a0927a1","country":"Hungary","flag":"hu","bands":2}
 {"id_country":"06630c890abadde9228ea818ce52b621","country":"Luxembourg","flag":"lu","bands":2}
 {"id_country":"5feb168ca8fb495dcc89b1208cdeb919","country":"Russia","flag":"ru","bands":2}
 {"id_country":"6542f875eaa09a5c550e5f3986400ad9","country":"Belarus","flag":"by","bands":2}
+{"id_country":"8189ecf686157db0c0274c1f49373318","country":"International","flag":"un","bands":2}
 {"id_country":"f01fc92b23faa973f3492a23d5a705c5","country":"Ukraine","flag":"ua","bands":2}
-{"id_country":"8189ecf686157db0c0274c1f49373318","country":"International","flag":"un","bands":1}
 {"id_country":"2ff6e535bd2f100979a171ad430e642b","country":"Serbia","flag":"rs","bands":1}
 {"id_country":"2e6507f70a9cc26fb50f5fd82a83c7ef","country":"Chile","flag":"cl","bands":1}
 {"id_country":"ef3388cc5659bccb742fb8af762f1bfd","country":"Colombia","flag":"co","bands":1}

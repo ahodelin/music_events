@@ -38,7 +38,7 @@
 {"id_event":"4c90356614158305d8527b80886d2c1e","year":2018,"date":"27.10.2018","event":"Rock for Hille Benefiz","place":"Landau (Gloria Kulturpalast)","bands":4}
 {"id_event":"a626f2fb0794eeb25b074b4c43776634","year":2018,"date":"02.11.2018","event":"Dia de los muertos Roadshow 2018","place":"Wiesbaden (Schlachthof)","bands":1}
 {"id_event":"3af7c6d148d216f13f66669acb8d5c59","year":2018,"date":"03.11.2018","event":"Debauchery's Balgeroth","place":"Weinheim (Café Central)","bands":4}
-{"id_event":"dd50d5dcc02ea12c31e0ff495891dc22","year":2018,"date":"04.11.2018","event":"\"Still Cyco Punk\" World Wide Tour 2018","place":"Aschaffenburg (Colos-Saal)","bands":3}
+{"id_event":"dd50d5dcc02ea12c31e0ff495891dc22","year":2018,"date":"04.11.2018","event":"\\"Still Cyco Punk\\" World Wide Tour 2018","place":"Aschaffenburg (Colos-Saal)","bands":3}
 {"id_event":"f8ead2514f0df3c6e8ec84b992dd6e44","year":2018,"date":"24.11.2018","event":"Hell over Europe II","place":"Weinheim (Café Central)","bands":4}
 {"id_event":"9afc751ca7f2d91d23c453b32fd21864","year":2018,"date":"08.12.2018","event":"The modern art of setting ablaze tour","place":"Wiesbaden (Schlachthof)","bands":4}
 {"id_event":"0aa506a505f1115202f993ee4d650480","year":2018,"date":"11.12.2018","event":"MTV's Headbangers Ball Tour 2018","place":"Wiesbaden (Schlachthof)","bands":4}
@@ -102,3 +102,4 @@
 {"id_event":"fce1fb772d7bd71211bb915625ac11af","year":2021,"date":"19.11.2021","event":"World needs mosh (Wiesbaden)","place":"Wiesbaden (Schlachthof)","bands":2}
 {"id_event":"95f89582ba9dcfbed475ebb3c06162db","year":2021,"date":"21.11.2021","event":"World needs mosh (Bonn)","place":"Bonn (Bla)","bands":2}
 {"id_event":"9f1a399c301132b273f595b1cfc5e99d","year":2021,"date":"25.11.2021","event":"SARCOFAGO TRIBUTE (Fabio Jhasko)","place":"Weinheim (Café Central)","bands":2}
+{"id_event":"23fcfcbd4fa686b213960a04f49856f4","year":2021,"date":"27.11.2021","event":"Dark Zodiak + Mortal Peril","place":"Darmstadt (Goldene Krone)","bands":2}

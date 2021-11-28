@@ -450,6 +450,6 @@
 {"id_band":"da29e297c23e7868f1d50ec5a6a4359b","id_country":"d8b00929dec65d422303256336ada04f"}
 {"id_band":"96048e254d2e02ba26f53edd271d3f88","id_country":"d8b00929dec65d422303256336ada04f"}
 {"id_band":"c2275e8ac71d308946a63958bc7603a1","id_country":"d8b00929dec65d422303256336ada04f"}
-{"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","id_country":"d8b00929dec65d422303256336ada04f"}
-{"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","id_country":"42537f0fb56e31e20ab9c2305752087d"}
 {"id_band":"dde3e0b0cc344a7b072bbab8c429f4ff","id_country":"42537f0fb56e31e20ab9c2305752087d"}
+{"id_band":"b785a5ffad5e7e36ccac25c51d5d8908","id_country":"d8b00929dec65d422303256336ada04f"}
+{"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","id_country":"8189ecf686157db0c0274c1f49373318"}
