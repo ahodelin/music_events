@@ -566,3 +566,5 @@
 {"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","id_event":"9f1a399c301132b273f595b1cfc5e99d"}
 {"id_band":"b785a5ffad5e7e36ccac25c51d5d8908","id_event":"23fcfcbd4fa686b213960a04f49856f4"}
 {"id_band":"2aae4f711c09481c8353003202e05359","id_event":"23fcfcbd4fa686b213960a04f49856f4"}
+{"id_band":"4bb93d90453dd63cc1957a033f7855c7","id_event":"54bf7e97edddf051b2a98b21b6d47e6a"}
+{"id_band":"f042da2a954a1521114551a6f9e22c75","id_event":"bb378a3687cc64953bf36ccea6eb5a27"}

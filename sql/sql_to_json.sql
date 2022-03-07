@@ -1,3 +1,5 @@
+\c music_events
+
 -- Bands
 copy (select row_to_json(t)
 from (select * from music.v_bands) t)
