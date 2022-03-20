@@ -19,7 +19,7 @@
 {"id_band":"5df92b70e2855656e9b3ffdf313d7379","band":"Anüs","country":"Sweden","flag":"se","likes":"y","generes":2,"events":1}
 {"id_band":"3e75cd2f2f6733ea4901458a7ce4236d","band":"Apey & The Pea","country":"Hungary","flag":"hu","likes":"n","generes":2,"events":1}
 {"id_band":"108c58fc39b79afc55fac7d9edf4aa2a","band":"Arch Enemy","country":"Sweden","flag":"se","likes":"y","generes":1,"events":3}
-{"id_band":"28bc31b338dbd482802b77ed1fd82a50","band":"Arroganz","country":"Germany","flag":"de","likes":"y","generes":2,"events":1}
+{"id_band":"28bc31b338dbd482802b77ed1fd82a50","band":"Arroganz","country":"Germany","flag":"de","likes":"y","generes":2,"events":2}
 {"id_band":"49c4097bae6c6ea96f552e38cfb6c2d1","band":"Artillery","country":"Denmark","flag":"dk","likes":"n","generes":1,"events":1}
 {"id_band":"e3f0bf612190af6c3fad41214115e004","band":"Asomvel","country":"UK","flag":"gb","likes":"y","generes":1,"events":1}
 {"id_band":"fb47f889f2c7c4fee1553d0f817b8aaa","band":"Asphyx","country":"Netherlands","flag":"nl","likes":"y","generes":2,"events":2}
@@ -122,7 +122,7 @@
 {"id_band":"36f969b6aeff175204078b0533eae1a0","band":"Deströyer 666","country":"Australia","flag":"au","likes":"y","generes":2,"events":1}
 {"id_band":"1bc1f7348d79a353ea4f594de9dd1392","band":"Devil Driver","country":"USA","flag":"us","likes":"y","generes":2,"events":1}
 {"id_band":"2082a7d613f976e7b182a3fe80a28958","band":"Dimmu Borgir","country":"Norway","flag":"no","likes":"y","generes":1,"events":1}
-{"id_band":"d9bc1db8c13da3a131d853237e1f05b2","band":"Disbelief","country":"Germany","flag":"de","likes":"y","generes":3,"events":1}
+{"id_band":"d9bc1db8c13da3a131d853237e1f05b2","band":"Disbelief","country":"Germany","flag":"de","likes":"y","generes":3,"events":2}
 {"id_band":"9cf73d0300eea453f17c6faaeb871c55","band":"Discreation","country":"Germany","flag":"de","likes":"m","generes":1,"events":1}
 {"id_band":"4dddd8579760abb62aa4b1910725e73c","band":"Disquiet","country":"Netherlands","flag":"nl","likes":"m","generes":1,"events":1}
 {"id_band":"d6de9c99f5cfa46352b2bc0be5c98c41","band":"Dissecdead","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
@@ -209,7 +209,7 @@
 {"id_band":"3bd94845163385cecefc5265a2e5a525","band":"Hollowed","country":"Germany","flag":"de","likes":"y","generes":2,"events":1}
 {"id_band":"0b0d1c3752576d666c14774b8233889f","band":"Hollow World","country":"Australia","flag":"au","likes":"m","generes":1,"events":1}
 {"id_band":"a4902fb3d5151e823c74dfd51551b4b0","band":"Horisont","country":"Sweden","flag":"se","likes":"m","generes":4,"events":1}
-{"id_band":"99bd5eff92fc3ba728a9da5aa1971488","band":"Horresque","country":"Germany","flag":"de","likes":"y","generes":1,"events":2}
+{"id_band":"99bd5eff92fc3ba728a9da5aa1971488","band":"Horresque","country":"Germany","flag":"de","likes":"y","generes":1,"events":3}
 {"id_band":"24ff2b4548c6bc357d9d9ab47882661e","band":"Humator","country":"Germany","flag":"de","likes":"y","generes":1,"events":2}
 {"id_band":"776da10f7e18ffde35ea94d144dc60a3","band":"Hypocrisy","country":"Sweden","flag":"se","likes":"y","generes":1,"events":3}
 {"id_band":"829922527f0e7d64a3cfda67e24351e3","band":"Ichor","country":"Germany","flag":"de","likes":"y","generes":2,"events":1}
@@ -222,6 +222,7 @@
 {"id_band":"6c607fc8c0adc99559bc14e01170fee1","band":"Incite","country":"USA","flag":"us","likes":"m","generes":2,"events":1}
 {"id_band":"91a337f89fe65fec1c97f52a821c1178","band":"Inconcessus Lux Lucis","country":"UK","flag":"gb","likes":"y","generes":1,"events":1}
 {"id_band":"5ec1e9fa36898eaf6d1021be67e0d00c","band":"Indian Nightmare","country":"Germany","flag":"de","likes":"n","generes":3,"events":1}
+{"id_band":"63c0a328ae2bee49789212822f79b83f","band":"Infected Inzestor","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"8ce896355a45f5b9959eb676b8b5580c","band":"Infected World","country":"Germany","flag":"de","likes":"m","generes":1,"events":1}
 {"id_band":"bbce8e45250a239a252752fac7137e00","band":"In Flames","country":"Sweden","flag":"se","likes":"y","generes":2,"events":1}
 {"id_band":"baa9d4eef21c7b89f42720313b5812d4","band":"Ingested","country":"UK","flag":"gb","likes":"y","generes":3,"events":1}
@@ -259,6 +260,7 @@
 {"id_band":"a3f5542dc915b94a5e10dab658bb0959","band":"Manegarm","country":"Sweden","flag":"se","likes":"y","generes":3,"events":1}
 {"id_band":"2ac79000a90b015badf6747312c0ccad","band":"Mantar","country":"Germany","flag":"de","likes":"y","generes":2,"events":3}
 {"id_band":"eb2c788da4f36fba18b85ae75aff0344","band":"Marduk","country":"Sweden","flag":"se","likes":"y","generes":1,"events":1}
+{"id_band":"f03bde11d261f185cbacfa32c1c6538c","band":"Master","country":"Czech Republic","flag":"cz","likes":"y","generes":2,"events":1}
 {"id_band":"626dceb92e4249628c1e76a2c955cd24","band":"Meatknife","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"8fda25275801e4a40df6c73078baf753","band":"Mecalimb","country":"Norway","flag":"no","likes":"m","generes":2,"events":1}
 {"id_band":"3a2a7f86ca87268be9b9e0557b013565","band":"Membaris","country":"Germany","flag":"de","likes":"m","generes":1,"events":1}
@@ -267,6 +269,7 @@
 {"id_band":"7e2b83d69e6c93adf203e13bc7d6f444","band":"Milking the Goatmachine","country":"Germany","flag":"de","likes":"y","generes":2,"events":3}
 {"id_band":"0fbddeb130361265f1ba6f86b00f0968","band":"Mindflair","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"3f15c445cb553524b235b01ab75fe9a6","band":"Ministry","country":"USA","flag":"us","likes":"y","generes":2,"events":1}
+{"id_band":"f6540bc63be4c0cb21811353c0d24f69","band":"Misanthropia","country":"Netherlands","flag":"nl","likes":"y","generes":1,"events":1}
 {"id_band":"656d1497f7e25fe0559c6be81a4bccae","band":"Misery Index","country":"USA","flag":"us","likes":"y","generes":2,"events":1}
 {"id_band":"f60ab90d94b9cafe6b32f6a93ee8fcda","band":"Mizery","country":"USA","flag":"us","likes":"m","generes":1,"events":1}
 {"id_band":"8775f64336ee5e9a8114fbe3a5a628c5","band":"MØL","country":"Denmark","flag":"dk","likes":"y","generes":2,"events":1}
@@ -310,6 +313,7 @@
 {"id_band":"e64d38b05d197d60009a43588b2e4583","band":"Paradise Lost","country":"UK","flag":"gb","likes":"m","generes":4,"events":1}
 {"id_band":"88711444ece8fe638ae0fb11c64e2df3","band":"Party Cannon","country":"UK","flag":"gb","likes":"y","generes":1,"events":1}
 {"id_band":"278c094627c0dd891d75ea7a3d0d021e","band":"Paxtilence","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
+{"id_band":"e4f0ad5ef0ac3037084d8a5e3ca1cabc","band":"Pestilence","country":"Netherlands","flag":"nl","likes":"m","generes":3,"events":1}
 {"id_band":"0a56095b73dcbd2a76bb9d4831881cb3","band":"Phantom Winter","country":"Germany","flag":"de","likes":"n","generes":1,"events":1}
 {"id_band":"ff578d3db4dc3311b3098c8365d54e6b","band":"Pighead","country":"Germany","flag":"de","likes":"y","generes":1,"events":2}
 {"id_band":"80fcd08f6e887f6cfbedd2156841ab2b","band":"P.O. Box","country":"France","flag":"fr","likes":"y","generes":1,"events":1}
@@ -352,6 +356,7 @@
 {"id_band":"7ef36a3325a61d4f1cff91acbe77c7e3","band":"Sensles","country":"Germany","flag":"de","likes":"m","generes":1,"events":1}
 {"id_band":"5b709b96ee02a30be5eee558e3058245","band":"Sepultura","country":"Brazil","flag":"br","likes":"y","generes":3,"events":1}
 {"id_band":"19baf8a6a25030ced87cd0ce733365a9","band":"Serrabulho","country":"Portugal","flag":"pt","likes":"y","generes":2,"events":1}
+{"id_band":"ea16d031090828264793e860a00cc995","band":"Severe Torture","country":"Netherlands","flag":"nl","likes":"y","generes":1,"events":1}
 {"id_band":"4ee21b1371ba008a26b313c7622256f8","band":"Shambala","country":"Germany","flag":"de","likes":"m","generes":2,"events":2}
 {"id_band":"91b18e22d4963b216af00e1dd43b5d05","band":"Shoot the Girl first","country":"France","flag":"fr","likes":"n","generes":2,"events":1}
 {"id_band":"6bd19bad2b0168d4481b19f9c25b4a9f","band":"Shores of Null","country":"Italy","flag":"it","likes":"y","generes":2,"events":1}
@@ -375,7 +380,7 @@
 {"id_band":"94ca28ea8d99549c2280bcc93f98c853","band":"Soulburn","country":"Netherlands","flag":"nl","likes":"y","generes":3,"events":1}
 {"id_band":"96048e254d2e02ba26f53edd271d3f88","band":"Souldevourer","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"076365679712e4206301117486c3d0ec","band":"Soulfly","country":"USA","flag":"us","likes":"y","generes":3,"events":1}
-{"id_band":"abd7ab19ff758cf4c1a2667e5bbac444","band":"Spasm","country":"Czech Republic","flag":"cz","likes":"y","generes":1,"events":1}
+{"id_band":"abd7ab19ff758cf4c1a2667e5bbac444","band":"Spasm","country":"Czech Republic","flag":"cz","likes":"y","generes":1,"events":2}
 {"id_band":"0af74c036db52f48ad6cbfef6fee2999","band":"Stam1na","country":"Finland","flag":"fi","likes":"y","generes":3,"events":1}
 {"id_band":"095849fbdc267416abc6ddb48be311d7","band":"Stillbirth","country":"Germany","flag":"de","likes":"y","generes":2,"events":1}
 {"id_band":"72778afd2696801f5f3a1f35d0e4e357","band":"Still Patient?","country":"Germany","flag":"de","likes":"m","generes":2,"events":1}
@@ -422,6 +427,7 @@
 {"id_band":"1da77fa5b97c17be83cc3d0693c405cf","band":"Twitching Tongues","country":"USA","flag":"us","likes":"m","generes":1,"events":1}
 {"id_band":"e0f39406f0e15487dd9d3997b2f5ca61","band":"Übergang","country":"Germany","flag":"de","likes":"y","generes":3,"events":1}
 {"id_band":"399033f75fcf47d6736c9c5209222ab8","band":"Undertow","country":"Germany","flag":"de","likes":"y","generes":3,"events":1}
+{"id_band":"5eed658c4b7b68a0ecc49205b68d54e7","band":"Undying Lust for Cadaverous Molestation (UxLxCxM)","country":"Germany","flag":"de","likes":"y","generes":1,"events":1}
 {"id_band":"6f195d8f9fe09d45d2e680f7d7157541","band":"Une Misere","country":"Iceland","flag":"is","likes":"y","generes":2,"events":1}
 {"id_band":"2113f739f81774557041db616ee851e6","band":"Unleashed","country":"Sweden","flag":"se","likes":"m","generes":1,"events":1}
 {"id_band":"32814ff4ca9a26b8d430a8c0bc8dc63e","band":"Ur","country":"Germany","flag":"de","likes":"y","generes":3,"events":1}

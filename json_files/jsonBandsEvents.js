@@ -568,3 +568,14 @@
 {"id_band":"2aae4f711c09481c8353003202e05359","id_event":"23fcfcbd4fa686b213960a04f49856f4"}
 {"id_band":"4bb93d90453dd63cc1957a033f7855c7","id_event":"54bf7e97edddf051b2a98b21b6d47e6a"}
 {"id_band":"f042da2a954a1521114551a6f9e22c75","id_event":"bb378a3687cc64953bf36ccea6eb5a27"}
+{"id_band":"abd7ab19ff758cf4c1a2667e5bbac444","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"63c0a328ae2bee49789212822f79b83f","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"28bc31b338dbd482802b77ed1fd82a50","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"83d15841023cff02eafedb1c87df9b11","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"d9bc1db8c13da3a131d853237e1f05b2","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"99bd5eff92fc3ba728a9da5aa1971488","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"f03bde11d261f185cbacfa32c1c6538c","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"f6540bc63be4c0cb21811353c0d24f69","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"e4f0ad5ef0ac3037084d8a5e3ca1cabc","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"ea16d031090828264793e860a00cc995","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}
+{"id_band":"5eed658c4b7b68a0ecc49205b68d54e7","id_event":"46ffa374af00ed2b76c1cfaa98b76e90"}

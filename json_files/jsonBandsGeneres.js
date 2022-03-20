@@ -748,3 +748,13 @@
 {"id_band":"dde3e0b0cc344a7b072bbab8c429f4ff","id_genere":"a68d5b72c2f98613f511337a59312f78"}
 {"id_band":"dde3e0b0cc344a7b072bbab8c429f4ff","id_genere":"17b8dff9566f6c98062ad5811c762f44"}
 {"id_band":"b785a5ffad5e7e36ccac25c51d5d8908","id_genere":"a29864963573d7bb061691ff823b97dd"}
+{"id_band":"63c0a328ae2bee49789212822f79b83f","id_genere":"0d1830fc8ac21dfabd6f33ab01578c0b"}
+{"id_band":"83d15841023cff02eafedb1c87df9b11","id_genere":"10a17b42501166d3bf8fbdff7e1d52b6"}
+{"id_band":"f03bde11d261f185cbacfa32c1c6538c","id_genere":"a29864963573d7bb061691ff823b97dd"}
+{"id_band":"f03bde11d261f185cbacfa32c1c6538c","id_genere":"17b8dff9566f6c98062ad5811c762f44"}
+{"id_band":"f6540bc63be4c0cb21811353c0d24f69","id_genere":"262770cfc76233c4f0d7a1e43a36cbf7"}
+{"id_band":"e4f0ad5ef0ac3037084d8a5e3ca1cabc","id_genere":"17b8dff9566f6c98062ad5811c762f44"}
+{"id_band":"e4f0ad5ef0ac3037084d8a5e3ca1cabc","id_genere":"a29864963573d7bb061691ff823b97dd"}
+{"id_band":"e4f0ad5ef0ac3037084d8a5e3ca1cabc","id_genere":"fd00614e73cb66fd71ab13c970a074d8"}
+{"id_band":"ea16d031090828264793e860a00cc995","id_genere":"17b8dff9566f6c98062ad5811c762f44"}
+{"id_band":"5eed658c4b7b68a0ecc49205b68d54e7","id_genere":"deb8040131c3f6a3caf6a616b34ac482"}

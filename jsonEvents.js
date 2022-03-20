@@ -40,7 +40,7 @@ var eventsInfo = {
 {"id_event":"4c90356614158305d8527b80886d2c1e","year":2018,"date":"27.10.2018","event":"Rock for Hille Benefiz","place":"Landau (Gloria Kulturpalast)","bands":4},
 {"id_event":"a626f2fb0794eeb25b074b4c43776634","year":2018,"date":"02.11.2018","event":"Dia de los muertos Roadshow 2018","place":"Wiesbaden (Schlachthof)","bands":1},
 {"id_event":"3af7c6d148d216f13f66669acb8d5c59","year":2018,"date":"03.11.2018","event":"Debauchery's Balgeroth","place":"Weinheim (Café Central)","bands":4},
-{"id_event":"dd50d5dcc02ea12c31e0ff495891dc22","year":2018,"date":"04.11.2018","event":"\"Still Cyco Punk\" World Wide Tour 2018","place":"Aschaffenburg (Colos-Saal)","bands":3},
+{"id_event":"dd50d5dcc02ea12c31e0ff495891dc22","year":2018,"date":"04.11.2018","event":"\'Still Cyco Punk\' World Wide Tour 2018","place":"Aschaffenburg (Colos-Saal)","bands":3},
 {"id_event":"f8ead2514f0df3c6e8ec84b992dd6e44","year":2018,"date":"24.11.2018","event":"Hell over Europe II","place":"Weinheim (Café Central)","bands":4},
 {"id_event":"9afc751ca7f2d91d23c453b32fd21864","year":2018,"date":"08.12.2018","event":"The modern art of setting ablaze tour","place":"Wiesbaden (Schlachthof)","bands":4},
 {"id_event":"0aa506a505f1115202f993ee4d650480","year":2018,"date":"11.12.2018","event":"MTV's Headbangers Ball Tour 2018","place":"Wiesbaden (Schlachthof)","bands":4},
@@ -107,6 +107,7 @@ var eventsInfo = {
 {"id_event":"23fcfcbd4fa686b213960a04f49856f4","year":2021,"date":"27.11.2021","event":"Dark Zodiak + Mortal Peril","place":"Darmstadt (Goldene Krone)","bands":2},
 {"id_event":"bb378a3687cc64953bf36ccea6eb5a27","year":2022,"date":"05.02.2022","event":"Warfield - Café Central","place":"Weinheim (Café Central)","bands":1},
 {"id_event":"54bf7e97edddf051b2a98b21b6d47e6a","year":2022,"date":"05.03.2022","event":"Slaughterra - Darmstadt","place":"Darmstadt (Goldene Krone)","bands":1},
+{"id_event":"46ffa374af00ed2b76c1cfaa98b76e90","year":2022,"date":"19.03.2022","event":"Heidelberg Deathfest V","place":"Heidelberg (halle 02)","bands":11},
 ]};
 function loadEvents(){
   return(eventsInfo);

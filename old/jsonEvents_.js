@@ -105,6 +105,9 @@ var eventsInfo = {
 {"id_event":"95f89582ba9dcfbed475ebb3c06162db","year":2021,"date":"21.11.2021","event":"World needs mosh (Bonn)","place":"Bonn (Bla)","bands":2},
 {"id_event":"9f1a399c301132b273f595b1cfc5e99d","year":2021,"date":"25.11.2021","event":"SARCOFAGO TRIBUTE (Fabio Jhasko)","place":"Weinheim (Café Central)","bands":2},
 {"id_event":"23fcfcbd4fa686b213960a04f49856f4","year":2021,"date":"27.11.2021","event":"Dark Zodiak + Mortal Peril","place":"Darmstadt (Goldene Krone)","bands":2},
+{"id_event":"bb378a3687cc64953bf36ccea6eb5a27","year":2022,"date":"05.02.2022","event":"Warfield - Café Central","place":"Weinheim (Café Central)","bands":1},
+{"id_event":"54bf7e97edddf051b2a98b21b6d47e6a","year":2022,"date":"05.03.2022","event":"Slaughterra - Darmstadt","place":"Darmstadt (Goldene Krone)","bands":1},
+{"id_event":"46ffa374af00ed2b76c1cfaa98b76e90","year":2022,"date":"19.03.2022","event":"Heidelberg Deathfest V","place":"Heidelberg (halle 02)","bands":11},
 ]};
 function loadEvents(){
   return(eventsInfo);
