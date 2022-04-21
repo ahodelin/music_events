@@ -108,6 +108,7 @@ var eventsInfo = {
 {"id_event":"bb378a3687cc64953bf36ccea6eb5a27","year":2022,"date":"05.02.2022","event":"Warfield - Café Central","place":"Weinheim (Café Central)","bands":1},
 {"id_event":"54bf7e97edddf051b2a98b21b6d47e6a","year":2022,"date":"05.03.2022","event":"Slaughterra - Darmstadt","place":"Darmstadt (Goldene Krone)","bands":1},
 {"id_event":"46ffa374af00ed2b76c1cfaa98b76e90","year":2022,"date":"19.03.2022","event":"Heidelberg Deathfest V","place":"Heidelberg (halle 02)","bands":11},
+{"id_event":"0cd1c230352e99227f43acc46129d6b4","year":2022,"date":"19.04.2022","event":"Morbidfest","place":"Weinheim (Café Central)","bands":4},
 ]};
 function loadEvents(){
   return(eventsInfo);

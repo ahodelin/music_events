@@ -1,9 +1,9 @@
-echo "var bandsGeneresInfo = {" > jsonBandsGeneres_.js
-echo "  \"bands_generes\":[" >> jsonBandsGeneres_.js
-sed -e 's/$/,/' jsonBandsGeneres.js > jsonBandsGeneresTmp.js
-cat jsonBandsGeneresTmp.js >> jsonBandsGeneres_.js
-rm jsonBandsGeneresTmp.js
-echo "]};" >> jsonBandsGeneres_.js
-echo "function loadBandsGeneres(){" >> jsonBandsGeneres_.js
-echo "  return(bandsGeneresInfo);" >> jsonBandsGeneres_.js
-echo "}" >> jsonBandsGeneres_.js
+echo "var bandsGeneresInfo = {" > jsonBandsGeneres.js
+echo "  \"bandsgeneres\":[" >> jsonBandsGeneres.js
+sed -e 's/$/,/' jsonBandsGeneres.json >> jsonBandsGeneres.js
+# cat jsonBandsGeneresTmp.js >> jsonBandsGeneres.js
+# rm jsonBandsGeneresTmp.js
+echo "]};" >> jsonBandsGeneres.js
+echo "function loadBandsGeneres(){" >> jsonBandsGeneres.js
+echo "  return(bandsGeneresInfo);" >> jsonBandsGeneres.js
+echo "}" >> jsonBandsGeneres.js

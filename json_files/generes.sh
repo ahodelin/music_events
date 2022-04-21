@@ -1,9 +1,9 @@
-echo "var generesInfo = {" > jsonGeneres_.js
-echo "  \"generes\":[" >> jsonGeneres_.js
-sed -e 's/$/,/' jsonGeneres.js > jsonGeneresTmp.js
-cat jsonGeneresTmp.js >> jsonGeneres_.js
-rm jsonGeneresTmp.js
-echo "]};" >> jsonGeneres_.js
-echo "function loadGeneres(){" >> jsonGeneres_.js
-echo "  return(generesInfo);" >> jsonGeneres_.js
-echo "}" >> jsonGeneres_.js
+echo "var generesInfo = {" > jsonGeneres.js
+echo "  \"generes\":[" >> jsonGeneres.js
+sed -e 's/$/,/' jsonGeneres.json >> jsonGeneres.js
+# cat jsonGeneresTmp.js >> jsonGeneres.js
+# rm jsonGeneresTmp.js
+echo "]};" >> jsonGeneres.js
+echo "function loadGeneres(){" >> jsonGeneres.js
+echo "  return(generesInfo);" >> jsonGeneres.js
+echo "}" >> jsonGeneres.js
