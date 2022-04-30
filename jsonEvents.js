@@ -110,6 +110,7 @@ var eventsInfo = {
 {"id_event":"46ffa374af00ed2b76c1cfaa98b76e90","year":2022,"date":"19.03.2022","event":"Heidelberg Deathfest V","place":"Heidelberg (halle 02)","bands":11},
 {"id_event":"0cd1c230352e99227f43acc46129d6b4","year":2022,"date":"19.04.2022","event":"Morbidfest","place":"Weinheim (Café Central)","bands":4},
 {"id_event":"6f14a4e8ecdf87e02d77cec09b6c98b9","year":2022,"date":"23.04.2022","event":"50 Jahre Doktor Holzbein","place":"Mainz (Kulturcafé auf dem Campus)","bands":2},
+{"id_event":"808e3291422cea1b35c76af1b5ba5326","year":2022,"date":"28.04.2022","event":"Doomsday Album Release Tour","place":"Wiesbaden (Schlachthof)","bands":3},
 ]};
 function loadEvents(){
   return(eventsInfo);
