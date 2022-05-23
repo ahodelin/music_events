@@ -113,6 +113,7 @@ var eventsInfo = {
 {"id_event":"808e3291422cea1b35c76af1b5ba5326","year":2022,"date":"28.04.2022","event":"Doomsday Album Release Tour","place":"Wiesbaden (Schlachthof)","bands":3},
 {"id_event":"20970f44b43a10d7282a77eda20866e2","year":2022,"date":"05.05.2022","event":"Necro Sapiens Tour 2022","place":"Wiesbaden (Schlachthof)","bands":2},
 {"id_event":"9feb9a9930d633ef18e1dae581b65327","year":2022,"date":"13.05.2022","event":"Horresque & Guests","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+{"id_event":"8342e65069254a6fd6d2bbc87aff8192","year":2022,"date":"20.05.2022","event":"Braincrusher in Hell 2020","place":"Hirschaid","bands":16},
 ]};
 function loadEvents(){
   return(eventsInfo);
