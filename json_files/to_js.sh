@@ -12,4 +12,5 @@ bash eventes.sh
 bash generes.sh
 
 mv *.js ../
-
+rm *.json
+cd

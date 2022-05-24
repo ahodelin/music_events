@@ -97,6 +97,7 @@ var eventsInfo = {
 {"id_event":"73d6ec35ad0e4ef8f213ba89d8bfd7d7","year":2021,"date":"23.07.2021","event":"New live rituals a COVID proof celebration of audial darkness","place":"Mannheim (7er-Club)","bands":2},
 {"id_event":"441306dd21b61d9a52e04b9e177cc9b5","year":2021,"date":"31.07.2021","event":"Jubiläumswoche 25 Jahre Hexenhaus","place":"Ulm (Hexenhaus)","bands":10},
 {"id_event":"13afebb96e2d2d27345bd3b1fefc4db0","year":2021,"date":"07.08.2021","event":"Crossplane & Hängerbänd","place":"Mainz (KUZ - Kulturzentrum)","bands":2},
+{"id_event":"320951dccf4030808c979375af8356b6","year":2021,"date":"28.08.2021","event":"Wild Boar Wars III","place":"Frankfurt (Das Bett)","bands":10},
 {"id_event":"f3603438cf79ee848cb2f5e4a5884663","year":2021,"date":"11.09.2021","event":"Alexander the Great in Exil","place":"Mainz (Kulturcafé auf dem Campus)","bands":2},
 {"id_event":"3c61b014201d6f62468d72d0363f7725","year":2021,"date":"16.09.2021","event":"Crisix, Insanity Alert","place":"Weinheim (Café Central)","bands":2},
 {"id_event":"a71ac13634cd0b6d26e52d11c76f0a63","year":2021,"date":"02.10.2021","event":"Warfield/Torment of Souls/Redgrin","place":"Kaiserslautern (Irish House)","bands":3},
