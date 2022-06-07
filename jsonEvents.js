@@ -115,6 +115,8 @@ var eventsInfo = {
 {"id_event":"20970f44b43a10d7282a77eda20866e2","year":2022,"date":"05.05.2022","event":"Necro Sapiens Tour 2022","place":"Wiesbaden (Schlachthof)","bands":2},
 {"id_event":"9feb9a9930d633ef18e1dae581b65327","year":2022,"date":"13.05.2022","event":"Horresque & Guests","place":"Mainz (M8 im Haus der Jugend)","bands":3},
 {"id_event":"8342e65069254a6fd6d2bbc87aff8192","year":2022,"date":"20.05.2022","event":"Braincrusher in Hell 2020","place":"Hirschaid","bands":16},
+{"id_event":"56b2b0021619529b3ea548e9b6298939","year":2022,"date":"05.06.2022","event":"29. Wave-Gotik-Treffen (Sunday)","place":"Leipzig (Felsenkeller / Naumanns)","bands":5},
+{"id_event":"54ae019a42e114d434a0c2a692e7e7ff","year":2022,"date":"06.06.2022","event":"29. Wave-Gotik-Treffen (Monday)","place":"Leipzig (Felsenkeller / Naumanns)","bands":4},
 ]};
 function loadEvents(){
   return(eventsInfo);

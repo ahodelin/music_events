@@ -621,6 +621,15 @@ var bandsEventsInfo = {
 {"id_band":"d0a1fd0467dc892f0dc27711637c864e","id_event":"320951dccf4030808c979375af8356b6"},
 {"id_band":"5f992768f7bb9592bed35b07197c87d0","id_event":"320951dccf4030808c979375af8356b6"},
 {"id_band":"b1bdad87bd3c4ac2c22473846d301a9e","id_event":"320951dccf4030808c979375af8356b6"},
+{"id_band":"781acc7e58c9a746d58f6e65ab1e90c4","id_event":"56b2b0021619529b3ea548e9b6298939"},
+{"id_band":"e5a674a93987de4a52230105907fffe9","id_event":"56b2b0021619529b3ea548e9b6298939"},
+{"id_band":"a2459c5c8a50215716247769c3dea40b","id_event":"56b2b0021619529b3ea548e9b6298939"},
+{"id_band":"e285e4ecb358b92237298f67526beff7","id_event":"56b2b0021619529b3ea548e9b6298939"},
+{"id_band":"dfdef9b5190f331de20fe029babf032e","id_event":"56b2b0021619529b3ea548e9b6298939"},
+{"id_band":"d832b654664d104f0fbb9b6674a09a11","id_event":"54ae019a42e114d434a0c2a692e7e7ff"},
+{"id_band":"2aeb128c6d3eb7e79acb393b50e1cf7b","id_event":"54ae019a42e114d434a0c2a692e7e7ff"},
+{"id_band":"213c449bd4bcfcdb6bffecf55b2c30b4","id_event":"54ae019a42e114d434a0c2a692e7e7ff"},
+{"id_band":"4ea353ae22a1c0d26327638f600aeac8","id_event":"54ae019a42e114d434a0c2a692e7e7ff"},
 ]};
 function loadBandsEvents(){
   return(bandsEventsInfo);
