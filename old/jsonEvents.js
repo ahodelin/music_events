@@ -117,8 +117,6 @@ var eventsInfo = {
 {"id_event":"8342e65069254a6fd6d2bbc87aff8192","year":2022,"date":"20.05.2022","event":"Braincrusher in Hell 2020","place":"Hirschaid","bands":16},
 {"id_event":"7712d7dceef5a521b4a554c431752979","year":2022,"date":"05.06.2022","event":"29. Wave-Gotik-Treffen","place":"Leipzig (Felsenkeller / Naumanns)","bands":9},
 {"id_event":"6118dc6a9a96e892fa5bbaac3ccb6d99","year":2022,"date":"24.06.2022","event":"Download Germany","place":"Hockenheim (Hockenheim-Ring)","bands":4},
-{"id_event":"9c697f7def422e3f6f885d3ec9741603","year":2022,"date":"02.07.2022","event":"Grill' Em All 2022","place":"Mainz (Alte Ziegelei)","bands":2},
-{"id_event":"b1e4aa22275a6a4b3213b44fc342f9fe","year":2022,"date":"05.07.2022","event":"Sepultura - Quadra Summer Tour - Europe 2022","place":"Lindau (Club Vaudeville)","bands":2},
 ]};
 function loadEvents(){
   return(eventsInfo);
