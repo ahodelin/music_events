@@ -120,6 +120,7 @@ var eventsInfo = {
 {"id_event":"9c697f7def422e3f6f885d3ec9741603","year":2022,"date":"02.07.2022","event":"Grill' Em All 2022","place":"Mainz (Alte Ziegelei)","bands":2},
 {"id_event":"b1e4aa22275a6a4b3213b44fc342f9fe","year":2022,"date":"05.07.2022","event":"Sepultura - Quadra Summer Tour - Europe 2022","place":"Lindau (Club Vaudeville)","bands":2},
 {"id_event":"31c3824b57ad0919df18a79978c701e9","year":2022,"date":"19.07.2022","event":"Post Covid European Summer Madness 2022","place":"Wiesbaden (Schlachthof)","bands":2},
+{"id_event":"fc0dc52ba0b7a645c4d70c0df70abb40","year":2022,"date":"03.08.2022","event":"Wacken Open Air 2022","place":"Wacken","bands":47},
 ]};
 function loadEvents(){
   return(eventsInfo);

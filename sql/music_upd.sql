@@ -10,7 +10,7 @@ insert into music.events
 
 insert into music.bands 
   values    
-    (md5('Cattle Decapitation'), 'Cattle Decapitation', 'm');   
+    (md5('The Risen Dread'), 'The Risen Dread', 'y');   
     (md5(''), 'Orca', 'y'),
     (md5(''), 'Kryn', 'm'),
     (md5(''), 'V.I.D.A', 'y'),
@@ -35,7 +35,9 @@ insert into music.bands
     (md5(''), 'Kampfar', 'm'),
     
     ;
- 
+insert into geo.countries 
+values 
+(md5('Croatia'), 'Croatia', 'hr');
 
 insert into music.bands_countries  
   values
@@ -51,26 +53,26 @@ insert into music.bands_countries
     (md5('Crypta'), md5('Brazil')),
     (md5('Gwar'), md5('USA')),
     (md5('Kampfar'), md5('Norway')),
-    (md5('Gaerea'), md5('')),
-    (md5('Mork'), md5('')),
-    (md5('Fusion Bomb'), md5('')),
-    (md5('Múr'), md5('')),
-    (md5('Typhus'), md5('')),
-    (md5('Komodo'), md5('')),
-    (md5('Ludicia'), md5('')),
-    (md5('Tranatopsy'), md5('')),
+    (md5('Gaerea'), md5('Portugal')),
+    (md5('Mork'), md5('Norway')),
+    (md5('Fusion Bomb'), md5('Luxembourg')),
+    (md5('Múr'), md5('Iceland')),
+    (md5('Typhus'), md5('Greece')),
+    (md5('Komodo'), md5('Panama')),
+    (md5('Ludicia'), md5('Indonesia')),
+    (md5('Tranatopsy'), md5('Mexico')),
     (md5('Criminal'), md5('Chile')),
-    (md5('Onslaught'), md5('')),
-    (md5('Cadaver'), md5('')),
-    (md5('Moral Putrefaction'), md5('')),
-    (md5('Almøst Human'), md5('')),
-    (md5('Divide'), md5('')),
-    (md5('The Risen Dead'), md5('')),
-    (md5('Speedemon'), md5('')),
-    (md5('Lycanthrope'), md5('')),
-    (md5('Impartial'), md5('')),
-    (md5('V.I.D.A'), md5('')),
-    (md5('Kryn'), md5('')),
+    (md5('Onslaught'), md5('UK')),
+    (md5('Cadaver'), md5('Norway')),
+    (md5('Moral Putrefaction'), md5('India')),
+    (md5('Almøst Human'), md5('Switzerland')),
+    (md5('Divide'), md5('Germany')),
+    (md5('The Risen Dread'), md5('Ireland')),
+    (md5('Speedemon'), md5('Portugal')),
+    (md5('Lycanthrope'), md5('Australia')),
+    (md5('Impartial'), md5('Faroe Islands')),
+    (md5('V.I.D.A'), md5('Argentina')),
+    (md5('Kryn'), md5('Croatia')),
     (md5('Orca'), md5('')),
     (md5('Mythraeum'), md5(''))
 ;
@@ -110,36 +112,48 @@ insert into music.bands_generes
     (md5('Crypta'), md5('Death Metal')),
     (md5('Gwar'), md5('Various')),
     (md5('Kampfar'), md5('Pagan Black Metal')),
-    (md5('Gaerea'), md5('')),
-    (md5('Mork'), md5('')),
-    (md5('Fusion Bomb'), md5('')),
-    (md5('Múr'), md5('')),
-    (md5('Typhus'), md5('')),
-    (md5('Komodo'), md5('')),
-    (md5('Ludicia'), md5('')),
-    (md5('Tranatopsy'), md5('')),
-    (md5('Criminal'), md5('Chile')),
-    (md5('Onslaught'), md5('')),
-    (md5('Cadaver'), md5('')),
-    (md5('Moral Putrefaction'), md5('')),
-    (md5('Almøst Human'), md5('')),
-    (md5('Divide'), md5('')),
-    (md5('The Risen Dead'), md5('')),
-    (md5('Speedemon'), md5('')),
-    (md5('Lycanthrope'), md5('')),
-    (md5('Impartial'), md5('')),
-    (md5('V.I.D.A'), md5('')),
-    (md5('Kryn'), md5('')),
-    (md5('Orca'), md5('')),
+    (md5('Gaerea'), md5('Black Metal')),
+    (md5('Mork'), md5('Black Metal')),
+    (md5('Fusion Bomb'), md5('Thrash Metal')),
+    (md5('Múr'), md5('Extreme Metal')),
+    (md5('Typhus'), md5('Thrash Metal')),--Speed/
+    (md5('Typhus'), md5('Speed Metal')),--/Thrash Metal
+    (md5('Komodo'), md5('Heavy Metal')), --Heavy/Thrash Metal
+    (md5('Komodo'), md5('Thrash Metal')), --Heavy/
+    (md5('Ludicia'), md5('Death Metal')), --/Deathcore
+    (md5('Ludicia'), md5('Deathcore')), --Death Metal/
+    (md5('Tranatopsy'), md5('Death Metal')),
+    (md5('Criminal'), md5('Death Metal')), --/, Groove Metal
+    (md5('Criminal'), md5('Thrash Metal')), --Death/Thrash Metal, 
+    (md5('Criminal'), md5('Groove Metal')), --Death/Thrash Metal, Groove Metal
+    (md5('Onslaught'), md5('Hardcore Punk')), -- (early); Thrash Metal
+    (md5('Onslaught'), md5('Thrash Metal')), --Hardcore Punk (early); 
+    (md5('Cadaver'), md5('Death Metal')), --Black//Thrash Metal
+    (md5('Cadaver'), md5('Black Metal')), --/Death/Thrash Metal
+    (md5('Cadaver'), md5('Thrash Metal')), --Black/Death/
+    (md5('Moral Putrefaction'), md5('Death Metal')),
+    (md5('Almøst Human'), md5('Extreme Metal')),
+    (md5('Divide'), md5('Death Metal')),
+    (md5('The Risen Dread'), md5('Groove Metal')), --Groove Metal/Metalcore
+    (md5('The Risen Dread'), md5('Metalcore')), --/
+    (md5('Speedemon'), md5('Speed Metal')), -- /Thrash Metal
+    (md5('Speedemon'), md5('Thrash Metal')), -- Speed/
+    (md5('Lycanthrope'), md5('Heavy Metal')),
+    (md5('Impartial'), md5('Metalcore')),
+    (md5('V.I.D.A'), md5('Thrash Metal')), --Melodic Death/Thrash Metal/Metalcore
+    (md5('V.I.D.A'), md5('Melodic Death Metal')), --Melodic Death//Metalcore
+    (md5('V.I.D.A'), md5('Metalcore')), --/Thrash Metal/
+    (md5('Kryn'), md5('Modern Metal')),
+    (md5('Orca'), md5('Philippines')),
     (md5('Mythraeum'), md5(''))
 ;
 
-delete from music.bands where id_band = md5('Casttle Decapitation');
-delete from music.bands_events  where id_band = md5('Cattle Decapitation');
+delete from music.bands where id_band = md5('The Risen Dead');
+delete from music.bands_events  where id_band = md5('The Risen Dead');
 
 
 insert into music.bands_events 
   values
-    (md5('Cattle Decapitation'), md5('Wacken Open Air 2022'));
+    (md5('The Risen Dread'), md5('Wacken Open Air 2022'));
 
 select count(id_band) from music.bands_events be where id_event = md5('Wacken Open Air 2022'); 
