@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.4 (Debian 14.4-1.pgdg110+1)
--- Dumped by pg_dump version 14.4 (Debian 14.4-1.pgdg110+1)
+-- Dumped from database version 14.5 (Debian 14.5-1.pgdg110+1)
+-- Dumped by pg_dump version 14.5 (Debian 14.5-1.pgdg110+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,29 +17,25 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: geo; Type: SCHEMA; Schema: -; Owner: postgres
+-- Name: geo; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA geo;
 
 
-ALTER SCHEMA geo OWNER TO postgres;
-
 --
--- Name: music; Type: SCHEMA; Schema: -; Owner: postgres
+-- Name: music; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA music;
 
-
-ALTER SCHEMA music OWNER TO postgres;
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: countries; Type: TABLE; Schema: geo; Owner: postgres
+-- Name: countries; Type: TABLE; Schema: geo; Owner: -
 --
 
 CREATE TABLE geo.countries (
@@ -49,10 +45,8 @@ CREATE TABLE geo.countries (
 );
 
 
-ALTER TABLE geo.countries OWNER TO postgres;
-
 --
--- Name: places; Type: TABLE; Schema: geo; Owner: postgres
+-- Name: places; Type: TABLE; Schema: geo; Owner: -
 --
 
 CREATE TABLE geo.places (
@@ -61,10 +55,8 @@ CREATE TABLE geo.places (
 );
 
 
-ALTER TABLE geo.places OWNER TO postgres;
-
 --
--- Name: bands; Type: TABLE; Schema: music; Owner: postgres
+-- Name: bands; Type: TABLE; Schema: music; Owner: -
 --
 
 CREATE TABLE music.bands (
@@ -75,10 +67,8 @@ CREATE TABLE music.bands (
 );
 
 
-ALTER TABLE music.bands OWNER TO postgres;
-
 --
--- Name: bands_countries; Type: TABLE; Schema: music; Owner: postgres
+-- Name: bands_countries; Type: TABLE; Schema: music; Owner: -
 --
 
 CREATE TABLE music.bands_countries (
@@ -87,10 +77,8 @@ CREATE TABLE music.bands_countries (
 );
 
 
-ALTER TABLE music.bands_countries OWNER TO postgres;
-
 --
--- Name: bands_events; Type: TABLE; Schema: music; Owner: postgres
+-- Name: bands_events; Type: TABLE; Schema: music; Owner: -
 --
 
 CREATE TABLE music.bands_events (
@@ -99,10 +87,8 @@ CREATE TABLE music.bands_events (
 );
 
 
-ALTER TABLE music.bands_events OWNER TO postgres;
-
 --
--- Name: bands_generes; Type: TABLE; Schema: music; Owner: postgres
+-- Name: bands_generes; Type: TABLE; Schema: music; Owner: -
 --
 
 CREATE TABLE music.bands_generes (
@@ -111,10 +97,8 @@ CREATE TABLE music.bands_generes (
 );
 
 
-ALTER TABLE music.bands_generes OWNER TO postgres;
-
 --
--- Name: events; Type: TABLE; Schema: music; Owner: postgres
+-- Name: events; Type: TABLE; Schema: music; Owner: -
 --
 
 CREATE TABLE music.events (
@@ -125,10 +109,8 @@ CREATE TABLE music.events (
 );
 
 
-ALTER TABLE music.events OWNER TO postgres;
-
 --
--- Name: generes; Type: TABLE; Schema: music; Owner: postgres
+-- Name: generes; Type: TABLE; Schema: music; Owner: -
 --
 
 CREATE TABLE music.generes (
@@ -137,10 +119,8 @@ CREATE TABLE music.generes (
 );
 
 
-ALTER TABLE music.generes OWNER TO postgres;
-
 --
--- Name: mv_musical_info; Type: MATERIALIZED VIEW; Schema: music; Owner: postgres
+-- Name: mv_musical_info; Type: MATERIALIZED VIEW; Schema: music; Owner: -
 --
 
 CREATE MATERIALIZED VIEW music.mv_musical_info AS
@@ -164,10 +144,8 @@ CREATE MATERIALIZED VIEW music.mv_musical_info AS
   WITH NO DATA;
 
 
-ALTER TABLE music.mv_musical_info OWNER TO postgres;
-
 --
--- Name: v_bands; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_bands; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_bands AS
@@ -187,10 +165,8 @@ CREATE VIEW music.v_bands AS
   ORDER BY b.band;
 
 
-ALTER TABLE music.v_bands OWNER TO postgres;
-
 --
--- Name: v_bands_events; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_bands_events; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_bands_events AS
@@ -203,10 +179,8 @@ CREATE VIEW music.v_bands_events AS
   ORDER BY b.band;
 
 
-ALTER TABLE music.v_bands_events OWNER TO postgres;
-
 --
--- Name: v_bands_generes; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_bands_generes; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_bands_generes AS
@@ -219,10 +193,8 @@ CREATE VIEW music.v_bands_generes AS
   ORDER BY b.band;
 
 
-ALTER TABLE music.v_bands_generes OWNER TO postgres;
-
 --
--- Name: v_bands_likes; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_bands_likes; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_bands_likes AS
@@ -233,10 +205,8 @@ CREATE VIEW music.v_bands_likes AS
   ORDER BY (count(bands.id_band)) DESC;
 
 
-ALTER TABLE music.v_bands_likes OWNER TO postgres;
-
 --
--- Name: v_countries; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_countries; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_countries AS
@@ -250,10 +220,8 @@ CREATE VIEW music.v_countries AS
   ORDER BY (count(DISTINCT bc.id_band)) DESC;
 
 
-ALTER TABLE music.v_countries OWNER TO postgres;
-
 --
--- Name: v_events; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_events; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_events AS
@@ -278,10 +246,8 @@ CREATE VIEW music.v_events AS
   ORDER BY e.date_event;
 
 
-ALTER TABLE music.v_events OWNER TO postgres;
-
 --
--- Name: v_events_years; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_events_years; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_events_years AS
@@ -292,10 +258,8 @@ CREATE VIEW music.v_events_years AS
   ORDER BY (date_part('year'::text, events.date_event));
 
 
-ALTER TABLE music.v_events_years OWNER TO postgres;
-
 --
--- Name: v_generes; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_generes; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_generes AS
@@ -308,10 +272,8 @@ CREATE VIEW music.v_generes AS
   ORDER BY (count(bg.id_band)) DESC;
 
 
-ALTER TABLE music.v_generes OWNER TO postgres;
-
 --
--- Name: v_places_events; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_places_events; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_places_events AS
@@ -324,10 +286,8 @@ CREATE VIEW music.v_places_events AS
   ORDER BY (count(e.id_event)) DESC;
 
 
-ALTER TABLE music.v_places_events OWNER TO postgres;
-
 --
--- Name: v_quantities; Type: VIEW; Schema: music; Owner: postgres
+-- Name: v_quantities; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_quantities AS
@@ -348,10 +308,8 @@ UNION
    FROM music.generes;
 
 
-ALTER TABLE music.v_quantities OWNER TO postgres;
-
 --
--- Data for Name: countries; Type: TABLE DATA; Schema: geo; Owner: postgres
+-- Data for Name: countries; Type: TABLE DATA; Schema: geo; Owner: -
 --
 
 COPY geo.countries (id_country, country, flag) FROM stdin;
@@ -407,7 +365,7 @@ fa79c3005daec47ecff84a116a0927a1	Hungary	hu
 
 
 --
--- Data for Name: places; Type: TABLE DATA; Schema: geo; Owner: postgres
+-- Data for Name: places; Type: TABLE DATA; Schema: geo; Owner: -
 --
 
 COPY geo.places (id_place, place) FROM stdin;
@@ -460,7 +418,7 @@ fbde8601308ae84be23d6de78e10d14c	Wacken
 
 
 --
--- Data for Name: bands; Type: TABLE DATA; Schema: music; Owner: postgres
+-- Data for Name: bands; Type: TABLE DATA; Schema: music; Owner: -
 --
 
 COPY music.bands (id_band, band, likes) FROM stdin;
@@ -922,7 +880,6 @@ b785a5ffad5e7e36ccac25c51d5d8908	Mortal Peril	y
 83d15841023cff02eafedb1c87df9b11	Birdflesh	m
 f03bde11d261f185cbacfa32c1c6538c	Master	y
 f6540bc63be4c0cb21811353c0d24f69	Misanthropia	y
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	Pestilence	m
 ea16d031090828264793e860a00cc995	Severe Torture	y
 5eed658c4b7b68a0ecc49205b68d54e7	Undying Lust for Cadaverous Molestation (UxLxCxM)	y
 96e3cdb363fe6df2723be5b994ad117a	Lecks inc.	y
@@ -973,7 +930,6 @@ c2e88140e99f33883dac39daee70ac36	Lycanthrope	m
 1bb6d0271ea775dfdfa7f9fe1048147a	Almøst Human	y
 f17c7007dd2ed483b9df587c1fdac2c7	Moral Putrefaction	y
 03022be9e2729189e226cca023a2c9bf	Cadaver	y
-c58de8415b504a6ffa5d0b14967f91bb	Onslaught	m
 4d79c341966242c047f3833289ee3a13	Criminal	y
 32921081f86e80cd10138b8959260e1a	Tranatopsy	y
 3041a64f7587a6768d8e307b2662785b	Ludicia	y
@@ -994,14 +950,16 @@ a5a8afc6c35c2625298b9ce4cc447b39	Auðn	y
 6ff24c538936b5b53e88258f88294666	Ill Niño	m
 d399575133268305c24d87f1c2ef054a	Implore	y
 71e720cd3fcc3cdb99f2f4dc7122e078	Mythraeum	y
-2d1f30c9fc8d7200bdf15b730c4cd757	Blood Incantation	m
-a1cebab6ecfd371779f9c18e36cbba0c	Cattle Decapitation	m
 743c89c3e93b9295c1ae6e750047fb1e	The Risen Dread	y
+e4f0ad5ef0ac3037084d8a5e3ca1cabc	Pestilence	y
+c58de8415b504a6ffa5d0b14967f91bb	Onslaught	y
+2d1f30c9fc8d7200bdf15b730c4cd757	Blood Incantation	y
+a1cebab6ecfd371779f9c18e36cbba0c	Cattle Decapitation	y
 \.
 
 
 --
--- Data for Name: bands_countries; Type: TABLE DATA; Schema: music; Owner: postgres
+-- Data for Name: bands_countries; Type: TABLE DATA; Schema: music; Owner: -
 --
 
 COPY music.bands_countries (id_band, id_country) FROM stdin;
@@ -1541,7 +1499,7 @@ ccff6df2a54baa3adeb0bddb8067e7c0	3536be57ce0713954e454ae6c53ec023
 
 
 --
--- Data for Name: bands_events; Type: TABLE DATA; Schema: music; Owner: postgres
+-- Data for Name: bands_events; Type: TABLE DATA; Schema: music; Owner: -
 --
 
 COPY music.bands_events (id_band, id_event) FROM stdin;
@@ -2236,7 +2194,7 @@ a1cebab6ecfd371779f9c18e36cbba0c	fc0dc52ba0b7a645c4d70c0df70abb40
 
 
 --
--- Data for Name: bands_generes; Type: TABLE DATA; Schema: music; Owner: postgres
+-- Data for Name: bands_generes; Type: TABLE DATA; Schema: music; Owner: -
 --
 
 COPY music.bands_generes (id_band, id_genere) FROM stdin;
@@ -3122,7 +3080,7 @@ ccff6df2a54baa3adeb0bddb8067e7c0	7a3808eef413b514776a7202fd2cb94f
 
 
 --
--- Data for Name: events; Type: TABLE DATA; Schema: music; Owner: postgres
+-- Data for Name: events; Type: TABLE DATA; Schema: music; Owner: -
 --
 
 COPY music.events (id_event, event, date_event, id_place) FROM stdin;
@@ -3251,7 +3209,7 @@ fc0dc52ba0b7a645c4d70c0df70abb40	Wacken Open Air 2022	2022-08-03	fbde8601308ae84
 
 
 --
--- Data for Name: generes; Type: TABLE DATA; Schema: music; Owner: postgres
+-- Data for Name: generes; Type: TABLE DATA; Schema: music; Owner: -
 --
 
 COPY music.generes (id_genere, genere) FROM stdin;
@@ -3403,7 +3361,7 @@ f22794f69ce5910cb4be68ff9026570d	Various
 
 
 --
--- Name: countries countries_country_key; Type: CONSTRAINT; Schema: geo; Owner: postgres
+-- Name: countries countries_country_key; Type: CONSTRAINT; Schema: geo; Owner: -
 --
 
 ALTER TABLE ONLY geo.countries
@@ -3411,7 +3369,7 @@ ALTER TABLE ONLY geo.countries
 
 
 --
--- Name: countries countries_pkey; Type: CONSTRAINT; Schema: geo; Owner: postgres
+-- Name: countries countries_pkey; Type: CONSTRAINT; Schema: geo; Owner: -
 --
 
 ALTER TABLE ONLY geo.countries
@@ -3419,7 +3377,7 @@ ALTER TABLE ONLY geo.countries
 
 
 --
--- Name: places places_pkey; Type: CONSTRAINT; Schema: geo; Owner: postgres
+-- Name: places places_pkey; Type: CONSTRAINT; Schema: geo; Owner: -
 --
 
 ALTER TABLE ONLY geo.places
@@ -3427,7 +3385,7 @@ ALTER TABLE ONLY geo.places
 
 
 --
--- Name: places places_place_key; Type: CONSTRAINT; Schema: geo; Owner: postgres
+-- Name: places places_place_key; Type: CONSTRAINT; Schema: geo; Owner: -
 --
 
 ALTER TABLE ONLY geo.places
@@ -3435,7 +3393,7 @@ ALTER TABLE ONLY geo.places
 
 
 --
--- Name: bands bands_band_key; Type: CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands bands_band_key; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands
@@ -3443,7 +3401,7 @@ ALTER TABLE ONLY music.bands
 
 
 --
--- Name: bands_countries bands_countries_pkey; Type: CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_countries bands_countries_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_countries
@@ -3451,7 +3409,7 @@ ALTER TABLE ONLY music.bands_countries
 
 
 --
--- Name: bands_events bands_events_pkey; Type: CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_events bands_events_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_events
@@ -3459,7 +3417,7 @@ ALTER TABLE ONLY music.bands_events
 
 
 --
--- Name: bands_generes bands_generes_pkey; Type: CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_generes bands_generes_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_generes
@@ -3467,7 +3425,7 @@ ALTER TABLE ONLY music.bands_generes
 
 
 --
--- Name: bands bands_pkey; Type: CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands bands_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands
@@ -3475,7 +3433,7 @@ ALTER TABLE ONLY music.bands
 
 
 --
--- Name: events events_pkey; Type: CONSTRAINT; Schema: music; Owner: postgres
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.events
@@ -3483,7 +3441,7 @@ ALTER TABLE ONLY music.events
 
 
 --
--- Name: generes generes_genere_key; Type: CONSTRAINT; Schema: music; Owner: postgres
+-- Name: generes generes_genere_key; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.generes
@@ -3491,7 +3449,7 @@ ALTER TABLE ONLY music.generes
 
 
 --
--- Name: generes generes_pkey; Type: CONSTRAINT; Schema: music; Owner: postgres
+-- Name: generes generes_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.generes
@@ -3499,7 +3457,7 @@ ALTER TABLE ONLY music.generes
 
 
 --
--- Name: bands_countries bands_countries_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_countries bands_countries_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_countries
@@ -3507,7 +3465,7 @@ ALTER TABLE ONLY music.bands_countries
 
 
 --
--- Name: bands_countries bands_countries_id_country_fkey; Type: FK CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_countries bands_countries_id_country_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_countries
@@ -3515,7 +3473,7 @@ ALTER TABLE ONLY music.bands_countries
 
 
 --
--- Name: bands_events bands_events_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_events bands_events_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_events
@@ -3523,7 +3481,7 @@ ALTER TABLE ONLY music.bands_events
 
 
 --
--- Name: bands_events bands_events_id_event_fkey; Type: FK CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_events bands_events_id_event_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_events
@@ -3531,7 +3489,7 @@ ALTER TABLE ONLY music.bands_events
 
 
 --
--- Name: bands_generes bands_generes_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_generes bands_generes_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_generes
@@ -3539,7 +3497,7 @@ ALTER TABLE ONLY music.bands_generes
 
 
 --
--- Name: bands_generes bands_generes_id_genere_fkey; Type: FK CONSTRAINT; Schema: music; Owner: postgres
+-- Name: bands_generes bands_generes_id_genere_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.bands_generes
@@ -3547,7 +3505,7 @@ ALTER TABLE ONLY music.bands_generes
 
 
 --
--- Name: events events_id_place_fkey; Type: FK CONSTRAINT; Schema: music; Owner: postgres
+-- Name: events events_id_place_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
 ALTER TABLE ONLY music.events
@@ -3555,7 +3513,7 @@ ALTER TABLE ONLY music.events
 
 
 --
--- Name: mv_musical_info; Type: MATERIALIZED VIEW DATA; Schema: music; Owner: postgres
+-- Name: mv_musical_info; Type: MATERIALIZED VIEW DATA; Schema: music; Owner: -
 --
 
 REFRESH MATERIALIZED VIEW music.mv_musical_info;
