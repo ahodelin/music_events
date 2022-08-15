@@ -121,6 +121,7 @@ var eventsInfo = {
 {"id_event":"b1e4aa22275a6a4b3213b44fc342f9fe","year":2022,"date":"05.07.2022","event":"Sepultura - Quadra Summer Tour - Europe 2022","place":"Lindau (Club Vaudeville)","bands":2},
 {"id_event":"31c3824b57ad0919df18a79978c701e9","year":2022,"date":"19.07.2022","event":"Post Covid European Summer Madness 2022","place":"Wiesbaden (Schlachthof)","bands":2},
 {"id_event":"fc0dc52ba0b7a645c4d70c0df70abb40","year":2022,"date":"03.08.2022","event":"Wacken Open Air 2022","place":"Wacken","bands":47},
+{"id_event":"7c02da151320d3aa28b1e0f54b0264b0","year":2022,"date":"13.08.2022","event":"Rockfield Open Air 2022","place":"Mainz-Kastel (Reduit)","bands":3},
 ]};
 function loadEvents(){
   return(eventsInfo);

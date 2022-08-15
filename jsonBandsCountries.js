@@ -532,6 +532,7 @@ var bandsCountriesInfo = {
 {"id_band":"26830d74f9ed8e7e4ea4e82e28fa4761","id_country":"560d4c6ff431c86546f3fcec72c748c7"},
 {"id_band":"02f36cf6fe7b187306b2a7d423cafc2c","id_country":"77dab2f81a6c8c9136efba7ab2c4c0f2"},
 {"id_band":"71e720cd3fcc3cdb99f2f4dc7122e078","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
+{"id_band":"54c09bacc963763eb8742fa1da44a968","id_country":"d8b00929dec65d422303256336ada04f"},
 ]};
 function loadBandsCountries(){
   return(bandsCountriesInfo);

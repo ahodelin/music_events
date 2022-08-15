@@ -878,6 +878,7 @@ var bandsGeneresInfo = {
 {"id_band":"26830d74f9ed8e7e4ea4e82e28fa4761","id_genere":"5cbdaf6af370a627c84c43743e99e016"},
 {"id_band":"02f36cf6fe7b187306b2a7d423cafc2c","id_genere":"f41da0c65a8fa3690e6a6877e7112afb"},
 {"id_band":"71e720cd3fcc3cdb99f2f4dc7122e078","id_genere":"a68d5b72c2f98613f511337a59312f78"},
+{"id_band":"54c09bacc963763eb8742fa1da44a968","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 ]};
 function loadBandsGeneres(){
   return(bandsGeneresInfo);
