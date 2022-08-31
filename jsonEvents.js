@@ -122,7 +122,7 @@ var eventsInfo = {
 {"id_event":"31c3824b57ad0919df18a79978c701e9","year":2022,"date":"19.07.2022","event":"Post Covid European Summer Madness 2022","place":"Wiesbaden (Schlachthof)","bands":2},
 {"id_event":"fc0dc52ba0b7a645c4d70c0df70abb40","year":2022,"date":"03.08.2022","event":"Wacken Open Air 2022","place":"Wacken","bands":47},
 {"id_event":"7c02da151320d3aa28b1e0f54b0264b0","year":2022,"date":"13.08.2022","event":"Rockfield Open Air 2022","place":"Mainz-Kastel (Reduit)","bands":3},
-{"id_event":"824428dadd859deaf1af1916aea84cfc","year":2022,"date":"25.08.2022","event":"Death Feast Open Air 2022","place":"Andernach","bands":12},
+{"id_event":"824428dadd859deaf1af1916aea84cfc","year":2022,"date":"25.08.2022","event":"Death Feast Open Air 2022","place":"Andernach","bands":32},
 ]};
 function loadEvents(){
   return(eventsInfo);

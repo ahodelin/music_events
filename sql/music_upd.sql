@@ -12,11 +12,7 @@ insert into music.events
 
 insert into music.bands 
   values
-    (md5(''), '', 'y'),
-    (md5(''), '', 'y'),
-    (md5(''), '', 'y'),
-    (md5(''), '', 'y'),
-    (md5(''), '', 'y'),
+    (md5(''), '', '')
 ;
 
 insert into geo.countries 
@@ -29,58 +25,17 @@ insert into music.generes
    
 insert into music.bands_countries 
   values
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
+    (md5(''), md5(''))
 ;
 
 insert into music.bands_generes 
   values
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-    (md5(''), md5('')),
-   ;
+    (md5(''), md5(''))
+;
 
 
 insert into music.bands_events 
   values
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022')),
-    (md5(''), md5('Death Feast Open Air 2022'))
+    (md5(''), md5(''))
  ;
 
