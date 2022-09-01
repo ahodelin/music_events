@@ -25,7 +25,7 @@ insert into music.generes
    
 insert into music.bands_countries 
   values
-    (md5(''), md5(''))
+    (md5('Birdflesh'), md5('Sweden'))
 ;
 
 insert into music.bands_generes 
