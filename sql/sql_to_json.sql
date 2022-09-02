@@ -40,3 +40,14 @@ to '/var/lib/postgresql/jsonEvents.json'
 copy (select row_to_json(t)
 from (select * from music.v_generes) t)
 to '/var/lib/postgresql/jsonGeneres.json'
+
+-- copy to latex
+-- Auðn - Au\dh n
+-- & - \& 
+--   Apey & The Pea
+--   Booze & Glory
+copy 
+  (
+    select band "Gruppe", ' & \includegraphics[width=1cm]{4x3/'||flag||'} & ' "Land", '\includegraphics[width=1cm]{'||'likes/'||likes||'} \\ \hline' "Farbe"  from music.v_bands vb
+  )
+to '/var/lib/postgresql/Music_Events.csv' with delimiter ';' csv;
