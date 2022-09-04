@@ -123,7 +123,6 @@ var eventsInfo = {
 {"id_event":"fc0dc52ba0b7a645c4d70c0df70abb40","year":2022,"date":"03.08.2022","event":"Wacken Open Air 2022","place":"Wacken","bands":47},
 {"id_event":"7c02da151320d3aa28b1e0f54b0264b0","year":2022,"date":"13.08.2022","event":"Rockfield Open Air 2022","place":"Mainz-Kastel (Reduit)","bands":3},
 {"id_event":"824428dadd859deaf1af1916aea84cfc","year":2022,"date":"25.08.2022","event":"Death Feast Open Air 2022","place":"Andernach","bands":32},
-{"id_event":"9922a07485d25c089f12792a50c5bfad","year":2022,"date":"02.09.2022","event":"Infernum meets Porkcore Festevil 2022","place":"Büchold","bands":15},
 ]};
 function loadEvents(){
   return(eventsInfo);

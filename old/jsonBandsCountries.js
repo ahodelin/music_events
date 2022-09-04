@@ -558,15 +558,6 @@ var bandsCountriesInfo = {
 {"id_band":"4267b5081fdfb47c085db24b58d949e0","id_country":"907eba32d950bfab68227fd7ea22999b"},
 {"id_band":"8f7de32e3b76c02859d6b007417bd509","id_country":"92468e8a62373add2b9caefddbcf1303"},
 {"id_band":"83d15841023cff02eafedb1c87df9b11","id_country":"c8f4261f9f46e6465709e17ebea7a92b"},
-{"id_band":"332d6b94de399f86d499be57f8a5a5ca","id_country":"d8b00929dec65d422303256336ada04f"},
-{"id_band":"b73377a1ec60e58d4eeb03347268c11b","id_country":"d8b00929dec65d422303256336ada04f"},
-{"id_band":"e3419706e1838c7ce6c25a28bef0c248","id_country":"d8b00929dec65d422303256336ada04f"},
-{"id_band":"382ed38ecc68052678c5ac5646298b63","id_country":"06630c890abadde9228ea818ce52b621"},
-{"id_band":"213c302f84c5d45929b66a20074075df","id_country":"d8b00929dec65d422303256336ada04f"},
-{"id_band":"22c030759ab12f97e941af558566505e","id_country":"d8b00929dec65d422303256336ada04f"},
-{"id_band":"f5507c2c7beee622b98ade0b93abb7fe","id_country":"d8b00929dec65d422303256336ada04f"},
-{"id_band":"41bee031bd7d2fdb14ff48c92f4d7984","id_country":"d8b00929dec65d422303256336ada04f"},
-{"id_band":"39a464d24bf08e6e8df586eb5fa7ee30","id_country":"d8b00929dec65d422303256336ada04f"},
 ]};
 function loadBandsCountries(){
   return(bandsCountriesInfo);

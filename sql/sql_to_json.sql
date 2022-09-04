@@ -39,7 +39,7 @@ to '/var/lib/postgresql/jsonEvents.json'
 -- Generes
 copy (select row_to_json(t)
 from (select * from music.v_generes) t)
-to '/var/lib/postgresql/jsonGeneres.json'
+to '/var/lib/postgresql/jsonGeneres.json';
 
 -- copy to latex
 -- Auðn - Au\dh n
