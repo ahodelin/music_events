@@ -930,6 +930,7 @@ var bandsGeneresInfo = {
 {"id_band":"41bee031bd7d2fdb14ff48c92f4d7984","id_genere":"34d8a5e79a59df217c6882ee766c850a"},
 {"id_band":"39a464d24bf08e6e8df586eb5fa7ee30","id_genere":"4cfbb125e9878528bab91d12421134d8"},
 {"id_band":"39a464d24bf08e6e8df586eb5fa7ee30","id_genere":"eaa57a9b4248ce3968e718895e1c2f04"},
+{"id_band":"f7c3dcc7ba01d0ead8e0cfb59cdf6afc","id_genere":"924ae2289369a9c1d279d1d59088be64"},
 ]};
 function loadBandsGeneres(){
   return(bandsGeneresInfo);
