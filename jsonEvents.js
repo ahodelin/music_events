@@ -125,6 +125,7 @@ var eventsInfo = {
 {"id_event":"824428dadd859deaf1af1916aea84cfc","year":2022,"date":"25.08.2022","event":"Death Feast Open Air 2022","place":"Andernach","bands":32},
 {"id_event":"9922a07485d25c089f12792a50c5bfad","year":2022,"date":"02.09.2022","event":"Infernum meets Porkcore Festevil 2022","place":"Büchold","bands":15},
 {"id_event":"40c1eb30fa7abc7fdb3d8e35c61f6a7c","year":2022,"date":"05.09.2022","event":"Brutality Unleashed Tour 2022","place":"Frankfurt am Main (Ponyhof Club)","bands":4},
+{"id_event":"4eb278e51ecc7a4e052416dc604ad5c5","year":2022,"date":"09.09.2022","event":"Metal Embrace Festival XIV","place":"Barleben","bands":15},
 ]};
 function loadEvents(){
   return(eventsInfo);

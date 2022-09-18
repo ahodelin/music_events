@@ -5,4 +5,4 @@ echo "]};" >> jsonEvents.js
 echo "function loadEvents(){" >> jsonEvents.js
 echo "  return(eventsInfo);" >> jsonEvents.js
 echo "}" >> jsonEvents.js
-echo "Note: jsonEvents.json - Still Cyco Punk! Change double slash to single slash and double comilla por simple comilla."
+echo "Note: jsonEvents.js - Still Cyco Punk! Change double slash to single slash and double comilla por simple comilla."
