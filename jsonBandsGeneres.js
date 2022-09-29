@@ -954,6 +954,10 @@ var bandsGeneresInfo = {
 {"id_band":"4ac863b6f6fa5ef02afdd9c1ca2a5e24","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 {"id_band":"4ac863b6f6fa5ef02afdd9c1ca2a5e24","id_genere":"262770cfc76233c4f0d7a1e43a36cbf7"},
 {"id_band":"1e2bcbb679ccfdea27b28bd1ea9f2e67","id_genere":"a68d5b72c2f98613f511337a59312f78"},
+{"id_band":"1c62394f457ee9a56b0885f622299ea2","id_genere":"01864d382accf1cdb077e42032b16340"},
+{"id_band":"b7e529a8e9af2a2610182b3d3fc33698","id_genere":"d5a9c37bc91d6d5d55a3c2e38c3bf97d"},
+{"id_band":"b7e529a8e9af2a2610182b3d3fc33698","id_genere":"a29864963573d7bb061691ff823b97dd"},
+{"id_band":"b7e529a8e9af2a2610182b3d3fc33698","id_genere":"02d3190ce0f08f32be33da6cc8ec8df8"},
 ]};
 function loadBandsGeneres(){
   return(bandsGeneresInfo);

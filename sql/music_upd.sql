@@ -16,7 +16,7 @@ insert into music.generes
 
 insert into music.events 
    values
-     (md5('Metal Embrace Festival XIV'), 'Metal Embrace Festival XIV', '2022.09.09', md5('Barleben'));
+     (md5(''), '', '2022.09.09', md5(''));
 
 
 
