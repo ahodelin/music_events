@@ -1,13 +1,13 @@
 var generesInfo = {
   "generes":[
-{"id_genere":"17b8dff9566f6c98062ad5811c762f44","genere":"Death Metal","bands":140},
-{"id_genere":"a29864963573d7bb061691ff823b97dd","genere":"Thrash Metal","bands":99},
+{"id_genere":"17b8dff9566f6c98062ad5811c762f44","genere":"Death Metal","bands":139},
+{"id_genere":"a29864963573d7bb061691ff823b97dd","genere":"Thrash Metal","bands":98},
 {"id_genere":"a68d5b72c2f98613f511337a59312f78","genere":"Black Metal","bands":66},
 {"id_genere":"04ae76937270105919847d05aee582b4","genere":"Heavy Metal","bands":41},
 {"id_genere":"7fa69773873856d74f68a6824ca4b691","genere":"Brutal Death Metal","bands":39},
 {"id_genere":"d5a9c37bc91d6d5d55a3c2e38c3bf97d","genere":"Groove Metal","bands":30},
 {"id_genere":"7a3808eef413b514776a7202fd2cb94f","genere":"Metalcore","bands":30},
-{"id_genere":"01864d382accf1cdb077e42032b16340","genere":"Melodic Death Metal","bands":29},
+{"id_genere":"01864d382accf1cdb077e42032b16340","genere":"Melodic Death Metal","bands":28},
 {"id_genere":"10a17b42501166d3bf8fbdff7e1d52b6","genere":"Grindcore","bands":27},
 {"id_genere":"885ba57d521cd859bacf6f76fb37ef7c","genere":"Doom Metal","bands":21},
 {"id_genere":"caac3244eefed8cffee878acae427e28","genere":"Deathcore","bands":18},

@@ -221,6 +221,24 @@ CREATE VIEW music.v_countries AS
 
 
 --
+-- Name: v_eu_board_german_black_death_thrash; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_eu_board_german_black_death_thrash AS
+ SELECT DISTINCT b.band,
+    c.country
+   FROM ((((((music.bands b
+     JOIN music.bands_events be ON ((b.id_band = be.id_band)))
+     JOIN music.events e ON ((be.id_event = e.id_event)))
+     JOIN music.bands_generes bg ON ((bg.id_band = b.id_band)))
+     JOIN music.generes g ON ((g.id_genere = bg.id_genere)))
+     JOIN music.bands_countries bc ON ((bc.id_band = b.id_band)))
+     JOIN geo.countries c ON ((c.id_country = bc.id_country)))
+  WHERE ((b.likes = 'y'::bpchar) AND (((g.genere)::text ~~ '%Death%'::text) OR ((g.genere)::text ~~ '%Thrash%'::text) OR ((g.genere)::text ~~ '%Speed%'::text) OR ((g.genere)::text ~~ '%Black%'::text)) AND ((c.country)::text = ANY ((ARRAY['Germany'::character varying, 'France'::character varying, 'Austria'::character varying, 'Belgium'::character varying, 'Switzerland'::character varying, 'Czech Republic'::character varying, 'Denmark'::character varying, 'Poland'::character varying, 'Netherlands'::character varying, 'Luxembourg'::character varying])::text[])))
+  ORDER BY c.country, b.band;
+
+
+--
 -- Name: v_events; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -419,6 +437,7 @@ e16b7534e6149fb73a7c2d9b02b61a7d	Büchold
 927ba3593d3a4597eac931a25b53a137	Frankfurt am Main (Das Bett)
 c2e2354512feb29acf171d655a159dd0	Frankfurt am Main (Festhalle)
 a93597b8b03e112e11f4cda2c1587b6f	Frankfurt am Main (Jahrhunderthalle)
+a247cd14d4d2259d6f2bc87dcb3fdfb6	Mörlenbach (LIVE MUSIC HALL Weiher)
 \.
 
 
@@ -1011,6 +1030,8 @@ d0386252fd85f76fc517724666cf59ae	Iron Savior	n
 0b9d35d460b848ad46ec0568961113bf	Torian	n
 b7e529a8e9af2a2610182b3d3fc33698	Machine Head	y
 1c62394f457ee9a56b0885f622299ea2	The Halo Effect	y
+9c8121ad290d22878906f93fa4ff4de3	Rise of Kronos	y
+64d9f86ed9eeac2695ec7847fe7ea313	Credic	y
 \.
 
 
@@ -1603,6 +1624,8 @@ d0386252fd85f76fc517724666cf59ae	d8b00929dec65d422303256336ada04f
 1e2bcbb679ccfdea27b28bd1ea9f2e67	d8b00929dec65d422303256336ada04f
 1c62394f457ee9a56b0885f622299ea2	c8f4261f9f46e6465709e17ebea7a92b
 b7e529a8e9af2a2610182b3d3fc33698	f75d91cdd36b85cc4a8dfeca4f24fa14
+9c8121ad290d22878906f93fa4ff4de3	d8b00929dec65d422303256336ada04f
+64d9f86ed9eeac2695ec7847fe7ea313	d8b00929dec65d422303256336ada04f
 \.
 
 
@@ -2370,6 +2393,9 @@ d0386252fd85f76fc517724666cf59ae	4eb278e51ecc7a4e052416dc604ad5c5
 942c9f2520684c22eb6216a92b711f9e	5c32c0f1d91f2c6579bb1e0b4da7d10c
 b7e529a8e9af2a2610182b3d3fc33698	5c32c0f1d91f2c6579bb1e0b4da7d10c
 1c62394f457ee9a56b0885f622299ea2	5c32c0f1d91f2c6579bb1e0b4da7d10c
+3af7c6d148d216f13f66669acb8d5c59	e1c9ae13502e64fd6fa4121f4af7fb0e
+9c8121ad290d22878906f93fa4ff4de3	e1c9ae13502e64fd6fa4121f4af7fb0e
+64d9f86ed9eeac2695ec7847fe7ea313	e1c9ae13502e64fd6fa4121f4af7fb0e
 \.
 
 
@@ -3336,6 +3362,9 @@ d0386252fd85f76fc517724666cf59ae	585f02a68092351a078fc43a21a56564
 b7e529a8e9af2a2610182b3d3fc33698	d5a9c37bc91d6d5d55a3c2e38c3bf97d
 b7e529a8e9af2a2610182b3d3fc33698	a29864963573d7bb061691ff823b97dd
 b7e529a8e9af2a2610182b3d3fc33698	02d3190ce0f08f32be33da6cc8ec8df8
+9c8121ad290d22878906f93fa4ff4de3	17b8dff9566f6c98062ad5811c762f44
+9c8121ad290d22878906f93fa4ff4de3	a29864963573d7bb061691ff823b97dd
+64d9f86ed9eeac2695ec7847fe7ea313	01864d382accf1cdb077e42032b16340
 \.
 
 
@@ -3471,6 +3500,7 @@ c5593cbec8087184815492eee880f9a8	Randy Hansen live in Frankfurt	2016-04-26	927ba
 320951dccf4030808c979375af8356b6	Wild Boar Wars III	2021-08-28	927ba3593d3a4597eac931a25b53a137
 4eb278e51ecc7a4e052416dc604ad5c5	Metal Embrace Festival XIV	2022-09-09	741ae9098af4e50aecf13b0ef08ecc47
 5c32c0f1d91f2c6579bb1e0b4da7d10c	Vikings and Lionhearts Tour 2022	2022-09-29	c2e2354512feb29acf171d655a159dd0
+e1c9ae13502e64fd6fa4121f4af7fb0e	BLUTFEST 2022	2022-10-01	a247cd14d4d2259d6f2bc87dcb3fdfb6
 \.
 
 

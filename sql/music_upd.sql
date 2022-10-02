@@ -16,7 +16,7 @@ insert into music.generes
 
 insert into music.events 
    values
-     (md5(''), '', '2022.09.09', md5(''));
+     (md5(''), '', '2022.10.0', md5(''));
 
 
 
