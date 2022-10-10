@@ -128,6 +128,8 @@ var eventsInfo = {
 {"id_event":"4eb278e51ecc7a4e052416dc604ad5c5","year":2022,"date":"09.09.2022","event":"Metal Embrace Festival XIV","place":"Barleben","bands":15},
 {"id_event":"5c32c0f1d91f2c6579bb1e0b4da7d10c","year":2022,"date":"29.09.2022","event":"Vikings and Lionhearts Tour 2022","place":"Frankfurt am Main (Festhalle)","bands":3},
 {"id_event":"e1c9ae13502e64fd6fa4121f4af7fb0e","year":2022,"date":"01.10.2022","event":"BLUTFEST 2022","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
+{"id_event":"95cc14735b9cc969baa1fe1d8e4196ae","year":2022,"date":"08.10.2022","event":"The Blackest Path","place":"Mainz (M8 im Haus der Jugend)","bands":6},
+{"id_event":"700b8ca4c946e01dc92ab6c33757cafb","year":2022,"date":"09.10.2022","event":"Activate Europe 2022","place":"Wiesbaden (Schlachthof)","bands":4},
 ]};
 function loadEvents(){
   return(eventsInfo);

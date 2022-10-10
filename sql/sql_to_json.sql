@@ -48,6 +48,6 @@ to '/var/lib/postgresql/jsonGeneres.json';
 --   Booze & Glory
 copy 
   (
-    select band "Gruppe", ' & \includegraphics[width=1cm]{4x3/'||flag||'} & ' "Land", '\includegraphics[width=1cm]{'||'likes/'||likes||'} \\ \hline' "Farbe"  from music.v_bands vb
+    select * from music.v_bands_to_tex
   )
 to '/var/lib/postgresql/Music_Events.csv' with delimiter ';' csv;

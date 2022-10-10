@@ -16,29 +16,64 @@ insert into music.generes
 
 insert into music.events 
    values
-     (md5(''), '', '2022.10.0', md5(''));
+     (md5(''), 'The Blackest Path', '2022.10.', md5(''))
+     ;
 
 
 
 insert into music.bands 
   values
-    (md5(''), '', ''),  
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
+    (md5(''), '', 'y'),
 ;
 
 
 insert into music.bands_countries 
   values
     (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5(''))
 ;
 
 insert into music.bands_generes 
   values
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
     (md5(''), md5('')),
 ;
 
 
 insert into music.bands_events 
   values
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
+    (md5(''), md5('')),
     (md5(''), md5('')),
 ;
 
