@@ -130,6 +130,7 @@ var eventsInfo = {
 {"id_event":"e1c9ae13502e64fd6fa4121f4af7fb0e","year":2022,"date":"01.10.2022","event":"BLUTFEST 2022","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
 {"id_event":"95cc14735b9cc969baa1fe1d8e4196ae","year":2022,"date":"08.10.2022","event":"The Blackest Path","place":"Mainz (M8 im Haus der Jugend)","bands":6},
 {"id_event":"700b8ca4c946e01dc92ab6c33757cafb","year":2022,"date":"09.10.2022","event":"Activate Europe 2022","place":"Wiesbaden (Schlachthof)","bands":4},
+{"id_event":"b5b9346b4a9da4233b62daad23cf36ed","year":2022,"date":"22.10.2022","event":"On Stage - 22.10.2022","place":"Mainz (Alexander the Great)","bands":2},
 ]};
 function loadEvents(){
   return(eventsInfo);

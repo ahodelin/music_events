@@ -972,6 +972,7 @@ var bandsGeneresInfo = {
 {"id_band":"8f4e7c5f66d6ee5698c01de29affc562","id_genere":"a29864963573d7bb061691ff823b97dd"},
 {"id_band":"f0bf2458b4c1a22fc329f036dd439f08","id_genere":"a29864963573d7bb061691ff823b97dd"},
 {"id_band":"25fa2cdf2be085aa5394db743677fb69","id_genere":"2894c332092204f7389275e1359f8e9b"},
+{"id_band":"32917b03e82a83d455dd6b7f8609532c","id_genere":"eaa57a9b4248ce3968e718895e1c2f04"},
 ]};
 function loadBandsGeneres(){
   return(bandsGeneresInfo);
