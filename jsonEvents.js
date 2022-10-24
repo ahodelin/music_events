@@ -1,6 +1,7 @@
 var eventsInfo = {
   "events":[
 {"id_event":"8640cd270510da320a9dd71429b95531","year":2015,"date":"28.08.2015","event":"NOAF XI","place":"Neuborn","bands":4},
+{"id_event":"f87736b916e7d1ac60d0b7b1b7ca97b4","year":2015,"date":"27.11.2015","event":"Dia de los muertos Roadshow 2015","place":"Wiesbaden (Schlachthof)","bands":1},
 {"id_event":"9e829f734a90920dd15d3b93134ee270","year":2016,"date":"22.01.2016","event":"EMP Persistence Tour 2016","place":"Wiesbaden (Schlachthof)","bands":7},
 {"id_event":"d3284558d8cda50eb33b5e5ce91da2af","year":2016,"date":"11.02.2016","event":"Before we go Farewell Tour 2016","place":"Wiesbaden (Schlachthof)","bands":3},
 {"id_event":"c5593cbec8087184815492eee880f9a8","year":2016,"date":"26.04.2016","event":"Randy Hansen live in Frankfurt","place":"Frankfurt am Main (Das Bett)","bands":1},

@@ -336,7 +336,7 @@ var bandsInfo = {
 {"id_band":"4261335bcdc95bd89fd530ba35afbf4c","band":"Liver Values","country":"Germany","flag":"de","likes":"m","generes":1,"events":1},
 {"id_band":"2cfe35095995e8dd15ab7b867e178c15","band":"Lonewolf","country":"France","flag":"fr","likes":"y","generes":2,"events":1},
 {"id_band":"2cf65e28c586eeb98daaecf6eb573e7a","band":"Lordi","country":"Finland","flag":"fi","likes":"m","generes":2,"events":1},
-{"id_band":"3cdb47307aeb005121b09c41c8d8bee6","band":"Los Skeleteros","country":"Germany","flag":"de","likes":"y","generes":1,"events":2},
+{"id_band":"3cdb47307aeb005121b09c41c8d8bee6","band":"Los Skeleteros","country":"Germany","flag":"de","likes":"y","generes":1,"events":3},
 {"id_band":"57eba43d6bec2a8115e94d6fbb42bc75","band":"Lost Society","country":"Finland","flag":"fi","likes":"n","generes":4,"events":1},
 {"id_band":"3041a64f7587a6768d8e307b2662785b","band":"Ludicia","country":"Indonesia","flag":"id","likes":"y","generes":2,"events":1},
 {"id_band":"c2e88140e99f33883dac39daee70ac36","band":"Lycanthrope","country":"Australia","flag":"au","likes":"m","generes":1,"events":1},
