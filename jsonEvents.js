@@ -134,6 +134,7 @@ var eventsInfo = {
 {"id_event":"b5b9346b4a9da4233b62daad23cf36ed","year":2022,"date":"22.10.2022","event":"On Stage - 22.10.2022","place":"Mainz (Alexander the Great)","bands":2},
 {"id_event":"57dc48deed395dc3a98caea535768d2f","year":2022,"date":"30.10.2022","event":"Europe 2022","place":"Wiesbaden (Schlachthof)","bands":5},
 {"id_event":"bf742e78e40e9b736c8f8cc47a37277c","year":2022,"date":"04.11.2022","event":"Laud as Fuck Fest","place":"Kusel (Kinett)","bands":2},
+{"id_event":"52270ed38759952c9cbd6487b265a3a7","year":2022,"date":"18.11.2022","event":"REVEL IN FLESH support: TORMENT OF SOULS","place":"Kusel (Kinett)","bands":2},
 ]};
 function loadEvents(){
   return(eventsInfo);

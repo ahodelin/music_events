@@ -1,6 +1,7 @@
 echo "var bandsInfo = {" > jsonBands.js
 echo "  \"bands\":[" >> jsonBands.js
-sed -e 's/$/,/' jsonBands.json >> jsonBands.js
+cat jsonBands.json >> jsonBands.js
+# sed -e 's/$/,/' jsonBands.json >> jsonBands.js
 # cat jsonBandsTmp.js >> jsonBands.js
 # rm jsonBandsTmp.js
 echo "]};" >> jsonBands.js

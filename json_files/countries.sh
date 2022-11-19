@@ -1,6 +1,7 @@
 echo "var countriesInfo = {" > jsonCountries.js
 echo "  \"countries\":[" >> jsonCountries.js
-sed -e 's/$/,/' jsonCountries.json >> jsonCountries.js
+cat jsonCountries.json >> jsonCountries.js
+# sed -e 's/$/,/' jsonCountries.json >> jsonCountries.js
 # cat jsonCountriesTmp.js >> jsonCountries.js
 # rm jsonCountriesTmp.js
 echo "]};" >> jsonCountries.js
