@@ -1,0 +1,7 @@
+cd ..
+git add * 
+d=`date`
+git commit -m "Last update $d"
+git fetch origin
+git push origin main
+

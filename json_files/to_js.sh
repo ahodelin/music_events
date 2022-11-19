@@ -1,4 +1,4 @@
-cd ../
+cd ..
 mkdir -p old
 mv *.js old/
 cd json_files

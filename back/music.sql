@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.5 (Debian 14.5-2.pgdg110+2)
--- Dumped by pg_dump version 14.5 (Debian 14.5-2.pgdg110+2)
+-- Dumped from database version 15.1 (Ubuntu 15.1-1.pgdg22.04+1)
+-- Dumped by pg_dump version 15.1 (Ubuntu 15.1-1.pgdg22.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -251,7 +251,7 @@ CREATE VIEW music.v_eu_board_german_black_death_thrash AS
      JOIN music.generes g ON ((g.id_genere = bg.id_genere)))
      JOIN music.bands_countries bc ON ((bc.id_band = b.id_band)))
      JOIN geo.countries c ON ((c.id_country = bc.id_country)))
-  WHERE ((b.likes = 'y'::bpchar) AND (((g.genere)::text ~~ '%Death%'::text) OR ((g.genere)::text ~~ '%Thrash%'::text) OR ((g.genere)::text ~~ '%Speed%'::text) OR ((g.genere)::text ~~ '%Black%'::text)) AND ((c.country)::text = ANY ((ARRAY['Germany'::character varying, 'France'::character varying, 'Austria'::character varying, 'Belgium'::character varying, 'Switzerland'::character varying, 'Czech Republic'::character varying, 'Denmark'::character varying, 'Poland'::character varying, 'Netherlands'::character varying, 'Luxembourg'::character varying])::text[])))
+  WHERE ((b.likes = 'y'::bpchar) AND (((g.genere)::text ~~ '%Death%'::text) OR ((g.genere)::text ~~ '%Thrash%'::text) OR ((g.genere)::text ~~ '%Speed%'::text) OR ((g.genere)::text ~~ '%Black%'::text)) AND ((c.country)::text = ANY (ARRAY[('Germany'::character varying)::text, ('France'::character varying)::text, ('Austria'::character varying)::text, ('Belgium'::character varying)::text, ('Switzerland'::character varying)::text, ('Czech Republic'::character varying)::text, ('Denmark'::character varying)::text, ('Poland'::character varying)::text, ('Netherlands'::character varying)::text, ('Luxembourg'::character varying)::text])))
   ORDER BY c.country, b.band;
 
 
@@ -580,6 +580,7 @@ dddb04bc0d058486d0ef0212c6ea0682	Darkall Slaves	y
 9bc2ca9505a273b06aa0b285061cd1de	Dead Congregation	y
 d3ed8223151e14b936436c336a4c7278	Batushka	y
 51fa80e44b7555c4130bd06c53f4835c	Cradle of Filth	y
+17bcf0bc2768911a378a55f42acedba7	Gwar	m
 9138c2cc0326412f2515623f4c850eb3	Dead Eyed Sleeper (Legacy)	y
 44b7bda13ac1febe84d8607ca8bbf439	Death Angel	y
 d857ab11d383a7e4d4239a54cbf2a63d	Deathrite	y
@@ -994,7 +995,6 @@ ab7b69efdaf168cbbe9a5b03d901be74	Komodo	m
 6a8538b37162b23d68791b9a0c54a5bf	Mork	y
 3921cb3f97a88349e153beb5492f6ef4	Gaerea	y
 f9f57e175d62861bb5f2bda44a078df7	Kampfar	m
-17bcf0bc2768911a378a55f42acedba7	Gwar	m
 9ee30f495029e1fdf6567045f2079be1	Crypta	y
 57eba43d6bec2a8115e94d6fbb42bc75	Lost Society	n
 071dbd416520d14b2e3688145801de41	Venom	y
@@ -2476,6 +2476,8 @@ b7e529a8e9af2a2610182b3d3fc33698	5c32c0f1d91f2c6579bb1e0b4da7d10c
 3af7c6d148d216f13f66669acb8d5c59	e1c9ae13502e64fd6fa4121f4af7fb0e
 9c8121ad290d22878906f93fa4ff4de3	e1c9ae13502e64fd6fa4121f4af7fb0e
 64d9f86ed9eeac2695ec7847fe7ea313	e1c9ae13502e64fd6fa4121f4af7fb0e
+4fab532a185610bb854e0946f4def6a4	52270ed38759952c9cbd6487b265a3a7
+1cdd53cece78d6e8dffcf664fa3d1be2	52270ed38759952c9cbd6487b265a3a7
 \.
 
 
@@ -3603,6 +3605,7 @@ b5b9346b4a9da4233b62daad23cf36ed	On Stage - 22.10.2022	2022-10-22	8bb89006a86a42
 f87736b916e7d1ac60d0b7b1b7ca97b4	Dia de los muertos Roadshow 2015	2015-11-27	427a371fadd4cce654dd30c27a36acb0	0
 57dc48deed395dc3a98caea535768d2f	Europe 2022	2022-10-30	427a371fadd4cce654dd30c27a36acb0	0
 bf742e78e40e9b736c8f8cc47a37277c	Laud as Fuck Fest	2022-11-04	d8634af954a0d50828522b6c6a6053c2	0
+52270ed38759952c9cbd6487b265a3a7	REVEL IN FLESH support: TORMENT OF SOULS	2022-11-18	d8634af954a0d50828522b6c6a6053c2	0
 \.
 
 
