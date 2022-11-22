@@ -47,9 +47,9 @@ to '/var/lib/postgresql/jsonGeneres.json';
 -- & - \& 
 --   Apey & The Pea
 --   Booze & Glory
+*/
 copy 
   (
     select * from music.v_bands_to_tex
   )
 to '/var/lib/postgresql/Music_Events.csv' with delimiter ';' csv;
-*/

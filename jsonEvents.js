@@ -135,6 +135,8 @@ var eventsInfo = {
 {"id_event":"57dc48deed395dc3a98caea535768d2f","year":2022,"date":"30.10.2022","event":"Europe 2022","place":"Wiesbaden (Schlachthof)","bands":5},
 {"id_event":"bf742e78e40e9b736c8f8cc47a37277c","year":2022,"date":"04.11.2022","event":"Laud as Fuck Fest","place":"Kusel (Kinett)","bands":2},
 {"id_event":"52270ed38759952c9cbd6487b265a3a7","year":2022,"date":"18.11.2022","event":"REVEL IN FLESH support: TORMENT OF SOULS","place":"Kusel (Kinett)","bands":2},
+{"id_event":"0e94c08f1e572c5415f66d193fbc322a","year":2022,"date":"19.11.2022","event":"Gorecrusher European Tour 2022","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
+{"id_event":"fb40042479b7dab1545b6ff8b011e288","year":2022,"date":"21.11.2022","event":"Sepultura - Quadra Tour Europe 2022","place":"Wiesbaden (Schlachthof)","bands":3},
 ]};
 function loadEvents(){
   return(eventsInfo);
