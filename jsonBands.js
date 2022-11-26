@@ -532,6 +532,7 @@ var bandsInfo = {
 {"id_band":"4a7d9e528dada8409e88865225fb27c4","band":"The Feelgood McLouds","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
 {"id_band":"470f3f69a2327481d26309dc65656f44","band":"The Fog","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
 {"id_band":"1c62394f457ee9a56b0885f622299ea2","band":"The Halo Effect","country":"Sweden","flag":"se","likes":"y","generes":1,"events":1},
+{"id_band":"34b1dade51ffdab56daebcf6ac981371","band":"The Hu","country":"Mongolia","flag":"mn","likes":"y","generes":2,"events":1},
 {"id_band":"d3e98095eeccaa253050d67210ef02bb","band":"The Idiots","country":"Germany","flag":"de","likes":"y","generes":4,"events":1},
 {"id_band":"c3490492512b7fe65cdb0c7305044675","band":"The Jailbreakers","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"dde3e0b0cc344a7b072bbab8c429f4ff","band":"The Laws Kill Destroy (Fábio Jhasko's Sarcófago tribute)","country":"Brazil","flag":"br","likes":"y","generes":3,"events":1},
