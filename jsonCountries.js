@@ -1,7 +1,7 @@
 var countriesInfo = {
   "countries":[
 {"id_country":"d8b00929dec65d422303256336ada04f","country":"Germany","flag":"de","bands":260},
-{"id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14","country":"USA","flag":"us","bands":68},
+{"id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14","country":"USA","flag":"us","bands":69},
 {"id_country":"c8f4261f9f46e6465709e17ebea7a92b","country":"Sweden","flag":"se","bands":32},
 {"id_country":"76423d8352c9e8fc8d7d65f62c55eae9","country":"UK","flag":"gb","bands":28},
 {"id_country":"a67d4cbdd1b59e0ffccc6bafc83eb033","country":"Netherlands","flag":"nl","bands":24},
@@ -15,9 +15,9 @@ var countriesInfo = {
 {"id_country":"ea71b362e3ea9969db085abfccdeb10d","country":"Portugal","flag":"pt","bands":8},
 {"id_country":"445d337b5cd5de476f99333df6b0c2a7","country":"Canada","flag":"ca","bands":7},
 {"id_country":"4442e4af0916f53a07fb8ca9a49b98ed","country":"Australia","flag":"au","bands":7},
-{"id_country":"907eba32d950bfab68227fd7ea22999b","country":"Spain","flag":"es","bands":6},
+{"id_country":"424214945ba5615eca039bfe5d731c09","country":"Denmark","flag":"dk","bands":7},
 {"id_country":"51802d8bb965d0e5be697f07d16922e8","country":"Czech Republic","flag":"cz","bands":6},
-{"id_country":"424214945ba5615eca039bfe5d731c09","country":"Denmark","flag":"dk","bands":6},
+{"id_country":"907eba32d950bfab68227fd7ea22999b","country":"Spain","flag":"es","bands":6},
 {"id_country":"94880bda83bda77c5692876700711f15","country":"Poland","flag":"pl","bands":5},
 {"id_country":"b78edab0f52e0d6c195fd0d8c5709d26","country":"Iceland","flag":"is","bands":5},
 {"id_country":"6b718641741f992e68ec3712718561b8","country":"Greece","flag":"gr","bands":5},
