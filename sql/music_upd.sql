@@ -1,7 +1,7 @@
 
 insert into geo.places 
   values 
-    (md5('Frankfurt am Main ()'), 'Frankfurt am Main ()');
+    (md5(' ()'), ' ()');
 
 
 insert into geo.countries 
@@ -16,7 +16,7 @@ insert into music.generes
 
 insert into music.events 
    values
-     (md5(''), '', '2022.12.0', md5('Frankfurt am Main ()'))
+     (md5(''), '', '2022.12.1', md5(' ()'))
      ;
 
 
@@ -26,8 +26,7 @@ insert into music.bands
     (md5(''), '', 'y'),
     (md5(''), '', 'y'),
     (md5(''), '', 'y'),
-    (md5(''), '', 'y'),
-    (md5(''), '', 'y'),
+    (md5(''), '', 'y');
     (md5(''), '', 'y'),
     (md5(''), '', 'y'),
     (md5(''), '', 'y'),

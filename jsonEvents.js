@@ -139,6 +139,7 @@ var eventsInfo = {
 {"id_event":"fb40042479b7dab1545b6ff8b011e288","year":2022,"date":"21.11.2022","event":"Sepultura - Quadra Tour Europe 2022","place":"Wiesbaden (Schlachthof)","bands":3},
 {"id_event":"cb155874b040e90a5653d5d13bab932b","year":2022,"date":"24.11.2022","event":"Black Thunder Tour","place":"Köln (Live Music Hall)","bands":1},
 {"id_event":"161882776281e759c9c63d385457ce2c","year":2022,"date":"29.11.2022","event":"Servant of the Road World Tour","place":"Frankfurt am Main (Festhalle)","bands":3},
+{"id_event":"f10521a3f832fd2c698b1ac0319ea29a","year":2022,"date":"03.12.2022","event":"Slice Me Nice 2022","place":"Frankfurt am Main (Haus Sindlingen)","bands":7},
 ]};
 function loadEvents(){
   return(eventsInfo);
