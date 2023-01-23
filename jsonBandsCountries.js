@@ -610,6 +610,10 @@ var bandsCountriesInfo = {
 {"id_band":"75cde58f0e5563f287f2d4afb0ce4b7e","id_country":"d8b00929dec65d422303256336ada04f"},
 {"id_band":"b74881ac32a010e91ac7fcbcfebe210e","id_country":"d8b00929dec65d422303256336ada04f"},
 {"id_band":"351af29ee203c740c3209a0e0a8e9c22","id_country":"1007e1b7f894dfbf72a0eaa80f3bc57e"},
+{"id_band":"bbdbdf297183a1c24be29ed89711f744","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
+{"id_band":"6e512379810ecf71206459e6a1e64154","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
+{"id_band":"f3b65f675d13d81c12d3bb30b0190cd1","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
+{"id_band":"1918775515a9c7b8db011fd35a443b82","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
 ]};
 function loadBandsCountries(){
   return(bandsCountriesInfo);

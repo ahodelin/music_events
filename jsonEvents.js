@@ -140,6 +140,7 @@ var eventsInfo = {
 {"id_event":"cb155874b040e90a5653d5d13bab932b","year":2022,"date":"24.11.2022","event":"Black Thunder Tour","place":"Köln (Live Music Hall)","bands":1},
 {"id_event":"161882776281e759c9c63d385457ce2c","year":2022,"date":"29.11.2022","event":"Servant of the Road World Tour","place":"Frankfurt am Main (Festhalle)","bands":3},
 {"id_event":"f10521a3f832fd2c698b1ac0319ea29a","year":2022,"date":"03.12.2022","event":"Slice Me Nice 2022","place":"Frankfurt am Main (Haus Sindlingen)","bands":7},
+{"id_event":"9f348351c96df42bcc7496c2010d4d1d","year":2023,"date":"19.01.2023","event":"Netherheaven Europe 2023","place":"Wiesbaden (Schlachthof)","bands":4},
 ]};
 function loadEvents(){
   return(eventsInfo);

@@ -997,6 +997,16 @@ var bandsGeneresInfo = {
 {"id_band":"b74881ac32a010e91ac7fcbcfebe210e","id_genere":"7fa69773873856d74f68a6824ca4b691"},
 {"id_band":"75cde58f0e5563f287f2d4afb0ce4b7e","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 {"id_band":"75cde58f0e5563f287f2d4afb0ce4b7e","id_genere":"10a17b42501166d3bf8fbdff7e1d52b6"},
+{"id_band":"bbdbdf297183a1c24be29ed89711f744","id_genere":"2df929d9b6150c082888b66e8129ee3f"},
+{"id_band":"bbdbdf297183a1c24be29ed89711f744","id_genere":"a29864963573d7bb061691ff823b97dd"},
+{"id_band":"6e512379810ecf71206459e6a1e64154","id_genere":"a29864963573d7bb061691ff823b97dd"},
+{"id_band":"6e512379810ecf71206459e6a1e64154","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
+{"id_band":"6e512379810ecf71206459e6a1e64154","id_genere":"a68d5b72c2f98613f511337a59312f78"},
+{"id_band":"f3b65f675d13d81c12d3bb30b0190cd1","id_genere":"fd00614e73cb66fd71ab13c970a074d8"},
+{"id_band":"f3b65f675d13d81c12d3bb30b0190cd1","id_genere":"caac3244eefed8cffee878acae427e28"},
+{"id_band":"f3b65f675d13d81c12d3bb30b0190cd1","id_genere":"7b327f171695316c16ddca1843a81531"},
+{"id_band":"1918775515a9c7b8db011fd35a443b82","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
+{"id_band":"1918775515a9c7b8db011fd35a443b82","id_genere":"1c800aa97116d9afd83204d65d50199a"},
 ]};
 function loadBandsGeneres(){
   return(bandsGeneresInfo);
