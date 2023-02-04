@@ -14,7 +14,6 @@
 			table {
 				font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 				border-collapse: collapse;
-				width: 100%;
 			}
 
 			td{
@@ -99,8 +98,8 @@
 			  var allBands = objBands.bands.length;
 			  var allEvents = objEvents.events.length;
 			  
-			  document.getElementById('allInfo').innerHTML = '<b>Bands: ' + allBands + 
-				', Events: ' + allEvents + '</b>';		  
+			  document.getElementById('allInfo').innerHTML = '<b>Viewed Bands: </b>' + allBands + 
+				  '<br> <b> Events: </b>' + allEvents;		  
 			  
 			  var selectDrpDwnBand = document.getElementById('selectBandId');
 			  var selectDrpDwnGenere = document.getElementById('selectGenereId');
