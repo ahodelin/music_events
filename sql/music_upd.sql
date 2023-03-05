@@ -10,7 +10,7 @@ insert into geo.countries
 
 insert into music.generes 
   values
-    (md5(''), '')
+    (md5('Death-Grind'), 'Death-Gind')
 ;
    
 
@@ -37,8 +37,8 @@ insert into music.bands
 
 insert into music.bands_countries 
   values
-    (md5('Dropdead'), md5('')),
-    (md5('Escuela Grind'), md5(''));
+    (md5('Dropdead'), md5('USA')),
+    (md5('Escuela Grind'), md5('USA'));
     (md5(''), md5('')),
     (md5(''), md5('')),
     (md5(''), md5('')),
@@ -47,11 +47,10 @@ insert into music.bands_countries
 
 insert into music.bands_generes 
   values
-    (md5('Dropdead'), md5('')),
+    (md5('Dropdead'), md5('Hardcore Punk')),
+    (md5('Escuela Grind'), md5('Death-Grind'));
     (md5(''), md5('')),
-    (md5('Escuela Grind'), md5('')),
     (md5(''), md5('')),
-    (md5(''), md5(''));
     (md5(''), md5('')),
     (md5(''), md5('')),
     (md5(''), md5('')),

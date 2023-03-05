@@ -614,6 +614,8 @@ var bandsCountriesInfo = {
 {"id_band":"6e512379810ecf71206459e6a1e64154","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
 {"id_band":"f3b65f675d13d81c12d3bb30b0190cd1","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
 {"id_band":"1918775515a9c7b8db011fd35a443b82","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
+{"id_band":"15bf34427540dd1945e5992583412b2f","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
+{"id_band":"ba8033b8cfb1ebfc91a5d03b3a268d9f","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
 ]};
 function loadBandsCountries(){
   return(bandsCountriesInfo);
