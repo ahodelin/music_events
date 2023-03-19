@@ -30,6 +30,157 @@ CREATE SCHEMA geo;
 CREATE SCHEMA music;
 
 
+--
+-- Name: insert_bands_on_countries(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.insert_bands_on_countries(ban character varying, countr character varying) RETURNS text
+    LANGUAGE plpgsql
+    AS $$ 
+declare 
+  i_band varchar;
+  i_countr varchar;
+begin 
+	
+  select id_country into i_countr 
+  from geo.countries c  
+  where country = countr for update;
+ 
+  if not found then    
+    return 'Please insert this country first';
+  end if;
+	
+  select id_band into i_band
+  from music.bands
+  where band = ban for update ;
+ 
+  if not found then
+  	insert into music.bands
+  	values (md5(ban), ban, 'y');
+    
+    insert into music.bands_countries
+    values(md5(ban), md5(countr));
+    return 'New band added. Band - County added';
+  else
+    insert into music.bands_countries
+    values(md5(ban), md5(countr));
+    return 'Band - Country added';
+  end if;
+end;
+$$;
+
+
+--
+-- Name: insert_bands_on_events(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.insert_bands_on_events(ban character varying, eve character varying) RETURNS text
+    LANGUAGE plpgsql
+    AS $$ 
+declare 
+  i_band varchar;
+ i_e varchar;
+begin 
+  select id_band into i_band
+  from music.bands
+  where band  = ban for update ;
+ 
+  if not found then
+  	insert into music.bands
+  	values (md5(ban), ban, 'y');
+  end if;
+ 
+  select id_event into i_e 
+  from music.events e 
+  where "event" = eve for update;
+ 
+  if not found then    
+    return 'This event does not exist';
+  else 
+    insert into music.bands_events
+    values (md5(ban), md5(eve));
+    return 'Band - Event inserted';
+  end if;
+end;
+$$;
+
+
+--
+-- Name: insert_bands_to_generes(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.insert_bands_to_generes(ban character varying, gene character varying) RETURNS text
+    LANGUAGE plpgsql
+    AS $$ 
+declare 
+  i_band varchar;
+  i_gene varchar;
+begin 
+	
+  select id_genere into i_gene 
+  from music.generes g
+  where genere = gene for update;
+ 
+  if not found then    
+    insert into music.generes
+  	values (md5(gene), gene);
+  end if;
+	
+  select id_band into i_band
+  from music.bands
+  where band = ban for update ;
+ 
+  if not found then
+  	insert into music.bands
+  	values (md5(ban), ban, 'y');
+    
+    insert into music.bands_generes
+    values(md5(ban), md5(gene));
+    return 'New band added. Band - Genere added';
+  else
+    insert into music.bands_generes
+    values(md5(ban), md5(gene));
+    return 'Band - Genere added';
+  end if;
+end;
+$$;
+
+
+--
+-- Name: insert_events(character varying, date, character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.insert_events(eve character varying, dat date, plac character varying) RETURNS text
+    LANGUAGE plpgsql
+    AS $$ 
+declare 
+  i_p varchar;
+  i_e varchar;
+begin 
+  select id_place into i_p
+  from geo.places
+  where place = plac for update ;
+ 
+  if not found then
+  	insert into geo.places
+  	values (md5(plac), plac);
+    --return 'New place inserted';
+  end if;
+ 
+  select id_event into i_e 
+  from music.events e 
+  where "event" = eve for update;
+ 
+  if not found then
+    insert into music.events
+    values (md5(eve), eve, dat, md5(plac));
+    return 'Added event';
+  else return 'Event exist';
+  end if;
+end;
+$$;
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -762,7 +913,6 @@ a7f9797e4cd716e1516f9d4845b0e1e2	Municipal Waste	m
 7d878673694ff2498fbea0e5ba27e0ea	Nailed to Obscurity	y
 0844ad55f17011abed4a5208a3a05b74	Napalm Death	y
 6738f9acd4740d945178c649d6981734	Nasty	m
-fd85bfffd5a0667738f6110281b25db8	Necrotted	y
 33f03dd57f667d41ac77c6baec352a81	need2destroy	y
 3509af6be9fe5defc1500f5c77e38563	Nekrovault	y
 0640cfbf1d269b69c535ea4e288dfd96	Nepumuc	m
@@ -1097,6 +1247,12 @@ f3b65f675d13d81c12d3bb30b0190cd1	Alluvial	y
 1918775515a9c7b8db011fd35a443b82	Creeping Death	y
 15bf34427540dd1945e5992583412b2f	Dropdead	y
 ba8033b8cfb1ebfc91a5d03b3a268d9f	Escuela Grind	y
+fd85bfffd5a0667738f6110281b25db8	Necrotted	y
+6e4b91e3d1950bcad012dbfbdd0fff09	Legal Hate	y
+32a02a8a7927de4a39e9e14f2dc46ac6	Deep Dirty	y
+747f992097b9e5c9df7585931537150a	Blood	y
+13c260ca90c0f47c9418790429220899	Schirenc Plays Pungent Stench	y
+2e6e83dd0fa0af6d5e07a1dc2abc7e5c	Schirenc plays Pungent Stench	y
 \.
 
 
@@ -1387,7 +1543,6 @@ a7f9797e4cd716e1516f9d4845b0e1e2	f75d91cdd36b85cc4a8dfeca4f24fa14
 7d878673694ff2498fbea0e5ba27e0ea	d8b00929dec65d422303256336ada04f
 0844ad55f17011abed4a5208a3a05b74	76423d8352c9e8fc8d7d65f62c55eae9
 6738f9acd4740d945178c649d6981734	6c1674d14bf5f95742f572cddb0641a7
-fd85bfffd5a0667738f6110281b25db8	d8b00929dec65d422303256336ada04f
 33f03dd57f667d41ac77c6baec352a81	d8b00929dec65d422303256336ada04f
 3509af6be9fe5defc1500f5c77e38563	d8b00929dec65d422303256336ada04f
 0640cfbf1d269b69c535ea4e288dfd96	d8b00929dec65d422303256336ada04f
@@ -1721,6 +1876,11 @@ f3b65f675d13d81c12d3bb30b0190cd1	f75d91cdd36b85cc4a8dfeca4f24fa14
 1918775515a9c7b8db011fd35a443b82	f75d91cdd36b85cc4a8dfeca4f24fa14
 15bf34427540dd1945e5992583412b2f	f75d91cdd36b85cc4a8dfeca4f24fa14
 ba8033b8cfb1ebfc91a5d03b3a268d9f	f75d91cdd36b85cc4a8dfeca4f24fa14
+fd85bfffd5a0667738f6110281b25db8	d8b00929dec65d422303256336ada04f
+6e4b91e3d1950bcad012dbfbdd0fff09	d8b00929dec65d422303256336ada04f
+32a02a8a7927de4a39e9e14f2dc46ac6	d8b00929dec65d422303256336ada04f
+747f992097b9e5c9df7585931537150a	d8b00929dec65d422303256336ada04f
+13c260ca90c0f47c9418790429220899	9891739094756d2605946c867b32ad28
 \.
 
 
@@ -2250,7 +2410,6 @@ fb47f889f2c7c4fee1553d0f817b8aaa	85c434b11120b4ba2f116e89843a594e
 fb47f889f2c7c4fee1553d0f817b8aaa	b6aaab867e3c1c7bfe215d7db747e5d9
 fb8be6409408481ad69166324bdade9c	0a85beacde1a467e23452f40b4710030
 fcd1c1b547d03e760d1defa4d2b98783	6b09e6ae26a0d03456b17df4c0964a2f
-fd85bfffd5a0667738f6110281b25db8	00da417154f2da39e79c9dcf4d7502fa
 fdc90583bd7a58b91384dea3d1659cde	abefb7041d2488eadeedba9a0829b753
 fe228019addf1d561d0123caae8d1e52	abefb7041d2488eadeedba9a0829b753
 fe5b73c2c2cd2d9278c3835c791289b6	a72c5a8b761c2fc1097f162eeda5d5db
@@ -2264,7 +2423,6 @@ bbddc022ee323e0a2b2d8c67e5cd321f	d0f1ffdb2d3a20a41f9c0f10df3b9386
 4bb93d90453dd63cc1957a033f7855c7	d0f1ffdb2d3a20a41f9c0f10df3b9386
 94ca28ea8d99549c2280bcc93f98c853	73d6ec35ad0e4ef8f213ba89d8bfd7d7
 24ff2b4548c6bc357d9d9ab47882661e	73d6ec35ad0e4ef8f213ba89d8bfd7d7
-fd85bfffd5a0667738f6110281b25db8	441306dd21b61d9a52e04b9e177cc9b5
 1cdd53cece78d6e8dffcf664fa3d1be2	441306dd21b61d9a52e04b9e177cc9b5
 6d89517dbd1a634b097f81f5bdbb07a2	441306dd21b61d9a52e04b9e177cc9b5
 eb3bfb5a3ccdd4483aabc307ae236066	441306dd21b61d9a52e04b9e177cc9b5
@@ -2539,6 +2697,20 @@ bbdbdf297183a1c24be29ed89711f744	9f348351c96df42bcc7496c2010d4d1d
 53369c74c3cacdc38bdcdeda9284fe3c	63cc3a7986e4e746cdb607be909b90d4
 15bf34427540dd1945e5992583412b2f	63cc3a7986e4e746cdb607be909b90d4
 ba8033b8cfb1ebfc91a5d03b3a268d9f	63cc3a7986e4e746cdb607be909b90d4
+fd85bfffd5a0667738f6110281b25db8	7fc85de86476aadededbf6716f2eebad
+fd85bfffd5a0667738f6110281b25db8	00da417154f2da39e79c9dcf4d7502fa
+fd85bfffd5a0667738f6110281b25db8	441306dd21b61d9a52e04b9e177cc9b5
+6e4b91e3d1950bcad012dbfbdd0fff09	7fc85de86476aadededbf6716f2eebad
+4fab532a185610bb854e0946f4def6a4	7fc85de86476aadededbf6716f2eebad
+32a02a8a7927de4a39e9e14f2dc46ac6	7fc85de86476aadededbf6716f2eebad
+e6fd7b62a39c109109d33fcd3b5e129d	7fc85de86476aadededbf6716f2eebad
+5435326cf392e2cd8ad7768150cd5df6	7fc85de86476aadededbf6716f2eebad
+747f992097b9e5c9df7585931537150a	7fc85de86476aadededbf6716f2eebad
+1cdd53cece78d6e8dffcf664fa3d1be2	7fc85de86476aadededbf6716f2eebad
+1734b04cf734cb291d97c135d74b4b87	7fc85de86476aadededbf6716f2eebad
+ee69e7d19f11ca58843ec2e9e77ddb38	7fc85de86476aadededbf6716f2eebad
+fb47f889f2c7c4fee1553d0f817b8aaa	7fc85de86476aadededbf6716f2eebad
+13c260ca90c0f47c9418790429220899	7fc85de86476aadededbf6716f2eebad
 \.
 
 
@@ -3248,8 +3420,6 @@ fb47f889f2c7c4fee1553d0f817b8aaa	885ba57d521cd859bacf6f76fb37ef7c
 fb8be6409408481ad69166324bdade9c	17b8dff9566f6c98062ad5811c762f44
 fb8be6409408481ad69166324bdade9c	a29864963573d7bb061691ff823b97dd
 fcd1c1b547d03e760d1defa4d2b98783	4fb2ada7c5440a256ed0e03c967fce74
-fd85bfffd5a0667738f6110281b25db8	17b8dff9566f6c98062ad5811c762f44
-fd85bfffd5a0667738f6110281b25db8	caac3244eefed8cffee878acae427e28
 fdc90583bd7a58b91384dea3d1659cde	04ae76937270105919847d05aee582b4
 fdc90583bd7a58b91384dea3d1659cde	dcd00c11302e3b16333943340d6b4a6b
 fe228019addf1d561d0123caae8d1e52	36e61931478cf781e59da3b5ae2ee64e
@@ -3556,6 +3726,14 @@ f3b65f675d13d81c12d3bb30b0190cd1	7b327f171695316c16ddca1843a81531
 1918775515a9c7b8db011fd35a443b82	1c800aa97116d9afd83204d65d50199a
 15bf34427540dd1945e5992583412b2f	2336f976c6d510d2a269a746a7756232
 ba8033b8cfb1ebfc91a5d03b3a268d9f	5515abb95e50f2f39c3072b4fef777e0
+fd85bfffd5a0667738f6110281b25db8	17b8dff9566f6c98062ad5811c762f44
+fd85bfffd5a0667738f6110281b25db8	caac3244eefed8cffee878acae427e28
+6e4b91e3d1950bcad012dbfbdd0fff09	17b8dff9566f6c98062ad5811c762f44
+6e4b91e3d1950bcad012dbfbdd0fff09	a29864963573d7bb061691ff823b97dd
+32a02a8a7927de4a39e9e14f2dc46ac6	deb8040131c3f6a3caf6a616b34ac482
+747f992097b9e5c9df7585931537150a	17b8dff9566f6c98062ad5811c762f44
+747f992097b9e5c9df7585931537150a	10a17b42501166d3bf8fbdff7e1d52b6
+2e6e83dd0fa0af6d5e07a1dc2abc7e5c	17b8dff9566f6c98062ad5811c762f44
 \.
 
 
@@ -3706,6 +3884,7 @@ cb155874b040e90a5653d5d13bab932b	Black Thunder Tour	2022-11-24	67eb541ae5d82ae86
 f10521a3f832fd2c698b1ac0319ea29a	Slice Me Nice 2022	2022-12-03	fa788dff4144faf1179fc82d60ccd571	0
 9f348351c96df42bcc7496c2010d4d1d	Netherheaven Europe 2023	2023-01-19	427a371fadd4cce654dd30c27a36acb0	0
 63cc3a7986e4e746cdb607be909b90d4	Campaing for musical destruction	2023-03-03	828d35ecd5412f7bc1ba369d5d657f9f	0
+7fc85de86476aadededbf6716f2eebad	Heidelberg Deathfest VI	2023-03-18	828d35ecd5412f7bc1ba369d5d657f9f	0
 \.
 
 

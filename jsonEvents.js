@@ -142,6 +142,7 @@ var eventsInfo = {
 {"id_event":"f10521a3f832fd2c698b1ac0319ea29a","year":2022,"date":"03.12.2022","event":"Slice Me Nice 2022","place":"Frankfurt am Main (Haus Sindlingen)","bands":7},
 {"id_event":"9f348351c96df42bcc7496c2010d4d1d","year":2023,"date":"19.01.2023","event":"Netherheaven Europe 2023","place":"Wiesbaden (Schlachthof)","bands":4},
 {"id_event":"63cc3a7986e4e746cdb607be909b90d4","year":2023,"date":"03.03.2023","event":"Campaing for musical destruction","place":"Heidelberg (halle 02)","bands":4},
+{"id_event":"7fc85de86476aadededbf6716f2eebad","year":2023,"date":"18.03.2023","event":"Heidelberg Deathfest VI","place":"Heidelberg (halle 02)","bands":12},
 ]};
 function loadEvents(){
   return(eventsInfo);
