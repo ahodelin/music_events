@@ -92,14 +92,18 @@ begin
   if not found then
   	insert into music.bands
   	values (md5(ban), ban, 'y');
-    
+  end if;
+ 
+  select id_band, id_country into i_band, i_countr
+  from music.bands_countries bc
+  where id_band = md5(band) and id_country = md5(countr);
+ 
+ if not found then
     insert into music.bands_countries
     values(md5(ban), md5(countr));
-    return 'New band added. Band - County added';
+    return 'Band - County added';
   else
-    insert into music.bands_countries
-    values(md5(ban), md5(countr));
-    return 'Band - Country added';
+    return 'This combination of band and country exist';
   end if;
 end;
 $$ language plpgsql;
@@ -133,14 +137,18 @@ begin
   if not found then
   	insert into music.bands
   	values (md5(ban), ban, 'y');
-    
-    insert into music.bands_generes
-    values(md5(ban), md5(gene));
-    return 'New band added. Band - Genere added';
-  else
+  end if;
+ 
+  select id_genere, id_band into i_gene, i_band
+  from music.bands_generes bg 
+  where id_band = md5(ban) and id_genere = md5(gene)  for update;
+  
+  if not found then
     insert into music.bands_generes
     values(md5(ban), md5(gene));
     return 'Band - Genere added';
+  else
+    return 'This combination of band and genere exist';
   end if;
 end;
 $$ language plpgsql;
