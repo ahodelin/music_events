@@ -1,8 +1,10 @@
 -- New events
+-- drop function music.insert_events;
 create or replace function music.insert_events(
   eve varchar, 
   dat date, 
-  plac varchar)
+  plac varchar,
+  dur int )
 returns text 
 as $$ 
 declare 
@@ -24,7 +26,7 @@ begin
  
   if not found then
     insert into music.events
-    values (md5(eve), eve, dat, md5(plac));
+    values (md5(eve), eve, dat, md5(plac), dur);
     return 'Added event';
   else return 'Event exist';
   end if;
@@ -141,7 +143,7 @@ begin
  
   select id_genere, id_band into i_gene, i_band
   from music.bands_generes bg 
-  where id_band = md5(ban) and id_genere = md5(gene)  for update;
+  where id_band = md5(ban) and id_genere = md5(gene) for update;
   
   if not found then
     insert into music.bands_generes
