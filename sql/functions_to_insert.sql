@@ -10,28 +10,31 @@ as $$
 declare 
   i_p varchar;
   i_e varchar;
-begin 
-  select id_place into i_p
-  from geo.places
-  where place = plac for update ;
- 
-  if not found then
-  	insert into geo.places
-  	values (md5(plac), plac);
-  end if;
- 
+begin
+	
   select id_event into i_e 
   from music.events e 
   where "event" = eve for update;
  
   if not found then
-    insert into music.events
+  
+    select id_place into i_p
+    from geo.places
+    where place = plac for update;
+   
+    if not found then 
+      insert into geo.places
+  	  values (md5(plac), plac);
+  	end if;
+  
+  	insert into music.events
     values (md5(eve), eve, dat, md5(plac), dur);
-    return 'Added event';
-  else return 'Event exist';
-  end if;
-end;
+    return 'Added event';  
+  else return 'Event alredy exist';
+    
+  end if;end;
 $$ language plpgsql;
+
 
 -- Bands on events
 create or replace function music.insert_bands_on_events(
