@@ -35,6 +35,7 @@ begin
   end if;end;
 $$ language plpgsql;
 
+select music.insert_events('test_event', now()::date, 'test_place', 0);
 
 -- Bands on events
 create or replace function music.insert_bands_on_events(
@@ -47,14 +48,14 @@ declare
   i_band varchar;
   i_e varchar;
 begin 
-  select id_band into i_band
-  from music.bands
-  where band  = ban for update ;
+	
+  select id_band, id_event into i_band, i_e
+  from music.bands_events be 
+  where id_band = md5(ban) and id_event = md5(eve) for update;
  
-  if not found then
-  	insert into music.bands
-  	values (md5(ban), ban, 'y');
-  end if;
+ if found then
+   return 'This combination Band - Event exist.';
+ end if;
  
   select id_event into i_e 
   from music.events e 
@@ -63,12 +64,29 @@ begin
   if not found then    
     return 'This event does not exist';
   else 
+    select id_band into i_band
+    from music.bands
+    where band  = ban for update ;
+ 
+    if not found then
+  	  insert into music.bands
+  	  values (md5(ban), ban, 'y');
+    end if;
+  
     insert into music.bands_events
     values (md5(ban), md5(eve));
     return 'Band - Event inserted';
   end if;
+  
 end;
 $$ language plpgsql;
+
+select music.insert_bands_on_events('test_band2', 'test_event');
+
+delete from music.bands_events where id_event = md5('test_event');
+delete from music.events where id_event = md5('test_event');
+delete from music.bands where band like 'test_band%';
+delete from geo.places where id_place = md5('test_place'); 
 
 -- Bands on contries
 create or replace function music.insert_bands_on_countries(
@@ -82,37 +100,45 @@ declare
   i_countr varchar;
 begin 
 	
-  select id_country into i_countr 
-  from geo.countries c  
-  where country = countr for update;
- 
-  if not found then    
-    return 'Please insert this country first';
-  end if;
-	
-  select id_band into i_band
-  from music.bands
-  where band = ban for update ;
- 
-  if not found then
-  	insert into music.bands
-  	values (md5(ban), ban, 'y');
-  end if;
- 
   select id_band, id_country into i_band, i_countr
   from music.bands_countries bc
-  where id_band = md5(band) and id_country = md5(countr);
+  where id_band = md5(ban) and id_country = md5(countr) for update;
  
- if not found then
+  if found then
+    return 'This combination of band and country exist';
+  else
+	 
+    select id_country into i_countr 
+    from geo.countries c  
+    where country = countr for update;
+ 
+    if not found then    
+      return 'Please insert this country first';
+    end if;
+   
+    select id_band into i_band
+    from music.bands
+    where band = ban for update ;
+ 
+    if not found then
+  	  insert into music.bands
+  	  values (md5(ban), ban, 'y');
+    end if; 
+  
     insert into music.bands_countries
     values(md5(ban), md5(countr));
-    return 'Band - County added';
-  else
-    return 'This combination of band and country exist';
+    return 'Band - County added'; 
+   
   end if;
+	  
 end;
 $$ language plpgsql;
 
+select music.insert_bands_on_countries('test_band', 'test_country');
+
+insert into geo.countries values (md5('test_country'), 'test_country', 'tc');
+delete from music.bands_countries where id_band = md5('test_band');
+delete from geo.countries where country = 'test_country';
 
 -- Bands plays generes
 create or replace function music.insert_bands_to_generes(
