@@ -52,7 +52,7 @@ copy
   (
     select * from music.v_bands_to_tex
   )
-to '/var/lib/postgresql/Music_Events.csv' with delimiter '' csv;
+to '/var/lib/postgresql/Music_Events.csv' with delimiter E';' csv;
 
 
 /*
