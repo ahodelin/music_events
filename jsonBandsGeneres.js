@@ -1016,6 +1016,9 @@ var bandsGeneresInfo = {
 {"id_band":"747f992097b9e5c9df7585931537150a","id_genere":"10a17b42501166d3bf8fbdff7e1d52b6"},
 {"id_band":"2e6e83dd0fa0af6d5e07a1dc2abc7e5c","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 ]};
+
+/*
 function loadBandsGeneres(){
   return(bandsGeneresInfo);
 }
+*/

@@ -151,6 +151,8 @@ var generesInfo = {
 {"id_genere":"f224a37b854811cb14412ceeca43a6ad","genere":"Shoegaze","bands":1},
 {"id_genere":"763a34aaa76475a926827873753d534f","genere":"Ambient Post-Black Metal","bands":1},
 ]};
+/*
 function loadGeneres(){
   return(generesInfo);
 }
+*/

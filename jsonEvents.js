@@ -144,6 +144,8 @@ var eventsInfo = {
 {"id_event":"63cc3a7986e4e746cdb607be909b90d4","year":2023,"date":"03.03.2023","event":"Campaing for musical destruction","place":"Heidelberg (halle 02)","bands":4},
 {"id_event":"7fc85de86476aadededbf6716f2eebad","year":2023,"date":"18.03.2023","event":"Heidelberg Deathfest VI","place":"Heidelberg (halle 02)","bands":12},
 ]};
+/*
 function loadEvents(){
   return(eventsInfo);
 }
+*/

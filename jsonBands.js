@@ -620,6 +620,8 @@ var bandsInfo = {
 {"id_band":"deaccc41a952e269107cc9a507dfa131","band":"Zodiac","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
 {"id_band":"bb4cc149e8027369e71eb1bb36cd98e0","band":"Zombi","country":"USA","flag":"us","likes":"m","generes":2,"events":1},
 ]};
+/*
 function loadBands(){
   return(bandsInfo);
 }
+*/

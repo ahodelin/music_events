@@ -823,6 +823,8 @@ var bandsEventsInfo = {
 {"id_band":"fb47f889f2c7c4fee1553d0f817b8aaa","id_event":"7fc85de86476aadededbf6716f2eebad"},
 {"id_band":"13c260ca90c0f47c9418790429220899","id_event":"7fc85de86476aadededbf6716f2eebad"},
 ]};
+/*
 function loadBandsEvents(){
   return(bandsEventsInfo);
 }
+*/

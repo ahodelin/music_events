@@ -49,6 +49,8 @@ var countriesInfo = {
 {"id_country":"77dab2f81a6c8c9136efba7ab2c4c0f2","country":"Philippines","flag":"ph","bands":1},
 {"id_country":"06e415f918c577f07328a52e24f75d43","country":"Ireland","flag":"ie","bands":1},
 ]};
+/*
 function loadCountries(){
   return(countriesInfo);
 }
+*/
