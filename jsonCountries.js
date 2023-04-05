@@ -13,7 +13,7 @@ var countriesInfo = {
 {"id_country":"d5b9290a0b67727d4ba1ca6059dc31a6","country":"Norway","flag":"no","bands":12},
 {"id_country":"3ad08396dc5afa78f34f548eea3c1d64","country":"Switzerland","flag":"ch","bands":12},
 {"id_country":"ea71b362e3ea9969db085abfccdeb10d","country":"Portugal","flag":"pt","bands":8},
-{"id_country":"4442e4af0916f53a07fb8ca9a49b98ed","country":"Australia","flag":"au","bands":7},
+{"id_country":"4442e4af0916f53a07fb8ca9a49b98ed","country":"Australia","flag":"au","bands":8},
 {"id_country":"445d337b5cd5de476f99333df6b0c2a7","country":"Canada","flag":"ca","bands":7},
 {"id_country":"424214945ba5615eca039bfe5d731c09","country":"Denmark","flag":"dk","bands":7},
 {"id_country":"51802d8bb965d0e5be697f07d16922e8","country":"Czech Republic","flag":"cz","bands":6},
@@ -49,8 +49,3 @@ var countriesInfo = {
 {"id_country":"77dab2f81a6c8c9136efba7ab2c4c0f2","country":"Philippines","flag":"ph","bands":1},
 {"id_country":"06e415f918c577f07328a52e24f75d43","country":"Ireland","flag":"ie","bands":1},
 ]};
-/*
-function loadCountries(){
-  return(countriesInfo);
-}
-*/

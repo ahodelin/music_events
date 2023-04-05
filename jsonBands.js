@@ -209,7 +209,7 @@ var bandsInfo = {
 {"id_band":"4ac863b6f6fa5ef02afdd9c1ca2a5e24","band":"Eridu","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
 {"id_band":"ba8033b8cfb1ebfc91a5d03b3a268d9f","band":"Escuela Grind","country":"USA","flag":"us","likes":"y","generes":1,"events":1},
 {"id_band":"ff5b48d38ce7d0c47c57555d4783a118","band":"Evertale","country":"Germany","flag":"de","likes":"m","generes":1,"events":1},
-{"id_band":"8945663993a728ab19a3853e5b820a42","band":"Evil Invaders","country":"Belgium","flag":"be","likes":"y","generes":1,"events":2},
+{"id_band":"8945663993a728ab19a3853e5b820a42","band":"Evil Invaders","country":"Belgium","flag":"be","likes":"y","generes":1,"events":3},
 {"id_band":"28a95ef0eabe44a27f49bbaecaa8a847","band":"Exhorder","country":"USA","flag":"us","likes":"y","generes":2,"events":1},
 {"id_band":"0cdf051c93865faa15cbc5cd3d2b69fb","band":"Exodus","country":"USA","flag":"us","likes":"y","generes":1,"events":1},
 {"id_band":"ade72e999b4e78925b18cf48d1faafa4","band":"Exorcised Gods","country":"Germany","flag":"de","likes":"n","generes":1,"events":1},
@@ -362,6 +362,7 @@ var bandsInfo = {
 {"id_band":"a3f5542dc915b94a5e10dab658bb0959","band":"Manegarm","country":"Sweden","flag":"se","likes":"y","generes":3,"events":1},
 {"id_band":"2ac79000a90b015badf6747312c0ccad","band":"Mantar","country":"Germany","flag":"de","likes":"y","generes":2,"events":4},
 {"id_band":"eb2c788da4f36fba18b85ae75aff0344","band":"Marduk","country":"Sweden","flag":"se","likes":"y","generes":1,"events":1},
+{"id_band":"19819b153eb0990c821bc106e34ab3e1","band":"Mason","country":"Australia","flag":"au","likes":"y","generes":2,"events":1},
 {"id_band":"f03bde11d261f185cbacfa32c1c6538c","band":"Master","country":"Czech Republic","flag":"cz","likes":"y","generes":2,"events":1},
 {"id_band":"626dceb92e4249628c1e76a2c955cd24","band":"Meatknife","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"8fda25275801e4a40df6c73078baf753","band":"Mecalimb","country":"Norway","flag":"no","likes":"m","generes":2,"events":1},
@@ -480,7 +481,7 @@ var bandsInfo = {
 {"id_band":"91c9ed0262dea7446a4f3a3e1cdd0698","band":"Satan's Fall","country":"Finland","flag":"fi","likes":"n","generes":2,"events":1},
 {"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","band":"Satan Worship","country":"International","flag":"un","likes":"y","generes":2,"events":1},
 {"id_band":"0cddbf403096e44a08bc37d1e2e99b0f","band":"Saxorior","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
-{"id_band":"79ce9bd96a3184b1ee7c700aa2927e67","band":"Schizophrenia","country":"Belgium","flag":"be","likes":"y","generes":2,"events":1},
+{"id_band":"79ce9bd96a3184b1ee7c700aa2927e67","band":"Schizophrenia","country":"Belgium","flag":"be","likes":"y","generes":2,"events":2},
 {"id_band":"d832b654664d104f0fbb9b6674a09a11","band":"Schöngeist","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"218f2bdae8ad3bb60482b201e280ffdc","band":"Scordatura","country":"UK","flag":"gb","likes":"y","generes":1,"events":1},
 {"id_band":"4927f3218b038c780eb795766dfd04ee","band":"Scornebeke","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
@@ -598,7 +599,7 @@ var bandsInfo = {
 {"id_band":"edd506a412c4f830215d4c0f1ac06e55","band":"Vomit the Soul","country":"Italy","flag":"it","likes":"y","generes":2,"events":1},
 {"id_band":"8e11b2f987a99ed900a44aa1aa8bd3d0","band":"Vortex","country":"Netherlands","flag":"nl","likes":"n","generes":1,"events":1},
 {"id_band":"59f06d56c38ac98effb4c6da117b0305","band":"Walls of Jericho","country":"USA","flag":"us","likes":"y","generes":1,"events":2},
-{"id_band":"804803e43d2c779d00004a6e87f28e30","band":"Warbringer","country":"USA","flag":"us","likes":"y","generes":1,"events":1},
+{"id_band":"804803e43d2c779d00004a6e87f28e30","band":"Warbringer","country":"USA","flag":"us","likes":"y","generes":1,"events":2},
 {"id_band":"f042da2a954a1521114551a6f9e22c75","band":"Warfield","country":"Germany","flag":"de","likes":"y","generes":1,"events":5},
 {"id_band":"b1d465aaf3ccf8701684211b1623adf2","band":"Warkings","country":"International","flag":"un","likes":"m","generes":1,"events":1},
 {"id_band":"4f840b1febbbcdb12b9517cd0a91e8f4","band":"When Plagues Collide","country":"Belgium","flag":"be","likes":"y","generes":1,"events":1},
@@ -620,8 +621,3 @@ var bandsInfo = {
 {"id_band":"deaccc41a952e269107cc9a507dfa131","band":"Zodiac","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
 {"id_band":"bb4cc149e8027369e71eb1bb36cd98e0","band":"Zombi","country":"USA","flag":"us","likes":"m","generes":2,"events":1},
 ]};
-/*
-function loadBands(){
-  return(bandsInfo);
-}
-*/

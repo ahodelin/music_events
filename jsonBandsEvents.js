@@ -822,9 +822,8 @@ var bandsEventsInfo = {
 {"id_band":"ee69e7d19f11ca58843ec2e9e77ddb38","id_event":"7fc85de86476aadededbf6716f2eebad"},
 {"id_band":"fb47f889f2c7c4fee1553d0f817b8aaa","id_event":"7fc85de86476aadededbf6716f2eebad"},
 {"id_band":"13c260ca90c0f47c9418790429220899","id_event":"7fc85de86476aadededbf6716f2eebad"},
+{"id_band":"8945663993a728ab19a3853e5b820a42","id_event":"18ef7142c02d84033cc9d41687981691"},
+{"id_band":"19819b153eb0990c821bc106e34ab3e1","id_event":"18ef7142c02d84033cc9d41687981691"},
+{"id_band":"79ce9bd96a3184b1ee7c700aa2927e67","id_event":"18ef7142c02d84033cc9d41687981691"},
+{"id_band":"804803e43d2c779d00004a6e87f28e30","id_event":"18ef7142c02d84033cc9d41687981691"},
 ]};
-/*
-function loadBandsEvents(){
-  return(bandsEventsInfo);
-}
-*/

@@ -1,6 +1,6 @@
 cd ..
 mkdir -p old
-mv *.js old/
+mv json*.js old/
 cd json_files
 
 bash bandsCountries.sh

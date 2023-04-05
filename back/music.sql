@@ -42,30 +42,37 @@ declare
   i_countr varchar;
 begin 
 	
-  select id_country into i_countr 
-  from geo.countries c  
-  where country = countr for update;
+  select id_band, id_country into i_band, i_countr
+  from music.bands_countries bc
+  where id_band = md5(ban) and id_country = md5(countr) for update;
  
-  if not found then    
-    return 'Please insert this country first';
-  end if;
-	
-  select id_band into i_band
-  from music.bands
-  where band = ban for update ;
- 
-  if not found then
-  	insert into music.bands
-  	values (md5(ban), ban, 'y');
-    
-    insert into music.bands_countries
-    values(md5(ban), md5(countr));
-    return 'New band added. Band - County added';
+  if found then
+    return 'This combination of band and country exist';
   else
+	 
+    select id_country into i_countr 
+    from geo.countries c  
+    where country = countr for update;
+ 
+    if not found then    
+      return 'Please insert this country first';
+    end if;
+   
+    select id_band into i_band
+    from music.bands
+    where band = ban for update ;
+ 
+    if not found then
+  	  insert into music.bands
+  	  values (md5(ban), ban, 'y');
+    end if; 
+  
     insert into music.bands_countries
     values(md5(ban), md5(countr));
-    return 'Band - Country added';
+    return 'Band - County added'; 
+   
   end if;
+	  
 end;
 $$;
 
@@ -79,16 +86,16 @@ CREATE FUNCTION music.insert_bands_on_events(ban character varying, eve characte
     AS $$ 
 declare 
   i_band varchar;
- i_e varchar;
+  i_e varchar;
 begin 
-  select id_band into i_band
-  from music.bands
-  where band  = ban for update ;
+	
+  select id_band, id_event into i_band, i_e
+  from music.bands_events be 
+  where id_band = md5(ban) and id_event = md5(eve) for update;
  
-  if not found then
-  	insert into music.bands
-  	values (md5(ban), ban, 'y');
-  end if;
+ if found then
+   return 'This combination Band - Event exist.';
+ end if;
  
   select id_event into i_e 
   from music.events e 
@@ -97,10 +104,20 @@ begin
   if not found then    
     return 'This event does not exist';
   else 
+    select id_band into i_band
+    from music.bands
+    where band  = ban for update ;
+ 
+    if not found then
+  	  insert into music.bands
+  	  values (md5(ban), ban, 'y');
+    end if;
+  
     insert into music.bands_events
     values (md5(ban), md5(eve));
     return 'Band - Event inserted';
   end if;
+  
 end;
 $$;
 
@@ -110,6 +127,53 @@ $$;
 --
 
 CREATE FUNCTION music.insert_bands_to_generes(ban character varying, gene character varying) RETURNS text
+    LANGUAGE plpgsql
+    AS $$ 
+declare 
+  i_band varchar;
+  i_gene varchar;
+begin 
+	
+  select id_genere, id_band into i_gene, i_band
+  from music.bands_generes bg 
+  where id_band = md5(ban) and id_genere = md5(gene) for update;
+  
+  if found then
+    return 'This combination of band and genere exist';
+  else
+  
+    select id_genere into i_gene 
+    from music.generes g
+    where genere = gene for update;
+ 
+    if not found then    
+      insert into music.generes
+  	  values (md5(gene), gene);
+    end if;
+	
+    select id_band into i_band
+    from music.bands
+    where band = ban for update ;
+ 
+    if not found then
+  	  insert into music.bands
+  	  values (md5(ban), ban, 'y');
+    end if;
+  
+    insert into music.bands_generes
+    values(md5(ban), md5(gene));
+    return 'Band - Genere added';
+    
+  end if;  
+end;
+$$;
+
+
+--
+-- Name: insert_bands_to_generes_test(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.insert_bands_to_generes_test(ban character varying, gene character varying) RETURNS text
     LANGUAGE plpgsql
     AS $$ 
 declare 
@@ -133,51 +197,56 @@ begin
   if not found then
   	insert into music.bands
   	values (md5(ban), ban, 'y');
-    
-    insert into music.bands_generes
-    values(md5(ban), md5(gene));
-    return 'New band added. Band - Genere added';
-  else
+  end if;
+ 
+  select id_genere, id_band into i_gene, i_band
+  from music.bands_generes bg 
+  where id_band = md5(ban) and id_genere = md5(gene)  for update;
+  
+  if not found then
     insert into music.bands_generes
     values(md5(ban), md5(gene));
     return 'Band - Genere added';
+  else
+    return 'This combination of band and genere exist';
   end if;
 end;
 $$;
 
 
 --
--- Name: insert_events(character varying, date, character varying); Type: FUNCTION; Schema: music; Owner: -
+-- Name: insert_events(character varying, date, character varying, integer); Type: FUNCTION; Schema: music; Owner: -
 --
 
-CREATE FUNCTION music.insert_events(eve character varying, dat date, plac character varying) RETURNS text
+CREATE FUNCTION music.insert_events(eve character varying, dat date, plac character varying, dur integer) RETURNS text
     LANGUAGE plpgsql
     AS $$ 
 declare 
   i_p varchar;
   i_e varchar;
-begin 
-  select id_place into i_p
-  from geo.places
-  where place = plac for update ;
- 
-  if not found then
-  	insert into geo.places
-  	values (md5(plac), plac);
-    --return 'New place inserted';
-  end if;
- 
+begin
+	
   select id_event into i_e 
   from music.events e 
   where "event" = eve for update;
  
   if not found then
-    insert into music.events
-    values (md5(eve), eve, dat, md5(plac));
-    return 'Added event';
-  else return 'Event exist';
-  end if;
-end;
+  
+    select id_place into i_p
+    from geo.places
+    where place = plac for update;
+   
+    if not found then 
+      insert into geo.places
+  	  values (md5(plac), plac);
+  	end if;
+  
+  	insert into music.events
+    values (md5(eve), eve, dat, md5(plac), dur);
+    return 'Added event';  
+  else return 'Event alredy exist';
+    
+  end if;end;
 $$;
 
 
@@ -1253,6 +1322,7 @@ fd85bfffd5a0667738f6110281b25db8	Necrotted	y
 747f992097b9e5c9df7585931537150a	Blood	y
 13c260ca90c0f47c9418790429220899	Schirenc Plays Pungent Stench	y
 2e6e83dd0fa0af6d5e07a1dc2abc7e5c	Schirenc plays Pungent Stench	y
+19819b153eb0990c821bc106e34ab3e1	Mason	y
 \.
 
 
@@ -1881,6 +1951,7 @@ fd85bfffd5a0667738f6110281b25db8	d8b00929dec65d422303256336ada04f
 32a02a8a7927de4a39e9e14f2dc46ac6	d8b00929dec65d422303256336ada04f
 747f992097b9e5c9df7585931537150a	d8b00929dec65d422303256336ada04f
 13c260ca90c0f47c9418790429220899	9891739094756d2605946c867b32ad28
+19819b153eb0990c821bc106e34ab3e1	4442e4af0916f53a07fb8ca9a49b98ed
 \.
 
 
@@ -2711,6 +2782,10 @@ e6fd7b62a39c109109d33fcd3b5e129d	7fc85de86476aadededbf6716f2eebad
 ee69e7d19f11ca58843ec2e9e77ddb38	7fc85de86476aadededbf6716f2eebad
 fb47f889f2c7c4fee1553d0f817b8aaa	7fc85de86476aadededbf6716f2eebad
 13c260ca90c0f47c9418790429220899	7fc85de86476aadededbf6716f2eebad
+8945663993a728ab19a3853e5b820a42	18ef7142c02d84033cc9d41687981691
+19819b153eb0990c821bc106e34ab3e1	18ef7142c02d84033cc9d41687981691
+79ce9bd96a3184b1ee7c700aa2927e67	18ef7142c02d84033cc9d41687981691
+804803e43d2c779d00004a6e87f28e30	18ef7142c02d84033cc9d41687981691
 \.
 
 
@@ -3734,6 +3809,8 @@ fd85bfffd5a0667738f6110281b25db8	caac3244eefed8cffee878acae427e28
 747f992097b9e5c9df7585931537150a	17b8dff9566f6c98062ad5811c762f44
 747f992097b9e5c9df7585931537150a	10a17b42501166d3bf8fbdff7e1d52b6
 2e6e83dd0fa0af6d5e07a1dc2abc7e5c	17b8dff9566f6c98062ad5811c762f44
+19819b153eb0990c821bc106e34ab3e1	a29864963573d7bb061691ff823b97dd
+19819b153eb0990c821bc106e34ab3e1	d5a9c37bc91d6d5d55a3c2e38c3bf97d
 \.
 
 
@@ -3792,7 +3869,6 @@ c150d400f383afb8e8427813549a82d3	Guido's sassy 17 (30th edition)	2019-04-26	8bb8
 488af8bdc554488b6c8854fae6ae8610	Downfall of Mankind Tour 2019	2019-05-07	4e592038a4c7b6cdc3e7b92d98867506	0
 62f7101086340682e5bc58a86976cfb5	Darkness approaching	2019-05-10	620f9da22d73cc8d5680539a4c87402b	0
 7126a50ce66fe18b84a7bfb3defea15f	Rockbahnhof 2019	2019-05-18	bb1bac023b4f02a5507f1047970d1aca	0
-8640cd270510da320a9dd71429b95531	NOAF XI	2015-08-28	bb1bac023b4f02a5507f1047970d1aca	1
 2a6b51056784227b35e412c444f54359	Metal Embrace Festival XII	2018-09-07	741ae9098af4e50aecf13b0ef08ecc47	1
 abefb7041d2488eadeedba9a0829b753	Taunus Metal Festival XI	2019-04-12	1e9e26a0456c1694d069e119dae54240	1
 20b7e40ecd659c47ca991e0d420a54eb	Rockfield Open Air 2017	2017-08-18	55ff4adc7d421cf9e05b68d25ee22341	2
@@ -3885,6 +3961,8 @@ f10521a3f832fd2c698b1ac0319ea29a	Slice Me Nice 2022	2022-12-03	fa788dff4144faf11
 9f348351c96df42bcc7496c2010d4d1d	Netherheaven Europe 2023	2023-01-19	427a371fadd4cce654dd30c27a36acb0	0
 63cc3a7986e4e746cdb607be909b90d4	Campaing for musical destruction	2023-03-03	828d35ecd5412f7bc1ba369d5d657f9f	0
 7fc85de86476aadededbf6716f2eebad	Heidelberg Deathfest VI	2023-03-18	828d35ecd5412f7bc1ba369d5d657f9f	0
+8640cd270510da320a9dd71429b95531	NOAF XI	2015-08-28	bb1bac023b4f02a5507f1047970d1aca	0
+18ef7142c02d84033cc9d41687981691	Ravaging Europe 2023	2023-03-29	2b18765ced0c329ecd1f1663925e8342	0
 \.
 
 

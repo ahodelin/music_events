@@ -143,9 +143,5 @@ var eventsInfo = {
 {"id_event":"9f348351c96df42bcc7496c2010d4d1d","year":2023,"date":"19.01.2023","event":"Netherheaven Europe 2023","place":"Wiesbaden (Schlachthof)","bands":4},
 {"id_event":"63cc3a7986e4e746cdb607be909b90d4","year":2023,"date":"03.03.2023","event":"Campaing for musical destruction","place":"Heidelberg (halle 02)","bands":4},
 {"id_event":"7fc85de86476aadededbf6716f2eebad","year":2023,"date":"18.03.2023","event":"Heidelberg Deathfest VI","place":"Heidelberg (halle 02)","bands":12},
+{"id_event":"18ef7142c02d84033cc9d41687981691","year":2023,"date":"29.03.2023","event":"Ravaging Europe 2023","place":"Mannheim (7er-Club)","bands":4},
 ]};
-/*
-function loadEvents(){
-  return(eventsInfo);
-}
-*/
