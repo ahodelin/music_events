@@ -1014,7 +1014,7 @@ var bandsGeneresInfo = {
 {"id_band":"32a02a8a7927de4a39e9e14f2dc46ac6","id_genere":"deb8040131c3f6a3caf6a616b34ac482"},
 {"id_band":"747f992097b9e5c9df7585931537150a","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 {"id_band":"747f992097b9e5c9df7585931537150a","id_genere":"10a17b42501166d3bf8fbdff7e1d52b6"},
-{"id_band":"2e6e83dd0fa0af6d5e07a1dc2abc7e5c","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 {"id_band":"19819b153eb0990c821bc106e34ab3e1","id_genere":"a29864963573d7bb061691ff823b97dd"},
 {"id_band":"19819b153eb0990c821bc106e34ab3e1","id_genere":"d5a9c37bc91d6d5d55a3c2e38c3bf97d"},
+{"id_band":"13c260ca90c0f47c9418790429220899","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 ]};

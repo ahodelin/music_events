@@ -481,6 +481,7 @@ var bandsInfo = {
 {"id_band":"91c9ed0262dea7446a4f3a3e1cdd0698","band":"Satan's Fall","country":"Finland","flag":"fi","likes":"n","generes":2,"events":1},
 {"id_band":"3bcbddf6c114327fc72ea06bcb02f9ef","band":"Satan Worship","country":"International","flag":"un","likes":"y","generes":2,"events":1},
 {"id_band":"0cddbf403096e44a08bc37d1e2e99b0f","band":"Saxorior","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
+{"id_band":"13c260ca90c0f47c9418790429220899","band":"Schirenc Plays Pungent Stench","country":"Austria","flag":"at","likes":"y","generes":1,"events":1},
 {"id_band":"79ce9bd96a3184b1ee7c700aa2927e67","band":"Schizophrenia","country":"Belgium","flag":"be","likes":"y","generes":2,"events":2},
 {"id_band":"d832b654664d104f0fbb9b6674a09a11","band":"Schöngeist","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"218f2bdae8ad3bb60482b201e280ffdc","band":"Scordatura","country":"UK","flag":"gb","likes":"y","generes":1,"events":1},
