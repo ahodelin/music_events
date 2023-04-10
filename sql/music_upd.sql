@@ -5,17 +5,17 @@ nsert into geo.countries
 */
    
 -- New events
-select music.insert_events('Ravaging Europe 2023', '2023.03.29', 'Mannheim (7er-Club)', 0);
+select music.insert_events('Easter Mosh', '2023.04.12', 'Weinheim (Café Central))', 0);
 
 -- Bands on events
-select music.insert_bands_on_events('Evil Invaders', 'Ravaging Europe 2023');
-select music.insert_bands_on_events('Mason', 'Ravaging Europe 2023');
-select music.insert_bands_on_events('Schizophrenia', 'Ravaging Europe 2023');
-select music.insert_bands_on_events('Warbringer', 'Ravaging Europe 2023');
+select music.insert_bands_on_events('Antagonism', 'Easter Mosh');
+select music.insert_bands_on_events('Inssanity Alert', 'Easter Mosh');
+select music.insert_bands_on_events('Dust Bolt', 'Easter Mosh');
+select music.insert_bands_on_events('Crisix', 'Easter Mosh');
 
 -- Bands countries
-select music.insert_bands_on_countries('Mason', 'Australia'); 
+select music.insert_bands_on_countries('Antagonism', 'France'); 
 
 -- Bands generes
-select music.insert_bands_to_generes('Mason', 'Thrash Metal');
-select music.insert_bands_to_generes('Mason', 'Groove Metal');
+select music.insert_bands_to_generes('Antagonism', 'Thrash Metal');
+
