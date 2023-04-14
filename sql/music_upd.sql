@@ -5,7 +5,7 @@ nsert into geo.countries
 */
    
 -- New events
-select music.insert_events('Easter Mosh', '2023.04.12', 'Weinheim (Café Central))', 0);
+select music.insert_events('Easter Mosh', '2023.04.12', 'Mannheim (MS Connexion Complex)', 0);
 
 -- Bands on events
 select music.insert_bands_on_events('Antagonism', 'Easter Mosh');
