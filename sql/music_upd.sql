@@ -5,17 +5,12 @@ nsert into geo.countries
 */
    
 -- New events
-select music.insert_events('Easter Mosh', '2023.04.12', 'Mannheim (MS Connexion Complex)', 0);
+select music.insert_events('', '2023.04.', '', 0);
 
 -- Bands on events
-select music.insert_bands_on_events('Antagonism', 'Easter Mosh');
-select music.insert_bands_on_events('Inssanity Alert', 'Easter Mosh');
-select music.insert_bands_on_events('Dust Bolt', 'Easter Mosh');
-select music.insert_bands_on_events('Crisix', 'Easter Mosh');
-
+select music.insert_bands_on_events('', '');
 -- Bands countries
-select music.insert_bands_on_countries('Antagonism', 'France'); 
+select music.insert_bands_on_countries('', ''); 
 
 -- Bands generes
-select music.insert_bands_to_generes('Antagonism', 'Thrash Metal');
-
+select music.insert_bands_to_generes('', '');
