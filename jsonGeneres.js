@@ -1,6 +1,6 @@
 var generesInfo = {
   "generes":[
-{"id_genere":"17b8dff9566f6c98062ad5811c762f44","genere":"Death Metal","bands":149},
+{"id_genere":"17b8dff9566f6c98062ad5811c762f44","genere":"Death Metal","bands":150},
 {"id_genere":"a29864963573d7bb061691ff823b97dd","genere":"Thrash Metal","bands":107},
 {"id_genere":"a68d5b72c2f98613f511337a59312f78","genere":"Black Metal","bands":72},
 {"id_genere":"04ae76937270105919847d05aee582b4","genere":"Heavy Metal","bands":43},
@@ -16,8 +16,8 @@ var generesInfo = {
 {"id_genere":"2df929d9b6150c082888b66e8129ee3f","genere":"Technical Death Metal","bands":16},
 {"id_genere":"dcd00c11302e3b16333943340d6b4a6b","genere":"Hard Rock","bands":16},
 {"id_genere":"2336f976c6d510d2a269a746a7756232","genere":"Hardcore Punk","bands":13},
-{"id_genere":"0cf6ece7453aa814e08cb7c33bd39846","genere":"Gothic Metal","bands":12},
 {"id_genere":"1c800aa97116d9afd83204d65d50199a","genere":"Hardcore","bands":12},
+{"id_genere":"0cf6ece7453aa814e08cb7c33bd39846","genere":"Gothic Metal","bands":12},
 {"id_genere":"2e607ef3a19cf3de029e2c5882896d33","genere":"Crossover","bands":11},
 {"id_genere":"ea9565886c02dbdc4892412537e607d7","genere":"Sludge Metal","bands":11},
 {"id_genere":"bb273189d856ee630d92fbc0274178bb","genere":"Alternative Metal","bands":11},
@@ -34,7 +34,7 @@ var generesInfo = {
 {"id_genere":"f0095594f17b3793be8291117582f96b","genere":"Post-Hardcore","bands":6},
 {"id_genere":"5bf88dc6f6501943cc5bc4c42c71b36b","genere":"Punk","bands":6},
 {"id_genere":"34d8a5e79a59df217c6882ee766c850a","genere":"Industrial Metal","bands":6},
-{"id_genere":"1868ffbe3756a1c3f58300f45aa5e1d3","genere":"Blackened Death Metal","bands":5},
+{"id_genere":"1868ffbe3756a1c3f58300f45aa5e1d3","genere":"Blackened Death Metal","bands":6},
 {"id_genere":"36e61931478cf781e59da3b5ae2ee64e","genere":"Melodic Heavy Metal","bands":5},
 {"id_genere":"239401e2c0d502df7c9009439bdb5bd3","genere":"Post-Black Metal","bands":5},
 {"id_genere":"7349da19c2ad6654280ecf64ce42b837","genere":"Oi!","bands":5},
