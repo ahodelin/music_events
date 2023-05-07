@@ -146,4 +146,5 @@ var eventsInfo = {
 {"id_event":"18ef7142c02d84033cc9d41687981691","year":2023,"date":"29.03.2023","event":"Ravaging Europe 2023","place":"Mannheim (7er-Club)","bands":4},
 {"id_event":"6b6bceac41ce67726a6218b1155f2e70","year":2023,"date":"12.04.2023","event":"Easter Mosh","place":"Mannheim (MS Connexion Complex)","bands":4},
 {"id_event":"60bb0152f453d3f043b4dabee1a60513","year":2023,"date":"21.04.2023","event":"Death Over Mainz 2023","place":"Mainz (M8 im Haus der Jugend)","bands":4},
+{"id_event":"6d7c6c981877a0dedcb276ef841e10aa","year":2023,"date":"06.05.2023","event":"KILMINISTER - A Tribute to MOTÖRHEAD","place":"Mainz (Alexander the Great)","bands":1},
 ]};

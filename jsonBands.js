@@ -332,6 +332,7 @@ var bandsInfo = {
 {"id_band":"1fda271217bb4c043c691fc6344087c1","band":"Kanine","country":"France","flag":"fr","likes":"y","generes":1,"events":1},
 {"id_band":"820de5995512273916b117944d6da15a","band":"Kataklysm","country":"Canada","flag":"ca","likes":"y","generes":1,"events":2},
 {"id_band":"e6fd7b62a39c109109d33fcd3b5e129d","band":"Keitzer","country":"Germany","flag":"de","likes":"y","generes":2,"events":2},
+{"id_band":"89eec5d48b8969bf61eea38e4b3cfdbf","band":"Kilminister","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"d39d7a2bb6d430fd238a6aedc7f0cee2","band":"Knife","country":"Germany","flag":"de","likes":"m","generes":2,"events":1},
 {"id_band":"6d57b25c282247075f5e03cde27814df","band":"Knockdown Brutality","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"ab7b69efdaf168cbbe9a5b03d901be74","band":"Komodo","country":"Panama","flag":"pa","likes":"m","generes":2,"events":1},
