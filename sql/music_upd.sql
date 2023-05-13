@@ -5,7 +5,7 @@ nsert into geo.countries
 */
    
 -- New events
-select music.insert_events('', '2023.04.', '', 0);
+select music.insert_events('', '2023.05.', '', 0);
 
 -- Bands on events
 select music.insert_bands_on_events('', '');
