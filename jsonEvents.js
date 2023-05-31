@@ -148,4 +148,9 @@ var eventsInfo = {
 {"id_event":"60bb0152f453d3f043b4dabee1a60513","year":2023,"date":"21.04.2023","event":"Death Over Mainz 2023","place":"Mainz (M8 im Haus der Jugend)","bands":4},
 {"id_event":"6d7c6c981877a0dedcb276ef841e10aa","year":2023,"date":"06.05.2023","event":"KILMINISTER - A Tribute to MOTÖRHEAD","place":"Mainz (Alexander the Great)","bands":1},
 {"id_event":"6f745abd8c203f0f0e821ceeb77e5d24","year":2023,"date":"12.05.2023","event":"Morbide Klänge II","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+{"id_event":"ee148734818b410ebf3404c30b91a50a","year":2023,"date":"26.05.2023","event":"30. Wave-Gotik-Treffen 1.","place":"Leipzig (Westbad)","bands":1},
+{"id_event":"22c0b9b50543aee600828acefda40b8b","year":2023,"date":"27.05.2023","event":"30. Wave-Gotik-Treffen 2.","place":"Leipzig (Heidnisches Dorf)","bands":1},
+{"id_event":"e3349b868a6a9cc278e869ca8dd3ba85","year":2023,"date":"28.05.2023","event":"30. Wave-Gotik-Treffen 4.","place":"Leipzig (Heidnisches Dorf)","bands":1},
+{"id_event":"bf1b35b58d2079445792f9121e5e091b","year":2023,"date":"28.05.2023","event":"30. Wave-Gotik-Treffen 3.","place":"Leipzig (Felsenkeller / Naumanns)","bands":2},
+{"id_event":"a3f903d924e35531caf1a26d7e91382c","year":2023,"date":"29.05.2023","event":"30. Wave-Gotik-Treffen 5.","place":"Leipzig (Heidnisches Dorf)","bands":2},
 ]};

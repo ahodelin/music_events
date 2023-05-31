@@ -627,4 +627,10 @@ var bandsCountriesInfo = {
 {"id_band":"89eec5d48b8969bf61eea38e4b3cfdbf","id_country":"d8b00929dec65d422303256336ada04f"},
 {"id_band":"703b1360391d2aef7b9ec688b00849bb","id_country":"d8b00929dec65d422303256336ada04f"},
 {"id_band":"b4b46e6ce2c563dd296e8bae768e1b9d","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"5c8c8b827ae259b8e4f8cb567a577a3e","id_country":"0309a6c666a7a803fdb9db95de71cf01"},
+{"id_band":"7f00429970ee9fd2a3185f777ff79922","id_country":"1007e1b7f894dfbf72a0eaa80f3bc57e"},
+{"id_band":"92e2cf901fe43bb77d99af2ff42ade77","id_country":"9891739094756d2605946c867b32ad28"},
+{"id_band":"1a1bfb986176c0ba845ae4f43d027f58","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"7ecdb1a0eb7c01d081acf2b7e11531c0","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"094caa14a3a49bf282d8f0f262a01f43","id_country":"c8f4261f9f46e6465709e17ebea7a92b"},
 ]};
