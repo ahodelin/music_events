@@ -433,7 +433,7 @@ CREATE VIEW music.v_bands_likes AS
 CREATE VIEW music.v_bands_to_tex AS
  SELECT
         CASE
-            WHEN ((vb.band)::text ~* 'Apey|Booze'::text) THEN (regexp_replace((vb.band)::text, '\&'::text, '\\&'::text))::character varying
+            WHEN ((vb.band)::text ~* 'Apey|Booze|Nordic'::text) THEN (regexp_replace((vb.band)::text, '\&'::text, '\\&'::text))::character varying
             WHEN ((vb.band)::text ~* 'Auðn'::text) THEN (regexp_replace((vb.band)::text, 'ð'::text, '\\dh '::text))::character varying
             ELSE vb.band
         END AS "Gruppe",
@@ -695,6 +695,7 @@ d8634af954a0d50828522b6c6a6053c2	Kusel (Kinett)
 fa788dff4144faf1179fc82d60ccd571	Frankfurt am Main (Haus Sindlingen)
 827250c5a7445093119fab43fb959d04	Leipzig (Westbad)
 fb5fce8ee7e869a708fa21aba0b8ebbf	Leipzig (Heidnisches Dorf)
+4a887b8a68acf9b04d9d027bddedb06b	Leipzig
 \.
 
 
@@ -2827,15 +2828,15 @@ fb28e62c0e801a787d55d97615e89771	60bb0152f453d3f043b4dabee1a60513
 5518086aebc9159ba7424be0073ce5c9	6f745abd8c203f0f0e821ceeb77e5d24
 703b1360391d2aef7b9ec688b00849bb	6f745abd8c203f0f0e821ceeb77e5d24
 b4b46e6ce2c563dd296e8bae768e1b9d	6f745abd8c203f0f0e821ceeb77e5d24
-5c8c8b827ae259b8e4f8cb567a577a3e	ee148734818b410ebf3404c30b91a50a
-7f00429970ee9fd2a3185f777ff79922	22c0b9b50543aee600828acefda40b8b
-92e2cf901fe43bb77d99af2ff42ade77	bf1b35b58d2079445792f9121e5e091b
-c4ddbffb73c1c34d20bd5b3f425ce4b1	bf1b35b58d2079445792f9121e5e091b
-1a1bfb986176c0ba845ae4f43d027f58	e3349b868a6a9cc278e869ca8dd3ba85
-7ecdb1a0eb7c01d081acf2b7e11531c0	a3f903d924e35531caf1a26d7e91382c
-094caa14a3a49bf282d8f0f262a01f43	a3f903d924e35531caf1a26d7e91382c
 110cb86243320511676f788dbc46f633	d5fba38ea6078ea36b9ac0539a8d40c9
 8e9f5b1fc0e61f9a289aba4c59e49521	d5fba38ea6078ea36b9ac0539a8d40c9
+5c8c8b827ae259b8e4f8cb567a577a3e	97a06553981fd4531de6d5542136b854
+7f00429970ee9fd2a3185f777ff79922	97a06553981fd4531de6d5542136b854
+92e2cf901fe43bb77d99af2ff42ade77	97a06553981fd4531de6d5542136b854
+c4ddbffb73c1c34d20bd5b3f425ce4b1	97a06553981fd4531de6d5542136b854
+1a1bfb986176c0ba845ae4f43d027f58	97a06553981fd4531de6d5542136b854
+7ecdb1a0eb7c01d081acf2b7e11531c0	97a06553981fd4531de6d5542136b854
+094caa14a3a49bf282d8f0f262a01f43	97a06553981fd4531de6d5542136b854
 \.
 
 
@@ -4000,8 +4001,6 @@ dae84dc2587a374c667d0ba291f33481	Rockharz Open Air 2019	2019-07-03	3b0409f1b5830
 fc0dc52ba0b7a645c4d70c0df70abb40	Wacken Open Air 2022	2022-08-03	fbde8601308ae84be23d6de78e10d14c	3
 53812183e083ed8a87818371d6b3dbfb	Rockfield Open Air 2019	2019-08-09	55ff4adc7d421cf9e05b68d25ee22341	2
 7c02da151320d3aa28b1e0f54b0264b0	Rockfield Open Air 2022	2022-08-13	55ff4adc7d421cf9e05b68d25ee22341	2
-d45cf5e6b7af0cee99b37f15b13360ed	28. Wave-Gotik-Treffen	2019-06-08	b67af931a5d0322adc7d56846dca86dc	1
-7712d7dceef5a521b4a554c431752979	29. Wave-Gotik-Treffen	2022-06-05	b67af931a5d0322adc7d56846dca86dc	1
 40c1eb30fa7abc7fdb3d8e35c61f6a7c	Brutality Unleashed Tour 2022	2022-09-05	93a57b9586b3285867e6b87031559aea	0
 c5593cbec8087184815492eee880f9a8	Randy Hansen live in Frankfurt	2016-04-26	927ba3593d3a4597eac931a25b53a137	0
 320951dccf4030808c979375af8356b6	Wild Boar Wars III	2021-08-28	927ba3593d3a4597eac931a25b53a137	0
@@ -4037,12 +4036,10 @@ f10521a3f832fd2c698b1ac0319ea29a	Slice Me Nice 2022	2022-12-03	fa788dff4144faf11
 60bb0152f453d3f043b4dabee1a60513	Death Over Mainz 2023	2023-04-21	620f9da22d73cc8d5680539a4c87402b	0
 6d7c6c981877a0dedcb276ef841e10aa	KILMINISTER - A Tribute to MOTÖRHEAD	2023-05-06	8bb89006a86a427f89e49efe7f1635c1	0
 6f745abd8c203f0f0e821ceeb77e5d24	Morbide Klänge II	2023-05-12	620f9da22d73cc8d5680539a4c87402b	0
-ee148734818b410ebf3404c30b91a50a	30. Wave-Gotik-Treffen 1.	2023-05-26	827250c5a7445093119fab43fb959d04	0
-22c0b9b50543aee600828acefda40b8b	30. Wave-Gotik-Treffen 2.	2023-05-27	fb5fce8ee7e869a708fa21aba0b8ebbf	0
-bf1b35b58d2079445792f9121e5e091b	30. Wave-Gotik-Treffen 3.	2023-05-28	b67af931a5d0322adc7d56846dca86dc	0
-e3349b868a6a9cc278e869ca8dd3ba85	30. Wave-Gotik-Treffen 4.	2023-05-28	fb5fce8ee7e869a708fa21aba0b8ebbf	0
-a3f903d924e35531caf1a26d7e91382c	30. Wave-Gotik-Treffen 5.	2023-05-29	fb5fce8ee7e869a708fa21aba0b8ebbf	0
 d5fba38ea6078ea36b9ac0539a8d40c9	HateSphere, sign of death	2023-06-03	0b186d7eb0143e60ced4af3380f5faa8	0
+d45cf5e6b7af0cee99b37f15b13360ed	28. Wave-Gotik-Treffen	2019-06-08	4a887b8a68acf9b04d9d027bddedb06b	1
+7712d7dceef5a521b4a554c431752979	29. Wave-Gotik-Treffen	2022-06-05	4a887b8a68acf9b04d9d027bddedb06b	1
+97a06553981fd4531de6d5542136b854	30. Wave-Gotik-Treffen	2023-05-26	4a887b8a68acf9b04d9d027bddedb06b	3
 \.
 
 
