@@ -633,4 +633,6 @@ var bandsCountriesInfo = {
 {"id_band":"1a1bfb986176c0ba845ae4f43d027f58","id_country":"d8b00929dec65d422303256336ada04f"},
 {"id_band":"7ecdb1a0eb7c01d081acf2b7e11531c0","id_country":"d8b00929dec65d422303256336ada04f"},
 {"id_band":"094caa14a3a49bf282d8f0f262a01f43","id_country":"c8f4261f9f46e6465709e17ebea7a92b"},
+{"id_band":"110cb86243320511676f788dbc46f633","id_country":"424214945ba5615eca039bfe5d731c09"},
+{"id_band":"8e9f5b1fc0e61f9a289aba4c59e49521","id_country":"d8b00929dec65d422303256336ada04f"},
 ]};

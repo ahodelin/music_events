@@ -1033,4 +1033,8 @@ var bandsGeneresInfo = {
 {"id_band":"7ecdb1a0eb7c01d081acf2b7e11531c0","id_genere":"8c42e2739ed83a54e5b2781b504c92de"},
 {"id_band":"094caa14a3a49bf282d8f0f262a01f43","id_genere":"885ba57d521cd859bacf6f76fb37ef7c"},
 {"id_band":"094caa14a3a49bf282d8f0f262a01f43","id_genere":"156968bdeb9fd240ae047867022d703b"},
+{"id_band":"110cb86243320511676f788dbc46f633","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
+{"id_band":"110cb86243320511676f788dbc46f633","id_genere":"a29864963573d7bb061691ff823b97dd"},
+{"id_band":"110cb86243320511676f788dbc46f633","id_genere":"d5a9c37bc91d6d5d55a3c2e38c3bf97d"},
+{"id_band":"8e9f5b1fc0e61f9a289aba4c59e49521","id_genere":"a29864963573d7bb061691ff823b97dd"},
 ]};
