@@ -150,4 +150,5 @@ var eventsInfo = {
 {"id_event":"6f745abd8c203f0f0e821ceeb77e5d24","year":2023,"date":"12.05.2023","event":"Morbide Klänge II","place":"Mainz (M8 im Haus der Jugend)","bands":3},
 {"id_event":"97a06553981fd4531de6d5542136b854","year":2023,"date":"26.05.2023","event":"30. Wave-Gotik-Treffen","place":"Leipzig","bands":7},
 {"id_event":"d5fba38ea6078ea36b9ac0539a8d40c9","year":2023,"date":"03.06.2023","event":"HateSphere, sign of death","place":"Weinheim (Café Central)","bands":2},
+{"id_event":"7d126fe510b243454713c0ac4cd66011","year":2023,"date":"09.06.2023","event":"Grabbenacht Festival 2023","place":"Schriesheim","bands":20},
 ]};
