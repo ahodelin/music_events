@@ -578,6 +578,15 @@ UNION
 
 
 --
+-- Name: test; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.test (
+    c character varying
+);
+
+
+--
 -- Data for Name: countries; Type: TABLE DATA; Schema: geo; Owner: -
 --
 
@@ -697,6 +706,7 @@ fa788dff4144faf1179fc82d60ccd571	Frankfurt am Main (Haus Sindlingen)
 827250c5a7445093119fab43fb959d04	Leipzig (Westbad)
 fb5fce8ee7e869a708fa21aba0b8ebbf	Leipzig (Heidnisches Dorf)
 4a887b8a68acf9b04d9d027bddedb06b	Leipzig
+e1d73a013c55de0ebff0e36b7c07ee77	Wernigerode
 \.
 
 
@@ -1353,6 +1363,8 @@ e83655f0458b6c309866fbde556be35a	Hereza	y
 92dd59a949dfceab979dd25ac858f204	Gorgatron	y
 ee1bc524d6d3410e94a99706dcb12319	Rottenness	y
 c09ffd48de204e4610d474ade2cf3a0d	Nuclear Vomit	y
+3e7f48e97425d4c532a0787e54843863	Dead Man's Hand	y
+bfff088b67e0fc6d1b80dbd6b6f0620c	The Gentlemen's Revenge	y
 \.
 
 
@@ -2009,6 +2021,8 @@ e83655f0458b6c309866fbde556be35a	560d4c6ff431c86546f3fcec72c748c7
 c09ffd48de204e4610d474ade2cf3a0d	94880bda83bda77c5692876700711f15
 92dd59a949dfceab979dd25ac858f204	f75d91cdd36b85cc4a8dfeca4f24fa14
 ee1bc524d6d3410e94a99706dcb12319	8dbb07a18d46f63d8b3c8994d5ccc351
+bfff088b67e0fc6d1b80dbd6b6f0620c	d8b00929dec65d422303256336ada04f
+3e7f48e97425d4c532a0787e54843863	d8b00929dec65d422303256336ada04f
 \.
 
 
@@ -2884,6 +2898,8 @@ e83655f0458b6c309866fbde556be35a	7d126fe510b243454713c0ac4cd66011
 92dd59a949dfceab979dd25ac858f204	7d126fe510b243454713c0ac4cd66011
 ee1bc524d6d3410e94a99706dcb12319	7d126fe510b243454713c0ac4cd66011
 c09ffd48de204e4610d474ade2cf3a0d	7d126fe510b243454713c0ac4cd66011
+3e7f48e97425d4c532a0787e54843863	9c553520982c65b603e9d741eaa56b09
+bfff088b67e0fc6d1b80dbd6b6f0620c	9c553520982c65b603e9d741eaa56b09
 \.
 
 
@@ -3952,6 +3968,9 @@ ee1bc524d6d3410e94a99706dcb12319	10a17b42501166d3bf8fbdff7e1d52b6
 ee1bc524d6d3410e94a99706dcb12319	7fa69773873856d74f68a6824ca4b691
 c09ffd48de204e4610d474ade2cf3a0d	10a17b42501166d3bf8fbdff7e1d52b6
 c09ffd48de204e4610d474ade2cf3a0d	17b8dff9566f6c98062ad5811c762f44
+bfff088b67e0fc6d1b80dbd6b6f0620c	d34d0c161bbb04228af45f99d2b407a6
+bfff088b67e0fc6d1b80dbd6b6f0620c	6add228b14f132e14ae9da754ef070c5
+3e7f48e97425d4c532a0787e54843863	353d5e79c4f0f22dc9fd189fb293b18c
 \.
 
 
@@ -4111,6 +4130,7 @@ d45cf5e6b7af0cee99b37f15b13360ed	28. Wave-Gotik-Treffen	2019-06-08	4a887b8a68acf
 7712d7dceef5a521b4a554c431752979	29. Wave-Gotik-Treffen	2022-06-05	4a887b8a68acf9b04d9d027bddedb06b	1
 97a06553981fd4531de6d5542136b854	30. Wave-Gotik-Treffen	2023-05-26	4a887b8a68acf9b04d9d027bddedb06b	3
 7d126fe510b243454713c0ac4cd66011	Grabbenacht Festival 2023	2023-06-09	7adc966f52e671b15ea54075581c862b	1
+9c553520982c65b603e9d741eaa56b09	57. Wernigeröder Rathausfest	2023-06-16	e1d73a013c55de0ebff0e36b7c07ee77	1
 \.
 
 
@@ -4274,6 +4294,18 @@ bb9a7990e74371142d6f4f02353a0db0	Hunnu Rock
 156968bdeb9fd240ae047867022d703b	Medieval Folk Metal
 e3bae98a1c48ce980083c79f6416c0f6	Crust Punk
 6caa33ae598155eb7c8967a6dc7f0d85	Thras Metal
+d34d0c161bbb04228af45f99d2b407a6	Dark Country
+353d5e79c4f0f22dc9fd189fb293b18c	Irish Folk
+\.
+
+
+--
+-- Data for Name: test; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.test (c) FROM stdin;
+The Gentlemen's
+The Gentlemen's Revenge
 \.
 
 
