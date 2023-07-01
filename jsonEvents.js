@@ -30,6 +30,7 @@ var eventsInfo = {
 {"id_event":"eb2330cf8b87aa13aad89f32d6cfda18","year":2018,"date":"27.04.2018","event":"Guido's Super Sweet 16 (30. jubilee)","place":"Mainz (Alexander the Great)","bands":2},
 {"id_event":"d8f74ab86e77455ffbd398065ee109a8","year":2018,"date":"21.05.2018","event":"Slamming Annihilation European Tour 2018","place":"Weinheim (Café Central)","bands":5},
 {"id_event":"a7fe0b5f5ae6fbfa811d754074e03d95","year":2018,"date":"01.06.2018","event":"Grabbenacht Festival 2018","place":"Schriesheim","bands":19},
+{"id_event":"89b8688929aebb711cffaa22561b1395","year":2018,"date":"08.07.2018","event":"Summer in the City 2018","place":"Mainz (Volkspark)","bands":2},
 {"id_event":"fcbfd4ea93701414772acad10ad93a5f","year":2018,"date":"27.07.2018","event":"Völkerball in Mainz","place":"Mainz (Rheinhufer)","bands":1},
 {"id_event":"3f15c445cb553524b235b01ab75fe9a6","year":2018,"date":"06.08.2018","event":"Ministry","place":"Wiesbaden (Schlachthof)","bands":3},
 {"id_event":"f10fa26efffb6c69534e7b0f7890272d","year":2018,"date":"17.08.2018","event":"Rockfield Open Air 2018","place":"Mainz-Kastel (Reduit)","bands":4},
@@ -153,4 +154,5 @@ var eventsInfo = {
 {"id_event":"7d126fe510b243454713c0ac4cd66011","year":2023,"date":"09.06.2023","event":"Grabbenacht Festival 2023","place":"Schriesheim","bands":20},
 {"id_event":"9c553520982c65b603e9d741eaa56b09","year":2023,"date":"16.06.2023","event":"57. Wernigeröder Rathausfest","place":"Wernigerode","bands":2},
 {"id_event":"2cd4ca525a2d7af5ffa5f6286998ceb0","year":2023,"date":"27.06.2023","event":"Rumble of thunder","place":"Frankfurt am Main (Batschkapp)","bands":2},
+{"id_event":"e59ace10fad0af976f723748e6fd2ea8","year":2023,"date":"30.06.2023","event":"Summer in the City 2023","place":"Mainz (Volkspark)","bands":1},
 ]};
