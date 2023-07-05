@@ -1,26 +1,28 @@
 
-insert into geo.countries 
-  values 
-    (md5('Jamaica'), 'Jamaica', 'jm');
+-- EUROPEAN MISERERE 2023: HARLOTT + BLOODSPOT + WITCHKRIEG @Frankfurt
+--3 Juli @ 6:00 pm
 
+/*insert into geo.countries 
+  values 
+    (md5(''), '', '');
+*/
    
 -- New events
-select music.insert_events('Summer in the City 2018', '2018.07.08', 'Mainz (Volkspark)', 1);
+select music.insert_events('European Miserere 2023', '2023.07.03', 'Frankfurt (ELFER Club)', 1);
 
 -- Bands on events
 
 
-select music.insert_bands_on_events('Sting', 'Summer in the City 2018');
-select music.insert_bands_on_events('Shaggy', 'Summer in the City 2018');
+select music.insert_bands_on_events('Harlott', 'European Miserere 2023');
+select music.insert_bands_on_events('Bloodspot', 'European Miserere 2023');
+select music.insert_bands_on_events('Witchkrieg', 'European Miserere 2023');
 
 -- Bands countries
-select music.insert_bands_on_countries('Sting', 'UK');
-select music.insert_bands_on_countries('Shaggy', 'Jamaica');
+select music.insert_bands_on_countries('Harlott', 'Australia');
+select music.insert_bands_on_countries('Witchkrieg', 'Germany');
 
 
 -- Bands generes
-select music.insert_bands_to_generes('Sting', 'Rock');
-select music.insert_bands_to_generes('Sting', 'Pop');
-select music.insert_bands_to_generes('Sting', 'Jazz');
+select music.insert_bands_to_generes('Witchkrieg', 'Thrash Metal');
+select music.insert_bands_to_generes('Harlott', 'Thrash Metal');
 
-select music.insert_bands_to_generes('Shaggy', 'Reggae');

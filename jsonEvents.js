@@ -155,4 +155,5 @@ var eventsInfo = {
 {"id_event":"9c553520982c65b603e9d741eaa56b09","year":2023,"date":"16.06.2023","event":"57. Wernigeröder Rathausfest","place":"Wernigerode","bands":2},
 {"id_event":"2cd4ca525a2d7af5ffa5f6286998ceb0","year":2023,"date":"27.06.2023","event":"Rumble of thunder","place":"Frankfurt am Main (Batschkapp)","bands":2},
 {"id_event":"e59ace10fad0af976f723748e6fd2ea8","year":2023,"date":"30.06.2023","event":"Summer in the City 2023","place":"Mainz (Volkspark)","bands":1},
+{"id_event":"2200574eb6396407ec9fc642c91f0e5a","year":2023,"date":"03.07.2023","event":"European Miserere 2023","place":"Frankfurt (ELFER Club)","bands":3},
 ]};
