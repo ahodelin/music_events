@@ -158,4 +158,5 @@ var eventsInfo = {
 {"id_event":"2200574eb6396407ec9fc642c91f0e5a","year":2023,"date":"03.07.2023","event":"European Miserere 2023","place":"Frankfurt (ELFER Club)","bands":3},
 {"id_event":"cb16e5f28a9e5532485fe35beca8d438","year":2023,"date":"13.07.2023","event":"In Flammen Open Air 2023","place":"Turgau/Entenfang","bands":34},
 {"id_event":"ddfe34c53312f205cb9ee1df3ee0cd0e","year":2023,"date":"21.07.2023","event":"Boarstream Open Air 2023","place":"Buchenbach","bands":15},
+{"id_event":"0962c746a7d30ba0f037b21fb8e32858","year":2023,"date":"25.07.2023","event":"A Goat Vomit Summer","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
 ]};

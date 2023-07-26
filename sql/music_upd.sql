@@ -8,7 +8,7 @@
 */
    
 -- New events
-select music.insert_events('', '2023.07.25', 'Mörlenbach (LIVE MUSIC HALL Weiher)', 0);
+select music.insert_events('', '2023.08.0', 'Dotmund ', 1);
 
 -- Bands on events
 select music.insert_bands_on_events('', '');
@@ -22,3 +22,5 @@ select music.insert_bands_on_countries('', '');
 select music.insert_bands_to_generes('', ' Metal');
 select music.insert_bands_to_generes('', ' Metal');
 select music.insert_bands_to_generes('', ' Metal');
+
+update music.bands set likes = 'y' where band = 'Ellende'
