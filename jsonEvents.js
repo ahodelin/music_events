@@ -159,4 +159,5 @@ var eventsInfo = {
 {"id_event":"cb16e5f28a9e5532485fe35beca8d438","year":2023,"date":"13.07.2023","event":"In Flammen Open Air 2023","place":"Turgau/Entenfang","bands":34},
 {"id_event":"ddfe34c53312f205cb9ee1df3ee0cd0e","year":2023,"date":"21.07.2023","event":"Boarstream Open Air 2023","place":"Buchenbach","bands":15},
 {"id_event":"0962c746a7d30ba0f037b21fb8e32858","year":2023,"date":"25.07.2023","event":"A Goat Vomit Summer","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
+{"id_event":"bc9dd8d4890a5523a876931328350747","year":2023,"date":"04.08.2023","event":"Dortmund Deathfest 2023","place":"Dotmund (JunkYard)","bands":22},
 ]};
