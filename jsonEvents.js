@@ -160,4 +160,5 @@ var eventsInfo = {
 {"id_event":"ddfe34c53312f205cb9ee1df3ee0cd0e","year":2023,"date":"21.07.2023","event":"Boarstream Open Air 2023","place":"Buchenbach","bands":15},
 {"id_event":"0962c746a7d30ba0f037b21fb8e32858","year":2023,"date":"25.07.2023","event":"A Goat Vomit Summer","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
 {"id_event":"bc9dd8d4890a5523a876931328350747","year":2023,"date":"04.08.2023","event":"Dortmund Deathfest 2023","place":"Dotmund (JunkYard)","bands":22},
+{"id_event":"1be77f077186f07ab5b59287427b15c2","year":2023,"date":"10.08.2023","event":"Oblivion European Tour 2023","place":"Weinheim (Café Central)","bands":2},
 ]};
