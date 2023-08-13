@@ -161,4 +161,5 @@ var eventsInfo = {
 {"id_event":"0962c746a7d30ba0f037b21fb8e32858","year":2023,"date":"25.07.2023","event":"A Goat Vomit Summer","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
 {"id_event":"bc9dd8d4890a5523a876931328350747","year":2023,"date":"04.08.2023","event":"Dortmund Deathfest 2023","place":"Dotmund (JunkYard)","bands":22},
 {"id_event":"1be77f077186f07ab5b59287427b15c2","year":2023,"date":"10.08.2023","event":"Oblivion European Tour 2023","place":"Weinheim (Café Central)","bands":2},
+{"id_event":"b5b6bc03476731967b51402bed55ed44","year":2023,"date":"11.08.2023","event":"Rockfield 2023","place":"Mainz-Kastel (Reduit)","bands":5},
 ]};

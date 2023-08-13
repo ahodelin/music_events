@@ -8,21 +8,13 @@
 */
    
 -- New events
-select music.insert_events('Rockfield 2023', '2023.08.11', '', 2);
---select music.insert_events(' 2023', '2023.08.12', '', 0);
+select music.insert_events('Death Feast Open Air 2023', '2023.08.24', 'Andernach', 2);
 
 -- Bands on events
-select music.insert_bands_on_events('Purify', 'Rockfield 2023');
-select music.insert_bands_on_events('Groundville Bastards', 'Rockfield 2023');
-select music.insert_bands_on_events('The Killer Apes', 'Rockfield 2023');
-select music.insert_bands_on_events('', 'Rockfield 2023');
-
+select music.insert_bands_on_events('', '');
 
 -- Bands countries
-select music.insert_bands_on_countries('Groundville Bastards', 'Germany');
-select music.insert_bands_on_countries('The Killer Apes', 'Germany');
+select music.insert_bands_on_countries('', '');
 
 -- Bands generes
-select music.insert_bands_to_generes('Groundville Bastards', '');
-select music.insert_bands_to_generes('The Killer Apes', '');
 select music.insert_bands_to_generes('', '');
