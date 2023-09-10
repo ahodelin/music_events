@@ -163,4 +163,5 @@ var eventsInfo = {
 {"id_event":"1be77f077186f07ab5b59287427b15c2","year":2023,"date":"10.08.2023","event":"Oblivion European Tour 2023","place":"Weinheim (Café Central)","bands":2},
 {"id_event":"b5b6bc03476731967b51402bed55ed44","year":2023,"date":"11.08.2023","event":"Rockfield 2023","place":"Mainz-Kastel (Reduit)","bands":5},
 {"id_event":"e396e5afb7cf4c68b9adce7af6adad8c","year":2023,"date":"24.08.2023","event":"Death Feast Open Air 2023","place":"Andernach","bands":33},
+{"id_event":"477a7e7627b4482929c215de7d3c4a76","year":2023,"date":"08.09.2023","event":"Metal Embrace Festival XV","place":"Barleben","bands":16},
 ]};
