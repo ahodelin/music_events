@@ -54,3 +54,9 @@ copy
   )
 to '/var/lib/postgresql/Music_Events.csv' with delimiter E';' csv;
 
+
+copy
+(
+  select * from music.v_eu_metalembrace_to_tex 
+)
+to '/var/lib/postgresql/Death_Black_Speed_Thrash_Europe.csv' with delimiter E';' csv;

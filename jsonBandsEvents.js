@@ -1006,4 +1006,6 @@ var bandsEventsInfo = {
 {"id_band":"5ff09619b7364339a105a1cbcb8d65fd","id_event":"477a7e7627b4482929c215de7d3c4a76"},
 {"id_band":"42563d0088d6ac1a47648fc7621e77c6","id_event":"477a7e7627b4482929c215de7d3c4a76"},
 {"id_band":"2eb6fb05d553b296096973cb97912cc0","id_event":"477a7e7627b4482929c215de7d3c4a76"},
+{"id_band":"50681f5168e67b62daa1837d8f693001","id_event":"7e834ee3aea78e49afb45728dbb63de2"},
+{"id_band":"e163173b9350642f7c855bf37c144ce0","id_event":"7e834ee3aea78e49afb45728dbb63de2"},
 ]};

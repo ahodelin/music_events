@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.4 (Ubuntu 15.4-1.pgdg22.04+1)
--- Dumped by pg_dump version 15.4 (Ubuntu 15.4-1.pgdg22.04+1)
+-- Dumped from database version 15.4 (Ubuntu 15.4-2.pgdg22.04+1)
+-- Dumped by pg_dump version 15.4 (Ubuntu 15.4-2.pgdg22.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -255,6 +255,16 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: continents; Type: TABLE; Schema: geo; Owner: -
+--
+
+CREATE TABLE geo.continents (
+    id_continent character varying NOT NULL,
+    continent character varying NOT NULL
+);
+
+
+--
 -- Name: countries; Type: TABLE; Schema: geo; Owner: -
 --
 
@@ -262,6 +272,16 @@ CREATE TABLE geo.countries (
     id_country character(32) NOT NULL,
     country character varying(100) NOT NULL,
     flag character(2)
+);
+
+
+--
+-- Name: countries_continents; Type: TABLE; Schema: geo; Owner: -
+--
+
+CREATE TABLE geo.countries_continents (
+    id_country character varying NOT NULL,
+    id_continent character varying NOT NULL
 );
 
 
@@ -476,6 +496,33 @@ CREATE VIEW music.v_eu_board_german_black_death_thrash AS
 
 
 --
+-- Name: v_eu_to_metalembrace; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_eu_to_metalembrace AS
+ SELECT DISTINCT b.band AS "Band",
+    cou.country AS "Country"
+   FROM ((((((music.bands b
+     JOIN music.bands_countries bc ON ((b.id_band = bc.id_band)))
+     JOIN geo.countries cou ON ((bc.id_country = cou.id_country)))
+     JOIN geo.countries_continents cc ON (((cc.id_country)::bpchar = cou.id_country)))
+     JOIN geo.continents con ON (((con.id_continent)::text = (cc.id_continent)::text)))
+     JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
+     JOIN music.generes g ON ((bg.id_genere = g.id_genere)))
+  WHERE (((con.continent)::text = 'Europe'::text) AND ((g.genere)::text = ANY ((ARRAY['Death Metal'::character varying, 'Thrash Metal'::character varying, 'Speed Metal'::character varying, 'Black Metal'::character varying, 'Melodic Death Metal'::character varying, 'Groove Metal'::character varying, 'Viking Metal'::character varying, 'Ambient'::character varying, 'Blackened Death Metal'::character varying, 'Avant-garde Black Metal'::character varying, 'Melodic Thrash Metal'::character varying, 'Melodic Black Metal'::character varying, 'Viking Black Metal'::character varying, 'Pagan Black Metal'::character varying, 'Ambient Post-Black Metal'::character varying, 'Pagan Metal'::character varying, 'Blackened Thrash Metal'::character varying, 'Atmospheric Black Metal'::character varying])::text[])))
+  ORDER BY cou.country, b.band;
+
+
+--
+-- Name: v_eu_metalembrace_to_tex; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_eu_metalembrace_to_tex AS
+ SELECT ((((v_eu_to_metalembrace."Band")::text || ' & '::text) || (v_eu_to_metalembrace."Country")::text) || ' \\ \hline'::text) AS "?column?"
+   FROM music.v_eu_to_metalembrace;
+
+
+--
 -- Name: v_events; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -589,6 +636,21 @@ CREATE TABLE public.test (
 
 
 --
+-- Data for Name: continents; Type: TABLE DATA; Schema: geo; Owner: -
+--
+
+COPY geo.continents (id_continent, continent) FROM stdin;
+f5cd262901883dff68d06b215fb0f28e	Africa
+154a67340e8c14dd5253dc4ff6120197	Asia
+912d59cdf1d3f551fae21f6f0062258f	Europe
+5ffec2d87ab548202f8b549af380913a	North America
+aab422acb3d2334a6deca0e1495745c2	South America
+c9d402d0280088a8c803e108bf31449b	Antartica
+2d8836190888267b97ce332cad2aa247	Oceania
+\.
+
+
+--
 -- Data for Name: countries; Type: TABLE DATA; Schema: geo; Owner: -
 --
 
@@ -647,6 +709,74 @@ bb6a72b6a93150d4181e50496fc15f5a	Mongolia	mn
 23b998b19b5f60dbbc4eedc53328b0c7	Dubai	ae
 1add2eb41fcae9b2a15b4a7d68571409	Jamaica	jm
 5a548c2f5875f10bf5614b7c258876cf	Israel	il
+\.
+
+
+--
+-- Data for Name: countries_continents; Type: TABLE DATA; Schema: geo; Owner: -
+--
+
+COPY geo.countries_continents (id_country, id_continent) FROM stdin;
+445d337b5cd5de476f99333df6b0c2a7	5ffec2d87ab548202f8b549af380913a
+f75d91cdd36b85cc4a8dfeca4f24fa14	5ffec2d87ab548202f8b549af380913a
+8dbb07a18d46f63d8b3c8994d5ccc351	5ffec2d87ab548202f8b549af380913a
+1add2eb41fcae9b2a15b4a7d68571409	5ffec2d87ab548202f8b549af380913a
+33cac763789c407f405b2cf0dce7df89	5ffec2d87ab548202f8b549af380913a
+5882b568d8a010ef48a6896f53b6eddb	5ffec2d87ab548202f8b549af380913a
+6bec347f256837d3539ad619bd489de7	5ffec2d87ab548202f8b549af380913a
+3536be57ce0713954e454ae6c53ec023	aab422acb3d2334a6deca0e1495745c2
+42537f0fb56e31e20ab9c2305752087d	aab422acb3d2334a6deca0e1495745c2
+2e6507f70a9cc26fb50f5fd82a83c7ef	aab422acb3d2334a6deca0e1495745c2
+ef3388cc5659bccb742fb8af762f1bfd	aab422acb3d2334a6deca0e1495745c2
+ae54a5c026f31ada088992587d92cb3a	154a67340e8c14dd5253dc4ff6120197
+7d31e0da1ab99fe8b08a22118e2f402b	154a67340e8c14dd5253dc4ff6120197
+4647d00cf81f8fb0ab80f753320d0fc9	154a67340e8c14dd5253dc4ff6120197
+21fc68909a9eb8692e84cf64e495213e	154a67340e8c14dd5253dc4ff6120197
+5a548c2f5875f10bf5614b7c258876cf	154a67340e8c14dd5253dc4ff6120197
+53a577bb3bc587b0c28ab808390f1c9b	154a67340e8c14dd5253dc4ff6120197
+bb6a72b6a93150d4181e50496fc15f5a	154a67340e8c14dd5253dc4ff6120197
+77dab2f81a6c8c9136efba7ab2c4c0f2	154a67340e8c14dd5253dc4ff6120197
+5feb168ca8fb495dcc89b1208cdeb919	154a67340e8c14dd5253dc4ff6120197
+a27b7b9f728d4b9109f95e8ee1040c68	154a67340e8c14dd5253dc4ff6120197
+4442e4af0916f53a07fb8ca9a49b98ed	2d8836190888267b97ce332cad2aa247
+c51ed580ea5e20c910d951f692512b4d	2d8836190888267b97ce332cad2aa247
+5feb168ca8fb495dcc89b1208cdeb919	912d59cdf1d3f551fae21f6f0062258f
+00247297c394dd443dc97067830c35f4	912d59cdf1d3f551fae21f6f0062258f
+0309a6c666a7a803fdb9db95de71cf01	912d59cdf1d3f551fae21f6f0062258f
+06630c890abadde9228ea818ce52b621	912d59cdf1d3f551fae21f6f0062258f
+0c7d5ae44b2a0be9ebd7d6b9f7d60f20	912d59cdf1d3f551fae21f6f0062258f
+1007e1b7f894dfbf72a0eaa80f3bc57e	912d59cdf1d3f551fae21f6f0062258f
+2ff6e535bd2f100979a171ad430e642b	912d59cdf1d3f551fae21f6f0062258f
+3ad08396dc5afa78f34f548eea3c1d64	912d59cdf1d3f551fae21f6f0062258f
+424214945ba5615eca039bfe5d731c09	912d59cdf1d3f551fae21f6f0062258f
+51802d8bb965d0e5be697f07d16922e8	912d59cdf1d3f551fae21f6f0062258f
+6542f875eaa09a5c550e5f3986400ad9	912d59cdf1d3f551fae21f6f0062258f
+6b718641741f992e68ec3712718561b8	912d59cdf1d3f551fae21f6f0062258f
+6c1674d14bf5f95742f572cddb0641a7	912d59cdf1d3f551fae21f6f0062258f
+6f781c6559a0c605da918096bdb69edf	912d59cdf1d3f551fae21f6f0062258f
+76423d8352c9e8fc8d7d65f62c55eae9	912d59cdf1d3f551fae21f6f0062258f
+907eba32d950bfab68227fd7ea22999b	912d59cdf1d3f551fae21f6f0062258f
+94880bda83bda77c5692876700711f15	912d59cdf1d3f551fae21f6f0062258f
+9891739094756d2605946c867b32ad28	912d59cdf1d3f551fae21f6f0062258f
+a67d4cbdd1b59e0ffccc6bafc83eb033	912d59cdf1d3f551fae21f6f0062258f
+b78edab0f52e0d6c195fd0d8c5709d26	912d59cdf1d3f551fae21f6f0062258f
+c8f4261f9f46e6465709e17ebea7a92b	912d59cdf1d3f551fae21f6f0062258f
+d5b9290a0b67727d4ba1ca6059dc31a6	912d59cdf1d3f551fae21f6f0062258f
+d8b00929dec65d422303256336ada04f	912d59cdf1d3f551fae21f6f0062258f
+ea71b362e3ea9969db085abfccdeb10d	912d59cdf1d3f551fae21f6f0062258f
+f01fc92b23faa973f3492a23d5a705c5	912d59cdf1d3f551fae21f6f0062258f
+fa79c3005daec47ecff84a116a0927a1	912d59cdf1d3f551fae21f6f0062258f
+76b88e7899abb3bfdd4b55b8c52726b0	912d59cdf1d3f551fae21f6f0062258f
+560d4c6ff431c86546f3fcec72c748c7	912d59cdf1d3f551fae21f6f0062258f
+06e415f918c577f07328a52e24f75d43	912d59cdf1d3f551fae21f6f0062258f
+92468e8a62373add2b9caefddbcf1303	912d59cdf1d3f551fae21f6f0062258f
+8189ecf686157db0c0274c1f49373318	912d59cdf1d3f551fae21f6f0062258f
+8189ecf686157db0c0274c1f49373318	5ffec2d87ab548202f8b549af380913a
+8189ecf686157db0c0274c1f49373318	aab422acb3d2334a6deca0e1495745c2
+8189ecf686157db0c0274c1f49373318	2d8836190888267b97ce332cad2aa247
+8189ecf686157db0c0274c1f49373318	154a67340e8c14dd5253dc4ff6120197
+8189ecf686157db0c0274c1f49373318	f5cd262901883dff68d06b215fb0f28e
+23b998b19b5f60dbbc4eedc53328b0c7	154a67340e8c14dd5253dc4ff6120197
 \.
 
 
@@ -1461,6 +1591,8 @@ b5bc9b34286d4d4943fc301fe9b46e46	Convictive	y
 d79d3a518bd9912fb38fa2ef71c39750	Matricide	y
 5ff09619b7364339a105a1cbcb8d65fd	Angelcrypt	y
 2eb6fb05d553b296096973cb97912cc0	Macbeth	m
+50681f5168e67b62daa1837d8f693001	The Shit Shakers	y
+e163173b9350642f7c855bf37c144ce0	Jo Carley and the old dry skulls	y
 \.
 
 
@@ -2205,6 +2337,8 @@ b5bc9b34286d4d4943fc301fe9b46e46	d8b00929dec65d422303256336ada04f
 d79d3a518bd9912fb38fa2ef71c39750	5a548c2f5875f10bf5614b7c258876cf
 5ff09619b7364339a105a1cbcb8d65fd	92468e8a62373add2b9caefddbcf1303
 2eb6fb05d553b296096973cb97912cc0	d8b00929dec65d422303256336ada04f
+e163173b9350642f7c855bf37c144ce0	76423d8352c9e8fc8d7d65f62c55eae9
+50681f5168e67b62daa1837d8f693001	d8b00929dec65d422303256336ada04f
 \.
 
 
@@ -3219,6 +3353,8 @@ d79d3a518bd9912fb38fa2ef71c39750	477a7e7627b4482929c215de7d3c4a76
 5ff09619b7364339a105a1cbcb8d65fd	477a7e7627b4482929c215de7d3c4a76
 42563d0088d6ac1a47648fc7621e77c6	477a7e7627b4482929c215de7d3c4a76
 2eb6fb05d553b296096973cb97912cc0	477a7e7627b4482929c215de7d3c4a76
+50681f5168e67b62daa1837d8f693001	7e834ee3aea78e49afb45728dbb63de2
+e163173b9350642f7c855bf37c144ce0	7e834ee3aea78e49afb45728dbb63de2
 \.
 
 
@@ -4429,6 +4565,15 @@ d79d3a518bd9912fb38fa2ef71c39750	7a3808eef413b514776a7202fd2cb94f
 5ff09619b7364339a105a1cbcb8d65fd	a29864963573d7bb061691ff823b97dd
 5ff09619b7364339a105a1cbcb8d65fd	01864d382accf1cdb077e42032b16340
 2eb6fb05d553b296096973cb97912cc0	04ae76937270105919847d05aee582b4
+e163173b9350642f7c855bf37c144ce0	aca2a3c07f76ae685ae818b312e025c5
+e163173b9350642f7c855bf37c144ce0	39d9d9f9143880553c5e2da25c87f33d
+e163173b9350642f7c855bf37c144ce0	59716c97497eb9694541f7c3d37b1a4d
+e163173b9350642f7c855bf37c144ce0	273112316e7fab5a848516666e3a57d1
+e163173b9350642f7c855bf37c144ce0	ead7038498db3f93ac79d28407a6d47c
+e163173b9350642f7c855bf37c144ce0	cd841371c5cd35c94bb823be9f53cf2f
+50681f5168e67b62daa1837d8f693001	9a284efda4d46636bd9d5298dfea1335
+50681f5168e67b62daa1837d8f693001	0cb6959de39db97ee5fad81faa008d8f
+50681f5168e67b62daa1837d8f693001	6add228b14f132e14ae9da754ef070c5
 \.
 
 
@@ -4601,6 +4746,7 @@ bc9dd8d4890a5523a876931328350747	Dortmund Deathfest 2023	2023-08-04	581032b233cf
 b5b6bc03476731967b51402bed55ed44	Rockfield 2023	2023-08-11	55ff4adc7d421cf9e05b68d25ee22341	2
 e396e5afb7cf4c68b9adce7af6adad8c	Death Feast Open Air 2023	2023-08-24	0643057438c69f0c17bf84c9495d2b7e	2
 477a7e7627b4482929c215de7d3c4a76	Metal Embrace Festival XV	2023-09-08	741ae9098af4e50aecf13b0ef08ecc47	1
+7e834ee3aea78e49afb45728dbb63de2	On Stage - 16.09.2023	2023-09-16	8bb89006a86a427f89e49efe7f1635c1	0
 \.
 
 
@@ -4763,7 +4909,6 @@ bb9a7990e74371142d6f4f02353a0db0	Hunnu Rock
 61bb65b2791647f828d25a985a2e60fa	Viking Nordic Folk
 156968bdeb9fd240ae047867022d703b	Medieval Folk Metal
 e3bae98a1c48ce980083c79f6416c0f6	Crust Punk
-6caa33ae598155eb7c8967a6dc7f0d85	Thras Metal
 d34d0c161bbb04228af45f99d2b407a6	Dark Country
 353d5e79c4f0f22dc9fd189fb293b18c	Irish Folk
 0ae61bd0474e04c9f1195d4baa0213a0	Pop
@@ -4776,6 +4921,12 @@ da832711951e70811ef7533835637961	Reggae
 5cdb9786c6dcb23a73a240c8b94d74f8	Brutal Deaht Metal
 a14c7f19780155d998b8c0d48c4f2f61	Technical Grindcore
 89089c3efdb2f18179df6d476e5759de	Melodic Viking Metal
+aca2a3c07f76ae685ae818b312e025c5	Blues
+39d9d9f9143880553c5e2da25c87f33d	Calypso
+59716c97497eb9694541f7c3d37b1a4d	Country
+ead7038498db3f93ac79d28407a6d47c	Vaudeville
+cd841371c5cd35c94bb823be9f53cf2f	Skiffle
+0cb6959de39db97ee5fad81faa008d8f	Ska
 \.
 
 
@@ -4787,6 +4938,30 @@ COPY public.test (c) FROM stdin;
 The Gentlemen's
 The Gentlemen's Revenge
 \.
+
+
+--
+-- Name: continents continents_continent_key; Type: CONSTRAINT; Schema: geo; Owner: -
+--
+
+ALTER TABLE ONLY geo.continents
+    ADD CONSTRAINT continents_continent_key UNIQUE (continent);
+
+
+--
+-- Name: continents continents_pkey; Type: CONSTRAINT; Schema: geo; Owner: -
+--
+
+ALTER TABLE ONLY geo.continents
+    ADD CONSTRAINT continents_pkey PRIMARY KEY (id_continent);
+
+
+--
+-- Name: countries_continents countries_continents_pkey; Type: CONSTRAINT; Schema: geo; Owner: -
+--
+
+ALTER TABLE ONLY geo.countries_continents
+    ADD CONSTRAINT countries_continents_pkey PRIMARY KEY (id_country, id_continent);
 
 
 --
@@ -4909,6 +5084,22 @@ CREATE OR REPLACE VIEW music.v_events_mod AS
      JOIN music.bands_events be ON ((be.id_event = e.id_event)))
   GROUP BY e.event, p.place, e.date_event, e.id_event
   ORDER BY e.date_event;
+
+
+--
+-- Name: countries_continents countries_continents_id_continent_fkey; Type: FK CONSTRAINT; Schema: geo; Owner: -
+--
+
+ALTER TABLE ONLY geo.countries_continents
+    ADD CONSTRAINT countries_continents_id_continent_fkey FOREIGN KEY (id_continent) REFERENCES geo.continents(id_continent);
+
+
+--
+-- Name: countries_continents countries_continents_id_country_fkey; Type: FK CONSTRAINT; Schema: geo; Owner: -
+--
+
+ALTER TABLE ONLY geo.countries_continents
+    ADD CONSTRAINT countries_continents_id_country_fkey FOREIGN KEY (id_country) REFERENCES geo.countries(id_country);
 
 
 --
