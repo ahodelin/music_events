@@ -165,4 +165,5 @@ var eventsInfo = {
 {"id_event":"e396e5afb7cf4c68b9adce7af6adad8c","year":2023,"date":"24.08.2023","event":"Death Feast Open Air 2023","place":"Andernach","bands":33},
 {"id_event":"477a7e7627b4482929c215de7d3c4a76","year":2023,"date":"08.09.2023","event":"Metal Embrace Festival XV","place":"Barleben","bands":16},
 {"id_event":"7e834ee3aea78e49afb45728dbb63de2","year":2023,"date":"16.09.2023","event":"On Stage - 16.09.2023","place":"Mainz (Alexander the Great)","bands":2},
+{"id_event":"b4bc434cadf0eb32a339ac495a2268e8","year":2023,"date":"26.09.2023","event":"40 Years of the Apocalypse Anniversary Tour 2023","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
 ]};
