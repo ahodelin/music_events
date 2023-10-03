@@ -9,11 +9,10 @@
 -- Ton Steine Scherben - Wiesbaden(Schlachthof) - 01.10.2015
    
 -- New events
-select music.insert_events('', '2023.09.2', '', 0);
+select music.insert_events('', '2023.10.', '', 0);
 
 -- Bands on events
 select music.insert_bands_on_events('', '');
-
 
 -- Bands countries
 select music.insert_bands_on_countries('', '');

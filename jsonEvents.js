@@ -166,4 +166,6 @@ var eventsInfo = {
 {"id_event":"477a7e7627b4482929c215de7d3c4a76","year":2023,"date":"08.09.2023","event":"Metal Embrace Festival XV","place":"Barleben","bands":16},
 {"id_event":"7e834ee3aea78e49afb45728dbb63de2","year":2023,"date":"16.09.2023","event":"On Stage - 16.09.2023","place":"Mainz (Alexander the Great)","bands":2},
 {"id_event":"b4bc434cadf0eb32a339ac495a2268e8","year":2023,"date":"26.09.2023","event":"40 Years of the Apocalypse Anniversary Tour 2023","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
+{"id_event":"331460836901954849fb420c890f1c44","year":2023,"date":"29.09.2023","event":"Horrible Death Tour 2023","place":"Frankfurt am Main (Ponyhof Club)","bands":3},
+{"id_event":"7e8a1347517055c0af14a3df27f42a4d","year":2023,"date":"30.09.2023","event":"Breakdown4Tolerance Vol.1 Festival","place":"Weilburg-Kubach (Bürgerhalle)","bands":9},
 ]};
