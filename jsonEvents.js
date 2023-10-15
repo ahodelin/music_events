@@ -168,4 +168,5 @@ var eventsInfo = {
 {"id_event":"b4bc434cadf0eb32a339ac495a2268e8","year":2023,"date":"26.09.2023","event":"40 Years of the Apocalypse Anniversary Tour 2023","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
 {"id_event":"331460836901954849fb420c890f1c44","year":2023,"date":"29.09.2023","event":"Horrible Death Tour 2023","place":"Frankfurt am Main (Ponyhof Club)","bands":3},
 {"id_event":"7e8a1347517055c0af14a3df27f42a4d","year":2023,"date":"30.09.2023","event":"Breakdown4Tolerance Vol.1 Festival","place":"Weilburg-Kubach (Bürgerhalle)","bands":9},
+{"id_event":"0e4288f287e446bf417ba4e0664a1c26","year":2023,"date":"14.10.2023","event":"The Path of Death 10","place":"Mainz (M8 im Haus der Jugend)","bands":7},
 ]};
