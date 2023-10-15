@@ -1031,4 +1031,5 @@ var bandsEventsInfo = {
 {"id_band":"6ff4735b0fc4160e081440b3f7238925","id_event":"0e4288f287e446bf417ba4e0664a1c26"},
 {"id_band":"f4f870098db58eeae93742dd2bcaf2b2","id_event":"0e4288f287e446bf417ba4e0664a1c26"},
 {"id_band":"100691b7539d5ae455b6f4a18394420c","id_event":"0e4288f287e446bf417ba4e0664a1c26"},
+{"id_band":"d5282bd6b63b4cd51b50b40d192f1161","id_event":"3aa0df8e70b789a940e8a4df74c1c1de"},
 ]};

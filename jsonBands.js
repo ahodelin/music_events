@@ -684,6 +684,7 @@ var bandsInfo = {
 {"id_band":"4366d01be1b2ddef162fc0ebb6933508","band":"Thunderstorm","country":"Germany","flag":"de","likes":"m","generes":2,"events":2},
 {"id_band":"46174766ce49edbbbc40e271c87b5a83","band":"Thy Antichrist","country":"Colombia","flag":"co","likes":"y","generes":1,"events":1},
 {"id_band":"9f10d335198e90990f3437c5733468e7","band":"Tiamat","country":"Sweden","flag":"se","likes":"m","generes":4,"events":1},
+{"id_band":"d5282bd6b63b4cd51b50b40d192f1161","band":"Ton Steine Scherben","country":"Germany","flag":"de","likes":"y","generes":5,"events":1},
 {"id_band":"4fa857a989df4e1deea676a43dceea07","band":"Too many Assholes","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"0b9d35d460b848ad46ec0568961113bf","band":"Torian","country":"Germany","flag":"de","likes":"n","generes":1,"events":1},
 {"id_band":"4fab532a185610bb854e0946f4def6a4","band":"Torment of Souls","country":"Germany","flag":"de","likes":"y","generes":1,"events":3},

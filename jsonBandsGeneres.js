@@ -1232,4 +1232,9 @@ var bandsGeneresInfo = {
 {"id_band":"c7d1a2a30826683fd366e7fd6527e79c","id_genere":"1868ffbe3756a1c3f58300f45aa5e1d3"},
 {"id_band":"6ff4735b0fc4160e081440b3f7238925","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 {"id_band":"100691b7539d5ae455b6f4a18394420c","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
+{"id_band":"d5282bd6b63b4cd51b50b40d192f1161","id_genere":"a48199bd07eec68b1214594af75d7eb3"},
+{"id_band":"d5282bd6b63b4cd51b50b40d192f1161","id_genere":"aca2a3c07f76ae685ae818b312e025c5"},
+{"id_band":"d5282bd6b63b4cd51b50b40d192f1161","id_genere":"08cbc2781f56d15c2c374824c7428a8c"},
+{"id_band":"d5282bd6b63b4cd51b50b40d192f1161","id_genere":"0077c87e06d736b19d6b3978f5e5e6e2"},
+{"id_band":"d5282bd6b63b4cd51b50b40d192f1161","id_genere":"2a78330cc0de19f12ae9c7de65b9d5d5"},
 ]};
