@@ -170,4 +170,6 @@ var eventsInfo = {
 {"id_event":"331460836901954849fb420c890f1c44","year":2023,"date":"29.09.2023","event":"Horrible Death Tour 2023","place":"Frankfurt am Main (Ponyhof Club)","bands":3},
 {"id_event":"7e8a1347517055c0af14a3df27f42a4d","year":2023,"date":"30.09.2023","event":"Breakdown4Tolerance Vol.1 Festival","place":"Weilburg-Kubach (Bürgerhalle)","bands":9},
 {"id_event":"0e4288f287e446bf417ba4e0664a1c26","year":2023,"date":"14.10.2023","event":"The Path of Death 10","place":"Mainz (M8 im Haus der Jugend)","bands":7},
+{"id_event":"b0f45689c096147b963b998eccdbc19e","year":2023,"date":"19.10.2023","event":"Hutkonzert - ATG - 19.10.2023","place":"Mainz (Alexander the Great)","bands":2},
+{"id_event":"3048f2df2a1969708f48957002d0ea46","year":2023,"date":"20.10.2023","event":"Latin American Massacre","place":"Mainz (M8 im Haus der Jugend)","bands":5},
 ]};
