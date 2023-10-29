@@ -156,7 +156,7 @@ var eventsInfo = {
 {"id_event":"9c553520982c65b603e9d741eaa56b09","year":2023,"date":"16.06.2023","event":"57. Wernigeröder Rathausfest","place":"Wernigerode","bands":2},
 {"id_event":"2cd4ca525a2d7af5ffa5f6286998ceb0","year":2023,"date":"27.06.2023","event":"Rumble of thunder","place":"Frankfurt am Main (Batschkapp)","bands":2},
 {"id_event":"e59ace10fad0af976f723748e6fd2ea8","year":2023,"date":"30.06.2023","event":"Summer in the City 2023","place":"Mainz (Volkspark)","bands":1},
-{"id_event":"2200574eb6396407ec9fc642c91f0e5a","year":2023,"date":"03.07.2023","event":"European Miserere 2023","place":"Frankfurt (ELFER Club)","bands":3},
+{"id_event":"2200574eb6396407ec9fc642c91f0e5a","year":2023,"date":"03.07.2023","event":"European Miserere 2023","place":"Frankfurt am Main (ELFER Club)","bands":3},
 {"id_event":"cb16e5f28a9e5532485fe35beca8d438","year":2023,"date":"13.07.2023","event":"In Flammen Open Air 2023","place":"Turgau/Entenfang","bands":34},
 {"id_event":"ddfe34c53312f205cb9ee1df3ee0cd0e","year":2023,"date":"21.07.2023","event":"Boarstream Open Air 2023","place":"Buchenbach","bands":15},
 {"id_event":"0962c746a7d30ba0f037b21fb8e32858","year":2023,"date":"25.07.2023","event":"A Goat Vomit Summer","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
@@ -172,4 +172,6 @@ var eventsInfo = {
 {"id_event":"0e4288f287e446bf417ba4e0664a1c26","year":2023,"date":"14.10.2023","event":"The Path of Death 10","place":"Mainz (M8 im Haus der Jugend)","bands":7},
 {"id_event":"b0f45689c096147b963b998eccdbc19e","year":2023,"date":"19.10.2023","event":"Hutkonzert - ATG - 19.10.2023","place":"Mainz (Alexander the Great)","bands":2},
 {"id_event":"3048f2df2a1969708f48957002d0ea46","year":2023,"date":"20.10.2023","event":"Latin American Massacre","place":"Mainz (M8 im Haus der Jugend)","bands":5},
+{"id_event":"dad100b64679b43501647a37e886a148","year":2023,"date":"27.10.2023","event":"40 Years of Destruction Europe Tour 2023","place":"Wiesbaden (Schlachthof)","bands":4},
+{"id_event":"98bbd03f950cbc96d6639a4b7b43e76a","year":2023,"date":"28.10.2023","event":"Death and Gore over Frankfurt","place":"Frankfurt am Main (Schöppche-Keller)","bands":2},
 ]};
