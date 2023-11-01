@@ -174,4 +174,5 @@ var eventsInfo = {
 {"id_event":"3048f2df2a1969708f48957002d0ea46","year":2023,"date":"20.10.2023","event":"Latin American Massacre","place":"Mainz (M8 im Haus der Jugend)","bands":5},
 {"id_event":"dad100b64679b43501647a37e886a148","year":2023,"date":"27.10.2023","event":"40 Years of Destruction Europe Tour 2023","place":"Wiesbaden (Schlachthof)","bands":4},
 {"id_event":"98bbd03f950cbc96d6639a4b7b43e76a","year":2023,"date":"28.10.2023","event":"Death and Gore over Frankfurt","place":"Frankfurt am Main (Schöppche-Keller)","bands":2},
+{"id_event":"ef91a35f7de705463fc18a852a0eaa9c","year":2023,"date":"31.10.2023","event":"Halloween mit Hängerbänd und Hellbent on Rocking","place":"Mainz (Alexander the Great)","bands":2},
 ]};

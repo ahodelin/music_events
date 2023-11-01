@@ -1248,4 +1248,6 @@ var bandsGeneresInfo = {
 {"id_band":"57f003f2f413eedf53362b020f467be4","id_genere":"585f02a68092351a078fc43a21a56564"},
 {"id_band":"5ef6a0f70220936a0158ad66fd5d9082","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 {"id_band":"25ebb3d62ad1160c96bbdea951ad2f34","id_genere":"a29864963573d7bb061691ff823b97dd"},
+{"id_band":"d97a4c5c71013baac562c2b5126909e1","id_genere":"ef5131009b7ced0b35ea49c8c7690cef"},
+{"id_band":"d97a4c5c71013baac562c2b5126909e1","id_genere":"5fa721b23d1df57306a710b77d7897d6"},
 ]};
