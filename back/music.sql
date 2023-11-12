@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.4 (Ubuntu 15.4-2.pgdg22.04+1)
--- Dumped by pg_dump version 15.4 (Ubuntu 15.4-2.pgdg22.04+1)
+-- Dumped from database version 15.5 (Ubuntu 15.5-1.pgdg22.04+1)
+-- Dumped by pg_dump version 15.5 (Ubuntu 15.5-1.pgdg22.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -303,6 +303,8 @@ CREATE TABLE music.bands (
     id_band character(32) NOT NULL,
     band character varying(100) NOT NULL,
     likes character(1),
+    active boolean DEFAULT true,
+    note character varying,
     CONSTRAINT bands_likes_check CHECK ((likes = ANY (ARRAY['y'::bpchar, 'n'::bpchar, 'm'::bpchar])))
 );
 
@@ -509,7 +511,7 @@ CREATE VIEW music.v_eu_to_metalembrace AS
      JOIN geo.continents con ON (((con.id_continent)::text = (cc.id_continent)::text)))
      JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
      JOIN music.generes g ON ((bg.id_genere = g.id_genere)))
-  WHERE (((con.continent)::text = 'Europe'::text) AND ((g.genere)::text = ANY ((ARRAY['Death Metal'::character varying, 'Thrash Metal'::character varying, 'Speed Metal'::character varying, 'Black Metal'::character varying, 'Melodic Death Metal'::character varying, 'Groove Metal'::character varying, 'Viking Metal'::character varying, 'Ambient'::character varying, 'Blackened Death Metal'::character varying, 'Avant-garde Black Metal'::character varying, 'Melodic Thrash Metal'::character varying, 'Melodic Black Metal'::character varying, 'Viking Black Metal'::character varying, 'Pagan Black Metal'::character varying, 'Ambient Post-Black Metal'::character varying, 'Pagan Metal'::character varying, 'Blackened Thrash Metal'::character varying, 'Atmospheric Black Metal'::character varying])::text[])))
+  WHERE (((con.continent)::text = 'Europe'::text) AND ((g.genere)::text = ANY ((ARRAY['Death Metal'::character varying, 'Thrash Metal'::character varying, 'Speed Metal'::character varying, 'Black Metal'::character varying, 'Melodic Death Metal'::character varying, 'Groove Metal'::character varying, 'Viking Metal'::character varying, 'Ambient'::character varying, 'Blackened Death Metal'::character varying, 'Avant-garde Black Metal'::character varying, 'Melodic Thrash Metal'::character varying, 'Melodic Black Metal'::character varying, 'Viking Black Metal'::character varying, 'Pagan Black Metal'::character varying, 'Ambient Post-Black Metal'::character varying, 'Pagan Metal'::character varying, 'Blackened Thrash Metal'::character varying, 'Atmospheric Black Metal'::character varying])::text[])) AND b.active)
   ORDER BY cou.country, b.band;
 
 
@@ -842,6 +844,7 @@ b26918c7403ba9006251abb5aed9b568	Buchenbach
 28b01417bfa80ac2a9d3521137485589	Weilburg-Kubach (Bürgerhalle)
 d7925427b71cf5c69dea1361e790154e	Frankfurt am Main (Schöppche-Keller)
 d6a89e194d2558258305d49f06856e57	Frankfurt am Main (ELFER Club)
+94707aea9e845e5e0ec91cd63f5982d6	Bechtheim (Gasthaus Bechtheimer Hof)
 \.
 
 
@@ -849,770 +852,779 @@ d6a89e194d2558258305d49f06856e57	Frankfurt am Main (ELFER Club)
 -- Data for Name: bands; Type: TABLE DATA; Schema: music; Owner: -
 --
 
-COPY music.bands (id_band, band, likes) FROM stdin;
-8b427a493fc39574fc801404bc032a2f	1000Mods	y
-721c28f4c74928cc9e0bb3fef345e408	Aborted	y
-0a7ba3f35a9750ff956dca1d548dad12	Abrogation	y
-54b72f3169fea84731d3bcba785eac49	Acranius	y
-d05a0e65818a69cc689b38c0c0007834	ADDICT	y
-dcabc7299e2b9ed5b05c33273e5fdd19	Aeon of Disease	y
-5ce10014f645da4156ddd2cd0965986e	Agnostic Front	y
-a332f1280622f9628fccd1b7aac7370a	Agrypnie	y
-249789ae53c239814de8e606ff717ec9	Airborn	m
-b1bdad87bd3c4ac2c22473846d301a9e	Al Goregrind	m
-fe5b73c2c2cd2d9278c3835c791289b6	All its Grace	y
-942c9f2520684c22eb6216a92b711f9e	Amon Amarth	y
-7cd7921da2e6aab79c441a0c2ffc969b	Amorphis	y
-948098e746bdf1c1045c12f042ea98c2	Analepsy	y
-59d153c1c2408b702189623231b7898a	Angelus Apatrida	y
-06efe152a554665e02b8dc4f620bf3f1	Anthrax	y
-14ab730fe0172d780da6d9e5d432c129	AntiPeeWee	m
-449b4d758aa7151bc1bbb24c3ffb40bb	Anubis	m
-5df92b70e2855656e9b3ffdf313d7379	Anüs	y
-3e75cd2f2f6733ea4901458a7ce4236d	Apey & The Pea	n
-108c58fc39b79afc55fac7d9edf4aa2a	Arch Enemy	y
-28bc31b338dbd482802b77ed1fd82a50	Arroganz	y
-49c4097bae6c6ea96f552e38cfb6c2d1	Artillery	n
-e3f0bf612190af6c3fad41214115e004	Asomvel	y
-fb47f889f2c7c4fee1553d0f817b8aaa	Asphyx	y
-264721f3fc2aee2d28dadcdff432dbc1	Atomwinter	m
-9a322166803a48932356586f05ef83c7	At the Gates	y
-75ab0270163731ee05f35640d56ef473	Audrey Horne	m
-9d3ac6904ce73645c6234803cd7e47ca	Außerwelt	y
-d1fb4e47d8421364f49199ee395ad1d3	Aversions Crown	y
-44012166c6633196dc30563db3ffd017	Avowal	y
-905a40c3533830252a909603c6fa1e6a	Avulsed	y
-aed85c73079b54830cd50a75c0958a90	Baleful Abyss (Zombieslut)	y
-da2110633f62b16a571c40318e4e4c1c	Battle against the Empire	y
-529a1d385b4a8ca97ea7369477c7b6a7	Battle Beast	m
-be20385e18333edb329d4574f364a1f0	Behemoth	y
-ee69e7d19f11ca58843ec2e9e77ddb38	Benediction	y
-925bd435e2718d623768dbf1bc1cfb60	Benighted	y
-ad01952b3c254c8ebefaf6f73ae62f7d	Betrayal	y
-7c7ab6fbcb47bd5df1e167ca28220ee9	Betraying the Martyrs	m
-e8afde257f8a2cbbd39d866ddfc06103	Bitchfork	y
-8f1f10cb698cb995fd69a671af6ecd58	Black Crown Initiate	y
-bbddc022ee323e0a2b2d8c67e5cd321f	Black Medusa	y
-74b3b7be6ed71b946a151d164ad8ede5	Black Reunion	y
-d9ab6b54c3bd5b212e8dc3a14e7699ef	Blæck Fox	y
-679eaa47efb2f814f2642966ee6bdfe1	Blessed Hellride	y
-e1db3add02ca4c1af33edc5a970a3bdc	Blizzen	m
-1c6987adbe5ab3e4364685e8caed0f59	Bloodbound	y
-cf4ee20655dd3f8f0a553c73ffe3f72a	Blood Fire Death	y
-348bcdb386eb9cb478b55a7574622b7c	Bloodgod	y
-b3ffff8517114caf70b9e70734dbaf6f	Bloodred Hourglass	y
-a4cbfb212102da21b82d94be555ac3ec	Blood Red Throne	y
-10d91715ea91101cfe0767c812da8151	Bloodspot	y
-1209f43dbecaba22f3514bf40135f991	Bobby Sixkiller and the Renegades	y
-dcff9a127428ffb03fc02fdf6cc39575	Böhse Onkelz	m
-6c00bb1a64f660600a6c1545377f92dc	Bokassa	y
-55159d04cc4faebd64689d3b74a94009	Booze & Glory	m
-b6da055500e3d92698575a3cfc74906c	Born from Pain	m
-1e9413d4cc9af0ad12a6707776573ba0	Bösedeath	y
-b01fbaf98cfbc1b72e8bca0b2e48769c	Bowel Evacuation	y
-4b98a8c164586e11779a0ef9421ad0ee	Brainstorm	m
-897edb97d775897f69fa168a88b01c19	Brand of Sacrifice	y
-eeaeec364c925e0c821660c7a953546e	Broken Teeth	m
-7533f96ec01fd81438833f71539c7d4e	Bullet	m
-11635778f116ce6922f6068638a39028	Burn	m
-d449a9b2eed8b0556dc7be9cda36b67b	Bury Tomorrow	y
-7eaf9a47aa47f3c65595ae107feab05d	Caliban	y
-7463543d784aa59ca86359a50ef58c8e	Cancer	y
-c4f0f5cedeffc6265ec3220ab594d56b	Candlemass	m
-63bd9a49dd18fbc89c2ec1e1b689ddda	Cannibal Corpse	y
-63ae1791fc0523f47bea9485ffec8b8c	Carach Angren	y
-c4c7cb77b45a448aa3ca63082671ad97	Carnal Decay	y
-5435326cf392e2cd8ad7768150cd5df6	Carnation	y
-828d51c39c87aad9b1407d409fa58e36	CCCP	y
-d2ff1e521585a91a94fb22752dd0ab45	Chapel of Disease	y
-77f2b3ea9e4bd785f5ff322bae51ba07	Children of Bodom	y
-6f199e29c5782bd05a4fef98e7e41419	Circle of Execution	y
-b0ce1e93de9839d07dab8d268ca23728	Colours of Autumn	m
-6830afd7158930ca7d1959ce778eb681	Combichrist	y
-a61b878c2b563f289de2109fa0f42144	Conan	m
-e67e51d5f41cfc9162ef7fd977d1f9f5	Condemned	y
-3d2ff8abd980d730b2f4fd0abae52f60	Converge	m
-ffa7450fd138573d8ae665134bccd02c	Corpsessed	y
-faabbecd319372311ed0781d17b641d1	Counterparts	m
-9f19396638dd8111f2cee938fdf4e455	Critical Mess	y
-fdcbfded0aaf369d936a70324b39c978	Crossplane	y
-1056b63fdc3c5015cc4591aa9989c14f	Crusher	y
-b5d9c5289fe97968a5634b3e138bf9e2	Cryptopsy	y
-2876f7ecdae220b3c0dcb91ff13d0590	Ctulu	y
-1734b04cf734cb291d97c135d74b4b87	Cytotoxin	y
-7d6b45c02283175f490558068d1fc81b	Dagoba	y
-8d7a18d54e82fcfb7a11566ce94b9109	Daily Insanity	y
-dddb04bc0d058486d0ef0212c6ea0682	Darkall Slaves	y
-0e2ea6aa669710389cf4d6e2ddf408c4	Darkened Nocturn Slaughtercult	y
-63ad3072dc5472bb44c2c42ede26d90f	Darkness	m
-2aae4f711c09481c8353003202e05359	Dark Zodiak	y
-28f843fa3a493a3720c4c45942ad970e	Dawn of Disease	y
-9bc2ca9505a273b06aa0b285061cd1de	Dead Congregation	y
-d3ed8223151e14b936436c336a4c7278	Batushka	y
-51fa80e44b7555c4130bd06c53f4835c	Cradle of Filth	y
-17bcf0bc2768911a378a55f42acedba7	Gwar	m
-ce2caf05154395724e4436f042b8fa53	Begging for Incest	y
-9138c2cc0326412f2515623f4c850eb3	Dead Eyed Sleeper (Legacy)	y
-44b7bda13ac1febe84d8607ca8bbf439	Death Angel	y
-d857ab11d383a7e4d4239a54cbf2a63d	Deathrite	y
-c74b5aa120021cbe18dcddd70d8622da	Deathstorm	y
-3af7c6d148d216f13f66669acb8d5c59	Debauchery's Balgeroth	y
-522b6c44eb0aedf4970f2990a2f2a812	Decapitated	y
-f4219e8fec02ce146754a5be8a85f246	Decaying Days	y
-c5f022ef2f3211dc1e3b8062ffe764f0	Defaced	y
-0ab20b5ad4d15b445ed94fa4eebb18d8	Defocus	y
-7fc454efb6df96e012e0f937723d24aa	Demored	y
-8edfa58b1aedb58629b80e5be2b2bd92	Denyal	y
-8589a6a4d8908d7e8813e9a1c5693d70	Depulsed	y
-947ce14614263eab49f780d68555aef8	Deranged	y
-7c83727aa466b3b1b9d6556369714fcf	Desbroce	y
-71e32909a1bec1edfc09aec09ca2ac17	Desdemonia	y
-3d01ff8c75214314c4ca768c30e6807b	Deserted Fear	y
-7771012413f955f819866e517b275cb4	Destinity	y
-36f969b6aeff175204078b0533eae1a0	Deströyer 666	y
-1bc1f7348d79a353ea4f594de9dd1392	Devil Driver	y
-2082a7d613f976e7b182a3fe80a28958	Dimmu Borgir	y
-d9bc1db8c13da3a131d853237e1f05b2	Disbelief	y
-9cf73d0300eea453f17c6faaeb871c55	Discreation	m
-4dddd8579760abb62aa4b1910725e73c	Disquiet	m
-d6de9c99f5cfa46352b2bc0be5c98c41	Dissecdead	y
-5194c60496c6f02e8b169de9a0aa542c	Double Crush Syndrome	m
-8654991720656374d632a5bb0c20ff11	Downfall of Gaia	m
-6a0e9ce4e2da4f2cbcd1292fddaa0ac6	Down to Nothing	m
-fe228019addf1d561d0123caae8d1e52	Dragonsfire	n
-1104831a0d0fe7d2a6a4198c781e0e0d	Dust Bolt	y
-889aaf9cd0894206af758577cf5cf071	Dyscarnate	y
-410d913416c022077c5c1709bf104d3c	EDGEBALL	n
-c5dc33e23743fb951b3fe7f1f477b794	Einherjer	y
-97ee29f216391d19f8769f79a1218a71	Eisregen	y
-b885447285ece8226facd896c04cdba2	Ektomorf	y
-f07c3eef5b7758026d45a12c7e2f6134	Embrace Decay	y
-0b6e98d660e2901c33333347da37ad36	Emerald	n
-6d3b28f48c848a21209a84452d66c0c4	Eminenz	y
-8c69497eba819ee79a964a0d790368fb	Endlevel	y
-1197a69404ee9475146f3d631de12bde	End of Green	y
-d730e65d54d6c0479561d25724afd813	Enforcer	n
-457f098eeb8e1518008449e9b1cb580d	Enisum	y
-ac94d15f46f10707a39c4bc513cd9f98	Enterprise Earth	y
-37f02eba79e0a3d29dfd6a4cf2f4d019	Epica	n
-39e83bc14e95fcbc05848fc33c30821f	Epicardiectomy	y
-f0c051b57055b052a3b7da1608f3039e	Eradicator	m
-e08383c479d96a8a762e23a99fd8bf84	Ereb Altor	m
-ff5b48d38ce7d0c47c57555d4783a118	Evertale	m
-8945663993a728ab19a3853e5b820a42	Evil Invaders	y
-28a95ef0eabe44a27f49bbaecaa8a847	Exhorder	y
-0cdf051c93865faa15cbc5cd3d2b69fb	Exodus	y
-ade72e999b4e78925b18cf48d1faafa4	Exorcised Gods	n
-4b503a03f3f1aec6e5b4d53dd8148498	Extermination Dismemberment	y
-887d6449e3544dca547a2ddba8f2d894	Exumer	y
-2672777b38bc4ce58c49cf4c82813a42	Fallen Temple	y
-832dd1d8efbdb257c2c7d3e505142f48	Far from ready	m
-f37ab058561fb6d233b9c2a0b080d4d1	Feuerschwanz	y
-3be3e956aeb5dc3b16285463e02af25b	Finsterforst	y
-42563d0088d6ac1a47648fc7621e77c6	Firtan	y
-7df8865bbec157552b8a579e0ed9bfe3	Five Finger Death Punch	y
-c883319a1db14bc28eff8088c5eba10e	Fjoergyn	y
-6b7cf117ecf0fea745c4c375c1480cb5	Fleshcrawl	y
-187ebdf7947f4b61e0725c93227676a4	Fleshgod Apocalypse	y
-4276250c9b1b839b9508825303c5c5ae	Fleshsphere	y
-7462f03404f29ea618bcc9d52de8e647	Flesh Trading Company	y
-5efb7d24387b25d8325839be958d9adf	Fracture	m
-9db9bc745a7568b51b3a968d215ddad6	From North	m
-cddf835bea180bd14234a825be7a7a82	Funeral Whore	y
-fdc90583bd7a58b91384dea3d1659cde	Furies	n
-401357e57c765967393ba391a338e89b	Ghost	y
-e64b94f14765cee7e05b4bec8f5fee31	Gingerpig	m
-d0a1fd0467dc892f0dc27711637c864e	God Dethroned	y
-e271e871e304f59e62a263ffe574ea2d	GodSkill	y
-a8d9eeed285f1d47836a5546a280a256	Godslave	y
-abbf8e3e3c3e78be8bd886484c1283c1	Grabak	y
-87f44124fb8d24f4c832138baede45c7	Grand Magus	y
-ed24ff8971b1fa43a1efbb386618ce35	Grave	y
-33b6f1b596a60fa87baef3d2c05b7c04	Grave Pleasures	m
-426fdc79046e281c5322161f011ce68c	Graveyard	y
-988d10abb9f42e7053450af19ad64c7f	Gut	n
-b89e91ccf14bfd7f485dd7be7d789b0a	H2O	m
-87ded0ea2f4029da0a0022000d59232b	Hadal Maw	m
-2a024edafb06c7882e2e1f7b57f2f951	Hailstone	m
-2fa2f1801dd37d6eb9fe4e34a782e397	Hämatom	y
-e0c2b0cc2e71294cd86916807fef62cb	Hammer King	m
-52ee4c6902f6ead006b0fb2f3e2d7771	Hängerbänd	y
-4f48e858e9ed95709458e17027bb94bf	Hark	y
-e0de9c10bbf73520385ea5dcbdf62073	Hatebreed	y
-065b56757c6f6a0fba7ab0c64e4c1ae1	Hate Eternal	y
-952dc6362e304f00575264e9d54d1fa6	Haunted Cemetery	y
-5cd1c3c856115627b4c3e93991f2d9cd	Havok	y
-0903a7e60f0eb20fdc8cc0b8dbd45526	Hell Boullevard	y
-32af59a47b8c7e1c982ae797fc491180	Hellknife	y
-fb8be6409408481ad69166324bdade9c	Hell:On	y
-bd4184ee062e4982b878b6b188793f5b	Hellripper	y
-0020f19414b5f2874a0bfacd9d511b84	Helrunar	y
-de12bbf91bc797df25ab4ae9cee1946b	Hexenizer	y
-237e378c239b44bff1e9a42ab866580c	Hierophant	y
-89adcf990042dfdac7fd23685b3f1e37	High Fighter	m
-44f2dc3400ce17fad32a189178ae72fa	Hills have Eyes	m
-3bd94845163385cecefc5265a2e5a525	Hollowed	y
-0b0d1c3752576d666c14774b8233889f	Hollow World	m
-3614c45db20ee41e068c2ab7969eb3b5	Ellende	y
-9d969d25c9f506c5518bb090ad5f8266	Embryectomy	y
-a4902fb3d5151e823c74dfd51551b4b0	Horisont	m
-99bd5eff92fc3ba728a9da5aa1971488	Horresque	y
-24ff2b4548c6bc357d9d9ab47882661e	Humator	y
-776da10f7e18ffde35ea94d144dc60a3	Hypocrisy	y
-829922527f0e7d64a3cfda67e24351e3	Ichor	y
-bfc9ace5d2a11fae56d038d68c601f00	I Declare War	y
-443866d78de61ab3cd3e0e9bf97a34f6	Igel vs. Shark	m
-b570e354b7ebc40e20029fcc7a15e5a7	Ignite	n
-7492a1ca2669793b485b295798f5d782	I'll be damned	m
-63d7f33143522ba270cb2c87f724b126	Illdisposed	y
-aa86b6fc103fc757e14f03afe6eb0c0a	Imperium Dekadenz	y
-6c607fc8c0adc99559bc14e01170fee1	Incite	m
-91a337f89fe65fec1c97f52a821c1178	Inconcessus Lux Lucis	y
-5ec1e9fa36898eaf6d1021be67e0d00c	Indian Nightmare	n
-8ce896355a45f5b9959eb676b8b5580c	Infected World	m
-bbce8e45250a239a252752fac7137e00	In Flames	y
-baa9d4eef21c7b89f42720313b5812d4	Ingested	y
-2414366fe63cf7017444181acacb6347	Inhumate	y
-1ac0c8e8c04cf2d6f02fdb8292e74588	Insanity Alert	m
-5f992768f7bb9592bed35b07197c87d0	Insulter	m
-ca5a010309ffb20190558ec20d97e5b2	In the Woods	n
-f644bd92037985f8eb20311bc6d5ed94	Into Darkness	y
-a825b2b87f3b61c9660b81f340f6e519	Iron Bastards	m
-891a55e21dfacf2f97c450c77e7c3ea7	Iron Reagan	y
-ef6369d9794dbe861a56100e92a3c71d	Isole	m
-73affe574e6d4dc2fa72b46dc9dd4815	Jinjer	n
-649db5c9643e1c17b3a44579980da0ad	Kaasschaaf	y
-1e8563d294da81043c2772b36753efaf	Kadavar	m
-362f8cdd1065b0f33e73208eb358991d	Kambrium	y
-820de5995512273916b117944d6da15a	Kataklysm	y
-d39d7a2bb6d430fd238a6aedc7f0cee2	Knife	m
-6d57b25c282247075f5e03cde27814df	Knockdown Brutality	y
-bbb668ff900efa57d936e726a09e4fe8	Korpiklaani	y
-2501f7ba78cc0fd07efb7c17666ff12e	Korpse	y
-76700087e932c3272e05694610d604ba	Kosmokrator	m
-9b1088b616414d0dc515ab1f2b4922f1	Kreator	y
-dfdef9b5190f331de20fe029babf032e	Lacrimas Profundere	m
-4cfab0d66614c6bb6d399837656c590e	Legion of the Damned	y
-5b22d1d5846a2b6b6d0cf342e912d124	Light to the blind	m
-4261335bcdc95bd89fd530ba35afbf4c	Liver Values	m
-2cfe35095995e8dd15ab7b867e178c15	Lonewolf	y
-2cf65e28c586eeb98daaecf6eb573e7a	Lordi	m
-3cdb47307aeb005121b09c41c8d8bee6	Los Skeleteros	y
-53407737e93f53afdfc588788b8288e8	Lyra's Legacy	n
-006fc2724417174310cf06d2672e34d2	Määt	y
-7db066b46f48d010fdb8c87337cdeda4	Madball	y
-a3f5542dc915b94a5e10dab658bb0959	Manegarm	y
-2ac79000a90b015badf6747312c0ccad	Mantar	y
-eb2c788da4f36fba18b85ae75aff0344	Marduk	y
-626dceb92e4249628c1e76a2c955cd24	Meatknife	y
-8fda25275801e4a40df6c73078baf753	Mecalimb	m
-3a2a7f86ca87268be9b9e0557b013565	Membaris	m
-ac03fad3be179a237521ec4ef2620fb0	Metal Inquisitor	n
-8b0ee5a501cef4a5699fd3b2d4549e8f	Metallica	y
-7e2b83d69e6c93adf203e13bc7d6f444	Milking the Goatmachine	y
-0fbddeb130361265f1ba6f86b00f0968	Mindflair	y
-3f15c445cb553524b235b01ab75fe9a6	Ministry	y
-656d1497f7e25fe0559c6be81a4bccae	Misery Index	y
-f60ab90d94b9cafe6b32f6a93ee8fcda	Mizery	m
-8775f64336ee5e9a8114fbe3a5a628c5	MØL	y
-e872b77ff7ac24acc5fa373ebe9bb492	Molotov	y
-f0e1f32b93f622ea3ddbf6b55b439812	Mono Inc.	m
-53a0aafa942245f18098ccd58b4121aa	Moontowers	n
-0780d2d1dbd538fec3cdd8699b08ea02	Morasth	y
-4a45ac6d83b85125b4163a40364e7b2c	More Than A Thousand	m
-58db028cf01dd425e5af6c7d511291c1	Moronic	y
-2252d763a2a4ac815b122a0176e3468f	Mosaic	y
-11d396b078f0ae37570c8ef0f45937ad	Motörblast	y
-585b13106ecfd7ede796242aeaed4ea8	Motorowl	y
-6c1fcd3c91bc400e5c16f467d75dced3	Mr. Irish Bastard	y
-a7f9797e4cd716e1516f9d4845b0e1e2	Municipal Waste	m
-7d878673694ff2498fbea0e5ba27e0ea	Nailed to Obscurity	y
-0844ad55f17011abed4a5208a3a05b74	Napalm Death	y
-6738f9acd4740d945178c649d6981734	Nasty	m
-33f03dd57f667d41ac77c6baec352a81	need2destroy	y
-3509af6be9fe5defc1500f5c77e38563	Nekrovault	y
-0640cfbf1d269b69c535ea4e288dfd96	Nepumuc	m
-a716390764a4896d99837e99f9e009c9	Nervosa	y
-e74a88c71835c14d92d583a1ed87cc6c	Nifelheim	y
-3d6ff25ab61ad55180a6aee9b64515bf	Nile	y
-36648510adbf2a3b2028197a60b5dada	NIOR	y
-eb3bfb5a3ccdd4483aabc307ae236066	No Brainer	y
-1ebd63d759e9ff532d5ce63ecb818731	Nocte Obducta	m
-1c06fc6740d924cab33dce73643d84b9	Nocturnal Graves	y
-4a2a0d0c29a49d9126dcb19230aa1994	No Return	y
-059792b70fc0686fb296e7fcae0bda50	Obscenity	m
-7dfe9aa0ca5bb31382879ccd144cc3ae	Of Colours	y
-a650d82df8ca65bb69a45242ab66b399	Omnium Gatherum	y
-3dda886448fe98771c001b56a4da9893	Omophagia	y
-d73310b95e8b4dece44e2a55dd1274e6	Orbit Culture	y
-fb28e62c0e801a787d55d97615e89771	Orcus Patera	y
-652208d2aa8cdd769632dbaeb7a16358	Orden Ogan	y
-660813131789b822f0c75c667e23fc85	Overkill	m
-b5f7b25b0154c34540eea8965f90984d	Pain City	y
-a7a9c1b4e7f10bd1fdf77aff255154f7	Papa Roach	m
-e64d38b05d197d60009a43588b2e4583	Paradise Lost	m
-88711444ece8fe638ae0fb11c64e2df3	Party Cannon	y
-278c094627c0dd891d75ea7a3d0d021e	Paxtilence	y
-0a56095b73dcbd2a76bb9d4831881cb3	Phantom Winter	n
-ff578d3db4dc3311b3098c8365d54e6b	Pighead	y
-80fcd08f6e887f6cfbedd2156841ab2b	P.O. Box	y
-db38e12f9903b156f9dc91fce2ef3919	Pokerface	m
-90d127641ffe2a600891cd2e3992685b	Poltergeist	m
-2e7a848dc99bd27acb36636124855faf	Porn the Gore	y
-79566192cda6b33a9ff59889eede2d66	Power Trip	y
-3964d4f40b6166aa9d370855bd20f662	Prediction	y
-4548a3b9c1e31cf001041dc0d166365b	Pripjat	y
-450948d9f14e07ba5e3015c2d726b452	Promethee	y
-c4678a2e0eef323aeb196670f2bc8a6e	Prostitute Desfigurement	y
-c1923ca7992dc6e79d28331abbb64e72	Psycroptic	y
-5842a0c2470fe12ee3acfeec16c79c57	Public Grave	y
-96682d9c9f1bed695dbf9176d3ee234c	Purify	y
-7f29efc2495ce308a8f4aa7bfc11d701	Randy Hansen	y
-12e93f5fab5f7d16ef37711ef264d282	Raw Ensemble	y
-4094ffd492ba473a2a7bea1b19b1662d	Reactory	y
-02d44fbbe1bfacd6eaa9b20299b1cb78	Rectal Smegma	y
-9ab8f911c74597493400602dc4d2b412	Refuge	y
-11f8d9ec8f6803ea61733840f13bc246	Relics of Humanity	y
-54f0b93fa83225e4a712b70c68c0ab6f	Revelation Steel	m
-1cdd53cece78d6e8dffcf664fa3d1be2	Revel in Flesh	y
-1e88302efcfc873691f0c31be4e2a388	Rezet	y
-2af9e4497582a6faa68a42ac2d512735	Rings of Saturn	y
-13caf3d14133dfb51067264d857eaf70	Risk it	y
-1e14d6b40d8e81d8d856ba66225dcbf3	Riverroth	m
-5b20ea1312a1a21beaa8b86fe3a07140	Rivers of Nihil	y
-fa03eb688ad8aa1db593d33dabd89bad	Root	y
-7a4fafa7badd04d5d3114ab67b0caf9d	Saltatio Mortis	n
-4cabe475dd501f3fd4da7273b5890c33	Samael	y
-f8e7112b86fcd9210dfaf32c00d6d375	Sanguine	n
-91c9ed0262dea7446a4f3a3e1cdd0698	Satan's Fall	n
-79ce9bd96a3184b1ee7c700aa2927e67	Schizophrenia	y
-218f2bdae8ad3bb60482b201e280ffdc	Scordatura	y
-4927f3218b038c780eb795766dfd04ee	Scornebeke	y
-0a97b893b92a7df612eadfe97589f242	Scrvmp	y
-31d8a0a978fad885b57a685b1a0229df	Seii Taishogun	y
-7ef36a3325a61d4f1cff91acbe77c7e3	Sensles	m
-5b709b96ee02a30be5eee558e3058245	Sepultura	y
-19baf8a6a25030ced87cd0ce733365a9	Serrabulho	y
-4ee21b1371ba008a26b313c7622256f8	Shambala	m
-91b18e22d4963b216af00e1dd43b5d05	Shoot the Girl first	n
-6bd19bad2b0168d4481b19f9c25b4a9f	Shores of Null	y
-53369c74c3cacdc38bdcdeda9284fe3c	Siberian Meat Grinder	y
-6bafe8cf106c32d485c469d36c056989	Sick of it all	y
-66599a31754b5ac2a202c46c2b577c8e	Six Feet Under	m
-4453eb658c6a304675bd52ca75fbae6d	Skeleton Pit	y
-5e4317ada306a255748447aef73fff68	Skeletonwitch	y
-360c000b499120147c8472998859a9fe	Skinned Alive	y
-e62a773154e1179b0cc8c5592207cb10	Skull Fist	n
-4bb93d90453dd63cc1957a033f7855c7	Slaughterra	y
-121189969c46f49b8249633c2d5a7bfa	Slayer	y
-f29d276fd930f1ad7687ed7e22929b64	Sleepers' Guilt	y
-249229ca88aa4a8815315bb085cf4d61	Slipknot	y
-c05d504b806ad065c9b548c0cb1334cd	Sober Truth	m
-b96a3cb81197e8308c87f6296174fe3e	Sodom	y
-8edf4531385941dfc85e3f3d3e32d24f	Soilwork	y
-90d523ebbf276f516090656ebfccdc9f	Solstafir	n
-94ca28ea8d99549c2280bcc93f98c853	Soulburn	y
-076365679712e4206301117486c3d0ec	Soulfly	y
-abd7ab19ff758cf4c1a2667e5bbac444	Spasm	y
-0af74c036db52f48ad6cbfef6fee2999	Stam1na	y
-095849fbdc267416abc6ddb48be311d7	Stillbirth	y
-72778afd2696801f5f3a1f35d0e4e357	Still Patient?	m
-5c0adc906f34f9404d65a47eea76dac0	Stonefall	y
-fdcf3cdc04f367257c92382e032b6293	Storm	y
-8bc31f7cc79c177ab7286dda04e2d1e5	Street Dogs	y
-88dd124c0720845cba559677f3afa15d	Sucking Leech	y
-2df8905eae6823023de6604dc5346c29	Suicidal Angels	y
-7e0d5240ec5d34a30b6f24909e5edcb4	Suicidal Tendencies	y
-f4f870098db58eeae93742dd2bcaf2b2	Sulphur Aeon	y
-d433b7c1ce696b94a8d8f72de6cfbeaa	Sun of the Sleepless	y
-28bb59d835e87f3fd813a58074ca0e11	Supreme Carnage	y
-aa0d528ba11ea1485d466dfe1ea40819	Surface	y
-bbc155fb2b111bf61c4f5ff892915e6b	Switch	y
-f953fa7b33e7b6503f4380895bbe41c8	Take Offense	m
-ad62209fb63910acf40280cea3647ec5	Task Force Beer	y
-0a267617c0b5b4d53e43a7d4e4c522ad	Teethgrinder	y
-058fcf8b126253956deb3ce672d107a7	Terror	y
-b14814d0ee12ffadc8f09ab9c604a9d0	Testament	y
-5447110e1e461c8c22890580c796277a	The black Dahlia Murder	y
-9e84832a15f2698f67079a3224c2b6fb	The Creatures from the Tomb	y
-4a7d9e528dada8409e88865225fb27c4	The Feelgood McLouds	y
-d3e98095eeccaa253050d67210ef02bb	The Idiots	y
-c3490492512b7fe65cdb0c7305044675	The Jailbreakers	y
-e61e30572fd58669ae9ea410774e0eb6	The Monolith Project	y
-990813672e87b667add44c712bb28d3d	The Ominous Circle	y
-8143ee8032c71f6f3f872fc5bb2a4fed	The Phobos Ensemble	m
-485065ad2259054abf342d7ae3fe27e6	The Privateer	m
-278606b1ac0ae7ef86e86342d1f259c3	The Prophecy 23	y
-c127f32dc042184d12b8c1433a77e8c4	The Vintage Caravan	m
-e4b3296f8a9e2a378eb3eb9576b91a37	Thornafire	y
-09d8e20a5368ce1e5c421a04cb566434	Thrudvangar	y
-4366d01be1b2ddef162fc0ebb6933508	Thunderstorm	m
-46174766ce49edbbbc40e271c87b5a83	Thy Antichrist	y
-4fa857a989df4e1deea676a43dceea07	Too many Assholes	y
-36cbc41c1c121f2c68f5776a118ea027	Tornado	m
-da867941c8bacf9be8e59bc13d765f92	Traitors	y
-6ee2e6d391fa98d7990b502e72c7ec58	Trancemission	m
-a4977b96c7e5084fcce21a0d07b045f8	Tribulation	y
-1da77fa5b97c17be83cc3d0693c405cf	Twitching Tongues	m
-e0f39406f0e15487dd9d3997b2f5ca61	Übergang	y
-399033f75fcf47d6736c9c5209222ab8	Undertow	y
-6f195d8f9fe09d45d2e680f7d7157541	Une Misere	y
-cafe9e68e8f90b3e1328da8858695b31	Tankard	y
-2113f739f81774557041db616ee851e6	Unleashed	m
-32814ff4ca9a26b8d430a8c0bc8dc63e	Ur	y
-e29ef4beb480eab906ffa7c05aeec23d	Vader	y
-2447873ddeeecaa165263091c0cbb22f	Vargsheim	y
-86482a1e94052aa18cd803a51104cdb9	Vektor	y
-fcd1c1b547d03e760d1defa4d2b98783	Victorius	n
-6369ba49db4cf35b35a7c47e3d4a4fd0	Visdom	m
-935b48a84528c4280ec208ce529deea0	Visions of Disfigurement	y
-52b133bfecec2fba79ecf451de3cf3bb	Völkerball	y
-559ccea48c3460ebc349587d35e808dd	Vomitory	y
-8e11b2f987a99ed900a44aa1aa8bd3d0	Vortex	n
-59f06d56c38ac98effb4c6da117b0305	Walls of Jericho	y
-804803e43d2c779d00004a6e87f28e30	Warbringer	y
-f042da2a954a1521114551a6f9e22c75	Warfield	y
-b1d465aaf3ccf8701684211b1623adf2	Warkings	m
-4f840b1febbbcdb12b9517cd0a91e8f4	When Plagues Collide	y
-c2855b6617a1b08fed3824564e15a653	Whitechapel	m
-405c7f920b019235f244315a564a8aed	Who killed Janis	m
-8e62fc75d9d0977d0be4771df05b3c2f	Wintersun	y
-cd9483c1733b17f57d11a77c9404893c	Wisdom in Chains	m
-3656edf3a40a25ccd00d414c9ecbb635	Witchfucker	y
-6d89517dbd1a634b097f81f5bdbb07a2	Witchhunter	m
-db46d9a37b31baa64cb51604a2e4939a	Within Destruction	y
-5af874093e5efcbaeb4377b84c5f2ec5	Wizard	m
-8a6f1a01e4b0d9e272126a8646a72088	Wolfheart	y
-5037c1968f3b239541c546d32dec39eb	World of Tomorrow	m
-3e52c77d795b7055eeff0c44687724a1	Xaon	y
-5952dff7a6b1b3c94238ad3c6a42b904	Zebrahead	m
-deaccc41a952e269107cc9a507dfa131	Zodiac	y
-bb4cc149e8027369e71eb1bb36cd98e0	Zombi	m
-754230e2c158107a2e93193c829e9e59	Crisix	y
-a29c1c4f0a97173007be3b737e8febcc	Redgrin	y
-4fab532a185610bb854e0946f4def6a4	Torment of Souls	y
-e25ee917084bdbdc8506b56abef0f351	Skelethal	y
-e6fd7b62a39c109109d33fcd3b5e129d	Keitzer	y
-da29e297c23e7868f1d50ec5a6a4359b	Blodtåke	y
-96048e254d2e02ba26f53edd271d3f88	Souldevourer	y
-c2275e8ac71d308946a63958bc7603a1	Fabulous Desaster	y
-3bcbddf6c114327fc72ea06bcb02f9ef	Satan Worship	y
-dde3e0b0cc344a7b072bbab8c429f4ff	The Laws Kill Destroy (Fábio Jhasko's Sarcófago tribute)	y
-b785a5ffad5e7e36ccac25c51d5d8908	Mortal Peril	y
-63c0a328ae2bee49789212822f79b83f	Infected Inzestor	y
-83d15841023cff02eafedb1c87df9b11	Birdflesh	m
-f03bde11d261f185cbacfa32c1c6538c	Master	y
-f6540bc63be4c0cb21811353c0d24f69	Misanthropia	y
-ea16d031090828264793e860a00cc995	Severe Torture	y
-5eed658c4b7b68a0ecc49205b68d54e7	Undying Lust for Cadaverous Molestation (UxLxCxM)	y
-96e3cdb363fe6df2723be5b994ad117a	Lecks inc.	y
-4ad6c928711328d1cf0167bc87079a14	Hate	y
-a0fb30950d2a150c1d2624716f216316	Belphegor	y
-c8d551145807972d194691247e7102a2	I am Morbid	y
-45b568ce63ea724c415677711b4328a7	Baest	y
-145bd9cf987b6f96fa6f3b3b326303c9	Der rote Milan	y
-c238980432ab6442df9b2c6698c43e47	Äera	y
-39a25b9c88ce401ca54fd7479d1c8b73	Jesajah	y
-8cadf0ad04644ce2947bf3aa2817816e	Balberskult	y
-85fac49d29a31f1f9a8a18d6b04b9fc9	Hellburst	y
-b81ee269be538a500ed057b3222c86a2	Crypts	y
-5518086aebc9159ba7424be0073ce5c9	Wound	y
-2c4e2c9948ddac6145e529c2ae7296da	Venefixion	y
-c9af1c425ca093648e919c2e471df3bd	Asagraum	y
-0291e38d9a3d398052be0ca52a7b1592	Possession	y
-8852173e80d762d62f0bcb379d82ebdb	Grave Miasma	m
-000f49c98c428aff4734497823d04f45	Sacramentum﻿	m
-dea293bdffcfb292b244b6fe92d246dc	Impaled Nazarene	m
-cf71a88972b5e06d8913cf53c916e6e4	Bloodland	y
-ac62ad2816456aa712809bf01327add1	LAWMÄNNER	n
-302ebe0389198972c223f4b72894780a	Stagewar	m
-470f3f69a2327481d26309dc65656f44	The Fog	y
-e254616b4a5bd5aaa54f90a3985ed184	Goath	y
-3c5c578b7cf5cc0d23c1730d1d51436a	Velvet Viper	n
-eaeaed2d9f3137518a5c8c7e6733214f	Elmsfire	m
-8ccd65d7f0f028405867991ae3eaeb56	Poisöned Speed	y
-781acc7e58c9a746d58f6e65ab1e90c4	Harakiri For The Sky	y
-e5a674a93987de4a52230105907fffe9	Nachtblut	y
-a2459c5c8a50215716247769c3dea40b	Mister Misery	m
-e285e4ecb358b92237298f67526beff7	Pyogenesis	n
-d832b654664d104f0fbb9b6674a09a11	Schöngeist	y
-2aeb128c6d3eb7e79acb393b50e1cf7b	Enter Tragedy	y
-213c449bd4bcfcdb6bffecf55b2c30b4	Erdling	y
-4ea353ae22a1c0d26327638f600aeac8	Stahlmann	y
-66244bb43939f81c100f03922cdc3439	Sabaton	y
-a538bfe6fe150a92a72d78f89733dbd0	The Spirit	y
-02f36cf6fe7b187306b2a7d423cafc2c	Orca	y
-26830d74f9ed8e7e4ea4e82e28fa4761	Kryn	m
-ccff6df2a54baa3adeb0bddb8067e7c0	V.I.D.A	y
-368ff974da0defe085637b7199231c0a	Impartial	m
-c2e88140e99f33883dac39daee70ac36	Lycanthrope	m
-93f4aac22b526b5f0c908462da306ffc	Speedemon	y
-0b914e196182d02615487e9793ecff3d	Divide	y
-1bb6d0271ea775dfdfa7f9fe1048147a	Almøst Human	y
-f17c7007dd2ed483b9df587c1fdac2c7	Moral Putrefaction	y
-03022be9e2729189e226cca023a2c9bf	Cadaver	y
-4d79c341966242c047f3833289ee3a13	Criminal	y
-32921081f86e80cd10138b8959260e1a	Tranatopsy	y
-3041a64f7587a6768d8e307b2662785b	Ludicia	y
-ab7b69efdaf168cbbe9a5b03d901be74	Komodo	m
-8259dc0bcebabcb0696496ca406dd672	Typhus	m
-57b9fe77adaac4846c238e995adb6ee2	Múr	y
-2654d6e7cec2ef045ca1772a980fbc4c	Fusion Bomb	y
-6a8538b37162b23d68791b9a0c54a5bf	Mork	y
-3921cb3f97a88349e153beb5492f6ef4	Gaerea	y
-f9f57e175d62861bb5f2bda44a078df7	Kampfar	m
-9ee30f495029e1fdf6567045f2079be1	Crypta	y
-57eba43d6bec2a8115e94d6fbb42bc75	Lost Society	n
-071dbd416520d14b2e3688145801de41	Venom	y
-9fc7c7342d41c7c53c6e8e4b9bc53fc4	Moonspell	n
-5588cb8830fdb8ac7159b7cf5d1e611e	Striker	n
-a5a8afc6c35c2625298b9ce4cc447b39	Auðn	y
-6ff24c538936b5b53e88258f88294666	Ill Niño	m
-d399575133268305c24d87f1c2ef054a	Implore	y
-71e720cd3fcc3cdb99f2f4dc7122e078	Mythraeum	y
-743c89c3e93b9295c1ae6e750047fb1e	The Risen Dread	y
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	Pestilence	y
-c58de8415b504a6ffa5d0b14967f91bb	Onslaught	y
-2d1f30c9fc8d7200bdf15b730c4cd757	Blood Incantation	y
-a1cebab6ecfd371779f9c18e36cbba0c	Cattle Decapitation	y
-54c09bacc963763eb8742fa1da44a968	Misanthropic	y
-0870b61c5e913cb405d250e80c9ba9b9	Leng Tch'e	y
-e563e0ba5dbf7c9417681c407d016277	Bloodtruth	y
-1745438c6be58479227d8c0d0220eec5	Organectomy	y
-7e5550d889d46d55df3065d742b5da51	Gutslit	y
-393a71c997d856ed5bb85a9695be6e46	Coffin Feeder	y
-20f0ae2f661bf20e506108c40c33a6f3	Suffocation	y
-3ed0c2ad2c9e6e7b161e6fe0175fe113	Acéldama	y
-96604499bfc96fcdb6da0faa204ff2fe	Gore Dimension	y
-dd18fa7a5052f2bce8ff7cb4a30903ea	Gutalax	y
-fd9a5c27c20cd89e4ffcc1592563abcf	Bound to Prevail	y
-a5475ebd65796bee170ad9f1ef746394	Basement Torture Killings	y
-1fda271217bb4c043c691fc6344087c1	Kanine	y
-cba95a42c53bdc6fbf3ddf9bf10a4069	Profanity	y
-fe2c9aea6c702e6b82bc19b4a5d76f90	Hurakan	y
-bb66c20c42c26f1874525c3ab956ec41	Brutal Sphincter	y
-aad365e95c3d5fadb5fdf9517c371e89	Tortharry	y
-88a51a2e269e7026f0734f3ef3244e89	Human Prey	y
-5c1a922f41003eb7a19b570c33b99ff4	Phrymerial	y
-de506362ebfcf7c632d659aa1f2b465d	Cumbeast	y
-1a8780e5531549bd454a04630a74cd4d	Monasteries	y
-c0d7362d0f52d119f1beb38b12c0b651	Côte D' Aver	y
-edd506a412c4f830215d4c0f1ac06e55	Vomit the Soul	y
-dde31adc1b0014ce659a65c8b4d6ce42	Endseeker	y
-4267b5081fdfb47c085db24b58d949e0	Wormed	y
-8f7de32e3b76c02859d6b007417bd509	Beheaded	y
-332d6b94de399f86d499be57f8a5a5ca	Shores of Lunacy	y
-b73377a1ec60e58d4eeb03347268c11b	April in Flames	y
-e3419706e1838c7ce6c25a28bef0c248	Asinis	y
-382ed38ecc68052678c5ac5646298b63	Mike Litoris Complot	y
-213c302f84c5d45929b66a20074075df	Lesson in Violence	y
-22c030759ab12f97e941af558566505e	Urinal Tribunal	y
-f5507c2c7beee622b98ade0b93abb7fe	Melodramatic Fools	y
-41bee031bd7d2fdb14ff48c92f4d7984	Cypecore	y
-39a464d24bf08e6e8df586eb5fa7ee30	Shot Crew	y
-f7c3dcc7ba01d0ead8e0cfb59cdf6afc	Impending Mindfuck	y
-4b42093adfc268ce8974a3fa8c4f6bca	Thron	y
-70d0b58ef51e537361d676f05ea39c7b	Heretoir	m
-6f0eadd7aadf134b1b84d9761808d5ad	Asphagor	y
-6896f30283ad47ceb4a17c8c8d625891	Drill Star Autopsy	y
-25118c5df9a2865a8bc97feb4aff4a18	Zero Degree	y
-5a53bed7a0e05c2b865537d96a39646f	Ferndal	y
-29b7417c5145049d6593a0d88759b9ee	Avataria	y
-4176aa79eae271d1b82015feceb00571	Graveworm	y
-c81794404ad68d298e9ceb75f69cf810	Agathodaimon	y
-d0386252fd85f76fc517724666cf59ae	Iron Savior	n
-0cddbf403096e44a08bc37d1e2e99b0f	Saxorior	y
-546bb05114b78748d142c67cdbdd34fd	Empyreal	y
-4ac863b6f6fa5ef02afdd9c1ca2a5e24	Eridu	y
-1e2bcbb679ccfdea27b28bd1ea9f2e67	Jarl	y
-0b9d35d460b848ad46ec0568961113bf	Torian	n
-b7e529a8e9af2a2610182b3d3fc33698	Machine Head	y
-1c62394f457ee9a56b0885f622299ea2	The Halo Effect	y
-9c8121ad290d22878906f93fa4ff4de3	Rise of Kronos	y
-64d9f86ed9eeac2695ec7847fe7ea313	Credic	y
-b04d1a151c786ee00092110333873a37	Glemsel	y
-65b029279eb0f99c0a565926566f6759	Naxen	y
-9bfbfab5220218468ecb02ed546e3d90	Horns of Domination	y
-be41b6cfece7dfa1b4e4d226fb999607	Beltez	y
-9c158607f29eaf8f567cc6304ada9c6d	Ninkharsag	y
-ca7e3b5c1860730cfd7b400de217fef2	Hemelbestormer	y
-8f4e7c5f66d6ee5698c01de29affc562	Algebra	y
-f0bf2458b4c1a22fc329f036dd439f08	Comaniac	y
-25fa2cdf2be085aa5394db743677fb69	Cryptosis	y
-32917b03e82a83d455dd6b7f8609532c	Fatal Fire	n
-0bcf509f7eb2db3b663f5782c8c4a86e	Dispised Icon	y
-4ffc374ef33b65b6acb388167ec542c0	Viscera	y
-42c9b99c6b409bc9990658f6e7829542	Oceano	y
-0c2277f470a7e9a2d70195ba32e1b08a	Distant	y
-47b23e889175dde5d6057db61cb52847	Crowbar	y
-bb51d2b900ba638568e48193aada8a6c	Sacred Reich	y
-92df3fd170b0285cd722e855a2968393	Guineapig	y
-b20a4217acaf4316739c6a5f6679ef60	Plasma	y
-34b1dade51ffdab56daebcf6ac981371	The Hu	y
-9d57ebbd1d3b135839b78221388394a1	Volbeat	y
-1833e2cfde2a7cf621d60288da14830c	Bad Wolves	m
-65976b6494d411d609160a2dfd98f903	Skindred	m
-178227c5aef3b3ded144b9e19867a370	Diaroe	y
-75cde58f0e5563f287f2d4afb0ce4b7e	Depression	y
-b74881ac32a010e91ac7fcbcfebe210e	Placenta Powerfist	y
-351af29ee203c740c3209a0e0a8e9c22	Fulci	y
-bbdbdf297183a1c24be29ed89711f744	Revocation	y
-6e512379810ecf71206459e6a1e64154	Goatwhore	y
-f3b65f675d13d81c12d3bb30b0190cd1	Alluvial	y
-1918775515a9c7b8db011fd35a443b82	Creeping Death	y
-15bf34427540dd1945e5992583412b2f	Dropdead	y
-ba8033b8cfb1ebfc91a5d03b3a268d9f	Escuela Grind	y
-fd85bfffd5a0667738f6110281b25db8	Necrotted	y
-6e4b91e3d1950bcad012dbfbdd0fff09	Legal Hate	y
-32a02a8a7927de4a39e9e14f2dc46ac6	Deep Dirty	y
-747f992097b9e5c9df7585931537150a	Blood	y
-13c260ca90c0f47c9418790429220899	Schirenc Plays Pungent Stench	y
-19819b153eb0990c821bc106e34ab3e1	Mason	y
-b619e7f3135359e3f778e90d1942e6f5	Antagonism	y
-0ddd0b1b6329e9cb9a64c4d947e641a8	Plagueborne	y
-30354302ae1c0715ccad2649da3d9443	Orobas	y
-89eec5d48b8969bf61eea38e4b3cfdbf	Kilminister	y
-703b1360391d2aef7b9ec688b00849bb	Vomit Spell	y
-b4b46e6ce2c563dd296e8bae768e1b9d	Servant	y
-5c8c8b827ae259b8e4f8cb567a577a3e	Shaârghot	y
-7f00429970ee9fd2a3185f777ff79922	Ragnarök Nordic & Viking Folk	y
-92e2cf901fe43bb77d99af2ff42ade77	Perchta	y
-1a1bfb986176c0ba845ae4f43d027f58	Estampie	y
-7ecdb1a0eb7c01d081acf2b7e11531c0	Rauhbein	y
-094caa14a3a49bf282d8f0f262a01f43	Apocalypse Orchestra	y
-c4ddbffb73c1c34d20bd5b3f425ce4b1	Elvenking	m
-110cb86243320511676f788dbc46f633	HateSphere	y
-8e9f5b1fc0e61f9a289aba4c59e49521	sign of death	y
-014dbc80621be3ddc6dd0150bc6571ff	Nervecell	y
-536d1ccb9cce397f948171765c0120d4	WeedWizard	y
-15b70a4565372e2da0d330568fe1d795	Human Waste	y
-8e331f2ea604deea899bfd0a494309ba	Braincasket	y
-46e1d00c2019ff857c307085c58e0015	5 Stabbed 4 Corpses	y
-6afdd78eac862dd63833a3ce5964b74b	Pusboil	y
-fb5f71046fd15a0a22d7bda38971f142	Vibrio Cholera	y
-512914f31042dacd2a05bfcebaacdb96	Demorphed	y
-d96d9dac0f19368234a1fe2d4daf7f7c	OPS - Orphan Playground Sniper	y
-5aa3856374df5daa99d3d33e6a38a865	Vor die Hunde	y
-e83655f0458b6c309866fbde556be35a	Hereza	y
-92dd59a949dfceab979dd25ac858f204	Gorgatron	y
-ee1bc524d6d3410e94a99706dcb12319	Rottenness	y
-c09ffd48de204e4610d474ade2cf3a0d	Nuclear Vomit	y
-3e7f48e97425d4c532a0787e54843863	Dead Man's Hand	y
-bfff088b67e0fc6d1b80dbd6b6f0620c	The Gentlemen's Revenge	y
-233dedc0bee8bbdf7930eab3dd54daee	Gunnar	n
-80f19b325c934c8396780d0c66a87c99	The Hollywood Vampires	y
-3ccca65d3d9843b81f4e251dcf8a3e8c	Sting	y
-9144b4f0da4c96565c47c38f0bc16593	Shaggy	y
-8b3d594047e4544f608c2ebb151aeb45	Witchkrieg	y
-ca03a570b4d4a22329359dc105a9ef22	Harlott	y
-f5eaa9c89bd215868235b0c068050883	Angstskíg	m
-9f10d335198e90990f3437c5733468e7	Tiamat	m
-b34f0dad8c934ee71aaabb2a675f9822	Gorleben	m
-c6458620084029f07681a55746ee4d69	Bitchhammer	m
-186aab3d817bd38f76c754001b0ab04d	Holy Moses	m
-dcd3968ac5b1ab25328f4ed42cdf2e2b	Infest	y
-6e25aa27fcd893613fac13b0312fe36d	Corrupt	y
-63e961dd2daa48ed1dade27a54f03ec4	Incantation	y
-4cc6d79ef4cf3af13b6c9b77783e688b	Embryo	y
-da34d04ff19376defc2facc252e52cf0	Shampoon Killer	y
-eaf446aca5ddd602d0ab194667e7bec1	Boötes Void	y
-ee325100d772dd075010b61b6f33c82a	Sněť	y
-950d43371e8291185e524550ad3fd0df	Kadaverficker	y
-2aa7757363ff360f3a08283c1d157b2c	Maceration	y
-d71218f2abfdd51d95ba7995b93bd536	Mephorash	y
-12c0763f59f7697824567a3ca32191db	Haemorrhage	y
-4e14f71c5702f5f71ad7de50587e2409	Methane	y
-8f7d02638c253eb2d03118800c623203	Necrosy	y
-d2ec9ebbccaa3c6925b86d1bd528d12f	Massacre	y
-2cca468dcaea0a807f756b1de2b3ec7b	Sirrush	y
-c8c012313f10e2d0830f3fbc5afca619	Midnight	y
-cf3ecbdc9b5ae9c5a87ab05403691350	Mystifier	y
-9323fc63b40460bcb68a7ad9840bad5a	Possessed	y
-6429807f6febbf061ac85089a8c3173d	LIK	y
-7b959644258e567b32d7c38e21fdb6fa	Ash Nazg Búrz	y
-b08c5a0f666c5f8a83a7bcafe51ec49b	Seth	y
-eb626abaffa54be81830da1b29a3f1d8	Demonical	y
-dd663d37df2cb0b5e222614dd720f6d3	Arkona	y
-71aabfaa43d427516f4020c7178de31c	Darkfall	y
-32f27ae0d5337bb62c636e3f6f17b0ff	Totensucht	y
-d9a6c1fcbafa92784f501ca419fe4090	Saor	y
-afd755c6a62ac0a0947a39c4f2cd2c20	Home Reared Meat	y
-b69b0e9285e4fa15470b0969836ac5ae	Nyctopia	y
-79d924bae828df8e676ba27e5dfc5f42	Riot City	n
-84557a1d9eb96a680c0557724e1d0532	Defleshed	y
-ead662696e0486cb7a478ecd13a0b5c5	Resurrected	y
-62165afb63fc004e619dff4d2132517c	Phantom Corporation	y
-b5d1848944ce92433b626211ed9e46f8	Bodyfarm	y
-92e67ef6f0f8c77b1dd631bd3b37ebca	Krisiun	y
-fe1f86f611c34fba898e4c90b71ec981	Bloodbath	y
-8c22a88267727dd513bf8ca278661e4d	Deicide	y
-541455f74d6f393174ff14b99e01b22d	Matt Miller	y
-90bebabe0c80676a4f6207ee0f8caa4c	Groundville Bastards	y
-ee8cde73a364c2b066f795edda1a303a	The Killer Apes	y
-92e25f3ba88109b777bd65b3b3de28a9	Pinch Black	y
-3e3b4203ce868f55b084eb4f2da535d3	Putrid Pile	y
-88ae6d397912fe633198a78a3b10f82e	Signs of the Swarm	y
-d2ec80fcff98ecb676da474dfcb5fe5c	Squash Bowels	y
-e31fabfff3891257949efc248dfa97e2	VILE	y
-4f6ae7ce964e64fdc143602aaaab1c26	Suffocate Bastard	y
-fe1fbc7d376820477e38b5fa497e4509	Fleshless	y
-b4087680a00055c7b9551c6a1ef50816	Anime Torment	y
-e318f5bc96fd248b69f6a969a320769e	Kraanium	y
-56525146be490541a00c20a1dab0a465	Viscera Trail	y
-2f39cfcedf45336beb2e966e80b93e22	Gutrectomy	y
-51053ffab2737bd21724ed0b7e6c56f7	Embrace your Punishment	y
-869d4f93046289e11b591fc7a740bc43	Devangelic	y
-edb40909b64e73b547843287929818de	Monument of Misanthropy	y
-5b3c70181a572c8d92d906ca20298d93	Ruins of Perception	y
-37b93f83b5fe94e766346ef212283282	Vulvectomy	y
-dbde8de43043d69c4fdd3e50a72b859d	Torsofuck	y
-0f512371d62ae34741d14dde50ab4529	Cliteater	y
-fd1bd629160356260c497da84df860e2	Crepitation	y
-3dba6c9259786defe62551e38665a94a	Amputated	y
-34d29649cb20a10a5e6b59c531077a59	Colpocleisis	y
-c02f12329daf99e6297001ef684d6285	Kinski	y
-be3c26bf034e9e62057314f3945f87be	Cephalic Carnage	m
-986a4f4e41790e819dc8b2a297aa8c87	Malignancy	m
-f64162c264d5679d130b6e8ae84d704e	Invoker	y
-0674a20e29104e21d141843a86421323	Torturized	y
-24dd5b3de900b9ee06f913a550beb64c	Groza	y
-fe7838d63434580c47798cbc5c2c8c63	Flammenaar	y
-e47c5fcf4a752dfcfbccaab5988193ef	Asenblut	y
-3d482a4abe7d814a741b06cb6306d598	Obscurity	y
-856256d0fddf6bfd898ef43777a80f0c	Aetherian	y
-b5bc9b34286d4d4943fc301fe9b46e46	Convictive	y
-589a30eb4a7274605385d3414ae82aaa	Nameless Death	y
-d79d3a518bd9912fb38fa2ef71c39750	Matricide	y
-5ff09619b7364339a105a1cbcb8d65fd	Angelcrypt	y
-2eb6fb05d553b296096973cb97912cc0	Macbeth	m
-50681f5168e67b62daa1837d8f693001	The Shit Shakers	y
-e163173b9350642f7c855bf37c144ce0	Jo Carley and the old dry skulls	y
-69af98a8916998443129c057ee04aec4	Skaphos	y
-57338bd22a6c5ba32f90981ffb25ef23	Warside	y
-48aeffb54173796a88ef8c4eb06dbf10	Horrible Creatures	y
-07759c4afc493965a5420e03bdc9b773	Magefa	y
-8989ab42027d29679d1dedc518eb04bd	On every Page	y
-a51211ef8cbbf7b49bfb27c099c30ce1	Mindreaper	y
-0dc9cb94cdd3a9e89383d344a103ed5b	Infected Chaos	y
-c45ca1e791f2849d9d11b3948fdefb74	Maniacs Brainacts	y
-54f89c837a689f7f27667efb92e3e6b1	Isn't	y
-266674d0a44a3a0102ab80021ddfd451	Disrooted	m
-50e7b1ba464091976138ec6a57b08ba0	Guardians Gate	m
-ada3962af4845c243fcd1ccafc815b09	Arctic Winter	y
-b05f3966288598b02cda4a41d6d1eb6b	Epicedium	y
-c7d1a2a30826683fd366e7fd6527e79c	Crescent	y
-6ff4735b0fc4160e081440b3f7238925	Purgatory	y
-100691b7539d5ae455b6f4a18394420c	Torture Killer	y
-d5282bd6b63b4cd51b50b40d192f1161	Ton Steine Scherben	y
-5159fd46698ae21d56f1684c2041bd79	Are we used to it	y
-c63ecd19a0ca74c22dfcf3063c9805d2	Contrast	y
-e08f00b43f7aa539eb60cfa149afd92e	Alteration	y
-793955e5d62f9b22bae3b59463c9ef63	Soulburner	y
-e4f2a1b2efa9caa67e58fa9610903ef0	Hellgarden	y
-25ebb3d62ad1160c96bbdea951ad2f34	Destruction	y
-57f003f2f413eedf53362b020f467be4	Whiplash	y
-5ef6a0f70220936a0158ad66fd5d9082	Journey of D.C.	y
-d97a4c5c71013baac562c2b5126909e1	Hellbent on Rocking	y
+COPY music.bands (id_band, band, likes, active, note) FROM stdin;
+8b427a493fc39574fc801404bc032a2f	1000Mods	y	t	\N
+721c28f4c74928cc9e0bb3fef345e408	Aborted	y	t	\N
+0a7ba3f35a9750ff956dca1d548dad12	Abrogation	y	t	\N
+54b72f3169fea84731d3bcba785eac49	Acranius	y	t	\N
+d05a0e65818a69cc689b38c0c0007834	ADDICT	y	t	\N
+dcabc7299e2b9ed5b05c33273e5fdd19	Aeon of Disease	y	t	\N
+5ce10014f645da4156ddd2cd0965986e	Agnostic Front	y	t	\N
+a332f1280622f9628fccd1b7aac7370a	Agrypnie	y	t	\N
+249789ae53c239814de8e606ff717ec9	Airborn	m	t	\N
+b1bdad87bd3c4ac2c22473846d301a9e	Al Goregrind	m	t	\N
+fe5b73c2c2cd2d9278c3835c791289b6	All its Grace	y	t	\N
+942c9f2520684c22eb6216a92b711f9e	Amon Amarth	y	t	\N
+7cd7921da2e6aab79c441a0c2ffc969b	Amorphis	y	t	\N
+948098e746bdf1c1045c12f042ea98c2	Analepsy	y	t	\N
+59d153c1c2408b702189623231b7898a	Angelus Apatrida	y	t	\N
+06efe152a554665e02b8dc4f620bf3f1	Anthrax	y	t	\N
+14ab730fe0172d780da6d9e5d432c129	AntiPeeWee	m	t	\N
+449b4d758aa7151bc1bbb24c3ffb40bb	Anubis	m	t	\N
+5df92b70e2855656e9b3ffdf313d7379	Anüs	y	t	\N
+3e75cd2f2f6733ea4901458a7ce4236d	Apey & The Pea	n	t	\N
+108c58fc39b79afc55fac7d9edf4aa2a	Arch Enemy	y	t	\N
+28bc31b338dbd482802b77ed1fd82a50	Arroganz	y	t	\N
+49c4097bae6c6ea96f552e38cfb6c2d1	Artillery	n	t	\N
+e3f0bf612190af6c3fad41214115e004	Asomvel	y	t	\N
+fb47f889f2c7c4fee1553d0f817b8aaa	Asphyx	y	t	\N
+264721f3fc2aee2d28dadcdff432dbc1	Atomwinter	m	t	\N
+9a322166803a48932356586f05ef83c7	At the Gates	y	t	\N
+75ab0270163731ee05f35640d56ef473	Audrey Horne	m	t	\N
+9d3ac6904ce73645c6234803cd7e47ca	Außerwelt	y	t	\N
+d1fb4e47d8421364f49199ee395ad1d3	Aversions Crown	y	t	\N
+44012166c6633196dc30563db3ffd017	Avowal	y	t	\N
+905a40c3533830252a909603c6fa1e6a	Avulsed	y	t	\N
+aed85c73079b54830cd50a75c0958a90	Baleful Abyss (Zombieslut)	y	t	\N
+da2110633f62b16a571c40318e4e4c1c	Battle against the Empire	y	t	\N
+529a1d385b4a8ca97ea7369477c7b6a7	Battle Beast	m	t	\N
+be20385e18333edb329d4574f364a1f0	Behemoth	y	t	\N
+ee69e7d19f11ca58843ec2e9e77ddb38	Benediction	y	t	\N
+925bd435e2718d623768dbf1bc1cfb60	Benighted	y	t	\N
+ad01952b3c254c8ebefaf6f73ae62f7d	Betrayal	y	t	\N
+7c7ab6fbcb47bd5df1e167ca28220ee9	Betraying the Martyrs	m	t	\N
+e8afde257f8a2cbbd39d866ddfc06103	Bitchfork	y	t	\N
+8f1f10cb698cb995fd69a671af6ecd58	Black Crown Initiate	y	t	\N
+bbddc022ee323e0a2b2d8c67e5cd321f	Black Medusa	y	t	\N
+74b3b7be6ed71b946a151d164ad8ede5	Black Reunion	y	t	\N
+d9ab6b54c3bd5b212e8dc3a14e7699ef	Blæck Fox	y	t	\N
+679eaa47efb2f814f2642966ee6bdfe1	Blessed Hellride	y	t	\N
+e1db3add02ca4c1af33edc5a970a3bdc	Blizzen	m	t	\N
+1c6987adbe5ab3e4364685e8caed0f59	Bloodbound	y	t	\N
+cf4ee20655dd3f8f0a553c73ffe3f72a	Blood Fire Death	y	t	\N
+b3ffff8517114caf70b9e70734dbaf6f	Bloodred Hourglass	y	t	\N
+a4cbfb212102da21b82d94be555ac3ec	Blood Red Throne	y	t	\N
+10d91715ea91101cfe0767c812da8151	Bloodspot	y	t	\N
+1209f43dbecaba22f3514bf40135f991	Bobby Sixkiller and the Renegades	y	t	\N
+dcff9a127428ffb03fc02fdf6cc39575	Böhse Onkelz	m	t	\N
+6c00bb1a64f660600a6c1545377f92dc	Bokassa	y	t	\N
+55159d04cc4faebd64689d3b74a94009	Booze & Glory	m	t	\N
+b6da055500e3d92698575a3cfc74906c	Born from Pain	m	t	\N
+1e9413d4cc9af0ad12a6707776573ba0	Bösedeath	y	t	\N
+b01fbaf98cfbc1b72e8bca0b2e48769c	Bowel Evacuation	y	t	\N
+4b98a8c164586e11779a0ef9421ad0ee	Brainstorm	m	t	\N
+897edb97d775897f69fa168a88b01c19	Brand of Sacrifice	y	t	\N
+eeaeec364c925e0c821660c7a953546e	Broken Teeth	m	t	\N
+7533f96ec01fd81438833f71539c7d4e	Bullet	m	t	\N
+11635778f116ce6922f6068638a39028	Burn	m	t	\N
+d449a9b2eed8b0556dc7be9cda36b67b	Bury Tomorrow	y	t	\N
+7eaf9a47aa47f3c65595ae107feab05d	Caliban	y	t	\N
+7463543d784aa59ca86359a50ef58c8e	Cancer	y	t	\N
+c4f0f5cedeffc6265ec3220ab594d56b	Candlemass	m	t	\N
+63bd9a49dd18fbc89c2ec1e1b689ddda	Cannibal Corpse	y	t	\N
+63ae1791fc0523f47bea9485ffec8b8c	Carach Angren	y	t	\N
+c4c7cb77b45a448aa3ca63082671ad97	Carnal Decay	y	t	\N
+5435326cf392e2cd8ad7768150cd5df6	Carnation	y	t	\N
+828d51c39c87aad9b1407d409fa58e36	CCCP	y	t	\N
+d2ff1e521585a91a94fb22752dd0ab45	Chapel of Disease	y	t	\N
+6f199e29c5782bd05a4fef98e7e41419	Circle of Execution	y	t	\N
+6830afd7158930ca7d1959ce778eb681	Combichrist	y	t	\N
+a61b878c2b563f289de2109fa0f42144	Conan	m	t	\N
+e67e51d5f41cfc9162ef7fd977d1f9f5	Condemned	y	t	\N
+3d2ff8abd980d730b2f4fd0abae52f60	Converge	m	t	\N
+ffa7450fd138573d8ae665134bccd02c	Corpsessed	y	t	\N
+faabbecd319372311ed0781d17b641d1	Counterparts	m	t	\N
+9f19396638dd8111f2cee938fdf4e455	Critical Mess	y	t	\N
+fdcbfded0aaf369d936a70324b39c978	Crossplane	y	t	\N
+1056b63fdc3c5015cc4591aa9989c14f	Crusher	y	t	\N
+b5d9c5289fe97968a5634b3e138bf9e2	Cryptopsy	y	t	\N
+1734b04cf734cb291d97c135d74b4b87	Cytotoxin	y	t	\N
+7d6b45c02283175f490558068d1fc81b	Dagoba	y	t	\N
+8d7a18d54e82fcfb7a11566ce94b9109	Daily Insanity	y	t	\N
+dddb04bc0d058486d0ef0212c6ea0682	Darkall Slaves	y	t	\N
+0e2ea6aa669710389cf4d6e2ddf408c4	Darkened Nocturn Slaughtercult	y	t	\N
+63ad3072dc5472bb44c2c42ede26d90f	Darkness	m	t	\N
+2aae4f711c09481c8353003202e05359	Dark Zodiak	y	t	\N
+28f843fa3a493a3720c4c45942ad970e	Dawn of Disease	y	t	\N
+9bc2ca9505a273b06aa0b285061cd1de	Dead Congregation	y	t	\N
+d3ed8223151e14b936436c336a4c7278	Batushka	y	t	\N
+51fa80e44b7555c4130bd06c53f4835c	Cradle of Filth	y	t	\N
+17bcf0bc2768911a378a55f42acedba7	Gwar	m	t	\N
+ce2caf05154395724e4436f042b8fa53	Begging for Incest	y	t	\N
+b0ce1e93de9839d07dab8d268ca23728	Colours of Autumn	y	t	\N
+348bcdb386eb9cb478b55a7574622b7c	Bloodgod	y	f	\N
+9138c2cc0326412f2515623f4c850eb3	Dead Eyed Sleeper (Legacy)	y	t	\N
+44b7bda13ac1febe84d8607ca8bbf439	Death Angel	y	t	\N
+d857ab11d383a7e4d4239a54cbf2a63d	Deathrite	y	t	\N
+c74b5aa120021cbe18dcddd70d8622da	Deathstorm	y	t	\N
+3af7c6d148d216f13f66669acb8d5c59	Debauchery's Balgeroth	y	t	\N
+522b6c44eb0aedf4970f2990a2f2a812	Decapitated	y	t	\N
+f4219e8fec02ce146754a5be8a85f246	Decaying Days	y	t	\N
+c5f022ef2f3211dc1e3b8062ffe764f0	Defaced	y	t	\N
+0ab20b5ad4d15b445ed94fa4eebb18d8	Defocus	y	t	\N
+7fc454efb6df96e012e0f937723d24aa	Demored	y	t	\N
+8edfa58b1aedb58629b80e5be2b2bd92	Denyal	y	t	\N
+8589a6a4d8908d7e8813e9a1c5693d70	Depulsed	y	t	\N
+947ce14614263eab49f780d68555aef8	Deranged	y	t	\N
+7c83727aa466b3b1b9d6556369714fcf	Desbroce	y	t	\N
+71e32909a1bec1edfc09aec09ca2ac17	Desdemonia	y	t	\N
+3d01ff8c75214314c4ca768c30e6807b	Deserted Fear	y	t	\N
+7771012413f955f819866e517b275cb4	Destinity	y	t	\N
+36f969b6aeff175204078b0533eae1a0	Deströyer 666	y	t	\N
+1bc1f7348d79a353ea4f594de9dd1392	Devil Driver	y	t	\N
+2082a7d613f976e7b182a3fe80a28958	Dimmu Borgir	y	t	\N
+d9bc1db8c13da3a131d853237e1f05b2	Disbelief	y	t	\N
+9cf73d0300eea453f17c6faaeb871c55	Discreation	m	t	\N
+4dddd8579760abb62aa4b1910725e73c	Disquiet	m	t	\N
+d6de9c99f5cfa46352b2bc0be5c98c41	Dissecdead	y	t	\N
+5194c60496c6f02e8b169de9a0aa542c	Double Crush Syndrome	m	t	\N
+8654991720656374d632a5bb0c20ff11	Downfall of Gaia	m	t	\N
+6a0e9ce4e2da4f2cbcd1292fddaa0ac6	Down to Nothing	m	t	\N
+fe228019addf1d561d0123caae8d1e52	Dragonsfire	n	t	\N
+1104831a0d0fe7d2a6a4198c781e0e0d	Dust Bolt	y	t	\N
+889aaf9cd0894206af758577cf5cf071	Dyscarnate	y	t	\N
+410d913416c022077c5c1709bf104d3c	EDGEBALL	n	t	\N
+c5dc33e23743fb951b3fe7f1f477b794	Einherjer	y	t	\N
+97ee29f216391d19f8769f79a1218a71	Eisregen	y	t	\N
+b885447285ece8226facd896c04cdba2	Ektomorf	y	t	\N
+f07c3eef5b7758026d45a12c7e2f6134	Embrace Decay	y	t	\N
+0b6e98d660e2901c33333347da37ad36	Emerald	n	t	\N
+6d3b28f48c848a21209a84452d66c0c4	Eminenz	y	t	\N
+8c69497eba819ee79a964a0d790368fb	Endlevel	y	t	\N
+1197a69404ee9475146f3d631de12bde	End of Green	y	t	\N
+d730e65d54d6c0479561d25724afd813	Enforcer	n	t	\N
+457f098eeb8e1518008449e9b1cb580d	Enisum	y	t	\N
+ac94d15f46f10707a39c4bc513cd9f98	Enterprise Earth	y	t	\N
+37f02eba79e0a3d29dfd6a4cf2f4d019	Epica	n	t	\N
+39e83bc14e95fcbc05848fc33c30821f	Epicardiectomy	y	t	\N
+f0c051b57055b052a3b7da1608f3039e	Eradicator	m	t	\N
+e08383c479d96a8a762e23a99fd8bf84	Ereb Altor	m	t	\N
+ff5b48d38ce7d0c47c57555d4783a118	Evertale	m	t	\N
+8945663993a728ab19a3853e5b820a42	Evil Invaders	y	t	\N
+28a95ef0eabe44a27f49bbaecaa8a847	Exhorder	y	t	\N
+0cdf051c93865faa15cbc5cd3d2b69fb	Exodus	y	t	\N
+4b503a03f3f1aec6e5b4d53dd8148498	Extermination Dismemberment	y	t	\N
+887d6449e3544dca547a2ddba8f2d894	Exumer	y	t	\N
+2672777b38bc4ce58c49cf4c82813a42	Fallen Temple	y	t	\N
+832dd1d8efbdb257c2c7d3e505142f48	Far from ready	m	t	\N
+f37ab058561fb6d233b9c2a0b080d4d1	Feuerschwanz	y	t	\N
+3be3e956aeb5dc3b16285463e02af25b	Finsterforst	y	t	\N
+42563d0088d6ac1a47648fc7621e77c6	Firtan	y	t	\N
+7df8865bbec157552b8a579e0ed9bfe3	Five Finger Death Punch	y	t	\N
+c883319a1db14bc28eff8088c5eba10e	Fjoergyn	y	t	\N
+6b7cf117ecf0fea745c4c375c1480cb5	Fleshcrawl	y	t	\N
+187ebdf7947f4b61e0725c93227676a4	Fleshgod Apocalypse	y	t	\N
+4276250c9b1b839b9508825303c5c5ae	Fleshsphere	y	t	\N
+7462f03404f29ea618bcc9d52de8e647	Flesh Trading Company	y	t	\N
+5efb7d24387b25d8325839be958d9adf	Fracture	m	t	\N
+9db9bc745a7568b51b3a968d215ddad6	From North	m	t	\N
+cddf835bea180bd14234a825be7a7a82	Funeral Whore	y	t	\N
+fdc90583bd7a58b91384dea3d1659cde	Furies	n	t	\N
+401357e57c765967393ba391a338e89b	Ghost	y	t	\N
+e64b94f14765cee7e05b4bec8f5fee31	Gingerpig	m	t	\N
+d0a1fd0467dc892f0dc27711637c864e	God Dethroned	y	t	\N
+e271e871e304f59e62a263ffe574ea2d	GodSkill	y	t	\N
+a8d9eeed285f1d47836a5546a280a256	Godslave	y	t	\N
+abbf8e3e3c3e78be8bd886484c1283c1	Grabak	y	t	\N
+87f44124fb8d24f4c832138baede45c7	Grand Magus	y	t	\N
+ed24ff8971b1fa43a1efbb386618ce35	Grave	y	t	\N
+33b6f1b596a60fa87baef3d2c05b7c04	Grave Pleasures	m	t	\N
+426fdc79046e281c5322161f011ce68c	Graveyard	y	t	\N
+988d10abb9f42e7053450af19ad64c7f	Gut	n	t	\N
+b89e91ccf14bfd7f485dd7be7d789b0a	H2O	m	t	\N
+87ded0ea2f4029da0a0022000d59232b	Hadal Maw	m	t	\N
+2a024edafb06c7882e2e1f7b57f2f951	Hailstone	m	t	\N
+2fa2f1801dd37d6eb9fe4e34a782e397	Hämatom	y	t	\N
+e0c2b0cc2e71294cd86916807fef62cb	Hammer King	m	t	\N
+52ee4c6902f6ead006b0fb2f3e2d7771	Hängerbänd	y	t	\N
+4f48e858e9ed95709458e17027bb94bf	Hark	y	t	\N
+e0de9c10bbf73520385ea5dcbdf62073	Hatebreed	y	t	\N
+065b56757c6f6a0fba7ab0c64e4c1ae1	Hate Eternal	y	t	\N
+952dc6362e304f00575264e9d54d1fa6	Haunted Cemetery	y	t	\N
+5cd1c3c856115627b4c3e93991f2d9cd	Havok	y	t	\N
+0903a7e60f0eb20fdc8cc0b8dbd45526	Hell Boullevard	y	t	\N
+32af59a47b8c7e1c982ae797fc491180	Hellknife	y	t	\N
+fb8be6409408481ad69166324bdade9c	Hell:On	y	t	\N
+bd4184ee062e4982b878b6b188793f5b	Hellripper	y	t	\N
+0020f19414b5f2874a0bfacd9d511b84	Helrunar	y	t	\N
+de12bbf91bc797df25ab4ae9cee1946b	Hexenizer	y	t	\N
+237e378c239b44bff1e9a42ab866580c	Hierophant	y	t	\N
+89adcf990042dfdac7fd23685b3f1e37	High Fighter	m	t	\N
+44f2dc3400ce17fad32a189178ae72fa	Hills have Eyes	m	t	\N
+3bd94845163385cecefc5265a2e5a525	Hollowed	y	t	\N
+0b0d1c3752576d666c14774b8233889f	Hollow World	m	t	\N
+3614c45db20ee41e068c2ab7969eb3b5	Ellende	y	t	\N
+9d969d25c9f506c5518bb090ad5f8266	Embryectomy	y	t	\N
+ade72e999b4e78925b18cf48d1faafa4	Exorcised Gods	y	t	\N
+a4902fb3d5151e823c74dfd51551b4b0	Horisont	m	t	\N
+99bd5eff92fc3ba728a9da5aa1971488	Horresque	y	t	\N
+24ff2b4548c6bc357d9d9ab47882661e	Humator	y	t	\N
+776da10f7e18ffde35ea94d144dc60a3	Hypocrisy	y	t	\N
+829922527f0e7d64a3cfda67e24351e3	Ichor	y	t	\N
+bfc9ace5d2a11fae56d038d68c601f00	I Declare War	y	t	\N
+443866d78de61ab3cd3e0e9bf97a34f6	Igel vs. Shark	m	t	\N
+b570e354b7ebc40e20029fcc7a15e5a7	Ignite	n	t	\N
+7492a1ca2669793b485b295798f5d782	I'll be damned	m	t	\N
+63d7f33143522ba270cb2c87f724b126	Illdisposed	y	t	\N
+aa86b6fc103fc757e14f03afe6eb0c0a	Imperium Dekadenz	y	t	\N
+6c607fc8c0adc99559bc14e01170fee1	Incite	m	t	\N
+91a337f89fe65fec1c97f52a821c1178	Inconcessus Lux Lucis	y	t	\N
+5ec1e9fa36898eaf6d1021be67e0d00c	Indian Nightmare	n	t	\N
+8ce896355a45f5b9959eb676b8b5580c	Infected World	m	t	\N
+bbce8e45250a239a252752fac7137e00	In Flames	y	t	\N
+baa9d4eef21c7b89f42720313b5812d4	Ingested	y	t	\N
+2414366fe63cf7017444181acacb6347	Inhumate	y	t	\N
+1ac0c8e8c04cf2d6f02fdb8292e74588	Insanity Alert	m	t	\N
+5f992768f7bb9592bed35b07197c87d0	Insulter	m	t	\N
+ca5a010309ffb20190558ec20d97e5b2	In the Woods	n	t	\N
+f644bd92037985f8eb20311bc6d5ed94	Into Darkness	y	t	\N
+a825b2b87f3b61c9660b81f340f6e519	Iron Bastards	m	t	\N
+891a55e21dfacf2f97c450c77e7c3ea7	Iron Reagan	y	t	\N
+ef6369d9794dbe861a56100e92a3c71d	Isole	m	t	\N
+73affe574e6d4dc2fa72b46dc9dd4815	Jinjer	n	t	\N
+649db5c9643e1c17b3a44579980da0ad	Kaasschaaf	y	t	\N
+1e8563d294da81043c2772b36753efaf	Kadavar	m	t	\N
+362f8cdd1065b0f33e73208eb358991d	Kambrium	y	t	\N
+820de5995512273916b117944d6da15a	Kataklysm	y	t	\N
+d39d7a2bb6d430fd238a6aedc7f0cee2	Knife	m	t	\N
+6d57b25c282247075f5e03cde27814df	Knockdown Brutality	y	t	\N
+bbb668ff900efa57d936e726a09e4fe8	Korpiklaani	y	t	\N
+2501f7ba78cc0fd07efb7c17666ff12e	Korpse	y	t	\N
+76700087e932c3272e05694610d604ba	Kosmokrator	m	t	\N
+9b1088b616414d0dc515ab1f2b4922f1	Kreator	y	t	\N
+dfdef9b5190f331de20fe029babf032e	Lacrimas Profundere	m	t	\N
+4cfab0d66614c6bb6d399837656c590e	Legion of the Damned	y	t	\N
+5b22d1d5846a2b6b6d0cf342e912d124	Light to the blind	m	t	\N
+4261335bcdc95bd89fd530ba35afbf4c	Liver Values	m	t	\N
+2cfe35095995e8dd15ab7b867e178c15	Lonewolf	y	t	\N
+2cf65e28c586eeb98daaecf6eb573e7a	Lordi	m	t	\N
+3cdb47307aeb005121b09c41c8d8bee6	Los Skeleteros	y	t	\N
+53407737e93f53afdfc588788b8288e8	Lyra's Legacy	n	t	\N
+006fc2724417174310cf06d2672e34d2	Määt	y	t	\N
+7db066b46f48d010fdb8c87337cdeda4	Madball	y	t	\N
+a3f5542dc915b94a5e10dab658bb0959	Manegarm	y	t	\N
+2ac79000a90b015badf6747312c0ccad	Mantar	y	t	\N
+eb2c788da4f36fba18b85ae75aff0344	Marduk	y	t	\N
+626dceb92e4249628c1e76a2c955cd24	Meatknife	y	t	\N
+8fda25275801e4a40df6c73078baf753	Mecalimb	m	t	\N
+3a2a7f86ca87268be9b9e0557b013565	Membaris	m	t	\N
+ac03fad3be179a237521ec4ef2620fb0	Metal Inquisitor	n	t	\N
+8b0ee5a501cef4a5699fd3b2d4549e8f	Metallica	y	t	\N
+7e2b83d69e6c93adf203e13bc7d6f444	Milking the Goatmachine	y	t	\N
+0fbddeb130361265f1ba6f86b00f0968	Mindflair	y	t	\N
+3f15c445cb553524b235b01ab75fe9a6	Ministry	y	t	\N
+656d1497f7e25fe0559c6be81a4bccae	Misery Index	y	t	\N
+f60ab90d94b9cafe6b32f6a93ee8fcda	Mizery	m	t	\N
+8775f64336ee5e9a8114fbe3a5a628c5	MØL	y	t	\N
+e872b77ff7ac24acc5fa373ebe9bb492	Molotov	y	t	\N
+f0e1f32b93f622ea3ddbf6b55b439812	Mono Inc.	m	t	\N
+53a0aafa942245f18098ccd58b4121aa	Moontowers	n	t	\N
+0780d2d1dbd538fec3cdd8699b08ea02	Morasth	y	t	\N
+4a45ac6d83b85125b4163a40364e7b2c	More Than A Thousand	m	t	\N
+2252d763a2a4ac815b122a0176e3468f	Mosaic	y	t	\N
+11d396b078f0ae37570c8ef0f45937ad	Motörblast	y	t	\N
+585b13106ecfd7ede796242aeaed4ea8	Motorowl	y	t	\N
+6c1fcd3c91bc400e5c16f467d75dced3	Mr. Irish Bastard	y	t	\N
+a7f9797e4cd716e1516f9d4845b0e1e2	Municipal Waste	m	t	\N
+7d878673694ff2498fbea0e5ba27e0ea	Nailed to Obscurity	y	t	\N
+0844ad55f17011abed4a5208a3a05b74	Napalm Death	y	t	\N
+6738f9acd4740d945178c649d6981734	Nasty	m	t	\N
+33f03dd57f667d41ac77c6baec352a81	need2destroy	y	t	\N
+3509af6be9fe5defc1500f5c77e38563	Nekrovault	y	t	\N
+0640cfbf1d269b69c535ea4e288dfd96	Nepumuc	m	t	\N
+a716390764a4896d99837e99f9e009c9	Nervosa	y	t	\N
+e74a88c71835c14d92d583a1ed87cc6c	Nifelheim	y	t	\N
+3d6ff25ab61ad55180a6aee9b64515bf	Nile	y	t	\N
+36648510adbf2a3b2028197a60b5dada	NIOR	y	t	\N
+eb3bfb5a3ccdd4483aabc307ae236066	No Brainer	y	t	\N
+1ebd63d759e9ff532d5ce63ecb818731	Nocte Obducta	m	t	\N
+1c06fc6740d924cab33dce73643d84b9	Nocturnal Graves	y	t	\N
+4a2a0d0c29a49d9126dcb19230aa1994	No Return	y	t	\N
+059792b70fc0686fb296e7fcae0bda50	Obscenity	m	t	\N
+7dfe9aa0ca5bb31382879ccd144cc3ae	Of Colours	y	t	\N
+a650d82df8ca65bb69a45242ab66b399	Omnium Gatherum	y	t	\N
+3dda886448fe98771c001b56a4da9893	Omophagia	y	t	\N
+d73310b95e8b4dece44e2a55dd1274e6	Orbit Culture	y	t	\N
+fb28e62c0e801a787d55d97615e89771	Orcus Patera	y	t	\N
+652208d2aa8cdd769632dbaeb7a16358	Orden Ogan	y	t	\N
+660813131789b822f0c75c667e23fc85	Overkill	m	t	\N
+b5f7b25b0154c34540eea8965f90984d	Pain City	y	t	\N
+a7a9c1b4e7f10bd1fdf77aff255154f7	Papa Roach	m	t	\N
+e64d38b05d197d60009a43588b2e4583	Paradise Lost	m	t	\N
+88711444ece8fe638ae0fb11c64e2df3	Party Cannon	y	t	\N
+278c094627c0dd891d75ea7a3d0d021e	Paxtilence	y	t	\N
+0a56095b73dcbd2a76bb9d4831881cb3	Phantom Winter	n	t	\N
+ff578d3db4dc3311b3098c8365d54e6b	Pighead	y	t	\N
+80fcd08f6e887f6cfbedd2156841ab2b	P.O. Box	y	t	\N
+db38e12f9903b156f9dc91fce2ef3919	Pokerface	m	t	\N
+58db028cf01dd425e5af6c7d511291c1	Moronic	y	f	\N
+90d127641ffe2a600891cd2e3992685b	Poltergeist	m	t	\N
+2e7a848dc99bd27acb36636124855faf	Porn the Gore	y	t	\N
+79566192cda6b33a9ff59889eede2d66	Power Trip	y	t	\N
+3964d4f40b6166aa9d370855bd20f662	Prediction	y	t	\N
+4548a3b9c1e31cf001041dc0d166365b	Pripjat	y	t	\N
+450948d9f14e07ba5e3015c2d726b452	Promethee	y	t	\N
+c4678a2e0eef323aeb196670f2bc8a6e	Prostitute Desfigurement	y	t	\N
+c1923ca7992dc6e79d28331abbb64e72	Psycroptic	y	t	\N
+5842a0c2470fe12ee3acfeec16c79c57	Public Grave	y	t	\N
+96682d9c9f1bed695dbf9176d3ee234c	Purify	y	t	\N
+7f29efc2495ce308a8f4aa7bfc11d701	Randy Hansen	y	t	\N
+12e93f5fab5f7d16ef37711ef264d282	Raw Ensemble	y	t	\N
+4094ffd492ba473a2a7bea1b19b1662d	Reactory	y	t	\N
+02d44fbbe1bfacd6eaa9b20299b1cb78	Rectal Smegma	y	t	\N
+9ab8f911c74597493400602dc4d2b412	Refuge	y	t	\N
+11f8d9ec8f6803ea61733840f13bc246	Relics of Humanity	y	t	\N
+54f0b93fa83225e4a712b70c68c0ab6f	Revelation Steel	m	t	\N
+1cdd53cece78d6e8dffcf664fa3d1be2	Revel in Flesh	y	t	\N
+1e88302efcfc873691f0c31be4e2a388	Rezet	y	t	\N
+2af9e4497582a6faa68a42ac2d512735	Rings of Saturn	y	t	\N
+13caf3d14133dfb51067264d857eaf70	Risk it	y	t	\N
+1e14d6b40d8e81d8d856ba66225dcbf3	Riverroth	m	t	\N
+5b20ea1312a1a21beaa8b86fe3a07140	Rivers of Nihil	y	t	\N
+fa03eb688ad8aa1db593d33dabd89bad	Root	y	t	\N
+7a4fafa7badd04d5d3114ab67b0caf9d	Saltatio Mortis	n	t	\N
+4cabe475dd501f3fd4da7273b5890c33	Samael	y	t	\N
+f8e7112b86fcd9210dfaf32c00d6d375	Sanguine	n	t	\N
+91c9ed0262dea7446a4f3a3e1cdd0698	Satan's Fall	n	t	\N
+79ce9bd96a3184b1ee7c700aa2927e67	Schizophrenia	y	t	\N
+218f2bdae8ad3bb60482b201e280ffdc	Scordatura	y	t	\N
+4927f3218b038c780eb795766dfd04ee	Scornebeke	y	t	\N
+0a97b893b92a7df612eadfe97589f242	Scrvmp	y	t	\N
+31d8a0a978fad885b57a685b1a0229df	Seii Taishogun	y	t	\N
+7ef36a3325a61d4f1cff91acbe77c7e3	Sensles	m	t	\N
+5b709b96ee02a30be5eee558e3058245	Sepultura	y	t	\N
+19baf8a6a25030ced87cd0ce733365a9	Serrabulho	y	t	\N
+91b18e22d4963b216af00e1dd43b5d05	Shoot the Girl first	n	t	\N
+6bd19bad2b0168d4481b19f9c25b4a9f	Shores of Null	y	t	\N
+53369c74c3cacdc38bdcdeda9284fe3c	Siberian Meat Grinder	y	t	\N
+6bafe8cf106c32d485c469d36c056989	Sick of it all	y	t	\N
+66599a31754b5ac2a202c46c2b577c8e	Six Feet Under	m	t	\N
+4453eb658c6a304675bd52ca75fbae6d	Skeleton Pit	y	t	\N
+5e4317ada306a255748447aef73fff68	Skeletonwitch	y	t	\N
+360c000b499120147c8472998859a9fe	Skinned Alive	y	t	\N
+e62a773154e1179b0cc8c5592207cb10	Skull Fist	n	t	\N
+4bb93d90453dd63cc1957a033f7855c7	Slaughterra	y	t	\N
+f29d276fd930f1ad7687ed7e22929b64	Sleepers' Guilt	y	t	\N
+249229ca88aa4a8815315bb085cf4d61	Slipknot	y	t	\N
+c05d504b806ad065c9b548c0cb1334cd	Sober Truth	m	t	\N
+b96a3cb81197e8308c87f6296174fe3e	Sodom	y	t	\N
+8edf4531385941dfc85e3f3d3e32d24f	Soilwork	y	t	\N
+90d523ebbf276f516090656ebfccdc9f	Solstafir	n	t	\N
+94ca28ea8d99549c2280bcc93f98c853	Soulburn	y	t	\N
+076365679712e4206301117486c3d0ec	Soulfly	y	t	\N
+abd7ab19ff758cf4c1a2667e5bbac444	Spasm	y	t	\N
+0af74c036db52f48ad6cbfef6fee2999	Stam1na	y	t	\N
+095849fbdc267416abc6ddb48be311d7	Stillbirth	y	t	\N
+72778afd2696801f5f3a1f35d0e4e357	Still Patient?	m	t	\N
+5c0adc906f34f9404d65a47eea76dac0	Stonefall	y	t	\N
+fdcf3cdc04f367257c92382e032b6293	Storm	y	t	\N
+8bc31f7cc79c177ab7286dda04e2d1e5	Street Dogs	y	t	\N
+88dd124c0720845cba559677f3afa15d	Sucking Leech	y	t	\N
+2df8905eae6823023de6604dc5346c29	Suicidal Angels	y	t	\N
+7e0d5240ec5d34a30b6f24909e5edcb4	Suicidal Tendencies	y	t	\N
+f4f870098db58eeae93742dd2bcaf2b2	Sulphur Aeon	y	t	\N
+d433b7c1ce696b94a8d8f72de6cfbeaa	Sun of the Sleepless	y	t	\N
+28bb59d835e87f3fd813a58074ca0e11	Supreme Carnage	y	t	\N
+aa0d528ba11ea1485d466dfe1ea40819	Surface	y	t	\N
+bbc155fb2b111bf61c4f5ff892915e6b	Switch	y	t	\N
+f953fa7b33e7b6503f4380895bbe41c8	Take Offense	m	t	\N
+ad62209fb63910acf40280cea3647ec5	Task Force Beer	y	t	\N
+0a267617c0b5b4d53e43a7d4e4c522ad	Teethgrinder	y	t	\N
+058fcf8b126253956deb3ce672d107a7	Terror	y	t	\N
+b14814d0ee12ffadc8f09ab9c604a9d0	Testament	y	t	\N
+5447110e1e461c8c22890580c796277a	The black Dahlia Murder	y	t	\N
+9e84832a15f2698f67079a3224c2b6fb	The Creatures from the Tomb	y	t	\N
+4a7d9e528dada8409e88865225fb27c4	The Feelgood McLouds	y	t	\N
+d3e98095eeccaa253050d67210ef02bb	The Idiots	y	t	\N
+c3490492512b7fe65cdb0c7305044675	The Jailbreakers	y	t	\N
+e61e30572fd58669ae9ea410774e0eb6	The Monolith Project	y	t	\N
+990813672e87b667add44c712bb28d3d	The Ominous Circle	y	t	\N
+8143ee8032c71f6f3f872fc5bb2a4fed	The Phobos Ensemble	m	t	\N
+485065ad2259054abf342d7ae3fe27e6	The Privateer	m	t	\N
+278606b1ac0ae7ef86e86342d1f259c3	The Prophecy 23	y	t	\N
+c127f32dc042184d12b8c1433a77e8c4	The Vintage Caravan	m	t	\N
+e4b3296f8a9e2a378eb3eb9576b91a37	Thornafire	y	t	\N
+09d8e20a5368ce1e5c421a04cb566434	Thrudvangar	y	t	\N
+4366d01be1b2ddef162fc0ebb6933508	Thunderstorm	m	t	\N
+46174766ce49edbbbc40e271c87b5a83	Thy Antichrist	y	t	\N
+4fa857a989df4e1deea676a43dceea07	Too many Assholes	y	t	\N
+36cbc41c1c121f2c68f5776a118ea027	Tornado	m	t	\N
+da867941c8bacf9be8e59bc13d765f92	Traitors	y	t	\N
+6ee2e6d391fa98d7990b502e72c7ec58	Trancemission	m	t	\N
+a4977b96c7e5084fcce21a0d07b045f8	Tribulation	y	t	\N
+1da77fa5b97c17be83cc3d0693c405cf	Twitching Tongues	m	t	\N
+e0f39406f0e15487dd9d3997b2f5ca61	Übergang	y	t	\N
+399033f75fcf47d6736c9c5209222ab8	Undertow	y	t	\N
+6f195d8f9fe09d45d2e680f7d7157541	Une Misere	y	t	\N
+cafe9e68e8f90b3e1328da8858695b31	Tankard	y	t	\N
+4ee21b1371ba008a26b313c7622256f8	Shambala	m	f	\N
+2113f739f81774557041db616ee851e6	Unleashed	m	t	\N
+32814ff4ca9a26b8d430a8c0bc8dc63e	Ur	y	t	\N
+e29ef4beb480eab906ffa7c05aeec23d	Vader	y	t	\N
+2447873ddeeecaa165263091c0cbb22f	Vargsheim	y	t	\N
+86482a1e94052aa18cd803a51104cdb9	Vektor	y	t	\N
+fcd1c1b547d03e760d1defa4d2b98783	Victorius	n	t	\N
+6369ba49db4cf35b35a7c47e3d4a4fd0	Visdom	m	t	\N
+935b48a84528c4280ec208ce529deea0	Visions of Disfigurement	y	t	\N
+52b133bfecec2fba79ecf451de3cf3bb	Völkerball	y	t	\N
+559ccea48c3460ebc349587d35e808dd	Vomitory	y	t	\N
+8e11b2f987a99ed900a44aa1aa8bd3d0	Vortex	n	t	\N
+59f06d56c38ac98effb4c6da117b0305	Walls of Jericho	y	t	\N
+804803e43d2c779d00004a6e87f28e30	Warbringer	y	t	\N
+f042da2a954a1521114551a6f9e22c75	Warfield	y	t	\N
+b1d465aaf3ccf8701684211b1623adf2	Warkings	m	t	\N
+4f840b1febbbcdb12b9517cd0a91e8f4	When Plagues Collide	y	t	\N
+c2855b6617a1b08fed3824564e15a653	Whitechapel	m	t	\N
+405c7f920b019235f244315a564a8aed	Who killed Janis	m	t	\N
+8e62fc75d9d0977d0be4771df05b3c2f	Wintersun	y	t	\N
+cd9483c1733b17f57d11a77c9404893c	Wisdom in Chains	m	t	\N
+3656edf3a40a25ccd00d414c9ecbb635	Witchfucker	y	t	\N
+6d89517dbd1a634b097f81f5bdbb07a2	Witchhunter	m	t	\N
+db46d9a37b31baa64cb51604a2e4939a	Within Destruction	y	t	\N
+5af874093e5efcbaeb4377b84c5f2ec5	Wizard	m	t	\N
+8a6f1a01e4b0d9e272126a8646a72088	Wolfheart	y	t	\N
+5037c1968f3b239541c546d32dec39eb	World of Tomorrow	m	t	\N
+3e52c77d795b7055eeff0c44687724a1	Xaon	y	t	\N
+5952dff7a6b1b3c94238ad3c6a42b904	Zebrahead	m	t	\N
+deaccc41a952e269107cc9a507dfa131	Zodiac	y	t	\N
+bb4cc149e8027369e71eb1bb36cd98e0	Zombi	m	t	\N
+754230e2c158107a2e93193c829e9e59	Crisix	y	t	\N
+a29c1c4f0a97173007be3b737e8febcc	Redgrin	y	t	\N
+4fab532a185610bb854e0946f4def6a4	Torment of Souls	y	t	\N
+e25ee917084bdbdc8506b56abef0f351	Skelethal	y	t	\N
+e6fd7b62a39c109109d33fcd3b5e129d	Keitzer	y	t	\N
+da29e297c23e7868f1d50ec5a6a4359b	Blodtåke	y	t	\N
+96048e254d2e02ba26f53edd271d3f88	Souldevourer	y	t	\N
+c2275e8ac71d308946a63958bc7603a1	Fabulous Desaster	y	t	\N
+3bcbddf6c114327fc72ea06bcb02f9ef	Satan Worship	y	t	\N
+dde3e0b0cc344a7b072bbab8c429f4ff	The Laws Kill Destroy (Fábio Jhasko's Sarcófago tribute)	y	t	\N
+b785a5ffad5e7e36ccac25c51d5d8908	Mortal Peril	y	t	\N
+63c0a328ae2bee49789212822f79b83f	Infected Inzestor	y	t	\N
+83d15841023cff02eafedb1c87df9b11	Birdflesh	m	t	\N
+f03bde11d261f185cbacfa32c1c6538c	Master	y	t	\N
+f6540bc63be4c0cb21811353c0d24f69	Misanthropia	y	t	\N
+ea16d031090828264793e860a00cc995	Severe Torture	y	t	\N
+5eed658c4b7b68a0ecc49205b68d54e7	Undying Lust for Cadaverous Molestation (UxLxCxM)	y	t	\N
+96e3cdb363fe6df2723be5b994ad117a	Lecks inc.	y	t	\N
+4ad6c928711328d1cf0167bc87079a14	Hate	y	t	\N
+a0fb30950d2a150c1d2624716f216316	Belphegor	y	t	\N
+c8d551145807972d194691247e7102a2	I am Morbid	y	t	\N
+45b568ce63ea724c415677711b4328a7	Baest	y	t	\N
+145bd9cf987b6f96fa6f3b3b326303c9	Der rote Milan	y	t	\N
+c238980432ab6442df9b2c6698c43e47	Äera	y	t	\N
+39a25b9c88ce401ca54fd7479d1c8b73	Jesajah	y	t	\N
+8cadf0ad04644ce2947bf3aa2817816e	Balberskult	y	t	\N
+85fac49d29a31f1f9a8a18d6b04b9fc9	Hellburst	y	t	\N
+b81ee269be538a500ed057b3222c86a2	Crypts	y	t	\N
+5518086aebc9159ba7424be0073ce5c9	Wound	y	t	\N
+2c4e2c9948ddac6145e529c2ae7296da	Venefixion	y	t	\N
+c9af1c425ca093648e919c2e471df3bd	Asagraum	y	t	\N
+0291e38d9a3d398052be0ca52a7b1592	Possession	y	t	\N
+8852173e80d762d62f0bcb379d82ebdb	Grave Miasma	m	t	\N
+000f49c98c428aff4734497823d04f45	Sacramentum﻿	m	t	\N
+dea293bdffcfb292b244b6fe92d246dc	Impaled Nazarene	m	t	\N
+cf71a88972b5e06d8913cf53c916e6e4	Bloodland	y	t	\N
+ac62ad2816456aa712809bf01327add1	LAWMÄNNER	n	t	\N
+302ebe0389198972c223f4b72894780a	Stagewar	m	t	\N
+470f3f69a2327481d26309dc65656f44	The Fog	y	t	\N
+e254616b4a5bd5aaa54f90a3985ed184	Goath	y	t	\N
+3c5c578b7cf5cc0d23c1730d1d51436a	Velvet Viper	n	t	\N
+eaeaed2d9f3137518a5c8c7e6733214f	Elmsfire	m	t	\N
+8ccd65d7f0f028405867991ae3eaeb56	Poisöned Speed	y	t	\N
+781acc7e58c9a746d58f6e65ab1e90c4	Harakiri For The Sky	y	t	\N
+e5a674a93987de4a52230105907fffe9	Nachtblut	y	t	\N
+a2459c5c8a50215716247769c3dea40b	Mister Misery	m	t	\N
+e285e4ecb358b92237298f67526beff7	Pyogenesis	n	t	\N
+d832b654664d104f0fbb9b6674a09a11	Schöngeist	y	t	\N
+2aeb128c6d3eb7e79acb393b50e1cf7b	Enter Tragedy	y	t	\N
+213c449bd4bcfcdb6bffecf55b2c30b4	Erdling	y	t	\N
+4ea353ae22a1c0d26327638f600aeac8	Stahlmann	y	t	\N
+66244bb43939f81c100f03922cdc3439	Sabaton	y	t	\N
+a538bfe6fe150a92a72d78f89733dbd0	The Spirit	y	t	\N
+02f36cf6fe7b187306b2a7d423cafc2c	Orca	y	t	\N
+26830d74f9ed8e7e4ea4e82e28fa4761	Kryn	m	t	\N
+ccff6df2a54baa3adeb0bddb8067e7c0	V.I.D.A	y	t	\N
+368ff974da0defe085637b7199231c0a	Impartial	m	t	\N
+c2e88140e99f33883dac39daee70ac36	Lycanthrope	m	t	\N
+93f4aac22b526b5f0c908462da306ffc	Speedemon	y	t	\N
+0b914e196182d02615487e9793ecff3d	Divide	y	t	\N
+1bb6d0271ea775dfdfa7f9fe1048147a	Almøst Human	y	t	\N
+f17c7007dd2ed483b9df587c1fdac2c7	Moral Putrefaction	y	t	\N
+03022be9e2729189e226cca023a2c9bf	Cadaver	y	t	\N
+4d79c341966242c047f3833289ee3a13	Criminal	y	t	\N
+32921081f86e80cd10138b8959260e1a	Tranatopsy	y	t	\N
+3041a64f7587a6768d8e307b2662785b	Ludicia	y	t	\N
+ab7b69efdaf168cbbe9a5b03d901be74	Komodo	m	t	\N
+8259dc0bcebabcb0696496ca406dd672	Typhus	m	t	\N
+57b9fe77adaac4846c238e995adb6ee2	Múr	y	t	\N
+2654d6e7cec2ef045ca1772a980fbc4c	Fusion Bomb	y	t	\N
+6a8538b37162b23d68791b9a0c54a5bf	Mork	y	t	\N
+3921cb3f97a88349e153beb5492f6ef4	Gaerea	y	t	\N
+f9f57e175d62861bb5f2bda44a078df7	Kampfar	m	t	\N
+9ee30f495029e1fdf6567045f2079be1	Crypta	y	t	\N
+57eba43d6bec2a8115e94d6fbb42bc75	Lost Society	n	t	\N
+071dbd416520d14b2e3688145801de41	Venom	y	t	\N
+9fc7c7342d41c7c53c6e8e4b9bc53fc4	Moonspell	n	t	\N
+5588cb8830fdb8ac7159b7cf5d1e611e	Striker	n	t	\N
+a5a8afc6c35c2625298b9ce4cc447b39	Auðn	y	t	\N
+6ff24c538936b5b53e88258f88294666	Ill Niño	m	t	\N
+d399575133268305c24d87f1c2ef054a	Implore	y	t	\N
+71e720cd3fcc3cdb99f2f4dc7122e078	Mythraeum	y	t	\N
+743c89c3e93b9295c1ae6e750047fb1e	The Risen Dread	y	t	\N
+e4f0ad5ef0ac3037084d8a5e3ca1cabc	Pestilence	y	t	\N
+c58de8415b504a6ffa5d0b14967f91bb	Onslaught	y	t	\N
+2d1f30c9fc8d7200bdf15b730c4cd757	Blood Incantation	y	t	\N
+a1cebab6ecfd371779f9c18e36cbba0c	Cattle Decapitation	y	t	\N
+54c09bacc963763eb8742fa1da44a968	Misanthropic	y	t	\N
+0870b61c5e913cb405d250e80c9ba9b9	Leng Tch'e	y	t	\N
+e563e0ba5dbf7c9417681c407d016277	Bloodtruth	y	t	\N
+1745438c6be58479227d8c0d0220eec5	Organectomy	y	t	\N
+7e5550d889d46d55df3065d742b5da51	Gutslit	y	t	\N
+393a71c997d856ed5bb85a9695be6e46	Coffin Feeder	y	t	\N
+20f0ae2f661bf20e506108c40c33a6f3	Suffocation	y	t	\N
+3ed0c2ad2c9e6e7b161e6fe0175fe113	Acéldama	y	t	\N
+96604499bfc96fcdb6da0faa204ff2fe	Gore Dimension	y	t	\N
+dd18fa7a5052f2bce8ff7cb4a30903ea	Gutalax	y	t	\N
+fd9a5c27c20cd89e4ffcc1592563abcf	Bound to Prevail	y	t	\N
+a5475ebd65796bee170ad9f1ef746394	Basement Torture Killings	y	t	\N
+1fda271217bb4c043c691fc6344087c1	Kanine	y	t	\N
+cba95a42c53bdc6fbf3ddf9bf10a4069	Profanity	y	t	\N
+fe2c9aea6c702e6b82bc19b4a5d76f90	Hurakan	y	t	\N
+bb66c20c42c26f1874525c3ab956ec41	Brutal Sphincter	y	t	\N
+aad365e95c3d5fadb5fdf9517c371e89	Tortharry	y	t	\N
+88a51a2e269e7026f0734f3ef3244e89	Human Prey	y	t	\N
+5c1a922f41003eb7a19b570c33b99ff4	Phrymerial	y	t	\N
+de506362ebfcf7c632d659aa1f2b465d	Cumbeast	y	t	\N
+1a8780e5531549bd454a04630a74cd4d	Monasteries	y	t	\N
+c0d7362d0f52d119f1beb38b12c0b651	Côte D' Aver	y	t	\N
+edd506a412c4f830215d4c0f1ac06e55	Vomit the Soul	y	t	\N
+dde31adc1b0014ce659a65c8b4d6ce42	Endseeker	y	t	\N
+4267b5081fdfb47c085db24b58d949e0	Wormed	y	t	\N
+8f7de32e3b76c02859d6b007417bd509	Beheaded	y	t	\N
+332d6b94de399f86d499be57f8a5a5ca	Shores of Lunacy	y	t	\N
+b73377a1ec60e58d4eeb03347268c11b	April in Flames	y	t	\N
+e3419706e1838c7ce6c25a28bef0c248	Asinis	y	t	\N
+382ed38ecc68052678c5ac5646298b63	Mike Litoris Complot	y	t	\N
+213c302f84c5d45929b66a20074075df	Lesson in Violence	y	t	\N
+22c030759ab12f97e941af558566505e	Urinal Tribunal	y	t	\N
+f5507c2c7beee622b98ade0b93abb7fe	Melodramatic Fools	y	t	\N
+41bee031bd7d2fdb14ff48c92f4d7984	Cypecore	y	t	\N
+39a464d24bf08e6e8df586eb5fa7ee30	Shot Crew	y	t	\N
+f7c3dcc7ba01d0ead8e0cfb59cdf6afc	Impending Mindfuck	y	t	\N
+4b42093adfc268ce8974a3fa8c4f6bca	Thron	y	t	\N
+70d0b58ef51e537361d676f05ea39c7b	Heretoir	m	t	\N
+6f0eadd7aadf134b1b84d9761808d5ad	Asphagor	y	t	\N
+6896f30283ad47ceb4a17c8c8d625891	Drill Star Autopsy	y	t	\N
+25118c5df9a2865a8bc97feb4aff4a18	Zero Degree	y	t	\N
+5a53bed7a0e05c2b865537d96a39646f	Ferndal	y	t	\N
+29b7417c5145049d6593a0d88759b9ee	Avataria	y	t	\N
+4176aa79eae271d1b82015feceb00571	Graveworm	y	t	\N
+c81794404ad68d298e9ceb75f69cf810	Agathodaimon	y	t	\N
+d0386252fd85f76fc517724666cf59ae	Iron Savior	n	t	\N
+0cddbf403096e44a08bc37d1e2e99b0f	Saxorior	y	t	\N
+546bb05114b78748d142c67cdbdd34fd	Empyreal	y	t	\N
+4ac863b6f6fa5ef02afdd9c1ca2a5e24	Eridu	y	t	\N
+1e2bcbb679ccfdea27b28bd1ea9f2e67	Jarl	y	t	\N
+0b9d35d460b848ad46ec0568961113bf	Torian	n	t	\N
+b7e529a8e9af2a2610182b3d3fc33698	Machine Head	y	t	\N
+1c62394f457ee9a56b0885f622299ea2	The Halo Effect	y	t	\N
+9c8121ad290d22878906f93fa4ff4de3	Rise of Kronos	y	t	\N
+64d9f86ed9eeac2695ec7847fe7ea313	Credic	y	t	\N
+b04d1a151c786ee00092110333873a37	Glemsel	y	t	\N
+65b029279eb0f99c0a565926566f6759	Naxen	y	t	\N
+9bfbfab5220218468ecb02ed546e3d90	Horns of Domination	y	t	\N
+be41b6cfece7dfa1b4e4d226fb999607	Beltez	y	t	\N
+9c158607f29eaf8f567cc6304ada9c6d	Ninkharsag	y	t	\N
+ca7e3b5c1860730cfd7b400de217fef2	Hemelbestormer	y	t	\N
+8f4e7c5f66d6ee5698c01de29affc562	Algebra	y	t	\N
+f0bf2458b4c1a22fc329f036dd439f08	Comaniac	y	t	\N
+25fa2cdf2be085aa5394db743677fb69	Cryptosis	y	t	\N
+32917b03e82a83d455dd6b7f8609532c	Fatal Fire	n	t	\N
+0bcf509f7eb2db3b663f5782c8c4a86e	Dispised Icon	y	t	\N
+4ffc374ef33b65b6acb388167ec542c0	Viscera	y	t	\N
+42c9b99c6b409bc9990658f6e7829542	Oceano	y	t	\N
+0c2277f470a7e9a2d70195ba32e1b08a	Distant	y	t	\N
+47b23e889175dde5d6057db61cb52847	Crowbar	y	t	\N
+bb51d2b900ba638568e48193aada8a6c	Sacred Reich	y	t	\N
+92df3fd170b0285cd722e855a2968393	Guineapig	y	t	\N
+b20a4217acaf4316739c6a5f6679ef60	Plasma	y	t	\N
+34b1dade51ffdab56daebcf6ac981371	The Hu	y	t	\N
+9d57ebbd1d3b135839b78221388394a1	Volbeat	y	t	\N
+1833e2cfde2a7cf621d60288da14830c	Bad Wolves	m	t	\N
+65976b6494d411d609160a2dfd98f903	Skindred	m	t	\N
+178227c5aef3b3ded144b9e19867a370	Diaroe	y	t	\N
+75cde58f0e5563f287f2d4afb0ce4b7e	Depression	y	t	\N
+b74881ac32a010e91ac7fcbcfebe210e	Placenta Powerfist	y	t	\N
+351af29ee203c740c3209a0e0a8e9c22	Fulci	y	t	\N
+bbdbdf297183a1c24be29ed89711f744	Revocation	y	t	\N
+6e512379810ecf71206459e6a1e64154	Goatwhore	y	t	\N
+f3b65f675d13d81c12d3bb30b0190cd1	Alluvial	y	t	\N
+1918775515a9c7b8db011fd35a443b82	Creeping Death	y	t	\N
+15bf34427540dd1945e5992583412b2f	Dropdead	y	t	\N
+ba8033b8cfb1ebfc91a5d03b3a268d9f	Escuela Grind	y	t	\N
+fd85bfffd5a0667738f6110281b25db8	Necrotted	y	t	\N
+6e4b91e3d1950bcad012dbfbdd0fff09	Legal Hate	y	t	\N
+32a02a8a7927de4a39e9e14f2dc46ac6	Deep Dirty	y	t	\N
+747f992097b9e5c9df7585931537150a	Blood	y	t	\N
+13c260ca90c0f47c9418790429220899	Schirenc Plays Pungent Stench	y	t	\N
+19819b153eb0990c821bc106e34ab3e1	Mason	y	t	\N
+b619e7f3135359e3f778e90d1942e6f5	Antagonism	y	t	\N
+0ddd0b1b6329e9cb9a64c4d947e641a8	Plagueborne	y	t	\N
+30354302ae1c0715ccad2649da3d9443	Orobas	y	t	\N
+89eec5d48b8969bf61eea38e4b3cfdbf	Kilminister	y	t	\N
+703b1360391d2aef7b9ec688b00849bb	Vomit Spell	y	t	\N
+b4b46e6ce2c563dd296e8bae768e1b9d	Servant	y	t	\N
+5c8c8b827ae259b8e4f8cb567a577a3e	Shaârghot	y	t	\N
+7f00429970ee9fd2a3185f777ff79922	Ragnarök Nordic & Viking Folk	y	t	\N
+92e2cf901fe43bb77d99af2ff42ade77	Perchta	y	t	\N
+1a1bfb986176c0ba845ae4f43d027f58	Estampie	y	t	\N
+7ecdb1a0eb7c01d081acf2b7e11531c0	Rauhbein	y	t	\N
+094caa14a3a49bf282d8f0f262a01f43	Apocalypse Orchestra	y	t	\N
+c4ddbffb73c1c34d20bd5b3f425ce4b1	Elvenking	m	t	\N
+110cb86243320511676f788dbc46f633	HateSphere	y	t	\N
+8e9f5b1fc0e61f9a289aba4c59e49521	sign of death	y	t	\N
+014dbc80621be3ddc6dd0150bc6571ff	Nervecell	y	t	\N
+536d1ccb9cce397f948171765c0120d4	WeedWizard	y	t	\N
+15b70a4565372e2da0d330568fe1d795	Human Waste	y	t	\N
+8e331f2ea604deea899bfd0a494309ba	Braincasket	y	t	\N
+46e1d00c2019ff857c307085c58e0015	5 Stabbed 4 Corpses	y	t	\N
+6afdd78eac862dd63833a3ce5964b74b	Pusboil	y	t	\N
+fb5f71046fd15a0a22d7bda38971f142	Vibrio Cholera	y	t	\N
+512914f31042dacd2a05bfcebaacdb96	Demorphed	y	t	\N
+d96d9dac0f19368234a1fe2d4daf7f7c	OPS - Orphan Playground Sniper	y	t	\N
+5aa3856374df5daa99d3d33e6a38a865	Vor die Hunde	y	t	\N
+e83655f0458b6c309866fbde556be35a	Hereza	y	t	\N
+92dd59a949dfceab979dd25ac858f204	Gorgatron	y	t	\N
+ee1bc524d6d3410e94a99706dcb12319	Rottenness	y	t	\N
+c09ffd48de204e4610d474ade2cf3a0d	Nuclear Vomit	y	t	\N
+3e7f48e97425d4c532a0787e54843863	Dead Man's Hand	y	t	\N
+bfff088b67e0fc6d1b80dbd6b6f0620c	The Gentlemen's Revenge	y	t	\N
+233dedc0bee8bbdf7930eab3dd54daee	Gunnar	n	t	\N
+80f19b325c934c8396780d0c66a87c99	The Hollywood Vampires	y	t	\N
+3ccca65d3d9843b81f4e251dcf8a3e8c	Sting	y	t	\N
+9144b4f0da4c96565c47c38f0bc16593	Shaggy	y	t	\N
+8b3d594047e4544f608c2ebb151aeb45	Witchkrieg	y	t	\N
+ca03a570b4d4a22329359dc105a9ef22	Harlott	y	t	\N
+f5eaa9c89bd215868235b0c068050883	Angstskíg	m	t	\N
+9f10d335198e90990f3437c5733468e7	Tiamat	m	t	\N
+b34f0dad8c934ee71aaabb2a675f9822	Gorleben	m	t	\N
+c6458620084029f07681a55746ee4d69	Bitchhammer	m	t	\N
+dcd3968ac5b1ab25328f4ed42cdf2e2b	Infest	y	t	\N
+6e25aa27fcd893613fac13b0312fe36d	Corrupt	y	t	\N
+63e961dd2daa48ed1dade27a54f03ec4	Incantation	y	t	\N
+4cc6d79ef4cf3af13b6c9b77783e688b	Embryo	y	t	\N
+da34d04ff19376defc2facc252e52cf0	Shampoon Killer	y	t	\N
+eaf446aca5ddd602d0ab194667e7bec1	Boötes Void	y	t	\N
+ee325100d772dd075010b61b6f33c82a	Sněť	y	t	\N
+950d43371e8291185e524550ad3fd0df	Kadaverficker	y	t	\N
+2aa7757363ff360f3a08283c1d157b2c	Maceration	y	t	\N
+d71218f2abfdd51d95ba7995b93bd536	Mephorash	y	t	\N
+12c0763f59f7697824567a3ca32191db	Haemorrhage	y	t	\N
+4e14f71c5702f5f71ad7de50587e2409	Methane	y	t	\N
+8f7d02638c253eb2d03118800c623203	Necrosy	y	t	\N
+d2ec9ebbccaa3c6925b86d1bd528d12f	Massacre	y	t	\N
+2cca468dcaea0a807f756b1de2b3ec7b	Sirrush	y	t	\N
+c8c012313f10e2d0830f3fbc5afca619	Midnight	y	t	\N
+cf3ecbdc9b5ae9c5a87ab05403691350	Mystifier	y	t	\N
+9323fc63b40460bcb68a7ad9840bad5a	Possessed	y	t	\N
+6429807f6febbf061ac85089a8c3173d	LIK	y	t	\N
+7b959644258e567b32d7c38e21fdb6fa	Ash Nazg Búrz	y	t	\N
+b08c5a0f666c5f8a83a7bcafe51ec49b	Seth	y	t	\N
+eb626abaffa54be81830da1b29a3f1d8	Demonical	y	t	\N
+dd663d37df2cb0b5e222614dd720f6d3	Arkona	y	t	\N
+71aabfaa43d427516f4020c7178de31c	Darkfall	y	t	\N
+32f27ae0d5337bb62c636e3f6f17b0ff	Totensucht	y	t	\N
+d9a6c1fcbafa92784f501ca419fe4090	Saor	y	t	\N
+afd755c6a62ac0a0947a39c4f2cd2c20	Home Reared Meat	y	t	\N
+b69b0e9285e4fa15470b0969836ac5ae	Nyctopia	y	t	\N
+79d924bae828df8e676ba27e5dfc5f42	Riot City	n	t	\N
+84557a1d9eb96a680c0557724e1d0532	Defleshed	y	t	\N
+ead662696e0486cb7a478ecd13a0b5c5	Resurrected	y	t	\N
+62165afb63fc004e619dff4d2132517c	Phantom Corporation	y	t	\N
+b5d1848944ce92433b626211ed9e46f8	Bodyfarm	y	t	\N
+92e67ef6f0f8c77b1dd631bd3b37ebca	Krisiun	y	t	\N
+fe1f86f611c34fba898e4c90b71ec981	Bloodbath	y	t	\N
+8c22a88267727dd513bf8ca278661e4d	Deicide	y	t	\N
+541455f74d6f393174ff14b99e01b22d	Matt Miller	y	t	\N
+90bebabe0c80676a4f6207ee0f8caa4c	Groundville Bastards	y	t	\N
+ee8cde73a364c2b066f795edda1a303a	The Killer Apes	y	t	\N
+92e25f3ba88109b777bd65b3b3de28a9	Pinch Black	y	t	\N
+3e3b4203ce868f55b084eb4f2da535d3	Putrid Pile	y	t	\N
+88ae6d397912fe633198a78a3b10f82e	Signs of the Swarm	y	t	\N
+d2ec80fcff98ecb676da474dfcb5fe5c	Squash Bowels	y	t	\N
+e31fabfff3891257949efc248dfa97e2	VILE	y	t	\N
+4f6ae7ce964e64fdc143602aaaab1c26	Suffocate Bastard	y	t	\N
+fe1fbc7d376820477e38b5fa497e4509	Fleshless	y	t	\N
+b4087680a00055c7b9551c6a1ef50816	Anime Torment	y	t	\N
+e318f5bc96fd248b69f6a969a320769e	Kraanium	y	t	\N
+56525146be490541a00c20a1dab0a465	Viscera Trail	y	t	\N
+186aab3d817bd38f76c754001b0ab04d	Holy Moses	m	f	\N
+2f39cfcedf45336beb2e966e80b93e22	Gutrectomy	y	t	\N
+51053ffab2737bd21724ed0b7e6c56f7	Embrace your Punishment	y	t	\N
+869d4f93046289e11b591fc7a740bc43	Devangelic	y	t	\N
+edb40909b64e73b547843287929818de	Monument of Misanthropy	y	t	\N
+5b3c70181a572c8d92d906ca20298d93	Ruins of Perception	y	t	\N
+37b93f83b5fe94e766346ef212283282	Vulvectomy	y	t	\N
+dbde8de43043d69c4fdd3e50a72b859d	Torsofuck	y	t	\N
+0f512371d62ae34741d14dde50ab4529	Cliteater	y	t	\N
+fd1bd629160356260c497da84df860e2	Crepitation	y	t	\N
+3dba6c9259786defe62551e38665a94a	Amputated	y	t	\N
+34d29649cb20a10a5e6b59c531077a59	Colpocleisis	y	t	\N
+c02f12329daf99e6297001ef684d6285	Kinski	y	t	\N
+be3c26bf034e9e62057314f3945f87be	Cephalic Carnage	m	t	\N
+986a4f4e41790e819dc8b2a297aa8c87	Malignancy	m	t	\N
+f64162c264d5679d130b6e8ae84d704e	Invoker	y	t	\N
+0674a20e29104e21d141843a86421323	Torturized	y	t	\N
+24dd5b3de900b9ee06f913a550beb64c	Groza	y	t	\N
+fe7838d63434580c47798cbc5c2c8c63	Flammenaar	y	t	\N
+e47c5fcf4a752dfcfbccaab5988193ef	Asenblut	y	t	\N
+3d482a4abe7d814a741b06cb6306d598	Obscurity	y	t	\N
+856256d0fddf6bfd898ef43777a80f0c	Aetherian	y	t	\N
+b5bc9b34286d4d4943fc301fe9b46e46	Convictive	y	t	\N
+589a30eb4a7274605385d3414ae82aaa	Nameless Death	y	t	\N
+d79d3a518bd9912fb38fa2ef71c39750	Matricide	y	t	\N
+5ff09619b7364339a105a1cbcb8d65fd	Angelcrypt	y	t	\N
+2eb6fb05d553b296096973cb97912cc0	Macbeth	m	t	\N
+50681f5168e67b62daa1837d8f693001	The Shit Shakers	y	t	\N
+e163173b9350642f7c855bf37c144ce0	Jo Carley and the old dry skulls	y	t	\N
+69af98a8916998443129c057ee04aec4	Skaphos	y	t	\N
+57338bd22a6c5ba32f90981ffb25ef23	Warside	y	t	\N
+48aeffb54173796a88ef8c4eb06dbf10	Horrible Creatures	y	t	\N
+07759c4afc493965a5420e03bdc9b773	Magefa	y	t	\N
+8989ab42027d29679d1dedc518eb04bd	On every Page	y	t	\N
+a51211ef8cbbf7b49bfb27c099c30ce1	Mindreaper	y	t	\N
+0dc9cb94cdd3a9e89383d344a103ed5b	Infected Chaos	y	t	\N
+c45ca1e791f2849d9d11b3948fdefb74	Maniacs Brainacts	y	t	\N
+54f89c837a689f7f27667efb92e3e6b1	Isn't	y	t	\N
+266674d0a44a3a0102ab80021ddfd451	Disrooted	m	t	\N
+50e7b1ba464091976138ec6a57b08ba0	Guardians Gate	m	t	\N
+ada3962af4845c243fcd1ccafc815b09	Arctic Winter	y	t	\N
+b05f3966288598b02cda4a41d6d1eb6b	Epicedium	y	t	\N
+c7d1a2a30826683fd366e7fd6527e79c	Crescent	y	t	\N
+6ff4735b0fc4160e081440b3f7238925	Purgatory	y	t	\N
+100691b7539d5ae455b6f4a18394420c	Torture Killer	y	t	\N
+d5282bd6b63b4cd51b50b40d192f1161	Ton Steine Scherben	y	t	\N
+5159fd46698ae21d56f1684c2041bd79	Are we used to it	y	t	\N
+c63ecd19a0ca74c22dfcf3063c9805d2	Contrast	y	t	\N
+e08f00b43f7aa539eb60cfa149afd92e	Alteration	y	t	\N
+793955e5d62f9b22bae3b59463c9ef63	Soulburner	y	t	\N
+e4f2a1b2efa9caa67e58fa9610903ef0	Hellgarden	y	t	\N
+25ebb3d62ad1160c96bbdea951ad2f34	Destruction	y	t	\N
+57f003f2f413eedf53362b020f467be4	Whiplash	y	t	\N
+5ef6a0f70220936a0158ad66fd5d9082	Journey of D.C.	y	t	\N
+d97a4c5c71013baac562c2b5126909e1	Hellbent on Rocking	y	t	\N
+1ebe59bfb566a19bc3ce5f4fb6c79cd3	Lost on Airfield	y	t	\N
+5f572d201a24500b2db6eca489a6a620	Defacing God	y	t	\N
+ac6dc9583812a034be2f5aacbf439236	Triagone	y	t	\N
+7f499363c322c1243827700c67a7591c	Losing my Grip	y	t	\N
+2040754b0f9589a89ce88912bcf0648e	LEYKA	y	t	\N
+13cd421d8a1cb48800543b9317aa2f52	Decreate	y	t	\N
+4b9f3b159347c34232c9f4b220cb22de	Spreading Miasma	y	t	\N
+81a17f1bf76469b18fbe410d8ec77da8	Root of all Evil	y	t	\N
+81a86312a4aa3660f273d6ed5e4a6c7d	No Face no Case	m	t	\N
+77f2b3ea9e4bd785f5ff322bae51ba07	Children of Bodom	y	f	\N
+2876f7ecdae220b3c0dcb91ff13d0590	Ctulu	y	f	\N
+121189969c46f49b8249633c2d5a7bfa	Slayer	y	f	\N
 \.
 
 
@@ -2384,6 +2396,15 @@ e4f2a1b2efa9caa67e58fa9610903ef0	2e6507f70a9cc26fb50f5fd82a83c7ef
 5ef6a0f70220936a0158ad66fd5d9082	d8b00929dec65d422303256336ada04f
 25ebb3d62ad1160c96bbdea951ad2f34	d8b00929dec65d422303256336ada04f
 d97a4c5c71013baac562c2b5126909e1	d8b00929dec65d422303256336ada04f
+1ebe59bfb566a19bc3ce5f4fb6c79cd3	d8b00929dec65d422303256336ada04f
+5f572d201a24500b2db6eca489a6a620	424214945ba5615eca039bfe5d731c09
+ac6dc9583812a034be2f5aacbf439236	6c1674d14bf5f95742f572cddb0641a7
+7f499363c322c1243827700c67a7591c	d8b00929dec65d422303256336ada04f
+2040754b0f9589a89ce88912bcf0648e	d8b00929dec65d422303256336ada04f
+13cd421d8a1cb48800543b9317aa2f52	d8b00929dec65d422303256336ada04f
+4b9f3b159347c34232c9f4b220cb22de	d8b00929dec65d422303256336ada04f
+81a17f1bf76469b18fbe410d8ec77da8	d8b00929dec65d422303256336ada04f
+81a86312a4aa3660f273d6ed5e4a6c7d	51802d8bb965d0e5be697f07d16922e8
 \.
 
 
@@ -3439,6 +3460,30 @@ b20a4217acaf4316739c6a5f6679ef60	98bbd03f950cbc96d6639a4b7b43e76a
 5ef6a0f70220936a0158ad66fd5d9082	98bbd03f950cbc96d6639a4b7b43e76a
 52ee4c6902f6ead006b0fb2f3e2d7771	ef91a35f7de705463fc18a852a0eaa9c
 d97a4c5c71013baac562c2b5126909e1	ef91a35f7de705463fc18a852a0eaa9c
+92e25f3ba88109b777bd65b3b3de28a9	1ac607a573d595a27f07adef0073a8fd
+54c09bacc963763eb8742fa1da44a968	1ac607a573d595a27f07adef0073a8fd
+1ebe59bfb566a19bc3ce5f4fb6c79cd3	1ac607a573d595a27f07adef0073a8fd
+92e67ef6f0f8c77b1dd631bd3b37ebca	2d2f874ab54161fb8158d43487e77eb6
+45b568ce63ea724c415677711b4328a7	2d2f874ab54161fb8158d43487e77eb6
+5f572d201a24500b2db6eca489a6a620	2d2f874ab54161fb8158d43487e77eb6
+ac6dc9583812a034be2f5aacbf439236	2d2f874ab54161fb8158d43487e77eb6
+59d153c1c2408b702189623231b7898a	8df16d3b3a2ca21ba921c310aadb7803
+bb51d2b900ba638568e48193aada8a6c	8df16d3b3a2ca21ba921c310aadb7803
+44b7bda13ac1febe84d8607ca8bbf439	8df16d3b3a2ca21ba921c310aadb7803
+7f499363c322c1243827700c67a7591c	dedb3aef6ecd0d48a7e7a41d8545a2d9
+2040754b0f9589a89ce88912bcf0648e	dedb3aef6ecd0d48a7e7a41d8545a2d9
+b0ce1e93de9839d07dab8d268ca23728	dedb3aef6ecd0d48a7e7a41d8545a2d9
+13cd421d8a1cb48800543b9317aa2f52	dedb3aef6ecd0d48a7e7a41d8545a2d9
+5b3c70181a572c8d92d906ca20298d93	dedb3aef6ecd0d48a7e7a41d8545a2d9
+de506362ebfcf7c632d659aa1f2b465d	dedb3aef6ecd0d48a7e7a41d8545a2d9
+5c1a922f41003eb7a19b570c33b99ff4	dedb3aef6ecd0d48a7e7a41d8545a2d9
+095849fbdc267416abc6ddb48be311d7	dedb3aef6ecd0d48a7e7a41d8545a2d9
+4b9f3b159347c34232c9f4b220cb22de	dedb3aef6ecd0d48a7e7a41d8545a2d9
+ade72e999b4e78925b18cf48d1faafa4	dedb3aef6ecd0d48a7e7a41d8545a2d9
+81a17f1bf76469b18fbe410d8ec77da8	dedb3aef6ecd0d48a7e7a41d8545a2d9
+332d6b94de399f86d499be57f8a5a5ca	dedb3aef6ecd0d48a7e7a41d8545a2d9
+2f39cfcedf45336beb2e966e80b93e22	dedb3aef6ecd0d48a7e7a41d8545a2d9
+81a86312a4aa3660f273d6ed5e4a6c7d	dedb3aef6ecd0d48a7e7a41d8545a2d9
 \.
 
 
@@ -4697,6 +4742,20 @@ e4f2a1b2efa9caa67e58fa9610903ef0	a68d5b72c2f98613f511337a59312f78
 25ebb3d62ad1160c96bbdea951ad2f34	a29864963573d7bb061691ff823b97dd
 d97a4c5c71013baac562c2b5126909e1	ef5131009b7ced0b35ea49c8c7690cef
 d97a4c5c71013baac562c2b5126909e1	5fa721b23d1df57306a710b77d7897d6
+1ebe59bfb566a19bc3ce5f4fb6c79cd3	dcd00c11302e3b16333943340d6b4a6b
+1ebe59bfb566a19bc3ce5f4fb6c79cd3	84caaa55a818fdacc56b1a78e3059e3b
+5f572d201a24500b2db6eca489a6a620	de62af4f3af4adf9e8c8791071ddafe3
+5f572d201a24500b2db6eca489a6a620	0cf6ece7453aa814e08cb7c33bd39846
+ac6dc9583812a034be2f5aacbf439236	2df929d9b6150c082888b66e8129ee3f
+7f499363c322c1243827700c67a7591c	7a3808eef413b514776a7202fd2cb94f
+7f499363c322c1243827700c67a7591c	caac3244eefed8cffee878acae427e28
+2040754b0f9589a89ce88912bcf0648e	7a3808eef413b514776a7202fd2cb94f
+13cd421d8a1cb48800543b9317aa2f52	01864d382accf1cdb077e42032b16340
+5c1a922f41003eb7a19b570c33b99ff4	86990837f323dde52a011a1f2d1eca0d
+ade72e999b4e78925b18cf48d1faafa4	d78332cc62698da3fa12331d9846e0a8
+4b9f3b159347c34232c9f4b220cb22de	2df929d9b6150c082888b66e8129ee3f
+81a17f1bf76469b18fbe410d8ec77da8	819de896b7c481c2b870bcf4ca7965fc
+81a86312a4aa3660f273d6ed5e4a6c7d	4c4f4d32429ac8424cb110b4117036e4
 \.
 
 
@@ -4880,6 +4939,10 @@ b0f45689c096147b963b998eccdbc19e	Hutkonzert - ATG - 19.10.2023	2023-10-19	8bb890
 2200574eb6396407ec9fc642c91f0e5a	European Miserere 2023	2023-07-03	d6a89e194d2558258305d49f06856e57	0
 98bbd03f950cbc96d6639a4b7b43e76a	Death and Gore over Frankfurt	2023-10-28	d7925427b71cf5c69dea1361e790154e	0
 ef91a35f7de705463fc18a852a0eaa9c	Halloween mit Hängerbänd und Hellbent on Rocking	2023-10-31	8bb89006a86a427f89e49efe7f1635c1	0
+1ac607a573d595a27f07adef0073a8fd	Death Metal night - 10.2023	2023-11-04	620f9da22d73cc8d5680539a4c87402b	0
+2d2f874ab54161fb8158d43487e77eb6	Swords into Flesh Europe Tour 2023	2023-11-07	0b186d7eb0143e60ced4af3380f5faa8	0
+8df16d3b3a2ca21ba921c310aadb7803	Night on the Living Thrash Tour 2023	2023-11-09	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0
+dedb3aef6ecd0d48a7e7a41d8545a2d9	Slaugther Feast 2023	2023-11-10	94707aea9e845e5e0ec91cd63f5982d6	1
 \.
 
 
@@ -5063,6 +5126,10 @@ a48199bd07eec68b1214594af75d7eb3	Folkrock
 08cbc2781f56d15c2c374824c7428a8c	Plitrock
 0077c87e06d736b19d6b3978f5e5e6e2	Protopunk
 5fa721b23d1df57306a710b77d7897d6	Punk'n'Roll
+84caaa55a818fdacc56b1a78e3059e3b	Heavy Rock
+86990837f323dde52a011a1f2d1eca0d	Technical Brutal Deathcore
+d78332cc62698da3fa12331d9846e0a8	Slamimng Deathcore
+819de896b7c481c2b870bcf4ca7965fc	Slamdown
 \.
 
 

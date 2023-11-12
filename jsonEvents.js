@@ -175,4 +175,8 @@ var eventsInfo = {
 {"id_event":"dad100b64679b43501647a37e886a148","year":2023,"date":"27.10.2023","event":"40 Years of Destruction Europe Tour 2023","place":"Wiesbaden (Schlachthof)","bands":4},
 {"id_event":"98bbd03f950cbc96d6639a4b7b43e76a","year":2023,"date":"28.10.2023","event":"Death and Gore over Frankfurt","place":"Frankfurt am Main (Schöppche-Keller)","bands":2},
 {"id_event":"ef91a35f7de705463fc18a852a0eaa9c","year":2023,"date":"31.10.2023","event":"Halloween mit Hängerbänd und Hellbent on Rocking","place":"Mainz (Alexander the Great)","bands":2},
+{"id_event":"1ac607a573d595a27f07adef0073a8fd","year":2023,"date":"04.11.2023","event":"Death Metal night - 10.2023","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+{"id_event":"2d2f874ab54161fb8158d43487e77eb6","year":2023,"date":"07.11.2023","event":"Swords into Flesh Europe Tour 2023","place":"Weinheim (Café Central)","bands":4},
+{"id_event":"8df16d3b3a2ca21ba921c310aadb7803","year":2023,"date":"09.11.2023","event":"Night on the Living Thrash Tour 2023","place":"Aschaffenburg (Colos-Saal)","bands":3},
+{"id_event":"dedb3aef6ecd0d48a7e7a41d8545a2d9","year":2023,"date":"10.11.2023","event":"Slaugther Feast 2023","place":"Bechtheim (Gasthaus Bechtheimer Hof)","bands":14},
 ]};

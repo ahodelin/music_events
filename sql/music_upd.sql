@@ -8,19 +8,21 @@ insert into geo.countries_continents
 */
    
 -- New events
-select music.insert_events('Halloween mit Hängerbänd und Hellbent on Rocking', '2023.10.31', 'Mainz (Alexander the Great)', 0);
 
-select music.insert_events('', '2023.11.04', '', 0);
+--insert into geo.places values (md5(''), '');
+
+select music.insert_events('"Morbid Devastation"-Tour', '2023.11.17', 'Wiesbaden (Schlachthof)', 0);
 
 -- Bands on events
-select music.insert_bands_on_events('Hängerbänd', 'Halloween mit Hängerbänd und Hellbent on Rocking');
-select music.insert_bands_on_events('Hellbent on Rocking', 'Halloween mit Hängerbänd und Hellbent on Rocking');
-
+select music.insert_bands_on_events('Cavalera Conspiracy', '"Morbid Devastation"-Tour');
+select music.insert_bands_on_events('Incite', '"Morbid Devastation"-Tour');
 
 
 -- Bands countries
-select music.insert_bands_on_countries('Hellbent on Rocking', 'Germany');
+select music.insert_bands_on_countries('Cavalera Conspiracy', 'USA');
+
 
 -- Bands generes
-select music.insert_bands_to_generes('Hellbent on Rocking', 'Punk Rock');
-select music.insert_bands_to_generes('Hellbent on Rocking', 'Punk''n''Roll');
+select music.insert_bands_to_generes('Cavalera Conspiracy', 'Death Metal');
+select music.insert_bands_to_generes('Cavalera Conspiracy', 'Thrash Metal');
+select music.insert_bands_to_generes('Cavalera Conspiracy', 'Groove Metal');

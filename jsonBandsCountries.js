@@ -763,4 +763,13 @@ var bandsCountriesInfo = {
 {"id_band":"5ef6a0f70220936a0158ad66fd5d9082","id_country":"d8b00929dec65d422303256336ada04f"},
 {"id_band":"25ebb3d62ad1160c96bbdea951ad2f34","id_country":"d8b00929dec65d422303256336ada04f"},
 {"id_band":"d97a4c5c71013baac562c2b5126909e1","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"1ebe59bfb566a19bc3ce5f4fb6c79cd3","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"5f572d201a24500b2db6eca489a6a620","id_country":"424214945ba5615eca039bfe5d731c09"},
+{"id_band":"ac6dc9583812a034be2f5aacbf439236","id_country":"6c1674d14bf5f95742f572cddb0641a7"},
+{"id_band":"7f499363c322c1243827700c67a7591c","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"2040754b0f9589a89ce88912bcf0648e","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"13cd421d8a1cb48800543b9317aa2f52","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"4b9f3b159347c34232c9f4b220cb22de","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"81a17f1bf76469b18fbe410d8ec77da8","id_country":"d8b00929dec65d422303256336ada04f"},
+{"id_band":"81a86312a4aa3660f273d6ed5e4a6c7d","id_country":"51802d8bb965d0e5be697f07d16922e8"},
 ]};
