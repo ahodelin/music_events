@@ -1264,4 +1264,8 @@ var bandsGeneresInfo = {
 {"id_band":"4b9f3b159347c34232c9f4b220cb22de","id_genere":"2df929d9b6150c082888b66e8129ee3f"},
 {"id_band":"81a17f1bf76469b18fbe410d8ec77da8","id_genere":"819de896b7c481c2b870bcf4ca7965fc"},
 {"id_band":"81a86312a4aa3660f273d6ed5e4a6c7d","id_genere":"4c4f4d32429ac8424cb110b4117036e4"},
+{"id_band":"15137b95180ccc986f6321acffb9cb6f","id_genere":"7fa69773873856d74f68a6824ca4b691"},
+{"id_band":"546f8a4844ac636dd18025dcc673a3ab","id_genere":"caac3244eefed8cffee878acae427e28"},
+{"id_band":"20d32d36893828d060096b2cd149820b","id_genere":"7a3808eef413b514776a7202fd2cb94f"},
+{"id_band":"20d32d36893828d060096b2cd149820b","id_genere":"caac3244eefed8cffee878acae427e28"},
 ]};

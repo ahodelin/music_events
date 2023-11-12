@@ -17,7 +17,6 @@ select music.insert_events('"Morbid Devastation"-Tour', '2023.11.17', 'Wiesbaden
 select music.insert_bands_on_events('Cavalera Conspiracy', '"Morbid Devastation"-Tour');
 select music.insert_bands_on_events('Incite', '"Morbid Devastation"-Tour');
 
-
 -- Bands countries
 select music.insert_bands_on_countries('Cavalera Conspiracy', 'USA');
 

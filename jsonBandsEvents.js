@@ -1071,4 +1071,8 @@ var bandsEventsInfo = {
 {"id_band":"332d6b94de399f86d499be57f8a5a5ca","id_event":"dedb3aef6ecd0d48a7e7a41d8545a2d9"},
 {"id_band":"2f39cfcedf45336beb2e966e80b93e22","id_event":"dedb3aef6ecd0d48a7e7a41d8545a2d9"},
 {"id_band":"81a86312a4aa3660f273d6ed5e4a6c7d","id_event":"dedb3aef6ecd0d48a7e7a41d8545a2d9"},
+{"id_band":"ade72e999b4e78925b18cf48d1faafa4","id_event":"a1ba44498f1b706e9ec67d6c50842b42"},
+{"id_band":"546f8a4844ac636dd18025dcc673a3ab","id_event":"a1ba44498f1b706e9ec67d6c50842b42"},
+{"id_band":"20d32d36893828d060096b2cd149820b","id_event":"a1ba44498f1b706e9ec67d6c50842b42"},
+{"id_band":"15137b95180ccc986f6321acffb9cb6f","id_event":"a1ba44498f1b706e9ec67d6c50842b42"},
 ]};

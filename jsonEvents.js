@@ -85,6 +85,7 @@ var eventsInfo = {
 {"id_event":"a7ea7b6c1894204987ce4694c1febe03","year":2019,"date":"31.10.2019","event":"Halloween Party 2019","place":"Mainz (Alexander the Great)","bands":3},
 {"id_event":"f861455af8364fc3fe01aef3fc597905","year":2019,"date":"01.11.2019","event":"Sons of Rebellion Tour 2019","place":"Mannheim (MS Connexion Complex)","bands":4},
 {"id_event":"8368e0fd31972c67de1117fb0fe12268","year":2019,"date":"03.11.2019","event":"Pagan Metal Festival","place":"Weinheim (Café Central)","bands":3},
+{"id_event":"a1ba44498f1b706e9ec67d6c50842b42","year":2019,"date":"15.11.2019","event":"Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger","place":"Mainz (M8)","bands":4},
 {"id_event":"b6aaab867e3c1c7bfe215d7db747e5d9","year":2019,"date":"30.11.2019","event":"Hell over Aschaffenburg","place":"Aschaffenburg (JUKUZ)","bands":4},
 {"id_event":"43bcb284a3d1a0eea2c7923d45b7f14e","year":2019,"date":"03.12.2019","event":"Berserker World Tour 2019","place":"Frankfurt am Main (Jahrhunderthalle)","bands":3},
 {"id_event":"20cf9df7281c50060aaf023e04fd5082","year":2019,"date":"04.12.2019","event":"Winter Hostilities 2019-Tour","place":"Wiesbaden (Schlachthof)","bands":4},
