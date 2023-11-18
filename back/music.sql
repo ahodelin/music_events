@@ -948,12 +948,12 @@ dddb04bc0d058486d0ef0212c6ea0682	Darkall Slaves	y	t	\N
 2aae4f711c09481c8353003202e05359	Dark Zodiak	y	t	\N
 28f843fa3a493a3720c4c45942ad970e	Dawn of Disease	y	t	\N
 9bc2ca9505a273b06aa0b285061cd1de	Dead Congregation	y	t	\N
-d3ed8223151e14b936436c336a4c7278	Batushka	y	t	\N
 51fa80e44b7555c4130bd06c53f4835c	Cradle of Filth	y	t	\N
 17bcf0bc2768911a378a55f42acedba7	Gwar	m	t	\N
 ce2caf05154395724e4436f042b8fa53	Begging for Incest	y	t	\N
 b0ce1e93de9839d07dab8d268ca23728	Colours of Autumn	y	t	\N
 348bcdb386eb9cb478b55a7574622b7c	Bloodgod	y	f	\N
+d3ed8223151e14b936436c336a4c7278	Batushka	y	t	Krzysztof Drabikowski's Batushka
 9138c2cc0326412f2515623f4c850eb3	Dead Eyed Sleeper (Legacy)	y	t	\N
 44b7bda13ac1febe84d8607ca8bbf439	Death Angel	y	t	\N
 d857ab11d383a7e4d4239a54cbf2a63d	Deathrite	y	t	\N
@@ -1068,7 +1068,6 @@ b570e354b7ebc40e20029fcc7a15e5a7	Ignite	n	t	\N
 7492a1ca2669793b485b295798f5d782	I'll be damned	m	t	\N
 63d7f33143522ba270cb2c87f724b126	Illdisposed	y	t	\N
 aa86b6fc103fc757e14f03afe6eb0c0a	Imperium Dekadenz	y	t	\N
-6c607fc8c0adc99559bc14e01170fee1	Incite	m	t	\N
 91a337f89fe65fec1c97f52a821c1178	Inconcessus Lux Lucis	y	t	\N
 5ec1e9fa36898eaf6d1021be67e0d00c	Indian Nightmare	n	t	\N
 8ce896355a45f5b9959eb676b8b5580c	Infected World	m	t	\N
@@ -1159,6 +1158,7 @@ ff578d3db4dc3311b3098c8365d54e6b	Pighead	y	t	\N
 80fcd08f6e887f6cfbedd2156841ab2b	P.O. Box	y	t	\N
 db38e12f9903b156f9dc91fce2ef3919	Pokerface	m	t	\N
 58db028cf01dd425e5af6c7d511291c1	Moronic	y	f	\N
+6c607fc8c0adc99559bc14e01170fee1	Incite	y	t	\N
 90d127641ffe2a600891cd2e3992685b	Poltergeist	m	t	\N
 2e7a848dc99bd27acb36636124855faf	Porn the Gore	y	t	\N
 79566192cda6b33a9ff59889eede2d66	Power Trip	y	t	\N
@@ -1567,7 +1567,6 @@ edb40909b64e73b547843287929818de	Monument of Misanthropy	y	t	\N
 5b3c70181a572c8d92d906ca20298d93	Ruins of Perception	y	t	\N
 37b93f83b5fe94e766346ef212283282	Vulvectomy	y	t	\N
 dbde8de43043d69c4fdd3e50a72b859d	Torsofuck	y	t	\N
-0f512371d62ae34741d14dde50ab4529	Cliteater	y	t	\N
 fd1bd629160356260c497da84df860e2	Crepitation	y	t	\N
 3dba6c9259786defe62551e38665a94a	Amputated	y	t	\N
 34d29649cb20a10a5e6b59c531077a59	Colpocleisis	y	t	\N
@@ -1629,6 +1628,8 @@ ac6dc9583812a034be2f5aacbf439236	Triagone	y	t	\N
 546f8a4844ac636dd18025dcc673a3ab	Harvest their Bodies	y	t	\N
 20d32d36893828d060096b2cd149820b	Call of Charon	y	t	\N
 15137b95180ccc986f6321acffb9cb6f	Trennjaeger	y	t	\N
+692649c1372f37ed50339b91337e7fec	Cavalera Conspiracy	y	t	\N
+0f512371d62ae34741d14dde50ab4529	Cliteater	y	f	\N
 \.
 
 
@@ -2412,6 +2413,7 @@ ac6dc9583812a034be2f5aacbf439236	6c1674d14bf5f95742f572cddb0641a7
 15137b95180ccc986f6321acffb9cb6f	d8b00929dec65d422303256336ada04f
 20d32d36893828d060096b2cd149820b	d8b00929dec65d422303256336ada04f
 546f8a4844ac636dd18025dcc673a3ab	d8b00929dec65d422303256336ada04f
+692649c1372f37ed50339b91337e7fec	f75d91cdd36b85cc4a8dfeca4f24fa14
 \.
 
 
@@ -3495,6 +3497,8 @@ ade72e999b4e78925b18cf48d1faafa4	a1ba44498f1b706e9ec67d6c50842b42
 546f8a4844ac636dd18025dcc673a3ab	a1ba44498f1b706e9ec67d6c50842b42
 20d32d36893828d060096b2cd149820b	a1ba44498f1b706e9ec67d6c50842b42
 15137b95180ccc986f6321acffb9cb6f	a1ba44498f1b706e9ec67d6c50842b42
+692649c1372f37ed50339b91337e7fec	86726dd04d66ca3def8c4e2ccfbbf3e2
+6c607fc8c0adc99559bc14e01170fee1	86726dd04d66ca3def8c4e2ccfbbf3e2
 \.
 
 
@@ -4771,6 +4775,9 @@ ade72e999b4e78925b18cf48d1faafa4	d78332cc62698da3fa12331d9846e0a8
 546f8a4844ac636dd18025dcc673a3ab	caac3244eefed8cffee878acae427e28
 20d32d36893828d060096b2cd149820b	7a3808eef413b514776a7202fd2cb94f
 20d32d36893828d060096b2cd149820b	caac3244eefed8cffee878acae427e28
+692649c1372f37ed50339b91337e7fec	17b8dff9566f6c98062ad5811c762f44
+692649c1372f37ed50339b91337e7fec	a29864963573d7bb061691ff823b97dd
+692649c1372f37ed50339b91337e7fec	d5a9c37bc91d6d5d55a3c2e38c3bf97d
 \.
 
 
@@ -4959,6 +4966,7 @@ ef91a35f7de705463fc18a852a0eaa9c	Halloween mit Hängerbänd und Hellbent on Rock
 8df16d3b3a2ca21ba921c310aadb7803	Night on the Living Thrash Tour 2023	2023-11-09	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0
 dedb3aef6ecd0d48a7e7a41d8545a2d9	Slaugther Feast 2023	2023-11-10	94707aea9e845e5e0ec91cd63f5982d6	1
 a1ba44498f1b706e9ec67d6c50842b42	Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger	2019-11-15	823f1912150a40bae02d466c136df28b	0
+86726dd04d66ca3def8c4e2ccfbbf3e2	"Morbid Devastation"-Tour	2023-11-17	427a371fadd4cce654dd30c27a36acb0	0
 \.
 
 

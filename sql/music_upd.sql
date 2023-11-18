@@ -11,17 +11,21 @@ insert into geo.countries_continents
 
 --insert into geo.places values (md5(''), '');
 
-select music.insert_events('"Morbid Devastation"-Tour', '2023.11.17', 'Wiesbaden (Schlachthof)', 0);
+select music.insert_events('European Fall 2023 Tour', '2023.11.19', 'Mörlenbach (LIVE MUSIC HALL Weiher)', 0);
 
 -- Bands on events
-select music.insert_bands_on_events('Cavalera Conspiracy', '"Morbid Devastation"-Tour');
-select music.insert_bands_on_events('Incite', '"Morbid Devastation"-Tour');
+select music.insert_bands_on_events('Uburen', 'European Fall 2023 Tour');
+select music.insert_bands_on_events('Kanonenfieber', 'European Fall 2023 Tour');
+select music.insert_bands_on_events('Batushka', 'European Fall 2023 Tour');
+
 
 -- Bands countries
-select music.insert_bands_on_countries('Cavalera Conspiracy', 'USA');
+select music.insert_bands_on_countries('Uburen', 'Norway');
+select music.insert_bands_on_countries('Kanonenfieber', 'Germany');
 
 
 -- Bands generes
-select music.insert_bands_to_generes('Cavalera Conspiracy', 'Death Metal');
-select music.insert_bands_to_generes('Cavalera Conspiracy', 'Thrash Metal');
-select music.insert_bands_to_generes('Cavalera Conspiracy', 'Groove Metal');
+select music.insert_bands_to_generes('Uburen', 'Viking Metal');
+select music.insert_bands_to_generes('Uburen', 'Black Metal');
+select music.insert_bands_to_generes('Kanonenfieber', 'Melodic Black Metal');
+select music.insert_bands_to_generes('Kanonenfieber', 'Death Metal');

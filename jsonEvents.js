@@ -180,4 +180,5 @@ var eventsInfo = {
 {"id_event":"2d2f874ab54161fb8158d43487e77eb6","year":2023,"date":"07.11.2023","event":"Swords into Flesh Europe Tour 2023","place":"Weinheim (Café Central)","bands":4},
 {"id_event":"8df16d3b3a2ca21ba921c310aadb7803","year":2023,"date":"09.11.2023","event":"Night on the Living Thrash Tour 2023","place":"Aschaffenburg (Colos-Saal)","bands":3},
 {"id_event":"dedb3aef6ecd0d48a7e7a41d8545a2d9","year":2023,"date":"10.11.2023","event":"Slaugther Feast 2023","place":"Bechtheim (Gasthaus Bechtheimer Hof)","bands":14},
+{"id_event":"86726dd04d66ca3def8c4e2ccfbbf3e2","year":2023,"date":"17.11.2023","event":"\'Morbid Devastation\'-Tour","place":"Wiesbaden (Schlachthof)","bands":2},
 ]};
