@@ -86,7 +86,7 @@ var eventsInfo = {
 {"id_event":"f861455af8364fc3fe01aef3fc597905","year":2019,"date":"01.11.2019","event":"Sons of Rebellion Tour 2019","place":"Mannheim (MS Connexion Complex)","bands":4},
 {"id_event":"8368e0fd31972c67de1117fb0fe12268","year":2019,"date":"03.11.2019","event":"Pagan Metal Festival","place":"Weinheim (Café Central)","bands":3},
 {"id_event":"a1ba44498f1b706e9ec67d6c50842b42","year":2019,"date":"15.11.2019","event":"Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger","place":"Mainz (M8)","bands":4},
-{"id_event":"b6aaab867e3c1c7bfe215d7db747e5d9","year":2019,"date":"30.11.2019","event":"Hell over Aschaffenburg","place":"Aschaffenburg (JUKUZ)","bands":4},
+{"id_event":"d3582717412a80f08b23f8add23a1f35","year":2019,"date":"30.11.2019","event":"Hell over Aschaffenburg - 2019","place":"Aschaffenburg (JUKUZ)","bands":4},
 {"id_event":"43bcb284a3d1a0eea2c7923d45b7f14e","year":2019,"date":"03.12.2019","event":"Berserker World Tour 2019","place":"Frankfurt am Main (Jahrhunderthalle)","bands":3},
 {"id_event":"20cf9df7281c50060aaf023e04fd5082","year":2019,"date":"04.12.2019","event":"Winter Hostilities 2019-Tour","place":"Wiesbaden (Schlachthof)","bands":4},
 {"id_event":"060fd8422f03df6eca94da7605b3a9cd","year":2019,"date":"14.12.2019","event":"MTV's Headbangers Ball Tour 2019","place":"Wiesbaden (Schlachthof)","bands":4},
@@ -181,4 +181,5 @@ var eventsInfo = {
 {"id_event":"8df16d3b3a2ca21ba921c310aadb7803","year":2023,"date":"09.11.2023","event":"Night on the Living Thrash Tour 2023","place":"Aschaffenburg (Colos-Saal)","bands":3},
 {"id_event":"dedb3aef6ecd0d48a7e7a41d8545a2d9","year":2023,"date":"10.11.2023","event":"Slaugther Feast 2023","place":"Bechtheim (Gasthaus Bechtheimer Hof)","bands":14},
 {"id_event":"86726dd04d66ca3def8c4e2ccfbbf3e2","year":2023,"date":"17.11.2023","event":"\'Morbid Devastation\'-Tour","place":"Wiesbaden (Schlachthof)","bands":2},
+{"id_event":"b8a9f22cb877ce0189a3ce04e105f0c1","year":2023,"date":"19.11.2023","event":"European Fall 2023 Tour","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
 ]};
