@@ -182,4 +182,6 @@ var eventsInfo = {
 {"id_event":"dedb3aef6ecd0d48a7e7a41d8545a2d9","year":2023,"date":"10.11.2023","event":"Slaugther Feast 2023","place":"Bechtheim (Gasthaus Bechtheimer Hof)","bands":14},
 {"id_event":"86726dd04d66ca3def8c4e2ccfbbf3e2","year":2023,"date":"17.11.2023","event":"\'Morbid Devastation\'-Tour","place":"Wiesbaden (Schlachthof)","bands":2},
 {"id_event":"b8a9f22cb877ce0189a3ce04e105f0c1","year":2023,"date":"19.11.2023","event":"European Fall 2023 Tour","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
+{"id_event":"6a1b89e9076bdcb811ab7b4b6b5fbb23","year":2023,"date":"24.11.2023","event":"Paganische Nacht - 2023","place":"Weibersbrunn (Mehrzweckhalle)","bands":4},
+{"id_event":"68884e33784d424fef2065652b743ee7","year":2023,"date":"25.11.2023","event":"Hell over Aschaffenburg - 2023","place":"Weibersbrunn (Mehrzweckhalle)","bands":5},
 ]};

@@ -9,31 +9,23 @@ insert into geo.countries_continents
    
 -- New events
 
-insert into geo.places values (md5('Weibersbrunn (Mehrzweckhalle)'), 'Weibersbrunn (Mehrzweckhalle)');
+insert into geo.places values (md5('Hofheim (Jazzkeller)'), 'Hofheim (Jazzkeller)');
 
-select music.insert_events('Paganische Nacht - 2023', '2023.11.24', 'Weibersbrunn (Mehrzweckhalle)', 0);
-select music.insert_events('Hell over Aschaffenburg - 2023', '2023.11.25', 'Weibersbrunn (Mehrzweckhalle)', 0);
-
+select music.insert_events('Slice Me Nice 2023', '2023.12.02', 'Hofheim (Jazzkeller)', 0);
 -- Bands on events
-select music.insert_bands_on_events('Asenblut', 'Paganische Nacht - 2023');
-select music.insert_bands_on_events('Finterforst', 'Paganische Nacht - 2023');
-select music.insert_bands_on_events('Arkuum', 'Paganische Nacht - 2023');
-select music.insert_bands_on_events('Gernotshagen', 'Paganische Nacht - 2023');
+select music.insert_bands_on_events('Gutalax', 'Slice Me Nice 2023');
+select music.insert_bands_on_events('Brutal Sphincter', 'Slice Me Nice 2023');
+select music.insert_bands_on_events('Mike Litoris Complot', 'Slice Me Nice 2023');
+select music.insert_bands_on_events('Slamentation', 'Slice Me Nice 2023');
 
 
-select music.insert_bands_on_events('Fleschrawl', 'Hell over Aschaffenburg - 2023');
-select music.insert_bands_on_events('Bodyfarm', 'Hell over Aschaffenburg - 2023');
-select music.insert_bands_on_events('Discreation', 'Hell over Aschaffenburg - 2023');
-select music.insert_bands_on_events('Divide', 'Hell over Aschaffenburg - 2023');
-select music.insert_bands_on_events('Soul Grinder', 'Hell over Aschaffenburg - 2023');
 
 -- Bands countries
-select music.insert_bands_on_countries('Soul Grinder', 'Germany');
-select music.insert_bands_on_countries('Arkuum', 'Germany');
-select music.insert_bands_on_countries('Gernotshagen', 'Germany');
+select music.insert_bands_on_countries('Slamentation', 'International');
+select music.insert_bands_on_countries('Mike Litoris Complot', 'Luxembourg');
 
 -- Bands generes
-select music.insert_bands_to_generes('Soul Grinder', 'Death Metal');
-select music.insert_bands_to_generes('Arkuum', 'Atmospheric Post-Black Metal');
-select music.insert_bands_to_generes('Gernotshagen', 'Pagan Black Metal');
-select music.insert_bands_to_generes('Gernotshagen', 'Folk Metal');
+select music.insert_bands_to_generes('Slamentation', 'Slam Metal');
+select music.insert_bands_to_generes('Slamentation', 'Brutal Death Metal');
+select music.insert_bands_to_generes('Mike Litoris Complot', 'Brutal Death Metal');
+select music.insert_bands_to_generes('Mike Litoris Complot', 'Grindcore');
