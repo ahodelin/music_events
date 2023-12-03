@@ -184,4 +184,5 @@ var eventsInfo = {
 {"id_event":"b8a9f22cb877ce0189a3ce04e105f0c1","year":2023,"date":"19.11.2023","event":"European Fall 2023 Tour","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
 {"id_event":"6a1b89e9076bdcb811ab7b4b6b5fbb23","year":2023,"date":"24.11.2023","event":"Paganische Nacht - 2023","place":"Weibersbrunn (Mehrzweckhalle)","bands":4},
 {"id_event":"68884e33784d424fef2065652b743ee7","year":2023,"date":"25.11.2023","event":"Hell over Aschaffenburg - 2023","place":"Weibersbrunn (Mehrzweckhalle)","bands":5},
+{"id_event":"cc0c4b3208cad5143bf8aec2c74ac9df","year":2023,"date":"02.12.2023","event":"Slice Me Nice 2023","place":"Hofheim (Jazzkeller)","bands":4},
 ]};
