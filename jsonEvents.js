@@ -85,7 +85,7 @@ var eventsInfo = {
 {"id_event":"a7ea7b6c1894204987ce4694c1febe03","year":2019,"date":"31.10.2019","event":"Halloween Party 2019","place":"Mainz (Alexander the Great)","bands":3},
 {"id_event":"f861455af8364fc3fe01aef3fc597905","year":2019,"date":"01.11.2019","event":"Sons of Rebellion Tour 2019","place":"Mannheim (MS Connexion Complex)","bands":4},
 {"id_event":"8368e0fd31972c67de1117fb0fe12268","year":2019,"date":"03.11.2019","event":"Pagan Metal Festival","place":"Weinheim (Café Central)","bands":3},
-{"id_event":"a1ba44498f1b706e9ec67d6c50842b42","year":2019,"date":"15.11.2019","event":"Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger","place":"Mainz (M8)","bands":4},
+{"id_event":"a1ba44498f1b706e9ec67d6c50842b42","year":2019,"date":"15.11.2019","event":"Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger","place":"Mainz (M8 im Haus der Jugend)","bands":4},
 {"id_event":"d3582717412a80f08b23f8add23a1f35","year":2019,"date":"30.11.2019","event":"Hell over Aschaffenburg - 2019","place":"Aschaffenburg (JUKUZ)","bands":4},
 {"id_event":"43bcb284a3d1a0eea2c7923d45b7f14e","year":2019,"date":"03.12.2019","event":"Berserker World Tour 2019","place":"Frankfurt am Main (Jahrhunderthalle)","bands":3},
 {"id_event":"20cf9df7281c50060aaf023e04fd5082","year":2019,"date":"04.12.2019","event":"Winter Hostilities 2019-Tour","place":"Wiesbaden (Schlachthof)","bands":4},
@@ -163,7 +163,7 @@ var eventsInfo = {
 {"id_event":"0962c746a7d30ba0f037b21fb8e32858","year":2023,"date":"25.07.2023","event":"A Goat Vomit Summer","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
 {"id_event":"bc9dd8d4890a5523a876931328350747","year":2023,"date":"04.08.2023","event":"Dortmund Deathfest 2023","place":"Dotmund (JunkYard)","bands":22},
 {"id_event":"1be77f077186f07ab5b59287427b15c2","year":2023,"date":"10.08.2023","event":"Oblivion European Tour 2023","place":"Weinheim (Café Central)","bands":2},
-{"id_event":"b5b6bc03476731967b51402bed55ed44","year":2023,"date":"11.08.2023","event":"Rockfield 2023","place":"Mainz-Kastel (Reduit)","bands":5},
+{"id_event":"fa64fb0e05a9c0e32010d73760dfa53f","year":2023,"date":"11.08.2023","event":"Rockfield Open Air 2023","place":"Mainz-Kastel (Reduit)","bands":5},
 {"id_event":"e396e5afb7cf4c68b9adce7af6adad8c","year":2023,"date":"24.08.2023","event":"Death Feast Open Air 2023","place":"Andernach","bands":33},
 {"id_event":"477a7e7627b4482929c215de7d3c4a76","year":2023,"date":"08.09.2023","event":"Metal Embrace Festival XV","place":"Barleben","bands":16},
 {"id_event":"7e834ee3aea78e49afb45728dbb63de2","year":2023,"date":"16.09.2023","event":"On Stage - 16.09.2023","place":"Mainz (Alexander the Great)","bands":2},
@@ -185,4 +185,5 @@ var eventsInfo = {
 {"id_event":"6a1b89e9076bdcb811ab7b4b6b5fbb23","year":2023,"date":"24.11.2023","event":"Paganische Nacht - 2023","place":"Weibersbrunn (Mehrzweckhalle)","bands":4},
 {"id_event":"68884e33784d424fef2065652b743ee7","year":2023,"date":"25.11.2023","event":"Hell over Aschaffenburg - 2023","place":"Weibersbrunn (Mehrzweckhalle)","bands":5},
 {"id_event":"cc0c4b3208cad5143bf8aec2c74ac9df","year":2023,"date":"02.12.2023","event":"Slice Me Nice 2023","place":"Hofheim (Jazzkeller)","bands":4},
+{"id_event":"4454869140a41f593eb7d8575d0f97c8","year":2023,"date":"09.12.2023","event":"Metal im M8 - 12.2023","place":"Mainz (M8 im Haus der Jugend)","bands":3},
 ]};
