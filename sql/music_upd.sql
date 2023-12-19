@@ -22,4 +22,4 @@ select music.insert_bands_on_events('', '');
 select music.insert_bands_on_countries('', '');
 
 -- Bands generes
-select music.insert_bands_to_generes('', ' Metal');
+select music.insert_bands_to_generes('', '');

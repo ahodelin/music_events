@@ -1283,4 +1283,5 @@ var bandsGeneresInfo = {
 {"id_band":"49f6021766f78bffb3f824eb199acfbc","id_genere":"a68d5b72c2f98613f511337a59312f78"},
 {"id_band":"f04de6fafc611682779eb2eb36bdbe25","id_genere":"4cfbb125e9878528bab91d12421134d8"},
 {"id_band":"f04de6fafc611682779eb2eb36bdbe25","id_genere":"eaa57a9b4248ce3968e718895e1c2f04"},
+{"id_band":"f7c31a68856cab2620244be2df27c728","id_genere":"02c4d46b0568d199466ef1baa339adc8"},
 ]};

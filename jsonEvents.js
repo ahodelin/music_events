@@ -186,4 +186,5 @@ var eventsInfo = {
 {"id_event":"68884e33784d424fef2065652b743ee7","year":2023,"date":"25.11.2023","event":"Hell over Aschaffenburg - 2023","place":"Weibersbrunn (Mehrzweckhalle)","bands":5},
 {"id_event":"cc0c4b3208cad5143bf8aec2c74ac9df","year":2023,"date":"02.12.2023","event":"Slice Me Nice 2023","place":"Hofheim (Jazzkeller)","bands":4},
 {"id_event":"4454869140a41f593eb7d8575d0f97c8","year":2023,"date":"09.12.2023","event":"Metal im M8 - 12.2023","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+{"id_event":"91b0a2f2ba6b8909cc412bf37e35f779","year":2023,"date":"18.12.2023","event":"Bands am Montag - 12.2023","place":"Mainz (Kulturcafé auf dem Campus)","bands":2},
 ]};
