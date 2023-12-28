@@ -48,7 +48,7 @@ var eventsInfo = {
 {"id_event":"9afc751ca7f2d91d23c453b32fd21864","year":2018,"date":"08.12.2018","event":"The modern art of setting ablaze tour","place":"Wiesbaden (Schlachthof)","bands":4},
 {"id_event":"0aa506a505f1115202f993ee4d650480","year":2018,"date":"11.12.2018","event":"MTV's Headbangers Ball Tour 2018","place":"Wiesbaden (Schlachthof)","bands":4},
 {"id_event":"f5a56d2eb1cd18bf3059cc15519097ea","year":2018,"date":"15.12.2018","event":"X-Mass in Hell Festival West Edition 2018","place":"Mannheim (MS Connexion Complex)","bands":8},
-{"id_event":"96a0774b50f0698d1245f287bfe20223","year":2018,"date":"27.12.2018","event":"Motörblast Play Motörhead","place":"Aschaffenburg (Colos-Saal)","bands":1},
+{"id_event":"55feb5f143059bd9a7a647ba7daab977","year":2018,"date":"27.12.2018","event":"Motörblast Play Motörhead - 2018","place":"Aschaffenburg (Colos-Saal)","bands":1},
 {"id_event":"8224efe45b1d8a1ebc0b9fb0a5405ac6","year":2019,"date":"24.01.2019","event":"EMP Persistence Tour 2019","place":"Wiesbaden (Schlachthof)","bands":7},
 {"id_event":"0e4e0056244fb82f89e66904ad62fdaf","year":2019,"date":"01.02.2019","event":"The Inmost Light Tatoo 2019","place":"Wiesbaden (Schlachthof)","bands":3},
 {"id_event":"9418ebabb93c5c1f47a05666913ec6e4","year":2019,"date":"13.02.2019","event":"Amorphis & Soilwork","place":"Wiesbaden (Schlachthof)","bands":4},
@@ -187,4 +187,5 @@ var eventsInfo = {
 {"id_event":"cc0c4b3208cad5143bf8aec2c74ac9df","year":2023,"date":"02.12.2023","event":"Slice Me Nice 2023","place":"Hofheim (Jazzkeller)","bands":4},
 {"id_event":"4454869140a41f593eb7d8575d0f97c8","year":2023,"date":"09.12.2023","event":"Metal im M8 - 12.2023","place":"Mainz (M8 im Haus der Jugend)","bands":3},
 {"id_event":"91b0a2f2ba6b8909cc412bf37e35f779","year":2023,"date":"18.12.2023","event":"Bands am Montag - 12.2023","place":"Mainz (Kulturcafé auf dem Campus)","bands":2},
+{"id_event":"85500121e0087db5354d72b484d1a90e","year":2023,"date":"27.12.2023","event":"Motörblast Play Motörhead - 2023","place":"Aschaffenburg (Colos-Saal)","bands":1},
 ]};

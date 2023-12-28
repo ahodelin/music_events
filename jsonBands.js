@@ -487,7 +487,7 @@ var bandsInfo = {
 {"id_band":"58db028cf01dd425e5af6c7d511291c1","band":"Moronic","country":"Germany","flag":"de","likes":"y","generes":1,"events":2},
 {"id_band":"b785a5ffad5e7e36ccac25c51d5d8908","band":"Mortal Peril","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"2252d763a2a4ac815b122a0176e3468f","band":"Mosaic","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
-{"id_band":"11d396b078f0ae37570c8ef0f45937ad","band":"Motörblast","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
+{"id_band":"11d396b078f0ae37570c8ef0f45937ad","band":"Motörblast","country":"Germany","flag":"de","likes":"y","generes":1,"events":2},
 {"id_band":"585b13106ecfd7ede796242aeaed4ea8","band":"Motorowl","country":"Germany","flag":"de","likes":"y","generes":5,"events":1},
 {"id_band":"6c1fcd3c91bc400e5c16f467d75dced3","band":"Mr. Irish Bastard","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
 {"id_band":"a7f9797e4cd716e1516f9d4845b0e1e2","band":"Municipal Waste","country":"USA","flag":"us","likes":"m","generes":2,"events":2},
