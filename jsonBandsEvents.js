@@ -446,7 +446,6 @@ var bandsEventsInfo = {
 {"id_band":"d0a1fd0467dc892f0dc27711637c864e","id_event":"2a6b51056784227b35e412c444f54359"},
 {"id_band":"d1fb4e47d8421364f49199ee395ad1d3","id_event":"cc4617b9ce3c2eee5d1e566eb2fbb1f6"},
 {"id_band":"d2ff1e521585a91a94fb22752dd0ab45","id_event":"0a85beacde1a467e23452f40b4710030"},
-{"id_band":"d39d7a2bb6d430fd238a6aedc7f0cee2","id_event":"e471494f42d963b13f025c0636c43763"},
 {"id_band":"d3e98095eeccaa253050d67210ef02bb","id_event":"dd50d5dcc02ea12c31e0ff495891dc22"},
 {"id_band":"d3ed8223151e14b936436c336a4c7278","id_event":"d45cf5e6b7af0cee99b37f15b13360ed"},
 {"id_band":"d433b7c1ce696b94a8d8f72de6cfbeaa","id_event":"d5cd210a82be3dd1a7879b83ba5657c0"},
@@ -1099,4 +1098,9 @@ var bandsEventsInfo = {
 {"id_band":"f7c31a68856cab2620244be2df27c728","id_event":"91b0a2f2ba6b8909cc412bf37e35f779"},
 {"id_band":"11d396b078f0ae37570c8ef0f45937ad","id_event":"55feb5f143059bd9a7a647ba7daab977"},
 {"id_band":"11d396b078f0ae37570c8ef0f45937ad","id_event":"85500121e0087db5354d72b484d1a90e"},
+{"id_band":"ae2056f2540325e2de91f64f5ac130b6","id_event":"e471494f42d963b13f025c0636c43763"},
+{"id_band":"b96a3cb81197e8308c87f6296174fe3e","id_event":"b5b0b9a19e53b658857004f145d6a94f"},
+{"id_band":"eced087124a41417845c0b0f4ff44ba9","id_event":"b5b0b9a19e53b658857004f145d6a94f"},
+{"id_band":"94ca28ea8d99549c2280bcc93f98c853","id_event":"b5b0b9a19e53b658857004f145d6a94f"},
+{"id_band":"edaf03c0c66aa548df3cebdae0f94545","id_event":"b5b0b9a19e53b658857004f145d6a94f"},
 ]};

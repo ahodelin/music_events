@@ -188,4 +188,5 @@ var eventsInfo = {
 {"id_event":"4454869140a41f593eb7d8575d0f97c8","year":2023,"date":"09.12.2023","event":"Metal im M8 - 12.2023","place":"Mainz (M8 im Haus der Jugend)","bands":3},
 {"id_event":"91b0a2f2ba6b8909cc412bf37e35f779","year":2023,"date":"18.12.2023","event":"Bands am Montag - 12.2023","place":"Mainz (Kulturcafé auf dem Campus)","bands":2},
 {"id_event":"85500121e0087db5354d72b484d1a90e","year":2023,"date":"27.12.2023","event":"Motörblast Play Motörhead - 2023","place":"Aschaffenburg (Colos-Saal)","bands":1},
+{"id_event":"b5b0b9a19e53b658857004f145d6a94f","year":2023,"date":"28.12.2023","event":"Evil Obsession 2023","place":"Heidelberg (halle 02)","bands":4},
 ]};

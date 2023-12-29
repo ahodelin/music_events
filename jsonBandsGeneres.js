@@ -589,8 +589,6 @@ var bandsGeneresInfo = {
 {"id_band":"d1fb4e47d8421364f49199ee395ad1d3","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 {"id_band":"d1fb4e47d8421364f49199ee395ad1d3","id_genere":"a68d5b72c2f98613f511337a59312f78"},
 {"id_band":"d2ff1e521585a91a94fb22752dd0ab45","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
-{"id_band":"d39d7a2bb6d430fd238a6aedc7f0cee2","id_genere":"1c800aa97116d9afd83204d65d50199a"},
-{"id_band":"d39d7a2bb6d430fd238a6aedc7f0cee2","id_genere":"4c4f4d32429ac8424cb110b4117036e4"},
 {"id_band":"d3e98095eeccaa253050d67210ef02bb","id_genere":"1c800aa97116d9afd83204d65d50199a"},
 {"id_band":"d3e98095eeccaa253050d67210ef02bb","id_genere":"2e607ef3a19cf3de029e2c5882896d33"},
 {"id_band":"d3e98095eeccaa253050d67210ef02bb","id_genere":"7349da19c2ad6654280ecf64ce42b837"},
@@ -1284,4 +1282,9 @@ var bandsGeneresInfo = {
 {"id_band":"f04de6fafc611682779eb2eb36bdbe25","id_genere":"4cfbb125e9878528bab91d12421134d8"},
 {"id_band":"f04de6fafc611682779eb2eb36bdbe25","id_genere":"eaa57a9b4248ce3968e718895e1c2f04"},
 {"id_band":"f7c31a68856cab2620244be2df27c728","id_genere":"02c4d46b0568d199466ef1baa339adc8"},
+{"id_band":"ae2056f2540325e2de91f64f5ac130b6","id_genere":"1c800aa97116d9afd83204d65d50199a"},
+{"id_band":"ae2056f2540325e2de91f64f5ac130b6","id_genere":"4c4f4d32429ac8424cb110b4117036e4"},
+{"id_band":"eced087124a41417845c0b0f4ff44ba9","id_genere":"51a0accd339e27727689fc781c4df015"},
+{"id_band":"eced087124a41417845c0b0f4ff44ba9","id_genere":"5bf88dc6f6501943cc5bc4c42c71b36b"},
+{"id_band":"edaf03c0c66aa548df3cebdae0f94545","id_genere":"a68d5b72c2f98613f511337a59312f78"},
 ]};
