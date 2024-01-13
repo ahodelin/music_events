@@ -1,5 +1,6 @@
 var eventsInfo = {
   "events":[
+{"id_event":"180e57969fd1e8948ebdf21ff1b57d3d","year":2014,"date":"04.10.2014","event":"15 Jahre live im GMZ Georg-Buch-Haus Wiesbaden","place":"Wiesbaden (GMZ Georg-Buch-Haus)","bands":2},
 {"id_event":"8640cd270510da320a9dd71429b95531","year":2015,"date":"28.08.2015","event":"NOAF XI","place":"Neuborn","bands":4},
 {"id_event":"3aa0df8e70b789a940e8a4df74c1c1de","year":2015,"date":"01.10.2015","event":"Ton Steine Scherben - 2015","place":"Wiesbaden (Schlachthof)","bands":1},
 {"id_event":"f87736b916e7d1ac60d0b7b1b7ca97b4","year":2015,"date":"27.11.2015","event":"Dia de los muertos Roadshow 2015","place":"Wiesbaden (Schlachthof)","bands":1},
@@ -189,4 +190,5 @@ var eventsInfo = {
 {"id_event":"91b0a2f2ba6b8909cc412bf37e35f779","year":2023,"date":"18.12.2023","event":"Bands am Montag - 12.2023","place":"Mainz (Kulturcafé auf dem Campus)","bands":2},
 {"id_event":"85500121e0087db5354d72b484d1a90e","year":2023,"date":"27.12.2023","event":"Motörblast Play Motörhead - 2023","place":"Aschaffenburg (Colos-Saal)","bands":1},
 {"id_event":"b5b0b9a19e53b658857004f145d6a94f","year":2023,"date":"28.12.2023","event":"Evil Obsession 2023","place":"Heidelberg (halle 02)","bands":4},
+{"id_event":"ee46f6424a052ac12d2c76309c260a36","year":2024,"date":"12.01.2024","event":"50 Jahre Geisler of Hell Festival","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
 ]};
