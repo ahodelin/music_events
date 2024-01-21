@@ -1,8 +1,8 @@
 var generesInfo = {
   "generes":[
 {"id_genere":"17b8dff9566f6c98062ad5811c762f44","genere":"Death Metal","bands":182},
-{"id_genere":"a29864963573d7bb061691ff823b97dd","genere":"Thrash Metal","bands":107},
-{"id_genere":"a68d5b72c2f98613f511337a59312f78","genere":"Black Metal","bands":84},
+{"id_genere":"a29864963573d7bb061691ff823b97dd","genere":"Thrash Metal","bands":108},
+{"id_genere":"a68d5b72c2f98613f511337a59312f78","genere":"Black Metal","bands":86},
 {"id_genere":"7fa69773873856d74f68a6824ca4b691","genere":"Brutal Death Metal","bands":67},
 {"id_genere":"01864d382accf1cdb077e42032b16340","genere":"Melodic Death Metal","bands":40},
 {"id_genere":"10a17b42501166d3bf8fbdff7e1d52b6","genere":"Grindcore","bands":39},
@@ -13,7 +13,7 @@ var generesInfo = {
 {"id_genere":"2df929d9b6150c082888b66e8129ee3f","genere":"Technical Death Metal","bands":18},
 {"id_genere":"04ae76937270105919847d05aee582b4","genere":"Heavy Metal","bands":18},
 {"id_genere":"deb8040131c3f6a3caf6a616b34ac482","genere":"Goregrind","bands":15},
-{"id_genere":"585f02a68092351a078fc43a21a56564","genere":"Speed Metal","bands":12},
+{"id_genere":"585f02a68092351a078fc43a21a56564","genere":"Speed Metal","bands":13},
 {"id_genere":"ea9565886c02dbdc4892412537e607d7","genere":"Sludge Metal","bands":10},
 {"id_genere":"4cfbb125e9878528bab91d12421134d8","genere":"Rock","bands":10},
 {"id_genere":"262770cfc76233c4f0d7a1e43a36cbf7","genere":"Melodic Black Metal","bands":10},

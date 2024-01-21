@@ -191,4 +191,5 @@ var eventsInfo = {
 {"id_event":"85500121e0087db5354d72b484d1a90e","year":2023,"date":"27.12.2023","event":"Motörblast Play Motörhead - 2023","place":"Aschaffenburg (Colos-Saal)","bands":1},
 {"id_event":"b5b0b9a19e53b658857004f145d6a94f","year":2023,"date":"28.12.2023","event":"Evil Obsession 2023","place":"Heidelberg (halle 02)","bands":4},
 {"id_event":"ee46f6424a052ac12d2c76309c260a36","year":2024,"date":"12.01.2024","event":"50 Jahre Geisler of Hell Festival","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
+{"id_event":"04fdcbd453ccdcfc343ffc7ab6b27a8d","year":2024,"date":"20.01.2024","event":"Dread Reaver Europe 2024","place":"Heidelberg (halle 02)","bands":3},
 ]};
