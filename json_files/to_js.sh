@@ -8,9 +8,9 @@ bash bandsEvents.sh
 bash bandsGeneres.sh
 bash bands.sh
 bash countries.sh
-bash eventes.sh
+bash events.sh
 bash generes.sh
 
 mv *.js ../
-rm *.json
+# rm *.json
 cd
