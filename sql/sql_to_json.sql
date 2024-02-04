@@ -1,5 +1,5 @@
 --\c music_events
-
+/*
 -- Bands
 copy (select row_to_json(t)|| ','
 from music.v_bands t)
@@ -40,6 +40,7 @@ to '/var/lib/postgresql/jsonEvents.json'
 copy (select row_to_json(t)|| ','
 from music.v_generes t)
 to '/var/lib/postgresql/jsonGeneres.json';
+*/
 
 /*
 -- copy to latex
@@ -47,7 +48,7 @@ to '/var/lib/postgresql/jsonGeneres.json';
 -- & - \& 
 --   Apey & The Pea
 --   Booze & Glory
-*/
+
 copy 
   (
     select * from music.v_bands_to_tex
@@ -60,3 +61,4 @@ copy
   select * from music.v_eu_metalembrace_to_tex 
 )
 to '/var/lib/postgresql/Death_Black_Speed_Thrash_Europe.csv' with delimiter E';' csv;
+*/
