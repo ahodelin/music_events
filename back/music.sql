@@ -462,8 +462,8 @@ CREATE VIEW music.v_bands_to_tex AS
             WHEN ((vb.band)::text ~* 'Auðn'::text) THEN (regexp_replace((vb.band)::text, 'ð'::text, '\\dh '::text))::character varying
             ELSE vb.band
         END AS "Gruppe",
-    ((' & \includegraphics[width=1cm]{4x3/'::text || (vb.flag)::text) || '} & '::text) AS "Land",
-    ((('\includegraphics[width=1cm]{'::text || 'likes/'::text) || (vb.likes)::text) || '} \\ \hline'::text) AS "Farbe"
+    ((' & \includegraphics[width=1cm]{../4x3/'::text || (vb.flag)::text) || '} & '::text) AS "Land",
+    ((('\includegraphics[width=1cm]{'::text || '../likes/'::text) || (vb.likes)::text) || '} \\ \hline'::text) AS "Farbe"
    FROM music.v_bands vb;
 
 

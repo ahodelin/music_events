@@ -1,6 +1,6 @@
 # cd ../..
 mkdir -p ../../old
-mv ../../json*.js ../../old/
+mv ../../js/json*.js ../../old/
 # cd sh/json_files/
 
 bash bandsCountries.sh
@@ -11,6 +11,6 @@ bash countries.sh
 bash events.sh
 bash generes.sh
 
-mv *.js ../..
+mv *.js ../../js
 # rm *.json
 #cd

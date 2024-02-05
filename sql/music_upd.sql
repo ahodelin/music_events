@@ -8,24 +8,17 @@ insert into geo.countries_continents
 */
 
 
---insert into geo.places values (md5(''), '');
+--insert into geo.places values (md5('Alzey (Oberhaus)'), 'Alzey (Oberhaus)');
 
 -- New events
-select music.insert_events('Dread Reaver Europe 2024', '2024.01.20', 'Heidelberg (halle 02)', 0);
+select music.insert_events('', '2024.0.', '', 0);
 
 
 -- Bands on events
-select music.insert_bands_on_events('Abbath', 'Dread Reaver Europe 2024');
-select music.insert_bands_on_events('Toxic Holocaust', 'Dread Reaver Europe 2024');
-select music.insert_bands_on_events('Hellripper', 'Dread Reaver Europe 2024');
-
+select music.insert_bands_on_events('', '');
 
 -- Bands countries
-select music.insert_bands_on_countries('Toxic Holocaust', 'USA');
-select music.insert_bands_on_countries('Abbath', 'Norway');
+select music.insert_bands_on_countries('', '');
 
 -- Bands generes
-select music.insert_bands_to_generes('Toxic Holocaust', 'Black Metal');
-select music.insert_bands_to_generes('Toxic Holocaust', 'Speed Metal');
-select music.insert_bands_to_generes('Toxic Holocaust', 'Thrash Metal');
-select music.insert_bands_to_generes('Abbath', 'Black Metal');
+select music.insert_bands_to_generes('', ' Metal');
