@@ -1302,4 +1302,7 @@ var bandsGeneresInfo = {
  {"id_band":"4ceb1f68d8a260c644c25799629a5615","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
  {"id_band":"7acb475eda543ccd0622d546c5772c5a","id_genere":"e22aa8f4c79b6c4bbeb6bcc7f4e1eb26"},
  {"id_band":"7acb475eda543ccd0622d546c5772c5a","id_genere":"7fa69773873856d74f68a6824ca4b691"},
+ {"id_band":"ba8d3efe842e0755020a2f1bc5533585","id_genere":"04ae76937270105919847d05aee582b4"},
+ {"id_band":"5a154476dd67358f4dab8500076dece3","id_genere":"a29864963573d7bb061691ff823b97dd"},
+ {"id_band":"5a154476dd67358f4dab8500076dece3","id_genere":"17b8dff9566f6c98062ad5811c762f44"},
 ]};

@@ -1120,4 +1120,7 @@ var bandsEventsInfo = {
  {"id_band":"7acb475eda543ccd0622d546c5772c5a","id_event":"0b305bfbd40df03ea4a962caa5bfc8f4"},
  {"id_band":"e6fd7b62a39c109109d33fcd3b5e129d","id_event":"0b305bfbd40df03ea4a962caa5bfc8f4"},
  {"id_band":"e318f5bc96fd248b69f6a969a320769e","id_event":"0b305bfbd40df03ea4a962caa5bfc8f4"},
+ {"id_band":"f042da2a954a1521114551a6f9e22c75","id_event":"d691b12bf758d4895b52dd338feb3a10"},
+ {"id_band":"ba8d3efe842e0755020a2f1bc5533585","id_event":"d691b12bf758d4895b52dd338feb3a10"},
+ {"id_band":"5a154476dd67358f4dab8500076dece3","id_event":"d691b12bf758d4895b52dd338feb3a10"},
 ]};
