@@ -195,4 +195,5 @@ var eventsInfo = {
  {"id_event":"379d64538f810914012edc9981039183","year":2024,"date":"03.02.2024","event":"Eskalation im Oberhaus 2024","place":"Alzey (Oberhaus)","bands":3},
  {"id_event":"0b305bfbd40df03ea4a962caa5bfc8f4","year":2024,"date":"24.02.2024","event":"Heidelberg Deathfest Warm-Up-Show 2024","place":"Weinheim (Café Central)","bands":5},
  {"id_event":"d691b12bf758d4895b52dd338feb3a10","year":2024,"date":"02.03.2024","event":"The young meatal attack","place":"Ludwigshafen am Rhein (Bon Scott Rock Cafe)","bands":3},
+ {"id_event":"95f435dc4c76d20082aafca8e5a394c9","year":2024,"date":"09.03.2024","event":"On Stage - 09.03.2024","place":"Mainz (Alexander the Great)","bands":2},
 ]};
