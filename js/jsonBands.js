@@ -27,7 +27,7 @@ var bandsInfo = {
  {"id_band":"3dba6c9259786defe62551e38665a94a","band":"Amputated","country":"UK","flag":"gb","likes":"y","generes":1,"events":1},
  {"id_band":"948098e746bdf1c1045c12f042ea98c2","band":"Analepsy","country":"Portugal","flag":"pt","likes":"y","generes":1,"events":2},
  {"id_band":"5ff09619b7364339a105a1cbcb8d65fd","band":"Angelcrypt","country":"Malta","flag":"mt","likes":"y","generes":3,"events":1},
- {"id_band":"59d153c1c2408b702189623231b7898a","band":"Angelus Apatrida","country":"Spain","flag":"es","likes":"y","generes":1,"events":2},
+ {"id_band":"59d153c1c2408b702189623231b7898a","band":"Angelus Apatrida","country":"Spain","flag":"es","likes":"y","generes":1,"events":3},
  {"id_band":"f5eaa9c89bd215868235b0c068050883","band":"Angstskíg","country":"Denmark","flag":"dk","likes":"m","generes":1,"events":1},
  {"id_band":"b4087680a00055c7b9551c6a1ef50816","band":"Anime Torment","country":"Czech Republic","flag":"cz","likes":"y","generes":1,"events":1},
  {"id_band":"b619e7f3135359e3f778e90d1942e6f5","band":"Antagonism","country":"France","flag":"fr","likes":"y","generes":1,"events":1},
