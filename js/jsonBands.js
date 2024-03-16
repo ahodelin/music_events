@@ -440,6 +440,7 @@ var bandsInfo = {
  {"id_band":"2cfe35095995e8dd15ab7b867e178c15","band":"Lonewolf","country":"France","flag":"fr","likes":"y","generes":2,"events":1},
  {"id_band":"2cf65e28c586eeb98daaecf6eb573e7a","band":"Lordi","country":"Finland","flag":"fi","likes":"m","generes":2,"events":1},
  {"id_band":"7f499363c322c1243827700c67a7591c","band":"Losing my Grip","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
+ {"id_band":"b46e412d7f90e277a1b9370cfeb26abe","band":"Los Mezcaleros","country":"Germany","flag":"de","likes":"n","generes":1,"events":1},
  {"id_band":"3cdb47307aeb005121b09c41c8d8bee6","band":"Los Skeleteros","country":"Germany","flag":"de","likes":"y","generes":1,"events":3},
  {"id_band":"1ebe59bfb566a19bc3ce5f4fb6c79cd3","band":"Lost on Airfield","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
  {"id_band":"57eba43d6bec2a8115e94d6fbb42bc75","band":"Lost Society","country":"Finland","flag":"fi","likes":"n","generes":4,"events":1},
