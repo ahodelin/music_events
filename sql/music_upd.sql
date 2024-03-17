@@ -14,7 +14,7 @@ insert into geo.countries_continents
 select music.insert_events('', '2024.03.', '', 0);
 
 update music.events 
-set price  = 
+set price  = z
 ,persons = 
 where id_event = md5 ('');
 
