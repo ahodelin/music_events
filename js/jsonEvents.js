@@ -19,6 +19,7 @@ var eventsInfo = {
  {"id_event":"bbce8e45250a239a252752fac7137e00","year":2017,"date":"24.03.2017","event":"In Flames","place":"Offenbach (Capitol)","bands":1},
  {"id_event":"e1baa5fa38e1e6c824f2011f89475f03","year":2017,"date":"09.04.2017","event":"The Popestar Tour 2017","place":"Wiesbaden (Schlachthof)","bands":2},
  {"id_event":"42c7a1c1e7836f74ced153a27d98cef0","year":2017,"date":"16.06.2017","event":"Matapaloz Festival 2017","place":"Hockenheim (Hockenheim-Ring)","bands":6},
+ {"id_event":"5c22297e2817e4a0c9ee608a67bcf297","year":2017,"date":"07.07.2017","event":"Open air Hamm 47.","place":"Hamm","bands":2},
  {"id_event":"20b7e40ecd659c47ca991e0d420a54eb","year":2017,"date":"18.08.2017","event":"Rockfield Open Air 2017","place":"Mainz-Kastel (Reduit)","bands":2},
  {"id_event":"372ca4be7841a47ba693d4de7d220981","year":2017,"date":"25.08.2017","event":"NOAF XIII","place":"Neuborn","bands":14},
  {"id_event":"d2a4c05671f768ba487ad365d2a0fb6e","year":2017,"date":"01.09.2017","event":"Metallergrillen 2017","place":"Rockenhausen","bands":16},

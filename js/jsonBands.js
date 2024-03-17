@@ -534,6 +534,7 @@ var bandsInfo = {
  {"id_band":"059792b70fc0686fb296e7fcae0bda50","band":"Obscenity","country":"Germany","flag":"de","likes":"m","generes":1,"events":1},
  {"id_band":"3d482a4abe7d814a741b06cb6306d598","band":"Obscurity","country":"Germany","flag":"de","likes":"y","generes":3,"events":1},
  {"id_band":"42c9b99c6b409bc9990658f6e7829542","band":"Oceano","country":"USA","flag":"us","likes":"y","generes":1,"events":1},
+ {"id_band":"49920f80faa980ca10fea8f31ddd5fc9","band":"Odd Couple","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
  {"id_band":"7dfe9aa0ca5bb31382879ccd144cc3ae","band":"Of Colours","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
  {"id_band":"a650d82df8ca65bb69a45242ab66b399","band":"Omnium Gatherum","country":"Finland","flag":"fi","likes":"y","generes":1,"events":1},
  {"id_band":"3dda886448fe98771c001b56a4da9893","band":"Omophagia","country":"Switzerland","flag":"ch","likes":"y","generes":1,"events":1},

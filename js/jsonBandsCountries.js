@@ -802,4 +802,6 @@ var bandsCountriesInfo = {
  {"id_band":"b8e18040dc07eead8e6741733653a740","id_country":"d8b00929dec65d422303256336ada04f"},
  {"id_band":"0bc244b6aa99080c3d37fea06d328193","id_country":"d8b00929dec65d422303256336ada04f"},
  {"id_band":"b46e412d7f90e277a1b9370cfeb26abe","id_country":"d8b00929dec65d422303256336ada04f"},
+ {"id_band":"49920f80faa980ca10fea8f31ddd5fc9","id_country":"d8b00929dec65d422303256336ada04f"},
+ {"id_band":"77b8757fad72bcc83030e90e59d2c203","id_country":"5a548c2f5875f10bf5614b7c258876cf"},
 ]};
