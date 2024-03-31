@@ -201,4 +201,5 @@ var eventsInfo = {
  {"id_event":"95f435dc4c76d20082aafca8e5a394c9","year":2024,"date":"09.03.2024","event":"On Stage - 09.03.2024","place":"Mainz (Alexander the Great)","bands":2},
  {"id_event":"ae89cc8a42502f057aa1d7cbdf5105a8","year":2024,"date":"20.03.2024","event":"Profanation over Europe 2024","place":"Wiesbaden (Schlachthof)","bands":3},
  {"id_event":"e3e419c6d94bb9333e21fbfa231367a0","year":2024,"date":"23.03.2024","event":"Tribute Bathory mit","place":"Mainz (Alexander the Great)","bands":2},
+ {"id_event":"fd4a13ab709b0975de3c7528ca3aab0e","year":2024,"date":"30.03.2024","event":"Necromanteum EU/UK Tour 2024","place":"Karlsruhe (Alter Schlachthof - Substage)","bands":4},
 ]};

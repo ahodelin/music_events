@@ -1313,4 +1313,6 @@ var bandsGeneresInfo = {
  {"id_band":"fddfe79923a5373a44237e0e60f5c845","id_genere":"5f05cefd0f6a07508d21a1d2be16d9c7"},
  {"id_band":"277ce66a47017ca1ce55714d5d2232b2","id_genere":"04ae76937270105919847d05aee582b4"},
  {"id_band":"2ad8a3ceb96c6bf74695f896999019d8","id_genere":"262770cfc76233c4f0d7a1e43a36cbf7"},
+ {"id_band":"fc4734cc48ce1595c9dbbe806f663af8","id_genere":"caac3244eefed8cffee878acae427e28"},
+ {"id_band":"567ddbaeec9bc3c5f0348a21ebd914b1","id_genere":"bb273189d856ee630d92fbc0274178bb"},
 ]};
