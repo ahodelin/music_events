@@ -808,4 +808,9 @@ var bandsCountriesInfo = {
  {"id_band":"2ad8a3ceb96c6bf74695f896999019d8","id_country":"d8b00929dec65d422303256336ada04f"},
  {"id_band":"fc4734cc48ce1595c9dbbe806f663af8","id_country":"f75d91cdd36b85cc4a8dfeca4f24fa14"},
  {"id_band":"567ddbaeec9bc3c5f0348a21ebd914b1","id_country":"76423d8352c9e8fc8d7d65f62c55eae9"},
+ {"id_band":"25cde5325befa9538b771717514351fb","id_country":"d8b00929dec65d422303256336ada04f"},
+ {"id_band":"cf2676445aa6abcc43a4b0d4b01b42a1","id_country":"d8b00929dec65d422303256336ada04f"},
+ {"id_band":"3005cc8298f189f94923611386015c78","id_country":"1007e1b7f894dfbf72a0eaa80f3bc57e"},
+ {"id_band":"7f2679aa5b1116cc22bab4ee10018f59","id_country":"6c1674d14bf5f95742f572cddb0641a7"},
+ {"id_band":"8a1acf425fb1bca48fb543edcc20a90d","id_country":"a67d4cbdd1b59e0ffccc6bafc83eb033"},
 ]};
