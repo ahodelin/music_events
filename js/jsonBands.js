@@ -681,6 +681,7 @@ var bandsInfo = {
  {"id_band":"abd7ab19ff758cf4c1a2667e5bbac444","band":"Spasm","country":"Czech Republic","flag":"cz","likes":"y","generes":1,"events":3},
  {"id_band":"16cbdd4df5f89d771dccfa1111d7f4bc","band":"Spearhead","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
  {"id_band":"93f4aac22b526b5f0c908462da306ffc","band":"Speedemon","country":"Portugal","flag":"pt","likes":"y","generes":2,"events":1},
+ {"id_band":"62254b7ab0a2b3d3138bde893dde64a3","band":"Spitfire","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
  {"id_band":"4b9f3b159347c34232c9f4b220cb22de","band":"Spreading Miasma","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
  {"id_band":"d2ec80fcff98ecb676da474dfcb5fe5c","band":"Squash Bowels","country":"Poland","flag":"pl","likes":"y","generes":1,"events":1},
  {"id_band":"302ebe0389198972c223f4b72894780a","band":"Stagewar","country":"Germany","flag":"de","likes":"m","generes":1,"events":1},

@@ -9,10 +9,10 @@ insert into geo.countries_continents
 
 -- 34.00 Dying Fetus
 
---insert into geo.places values (md5(' ()'), ' ()');
+-- insert into geo.places values (md5(' ()'), ' ()');
 
 -- New events
-select music.insert_events('', '2024.04.', ' ()', 0);
+select music.insert_events('T', '2024.04.', ' ()', 0);
 
 update music.events 
 set price  = 
