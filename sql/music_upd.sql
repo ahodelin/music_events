@@ -9,30 +9,22 @@ insert into geo.countries_continents
 
 -- 34.00 Dying Fetus
 
-insert into geo.places values (md5('Ludwigshafen (Kulturzentrum dasHaus)'), 'Ludwigshafen (Kulturzentrum dasHaus)');
+--insert into geo.places values (md5(' ()'), ' ()');
 
 -- New events
-select music.insert_events('Thrash Attack - 06.04.2024', '2024.04.06', 'Ludwigshafen (Kulturzentrum dasHaus)', 0);
+select music.insert_events('', '2024.04.', ' ()', 0);
 
 update music.events 
-set price  = 16.52
+set price  = 
 ,persons = 2
-where id_event = md5 ('Thrash Attack - 06.04.2024');
+where id_event = md5 ('');
 
 
 -- Bands on events
-select music.insert_bands_on_events('Warfield', 'Thrash Attack - 06.04.2024');
-select music.insert_bands_on_events('Megalive', 'Thrash Attack - 06.04.2024');
-select music.insert_bands_on_events('Hell Patröl', 'Thrash Attack - 06.04.2024');
-select music.insert_bands_on_events('Spitfire', 'Thrash Attack - 06.04.2024');
-
+select music.insert_bands_on_events('', '');
 
 -- Bands countries
-select music.insert_bands_on_countries('Welded', 'Germany');
-select music.insert_bands_on_countries('Megalive', 'Germany');
-select music.insert_bands_on_countries('Spitfire', 'Germany');
+select music.insert_bands_on_countries('', 'Germany');
 
 -- Bands generes
-select music.insert_bands_to_generes('Megalive', 'Tribute to Megadeth');
-select music.insert_bands_to_generes('Spetfire', 'Speed Metal');
-select music.insert_bands_to_generes('Spetfire', 'Thrash Metal');
+select music.insert_bands_to_generes('', ' Metal');
