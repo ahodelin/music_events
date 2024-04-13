@@ -204,4 +204,5 @@ var eventsInfo = {
  {"id_event":"fd4a13ab709b0975de3c7528ca3aab0e","year":2024,"date":"30.03.2024","event":"Necromanteum EU/UK Tour 2024","place":"Karlsruhe (Alter Schlachthof - Substage)","bands":4},
  {"id_event":"573a39e7d69678efec23ba7a9e99f0f5","year":2024,"date":"05.04.2024","event":"Taunus Metal Festival XIV","place":"Oberursel","bands":7},
  {"id_event":"b8fabad72c3fd0540815a6cd8d126a14","year":2024,"date":"06.04.2024","event":"Thrash Attack - 06.04.2024","place":"Ludwigshafen (Kulturzentrum dasHaus)","bands":4},
+ {"id_event":"1d8cf922eebeba04d4aa27b8b5e412c3","year":2024,"date":"12.04.2024","event":"Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show","place":"Mainz (Kulturclub schon schön)","bands":3},
 ]};

@@ -24,7 +24,7 @@ for(b of objBands.bands){
 		b['band'] + '</option>';
 }
                           
-selectDrpDwnGenere.innerHTML = '<option value = "void" selected>Select Genere</option>';
+selectDrpDwnGenere.innerHTML = '<option value = "void" selected>Select Genre</option>';
 for(g of objGeneres.generes){
 	selectDrpDwnGenere.innerHTML = selectDrpDwnGenere.innerHTML + 
         	'<option value = "' + g['id_genere'] + '">' +

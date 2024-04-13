@@ -1328,4 +1328,6 @@ var bandsGeneresInfo = {
  {"id_band":"c2d7bbc06d62144545c45b9060b0a629","id_genere":"d5750853c14498dc264065bcf7e05a29"},
  {"id_band":"62254b7ab0a2b3d3138bde893dde64a3","id_genere":"a29864963573d7bb061691ff823b97dd"},
  {"id_band":"62254b7ab0a2b3d3138bde893dde64a3","id_genere":"585f02a68092351a078fc43a21a56564"},
+ {"id_band":"f291caafeb623728ebf0166ac4cb0825","id_genere":"5bf88dc6f6501943cc5bc4c42c71b36b"},
+ {"id_band":"f291caafeb623728ebf0166ac4cb0825","id_genere":"0e67c2c71665c073ae6e51d2a82dc311"},
 ]};
