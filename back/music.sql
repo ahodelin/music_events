@@ -424,7 +424,7 @@ CREATE VIEW music.v_bands_events AS
    FROM ((music.bands b
      JOIN music.bands_events be ON ((b.id_band = be.id_band)))
      JOIN music.events e ON ((be.id_event = e.id_event)))
-  ORDER BY b.band;
+  ORDER BY b.band, e.date_event;
 
 
 --
@@ -438,7 +438,7 @@ CREATE VIEW music.v_bands_generes AS
    FROM ((music.bands b
      JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
      JOIN music.generes g ON ((bg.id_genere = g.id_genere)))
-  ORDER BY b.band;
+  ORDER BY b.band, g.genere;
 
 
 --
@@ -594,7 +594,7 @@ CREATE VIEW music.v_generes AS
      JOIN music.bands b ON ((b.id_band = bg.id_band)))
   WHERE (b.likes = 'y'::bpchar)
   GROUP BY g.genere, g.id_genere
-  ORDER BY (count(bg.id_band)) DESC;
+  ORDER BY (count(bg.id_band)) DESC, g.genere;
 
 
 --
@@ -1684,6 +1684,7 @@ cf2676445aa6abcc43a4b0d4b01b42a1	Hell Patröl	y	t	\N
 c2d7bbc06d62144545c45b9060b0a629	Megalive	y	t	\N
 62254b7ab0a2b3d3138bde893dde64a3	Spitfire	y	t	\N
 f291caafeb623728ebf0166ac4cb0825	Devil's Hours	y	t	\N
+1a46202030819f7419e300997199c955	Reflexor	y	t	\N
 \.
 
 
@@ -2508,6 +2509,7 @@ fddfe79923a5373a44237e0e60f5c845	5a548c2f5875f10bf5614b7c258876cf
 c2d7bbc06d62144545c45b9060b0a629	d8b00929dec65d422303256336ada04f
 62254b7ab0a2b3d3138bde893dde64a3	d8b00929dec65d422303256336ada04f
 f291caafeb623728ebf0166ac4cb0825	d8b00929dec65d422303256336ada04f
+1a46202030819f7419e300997199c955	d8b00929dec65d422303256336ada04f
 \.
 
 
@@ -3668,6 +3670,8 @@ cf2676445aa6abcc43a4b0d4b01b42a1	b8fabad72c3fd0540815a6cd8d126a14
 a332f1280622f9628fccd1b7aac7370a	1d8cf922eebeba04d4aa27b8b5e412c3
 99bd5eff92fc3ba728a9da5aa1971488	1d8cf922eebeba04d4aa27b8b5e412c3
 f291caafeb623728ebf0166ac4cb0825	1d8cf922eebeba04d4aa27b8b5e412c3
+96682d9c9f1bed695dbf9176d3ee234c	31b7b744437a5b46fb982fcdf1b94851
+1a46202030819f7419e300997199c955	31b7b744437a5b46fb982fcdf1b94851
 \.
 
 
@@ -5006,6 +5010,7 @@ c2d7bbc06d62144545c45b9060b0a629	d5750853c14498dc264065bcf7e05a29
 62254b7ab0a2b3d3138bde893dde64a3	585f02a68092351a078fc43a21a56564
 f291caafeb623728ebf0166ac4cb0825	5bf88dc6f6501943cc5bc4c42c71b36b
 f291caafeb623728ebf0166ac4cb0825	0e67c2c71665c073ae6e51d2a82dc311
+1a46202030819f7419e300997199c955	a29864963573d7bb061691ff823b97dd
 \.
 
 
@@ -5030,6 +5035,7 @@ fd4a13ab709b0975de3c7528ca3aab0e	Necromanteum EU/UK Tour 2024	2024-03-30	89c0549
 573a39e7d69678efec23ba7a9e99f0f5	Taunus Metal Festival XIV	2024-04-05	1e9e26a0456c1694d069e119dae54240	0	30.00	2
 b8fabad72c3fd0540815a6cd8d126a14	Thrash Attack - 06.04.2024	2024-04-06	6db34279cf6070892349b478135302e7	0	16.52	2
 1d8cf922eebeba04d4aa27b8b5e412c3	Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show	2024-04-12	446c20c5e383ff30350166d5ab741efb	0	22.0	2
+31b7b744437a5b46fb982fcdf1b94851	Super Sweet 16 (Edition 36)	2024-04-20	14b82c93c42422209e5b5aad5b7b772e	0	0	2
 02ce1b3a6156c9f73724ea3efabde2e8	Angelus Apatrida - Tour 2022	2022-07-28	0b186d7eb0143e60ced4af3380f5faa8	0	16.50	2
 c9a70f42ce4dcd82a99ed83a5117b890	Where Owls know my name EU|UK Tour 2019	2019-09-22	427a371fadd4cce654dd30c27a36acb0	0	24.70	2
 d5cd210a82be3dd1a7879b83ba5657c0	15 Years New Evil Music, Festival	2019-10-12	4751a5b2d9992dca6e462e3b14695284	0	44.0	2
