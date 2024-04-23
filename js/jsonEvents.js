@@ -206,4 +206,5 @@ var eventsInfo = {
  {"id_event":"b8fabad72c3fd0540815a6cd8d126a14","year":2024,"date":"06.04.2024","event":"Thrash Attack - 06.04.2024","place":"Ludwigshafen (Kulturzentrum dasHaus)","bands":4},
  {"id_event":"1d8cf922eebeba04d4aa27b8b5e412c3","year":2024,"date":"12.04.2024","event":"Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show","place":"Mainz (Kulturclub schon schön)","bands":3},
  {"id_event":"31b7b744437a5b46fb982fcdf1b94851","year":2024,"date":"20.04.2024","event":"Super Sweet 16 (Edition 36)","place":"Mainz (Kulturcafé auf dem Campus)","bands":2},
+ {"id_event":"2c6a917b013e933d5ef1aa0a6216e575","year":2024,"date":"22.04.2024","event":"Fintroll + Metsatöll + Suotana Tour 2024","place":"Aschaffenburg (Colos-Saal)","bands":3},
 ]};
