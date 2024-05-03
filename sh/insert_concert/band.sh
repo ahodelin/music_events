@@ -10,9 +10,11 @@ while [[ $band != "" ]]; do
 
   if [[ $band != "" ]]; then 
     ba=`psql -U $dbuser -w -d $db -c "select band from music.bands t where band = '$band';"`
+    echo -n "Did you like this band? (y, m, n)? "
+    read likes
 
     if [[ $ba =~ $not_found_in_db ]]; then
-      psql -U $dbuser -w -d $db -c "insert into music.bands values (md5('$band'), '$band');"
+      psql -U $dbuser -w -d $db -c "insert into music.bands values (md5('$band'), '$band', '$likes');"
       echo "New Band $band inserted"
 
       bash country.sh "$band"
