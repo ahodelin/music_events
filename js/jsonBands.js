@@ -418,7 +418,7 @@ var bandsInfo = {
  {"id_band":"1fda271217bb4c043c691fc6344087c1","band":"Kanine","country":"France","flag":"fr","likes":"y","generes":1,"events":3},
  {"id_band":"ce5e821f2dcc57569eae793f628c99cf","band":"Kanonenfieber","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
  {"id_band":"820de5995512273916b117944d6da15a","band":"Kataklysm","country":"Canada","flag":"ca","likes":"y","generes":1,"events":3},
- {"id_band":"a66eef08e0540cc85e2c3f409e04d389","band":"Keep of Kasessin","country":"Norway","flag":"no","likes":null,"generes":3,"events":1},
+ {"id_band":"e58ecda1a7b9bfdff6a10d398f468c3f","band":"Keep of Kalessin","country":"Norway","flag":"no","likes":"y","generes":3,"events":1},
  {"id_band":"e6fd7b62a39c109109d33fcd3b5e129d","band":"Keitzer","country":"Germany","flag":"de","likes":"y","generes":2,"events":4},
  {"id_band":"89eec5d48b8969bf61eea38e4b3cfdbf","band":"Kilminister","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
  {"id_band":"c02f12329daf99e6297001ef684d6285","band":"Kinski","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},

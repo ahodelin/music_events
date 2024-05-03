@@ -609,7 +609,7 @@ var bandsEventsInfo = {
  {"id_band":"820de5995512273916b117944d6da15a","id_event":"663ea93736c204faee5f6c339203be3e"},
  {"id_band":"820de5995512273916b117944d6da15a","id_event":"060fd8422f03df6eca94da7605b3a9cd"},
  {"id_band":"820de5995512273916b117944d6da15a","id_event":"bc9dd8d4890a5523a876931328350747"},
- {"id_band":"a66eef08e0540cc85e2c3f409e04d389","id_event":"f853b43cbe11fe4cdef7009f0f98d4f2"},
+ {"id_band":"e58ecda1a7b9bfdff6a10d398f468c3f","id_event":"f853b43cbe11fe4cdef7009f0f98d4f2"},
  {"id_band":"e6fd7b62a39c109109d33fcd3b5e129d","id_event":"0b305bfbd40df03ea4a962caa5bfc8f4"},
  {"id_band":"e6fd7b62a39c109109d33fcd3b5e129d","id_event":"0e4288f287e446bf417ba4e0664a1c26"},
  {"id_band":"e6fd7b62a39c109109d33fcd3b5e129d","id_event":"7fc85de86476aadededbf6716f2eebad"},
