@@ -210,4 +210,5 @@ var eventsInfo = {
  {"id_event":"fd5ccee80a5d5a1a16944aefe2b840c5","year":2024,"date":"01.05.2024","event":"Celebrating the music of Jimi Hendrix","place":"Weinheim (Café Central)","bands":1},
  {"id_event":"f853b43cbe11fe4cdef7009f0f98d4f2","year":2024,"date":"02.05.2024","event":"Hate, Keep of Kalessin","place":"Weinheim (Café Central)","bands":2},
  {"id_event":"220f8c4b62141ad5acd8b11d4d0f2bd3","year":2024,"date":"03.05.2024","event":"Heretic Hordes I","place":"Mannheim (7er Club)","bands":5},
+ {"id_event":"6bc91856db67c4e90b455638fa43e0bd","year":2024,"date":"04.05.2024","event":"Shades of Sorrow European Tour 2024","place":"Weinheim (Café Central)","bands":3},
 ]};
