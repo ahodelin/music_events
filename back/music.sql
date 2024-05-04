@@ -1693,9 +1693,9 @@ f291caafeb623728ebf0166ac4cb0825	Devil's Hours	y	t	\N
 e58ecda1a7b9bfdff6a10d398f468c3f	Keep of Kalessin	y	t	\N
 183bea99848e19bdb720ba5774d216ba	Gasbrand	y	t	\N
 495ddc6ae449bf858afe5512d28563f5	Medico Peste	y	t	\N
-3b0b94c18b8d65aec3a8ca7f4dae720d	Tears of Fire	y	t	\N
 b2b4ae56a4531455e275770dc577b68e	Devastator	y	t	\N
-f9d5d4c7b26c7b832ee503b767d5df52	Slaughter Messiah	y	t	\N
+3b0b94c18b8d65aec3a8ca7f4dae720d	Tears of Fire	y	t	Location: Germany
+f9d5d4c7b26c7b832ee503b767d5df52	Slaughter Messiah	m	t	\N
 \.
 
 

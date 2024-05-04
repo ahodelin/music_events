@@ -672,7 +672,7 @@ var bandsInfo = {
  {"id_band":"360c000b499120147c8472998859a9fe","band":"Skinned Alive","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},
  {"id_band":"e62a773154e1179b0cc8c5592207cb10","band":"Skull Fist","country":"Canada","flag":"ca","likes":"n","generes":2,"events":1},
  {"id_band":"e9782409a3511c3535149cdfb5b76364","band":"Slamentation","country":"International","flag":"un","likes":"y","generes":2,"events":1},
- {"id_band":"f9d5d4c7b26c7b832ee503b767d5df52","band":"Slaughter Messiah","country":"Belgium","flag":"be","likes":"y","generes":3,"events":1},
+ {"id_band":"f9d5d4c7b26c7b832ee503b767d5df52","band":"Slaughter Messiah","country":"Belgium","flag":"be","likes":"m","generes":3,"events":1},
  {"id_band":"4bb93d90453dd63cc1957a033f7855c7","band":"Slaughterra","country":"Germany","flag":"de","likes":"y","generes":3,"events":3},
  {"id_band":"121189969c46f49b8249633c2d5a7bfa","band":"Slayer","country":"USA","flag":"us","likes":"y","generes":1,"events":1},
  {"id_band":"f29d276fd930f1ad7687ed7e22929b64","band":"Sleepers' Guilt","country":"Luxembourg","flag":"lu","likes":"y","generes":1,"events":2},

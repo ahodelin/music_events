@@ -9,7 +9,7 @@ insert into geo.countries_continents
 
 -- 34.00 Dying Fetus
 
--- insert into geo.places values (md5(' ()'), ' ()');
+-- insert into geo.places values (md5('Mannheim (7er Club)'), 'Mannheim (7er Club)');
 
 -- New events
 select music.insert_events('', '2024.05.', '', 0);
