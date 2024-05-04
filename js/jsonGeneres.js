@@ -1,8 +1,8 @@
 var generesInfo = {
   "generes":[
- {"id_genere":"17b8dff9566f6c98062ad5811c762f44","genere":"Death Metal","bands":183},
- {"id_genere":"a29864963573d7bb061691ff823b97dd","genere":"Thrash Metal","bands":111},
- {"id_genere":"a68d5b72c2f98613f511337a59312f78","genere":"Black Metal","bands":88},
+ {"id_genere":"17b8dff9566f6c98062ad5811c762f44","genere":"Death Metal","bands":184},
+ {"id_genere":"a29864963573d7bb061691ff823b97dd","genere":"Thrash Metal","bands":113},
+ {"id_genere":"a68d5b72c2f98613f511337a59312f78","genere":"Black Metal","bands":93},
  {"id_genere":"7fa69773873856d74f68a6824ca4b691","genere":"Brutal Death Metal","bands":69},
  {"id_genere":"01864d382accf1cdb077e42032b16340","genere":"Melodic Death Metal","bands":42},
  {"id_genere":"10a17b42501166d3bf8fbdff7e1d52b6","genere":"Grindcore","bands":39},
@@ -97,6 +97,7 @@ var generesInfo = {
  {"id_genere":"efe010f3a24895472e65b173e01b969d","genere":"Experimental Metal","bands":1},
  {"id_genere":"ba60b529061c0af9afe655b44957e41b","genere":"Extreme Gothic Metal","bands":1},
  {"id_genere":"a48199bd07eec68b1214594af75d7eb3","genere":"Folkrock","bands":1},
+ {"id_genere":"d4fe504b565a2bcbec1bb4c56445e857","genere":"Funeral Doom Metal","bands":1},
  {"id_genere":"2e9dfd2e07792b56179212f5b8f473e6","genere":"Funk Rock","bands":1},
  {"id_genere":"d3fcef9d7f88d2a12ea460c604731cd5","genere":"German Punk","bands":1},
  {"id_genere":"9c093ec7867ba1df61e27a5943168b90","genere":"Gothic Rock","bands":1},
@@ -114,6 +115,7 @@ var generesInfo = {
  {"id_genere":"36e61931478cf781e59da3b5ae2ee64e","genere":"Melodic Heavy Metal","bands":1},
  {"id_genere":"836ea59914cc7a8e81ee0dd63f7c21c1","genere":"Melodic Metalcore","bands":1},
  {"id_genere":"89089c3efdb2f18179df6d476e5759de","genere":"Melodic Viking Metal","bands":1},
+ {"id_genere":"f829960b3a62def55e90a3054491ead7","genere":"Middle Eastern Doom Metal","bands":1},
  {"id_genere":"5cbdaf6af370a627c84c43743e99e016","genere":"Modern Metal","bands":1},
  {"id_genere":"504724f4d7623c2a03384bd0f213e524","genere":"New Wave of British Heavy Metal","bands":1},
  {"id_genere":"08cbc2781f56d15c2c374824c7428a8c","genere":"Plitrock","bands":1},

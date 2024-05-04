@@ -8,6 +8,7 @@ days_ago_pattr="[0-9]+"
 price_pattr="[0-9]*\.[0-9]*"
 duration_pattr="[0-9]+"
 person_pattr="[1-2]"
+date_pattr="20[2-4][0-9]\-[0-1][0-9]\-[0-3][0-9]"
 
 echo "Information of music event."
 
@@ -17,13 +18,23 @@ while [[ $ok != "yes" ]]; do
   read music_event
 
   echo
-  days_ago=""
-  while [[ ! $days_ago =~ $days_ago_pattr ]]; do
-    echo -n "Days ago (d): "
-    read days_ago
-  done
-
-  date_event=`date --date="$days_ago days ago" +%Y-%m-%d`
+  echo -n "Do you know the date of this event? "
+  read answer
+  
+  if [[ $answer == "yes" ]]; then
+    date_event=""
+    while [[ ! $date_event =~ $date_pattr ]]; do
+      echo -n "Date of event: "
+      read date_event
+    done
+  else 
+    days_ago=""
+    while [[ ! $days_ago =~ $days_ago_pattr ]]; do
+      echo -n "Days ago (d): "
+      read days_ago
+    done
+    date_event=`date --date="$days_ago days ago" +%Y-%m-%d`
+  fi
 
   echo
   echo -n "Place: "

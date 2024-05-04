@@ -101,7 +101,7 @@ var eventsInfo = {
  {"id_event":"dcda9434b422f9aa793f0a8874922306","year":2020,"date":"07.03.2020","event":"A Tribute to ACDC 2020","place":"Magdeburg (Factory)","bands":1},
  {"id_event":"4bc4f9db3d901e8efe90f60d85a0420d","year":2020,"date":"11.03.2020","event":"Descend into Madness Tour 2020","place":"Wiesbaden (Schlachthof)","bands":3},
  {"id_event":"d0f1ffdb2d3a20a41f9c0f10df3b9386","year":2020,"date":"25.09.2020","event":"Südpfalz Metalfest","place":"Landau (Gloria Kulturpalast)","bands":3},
- {"id_event":"73d6ec35ad0e4ef8f213ba89d8bfd7d7","year":2021,"date":"23.07.2021","event":"New live rituals a COVID proof celebration of audial darkness","place":"Mannheim (7er-Club)","bands":2},
+ {"id_event":"73d6ec35ad0e4ef8f213ba89d8bfd7d7","year":2021,"date":"23.07.2021","event":"New live rituals a COVID proof celebration of audial darkness","place":"Mannheim (7er Club)","bands":2},
  {"id_event":"441306dd21b61d9a52e04b9e177cc9b5","year":2021,"date":"31.07.2021","event":"Jubiläumswoche 25 Jahre Hexenhaus","place":"Ulm (Hexenhaus)","bands":10},
  {"id_event":"13afebb96e2d2d27345bd3b1fefc4db0","year":2021,"date":"06.08.2021","event":"Crossplane & Hängerbänd","place":"Mainz (KUZ - Kulturzentrum)","bands":2},
  {"id_event":"320951dccf4030808c979375af8356b6","year":2021,"date":"28.08.2021","event":"Wild Boar Wars III","place":"Frankfurt am Main (Das Bett)","bands":10},
@@ -150,7 +150,7 @@ var eventsInfo = {
  {"id_event":"9f348351c96df42bcc7496c2010d4d1d","year":2023,"date":"19.01.2023","event":"Netherheaven Europe 2023","place":"Wiesbaden (Schlachthof)","bands":4},
  {"id_event":"63cc3a7986e4e746cdb607be909b90d4","year":2023,"date":"03.03.2023","event":"Campaing for musical destruction","place":"Heidelberg (halle 02)","bands":4},
  {"id_event":"7fc85de86476aadededbf6716f2eebad","year":2023,"date":"18.03.2023","event":"Heidelberg Deathfest VI","place":"Heidelberg (halle 02)","bands":12},
- {"id_event":"18ef7142c02d84033cc9d41687981691","year":2023,"date":"29.03.2023","event":"Ravaging Europe 2023","place":"Mannheim (7er-Club)","bands":4},
+ {"id_event":"18ef7142c02d84033cc9d41687981691","year":2023,"date":"29.03.2023","event":"Ravaging Europe 2023","place":"Mannheim (7er Club)","bands":4},
  {"id_event":"6b6bceac41ce67726a6218b1155f2e70","year":2023,"date":"12.04.2023","event":"Easter Mosh","place":"Mannheim (MS Connexion Complex)","bands":4},
  {"id_event":"60bb0152f453d3f043b4dabee1a60513","year":2023,"date":"21.04.2023","event":"Death Over Mainz 2023","place":"Mainz (M8 im Haus der Jugend)","bands":4},
  {"id_event":"6d7c6c981877a0dedcb276ef841e10aa","year":2023,"date":"06.05.2023","event":"KILMINISTER - A Tribute to MOTÖRHEAD","place":"Mainz (Alexander the Great)","bands":1},
@@ -209,4 +209,5 @@ var eventsInfo = {
  {"id_event":"2c6a917b013e933d5ef1aa0a6216e575","year":2024,"date":"22.04.2024","event":"Fintroll + Metsatöll + Suotana Tour 2024","place":"Aschaffenburg (Colos-Saal)","bands":3},
  {"id_event":"fd5ccee80a5d5a1a16944aefe2b840c5","year":2024,"date":"01.05.2024","event":"Celebrating the music of Jimi Hendrix","place":"Weinheim (Café Central)","bands":1},
  {"id_event":"f853b43cbe11fe4cdef7009f0f98d4f2","year":2024,"date":"02.05.2024","event":"Hate, Keep of Kalessin","place":"Weinheim (Café Central)","bands":2},
+ {"id_event":"220f8c4b62141ad5acd8b11d4d0f2bd3","year":2024,"date":"03.05.2024","event":"Heretic Hordes I","place":"Mannheim (7er Club)","bands":5},
 ]};
