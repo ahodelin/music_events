@@ -9,7 +9,7 @@ bash bandsGeneres.sh
 bash bands.sh
 bash countries.sh
 bash events.sh
-bash generes.sh
+bash genres.sh
 
 mv *.js ../../js
 # rm *.json

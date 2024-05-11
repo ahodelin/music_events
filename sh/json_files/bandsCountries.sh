@@ -1,7 +1,3 @@
-# dbpass=`pass postgres_pass`
-# export PGPASSWORD=$dbpass
-# dbuser=`pass postgres_user`
-
 source database_connection_config_vars.sh
 config_var
 
