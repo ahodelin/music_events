@@ -709,6 +709,7 @@ e31959fe2842dacea4d16d36e9813620	Egypt	eg
 7755415a9fe7022060b98a689236ccd2	Estonia	ee
 ce937cf52d098a4d7cc678cec86ef97a	United Kingdom of Great Britain and Northern Ireland	gb
 1f122dd19db580fd03635dd699fb49de	United States of America	us
+c89bc418c38da77213c6c6e03cac2510	South Africa	za
 \.
 
 
@@ -779,6 +780,7 @@ fa79c3005daec47ecff84a116a0927a1	912d59cdf1d3f551fae21f6f0062258f
 e31959fe2842dacea4d16d36e9813620	f5cd262901883dff68d06b215fb0f28e
 7755415a9fe7022060b98a689236ccd2	912d59cdf1d3f551fae21f6f0062258f
 ce937cf52d098a4d7cc678cec86ef97a	912d59cdf1d3f551fae21f6f0062258f
+c89bc418c38da77213c6c6e03cac2510	f5cd262901883dff68d06b215fb0f28e
 \.
 
 
@@ -860,7 +862,6 @@ ea72b9f0db73025c8aaedae0f7b874f8	Hamm
 446c20c5e383ff30350166d5ab741efb	Mainz (Kulturclub schon schön)
 6d488d592421aa8391ff259ef1c8b744	Mannheim (7er Club)
 ca838f25ade35ddc0337a6f0ea710f4b	Mühltal (Steinbruch Theater)
-f81a33c40cc436be44a973017589a760	Test Place
 \.
 
 
@@ -5113,7 +5114,6 @@ fd5ccee80a5d5a1a16944aefe2b840c5	Celebrating the music of Jimi Hendrix	2024-05-0
 c9a70f42ce4dcd82a99ed83a5117b890	Where Owls know my name EU|UK Tour 2019	2019-09-22	427a371fadd4cce654dd30c27a36acb0	0	24.70	2
 d5cd210a82be3dd1a7879b83ba5657c0	15 Years New Evil Music, Festival	2019-10-12	4751a5b2d9992dca6e462e3b14695284	0	44.0	2
 f853b43cbe11fe4cdef7009f0f98d4f2	Hate, Keep of Kalessin	2024-05-02	0b186d7eb0143e60ced4af3380f5faa8	0	25.30	2
-d157c9076092d9c60a203b13bca24311	Test Event	2024-05-11	f81a33c40cc436be44a973017589a760	0	30.60	2
 372ca4be7841a47ba693d4de7d220981	NOAF XIII	2017-08-25	bb1bac023b4f02a5507f1047970d1aca	1	38.00	2
 42c7a1c1e7836f74ced153a27d98cef0	Matapaloz Festival 2017	2017-06-16	d379f693135eefa77bc9732f97fcaaf1	1	170.99	2
 8df16d3b3a2ca21ba921c310aadb7803	Night on the Living Thrash Tour 2023	2023-11-09	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0	39.50	2

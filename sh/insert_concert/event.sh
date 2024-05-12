@@ -24,7 +24,7 @@ while [[ $ok != "yes" ]]; do
   if [[ $answer == "yes" ]]; then
     date_event=""
     while [[ ! $date_event =~ $date_pattr ]]; do
-      echo -n "Date of event: "
+      echo -n "Date of event (yyyy-mm-dd): "
       read date_event
     done
   else 
@@ -77,9 +77,6 @@ done
 
 echo 
 
-bash place.sh "$place_event"
-
-psql -U $dbuser -w -d music_events -c "insert into music.events values (md5('$music_event'), '$music_event', '$date_event', md5('$place_event'), $duration_event, $price_event, $person_event);"
-echo "Event inserted."
-bash band.sh "$music_event"
+psql -U $dbuser -w -d $db -c "select music.insert_events ('$music_event', '$date_event', '$place_event', $duration_event, $price_event, $person_event);"
+bash band_event.sh "$music_event"
 

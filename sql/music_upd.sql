@@ -1,11 +1,11 @@
-
+/*
 insert into geo.countries 
   values 
-    (md5('South Africa'), 'South Africa', 'za');
+    (md5(''), '', '');
    
 insert into geo.countries_continents
-  values (md5('South Africa'), md5('Africa'));
-
+  values (md5(''), md5(''));
+*/
 
 -- 34.00 Dying Fetus
 

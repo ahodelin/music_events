@@ -22,12 +22,11 @@ while
       psql -U $dbuser -w -d $db -c "insert into music.bands values (md5('$band'), '$band', '$likes');"
       echo "New Band $band inserted"
 
-      bash country.sh "$band"
-      bash genre.sh "$band"
+      bash band_country.sh "$band"
+#      bash genre.sh "$band"
     fi
 
-    psql -U $dbuser -w -d $db -c "insert into music.bands_events values (md5('$band'), md5('$event'));"
-    echo "$band - $event inserted"
+    psql -U $dbuser -w -d $db -c "select music.insert_bands_on_events('$band', '$event');"
   fi
 
   [[ $band != "" ]]
