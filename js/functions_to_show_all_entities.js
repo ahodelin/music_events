@@ -63,7 +63,7 @@ function showAllGeneres(){
         var thGenere = document.createElement('th');
         var thBand = document.createElement('th');
                                                         
-        thGenere.appendChild(document.createTextNode('Genere'));
+        thGenere.appendChild(document.createTextNode('Genre'));
         thBand.appendChild(document.createTextNode('Bands'));
 
         var trh = document.createElement('tr');                         

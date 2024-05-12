@@ -20,12 +20,10 @@ while
       echo -n "Did you like this band? (y, m, n)? "
       read likes
       psql -U $dbuser -w -d $db -c "insert into music.bands values (md5('$band'), '$band', '$likes');"
-      echo "New Band $band inserted"
 
       bash band_country.sh "$band"
-#      bash genre.sh "$band"
+      bash band_genre.sh "$band"
     fi
-
     psql -U $dbuser -w -d $db -c "select music.insert_bands_on_events('$band', '$event');"
   fi
 

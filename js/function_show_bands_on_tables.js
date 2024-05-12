@@ -11,7 +11,7 @@ function bandsTable(bandId){
     thBand.appendChild(document.createTextNode('Band'));
     thFlag.appendChild(document.createTextNode('Flag'));
     thCountry.appendChild(document.createTextNode('Country'));
-    thGenere.appendChild(document.createTextNode('Generes'));
+    thGenere.appendChild(document.createTextNode('Genres'));
     thEvent.appendChild(document.createTextNode('Events'));
     thLike.appendChild(document.createTextNode('Like'));
 
