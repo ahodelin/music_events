@@ -215,10 +215,10 @@ $$;
 
 
 --
--- Name: insert_events(character varying, date, character varying, integer); Type: FUNCTION; Schema: music; Owner: -
+-- Name: insert_events(character varying, date, character varying, integer, numeric, integer); Type: FUNCTION; Schema: music; Owner: -
 --
 
-CREATE FUNCTION music.insert_events(eve character varying, dat date, plac character varying, dur integer) RETURNS text
+CREATE FUNCTION music.insert_events(eve character varying, dat date, plac character varying, dur integer, pri numeric, per integer) RETURNS text
     LANGUAGE plpgsql
     AS $$ 
 declare 
@@ -242,7 +242,7 @@ begin
   	end if;
   
   	insert into music.events
-    values (md5(eve), eve, dat, md5(plac), dur);
+    values (md5(eve), eve, dat, md5(plac), dur, pri, per);
     return 'Added event';  
   else return 'Event alredy exist';
     
@@ -859,6 +859,8 @@ ea72b9f0db73025c8aaedae0f7b874f8	Hamm
 6db34279cf6070892349b478135302e7	Ludwigshafen (Kulturzentrum dasHaus)
 446c20c5e383ff30350166d5ab741efb	Mainz (Kulturclub schon schön)
 6d488d592421aa8391ff259ef1c8b744	Mannheim (7er Club)
+ca838f25ade35ddc0337a6f0ea710f4b	Mühltal (Steinbruch Theater)
+f81a33c40cc436be44a973017589a760	Test Place
 \.
 
 
@@ -1695,6 +1697,8 @@ b2b4ae56a4531455e275770dc577b68e	Devastator	y	t	\N
 f9d5d4c7b26c7b832ee503b767d5df52	Slaughter Messiah	m	t	\N
 5d56713e4586c9b1920eb1a3d4597564	Nakkeknaekker	y	t	\N
 f9030edd3045787fcbcfd47da5246596	Plaguemace	y	t	\N
+215513a2c867f8b24d5aea58c9abfff6	Cognitive	y	t	\N
+1ca632ac231052e4116239ccb8952dfe	Macabre Demise	y	t	\N
 \.
 
 
@@ -2531,6 +2535,8 @@ be3c26bf034e9e62057314f3945f87be	1f122dd19db580fd03635dd699fb49de
 1683f5557c9db93b35d1d2ae450baa21	1f122dd19db580fd03635dd699fb49de
 d449a9b2eed8b0556dc7be9cda36b67b	ce937cf52d098a4d7cc678cec86ef97a
 7463543d784aa59ca86359a50ef58c8e	ce937cf52d098a4d7cc678cec86ef97a
+215513a2c867f8b24d5aea58c9abfff6	1f122dd19db580fd03635dd699fb49de
+1ca632ac231052e4116239ccb8952dfe	d8b00929dec65d422303256336ada04f
 \.
 
 
@@ -3707,6 +3713,11 @@ f9d5d4c7b26c7b832ee503b767d5df52	220f8c4b62141ad5acd8b11d4d0f2bd3
 9ee30f495029e1fdf6567045f2079be1	6bc91856db67c4e90b455638fa43e0bd
 5d56713e4586c9b1920eb1a3d4597564	6bc91856db67c4e90b455638fa43e0bd
 f9030edd3045787fcbcfd47da5246596	6bc91856db67c4e90b455638fa43e0bd
+88711444ece8fe638ae0fb11c64e2df3	5e651777820428286fde01ffe87cb4b7
+215513a2c867f8b24d5aea58c9abfff6	5e651777820428286fde01ffe87cb4b7
+1e9413d4cc9af0ad12a6707776573ba0	5e651777820428286fde01ffe87cb4b7
+b20a4217acaf4316739c6a5f6679ef60	5e651777820428286fde01ffe87cb4b7
+1ca632ac231052e4116239ccb8952dfe	5e651777820428286fde01ffe87cb4b7
 \.
 
 
@@ -5065,6 +5076,9 @@ f291caafeb623728ebf0166ac4cb0825	7a09fdabda255b02b2283e724071944b
 f9d5d4c7b26c7b832ee503b767d5df52	a29864963573d7bb061691ff823b97dd
 f9030edd3045787fcbcfd47da5246596	17b8dff9566f6c98062ad5811c762f44
 5d56713e4586c9b1920eb1a3d4597564	17b8dff9566f6c98062ad5811c762f44
+215513a2c867f8b24d5aea58c9abfff6	2df929d9b6150c082888b66e8129ee3f
+215513a2c867f8b24d5aea58c9abfff6	caac3244eefed8cffee878acae427e28
+1ca632ac231052e4116239ccb8952dfe	7fa69773873856d74f68a6824ca4b691
 \.
 
 
@@ -5075,6 +5089,7 @@ f9030edd3045787fcbcfd47da5246596	17b8dff9566f6c98062ad5811c762f44
 COPY music.events (id_event, event, date_event, id_place, duration, price, persons) FROM stdin;
 b1e4aa22275a6a4b3213b44fc342f9fe	Sepultura - Quadra Summer Tour - Europe 2022	2022-07-05	6d998a5f2c8b461a654f7f9e34ab4368	0	37.31	2
 f10fa26efffb6c69534e7b0f7890272d	Rockfield Open Air 2018	2018-08-17	55ff4adc7d421cf9e05b68d25ee22341	2	0.00	2
+5e651777820428286fde01ffe87cb4b7	Gutcity Deathfest 2024	2024-05-11	ca838f25ade35ddc0337a6f0ea710f4b	0	30.60	2
 9e829f734a90920dd15d3b93134ee270	EMP Persistence Tour 2016	2016-01-22	427a371fadd4cce654dd30c27a36acb0	0	31.20	2
 52b133bfecec2fba79ecf451de3cf3bb	Völkerball	2016-05-05	657d564cc1dbaf58e2f2135b57d02d99	0	23.50	2
 8307a775d42c5bfbaab36501bf6a3f6c	Noche de los Muertos - 2017	2017-10-31	c5159d0425e9c5737c8884eb38d70dd9	0	15	2
@@ -5098,6 +5113,7 @@ fd5ccee80a5d5a1a16944aefe2b840c5	Celebrating the music of Jimi Hendrix	2024-05-0
 c9a70f42ce4dcd82a99ed83a5117b890	Where Owls know my name EU|UK Tour 2019	2019-09-22	427a371fadd4cce654dd30c27a36acb0	0	24.70	2
 d5cd210a82be3dd1a7879b83ba5657c0	15 Years New Evil Music, Festival	2019-10-12	4751a5b2d9992dca6e462e3b14695284	0	44.0	2
 f853b43cbe11fe4cdef7009f0f98d4f2	Hate, Keep of Kalessin	2024-05-02	0b186d7eb0143e60ced4af3380f5faa8	0	25.30	2
+d157c9076092d9c60a203b13bca24311	Test Event	2024-05-11	f81a33c40cc436be44a973017589a760	0	30.60	2
 372ca4be7841a47ba693d4de7d220981	NOAF XIII	2017-08-25	bb1bac023b4f02a5507f1047970d1aca	1	38.00	2
 42c7a1c1e7836f74ced153a27d98cef0	Matapaloz Festival 2017	2017-06-16	d379f693135eefa77bc9732f97fcaaf1	1	170.99	2
 8df16d3b3a2ca21ba921c310aadb7803	Night on the Living Thrash Tour 2023	2023-11-09	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0	39.50	2

@@ -1,7 +1,7 @@
 var countriesInfo = {
   "countries":[
- {"id_country":"d8b00929dec65d422303256336ada04f","country":"Germany","flag":"de","bands":363},
- {"id_country":"1f122dd19db580fd03635dd699fb49de","country":"United States of America","flag":"us","bands":94},
+ {"id_country":"d8b00929dec65d422303256336ada04f","country":"Germany","flag":"de","bands":364},
+ {"id_country":"1f122dd19db580fd03635dd699fb49de","country":"United States of America","flag":"us","bands":95},
  {"id_country":"c8f4261f9f46e6465709e17ebea7a92b","country":"Sweden","flag":"se","bands":39},
  {"id_country":"ce937cf52d098a4d7cc678cec86ef97a","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","bands":37},
  {"id_country":"a67d4cbdd1b59e0ffccc6bafc83eb033","country":"Netherlands","flag":"nl","bands":28},
