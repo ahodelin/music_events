@@ -44,6 +44,53 @@ begin
 	
   select id_band, id_country into i_band, i_countr
   from music.bands_countries bc
+  where id_band = md5(ban) and id_country = countr for update;
+ 
+  if found then
+    return 'This combination of band and country exist';
+  else
+	 
+    select id_country into i_countr 
+    from geo.countries c  
+    where id_country = countr for update;
+ 
+    if not found then    
+      return 'Please insert this country first';
+    end if;
+   
+    select id_band into i_band
+    from music.bands
+    where band = ban for update ;
+ 
+    if not found then
+  	  insert into music.bands
+  	  values (md5(ban), ban, 'y');
+    end if; 
+  
+    insert into music.bands_countries
+    values(md5(ban), countr);
+    return 'Band - County added'; 
+   
+  end if;
+	  
+end;
+$$;
+
+
+--
+-- Name: insert_bands_on_countries_old(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.insert_bands_on_countries_old(ban character varying, countr character varying) RETURNS text
+    LANGUAGE plpgsql
+    AS $$ 
+declare 
+  i_band varchar;
+  i_countr varchar;
+begin 
+	
+  select id_band, id_country into i_band, i_countr
+  from music.bands_countries bc
   where id_band = md5(ban) and id_country = md5(countr) for update;
  
   if found then
@@ -292,6 +339,26 @@ CREATE TABLE geo.countries_continents (
 CREATE TABLE geo.places (
     id_place character(32) NOT NULL,
     place character varying(100) NOT NULL
+);
+
+
+--
+-- Name: unm49_iso3166; Type: TABLE; Schema: geo; Owner: -
+--
+
+CREATE TABLE geo.unm49_iso3166 (
+    global_code character varying(3),
+    global_name character varying(50),
+    region_code character varying(3),
+    region_name character varying(50),
+    sub_region_code character varying(3),
+    sub_region_name character varying(50),
+    intermediate_region_code character varying(3),
+    intermediate_region_name character varying(50),
+    country_or_area character varying(70),
+    m49_code character varying(3),
+    iso_alpha2_code character varying(2),
+    iso_alpha3_code character varying(3)
 );
 
 
@@ -638,13 +705,13 @@ UNION
 --
 
 COPY geo.continents (id_continent, continent) FROM stdin;
-f5cd262901883dff68d06b215fb0f28e	Africa
-154a67340e8c14dd5253dc4ff6120197	Asia
-912d59cdf1d3f551fae21f6f0062258f	Europe
 5ffec2d87ab548202f8b549af380913a	North America
 aab422acb3d2334a6deca0e1495745c2	South America
 c9d402d0280088a8c803e108bf31449b	Antartica
-2d8836190888267b97ce332cad2aa247	Oceania
+150	Europe
+002	Africa
+142	Asia
+009	Oceania
 \.
 
 
@@ -653,63 +720,64 @@ c9d402d0280088a8c803e108bf31449b	Antartica
 --
 
 COPY geo.countries (id_country, country, flag) FROM stdin;
-00247297c394dd443dc97067830c35f4	Slovenia	si
-0309a6c666a7a803fdb9db95de71cf01	France	fr
-06630c890abadde9228ea818ce52b621	Luxembourg	lu
-0c7d5ae44b2a0be9ebd7d6b9f7d60f20	Romania	ro
-1007e1b7f894dfbf72a0eaa80f3bc57e	Italy	it
-21fc68909a9eb8692e84cf64e495213e	Iran	ir
-2e6507f70a9cc26fb50f5fd82a83c7ef	Chile	cl
-2ff6e535bd2f100979a171ad430e642b	Serbia	rs
-33cac763789c407f405b2cf0dce7df89	Cuba	cu
-3536be57ce0713954e454ae6c53ec023	Argentina	ar
-3ad08396dc5afa78f34f548eea3c1d64	Switzerland	ch
-424214945ba5615eca039bfe5d731c09	Denmark	dk
-42537f0fb56e31e20ab9c2305752087d	Brazil	br
-4442e4af0916f53a07fb8ca9a49b98ed	Australia	au
-445d337b5cd5de476f99333df6b0c2a7	Canada	ca
-4647d00cf81f8fb0ab80f753320d0fc9	Indonesia	id
-51802d8bb965d0e5be697f07d16922e8	Czech Republic	cz
-53a577bb3bc587b0c28ab808390f1c9b	Japan	jp
-5882b568d8a010ef48a6896f53b6eddb	Costa Rica	cr
-5feb168ca8fb495dcc89b1208cdeb919	Russia	ru
-6542f875eaa09a5c550e5f3986400ad9	Belarus	by
-6b718641741f992e68ec3712718561b8	Greece	gr
-6bec347f256837d3539ad619bd489de7	Panama	pa
-6c1674d14bf5f95742f572cddb0641a7	Belgium	be
-6f781c6559a0c605da918096bdb69edf	Finland	fi
-8189ecf686157db0c0274c1f49373318	International	un
-8dbb07a18d46f63d8b3c8994d5ccc351	Mexico	mx
-907eba32d950bfab68227fd7ea22999b	Spain	es
-94880bda83bda77c5692876700711f15	Poland	pl
-9891739094756d2605946c867b32ad28	Austria	at
-a67d4cbdd1b59e0ffccc6bafc83eb033	Netherlands	nl
-ae54a5c026f31ada088992587d92cb3a	China	cn
-b78edab0f52e0d6c195fd0d8c5709d26	Iceland	is
-c51ed580ea5e20c910d951f692512b4d	New Zealand	nz
-c8f4261f9f46e6465709e17ebea7a92b	Sweden	se
-d5b9290a0b67727d4ba1ca6059dc31a6	Norway	no
-d8b00929dec65d422303256336ada04f	Germany	de
-ea71b362e3ea9969db085abfccdeb10d	Portugal	pt
-ef3388cc5659bccb742fb8af762f1bfd	Colombia	co
-f01fc92b23faa973f3492a23d5a705c5	Ukraine	ua
-fa79c3005daec47ecff84a116a0927a1	Hungary	hu
-7d31e0da1ab99fe8b08a22118e2f402b	India	in
-76b88e7899abb3bfdd4b55b8c52726b0	Faroe Islands	fo
-560d4c6ff431c86546f3fcec72c748c7	Croatia	hr
-77dab2f81a6c8c9136efba7ab2c4c0f2	Philippines	ph
-06e415f918c577f07328a52e24f75d43	Ireland	ie
-a27b7b9f728d4b9109f95e8ee1040c68	Türkiye	tr
-92468e8a62373add2b9caefddbcf1303	Malta	mt
-bb6a72b6a93150d4181e50496fc15f5a	Mongolia	mn
-23b998b19b5f60dbbc4eedc53328b0c7	Dubai	ae
-1add2eb41fcae9b2a15b4a7d68571409	Jamaica	jm
-5a548c2f5875f10bf5614b7c258876cf	Israel	il
-e31959fe2842dacea4d16d36e9813620	Egypt	eg
-7755415a9fe7022060b98a689236ccd2	Estonia	ee
-ce937cf52d098a4d7cc678cec86ef97a	United Kingdom of Great Britain and Northern Ireland	gb
-1f122dd19db580fd03635dd699fb49de	United States of America	us
-c89bc418c38da77213c6c6e03cac2510	South Africa	za
+NLD                             	Netherlands	nl
+RUS                             	Russian Federation	ru
+IRN                             	Iran	ir
+ARE                             	United Arab Emirates	ae
+CZE                             	Czechia	cz
+001                             	International	un
+150                             	Europe	eu
+EGY                             	Egypt	eg
+ZAF                             	South Africa	za
+CUB                             	Cuba	cu
+JAM                             	Jamaica	jm
+CRI                             	Costa Rica	cr
+MEX                             	Mexico	mx
+PAN                             	Panama	pa
+ARG                             	Argentina	ar
+BRA                             	Brazil	br
+CHL                             	Chile	cl
+COL                             	Colombia	co
+CAN                             	Canada	ca
+USA                             	United States of America	us
+CHN                             	China	cn
+JPN                             	Japan	jp
+MNG                             	Mongolia	mn
+IDN                             	Indonesia	id
+PHL                             	Philippines	ph
+IND                             	India	in
+ISR                             	Israel	il
+TUR                             	Türkiye	tr
+BLR                             	Belarus	by
+HUN                             	Hungary	hu
+POL                             	Poland	pl
+ROU                             	Romania	ro
+UKR                             	Ukraine	ua
+DNK                             	Denmark	dk
+EST                             	Estonia	ee
+FRO                             	Faroe Islands	fo
+FIN                             	Finland	fi
+ISL                             	Iceland	is
+IRL                             	Ireland	ie
+NOR                             	Norway	no
+SWE                             	Sweden	se
+GBR                             	United Kingdom of Great Britain and Northern Ireland	gb
+HRV                             	Croatia	hr
+GRC                             	Greece	gr
+ITA                             	Italy	it
+MLT                             	Malta	mt
+PRT                             	Portugal	pt
+SRB                             	Serbia	rs
+SVN                             	Slovenia	si
+ESP                             	Spain	es
+AUT                             	Austria	at
+BEL                             	Belgium	be
+FRA                             	France	fr
+DEU                             	Germany	de
+LUX                             	Luxembourg	lu
+CHE                             	Switzerland	ch
+AUS                             	Australia	au
+NZL                             	New Zealand	nz
 \.
 
 
@@ -718,69 +786,70 @@ c89bc418c38da77213c6c6e03cac2510	South Africa	za
 --
 
 COPY geo.countries_continents (id_country, id_continent) FROM stdin;
-445d337b5cd5de476f99333df6b0c2a7	5ffec2d87ab548202f8b549af380913a
-8dbb07a18d46f63d8b3c8994d5ccc351	5ffec2d87ab548202f8b549af380913a
-1add2eb41fcae9b2a15b4a7d68571409	5ffec2d87ab548202f8b549af380913a
-33cac763789c407f405b2cf0dce7df89	5ffec2d87ab548202f8b549af380913a
-5882b568d8a010ef48a6896f53b6eddb	5ffec2d87ab548202f8b549af380913a
-6bec347f256837d3539ad619bd489de7	5ffec2d87ab548202f8b549af380913a
-3536be57ce0713954e454ae6c53ec023	aab422acb3d2334a6deca0e1495745c2
-42537f0fb56e31e20ab9c2305752087d	aab422acb3d2334a6deca0e1495745c2
-2e6507f70a9cc26fb50f5fd82a83c7ef	aab422acb3d2334a6deca0e1495745c2
-ef3388cc5659bccb742fb8af762f1bfd	aab422acb3d2334a6deca0e1495745c2
-ae54a5c026f31ada088992587d92cb3a	154a67340e8c14dd5253dc4ff6120197
-7d31e0da1ab99fe8b08a22118e2f402b	154a67340e8c14dd5253dc4ff6120197
-4647d00cf81f8fb0ab80f753320d0fc9	154a67340e8c14dd5253dc4ff6120197
-21fc68909a9eb8692e84cf64e495213e	154a67340e8c14dd5253dc4ff6120197
-5a548c2f5875f10bf5614b7c258876cf	154a67340e8c14dd5253dc4ff6120197
-53a577bb3bc587b0c28ab808390f1c9b	154a67340e8c14dd5253dc4ff6120197
-bb6a72b6a93150d4181e50496fc15f5a	154a67340e8c14dd5253dc4ff6120197
-77dab2f81a6c8c9136efba7ab2c4c0f2	154a67340e8c14dd5253dc4ff6120197
-5feb168ca8fb495dcc89b1208cdeb919	154a67340e8c14dd5253dc4ff6120197
-a27b7b9f728d4b9109f95e8ee1040c68	154a67340e8c14dd5253dc4ff6120197
-4442e4af0916f53a07fb8ca9a49b98ed	2d8836190888267b97ce332cad2aa247
-c51ed580ea5e20c910d951f692512b4d	2d8836190888267b97ce332cad2aa247
-5feb168ca8fb495dcc89b1208cdeb919	912d59cdf1d3f551fae21f6f0062258f
-00247297c394dd443dc97067830c35f4	912d59cdf1d3f551fae21f6f0062258f
-0309a6c666a7a803fdb9db95de71cf01	912d59cdf1d3f551fae21f6f0062258f
-06630c890abadde9228ea818ce52b621	912d59cdf1d3f551fae21f6f0062258f
-0c7d5ae44b2a0be9ebd7d6b9f7d60f20	912d59cdf1d3f551fae21f6f0062258f
-1007e1b7f894dfbf72a0eaa80f3bc57e	912d59cdf1d3f551fae21f6f0062258f
-2ff6e535bd2f100979a171ad430e642b	912d59cdf1d3f551fae21f6f0062258f
-3ad08396dc5afa78f34f548eea3c1d64	912d59cdf1d3f551fae21f6f0062258f
-424214945ba5615eca039bfe5d731c09	912d59cdf1d3f551fae21f6f0062258f
-51802d8bb965d0e5be697f07d16922e8	912d59cdf1d3f551fae21f6f0062258f
-6542f875eaa09a5c550e5f3986400ad9	912d59cdf1d3f551fae21f6f0062258f
-6b718641741f992e68ec3712718561b8	912d59cdf1d3f551fae21f6f0062258f
-6c1674d14bf5f95742f572cddb0641a7	912d59cdf1d3f551fae21f6f0062258f
-6f781c6559a0c605da918096bdb69edf	912d59cdf1d3f551fae21f6f0062258f
-907eba32d950bfab68227fd7ea22999b	912d59cdf1d3f551fae21f6f0062258f
-94880bda83bda77c5692876700711f15	912d59cdf1d3f551fae21f6f0062258f
-9891739094756d2605946c867b32ad28	912d59cdf1d3f551fae21f6f0062258f
-a67d4cbdd1b59e0ffccc6bafc83eb033	912d59cdf1d3f551fae21f6f0062258f
-b78edab0f52e0d6c195fd0d8c5709d26	912d59cdf1d3f551fae21f6f0062258f
-c8f4261f9f46e6465709e17ebea7a92b	912d59cdf1d3f551fae21f6f0062258f
-d5b9290a0b67727d4ba1ca6059dc31a6	912d59cdf1d3f551fae21f6f0062258f
-d8b00929dec65d422303256336ada04f	912d59cdf1d3f551fae21f6f0062258f
-ea71b362e3ea9969db085abfccdeb10d	912d59cdf1d3f551fae21f6f0062258f
-f01fc92b23faa973f3492a23d5a705c5	912d59cdf1d3f551fae21f6f0062258f
-fa79c3005daec47ecff84a116a0927a1	912d59cdf1d3f551fae21f6f0062258f
-76b88e7899abb3bfdd4b55b8c52726b0	912d59cdf1d3f551fae21f6f0062258f
-1f122dd19db580fd03635dd699fb49de	5ffec2d87ab548202f8b549af380913a
-560d4c6ff431c86546f3fcec72c748c7	912d59cdf1d3f551fae21f6f0062258f
-06e415f918c577f07328a52e24f75d43	912d59cdf1d3f551fae21f6f0062258f
-92468e8a62373add2b9caefddbcf1303	912d59cdf1d3f551fae21f6f0062258f
-8189ecf686157db0c0274c1f49373318	912d59cdf1d3f551fae21f6f0062258f
-8189ecf686157db0c0274c1f49373318	5ffec2d87ab548202f8b549af380913a
-8189ecf686157db0c0274c1f49373318	aab422acb3d2334a6deca0e1495745c2
-8189ecf686157db0c0274c1f49373318	2d8836190888267b97ce332cad2aa247
-8189ecf686157db0c0274c1f49373318	154a67340e8c14dd5253dc4ff6120197
-8189ecf686157db0c0274c1f49373318	f5cd262901883dff68d06b215fb0f28e
-23b998b19b5f60dbbc4eedc53328b0c7	154a67340e8c14dd5253dc4ff6120197
-e31959fe2842dacea4d16d36e9813620	f5cd262901883dff68d06b215fb0f28e
-7755415a9fe7022060b98a689236ccd2	912d59cdf1d3f551fae21f6f0062258f
-ce937cf52d098a4d7cc678cec86ef97a	912d59cdf1d3f551fae21f6f0062258f
-c89bc418c38da77213c6c6e03cac2510	f5cd262901883dff68d06b215fb0f28e
+150	150
+IRN	142
+CZE	150
+AUS	009
+NZL	009
+JAM	5ffec2d87ab548202f8b549af380913a
+CRI	5ffec2d87ab548202f8b549af380913a
+MEX	5ffec2d87ab548202f8b549af380913a
+PAN	5ffec2d87ab548202f8b549af380913a
+ARG	aab422acb3d2334a6deca0e1495745c2
+BRA	aab422acb3d2334a6deca0e1495745c2
+CHL	aab422acb3d2334a6deca0e1495745c2
+CAN	5ffec2d87ab548202f8b549af380913a
+CHN	142
+JPN	142
+MNG	142
+IDN	142
+PHL	142
+IND	142
+ISR	142
+TUR	142
+BLR	150
+HUN	150
+POL	150
+ROU	150
+UKR	150
+DNK	150
+FRO	150
+FIN	150
+ISL	150
+NOR	150
+SWE	150
+GRC	150
+ITA	150
+PRT	150
+SRB	150
+SVN	150
+ESP	150
+AUT	150
+BEL	150
+LUX	150
+CHE	150
+NLD	150
+RUS	142
+RUS	150
+COL	aab422acb3d2334a6deca0e1495745c2
+CUB	5ffec2d87ab548202f8b549af380913a
+USA	5ffec2d87ab548202f8b549af380913a
+DEU	150
+FRA	150
+ARE	142
+001	002
+001	142
+001	5ffec2d87ab548202f8b549af380913a
+001	aab422acb3d2334a6deca0e1495745c2
+EGY	002
+ZAF	002
+001	150
+EST	150
+001	009
+GBR	150
+IRL	150
+HRV	150
+MLT	150
 \.
 
 
@@ -862,6 +931,262 @@ ea72b9f0db73025c8aaedae0f7b874f8	Hamm
 446c20c5e383ff30350166d5ab741efb	Mainz (Kulturclub schon schön)
 6d488d592421aa8391ff259ef1c8b744	Mannheim (7er Club)
 ca838f25ade35ddc0337a6f0ea710f4b	Mühltal (Steinbruch Theater)
+\.
+
+
+--
+-- Data for Name: unm49_iso3166; Type: TABLE DATA; Schema: geo; Owner: -
+--
+
+COPY geo.unm49_iso3166 (global_code, global_name, region_code, region_name, sub_region_code, sub_region_name, intermediate_region_code, intermediate_region_name, country_or_area, m49_code, iso_alpha2_code, iso_alpha3_code) FROM stdin;
+001	World	002	Africa	015	Northern Africa			Algeria	012	DZ	DZA
+001	World	002	Africa	015	Northern Africa			Egypt	818	EG	EGY
+001	World	002	Africa	015	Northern Africa			Libya	434	LY	LBY
+001	World	002	Africa	015	Northern Africa			Morocco	504	MA	MAR
+001	World	002	Africa	015	Northern Africa			Sudan	729	SD	SDN
+001	World	002	Africa	015	Northern Africa			Tunisia	788	TN	TUN
+001	World	002	Africa	015	Northern Africa			Western Sahara	732	EH	ESH
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	British Indian Ocean Territory	086	IO	IOT
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Burundi	108	BI	BDI
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Comoros	174	KM	COM
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Djibouti	262	DJ	DJI
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Eritrea	232	ER	ERI
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Ethiopia	231	ET	ETH
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	French Southern Territories	260	TF	ATF
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Kenya	404	KE	KEN
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Madagascar	450	MG	MDG
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Malawi	454	MW	MWI
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Mauritius	480	MU	MUS
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Mayotte	175	YT	MYT
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Mozambique	508	MZ	MOZ
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Réunion	638	RE	REU
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Rwanda	646	RW	RWA
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Seychelles	690	SC	SYC
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Somalia	706	SO	SOM
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	South Sudan	728	SS	SSD
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Uganda	800	UG	UGA
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	United Republic of Tanzania	834	TZ	TZA
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Zambia	894	ZM	ZMB
+001	World	002	Africa	202	Sub-Saharan Africa	014	Eastern Africa	Zimbabwe	716	ZW	ZWE
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Angola	024	AO	AGO
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Cameroon	120	CM	CMR
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Central African Republic	140	CF	CAF
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Chad	148	TD	TCD
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Congo	178	CG	COG
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Democratic Republic of the Congo	180	CD	COD
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Equatorial Guinea	226	GQ	GNQ
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Gabon	266	GA	GAB
+001	World	002	Africa	202	Sub-Saharan Africa	017	Middle Africa	Sao Tome and Principe	678	ST	STP
+001	World	002	Africa	202	Sub-Saharan Africa	018	Southern Africa	Botswana	072	BW	BWA
+001	World	002	Africa	202	Sub-Saharan Africa	018	Southern Africa	Eswatini	748	SZ	SWZ
+001	World	002	Africa	202	Sub-Saharan Africa	018	Southern Africa	Lesotho	426	LS	LSO
+001	World	002	Africa	202	Sub-Saharan Africa	018	Southern Africa	Namibia	516	NA	NAM
+001	World	002	Africa	202	Sub-Saharan Africa	018	Southern Africa	South Africa	710	ZA	ZAF
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Benin	204	BJ	BEN
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Burkina Faso	854	BF	BFA
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Cabo Verde	132	CV	CPV
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Côte d’Ivoire	384	CI	CIV
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Gambia	270	GM	GMB
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Ghana	288	GH	GHA
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Guinea	324	GN	GIN
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Guinea-Bissau	624	GW	GNB
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Liberia	430	LR	LBR
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Mali	466	ML	MLI
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Mauritania	478	MR	MRT
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Niger	562	NE	NER
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Nigeria	566	NG	NGA
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Saint Helena	654	SH	SHN
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Senegal	686	SN	SEN
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Sierra Leone	694	SL	SLE
+001	World	002	Africa	202	Sub-Saharan Africa	011	Western Africa	Togo	768	TG	TGO
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Anguilla	660	AI	AIA
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Antigua and Barbuda	028	AG	ATG
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Aruba	533	AW	ABW
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Bahamas	044	BS	BHS
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Barbados	052	BB	BRB
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Bonaire, Sint Eustatius and Saba	535	BQ	BES
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	British Virgin Islands	092	VG	VGB
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Cayman Islands	136	KY	CYM
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Cuba	192	CU	CUB
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Curaçao	531	CW	CUW
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Dominica	212	DM	DMA
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Dominican Republic	214	DO	DOM
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Grenada	308	GD	GRD
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Guadeloupe	312	GP	GLP
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Haiti	332	HT	HTI
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Jamaica	388	JM	JAM
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Martinique	474	MQ	MTQ
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Montserrat	500	MS	MSR
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Puerto Rico	630	PR	PRI
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Saint Barthélemy	652	BL	BLM
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Saint Kitts and Nevis	659	KN	KNA
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Saint Lucia	662	LC	LCA
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Saint Martin (French Part)	663	MF	MAF
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Saint Vincent and the Grenadines	670	VC	VCT
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Sint Maarten (Dutch part)	534	SX	SXM
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Trinidad and Tobago	780	TT	TTO
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	Turks and Caicos Islands	796	TC	TCA
+001	World	019	Americas	419	Latin America and the Caribbean	029	Caribbean	United States Virgin Islands	850	VI	VIR
+001	World	019	Americas	419	Latin America and the Caribbean	013	Central America	Belize	084	BZ	BLZ
+001	World	019	Americas	419	Latin America and the Caribbean	013	Central America	Costa Rica	188	CR	CRI
+001	World	019	Americas	419	Latin America and the Caribbean	013	Central America	El Salvador	222	SV	SLV
+001	World	019	Americas	419	Latin America and the Caribbean	013	Central America	Guatemala	320	GT	GTM
+001	World	019	Americas	419	Latin America and the Caribbean	013	Central America	Honduras	340	HN	HND
+001	World	019	Americas	419	Latin America and the Caribbean	013	Central America	Mexico	484	MX	MEX
+001	World	019	Americas	419	Latin America and the Caribbean	013	Central America	Nicaragua	558	NI	NIC
+001	World	019	Americas	419	Latin America and the Caribbean	013	Central America	Panama	591	PA	PAN
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Argentina	032	AR	ARG
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Bolivia (Plurinational State of)	068	BO	BOL
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Bouvet Island	074	BV	BVT
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Brazil	076	BR	BRA
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Chile	152	CL	CHL
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Colombia	170	CO	COL
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Ecuador	218	EC	ECU
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Falkland Islands (Malvinas)	238	FK	FLK
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	French Guiana	254	GF	GUF
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Guyana	328	GY	GUY
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Paraguay	600	PY	PRY
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Peru	604	PE	PER
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	South Georgia and the South Sandwich Islands	239	GS	SGS
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Suriname	740	SR	SUR
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Uruguay	858	UY	URY
+001	World	019	Americas	419	Latin America and the Caribbean	005	South America	Venezuela (Bolivarian Republic of)	862	VE	VEN
+001	World	019	Americas	021	Northern America			Bermuda	060	BM	BMU
+001	World	019	Americas	021	Northern America			Canada	124	CA	CAN
+001	World	019	Americas	021	Northern America			Greenland	304	GL	GRL
+001	World	019	Americas	021	Northern America			Saint Pierre and Miquelon	666	PM	SPM
+001	World	019	Americas	021	Northern America			United States of America	840	US	USA
+001	World							Antarctica	010	AQ	ATA
+001	World	142	Asia	143	Central Asia			Kazakhstan	398	KZ	KAZ
+001	World	142	Asia	143	Central Asia			Kyrgyzstan	417	KG	KGZ
+001	World	142	Asia	143	Central Asia			Tajikistan	762	TJ	TJK
+001	World	142	Asia	143	Central Asia			Turkmenistan	795	TM	TKM
+001	World	142	Asia	143	Central Asia			Uzbekistan	860	UZ	UZB
+001	World	142	Asia	030	Eastern Asia			China	156	CN	CHN
+001	World	142	Asia	030	Eastern Asia			China, Hong Kong Special Administrative Region	344	HK	HKG
+001	World	142	Asia	030	Eastern Asia			China, Macao Special Administrative Region	446	MO	MAC
+001	World	142	Asia	030	Eastern Asia			Democratic People's Republic of Korea	408	KP	PRK
+001	World	142	Asia	030	Eastern Asia			Japan	392	JP	JPN
+001	World	142	Asia	030	Eastern Asia			Mongolia	496	MN	MNG
+001	World	142	Asia	030	Eastern Asia			Republic of Korea	410	KR	KOR
+001	World	142	Asia	035	South-eastern Asia			Brunei Darussalam	096	BN	BRN
+001	World	142	Asia	035	South-eastern Asia			Cambodia	116	KH	KHM
+001	World	142	Asia	035	South-eastern Asia			Indonesia	360	ID	IDN
+001	World	142	Asia	035	South-eastern Asia			Lao People's Democratic Republic	418	LA	LAO
+001	World	142	Asia	035	South-eastern Asia			Malaysia	458	MY	MYS
+001	World	142	Asia	035	South-eastern Asia			Myanmar	104	MM	MMR
+001	World	142	Asia	035	South-eastern Asia			Philippines	608	PH	PHL
+001	World	142	Asia	035	South-eastern Asia			Singapore	702	SG	SGP
+001	World	142	Asia	035	South-eastern Asia			Thailand	764	TH	THA
+001	World	142	Asia	035	South-eastern Asia			Timor-Leste	626	TL	TLS
+001	World	142	Asia	035	South-eastern Asia			Viet Nam	704	VN	VNM
+001	World	142	Asia	034	Southern Asia			Afghanistan	004	AF	AFG
+001	World	142	Asia	034	Southern Asia			Bangladesh	050	BD	BGD
+001	World	142	Asia	034	Southern Asia			Bhutan	064	BT	BTN
+001	World	142	Asia	034	Southern Asia			India	356	IN	IND
+001	World	142	Asia	034	Southern Asia			Iran (Islamic Republic of)	364	IR	IRN
+001	World	142	Asia	034	Southern Asia			Maldives	462	MV	MDV
+001	World	142	Asia	034	Southern Asia			Nepal	524	NP	NPL
+001	World	142	Asia	034	Southern Asia			Pakistan	586	PK	PAK
+001	World	142	Asia	034	Southern Asia			Sri Lanka	144	LK	LKA
+001	World	142	Asia	145	Western Asia			Armenia	051	AM	ARM
+001	World	142	Asia	145	Western Asia			Azerbaijan	031	AZ	AZE
+001	World	142	Asia	145	Western Asia			Bahrain	048	BH	BHR
+001	World	142	Asia	145	Western Asia			Cyprus	196	CY	CYP
+001	World	142	Asia	145	Western Asia			Georgia	268	GE	GEO
+001	World	142	Asia	145	Western Asia			Iraq	368	IQ	IRQ
+001	World	142	Asia	145	Western Asia			Israel	376	IL	ISR
+001	World	142	Asia	145	Western Asia			Jordan	400	JO	JOR
+001	World	142	Asia	145	Western Asia			Kuwait	414	KW	KWT
+001	World	142	Asia	145	Western Asia			Lebanon	422	LB	LBN
+001	World	142	Asia	145	Western Asia			Oman	512	OM	OMN
+001	World	142	Asia	145	Western Asia			Qatar	634	QA	QAT
+001	World	142	Asia	145	Western Asia			Saudi Arabia	682	SA	SAU
+001	World	142	Asia	145	Western Asia			State of Palestine	275	PS	PSE
+001	World	142	Asia	145	Western Asia			Syrian Arab Republic	760	SY	SYR
+001	World	142	Asia	145	Western Asia			Türkiye	792	TR	TUR
+001	World	142	Asia	145	Western Asia			United Arab Emirates	784	AE	ARE
+001	World	142	Asia	145	Western Asia			Yemen	887	YE	YEM
+001	World	150	Europe	151	Eastern Europe			Belarus	112	BY	BLR
+001	World	150	Europe	151	Eastern Europe			Bulgaria	100	BG	BGR
+001	World	150	Europe	151	Eastern Europe			Czechia	203	CZ	CZE
+001	World	150	Europe	151	Eastern Europe			Hungary	348	HU	HUN
+001	World	150	Europe	151	Eastern Europe			Poland	616	PL	POL
+001	World	150	Europe	151	Eastern Europe			Republic of Moldova	498	MD	MDA
+001	World	150	Europe	151	Eastern Europe			Romania	642	RO	ROU
+001	World	150	Europe	151	Eastern Europe			Russian Federation	643	RU	RUS
+001	World	150	Europe	151	Eastern Europe			Slovakia	703	SK	SVK
+001	World	150	Europe	151	Eastern Europe			Ukraine	804	UA	UKR
+001	World	150	Europe	154	Northern Europe			Åland Islands	248	AX	ALA
+001	World	150	Europe	154	Northern Europe			Denmark	208	DK	DNK
+001	World	150	Europe	154	Northern Europe			Estonia	233	EE	EST
+001	World	150	Europe	154	Northern Europe			Faroe Islands	234	FO	FRO
+001	World	150	Europe	154	Northern Europe			Finland	246	FI	FIN
+001	World	150	Europe	154	Northern Europe			Guernsey	831	GG	GGY
+001	World	150	Europe	154	Northern Europe			Iceland	352	IS	ISL
+001	World	150	Europe	154	Northern Europe			Ireland	372	IE	IRL
+001	World	150	Europe	154	Northern Europe			Isle of Man	833	IM	IMN
+001	World	150	Europe	154	Northern Europe			Jersey	832	JE	JEY
+001	World	150	Europe	154	Northern Europe			Latvia	428	LV	LVA
+001	World	150	Europe	154	Northern Europe			Lithuania	440	LT	LTU
+001	World	150	Europe	154	Northern Europe			Norway	578	NO	NOR
+001	World	150	Europe	154	Northern Europe			Svalbard and Jan Mayen Islands	744	SJ	SJM
+001	World	150	Europe	154	Northern Europe			Sweden	752	SE	SWE
+001	World	150	Europe	154	Northern Europe			United Kingdom of Great Britain and Northern Ireland	826	GB	GBR
+001	World	150	Europe	039	Southern Europe			Albania	008	AL	ALB
+001	World	150	Europe	039	Southern Europe			Andorra	020	AD	AND
+001	World	150	Europe	039	Southern Europe			Bosnia and Herzegovina	070	BA	BIH
+001	World	150	Europe	039	Southern Europe			Croatia	191	HR	HRV
+001	World	150	Europe	039	Southern Europe			Gibraltar	292	GI	GIB
+001	World	150	Europe	039	Southern Europe			Greece	300	GR	GRC
+001	World	150	Europe	039	Southern Europe			Holy See	336	VA	VAT
+001	World	150	Europe	039	Southern Europe			Italy	380	IT	ITA
+001	World	150	Europe	039	Southern Europe			Malta	470	MT	MLT
+001	World	150	Europe	039	Southern Europe			Montenegro	499	ME	MNE
+001	World	150	Europe	039	Southern Europe			North Macedonia	807	MK	MKD
+001	World	150	Europe	039	Southern Europe			Portugal	620	PT	PRT
+001	World	150	Europe	039	Southern Europe			San Marino	674	SM	SMR
+001	World	150	Europe	039	Southern Europe			Serbia	688	RS	SRB
+001	World	150	Europe	039	Southern Europe			Slovenia	705	SI	SVN
+001	World	150	Europe	039	Southern Europe			Spain	724	ES	ESP
+001	World	150	Europe	155	Western Europe			Austria	040	AT	AUT
+001	World	150	Europe	155	Western Europe			Belgium	056	BE	BEL
+001	World	150	Europe	155	Western Europe			France	250	FR	FRA
+001	World	150	Europe	155	Western Europe			Germany	276	DE	DEU
+001	World	150	Europe	155	Western Europe			Liechtenstein	438	LI	LIE
+001	World	150	Europe	155	Western Europe			Luxembourg	442	LU	LUX
+001	World	150	Europe	155	Western Europe			Monaco	492	MC	MCO
+001	World	150	Europe	155	Western Europe			Netherlands (Kingdom of the)	528	NL	NLD
+001	World	150	Europe	155	Western Europe			Switzerland	756	CH	CHE
+001	World	009	Oceania	053	Australia and New Zealand			Australia	036	AU	AUS
+001	World	009	Oceania	053	Australia and New Zealand			Christmas Island	162	CX	CXR
+001	World	009	Oceania	053	Australia and New Zealand			Cocos (Keeling) Islands	166	CC	CCK
+001	World	009	Oceania	053	Australia and New Zealand			Heard Island and McDonald Islands	334	HM	HMD
+001	World	009	Oceania	053	Australia and New Zealand			New Zealand	554	NZ	NZL
+001	World	009	Oceania	053	Australia and New Zealand			Norfolk Island	574	NF	NFK
+001	World	009	Oceania	054	Melanesia			Fiji	242	FJ	FJI
+001	World	009	Oceania	054	Melanesia			New Caledonia	540	NC	NCL
+001	World	009	Oceania	054	Melanesia			Papua New Guinea	598	PG	PNG
+001	World	009	Oceania	054	Melanesia			Solomon Islands	090	SB	SLB
+001	World	009	Oceania	054	Melanesia			Vanuatu	548	VU	VUT
+001	World	009	Oceania	057	Micronesia			Guam	316	GU	GUM
+001	World	009	Oceania	057	Micronesia			Kiribati	296	KI	KIR
+001	World	009	Oceania	057	Micronesia			Marshall Islands	584	MH	MHL
+001	World	009	Oceania	057	Micronesia			Micronesia (Federated States of)	583	FM	FSM
+001	World	009	Oceania	057	Micronesia			Nauru	520	NR	NRU
+001	World	009	Oceania	057	Micronesia			Northern Mariana Islands	580	MP	MNP
+001	World	009	Oceania	057	Micronesia			Palau	585	PW	PLW
+001	World	009	Oceania	057	Micronesia			United States Minor Outlying Islands	581	UM	UMI
+001	World	009	Oceania	061	Polynesia			American Samoa	016	AS	ASM
+001	World	009	Oceania	061	Polynesia			Cook Islands	184	CK	COK
+001	World	009	Oceania	061	Polynesia			French Polynesia	258	PF	PYF
+001	World	009	Oceania	061	Polynesia			Niue	570	NU	NIU
+001	World	009	Oceania	061	Polynesia			Pitcairn	612	PN	PCN
+001	World	009	Oceania	061	Polynesia			Samoa	882	WS	WSM
+001	World	009	Oceania	061	Polynesia			Tokelau	772	TK	TKL
+001	World	009	Oceania	061	Polynesia			Tonga	776	TO	TON
+001	World	009	Oceania	061	Polynesia			Tuvalu	798	TV	TUV
+001	World	009	Oceania	061	Polynesia			Wallis and Futuna Islands	876	WF	WLF
 \.
 
 
@@ -1700,6 +2025,10 @@ f9d5d4c7b26c7b832ee503b767d5df52	Slaughter Messiah	m	t	\N
 f9030edd3045787fcbcfd47da5246596	Plaguemace	y	t	\N
 215513a2c867f8b24d5aea58c9abfff6	Cognitive	y	t	\N
 1ca632ac231052e4116239ccb8952dfe	Macabre Demise	y	t	\N
+62a40f6fa589c7007ded80d26ad1c3a9	Fallujah	y	t	\N
+7d9488e60660507d0f88850245ddc7a5	Vulvodynia	y	t	\N
+abb4decfc5a094f45911b94337e7e2c4	Mélancholia	y	t	\N
+e061c04af9609876757f0b33d14c63e5	South of Hessen	y	t	\N
 \.
 
 
@@ -1708,836 +2037,840 @@ f9030edd3045787fcbcfd47da5246596	Plaguemace	y	t	\N
 --
 
 COPY music.bands_countries (id_band, id_country) FROM stdin;
-8b427a493fc39574fc801404bc032a2f	6b718641741f992e68ec3712718561b8
-721c28f4c74928cc9e0bb3fef345e408	6c1674d14bf5f95742f572cddb0641a7
-0a7ba3f35a9750ff956dca1d548dad12	d8b00929dec65d422303256336ada04f
-54b72f3169fea84731d3bcba785eac49	d8b00929dec65d422303256336ada04f
-d05a0e65818a69cc689b38c0c0007834	d8b00929dec65d422303256336ada04f
-dcabc7299e2b9ed5b05c33273e5fdd19	d8b00929dec65d422303256336ada04f
-a332f1280622f9628fccd1b7aac7370a	d8b00929dec65d422303256336ada04f
-249789ae53c239814de8e606ff717ec9	1007e1b7f894dfbf72a0eaa80f3bc57e
-b1bdad87bd3c4ac2c22473846d301a9e	d8b00929dec65d422303256336ada04f
-fe5b73c2c2cd2d9278c3835c791289b6	d8b00929dec65d422303256336ada04f
-942c9f2520684c22eb6216a92b711f9e	c8f4261f9f46e6465709e17ebea7a92b
-7cd7921da2e6aab79c441a0c2ffc969b	6f781c6559a0c605da918096bdb69edf
-948098e746bdf1c1045c12f042ea98c2	ea71b362e3ea9969db085abfccdeb10d
-59d153c1c2408b702189623231b7898a	907eba32d950bfab68227fd7ea22999b
-14ab730fe0172d780da6d9e5d432c129	d8b00929dec65d422303256336ada04f
-449b4d758aa7151bc1bbb24c3ffb40bb	33cac763789c407f405b2cf0dce7df89
-5df92b70e2855656e9b3ffdf313d7379	c8f4261f9f46e6465709e17ebea7a92b
-3e75cd2f2f6733ea4901458a7ce4236d	fa79c3005daec47ecff84a116a0927a1
-108c58fc39b79afc55fac7d9edf4aa2a	c8f4261f9f46e6465709e17ebea7a92b
-28bc31b338dbd482802b77ed1fd82a50	d8b00929dec65d422303256336ada04f
-49c4097bae6c6ea96f552e38cfb6c2d1	424214945ba5615eca039bfe5d731c09
-fb47f889f2c7c4fee1553d0f817b8aaa	a67d4cbdd1b59e0ffccc6bafc83eb033
-264721f3fc2aee2d28dadcdff432dbc1	d8b00929dec65d422303256336ada04f
-9a322166803a48932356586f05ef83c7	c8f4261f9f46e6465709e17ebea7a92b
-75ab0270163731ee05f35640d56ef473	d5b9290a0b67727d4ba1ca6059dc31a6
-9d3ac6904ce73645c6234803cd7e47ca	d8b00929dec65d422303256336ada04f
-d1fb4e47d8421364f49199ee395ad1d3	4442e4af0916f53a07fb8ca9a49b98ed
-44012166c6633196dc30563db3ffd017	d8b00929dec65d422303256336ada04f
-905a40c3533830252a909603c6fa1e6a	907eba32d950bfab68227fd7ea22999b
-aed85c73079b54830cd50a75c0958a90	d8b00929dec65d422303256336ada04f
-da2110633f62b16a571c40318e4e4c1c	d8b00929dec65d422303256336ada04f
-529a1d385b4a8ca97ea7369477c7b6a7	6f781c6559a0c605da918096bdb69edf
-d3ed8223151e14b936436c336a4c7278	94880bda83bda77c5692876700711f15
-ce2caf05154395724e4436f042b8fa53	d8b00929dec65d422303256336ada04f
-be20385e18333edb329d4574f364a1f0	94880bda83bda77c5692876700711f15
-925bd435e2718d623768dbf1bc1cfb60	0309a6c666a7a803fdb9db95de71cf01
-ad01952b3c254c8ebefaf6f73ae62f7d	d8b00929dec65d422303256336ada04f
-7c7ab6fbcb47bd5df1e167ca28220ee9	0309a6c666a7a803fdb9db95de71cf01
-e8afde257f8a2cbbd39d866ddfc06103	9891739094756d2605946c867b32ad28
-bbddc022ee323e0a2b2d8c67e5cd321f	d8b00929dec65d422303256336ada04f
-d9ab6b54c3bd5b212e8dc3a14e7699ef	d8b00929dec65d422303256336ada04f
-679eaa47efb2f814f2642966ee6bdfe1	d8b00929dec65d422303256336ada04f
-e1db3add02ca4c1af33edc5a970a3bdc	d8b00929dec65d422303256336ada04f
-1c6987adbe5ab3e4364685e8caed0f59	c8f4261f9f46e6465709e17ebea7a92b
-cf4ee20655dd3f8f0a553c73ffe3f72a	d8b00929dec65d422303256336ada04f
-348bcdb386eb9cb478b55a7574622b7c	a67d4cbdd1b59e0ffccc6bafc83eb033
-b3ffff8517114caf70b9e70734dbaf6f	6f781c6559a0c605da918096bdb69edf
-a4cbfb212102da21b82d94be555ac3ec	d5b9290a0b67727d4ba1ca6059dc31a6
-10d91715ea91101cfe0767c812da8151	d8b00929dec65d422303256336ada04f
-1209f43dbecaba22f3514bf40135f991	d8b00929dec65d422303256336ada04f
-dcff9a127428ffb03fc02fdf6cc39575	d8b00929dec65d422303256336ada04f
-6c00bb1a64f660600a6c1545377f92dc	d5b9290a0b67727d4ba1ca6059dc31a6
-b6da055500e3d92698575a3cfc74906c	a67d4cbdd1b59e0ffccc6bafc83eb033
-1e9413d4cc9af0ad12a6707776573ba0	d8b00929dec65d422303256336ada04f
-b01fbaf98cfbc1b72e8bca0b2e48769c	d8b00929dec65d422303256336ada04f
-4b98a8c164586e11779a0ef9421ad0ee	d8b00929dec65d422303256336ada04f
-897edb97d775897f69fa168a88b01c19	445d337b5cd5de476f99333df6b0c2a7
-7533f96ec01fd81438833f71539c7d4e	c8f4261f9f46e6465709e17ebea7a92b
-7eaf9a47aa47f3c65595ae107feab05d	d8b00929dec65d422303256336ada04f
-c4f0f5cedeffc6265ec3220ab594d56b	c8f4261f9f46e6465709e17ebea7a92b
-63ae1791fc0523f47bea9485ffec8b8c	a67d4cbdd1b59e0ffccc6bafc83eb033
-c4c7cb77b45a448aa3ca63082671ad97	3ad08396dc5afa78f34f548eea3c1d64
-5435326cf392e2cd8ad7768150cd5df6	6c1674d14bf5f95742f572cddb0641a7
-828d51c39c87aad9b1407d409fa58e36	d8b00929dec65d422303256336ada04f
-d2ff1e521585a91a94fb22752dd0ab45	d8b00929dec65d422303256336ada04f
-77f2b3ea9e4bd785f5ff322bae51ba07	6f781c6559a0c605da918096bdb69edf
-6f199e29c5782bd05a4fef98e7e41419	3ad08396dc5afa78f34f548eea3c1d64
-b0ce1e93de9839d07dab8d268ca23728	d8b00929dec65d422303256336ada04f
-6830afd7158930ca7d1959ce778eb681	d5b9290a0b67727d4ba1ca6059dc31a6
-e3f0bf612190af6c3fad41214115e004	ce937cf52d098a4d7cc678cec86ef97a
-ee69e7d19f11ca58843ec2e9e77ddb38	ce937cf52d098a4d7cc678cec86ef97a
-74b3b7be6ed71b946a151d164ad8ede5	ce937cf52d098a4d7cc678cec86ef97a
-55159d04cc4faebd64689d3b74a94009	ce937cf52d098a4d7cc678cec86ef97a
-eeaeec364c925e0c821660c7a953546e	ce937cf52d098a4d7cc678cec86ef97a
-ffa7450fd138573d8ae665134bccd02c	6f781c6559a0c605da918096bdb69edf
-faabbecd319372311ed0781d17b641d1	445d337b5cd5de476f99333df6b0c2a7
-9f19396638dd8111f2cee938fdf4e455	d8b00929dec65d422303256336ada04f
-fdcbfded0aaf369d936a70324b39c978	d8b00929dec65d422303256336ada04f
-1056b63fdc3c5015cc4591aa9989c14f	d8b00929dec65d422303256336ada04f
-b5d9c5289fe97968a5634b3e138bf9e2	445d337b5cd5de476f99333df6b0c2a7
-2876f7ecdae220b3c0dcb91ff13d0590	d8b00929dec65d422303256336ada04f
-1734b04cf734cb291d97c135d74b4b87	d8b00929dec65d422303256336ada04f
-7d6b45c02283175f490558068d1fc81b	0309a6c666a7a803fdb9db95de71cf01
-8d7a18d54e82fcfb7a11566ce94b9109	d8b00929dec65d422303256336ada04f
-dddb04bc0d058486d0ef0212c6ea0682	0309a6c666a7a803fdb9db95de71cf01
-0e2ea6aa669710389cf4d6e2ddf408c4	d8b00929dec65d422303256336ada04f
-63ad3072dc5472bb44c2c42ede26d90f	d8b00929dec65d422303256336ada04f
-2aae4f711c09481c8353003202e05359	d8b00929dec65d422303256336ada04f
-28f843fa3a493a3720c4c45942ad970e	d8b00929dec65d422303256336ada04f
-9bc2ca9505a273b06aa0b285061cd1de	6b718641741f992e68ec3712718561b8
-9138c2cc0326412f2515623f4c850eb3	d8b00929dec65d422303256336ada04f
-d857ab11d383a7e4d4239a54cbf2a63d	d8b00929dec65d422303256336ada04f
-c74b5aa120021cbe18dcddd70d8622da	9891739094756d2605946c867b32ad28
-3af7c6d148d216f13f66669acb8d5c59	d8b00929dec65d422303256336ada04f
-522b6c44eb0aedf4970f2990a2f2a812	94880bda83bda77c5692876700711f15
-f4219e8fec02ce146754a5be8a85f246	d8b00929dec65d422303256336ada04f
-c5f022ef2f3211dc1e3b8062ffe764f0	3ad08396dc5afa78f34f548eea3c1d64
-0ab20b5ad4d15b445ed94fa4eebb18d8	d8b00929dec65d422303256336ada04f
-7fc454efb6df96e012e0f937723d24aa	d8b00929dec65d422303256336ada04f
-8edfa58b1aedb58629b80e5be2b2bd92	d8b00929dec65d422303256336ada04f
-947ce14614263eab49f780d68555aef8	c8f4261f9f46e6465709e17ebea7a92b
-7c83727aa466b3b1b9d6556369714fcf	33cac763789c407f405b2cf0dce7df89
-71e32909a1bec1edfc09aec09ca2ac17	06630c890abadde9228ea818ce52b621
-3d01ff8c75214314c4ca768c30e6807b	d8b00929dec65d422303256336ada04f
-7771012413f955f819866e517b275cb4	0309a6c666a7a803fdb9db95de71cf01
-36f969b6aeff175204078b0533eae1a0	4442e4af0916f53a07fb8ca9a49b98ed
-2082a7d613f976e7b182a3fe80a28958	d5b9290a0b67727d4ba1ca6059dc31a6
-d9bc1db8c13da3a131d853237e1f05b2	d8b00929dec65d422303256336ada04f
-9cf73d0300eea453f17c6faaeb871c55	d8b00929dec65d422303256336ada04f
-4dddd8579760abb62aa4b1910725e73c	a67d4cbdd1b59e0ffccc6bafc83eb033
-d6de9c99f5cfa46352b2bc0be5c98c41	d8b00929dec65d422303256336ada04f
-5194c60496c6f02e8b169de9a0aa542c	d8b00929dec65d422303256336ada04f
-8654991720656374d632a5bb0c20ff11	d8b00929dec65d422303256336ada04f
-fe228019addf1d561d0123caae8d1e52	d8b00929dec65d422303256336ada04f
-1104831a0d0fe7d2a6a4198c781e0e0d	d8b00929dec65d422303256336ada04f
-410d913416c022077c5c1709bf104d3c	d8b00929dec65d422303256336ada04f
-c5dc33e23743fb951b3fe7f1f477b794	d5b9290a0b67727d4ba1ca6059dc31a6
-97ee29f216391d19f8769f79a1218a71	d8b00929dec65d422303256336ada04f
-b885447285ece8226facd896c04cdba2	fa79c3005daec47ecff84a116a0927a1
-3614c45db20ee41e068c2ab7969eb3b5	9891739094756d2605946c867b32ad28
-c4ddbffb73c1c34d20bd5b3f425ce4b1	1007e1b7f894dfbf72a0eaa80f3bc57e
-f07c3eef5b7758026d45a12c7e2f6134	d8b00929dec65d422303256336ada04f
-9d969d25c9f506c5518bb090ad5f8266	6b718641741f992e68ec3712718561b8
-0b6e98d660e2901c33333347da37ad36	3ad08396dc5afa78f34f548eea3c1d64
-6d3b28f48c848a21209a84452d66c0c4	d8b00929dec65d422303256336ada04f
-8c69497eba819ee79a964a0d790368fb	d8b00929dec65d422303256336ada04f
-1197a69404ee9475146f3d631de12bde	d8b00929dec65d422303256336ada04f
-d730e65d54d6c0479561d25724afd813	c8f4261f9f46e6465709e17ebea7a92b
-457f098eeb8e1518008449e9b1cb580d	1007e1b7f894dfbf72a0eaa80f3bc57e
-37f02eba79e0a3d29dfd6a4cf2f4d019	a67d4cbdd1b59e0ffccc6bafc83eb033
-39e83bc14e95fcbc05848fc33c30821f	51802d8bb965d0e5be697f07d16922e8
-f0c051b57055b052a3b7da1608f3039e	d8b00929dec65d422303256336ada04f
-e08383c479d96a8a762e23a99fd8bf84	c8f4261f9f46e6465709e17ebea7a92b
-ff5b48d38ce7d0c47c57555d4783a118	d8b00929dec65d422303256336ada04f
-8945663993a728ab19a3853e5b820a42	6c1674d14bf5f95742f572cddb0641a7
-ade72e999b4e78925b18cf48d1faafa4	d8b00929dec65d422303256336ada04f
-4b503a03f3f1aec6e5b4d53dd8148498	6542f875eaa09a5c550e5f3986400ad9
-887d6449e3544dca547a2ddba8f2d894	d8b00929dec65d422303256336ada04f
-2672777b38bc4ce58c49cf4c82813a42	d8b00929dec65d422303256336ada04f
-832dd1d8efbdb257c2c7d3e505142f48	d8b00929dec65d422303256336ada04f
-f37ab058561fb6d233b9c2a0b080d4d1	d8b00929dec65d422303256336ada04f
-3be3e956aeb5dc3b16285463e02af25b	d8b00929dec65d422303256336ada04f
-a61b878c2b563f289de2109fa0f42144	ce937cf52d098a4d7cc678cec86ef97a
-51fa80e44b7555c4130bd06c53f4835c	ce937cf52d098a4d7cc678cec86ef97a
-889aaf9cd0894206af758577cf5cf071	ce937cf52d098a4d7cc678cec86ef97a
-42563d0088d6ac1a47648fc7621e77c6	d8b00929dec65d422303256336ada04f
-c883319a1db14bc28eff8088c5eba10e	d8b00929dec65d422303256336ada04f
-6b7cf117ecf0fea745c4c375c1480cb5	d8b00929dec65d422303256336ada04f
-187ebdf7947f4b61e0725c93227676a4	1007e1b7f894dfbf72a0eaa80f3bc57e
-4276250c9b1b839b9508825303c5c5ae	d8b00929dec65d422303256336ada04f
-7462f03404f29ea618bcc9d52de8e647	d8b00929dec65d422303256336ada04f
-5efb7d24387b25d8325839be958d9adf	d8b00929dec65d422303256336ada04f
-9db9bc745a7568b51b3a968d215ddad6	c8f4261f9f46e6465709e17ebea7a92b
-cddf835bea180bd14234a825be7a7a82	a67d4cbdd1b59e0ffccc6bafc83eb033
-fdc90583bd7a58b91384dea3d1659cde	0309a6c666a7a803fdb9db95de71cf01
-401357e57c765967393ba391a338e89b	c8f4261f9f46e6465709e17ebea7a92b
-e64b94f14765cee7e05b4bec8f5fee31	a67d4cbdd1b59e0ffccc6bafc83eb033
-d0a1fd0467dc892f0dc27711637c864e	a67d4cbdd1b59e0ffccc6bafc83eb033
-e271e871e304f59e62a263ffe574ea2d	d8b00929dec65d422303256336ada04f
-a8d9eeed285f1d47836a5546a280a256	d8b00929dec65d422303256336ada04f
-abbf8e3e3c3e78be8bd886484c1283c1	d8b00929dec65d422303256336ada04f
-87f44124fb8d24f4c832138baede45c7	c8f4261f9f46e6465709e17ebea7a92b
-ed24ff8971b1fa43a1efbb386618ce35	c8f4261f9f46e6465709e17ebea7a92b
-33b6f1b596a60fa87baef3d2c05b7c04	6f781c6559a0c605da918096bdb69edf
-426fdc79046e281c5322161f011ce68c	907eba32d950bfab68227fd7ea22999b
-988d10abb9f42e7053450af19ad64c7f	d8b00929dec65d422303256336ada04f
-dd18fa7a5052f2bce8ff7cb4a30903ea	51802d8bb965d0e5be697f07d16922e8
-87ded0ea2f4029da0a0022000d59232b	4442e4af0916f53a07fb8ca9a49b98ed
-2a024edafb06c7882e2e1f7b57f2f951	d8b00929dec65d422303256336ada04f
-2fa2f1801dd37d6eb9fe4e34a782e397	d8b00929dec65d422303256336ada04f
-e0c2b0cc2e71294cd86916807fef62cb	d8b00929dec65d422303256336ada04f
-52ee4c6902f6ead006b0fb2f3e2d7771	d8b00929dec65d422303256336ada04f
-952dc6362e304f00575264e9d54d1fa6	d8b00929dec65d422303256336ada04f
-0903a7e60f0eb20fdc8cc0b8dbd45526	1007e1b7f894dfbf72a0eaa80f3bc57e
-32af59a47b8c7e1c982ae797fc491180	d8b00929dec65d422303256336ada04f
-fb8be6409408481ad69166324bdade9c	f01fc92b23faa973f3492a23d5a705c5
-0020f19414b5f2874a0bfacd9d511b84	d8b00929dec65d422303256336ada04f
-de12bbf91bc797df25ab4ae9cee1946b	d8b00929dec65d422303256336ada04f
-237e378c239b44bff1e9a42ab866580c	1007e1b7f894dfbf72a0eaa80f3bc57e
-89adcf990042dfdac7fd23685b3f1e37	d8b00929dec65d422303256336ada04f
-44f2dc3400ce17fad32a189178ae72fa	ea71b362e3ea9969db085abfccdeb10d
-3bd94845163385cecefc5265a2e5a525	d8b00929dec65d422303256336ada04f
-0b0d1c3752576d666c14774b8233889f	4442e4af0916f53a07fb8ca9a49b98ed
-a4902fb3d5151e823c74dfd51551b4b0	c8f4261f9f46e6465709e17ebea7a92b
-99bd5eff92fc3ba728a9da5aa1971488	d8b00929dec65d422303256336ada04f
-24ff2b4548c6bc357d9d9ab47882661e	d8b00929dec65d422303256336ada04f
-776da10f7e18ffde35ea94d144dc60a3	c8f4261f9f46e6465709e17ebea7a92b
-829922527f0e7d64a3cfda67e24351e3	d8b00929dec65d422303256336ada04f
-443866d78de61ab3cd3e0e9bf97a34f6	9891739094756d2605946c867b32ad28
-7492a1ca2669793b485b295798f5d782	424214945ba5615eca039bfe5d731c09
-63d7f33143522ba270cb2c87f724b126	424214945ba5615eca039bfe5d731c09
-aa86b6fc103fc757e14f03afe6eb0c0a	d8b00929dec65d422303256336ada04f
-5ec1e9fa36898eaf6d1021be67e0d00c	d8b00929dec65d422303256336ada04f
-8ce896355a45f5b9959eb676b8b5580c	d8b00929dec65d422303256336ada04f
-bbce8e45250a239a252752fac7137e00	c8f4261f9f46e6465709e17ebea7a92b
-2414366fe63cf7017444181acacb6347	0309a6c666a7a803fdb9db95de71cf01
-1ac0c8e8c04cf2d6f02fdb8292e74588	9891739094756d2605946c867b32ad28
-5f992768f7bb9592bed35b07197c87d0	d8b00929dec65d422303256336ada04f
-ca5a010309ffb20190558ec20d97e5b2	d5b9290a0b67727d4ba1ca6059dc31a6
-f644bd92037985f8eb20311bc6d5ed94	d8b00929dec65d422303256336ada04f
-a825b2b87f3b61c9660b81f340f6e519	0309a6c666a7a803fdb9db95de71cf01
-ef6369d9794dbe861a56100e92a3c71d	c8f4261f9f46e6465709e17ebea7a92b
-73affe574e6d4dc2fa72b46dc9dd4815	f01fc92b23faa973f3492a23d5a705c5
-649db5c9643e1c17b3a44579980da0ad	a67d4cbdd1b59e0ffccc6bafc83eb033
-1e8563d294da81043c2772b36753efaf	d8b00929dec65d422303256336ada04f
-362f8cdd1065b0f33e73208eb358991d	d8b00929dec65d422303256336ada04f
-820de5995512273916b117944d6da15a	445d337b5cd5de476f99333df6b0c2a7
-6d57b25c282247075f5e03cde27814df	d8b00929dec65d422303256336ada04f
-bbb668ff900efa57d936e726a09e4fe8	6f781c6559a0c605da918096bdb69edf
-2501f7ba78cc0fd07efb7c17666ff12e	a67d4cbdd1b59e0ffccc6bafc83eb033
-76700087e932c3272e05694610d604ba	6c1674d14bf5f95742f572cddb0641a7
-9b1088b616414d0dc515ab1f2b4922f1	d8b00929dec65d422303256336ada04f
-7df8865bbec157552b8a579e0ed9bfe3	1f122dd19db580fd03635dd699fb49de
-4f48e858e9ed95709458e17027bb94bf	ce937cf52d098a4d7cc678cec86ef97a
-bd4184ee062e4982b878b6b188793f5b	ce937cf52d098a4d7cc678cec86ef97a
-91a337f89fe65fec1c97f52a821c1178	ce937cf52d098a4d7cc678cec86ef97a
-baa9d4eef21c7b89f42720313b5812d4	ce937cf52d098a4d7cc678cec86ef97a
-dfdef9b5190f331de20fe029babf032e	d8b00929dec65d422303256336ada04f
-4cfab0d66614c6bb6d399837656c590e	a67d4cbdd1b59e0ffccc6bafc83eb033
-5b22d1d5846a2b6b6d0cf342e912d124	d8b00929dec65d422303256336ada04f
-4261335bcdc95bd89fd530ba35afbf4c	d8b00929dec65d422303256336ada04f
-2cfe35095995e8dd15ab7b867e178c15	0309a6c666a7a803fdb9db95de71cf01
-2cf65e28c586eeb98daaecf6eb573e7a	6f781c6559a0c605da918096bdb69edf
-3cdb47307aeb005121b09c41c8d8bee6	d8b00929dec65d422303256336ada04f
-53407737e93f53afdfc588788b8288e8	d8b00929dec65d422303256336ada04f
-006fc2724417174310cf06d2672e34d2	d8b00929dec65d422303256336ada04f
-a3f5542dc915b94a5e10dab658bb0959	c8f4261f9f46e6465709e17ebea7a92b
-2ac79000a90b015badf6747312c0ccad	d8b00929dec65d422303256336ada04f
-eb2c788da4f36fba18b85ae75aff0344	c8f4261f9f46e6465709e17ebea7a92b
-626dceb92e4249628c1e76a2c955cd24	d8b00929dec65d422303256336ada04f
-8fda25275801e4a40df6c73078baf753	d5b9290a0b67727d4ba1ca6059dc31a6
-3a2a7f86ca87268be9b9e0557b013565	d8b00929dec65d422303256336ada04f
-ac03fad3be179a237521ec4ef2620fb0	d8b00929dec65d422303256336ada04f
-7e2b83d69e6c93adf203e13bc7d6f444	d8b00929dec65d422303256336ada04f
-0fbddeb130361265f1ba6f86b00f0968	d8b00929dec65d422303256336ada04f
-8775f64336ee5e9a8114fbe3a5a628c5	424214945ba5615eca039bfe5d731c09
-e872b77ff7ac24acc5fa373ebe9bb492	8dbb07a18d46f63d8b3c8994d5ccc351
-f0e1f32b93f622ea3ddbf6b55b439812	d8b00929dec65d422303256336ada04f
-53a0aafa942245f18098ccd58b4121aa	d8b00929dec65d422303256336ada04f
-0780d2d1dbd538fec3cdd8699b08ea02	d8b00929dec65d422303256336ada04f
-4a45ac6d83b85125b4163a40364e7b2c	ea71b362e3ea9969db085abfccdeb10d
-58db028cf01dd425e5af6c7d511291c1	d8b00929dec65d422303256336ada04f
-2252d763a2a4ac815b122a0176e3468f	d8b00929dec65d422303256336ada04f
-11d396b078f0ae37570c8ef0f45937ad	d8b00929dec65d422303256336ada04f
-585b13106ecfd7ede796242aeaed4ea8	d8b00929dec65d422303256336ada04f
-6c1fcd3c91bc400e5c16f467d75dced3	d8b00929dec65d422303256336ada04f
-7d878673694ff2498fbea0e5ba27e0ea	d8b00929dec65d422303256336ada04f
-6738f9acd4740d945178c649d6981734	6c1674d14bf5f95742f572cddb0641a7
-33f03dd57f667d41ac77c6baec352a81	d8b00929dec65d422303256336ada04f
-3509af6be9fe5defc1500f5c77e38563	d8b00929dec65d422303256336ada04f
-0640cfbf1d269b69c535ea4e288dfd96	d8b00929dec65d422303256336ada04f
-a716390764a4896d99837e99f9e009c9	42537f0fb56e31e20ab9c2305752087d
-e74a88c71835c14d92d583a1ed87cc6c	c8f4261f9f46e6465709e17ebea7a92b
-36648510adbf2a3b2028197a60b5dada	d8b00929dec65d422303256336ada04f
-eb3bfb5a3ccdd4483aabc307ae236066	d8b00929dec65d422303256336ada04f
-1ebd63d759e9ff532d5ce63ecb818731	d8b00929dec65d422303256336ada04f
-1c06fc6740d924cab33dce73643d84b9	4442e4af0916f53a07fb8ca9a49b98ed
-4a2a0d0c29a49d9126dcb19230aa1994	0309a6c666a7a803fdb9db95de71cf01
-059792b70fc0686fb296e7fcae0bda50	d8b00929dec65d422303256336ada04f
-7dfe9aa0ca5bb31382879ccd144cc3ae	d8b00929dec65d422303256336ada04f
-a650d82df8ca65bb69a45242ab66b399	6f781c6559a0c605da918096bdb69edf
-3dda886448fe98771c001b56a4da9893	3ad08396dc5afa78f34f548eea3c1d64
-d73310b95e8b4dece44e2a55dd1274e6	c8f4261f9f46e6465709e17ebea7a92b
-fb28e62c0e801a787d55d97615e89771	d8b00929dec65d422303256336ada04f
-652208d2aa8cdd769632dbaeb7a16358	d8b00929dec65d422303256336ada04f
-b5f7b25b0154c34540eea8965f90984d	d5b9290a0b67727d4ba1ca6059dc31a6
-278c094627c0dd891d75ea7a3d0d021e	d8b00929dec65d422303256336ada04f
-0a56095b73dcbd2a76bb9d4831881cb3	d8b00929dec65d422303256336ada04f
-ff578d3db4dc3311b3098c8365d54e6b	d8b00929dec65d422303256336ada04f
-80fcd08f6e887f6cfbedd2156841ab2b	0309a6c666a7a803fdb9db95de71cf01
-db38e12f9903b156f9dc91fce2ef3919	5feb168ca8fb495dcc89b1208cdeb919
-90d127641ffe2a600891cd2e3992685b	3ad08396dc5afa78f34f548eea3c1d64
-2e7a848dc99bd27acb36636124855faf	0c7d5ae44b2a0be9ebd7d6b9f7d60f20
-3964d4f40b6166aa9d370855bd20f662	9891739094756d2605946c867b32ad28
-4548a3b9c1e31cf001041dc0d166365b	d8b00929dec65d422303256336ada04f
-450948d9f14e07ba5e3015c2d726b452	3ad08396dc5afa78f34f548eea3c1d64
-c4678a2e0eef323aeb196670f2bc8a6e	a67d4cbdd1b59e0ffccc6bafc83eb033
-c1923ca7992dc6e79d28331abbb64e72	4442e4af0916f53a07fb8ca9a49b98ed
-5842a0c2470fe12ee3acfeec16c79c57	d8b00929dec65d422303256336ada04f
-96682d9c9f1bed695dbf9176d3ee234c	d8b00929dec65d422303256336ada04f
-12e93f5fab5f7d16ef37711ef264d282	d8b00929dec65d422303256336ada04f
-4094ffd492ba473a2a7bea1b19b1662d	d8b00929dec65d422303256336ada04f
-6429807f6febbf061ac85089a8c3173d	c8f4261f9f46e6465709e17ebea7a92b
-7db066b46f48d010fdb8c87337cdeda4	1f122dd19db580fd03635dd699fb49de
-0844ad55f17011abed4a5208a3a05b74	ce937cf52d098a4d7cc678cec86ef97a
-e64d38b05d197d60009a43588b2e4583	ce937cf52d098a4d7cc678cec86ef97a
-88711444ece8fe638ae0fb11c64e2df3	ce937cf52d098a4d7cc678cec86ef97a
-02d44fbbe1bfacd6eaa9b20299b1cb78	a67d4cbdd1b59e0ffccc6bafc83eb033
-9ab8f911c74597493400602dc4d2b412	d8b00929dec65d422303256336ada04f
-11f8d9ec8f6803ea61733840f13bc246	6542f875eaa09a5c550e5f3986400ad9
-54f0b93fa83225e4a712b70c68c0ab6f	d8b00929dec65d422303256336ada04f
-1cdd53cece78d6e8dffcf664fa3d1be2	d8b00929dec65d422303256336ada04f
-1e88302efcfc873691f0c31be4e2a388	d8b00929dec65d422303256336ada04f
-13caf3d14133dfb51067264d857eaf70	d8b00929dec65d422303256336ada04f
-1e14d6b40d8e81d8d856ba66225dcbf3	2ff6e535bd2f100979a171ad430e642b
-fa03eb688ad8aa1db593d33dabd89bad	51802d8bb965d0e5be697f07d16922e8
-7a4fafa7badd04d5d3114ab67b0caf9d	d8b00929dec65d422303256336ada04f
-4cabe475dd501f3fd4da7273b5890c33	3ad08396dc5afa78f34f548eea3c1d64
-91c9ed0262dea7446a4f3a3e1cdd0698	6f781c6559a0c605da918096bdb69edf
-79ce9bd96a3184b1ee7c700aa2927e67	6c1674d14bf5f95742f572cddb0641a7
-4927f3218b038c780eb795766dfd04ee	d8b00929dec65d422303256336ada04f
-0a97b893b92a7df612eadfe97589f242	d8b00929dec65d422303256336ada04f
-31d8a0a978fad885b57a685b1a0229df	9891739094756d2605946c867b32ad28
-7ef36a3325a61d4f1cff91acbe77c7e3	d8b00929dec65d422303256336ada04f
-5b709b96ee02a30be5eee558e3058245	42537f0fb56e31e20ab9c2305752087d
-19baf8a6a25030ced87cd0ce733365a9	ea71b362e3ea9969db085abfccdeb10d
-4ee21b1371ba008a26b313c7622256f8	d8b00929dec65d422303256336ada04f
-91b18e22d4963b216af00e1dd43b5d05	0309a6c666a7a803fdb9db95de71cf01
-6bd19bad2b0168d4481b19f9c25b4a9f	1007e1b7f894dfbf72a0eaa80f3bc57e
-53369c74c3cacdc38bdcdeda9284fe3c	5feb168ca8fb495dcc89b1208cdeb919
-4453eb658c6a304675bd52ca75fbae6d	d8b00929dec65d422303256336ada04f
-360c000b499120147c8472998859a9fe	d8b00929dec65d422303256336ada04f
-e62a773154e1179b0cc8c5592207cb10	445d337b5cd5de476f99333df6b0c2a7
-4bb93d90453dd63cc1957a033f7855c7	d8b00929dec65d422303256336ada04f
-f29d276fd930f1ad7687ed7e22929b64	06630c890abadde9228ea818ce52b621
-c05d504b806ad065c9b548c0cb1334cd	d8b00929dec65d422303256336ada04f
-b96a3cb81197e8308c87f6296174fe3e	d8b00929dec65d422303256336ada04f
-8edf4531385941dfc85e3f3d3e32d24f	c8f4261f9f46e6465709e17ebea7a92b
-90d523ebbf276f516090656ebfccdc9f	b78edab0f52e0d6c195fd0d8c5709d26
-94ca28ea8d99549c2280bcc93f98c853	a67d4cbdd1b59e0ffccc6bafc83eb033
-abd7ab19ff758cf4c1a2667e5bbac444	51802d8bb965d0e5be697f07d16922e8
-0af74c036db52f48ad6cbfef6fee2999	6f781c6559a0c605da918096bdb69edf
-095849fbdc267416abc6ddb48be311d7	d8b00929dec65d422303256336ada04f
-72778afd2696801f5f3a1f35d0e4e357	d8b00929dec65d422303256336ada04f
-5c0adc906f34f9404d65a47eea76dac0	d8b00929dec65d422303256336ada04f
-fdcf3cdc04f367257c92382e032b6293	d8b00929dec65d422303256336ada04f
-88dd124c0720845cba559677f3afa15d	d8b00929dec65d422303256336ada04f
-2df8905eae6823023de6604dc5346c29	6b718641741f992e68ec3712718561b8
-f4f870098db58eeae93742dd2bcaf2b2	d8b00929dec65d422303256336ada04f
-d433b7c1ce696b94a8d8f72de6cfbeaa	d8b00929dec65d422303256336ada04f
-28bb59d835e87f3fd813a58074ca0e11	d8b00929dec65d422303256336ada04f
-bbc155fb2b111bf61c4f5ff892915e6b	33cac763789c407f405b2cf0dce7df89
-cafe9e68e8f90b3e1328da8858695b31	d8b00929dec65d422303256336ada04f
-ad62209fb63910acf40280cea3647ec5	d8b00929dec65d422303256336ada04f
-0a267617c0b5b4d53e43a7d4e4c522ad	a67d4cbdd1b59e0ffccc6bafc83eb033
-9e84832a15f2698f67079a3224c2b6fb	d8b00929dec65d422303256336ada04f
-4a7d9e528dada8409e88865225fb27c4	d8b00929dec65d422303256336ada04f
-d3e98095eeccaa253050d67210ef02bb	d8b00929dec65d422303256336ada04f
-c3490492512b7fe65cdb0c7305044675	d8b00929dec65d422303256336ada04f
-e61e30572fd58669ae9ea410774e0eb6	d8b00929dec65d422303256336ada04f
-990813672e87b667add44c712bb28d3d	ea71b362e3ea9969db085abfccdeb10d
-8143ee8032c71f6f3f872fc5bb2a4fed	9891739094756d2605946c867b32ad28
-485065ad2259054abf342d7ae3fe27e6	d8b00929dec65d422303256336ada04f
-278606b1ac0ae7ef86e86342d1f259c3	d8b00929dec65d422303256336ada04f
-a538bfe6fe150a92a72d78f89733dbd0	d8b00929dec65d422303256336ada04f
-c127f32dc042184d12b8c1433a77e8c4	b78edab0f52e0d6c195fd0d8c5709d26
-e4b3296f8a9e2a378eb3eb9576b91a37	2e6507f70a9cc26fb50f5fd82a83c7ef
-09d8e20a5368ce1e5c421a04cb566434	d8b00929dec65d422303256336ada04f
-4366d01be1b2ddef162fc0ebb6933508	d8b00929dec65d422303256336ada04f
-46174766ce49edbbbc40e271c87b5a83	ef3388cc5659bccb742fb8af762f1bfd
-2af9e4497582a6faa68a42ac2d512735	1f122dd19db580fd03635dd699fb49de
-f8e7112b86fcd9210dfaf32c00d6d375	ce937cf52d098a4d7cc678cec86ef97a
-218f2bdae8ad3bb60482b201e280ffdc	ce937cf52d098a4d7cc678cec86ef97a
-65976b6494d411d609160a2dfd98f903	ce937cf52d098a4d7cc678cec86ef97a
-4fa857a989df4e1deea676a43dceea07	d8b00929dec65d422303256336ada04f
-36cbc41c1c121f2c68f5776a118ea027	6f781c6559a0c605da918096bdb69edf
-6ee2e6d391fa98d7990b502e72c7ec58	d8b00929dec65d422303256336ada04f
-a4977b96c7e5084fcce21a0d07b045f8	c8f4261f9f46e6465709e17ebea7a92b
-e0f39406f0e15487dd9d3997b2f5ca61	d8b00929dec65d422303256336ada04f
-399033f75fcf47d6736c9c5209222ab8	d8b00929dec65d422303256336ada04f
-6f195d8f9fe09d45d2e680f7d7157541	b78edab0f52e0d6c195fd0d8c5709d26
-2113f739f81774557041db616ee851e6	c8f4261f9f46e6465709e17ebea7a92b
-32814ff4ca9a26b8d430a8c0bc8dc63e	d8b00929dec65d422303256336ada04f
-e29ef4beb480eab906ffa7c05aeec23d	94880bda83bda77c5692876700711f15
-2447873ddeeecaa165263091c0cbb22f	d8b00929dec65d422303256336ada04f
-fcd1c1b547d03e760d1defa4d2b98783	d8b00929dec65d422303256336ada04f
-6369ba49db4cf35b35a7c47e3d4a4fd0	d8b00929dec65d422303256336ada04f
-52b133bfecec2fba79ecf451de3cf3bb	d8b00929dec65d422303256336ada04f
-559ccea48c3460ebc349587d35e808dd	c8f4261f9f46e6465709e17ebea7a92b
-8e11b2f987a99ed900a44aa1aa8bd3d0	a67d4cbdd1b59e0ffccc6bafc83eb033
-f042da2a954a1521114551a6f9e22c75	d8b00929dec65d422303256336ada04f
-b1d465aaf3ccf8701684211b1623adf2	8189ecf686157db0c0274c1f49373318
-4f840b1febbbcdb12b9517cd0a91e8f4	6c1674d14bf5f95742f572cddb0641a7
-405c7f920b019235f244315a564a8aed	d8b00929dec65d422303256336ada04f
-8e62fc75d9d0977d0be4771df05b3c2f	6f781c6559a0c605da918096bdb69edf
-3656edf3a40a25ccd00d414c9ecbb635	d8b00929dec65d422303256336ada04f
-6d89517dbd1a634b097f81f5bdbb07a2	d8b00929dec65d422303256336ada04f
-db46d9a37b31baa64cb51604a2e4939a	00247297c394dd443dc97067830c35f4
-5af874093e5efcbaeb4377b84c5f2ec5	d8b00929dec65d422303256336ada04f
-8a6f1a01e4b0d9e272126a8646a72088	6f781c6559a0c605da918096bdb69edf
-5037c1968f3b239541c546d32dec39eb	d8b00929dec65d422303256336ada04f
-3e52c77d795b7055eeff0c44687724a1	3ad08396dc5afa78f34f548eea3c1d64
-deaccc41a952e269107cc9a507dfa131	d8b00929dec65d422303256336ada04f
-754230e2c158107a2e93193c829e9e59	907eba32d950bfab68227fd7ea22999b
-a29c1c4f0a97173007be3b737e8febcc	d8b00929dec65d422303256336ada04f
-4fab532a185610bb854e0946f4def6a4	d8b00929dec65d422303256336ada04f
-e25ee917084bdbdc8506b56abef0f351	0309a6c666a7a803fdb9db95de71cf01
-e6fd7b62a39c109109d33fcd3b5e129d	d8b00929dec65d422303256336ada04f
-da29e297c23e7868f1d50ec5a6a4359b	d8b00929dec65d422303256336ada04f
-96048e254d2e02ba26f53edd271d3f88	d8b00929dec65d422303256336ada04f
-c2275e8ac71d308946a63958bc7603a1	d8b00929dec65d422303256336ada04f
-dde3e0b0cc344a7b072bbab8c429f4ff	42537f0fb56e31e20ab9c2305752087d
-b785a5ffad5e7e36ccac25c51d5d8908	d8b00929dec65d422303256336ada04f
-3bcbddf6c114327fc72ea06bcb02f9ef	8189ecf686157db0c0274c1f49373318
-63c0a328ae2bee49789212822f79b83f	d8b00929dec65d422303256336ada04f
-f03bde11d261f185cbacfa32c1c6538c	51802d8bb965d0e5be697f07d16922e8
-f6540bc63be4c0cb21811353c0d24f69	a67d4cbdd1b59e0ffccc6bafc83eb033
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	a67d4cbdd1b59e0ffccc6bafc83eb033
-ea16d031090828264793e860a00cc995	a67d4cbdd1b59e0ffccc6bafc83eb033
-5eed658c4b7b68a0ecc49205b68d54e7	d8b00929dec65d422303256336ada04f
-a0fb30950d2a150c1d2624716f216316	9891739094756d2605946c867b32ad28
-4ad6c928711328d1cf0167bc87079a14	94880bda83bda77c5692876700711f15
-96e3cdb363fe6df2723be5b994ad117a	0309a6c666a7a803fdb9db95de71cf01
-45b568ce63ea724c415677711b4328a7	424214945ba5615eca039bfe5d731c09
-145bd9cf987b6f96fa6f3b3b326303c9	d8b00929dec65d422303256336ada04f
-c238980432ab6442df9b2c6698c43e47	d8b00929dec65d422303256336ada04f
-39a25b9c88ce401ca54fd7479d1c8b73	9891739094756d2605946c867b32ad28
-8cadf0ad04644ce2947bf3aa2817816e	d8b00929dec65d422303256336ada04f
-85fac49d29a31f1f9a8a18d6b04b9fc9	d8b00929dec65d422303256336ada04f
-b81ee269be538a500ed057b3222c86a2	d8b00929dec65d422303256336ada04f
-cf71a88972b5e06d8913cf53c916e6e4	d8b00929dec65d422303256336ada04f
-5518086aebc9159ba7424be0073ce5c9	d8b00929dec65d422303256336ada04f
-2c4e2c9948ddac6145e529c2ae7296da	0309a6c666a7a803fdb9db95de71cf01
-c9af1c425ca093648e919c2e471df3bd	a67d4cbdd1b59e0ffccc6bafc83eb033
-0291e38d9a3d398052be0ca52a7b1592	6c1674d14bf5f95742f572cddb0641a7
-000f49c98c428aff4734497823d04f45	c8f4261f9f46e6465709e17ebea7a92b
-dea293bdffcfb292b244b6fe92d246dc	6f781c6559a0c605da918096bdb69edf
-302ebe0389198972c223f4b72894780a	d8b00929dec65d422303256336ada04f
-ac62ad2816456aa712809bf01327add1	d8b00929dec65d422303256336ada04f
-470f3f69a2327481d26309dc65656f44	d8b00929dec65d422303256336ada04f
-e254616b4a5bd5aaa54f90a3985ed184	d8b00929dec65d422303256336ada04f
-3c5c578b7cf5cc0d23c1730d1d51436a	d8b00929dec65d422303256336ada04f
-da867941c8bacf9be8e59bc13d765f92	1f122dd19db580fd03635dd699fb49de
-935b48a84528c4280ec208ce529deea0	ce937cf52d098a4d7cc678cec86ef97a
-8852173e80d762d62f0bcb379d82ebdb	ce937cf52d098a4d7cc678cec86ef97a
-eaeaed2d9f3137518a5c8c7e6733214f	d8b00929dec65d422303256336ada04f
-8ccd65d7f0f028405867991ae3eaeb56	d8b00929dec65d422303256336ada04f
-781acc7e58c9a746d58f6e65ab1e90c4	9891739094756d2605946c867b32ad28
-e5a674a93987de4a52230105907fffe9	d8b00929dec65d422303256336ada04f
-a2459c5c8a50215716247769c3dea40b	c8f4261f9f46e6465709e17ebea7a92b
-e285e4ecb358b92237298f67526beff7	d8b00929dec65d422303256336ada04f
-d832b654664d104f0fbb9b6674a09a11	d8b00929dec65d422303256336ada04f
-2aeb128c6d3eb7e79acb393b50e1cf7b	d8b00929dec65d422303256336ada04f
-213c449bd4bcfcdb6bffecf55b2c30b4	d8b00929dec65d422303256336ada04f
-4ea353ae22a1c0d26327638f600aeac8	d8b00929dec65d422303256336ada04f
-66244bb43939f81c100f03922cdc3439	c8f4261f9f46e6465709e17ebea7a92b
-d399575133268305c24d87f1c2ef054a	d8b00929dec65d422303256336ada04f
-a5a8afc6c35c2625298b9ce4cc447b39	b78edab0f52e0d6c195fd0d8c5709d26
-5588cb8830fdb8ac7159b7cf5d1e611e	445d337b5cd5de476f99333df6b0c2a7
-9fc7c7342d41c7c53c6e8e4b9bc53fc4	ea71b362e3ea9969db085abfccdeb10d
-57eba43d6bec2a8115e94d6fbb42bc75	6f781c6559a0c605da918096bdb69edf
-9ee30f495029e1fdf6567045f2079be1	42537f0fb56e31e20ab9c2305752087d
-f9f57e175d62861bb5f2bda44a078df7	d5b9290a0b67727d4ba1ca6059dc31a6
-3921cb3f97a88349e153beb5492f6ef4	ea71b362e3ea9969db085abfccdeb10d
-6a8538b37162b23d68791b9a0c54a5bf	d5b9290a0b67727d4ba1ca6059dc31a6
-2654d6e7cec2ef045ca1772a980fbc4c	06630c890abadde9228ea818ce52b621
-57b9fe77adaac4846c238e995adb6ee2	b78edab0f52e0d6c195fd0d8c5709d26
-8259dc0bcebabcb0696496ca406dd672	6b718641741f992e68ec3712718561b8
-ab7b69efdaf168cbbe9a5b03d901be74	6bec347f256837d3539ad619bd489de7
-3041a64f7587a6768d8e307b2662785b	4647d00cf81f8fb0ab80f753320d0fc9
-32921081f86e80cd10138b8959260e1a	8dbb07a18d46f63d8b3c8994d5ccc351
-4d79c341966242c047f3833289ee3a13	2e6507f70a9cc26fb50f5fd82a83c7ef
-03022be9e2729189e226cca023a2c9bf	d5b9290a0b67727d4ba1ca6059dc31a6
-f17c7007dd2ed483b9df587c1fdac2c7	7d31e0da1ab99fe8b08a22118e2f402b
-1bb6d0271ea775dfdfa7f9fe1048147a	3ad08396dc5afa78f34f548eea3c1d64
-743c89c3e93b9295c1ae6e750047fb1e	06e415f918c577f07328a52e24f75d43
-93f4aac22b526b5f0c908462da306ffc	ea71b362e3ea9969db085abfccdeb10d
-c2e88140e99f33883dac39daee70ac36	4442e4af0916f53a07fb8ca9a49b98ed
-368ff974da0defe085637b7199231c0a	76b88e7899abb3bfdd4b55b8c52726b0
-ccff6df2a54baa3adeb0bddb8067e7c0	3536be57ce0713954e454ae6c53ec023
-26830d74f9ed8e7e4ea4e82e28fa4761	560d4c6ff431c86546f3fcec72c748c7
-02f36cf6fe7b187306b2a7d423cafc2c	77dab2f81a6c8c9136efba7ab2c4c0f2
-54c09bacc963763eb8742fa1da44a968	d8b00929dec65d422303256336ada04f
-e563e0ba5dbf7c9417681c407d016277	1007e1b7f894dfbf72a0eaa80f3bc57e
-1745438c6be58479227d8c0d0220eec5	c51ed580ea5e20c910d951f692512b4d
-7e5550d889d46d55df3065d742b5da51	7d31e0da1ab99fe8b08a22118e2f402b
-0870b61c5e913cb405d250e80c9ba9b9	6c1674d14bf5f95742f572cddb0641a7
-393a71c997d856ed5bb85a9695be6e46	6c1674d14bf5f95742f572cddb0641a7
-96604499bfc96fcdb6da0faa204ff2fe	a27b7b9f728d4b9109f95e8ee1040c68
-3ed0c2ad2c9e6e7b161e6fe0175fe113	5882b568d8a010ef48a6896f53b6eddb
-fd9a5c27c20cd89e4ffcc1592563abcf	92468e8a62373add2b9caefddbcf1303
-1fda271217bb4c043c691fc6344087c1	0309a6c666a7a803fdb9db95de71cf01
-cba95a42c53bdc6fbf3ddf9bf10a4069	d8b00929dec65d422303256336ada04f
-fe2c9aea6c702e6b82bc19b4a5d76f90	0309a6c666a7a803fdb9db95de71cf01
-bb66c20c42c26f1874525c3ab956ec41	6c1674d14bf5f95742f572cddb0641a7
-aad365e95c3d5fadb5fdf9517c371e89	51802d8bb965d0e5be697f07d16922e8
-88a51a2e269e7026f0734f3ef3244e89	d8b00929dec65d422303256336ada04f
-5c1a922f41003eb7a19b570c33b99ff4	907eba32d950bfab68227fd7ea22999b
-de506362ebfcf7c632d659aa1f2b465d	6f781c6559a0c605da918096bdb69edf
-c0d7362d0f52d119f1beb38b12c0b651	a67d4cbdd1b59e0ffccc6bafc83eb033
-edd506a412c4f830215d4c0f1ac06e55	1007e1b7f894dfbf72a0eaa80f3bc57e
-dde31adc1b0014ce659a65c8b4d6ce42	d8b00929dec65d422303256336ada04f
-4267b5081fdfb47c085db24b58d949e0	907eba32d950bfab68227fd7ea22999b
-8f7de32e3b76c02859d6b007417bd509	92468e8a62373add2b9caefddbcf1303
-83d15841023cff02eafedb1c87df9b11	c8f4261f9f46e6465709e17ebea7a92b
-332d6b94de399f86d499be57f8a5a5ca	d8b00929dec65d422303256336ada04f
-b73377a1ec60e58d4eeb03347268c11b	d8b00929dec65d422303256336ada04f
-e3419706e1838c7ce6c25a28bef0c248	d8b00929dec65d422303256336ada04f
-382ed38ecc68052678c5ac5646298b63	06630c890abadde9228ea818ce52b621
-213c302f84c5d45929b66a20074075df	d8b00929dec65d422303256336ada04f
-22c030759ab12f97e941af558566505e	d8b00929dec65d422303256336ada04f
-f5507c2c7beee622b98ade0b93abb7fe	d8b00929dec65d422303256336ada04f
-41bee031bd7d2fdb14ff48c92f4d7984	d8b00929dec65d422303256336ada04f
-39a464d24bf08e6e8df586eb5fa7ee30	d8b00929dec65d422303256336ada04f
-f7c3dcc7ba01d0ead8e0cfb59cdf6afc	d8b00929dec65d422303256336ada04f
-6ff24c538936b5b53e88258f88294666	1f122dd19db580fd03635dd699fb49de
-071dbd416520d14b2e3688145801de41	ce937cf52d098a4d7cc678cec86ef97a
-c58de8415b504a6ffa5d0b14967f91bb	ce937cf52d098a4d7cc678cec86ef97a
-a5475ebd65796bee170ad9f1ef746394	ce937cf52d098a4d7cc678cec86ef97a
-1a8780e5531549bd454a04630a74cd4d	ce937cf52d098a4d7cc678cec86ef97a
-4b42093adfc268ce8974a3fa8c4f6bca	d8b00929dec65d422303256336ada04f
-70d0b58ef51e537361d676f05ea39c7b	d8b00929dec65d422303256336ada04f
-6f0eadd7aadf134b1b84d9761808d5ad	9891739094756d2605946c867b32ad28
-6896f30283ad47ceb4a17c8c8d625891	d8b00929dec65d422303256336ada04f
-25118c5df9a2865a8bc97feb4aff4a18	d8b00929dec65d422303256336ada04f
-5a53bed7a0e05c2b865537d96a39646f	d8b00929dec65d422303256336ada04f
-29b7417c5145049d6593a0d88759b9ee	d8b00929dec65d422303256336ada04f
-4176aa79eae271d1b82015feceb00571	1007e1b7f894dfbf72a0eaa80f3bc57e
-c81794404ad68d298e9ceb75f69cf810	d8b00929dec65d422303256336ada04f
-d0386252fd85f76fc517724666cf59ae	d8b00929dec65d422303256336ada04f
-0cddbf403096e44a08bc37d1e2e99b0f	d8b00929dec65d422303256336ada04f
-0b9d35d460b848ad46ec0568961113bf	d8b00929dec65d422303256336ada04f
-546bb05114b78748d142c67cdbdd34fd	d8b00929dec65d422303256336ada04f
-4ac863b6f6fa5ef02afdd9c1ca2a5e24	d8b00929dec65d422303256336ada04f
-1e2bcbb679ccfdea27b28bd1ea9f2e67	d8b00929dec65d422303256336ada04f
-1c62394f457ee9a56b0885f622299ea2	c8f4261f9f46e6465709e17ebea7a92b
-64d9f86ed9eeac2695ec7847fe7ea313	d8b00929dec65d422303256336ada04f
-b04d1a151c786ee00092110333873a37	424214945ba5615eca039bfe5d731c09
-65b029279eb0f99c0a565926566f6759	d8b00929dec65d422303256336ada04f
-9bfbfab5220218468ecb02ed546e3d90	d8b00929dec65d422303256336ada04f
-be41b6cfece7dfa1b4e4d226fb999607	d8b00929dec65d422303256336ada04f
-ca7e3b5c1860730cfd7b400de217fef2	6c1674d14bf5f95742f572cddb0641a7
-8f4e7c5f66d6ee5698c01de29affc562	3ad08396dc5afa78f34f548eea3c1d64
-f0bf2458b4c1a22fc329f036dd439f08	3ad08396dc5afa78f34f548eea3c1d64
-25fa2cdf2be085aa5394db743677fb69	a67d4cbdd1b59e0ffccc6bafc83eb033
-32917b03e82a83d455dd6b7f8609532c	d8b00929dec65d422303256336ada04f
-0c2277f470a7e9a2d70195ba32e1b08a	a67d4cbdd1b59e0ffccc6bafc83eb033
-0bcf509f7eb2db3b663f5782c8c4a86e	445d337b5cd5de476f99333df6b0c2a7
-92df3fd170b0285cd722e855a2968393	1007e1b7f894dfbf72a0eaa80f3bc57e
-b20a4217acaf4316739c6a5f6679ef60	d8b00929dec65d422303256336ada04f
-34b1dade51ffdab56daebcf6ac981371	bb6a72b6a93150d4181e50496fc15f5a
-9d57ebbd1d3b135839b78221388394a1	424214945ba5615eca039bfe5d731c09
-178227c5aef3b3ded144b9e19867a370	d8b00929dec65d422303256336ada04f
-75cde58f0e5563f287f2d4afb0ce4b7e	d8b00929dec65d422303256336ada04f
-b74881ac32a010e91ac7fcbcfebe210e	d8b00929dec65d422303256336ada04f
-351af29ee203c740c3209a0e0a8e9c22	1007e1b7f894dfbf72a0eaa80f3bc57e
-fd85bfffd5a0667738f6110281b25db8	d8b00929dec65d422303256336ada04f
-6e4b91e3d1950bcad012dbfbdd0fff09	d8b00929dec65d422303256336ada04f
-32a02a8a7927de4a39e9e14f2dc46ac6	d8b00929dec65d422303256336ada04f
-747f992097b9e5c9df7585931537150a	d8b00929dec65d422303256336ada04f
-13c260ca90c0f47c9418790429220899	9891739094756d2605946c867b32ad28
-19819b153eb0990c821bc106e34ab3e1	4442e4af0916f53a07fb8ca9a49b98ed
-b619e7f3135359e3f778e90d1942e6f5	0309a6c666a7a803fdb9db95de71cf01
-0ddd0b1b6329e9cb9a64c4d947e641a8	d8b00929dec65d422303256336ada04f
-30354302ae1c0715ccad2649da3d9443	424214945ba5615eca039bfe5d731c09
-89eec5d48b8969bf61eea38e4b3cfdbf	d8b00929dec65d422303256336ada04f
-703b1360391d2aef7b9ec688b00849bb	d8b00929dec65d422303256336ada04f
-b4b46e6ce2c563dd296e8bae768e1b9d	d8b00929dec65d422303256336ada04f
-5c8c8b827ae259b8e4f8cb567a577a3e	0309a6c666a7a803fdb9db95de71cf01
-7f00429970ee9fd2a3185f777ff79922	1007e1b7f894dfbf72a0eaa80f3bc57e
-92e2cf901fe43bb77d99af2ff42ade77	9891739094756d2605946c867b32ad28
-1a1bfb986176c0ba845ae4f43d027f58	d8b00929dec65d422303256336ada04f
-7ecdb1a0eb7c01d081acf2b7e11531c0	d8b00929dec65d422303256336ada04f
-094caa14a3a49bf282d8f0f262a01f43	c8f4261f9f46e6465709e17ebea7a92b
-110cb86243320511676f788dbc46f633	424214945ba5615eca039bfe5d731c09
-8e9f5b1fc0e61f9a289aba4c59e49521	d8b00929dec65d422303256336ada04f
-014dbc80621be3ddc6dd0150bc6571ff	23b998b19b5f60dbbc4eedc53328b0c7
-536d1ccb9cce397f948171765c0120d4	d8b00929dec65d422303256336ada04f
-15b70a4565372e2da0d330568fe1d795	d8b00929dec65d422303256336ada04f
-8e331f2ea604deea899bfd0a494309ba	a67d4cbdd1b59e0ffccc6bafc83eb033
-46e1d00c2019ff857c307085c58e0015	d8b00929dec65d422303256336ada04f
-6afdd78eac862dd63833a3ce5964b74b	3ad08396dc5afa78f34f548eea3c1d64
-fb5f71046fd15a0a22d7bda38971f142	d8b00929dec65d422303256336ada04f
-512914f31042dacd2a05bfcebaacdb96	d8b00929dec65d422303256336ada04f
-d96d9dac0f19368234a1fe2d4daf7f7c	d8b00929dec65d422303256336ada04f
-5aa3856374df5daa99d3d33e6a38a865	d8b00929dec65d422303256336ada04f
-e83655f0458b6c309866fbde556be35a	560d4c6ff431c86546f3fcec72c748c7
-c09ffd48de204e4610d474ade2cf3a0d	94880bda83bda77c5692876700711f15
-b7e529a8e9af2a2610182b3d3fc33698	1f122dd19db580fd03635dd699fb49de
-9c158607f29eaf8f567cc6304ada9c6d	ce937cf52d098a4d7cc678cec86ef97a
-4ffc374ef33b65b6acb388167ec542c0	ce937cf52d098a4d7cc678cec86ef97a
-ee1bc524d6d3410e94a99706dcb12319	8dbb07a18d46f63d8b3c8994d5ccc351
-bfff088b67e0fc6d1b80dbd6b6f0620c	d8b00929dec65d422303256336ada04f
-3e7f48e97425d4c532a0787e54843863	d8b00929dec65d422303256336ada04f
-9144b4f0da4c96565c47c38f0bc16593	1add2eb41fcae9b2a15b4a7d68571409
-ca03a570b4d4a22329359dc105a9ef22	4442e4af0916f53a07fb8ca9a49b98ed
-8b3d594047e4544f608c2ebb151aeb45	d8b00929dec65d422303256336ada04f
-f5eaa9c89bd215868235b0c068050883	424214945ba5615eca039bfe5d731c09
-dcd3968ac5b1ab25328f4ed42cdf2e2b	2ff6e535bd2f100979a171ad430e642b
-9f10d335198e90990f3437c5733468e7	c8f4261f9f46e6465709e17ebea7a92b
-4cc6d79ef4cf3af13b6c9b77783e688b	1007e1b7f894dfbf72a0eaa80f3bc57e
-da34d04ff19376defc2facc252e52cf0	51802d8bb965d0e5be697f07d16922e8
-eaf446aca5ddd602d0ab194667e7bec1	d8b00929dec65d422303256336ada04f
-b34f0dad8c934ee71aaabb2a675f9822	d8b00929dec65d422303256336ada04f
-c6458620084029f07681a55746ee4d69	d8b00929dec65d422303256336ada04f
-ee325100d772dd075010b61b6f33c82a	51802d8bb965d0e5be697f07d16922e8
-950d43371e8291185e524550ad3fd0df	d8b00929dec65d422303256336ada04f
-2aa7757363ff360f3a08283c1d157b2c	424214945ba5615eca039bfe5d731c09
-d71218f2abfdd51d95ba7995b93bd536	c8f4261f9f46e6465709e17ebea7a92b
-186aab3d817bd38f76c754001b0ab04d	d8b00929dec65d422303256336ada04f
-12c0763f59f7697824567a3ca32191db	907eba32d950bfab68227fd7ea22999b
-4e14f71c5702f5f71ad7de50587e2409	c8f4261f9f46e6465709e17ebea7a92b
-8f7d02638c253eb2d03118800c623203	1007e1b7f894dfbf72a0eaa80f3bc57e
-2cca468dcaea0a807f756b1de2b3ec7b	1007e1b7f894dfbf72a0eaa80f3bc57e
-cf3ecbdc9b5ae9c5a87ab05403691350	42537f0fb56e31e20ab9c2305752087d
-7b959644258e567b32d7c38e21fdb6fa	8dbb07a18d46f63d8b3c8994d5ccc351
-b08c5a0f666c5f8a83a7bcafe51ec49b	0309a6c666a7a803fdb9db95de71cf01
-eb626abaffa54be81830da1b29a3f1d8	c8f4261f9f46e6465709e17ebea7a92b
-dd663d37df2cb0b5e222614dd720f6d3	94880bda83bda77c5692876700711f15
-71aabfaa43d427516f4020c7178de31c	9891739094756d2605946c867b32ad28
-32f27ae0d5337bb62c636e3f6f17b0ff	d8b00929dec65d422303256336ada04f
-afd755c6a62ac0a0947a39c4f2cd2c20	d8b00929dec65d422303256336ada04f
-79d924bae828df8e676ba27e5dfc5f42	445d337b5cd5de476f99333df6b0c2a7
-84557a1d9eb96a680c0557724e1d0532	c8f4261f9f46e6465709e17ebea7a92b
-ead662696e0486cb7a478ecd13a0b5c5	d8b00929dec65d422303256336ada04f
-62165afb63fc004e619dff4d2132517c	d8b00929dec65d422303256336ada04f
-b5d1848944ce92433b626211ed9e46f8	a67d4cbdd1b59e0ffccc6bafc83eb033
-92e67ef6f0f8c77b1dd631bd3b37ebca	42537f0fb56e31e20ab9c2305752087d
-fe1f86f611c34fba898e4c90b71ec981	c8f4261f9f46e6465709e17ebea7a92b
-90bebabe0c80676a4f6207ee0f8caa4c	d8b00929dec65d422303256336ada04f
-ee8cde73a364c2b066f795edda1a303a	d8b00929dec65d422303256336ada04f
-92e25f3ba88109b777bd65b3b3de28a9	d8b00929dec65d422303256336ada04f
-d2ec80fcff98ecb676da474dfcb5fe5c	94880bda83bda77c5692876700711f15
-4f6ae7ce964e64fdc143602aaaab1c26	d8b00929dec65d422303256336ada04f
-fe1fbc7d376820477e38b5fa497e4509	51802d8bb965d0e5be697f07d16922e8
-b4087680a00055c7b9551c6a1ef50816	51802d8bb965d0e5be697f07d16922e8
-e318f5bc96fd248b69f6a969a320769e	d5b9290a0b67727d4ba1ca6059dc31a6
-56525146be490541a00c20a1dab0a465	5a548c2f5875f10bf5614b7c258876cf
-2f39cfcedf45336beb2e966e80b93e22	d8b00929dec65d422303256336ada04f
-51053ffab2737bd21724ed0b7e6c56f7	0309a6c666a7a803fdb9db95de71cf01
-869d4f93046289e11b591fc7a740bc43	1007e1b7f894dfbf72a0eaa80f3bc57e
-edb40909b64e73b547843287929818de	9891739094756d2605946c867b32ad28
-5b3c70181a572c8d92d906ca20298d93	d8b00929dec65d422303256336ada04f
-37b93f83b5fe94e766346ef212283282	1007e1b7f894dfbf72a0eaa80f3bc57e
-dbde8de43043d69c4fdd3e50a72b859d	6f781c6559a0c605da918096bdb69edf
-0f512371d62ae34741d14dde50ab4529	a67d4cbdd1b59e0ffccc6bafc83eb033
-c02f12329daf99e6297001ef684d6285	d8b00929dec65d422303256336ada04f
-f64162c264d5679d130b6e8ae84d704e	d8b00929dec65d422303256336ada04f
-0674a20e29104e21d141843a86421323	d8b00929dec65d422303256336ada04f
-24dd5b3de900b9ee06f913a550beb64c	d8b00929dec65d422303256336ada04f
-92dd59a949dfceab979dd25ac858f204	1f122dd19db580fd03635dd699fb49de
-3ccca65d3d9843b81f4e251dcf8a3e8c	ce937cf52d098a4d7cc678cec86ef97a
-d9a6c1fcbafa92784f501ca419fe4090	ce937cf52d098a4d7cc678cec86ef97a
-b69b0e9285e4fa15470b0969836ac5ae	ce937cf52d098a4d7cc678cec86ef97a
-fd1bd629160356260c497da84df860e2	ce937cf52d098a4d7cc678cec86ef97a
-3dba6c9259786defe62551e38665a94a	ce937cf52d098a4d7cc678cec86ef97a
-34d29649cb20a10a5e6b59c531077a59	ce937cf52d098a4d7cc678cec86ef97a
-fe7838d63434580c47798cbc5c2c8c63	d8b00929dec65d422303256336ada04f
-e47c5fcf4a752dfcfbccaab5988193ef	d8b00929dec65d422303256336ada04f
-3d482a4abe7d814a741b06cb6306d598	d8b00929dec65d422303256336ada04f
-856256d0fddf6bfd898ef43777a80f0c	6b718641741f992e68ec3712718561b8
-b5bc9b34286d4d4943fc301fe9b46e46	d8b00929dec65d422303256336ada04f
-589a30eb4a7274605385d3414ae82aaa	d8b00929dec65d422303256336ada04f
-d79d3a518bd9912fb38fa2ef71c39750	5a548c2f5875f10bf5614b7c258876cf
-5ff09619b7364339a105a1cbcb8d65fd	92468e8a62373add2b9caefddbcf1303
-2eb6fb05d553b296096973cb97912cc0	d8b00929dec65d422303256336ada04f
-50681f5168e67b62daa1837d8f693001	d8b00929dec65d422303256336ada04f
-57338bd22a6c5ba32f90981ffb25ef23	0309a6c666a7a803fdb9db95de71cf01
-69af98a8916998443129c057ee04aec4	0309a6c666a7a803fdb9db95de71cf01
-48aeffb54173796a88ef8c4eb06dbf10	51802d8bb965d0e5be697f07d16922e8
-ada3962af4845c243fcd1ccafc815b09	d8b00929dec65d422303256336ada04f
-07759c4afc493965a5420e03bdc9b773	d8b00929dec65d422303256336ada04f
-8989ab42027d29679d1dedc518eb04bd	d8b00929dec65d422303256336ada04f
-54f89c837a689f7f27667efb92e3e6b1	8189ecf686157db0c0274c1f49373318
-266674d0a44a3a0102ab80021ddfd451	d8b00929dec65d422303256336ada04f
-50e7b1ba464091976138ec6a57b08ba0	d8b00929dec65d422303256336ada04f
-a51211ef8cbbf7b49bfb27c099c30ce1	d8b00929dec65d422303256336ada04f
-0dc9cb94cdd3a9e89383d344a103ed5b	9891739094756d2605946c867b32ad28
-c45ca1e791f2849d9d11b3948fdefb74	d8b00929dec65d422303256336ada04f
-b05f3966288598b02cda4a41d6d1eb6b	d8b00929dec65d422303256336ada04f
-c7d1a2a30826683fd366e7fd6527e79c	e31959fe2842dacea4d16d36e9813620
-6ff4735b0fc4160e081440b3f7238925	d8b00929dec65d422303256336ada04f
-100691b7539d5ae455b6f4a18394420c	6f781c6559a0c605da918096bdb69edf
-d5282bd6b63b4cd51b50b40d192f1161	d8b00929dec65d422303256336ada04f
-5159fd46698ae21d56f1684c2041bd79	d8b00929dec65d422303256336ada04f
-c63ecd19a0ca74c22dfcf3063c9805d2	d8b00929dec65d422303256336ada04f
-e08f00b43f7aa539eb60cfa149afd92e	d8b00929dec65d422303256336ada04f
-793955e5d62f9b22bae3b59463c9ef63	2e6507f70a9cc26fb50f5fd82a83c7ef
-e4f2a1b2efa9caa67e58fa9610903ef0	2e6507f70a9cc26fb50f5fd82a83c7ef
-5ef6a0f70220936a0158ad66fd5d9082	d8b00929dec65d422303256336ada04f
-25ebb3d62ad1160c96bbdea951ad2f34	d8b00929dec65d422303256336ada04f
-d97a4c5c71013baac562c2b5126909e1	d8b00929dec65d422303256336ada04f
-1ebe59bfb566a19bc3ce5f4fb6c79cd3	d8b00929dec65d422303256336ada04f
-5f572d201a24500b2db6eca489a6a620	424214945ba5615eca039bfe5d731c09
-ac6dc9583812a034be2f5aacbf439236	6c1674d14bf5f95742f572cddb0641a7
-7f499363c322c1243827700c67a7591c	d8b00929dec65d422303256336ada04f
-2040754b0f9589a89ce88912bcf0648e	d8b00929dec65d422303256336ada04f
-13cd421d8a1cb48800543b9317aa2f52	d8b00929dec65d422303256336ada04f
-4b9f3b159347c34232c9f4b220cb22de	d8b00929dec65d422303256336ada04f
-81a17f1bf76469b18fbe410d8ec77da8	d8b00929dec65d422303256336ada04f
-81a86312a4aa3660f273d6ed5e4a6c7d	51802d8bb965d0e5be697f07d16922e8
-15137b95180ccc986f6321acffb9cb6f	d8b00929dec65d422303256336ada04f
-20d32d36893828d060096b2cd149820b	d8b00929dec65d422303256336ada04f
-546f8a4844ac636dd18025dcc673a3ab	d8b00929dec65d422303256336ada04f
-0646225016fba179076d7df56260d1b2	d5b9290a0b67727d4ba1ca6059dc31a6
-ce5e821f2dcc57569eae793f628c99cf	d8b00929dec65d422303256336ada04f
-cd11b262d721d8b3f35ad2d2af8431dd	d8b00929dec65d422303256336ada04f
-15cee64305c1b40a4fac10c26ffa227d	d8b00929dec65d422303256336ada04f
-3771bd5f354df475660a24613fcb7a8c	d8b00929dec65d422303256336ada04f
-f43bb3f980f58c66fc81874924043946	d8b00929dec65d422303256336ada04f
-069cdf9184e271a3c6d45ad7e86fcac2	d8b00929dec65d422303256336ada04f
-e9782409a3511c3535149cdfb5b76364	8189ecf686157db0c0274c1f49373318
-49f6021766f78bffb3f824eb199acfbc	d8b00929dec65d422303256336ada04f
-f04de6fafc611682779eb2eb36bdbe25	d8b00929dec65d422303256336ada04f
-f7c31a68856cab2620244be2df27c728	d8b00929dec65d422303256336ada04f
-ae2056f2540325e2de91f64f5ac130b6	d8b00929dec65d422303256336ada04f
-eced087124a41417845c0b0f4ff44ba9	d8b00929dec65d422303256336ada04f
-edaf03c0c66aa548df3cebdae0f94545	d8b00929dec65d422303256336ada04f
-16cbdd4df5f89d771dccfa1111d7f4bc	d8b00929dec65d422303256336ada04f
-9abdb4a0588186fc4425b29080e820a2	d8b00929dec65d422303256336ada04f
-06a4594d3b323539e9dc4820625d01b8	d8b00929dec65d422303256336ada04f
-b5c7675d6faefd09e871a6c1157e9353	d8b00929dec65d422303256336ada04f
-ae653e4f46c5928cc4b4b171efbcf881	d5b9290a0b67727d4ba1ca6059dc31a6
-df8457281db2cba8bbcb4b3b80f2b9a3	d8b00929dec65d422303256336ada04f
-f85df6e18a73a6d1f5ccb59ee51558ae	d8b00929dec65d422303256336ada04f
-0308321fc4f75ddaed8208c24f2cb918	d8b00929dec65d422303256336ada04f
-4ceb1f68d8a260c644c25799629a5615	6c1674d14bf5f95742f572cddb0641a7
-7acb475eda543ccd0622d546c5772c5a	d8b00929dec65d422303256336ada04f
-ba8d3efe842e0755020a2f1bc5533585	d8b00929dec65d422303256336ada04f
-5a154476dd67358f4dab8500076dece3	d8b00929dec65d422303256336ada04f
-b8e18040dc07eead8e6741733653a740	d8b00929dec65d422303256336ada04f
-0bc244b6aa99080c3d37fea06d328193	d8b00929dec65d422303256336ada04f
-e163173b9350642f7c855bf37c144ce0	ce937cf52d098a4d7cc678cec86ef97a
-b46e412d7f90e277a1b9370cfeb26abe	d8b00929dec65d422303256336ada04f
-49920f80faa980ca10fea8f31ddd5fc9	d8b00929dec65d422303256336ada04f
-277ce66a47017ca1ce55714d5d2232b2	6b718641741f992e68ec3712718561b8
-2ad8a3ceb96c6bf74695f896999019d8	d8b00929dec65d422303256336ada04f
-25cde5325befa9538b771717514351fb	d8b00929dec65d422303256336ada04f
-cf2676445aa6abcc43a4b0d4b01b42a1	d8b00929dec65d422303256336ada04f
-3005cc8298f189f94923611386015c78	1007e1b7f894dfbf72a0eaa80f3bc57e
-7f2679aa5b1116cc22bab4ee10018f59	6c1674d14bf5f95742f572cddb0641a7
-8a1acf425fb1bca48fb543edcc20a90d	a67d4cbdd1b59e0ffccc6bafc83eb033
-fddfe79923a5373a44237e0e60f5c845	5a548c2f5875f10bf5614b7c258876cf
-c2d7bbc06d62144545c45b9060b0a629	d8b00929dec65d422303256336ada04f
-62254b7ab0a2b3d3138bde893dde64a3	d8b00929dec65d422303256336ada04f
-f291caafeb623728ebf0166ac4cb0825	d8b00929dec65d422303256336ada04f
-1a46202030819f7419e300997199c955	d8b00929dec65d422303256336ada04f
-1f94ea2f8cb55dd130ec2254c7c2238c	6f781c6559a0c605da918096bdb69edf
-8d788b28d613c227ea3c87ac898a8256	7755415a9fe7022060b98a689236ccd2
-5226c9e67aff4f963aea67c95cd5f3f0	6f781c6559a0c605da918096bdb69edf
-e58ecda1a7b9bfdff6a10d398f468c3f	d5b9290a0b67727d4ba1ca6059dc31a6
-183bea99848e19bdb720ba5774d216ba	d8b00929dec65d422303256336ada04f
-495ddc6ae449bf858afe5512d28563f5	94880bda83bda77c5692876700711f15
-3b0b94c18b8d65aec3a8ca7f4dae720d	21fc68909a9eb8692e84cf64e495213e
-f9d5d4c7b26c7b832ee503b767d5df52	6c1674d14bf5f95742f572cddb0641a7
-f9030edd3045787fcbcfd47da5246596	424214945ba5615eca039bfe5d731c09
-5d56713e4586c9b1920eb1a3d4597564	424214945ba5615eca039bfe5d731c09
-5ce10014f645da4156ddd2cd0965986e	1f122dd19db580fd03635dd699fb49de
-06efe152a554665e02b8dc4f620bf3f1	1f122dd19db580fd03635dd699fb49de
-8f1f10cb698cb995fd69a671af6ecd58	1f122dd19db580fd03635dd699fb49de
-11635778f116ce6922f6068638a39028	1f122dd19db580fd03635dd699fb49de
-63bd9a49dd18fbc89c2ec1e1b689ddda	1f122dd19db580fd03635dd699fb49de
-e67e51d5f41cfc9162ef7fd977d1f9f5	1f122dd19db580fd03635dd699fb49de
-3d2ff8abd980d730b2f4fd0abae52f60	1f122dd19db580fd03635dd699fb49de
-47b23e889175dde5d6057db61cb52847	1f122dd19db580fd03635dd699fb49de
-44b7bda13ac1febe84d8607ca8bbf439	1f122dd19db580fd03635dd699fb49de
-8589a6a4d8908d7e8813e9a1c5693d70	1f122dd19db580fd03635dd699fb49de
-1bc1f7348d79a353ea4f594de9dd1392	1f122dd19db580fd03635dd699fb49de
-6a0e9ce4e2da4f2cbcd1292fddaa0ac6	1f122dd19db580fd03635dd699fb49de
-ac94d15f46f10707a39c4bc513cd9f98	1f122dd19db580fd03635dd699fb49de
-28a95ef0eabe44a27f49bbaecaa8a847	1f122dd19db580fd03635dd699fb49de
-0cdf051c93865faa15cbc5cd3d2b69fb	1f122dd19db580fd03635dd699fb49de
-b89e91ccf14bfd7f485dd7be7d789b0a	1f122dd19db580fd03635dd699fb49de
-e0de9c10bbf73520385ea5dcbdf62073	1f122dd19db580fd03635dd699fb49de
-065b56757c6f6a0fba7ab0c64e4c1ae1	1f122dd19db580fd03635dd699fb49de
-5cd1c3c856115627b4c3e93991f2d9cd	1f122dd19db580fd03635dd699fb49de
-bfc9ace5d2a11fae56d038d68c601f00	1f122dd19db580fd03635dd699fb49de
-b570e354b7ebc40e20029fcc7a15e5a7	1f122dd19db580fd03635dd699fb49de
-6c607fc8c0adc99559bc14e01170fee1	1f122dd19db580fd03635dd699fb49de
-891a55e21dfacf2f97c450c77e7c3ea7	1f122dd19db580fd03635dd699fb49de
-8b0ee5a501cef4a5699fd3b2d4549e8f	1f122dd19db580fd03635dd699fb49de
-3f15c445cb553524b235b01ab75fe9a6	1f122dd19db580fd03635dd699fb49de
-656d1497f7e25fe0559c6be81a4bccae	1f122dd19db580fd03635dd699fb49de
-f60ab90d94b9cafe6b32f6a93ee8fcda	1f122dd19db580fd03635dd699fb49de
-a7f9797e4cd716e1516f9d4845b0e1e2	1f122dd19db580fd03635dd699fb49de
-3d6ff25ab61ad55180a6aee9b64515bf	1f122dd19db580fd03635dd699fb49de
-660813131789b822f0c75c667e23fc85	1f122dd19db580fd03635dd699fb49de
-a7a9c1b4e7f10bd1fdf77aff255154f7	1f122dd19db580fd03635dd699fb49de
-79566192cda6b33a9ff59889eede2d66	1f122dd19db580fd03635dd699fb49de
-7f29efc2495ce308a8f4aa7bfc11d701	1f122dd19db580fd03635dd699fb49de
-5b20ea1312a1a21beaa8b86fe3a07140	1f122dd19db580fd03635dd699fb49de
-6bafe8cf106c32d485c469d36c056989	1f122dd19db580fd03635dd699fb49de
-66599a31754b5ac2a202c46c2b577c8e	1f122dd19db580fd03635dd699fb49de
-5e4317ada306a255748447aef73fff68	1f122dd19db580fd03635dd699fb49de
-121189969c46f49b8249633c2d5a7bfa	1f122dd19db580fd03635dd699fb49de
-249229ca88aa4a8815315bb085cf4d61	1f122dd19db580fd03635dd699fb49de
-076365679712e4206301117486c3d0ec	1f122dd19db580fd03635dd699fb49de
-fc4734cc48ce1595c9dbbe806f663af8	1f122dd19db580fd03635dd699fb49de
-567ddbaeec9bc3c5f0348a21ebd914b1	ce937cf52d098a4d7cc678cec86ef97a
-b2b4ae56a4531455e275770dc577b68e	ce937cf52d098a4d7cc678cec86ef97a
-8bc31f7cc79c177ab7286dda04e2d1e5	1f122dd19db580fd03635dd699fb49de
-7e0d5240ec5d34a30b6f24909e5edcb4	1f122dd19db580fd03635dd699fb49de
-f953fa7b33e7b6503f4380895bbe41c8	1f122dd19db580fd03635dd699fb49de
-058fcf8b126253956deb3ce672d107a7	1f122dd19db580fd03635dd699fb49de
-b14814d0ee12ffadc8f09ab9c604a9d0	1f122dd19db580fd03635dd699fb49de
-5447110e1e461c8c22890580c796277a	1f122dd19db580fd03635dd699fb49de
-1da77fa5b97c17be83cc3d0693c405cf	1f122dd19db580fd03635dd699fb49de
-86482a1e94052aa18cd803a51104cdb9	1f122dd19db580fd03635dd699fb49de
-59f06d56c38ac98effb4c6da117b0305	1f122dd19db580fd03635dd699fb49de
-804803e43d2c779d00004a6e87f28e30	1f122dd19db580fd03635dd699fb49de
-c2855b6617a1b08fed3824564e15a653	1f122dd19db580fd03635dd699fb49de
-cd9483c1733b17f57d11a77c9404893c	1f122dd19db580fd03635dd699fb49de
-5952dff7a6b1b3c94238ad3c6a42b904	1f122dd19db580fd03635dd699fb49de
-bb4cc149e8027369e71eb1bb36cd98e0	1f122dd19db580fd03635dd699fb49de
-c8d551145807972d194691247e7102a2	1f122dd19db580fd03635dd699fb49de
-2d1f30c9fc8d7200bdf15b730c4cd757	1f122dd19db580fd03635dd699fb49de
-a1cebab6ecfd371779f9c18e36cbba0c	1f122dd19db580fd03635dd699fb49de
-17bcf0bc2768911a378a55f42acedba7	1f122dd19db580fd03635dd699fb49de
-71e720cd3fcc3cdb99f2f4dc7122e078	1f122dd19db580fd03635dd699fb49de
-20f0ae2f661bf20e506108c40c33a6f3	1f122dd19db580fd03635dd699fb49de
-42c9b99c6b409bc9990658f6e7829542	1f122dd19db580fd03635dd699fb49de
-bb51d2b900ba638568e48193aada8a6c	1f122dd19db580fd03635dd699fb49de
-1833e2cfde2a7cf621d60288da14830c	1f122dd19db580fd03635dd699fb49de
-bbdbdf297183a1c24be29ed89711f744	1f122dd19db580fd03635dd699fb49de
-6e512379810ecf71206459e6a1e64154	1f122dd19db580fd03635dd699fb49de
-f3b65f675d13d81c12d3bb30b0190cd1	1f122dd19db580fd03635dd699fb49de
-1918775515a9c7b8db011fd35a443b82	1f122dd19db580fd03635dd699fb49de
-15bf34427540dd1945e5992583412b2f	1f122dd19db580fd03635dd699fb49de
-ba8033b8cfb1ebfc91a5d03b3a268d9f	1f122dd19db580fd03635dd699fb49de
-233dedc0bee8bbdf7930eab3dd54daee	1f122dd19db580fd03635dd699fb49de
-80f19b325c934c8396780d0c66a87c99	1f122dd19db580fd03635dd699fb49de
-6e25aa27fcd893613fac13b0312fe36d	1f122dd19db580fd03635dd699fb49de
-63e961dd2daa48ed1dade27a54f03ec4	1f122dd19db580fd03635dd699fb49de
-d2ec9ebbccaa3c6925b86d1bd528d12f	1f122dd19db580fd03635dd699fb49de
-c8c012313f10e2d0830f3fbc5afca619	1f122dd19db580fd03635dd699fb49de
-9323fc63b40460bcb68a7ad9840bad5a	1f122dd19db580fd03635dd699fb49de
-8c22a88267727dd513bf8ca278661e4d	1f122dd19db580fd03635dd699fb49de
-541455f74d6f393174ff14b99e01b22d	1f122dd19db580fd03635dd699fb49de
-3e3b4203ce868f55b084eb4f2da535d3	1f122dd19db580fd03635dd699fb49de
-88ae6d397912fe633198a78a3b10f82e	1f122dd19db580fd03635dd699fb49de
-e31fabfff3891257949efc248dfa97e2	1f122dd19db580fd03635dd699fb49de
-986a4f4e41790e819dc8b2a297aa8c87	1f122dd19db580fd03635dd699fb49de
-be3c26bf034e9e62057314f3945f87be	1f122dd19db580fd03635dd699fb49de
-57f003f2f413eedf53362b020f467be4	1f122dd19db580fd03635dd699fb49de
-692649c1372f37ed50339b91337e7fec	1f122dd19db580fd03635dd699fb49de
-1683f5557c9db93b35d1d2ae450baa21	1f122dd19db580fd03635dd699fb49de
-d449a9b2eed8b0556dc7be9cda36b67b	ce937cf52d098a4d7cc678cec86ef97a
-7463543d784aa59ca86359a50ef58c8e	ce937cf52d098a4d7cc678cec86ef97a
-215513a2c867f8b24d5aea58c9abfff6	1f122dd19db580fd03635dd699fb49de
-1ca632ac231052e4116239ccb8952dfe	d8b00929dec65d422303256336ada04f
+fb47f889f2c7c4fee1553d0f817b8aaa	NLD                             
+348bcdb386eb9cb478b55a7574622b7c	NLD                             
+925bd435e2718d623768dbf1bc1cfb60	FRA                             
+7c7ab6fbcb47bd5df1e167ca28220ee9	FRA                             
+0cdf051c93865faa15cbc5cd3d2b69fb	USA                             
+b89e91ccf14bfd7f485dd7be7d789b0a	USA                             
+e0de9c10bbf73520385ea5dcbdf62073	USA                             
+065b56757c6f6a0fba7ab0c64e4c1ae1	USA                             
+b6da055500e3d92698575a3cfc74906c	NLD                             
+5cd1c3c856115627b4c3e93991f2d9cd	USA                             
+bfc9ace5d2a11fae56d038d68c601f00	USA                             
+63ae1791fc0523f47bea9485ffec8b8c	NLD                             
+b570e354b7ebc40e20029fcc7a15e5a7	USA                             
+6c607fc8c0adc99559bc14e01170fee1	USA                             
+891a55e21dfacf2f97c450c77e7c3ea7	USA                             
+8b0ee5a501cef4a5699fd3b2d4549e8f	USA                             
+3f15c445cb553524b235b01ab75fe9a6	USA                             
+656d1497f7e25fe0559c6be81a4bccae	USA                             
+f60ab90d94b9cafe6b32f6a93ee8fcda	USA                             
+a7f9797e4cd716e1516f9d4845b0e1e2	USA                             
+3d6ff25ab61ad55180a6aee9b64515bf	USA                             
+660813131789b822f0c75c667e23fc85	USA                             
+a7a9c1b4e7f10bd1fdf77aff255154f7	USA                             
+79566192cda6b33a9ff59889eede2d66	USA                             
+7f29efc2495ce308a8f4aa7bfc11d701	USA                             
+5b20ea1312a1a21beaa8b86fe3a07140	USA                             
+6bafe8cf106c32d485c469d36c056989	USA                             
+66599a31754b5ac2a202c46c2b577c8e	USA                             
+5e4317ada306a255748447aef73fff68	USA                             
+121189969c46f49b8249633c2d5a7bfa	USA                             
+249229ca88aa4a8815315bb085cf4d61	USA                             
+076365679712e4206301117486c3d0ec	USA                             
+fc4734cc48ce1595c9dbbe806f663af8	USA                             
+86482a1e94052aa18cd803a51104cdb9	USA                             
+59f06d56c38ac98effb4c6da117b0305	USA                             
+e3f0bf612190af6c3fad41214115e004	GBR                             
+ee69e7d19f11ca58843ec2e9e77ddb38	GBR                             
+897edb97d775897f69fa168a88b01c19	CAN                             
+3e75cd2f2f6733ea4901458a7ce4236d	HUN                             
+d3ed8223151e14b936436c336a4c7278	POL                             
+be20385e18333edb329d4574f364a1f0	POL                             
+49c4097bae6c6ea96f552e38cfb6c2d1	DNK                             
+449b4d758aa7151bc1bbb24c3ffb40bb	CUB                             
+0a7ba3f35a9750ff956dca1d548dad12	DEU                             
+54b72f3169fea84731d3bcba785eac49	DEU                             
+d05a0e65818a69cc689b38c0c0007834	DEU                             
+dcabc7299e2b9ed5b05c33273e5fdd19	DEU                             
+a332f1280622f9628fccd1b7aac7370a	DEU                             
+b1bdad87bd3c4ac2c22473846d301a9e	DEU                             
+fe5b73c2c2cd2d9278c3835c791289b6	DEU                             
+7d6b45c02283175f490558068d1fc81b	FRA                             
+dddb04bc0d058486d0ef0212c6ea0682	FRA                             
+7771012413f955f819866e517b275cb4	FRA                             
+4dddd8579760abb62aa4b1910725e73c	NLD                             
+37f02eba79e0a3d29dfd6a4cf2f4d019	NLD                             
+804803e43d2c779d00004a6e87f28e30	USA                             
+c2855b6617a1b08fed3824564e15a653	USA                             
+cd9483c1733b17f57d11a77c9404893c	USA                             
+5952dff7a6b1b3c94238ad3c6a42b904	USA                             
+bb4cc149e8027369e71eb1bb36cd98e0	USA                             
+39e83bc14e95fcbc05848fc33c30821f	CZE                             
+c8d551145807972d194691247e7102a2	USA                             
+2d1f30c9fc8d7200bdf15b730c4cd757	USA                             
+a1cebab6ecfd371779f9c18e36cbba0c	USA                             
+17bcf0bc2768911a378a55f42acedba7	USA                             
+71e720cd3fcc3cdb99f2f4dc7122e078	USA                             
+20f0ae2f661bf20e506108c40c33a6f3	USA                             
+42c9b99c6b409bc9990658f6e7829542	USA                             
+bb51d2b900ba638568e48193aada8a6c	USA                             
+1833e2cfde2a7cf621d60288da14830c	USA                             
+bbdbdf297183a1c24be29ed89711f744	USA                             
+6e512379810ecf71206459e6a1e64154	USA                             
+f3b65f675d13d81c12d3bb30b0190cd1	USA                             
+1918775515a9c7b8db011fd35a443b82	USA                             
+15bf34427540dd1945e5992583412b2f	USA                             
+ba8033b8cfb1ebfc91a5d03b3a268d9f	USA                             
+233dedc0bee8bbdf7930eab3dd54daee	USA                             
+80f19b325c934c8396780d0c66a87c99	USA                             
+6e25aa27fcd893613fac13b0312fe36d	USA                             
+63e961dd2daa48ed1dade27a54f03ec4	USA                             
+d2ec9ebbccaa3c6925b86d1bd528d12f	USA                             
+c8c012313f10e2d0830f3fbc5afca619	USA                             
+9323fc63b40460bcb68a7ad9840bad5a	USA                             
+8c22a88267727dd513bf8ca278661e4d	USA                             
+541455f74d6f393174ff14b99e01b22d	USA                             
+3e3b4203ce868f55b084eb4f2da535d3	USA                             
+88ae6d397912fe633198a78a3b10f82e	USA                             
+e31fabfff3891257949efc248dfa97e2	USA                             
+986a4f4e41790e819dc8b2a297aa8c87	USA                             
+be3c26bf034e9e62057314f3945f87be	USA                             
+57f003f2f413eedf53362b020f467be4	USA                             
+692649c1372f37ed50339b91337e7fec	USA                             
+1683f5557c9db93b35d1d2ae450baa21	USA                             
+a61b878c2b563f289de2109fa0f42144	GBR                             
+51fa80e44b7555c4130bd06c53f4835c	GBR                             
+889aaf9cd0894206af758577cf5cf071	GBR                             
+faabbecd319372311ed0781d17b641d1	CAN                             
+b5d9c5289fe97968a5634b3e138bf9e2	CAN                             
+4b503a03f3f1aec6e5b4d53dd8148498	BLR                             
+7c83727aa466b3b1b9d6556369714fcf	CUB                             
+9f19396638dd8111f2cee938fdf4e455	DEU                             
+fdcbfded0aaf369d936a70324b39c978	DEU                             
+1056b63fdc3c5015cc4591aa9989c14f	DEU                             
+2876f7ecdae220b3c0dcb91ff13d0590	DEU                             
+1734b04cf734cb291d97c135d74b4b87	DEU                             
+8d7a18d54e82fcfb7a11566ce94b9109	DEU                             
+0e2ea6aa669710389cf4d6e2ddf408c4	DEU                             
+63ad3072dc5472bb44c2c42ede26d90f	DEU                             
+2aae4f711c09481c8353003202e05359	DEU                             
+fdc90583bd7a58b91384dea3d1659cde	FRA                             
+2414366fe63cf7017444181acacb6347	FRA                             
+a825b2b87f3b61c9660b81f340f6e519	FRA                             
+7df8865bbec157552b8a579e0ed9bfe3	USA                             
+cddf835bea180bd14234a825be7a7a82	NLD                             
+215513a2c867f8b24d5aea58c9abfff6	USA                             
+62a40f6fa589c7007ded80d26ad1c3a9	USA                             
+74b3b7be6ed71b946a151d164ad8ede5	GBR                             
+e64b94f14765cee7e05b4bec8f5fee31	NLD                             
+d0a1fd0467dc892f0dc27711637c864e	NLD                             
+649db5c9643e1c17b3a44579980da0ad	NLD                             
+55159d04cc4faebd64689d3b74a94009	GBR                             
+eeaeec364c925e0c821660c7a953546e	GBR                             
+4f48e858e9ed95709458e17027bb94bf	GBR                             
+2501f7ba78cc0fd07efb7c17666ff12e	NLD                             
+dd18fa7a5052f2bce8ff7cb4a30903ea	CZE                             
+bd4184ee062e4982b878b6b188793f5b	GBR                             
+91a337f89fe65fec1c97f52a821c1178	GBR                             
+baa9d4eef21c7b89f42720313b5812d4	GBR                             
+820de5995512273916b117944d6da15a	CAN                             
+fb8be6409408481ad69166324bdade9c	UKR                             
+73affe574e6d4dc2fa72b46dc9dd4815	UKR                             
+7492a1ca2669793b485b295798f5d782	DNK                             
+63d7f33143522ba270cb2c87f724b126	DNK                             
+33b6f1b596a60fa87baef3d2c05b7c04	FIN                             
+bbb668ff900efa57d936e726a09e4fe8	FIN                             
+ca5a010309ffb20190558ec20d97e5b2	NOR                             
+9db9bc745a7568b51b3a968d215ddad6	SWE                             
+401357e57c765967393ba391a338e89b	SWE                             
+87f44124fb8d24f4c832138baede45c7	SWE                             
+ed24ff8971b1fa43a1efbb386618ce35	SWE                             
+a4902fb3d5151e823c74dfd51551b4b0	SWE                             
+776da10f7e18ffde35ea94d144dc60a3	SWE                             
+bbce8e45250a239a252752fac7137e00	SWE                             
+ef6369d9794dbe861a56100e92a3c71d	SWE                             
+187ebdf7947f4b61e0725c93227676a4	ITA                             
+0903a7e60f0eb20fdc8cc0b8dbd45526	ITA                             
+237e378c239b44bff1e9a42ab866580c	ITA                             
+44f2dc3400ce17fad32a189178ae72fa	PRT                             
+426fdc79046e281c5322161f011ce68c	ESP                             
+443866d78de61ab3cd3e0e9bf97a34f6	AUT                             
+1ac0c8e8c04cf2d6f02fdb8292e74588	AUT                             
+76700087e932c3272e05694610d604ba	BEL                             
+87ded0ea2f4029da0a0022000d59232b	AUS                             
+0b0d1c3752576d666c14774b8233889f	AUS                             
+42563d0088d6ac1a47648fc7621e77c6	DEU                             
+c883319a1db14bc28eff8088c5eba10e	DEU                             
+6b7cf117ecf0fea745c4c375c1480cb5	DEU                             
+4276250c9b1b839b9508825303c5c5ae	DEU                             
+7462f03404f29ea618bcc9d52de8e647	DEU                             
+5efb7d24387b25d8325839be958d9adf	DEU                             
+e271e871e304f59e62a263ffe574ea2d	DEU                             
+a8d9eeed285f1d47836a5546a280a256	DEU                             
+abbf8e3e3c3e78be8bd886484c1283c1	DEU                             
+2cfe35095995e8dd15ab7b867e178c15	FRA                             
+4a2a0d0c29a49d9126dcb19230aa1994	FRA                             
+80fcd08f6e887f6cfbedd2156841ab2b	FRA                             
+7db066b46f48d010fdb8c87337cdeda4	USA                             
+4cfab0d66614c6bb6d399837656c590e	NLD                             
+c4678a2e0eef323aeb196670f2bc8a6e	NLD                             
+0844ad55f17011abed4a5208a3a05b74	GBR                             
+e64d38b05d197d60009a43588b2e4583	GBR                             
+88711444ece8fe638ae0fb11c64e2df3	GBR                             
+e872b77ff7ac24acc5fa373ebe9bb492	MEX                             
+db38e12f9903b156f9dc91fce2ef3919	RUS                             
+a716390764a4896d99837e99f9e009c9	BRA                             
+b885447285ece8226facd896c04cdba2	HUN                             
+522b6c44eb0aedf4970f2990a2f2a812	POL                             
+2e7a848dc99bd27acb36636124855faf	ROU                             
+8775f64336ee5e9a8114fbe3a5a628c5	DNK                             
+7cd7921da2e6aab79c441a0c2ffc969b	FIN                             
+529a1d385b4a8ca97ea7369477c7b6a7	FIN                             
+b3ffff8517114caf70b9e70734dbaf6f	FIN                             
+77f2b3ea9e4bd785f5ff322bae51ba07	FIN                             
+ffa7450fd138573d8ae665134bccd02c	FIN                             
+2cf65e28c586eeb98daaecf6eb573e7a	FIN                             
+a650d82df8ca65bb69a45242ab66b399	FIN                             
+75ab0270163731ee05f35640d56ef473	NOR                             
+a4cbfb212102da21b82d94be555ac3ec	NOR                             
+6c00bb1a64f660600a6c1545377f92dc	NOR                             
+6830afd7158930ca7d1959ce778eb681	NOR                             
+2082a7d613f976e7b182a3fe80a28958	NOR                             
+c5dc33e23743fb951b3fe7f1f477b794	NOR                             
+8fda25275801e4a40df6c73078baf753	NOR                             
+b5f7b25b0154c34540eea8965f90984d	NOR                             
+942c9f2520684c22eb6216a92b711f9e	SWE                             
+5df92b70e2855656e9b3ffdf313d7379	SWE                             
+108c58fc39b79afc55fac7d9edf4aa2a	SWE                             
+9a322166803a48932356586f05ef83c7	SWE                             
+1c6987adbe5ab3e4364685e8caed0f59	SWE                             
+7533f96ec01fd81438833f71539c7d4e	SWE                             
+c4f0f5cedeffc6265ec3220ab594d56b	SWE                             
+947ce14614263eab49f780d68555aef8	SWE                             
+d730e65d54d6c0479561d25724afd813	SWE                             
+e08383c479d96a8a762e23a99fd8bf84	SWE                             
+a3f5542dc915b94a5e10dab658bb0959	SWE                             
+eb2c788da4f36fba18b85ae75aff0344	SWE                             
+e74a88c71835c14d92d583a1ed87cc6c	SWE                             
+d73310b95e8b4dece44e2a55dd1274e6	SWE                             
+6429807f6febbf061ac85089a8c3173d	SWE                             
+66244bb43939f81c100f03922cdc3439	SWE                             
+83d15841023cff02eafedb1c87df9b11	SWE                             
+26830d74f9ed8e7e4ea4e82e28fa4761	HRV                             
+dfdef9b5190f331de20fe029babf032e	DEU                             
+5b22d1d5846a2b6b6d0cf342e912d124	DEU                             
+4261335bcdc95bd89fd530ba35afbf4c	DEU                             
+3cdb47307aeb005121b09c41c8d8bee6	DEU                             
+53407737e93f53afdfc588788b8288e8	DEU                             
+006fc2724417174310cf06d2672e34d2	DEU                             
+2ac79000a90b015badf6747312c0ccad	DEU                             
+626dceb92e4249628c1e76a2c955cd24	DEU                             
+3a2a7f86ca87268be9b9e0557b013565	DEU                             
+ac03fad3be179a237521ec4ef2620fb0	DEU                             
+7e2b83d69e6c93adf203e13bc7d6f444	DEU                             
+91b18e22d4963b216af00e1dd43b5d05	FRA                             
+02d44fbbe1bfacd6eaa9b20299b1cb78	NLD                             
+2af9e4497582a6faa68a42ac2d512735	USA                             
+f8e7112b86fcd9210dfaf32c00d6d375	GBR                             
+218f2bdae8ad3bb60482b201e280ffdc	GBR                             
+65976b6494d411d609160a2dfd98f903	GBR                             
+5b709b96ee02a30be5eee558e3058245	BRA                             
+94ca28ea8d99549c2280bcc93f98c853	NLD                             
+e4b3296f8a9e2a378eb3eb9576b91a37	CHL                             
+e62a773154e1179b0cc8c5592207cb10	CAN                             
+0a267617c0b5b4d53e43a7d4e4c522ad	NLD                             
+11f8d9ec8f6803ea61733840f13bc246	BLR                             
+53369c74c3cacdc38bdcdeda9284fe3c	RUS                             
+fa03eb688ad8aa1db593d33dabd89bad	CZE                             
+91c9ed0262dea7446a4f3a3e1cdd0698	FIN                             
+0af74c036db52f48ad6cbfef6fee2999	FIN                             
+90d523ebbf276f516090656ebfccdc9f	ISL                             
+abd7ab19ff758cf4c1a2667e5bbac444	CZE                             
+c127f32dc042184d12b8c1433a77e8c4	ISL                             
+8edf4531385941dfc85e3f3d3e32d24f	SWE                             
+8b427a493fc39574fc801404bc032a2f	GRC                             
+9bc2ca9505a273b06aa0b285061cd1de	GRC                             
+9d969d25c9f506c5518bb090ad5f8266	GRC                             
+2df8905eae6823023de6604dc5346c29	GRC                             
+8259dc0bcebabcb0696496ca406dd672	GRC                             
+249789ae53c239814de8e606ff717ec9	ITA                             
+c4ddbffb73c1c34d20bd5b3f425ce4b1	ITA                             
+457f098eeb8e1518008449e9b1cb580d	ITA                             
+6bd19bad2b0168d4481b19f9c25b4a9f	ITA                             
+e563e0ba5dbf7c9417681c407d016277	ITA                             
+edd506a412c4f830215d4c0f1ac06e55	ITA                             
+fd9a5c27c20cd89e4ffcc1592563abcf	MLT                             
+8f7de32e3b76c02859d6b007417bd509	MLT                             
+948098e746bdf1c1045c12f042ea98c2	PRT                             
+4a45ac6d83b85125b4163a40364e7b2c	PRT                             
+19baf8a6a25030ced87cd0ce733365a9	PRT                             
+990813672e87b667add44c712bb28d3d	PRT                             
+9fc7c7342d41c7c53c6e8e4b9bc53fc4	PRT                             
+3921cb3f97a88349e153beb5492f6ef4	PRT                             
+93f4aac22b526b5f0c908462da306ffc	PRT                             
+1e14d6b40d8e81d8d856ba66225dcbf3	SRB                             
+59d153c1c2408b702189623231b7898a	ESP                             
+905a40c3533830252a909603c6fa1e6a	ESP                             
+5c1a922f41003eb7a19b570c33b99ff4	ESP                             
+4267b5081fdfb47c085db24b58d949e0	ESP                             
+e8afde257f8a2cbbd39d866ddfc06103	AUT                             
+c74b5aa120021cbe18dcddd70d8622da	AUT                             
+3614c45db20ee41e068c2ab7969eb3b5	AUT                             
+3964d4f40b6166aa9d370855bd20f662	AUT                             
+31d8a0a978fad885b57a685b1a0229df	AUT                             
+8143ee8032c71f6f3f872fc5bb2a4fed	AUT                             
+46174766ce49edbbbc40e271c87b5a83	COL                             
+bbc155fb2b111bf61c4f5ff892915e6b	CUB                             
+9ab8f911c74597493400602dc4d2b412	DEU                             
+54f0b93fa83225e4a712b70c68c0ab6f	DEU                             
+1cdd53cece78d6e8dffcf664fa3d1be2	DEU                             
+1e88302efcfc873691f0c31be4e2a388	DEU                             
+13caf3d14133dfb51067264d857eaf70	DEU                             
+7a4fafa7badd04d5d3114ab67b0caf9d	DEU                             
+4927f3218b038c780eb795766dfd04ee	DEU                             
+0a97b893b92a7df612eadfe97589f242	DEU                             
+7ef36a3325a61d4f1cff91acbe77c7e3	DEU                             
+e25ee917084bdbdc8506b56abef0f351	FRA                             
+8e11b2f987a99ed900a44aa1aa8bd3d0	NLD                             
+96e3cdb363fe6df2723be5b994ad117a	FRA                             
+2c4e2c9948ddac6145e529c2ae7296da	FRA                             
+f6540bc63be4c0cb21811353c0d24f69	NLD                             
+da867941c8bacf9be8e59bc13d765f92	USA                             
+935b48a84528c4280ec208ce529deea0	GBR                             
+8852173e80d762d62f0bcb379d82ebdb	GBR                             
+e4f0ad5ef0ac3037084d8a5e3ca1cabc	NLD                             
+ea16d031090828264793e860a00cc995	NLD                             
+b1d465aaf3ccf8701684211b1623adf2	150                             
+c9af1c425ca093648e919c2e471df3bd	NLD                             
+dde3e0b0cc344a7b072bbab8c429f4ff	BRA                             
+e29ef4beb480eab906ffa7c05aeec23d	POL                             
+4ad6c928711328d1cf0167bc87079a14	POL                             
+45b568ce63ea724c415677711b4328a7	DNK                             
+36cbc41c1c121f2c68f5776a118ea027	FIN                             
+8e62fc75d9d0977d0be4771df05b3c2f	FIN                             
+f03bde11d261f185cbacfa32c1c6538c	CZE                             
+8a6f1a01e4b0d9e272126a8646a72088	FIN                             
+dea293bdffcfb292b244b6fe92d246dc	FIN                             
+6f195d8f9fe09d45d2e680f7d7157541	ISL                             
+3bcbddf6c114327fc72ea06bcb02f9ef	001                             
+a4977b96c7e5084fcce21a0d07b045f8	SWE                             
+2113f739f81774557041db616ee851e6	SWE                             
+559ccea48c3460ebc349587d35e808dd	SWE                             
+000f49c98c428aff4734497823d04f45	SWE                             
+db46d9a37b31baa64cb51604a2e4939a	SVN                             
+754230e2c158107a2e93193c829e9e59	ESP                             
+a0fb30950d2a150c1d2624716f216316	AUT                             
+39a25b9c88ce401ca54fd7479d1c8b73	AUT                             
+781acc7e58c9a746d58f6e65ab1e90c4	AUT                             
+edb40909b64e73b547843287929818de	AUT                             
+721c28f4c74928cc9e0bb3fef345e408	BEL                             
+5435326cf392e2cd8ad7768150cd5df6	BEL                             
+8945663993a728ab19a3853e5b820a42	BEL                             
+6738f9acd4740d945178c649d6981734	BEL                             
+79ce9bd96a3184b1ee7c700aa2927e67	BEL                             
+4f840b1febbbcdb12b9517cd0a91e8f4	BEL                             
+0291e38d9a3d398052be0ca52a7b1592	BEL                             
+0870b61c5e913cb405d250e80c9ba9b9	BEL                             
+393a71c997d856ed5bb85a9695be6e46	BEL                             
+bb66c20c42c26f1874525c3ab956ec41	BEL                             
+71e32909a1bec1edfc09aec09ca2ac17	LUX                             
+f29d276fd930f1ad7687ed7e22929b64	LUX                             
+2654d6e7cec2ef045ca1772a980fbc4c	LUX                             
+382ed38ecc68052678c5ac5646298b63	LUX                             
+c4c7cb77b45a448aa3ca63082671ad97	CHE                             
+6f199e29c5782bd05a4fef98e7e41419	CHE                             
+c5f022ef2f3211dc1e3b8062ffe764f0	CHE                             
+0b6e98d660e2901c33333347da37ad36	CHE                             
+3dda886448fe98771c001b56a4da9893	CHE                             
+90d127641ffe2a600891cd2e3992685b	CHE                             
+4fa857a989df4e1deea676a43dceea07	DEU                             
+6ee2e6d391fa98d7990b502e72c7ec58	DEU                             
+e0f39406f0e15487dd9d3997b2f5ca61	DEU                             
+399033f75fcf47d6736c9c5209222ab8	DEU                             
+32814ff4ca9a26b8d430a8c0bc8dc63e	DEU                             
+2447873ddeeecaa165263091c0cbb22f	DEU                             
+fcd1c1b547d03e760d1defa4d2b98783	DEU                             
+6369ba49db4cf35b35a7c47e3d4a4fd0	DEU                             
+1fda271217bb4c043c691fc6344087c1	FRA                             
+fe2c9aea6c702e6b82bc19b4a5d76f90	FRA                             
+c0d7362d0f52d119f1beb38b12c0b651	NLD                             
+6ff24c538936b5b53e88258f88294666	USA                             
+aad365e95c3d5fadb5fdf9517c371e89	CZE                             
+071dbd416520d14b2e3688145801de41	GBR                             
+c58de8415b504a6ffa5d0b14967f91bb	GBR                             
+a5475ebd65796bee170ad9f1ef746394	GBR                             
+1a8780e5531549bd454a04630a74cd4d	GBR                             
+3ed0c2ad2c9e6e7b161e6fe0175fe113	CRI                             
+32921081f86e80cd10138b8959260e1a	MEX                             
+ab7b69efdaf168cbbe9a5b03d901be74	PAN                             
+ccff6df2a54baa3adeb0bddb8067e7c0	ARG                             
+9ee30f495029e1fdf6567045f2079be1	BRA                             
+4d79c341966242c047f3833289ee3a13	CHL                             
+5588cb8830fdb8ac7159b7cf5d1e611e	CAN                             
+3041a64f7587a6768d8e307b2662785b	IDN                             
+02f36cf6fe7b187306b2a7d423cafc2c	PHL                             
+f17c7007dd2ed483b9df587c1fdac2c7	IND                             
+7e5550d889d46d55df3065d742b5da51	IND                             
+96604499bfc96fcdb6da0faa204ff2fe	TUR                             
+368ff974da0defe085637b7199231c0a	FRO                             
+57eba43d6bec2a8115e94d6fbb42bc75	FIN                             
+de506362ebfcf7c632d659aa1f2b465d	FIN                             
+a5a8afc6c35c2625298b9ce4cc447b39	ISL                             
+57b9fe77adaac4846c238e995adb6ee2	ISL                             
+743c89c3e93b9295c1ae6e750047fb1e	IRL                             
+f9f57e175d62861bb5f2bda44a078df7	NOR                             
+6a8538b37162b23d68791b9a0c54a5bf	NOR                             
+03022be9e2729189e226cca023a2c9bf	NOR                             
+a2459c5c8a50215716247769c3dea40b	SWE                             
+eaeaed2d9f3137518a5c8c7e6733214f	DEU                             
+8ccd65d7f0f028405867991ae3eaeb56	DEU                             
+e5a674a93987de4a52230105907fffe9	DEU                             
+e285e4ecb358b92237298f67526beff7	DEU                             
+d832b654664d104f0fbb9b6674a09a11	DEU                             
+2aeb128c6d3eb7e79acb393b50e1cf7b	DEU                             
+b619e7f3135359e3f778e90d1942e6f5	FRA                             
+5c8c8b827ae259b8e4f8cb567a577a3e	FRA                             
+25fa2cdf2be085aa5394db743677fb69	NLD                             
+b7e529a8e9af2a2610182b3d3fc33698	USA                             
+9c158607f29eaf8f567cc6304ada9c6d	GBR                             
+4ffc374ef33b65b6acb388167ec542c0	GBR                             
+0bcf509f7eb2db3b663f5782c8c4a86e	CAN                             
+0c2277f470a7e9a2d70195ba32e1b08a	NLD                             
+34b1dade51ffdab56daebcf6ac981371	MNG                             
+c09ffd48de204e4610d474ade2cf3a0d	POL                             
+b04d1a151c786ee00092110333873a37	DNK                             
+9d57ebbd1d3b135839b78221388394a1	DNK                             
+30354302ae1c0715ccad2649da3d9443	DNK                             
+110cb86243320511676f788dbc46f633	DNK                             
+1c62394f457ee9a56b0885f622299ea2	SWE                             
+8e331f2ea604deea899bfd0a494309ba	NLD                             
+094caa14a3a49bf282d8f0f262a01f43	SWE                             
+e83655f0458b6c309866fbde556be35a	HRV                             
+4176aa79eae271d1b82015feceb00571	ITA                             
+014dbc80621be3ddc6dd0150bc6571ff	ARE                             
+92df3fd170b0285cd722e855a2968393	ITA                             
+351af29ee203c740c3209a0e0a8e9c22	ITA                             
+7f00429970ee9fd2a3185f777ff79922	ITA                             
+6f0eadd7aadf134b1b84d9761808d5ad	AUT                             
+13c260ca90c0f47c9418790429220899	AUT                             
+92e2cf901fe43bb77d99af2ff42ade77	AUT                             
+ca7e3b5c1860730cfd7b400de217fef2	BEL                             
+450948d9f14e07ba5e3015c2d726b452	CHE                             
+4cabe475dd501f3fd4da7273b5890c33	CHE                             
+3e52c77d795b7055eeff0c44687724a1	CHE                             
+1bb6d0271ea775dfdfa7f9fe1048147a	CHE                             
+8f4e7c5f66d6ee5698c01de29affc562	CHE                             
+f0bf2458b4c1a22fc329f036dd439f08	CHE                             
+6afdd78eac862dd63833a3ce5964b74b	CHE                             
+d1fb4e47d8421364f49199ee395ad1d3	AUS                             
+36f969b6aeff175204078b0533eae1a0	AUS                             
+1c06fc6740d924cab33dce73643d84b9	AUS                             
+c1923ca7992dc6e79d28331abbb64e72	AUS                             
+c2e88140e99f33883dac39daee70ac36	AUS                             
+19819b153eb0990c821bc106e34ab3e1	AUS                             
+ca03a570b4d4a22329359dc105a9ef22	AUS                             
+1745438c6be58479227d8c0d0220eec5	NZL                             
+4b42093adfc268ce8974a3fa8c4f6bca	DEU                             
+70d0b58ef51e537361d676f05ea39c7b	DEU                             
+6896f30283ad47ceb4a17c8c8d625891	DEU                             
+25118c5df9a2865a8bc97feb4aff4a18	DEU                             
+5a53bed7a0e05c2b865537d96a39646f	DEU                             
+29b7417c5145049d6593a0d88759b9ee	DEU                             
+c81794404ad68d298e9ceb75f69cf810	DEU                             
+d0386252fd85f76fc517724666cf59ae	DEU                             
+0cddbf403096e44a08bc37d1e2e99b0f	DEU                             
+b08c5a0f666c5f8a83a7bcafe51ec49b	FRA                             
+b5d1848944ce92433b626211ed9e46f8	NLD                             
+51053ffab2737bd21724ed0b7e6c56f7	FRA                             
+92dd59a949dfceab979dd25ac858f204	USA                             
+3ccca65d3d9843b81f4e251dcf8a3e8c	GBR                             
+d9a6c1fcbafa92784f501ca419fe4090	GBR                             
+b69b0e9285e4fa15470b0969836ac5ae	GBR                             
+0f512371d62ae34741d14dde50ab4529	NLD                             
+da34d04ff19376defc2facc252e52cf0	CZE                             
+fd1bd629160356260c497da84df860e2	GBR                             
+ee325100d772dd075010b61b6f33c82a	CZE                             
+fe1fbc7d376820477e38b5fa497e4509	CZE                             
+3dba6c9259786defe62551e38665a94a	GBR                             
+34d29649cb20a10a5e6b59c531077a59	GBR                             
+b4087680a00055c7b9551c6a1ef50816	CZE                             
+9144b4f0da4c96565c47c38f0bc16593	JAM                             
+ee1bc524d6d3410e94a99706dcb12319	MEX                             
+7b959644258e567b32d7c38e21fdb6fa	MEX                             
+cf3ecbdc9b5ae9c5a87ab05403691350	BRA                             
+92e67ef6f0f8c77b1dd631bd3b37ebca	BRA                             
+79d924bae828df8e676ba27e5dfc5f42	CAN                             
+56525146be490541a00c20a1dab0a465	ISR                             
+dd663d37df2cb0b5e222614dd720f6d3	POL                             
+d2ec80fcff98ecb676da474dfcb5fe5c	POL                             
+f5eaa9c89bd215868235b0c068050883	DNK                             
+2aa7757363ff360f3a08283c1d157b2c	DNK                             
+dbde8de43043d69c4fdd3e50a72b859d	FIN                             
+e318f5bc96fd248b69f6a969a320769e	NOR                             
+9f10d335198e90990f3437c5733468e7	SWE                             
+d71218f2abfdd51d95ba7995b93bd536	SWE                             
+4e14f71c5702f5f71ad7de50587e2409	SWE                             
+eb626abaffa54be81830da1b29a3f1d8	SWE                             
+84557a1d9eb96a680c0557724e1d0532	SWE                             
+fe1f86f611c34fba898e4c90b71ec981	SWE                             
+4cc6d79ef4cf3af13b6c9b77783e688b	ITA                             
+8f7d02638c253eb2d03118800c623203	ITA                             
+2cca468dcaea0a807f756b1de2b3ec7b	ITA                             
+869d4f93046289e11b591fc7a740bc43	ITA                             
+37b93f83b5fe94e766346ef212283282	ITA                             
+dcd3968ac5b1ab25328f4ed42cdf2e2b	SRB                             
+12c0763f59f7697824567a3ca32191db	ESP                             
+71aabfaa43d427516f4020c7178de31c	AUT                             
+bfff088b67e0fc6d1b80dbd6b6f0620c	DEU                             
+3e7f48e97425d4c532a0787e54843863	DEU                             
+8b3d594047e4544f608c2ebb151aeb45	DEU                             
+eaf446aca5ddd602d0ab194667e7bec1	DEU                             
+b34f0dad8c934ee71aaabb2a675f9822	DEU                             
+c6458620084029f07681a55746ee4d69	DEU                             
+950d43371e8291185e524550ad3fd0df	DEU                             
+186aab3d817bd38f76c754001b0ab04d	DEU                             
+32f27ae0d5337bb62c636e3f6f17b0ff	DEU                             
+57338bd22a6c5ba32f90981ffb25ef23	FRA                             
+69af98a8916998443129c057ee04aec4	FRA                             
+e163173b9350642f7c855bf37c144ce0	GBR                             
+48aeffb54173796a88ef8c4eb06dbf10	CZE                             
+54f89c837a689f7f27667efb92e3e6b1	150                             
+e9782409a3511c3535149cdfb5b76364	150                             
+81a86312a4aa3660f273d6ed5e4a6c7d	CZE                             
+c7d1a2a30826683fd366e7fd6527e79c	EGY                             
+793955e5d62f9b22bae3b59463c9ef63	CHL                             
+e4f2a1b2efa9caa67e58fa9610903ef0	CHL                             
+d79d3a518bd9912fb38fa2ef71c39750	ISR                             
+5f572d201a24500b2db6eca489a6a620	DNK                             
+100691b7539d5ae455b6f4a18394420c	FIN                             
+0646225016fba179076d7df56260d1b2	NOR                             
+ae653e4f46c5928cc4b4b171efbcf881	NOR                             
+856256d0fddf6bfd898ef43777a80f0c	GRC                             
+5ff09619b7364339a105a1cbcb8d65fd	MLT                             
+0dc9cb94cdd3a9e89383d344a103ed5b	AUT                             
+ac6dc9583812a034be2f5aacbf439236	BEL                             
+4ceb1f68d8a260c644c25799629a5615	BEL                             
+fe7838d63434580c47798cbc5c2c8c63	DEU                             
+e47c5fcf4a752dfcfbccaab5988193ef	DEU                             
+3d482a4abe7d814a741b06cb6306d598	DEU                             
+b5bc9b34286d4d4943fc301fe9b46e46	DEU                             
+589a30eb4a7274605385d3414ae82aaa	DEU                             
+5ce10014f645da4156ddd2cd0965986e	USA                             
+06efe152a554665e02b8dc4f620bf3f1	USA                             
+8f1f10cb698cb995fd69a671af6ecd58	USA                             
+11635778f116ce6922f6068638a39028	USA                             
+8a1acf425fb1bca48fb543edcc20a90d	NLD                             
+63bd9a49dd18fbc89c2ec1e1b689ddda	USA                             
+e67e51d5f41cfc9162ef7fd977d1f9f5	USA                             
+3d2ff8abd980d730b2f4fd0abae52f60	USA                             
+47b23e889175dde5d6057db61cb52847	USA                             
+44b7bda13ac1febe84d8607ca8bbf439	USA                             
+3b0b94c18b8d65aec3a8ca7f4dae720d	IRN                             
+8589a6a4d8908d7e8813e9a1c5693d70	USA                             
+1bc1f7348d79a353ea4f594de9dd1392	USA                             
+6a0e9ce4e2da4f2cbcd1292fddaa0ac6	USA                             
+ac94d15f46f10707a39c4bc513cd9f98	USA                             
+28a95ef0eabe44a27f49bbaecaa8a847	USA                             
+567ddbaeec9bc3c5f0348a21ebd914b1	GBR                             
+b2b4ae56a4531455e275770dc577b68e	GBR                             
+fddfe79923a5373a44237e0e60f5c845	ISR                             
+495ddc6ae449bf858afe5512d28563f5	POL                             
+f9030edd3045787fcbcfd47da5246596	DNK                             
+5d56713e4586c9b1920eb1a3d4597564	DNK                             
+8d788b28d613c227ea3c87ac898a8256	EST                             
+1f94ea2f8cb55dd130ec2254c7c2238c	FIN                             
+5226c9e67aff4f963aea67c95cd5f3f0	FIN                             
+e58ecda1a7b9bfdff6a10d398f468c3f	NOR                             
+277ce66a47017ca1ce55714d5d2232b2	GRC                             
+3005cc8298f189f94923611386015c78	ITA                             
+7f2679aa5b1116cc22bab4ee10018f59	BEL                             
+b46e412d7f90e277a1b9370cfeb26abe	DEU                             
+49920f80faa980ca10fea8f31ddd5fc9	DEU                             
+2ad8a3ceb96c6bf74695f896999019d8	DEU                             
+25cde5325befa9538b771717514351fb	DEU                             
+cf2676445aa6abcc43a4b0d4b01b42a1	DEU                             
+c2d7bbc06d62144545c45b9060b0a629	DEU                             
+62254b7ab0a2b3d3138bde893dde64a3	DEU                             
+f291caafeb623728ebf0166ac4cb0825	DEU                             
+1a46202030819f7419e300997199c955	DEU                             
+183bea99848e19bdb720ba5774d216ba	DEU                             
+f9d5d4c7b26c7b832ee503b767d5df52	BEL                             
+8bc31f7cc79c177ab7286dda04e2d1e5	USA                             
+7e0d5240ec5d34a30b6f24909e5edcb4	USA                             
+f953fa7b33e7b6503f4380895bbe41c8	USA                             
+058fcf8b126253956deb3ce672d107a7	USA                             
+b14814d0ee12ffadc8f09ab9c604a9d0	USA                             
+5447110e1e461c8c22890580c796277a	USA                             
+1da77fa5b97c17be83cc3d0693c405cf	USA                             
+d449a9b2eed8b0556dc7be9cda36b67b	GBR                             
+7463543d784aa59ca86359a50ef58c8e	GBR                             
+14ab730fe0172d780da6d9e5d432c129	DEU                             
+28bc31b338dbd482802b77ed1fd82a50	DEU                             
+264721f3fc2aee2d28dadcdff432dbc1	DEU                             
+9d3ac6904ce73645c6234803cd7e47ca	DEU                             
+44012166c6633196dc30563db3ffd017	DEU                             
+aed85c73079b54830cd50a75c0958a90	DEU                             
+da2110633f62b16a571c40318e4e4c1c	DEU                             
+ce2caf05154395724e4436f042b8fa53	DEU                             
+ad01952b3c254c8ebefaf6f73ae62f7d	DEU                             
+bbddc022ee323e0a2b2d8c67e5cd321f	DEU                             
+d9ab6b54c3bd5b212e8dc3a14e7699ef	DEU                             
+679eaa47efb2f814f2642966ee6bdfe1	DEU                             
+e1db3add02ca4c1af33edc5a970a3bdc	DEU                             
+cf4ee20655dd3f8f0a553c73ffe3f72a	DEU                             
+10d91715ea91101cfe0767c812da8151	DEU                             
+1209f43dbecaba22f3514bf40135f991	DEU                             
+dcff9a127428ffb03fc02fdf6cc39575	DEU                             
+1e9413d4cc9af0ad12a6707776573ba0	DEU                             
+b01fbaf98cfbc1b72e8bca0b2e48769c	DEU                             
+4b98a8c164586e11779a0ef9421ad0ee	DEU                             
+1ca632ac231052e4116239ccb8952dfe	DEU                             
+e061c04af9609876757f0b33d14c63e5	DEU                             
+7d9488e60660507d0f88850245ddc7a5	ZAF                             
+abb4decfc5a094f45911b94337e7e2c4	AUS                             
+7eaf9a47aa47f3c65595ae107feab05d	DEU                             
+828d51c39c87aad9b1407d409fa58e36	DEU                             
+d2ff1e521585a91a94fb22752dd0ab45	DEU                             
+b0ce1e93de9839d07dab8d268ca23728	DEU                             
+28f843fa3a493a3720c4c45942ad970e	DEU                             
+9138c2cc0326412f2515623f4c850eb3	DEU                             
+d857ab11d383a7e4d4239a54cbf2a63d	DEU                             
+3af7c6d148d216f13f66669acb8d5c59	DEU                             
+f4219e8fec02ce146754a5be8a85f246	DEU                             
+0ab20b5ad4d15b445ed94fa4eebb18d8	DEU                             
+7fc454efb6df96e012e0f937723d24aa	DEU                             
+8edfa58b1aedb58629b80e5be2b2bd92	DEU                             
+3d01ff8c75214314c4ca768c30e6807b	DEU                             
+d9bc1db8c13da3a131d853237e1f05b2	DEU                             
+9cf73d0300eea453f17c6faaeb871c55	DEU                             
+d6de9c99f5cfa46352b2bc0be5c98c41	DEU                             
+5194c60496c6f02e8b169de9a0aa542c	DEU                             
+8654991720656374d632a5bb0c20ff11	DEU                             
+fe228019addf1d561d0123caae8d1e52	DEU                             
+1104831a0d0fe7d2a6a4198c781e0e0d	DEU                             
+410d913416c022077c5c1709bf104d3c	DEU                             
+97ee29f216391d19f8769f79a1218a71	DEU                             
+f07c3eef5b7758026d45a12c7e2f6134	DEU                             
+6d3b28f48c848a21209a84452d66c0c4	DEU                             
+8c69497eba819ee79a964a0d790368fb	DEU                             
+1197a69404ee9475146f3d631de12bde	DEU                             
+f0c051b57055b052a3b7da1608f3039e	DEU                             
+ff5b48d38ce7d0c47c57555d4783a118	DEU                             
+ade72e999b4e78925b18cf48d1faafa4	DEU                             
+887d6449e3544dca547a2ddba8f2d894	DEU                             
+2672777b38bc4ce58c49cf4c82813a42	DEU                             
+832dd1d8efbdb257c2c7d3e505142f48	DEU                             
+f37ab058561fb6d233b9c2a0b080d4d1	DEU                             
+3be3e956aeb5dc3b16285463e02af25b	DEU                             
+988d10abb9f42e7053450af19ad64c7f	DEU                             
+2a024edafb06c7882e2e1f7b57f2f951	DEU                             
+2fa2f1801dd37d6eb9fe4e34a782e397	DEU                             
+e0c2b0cc2e71294cd86916807fef62cb	DEU                             
+52ee4c6902f6ead006b0fb2f3e2d7771	DEU                             
+952dc6362e304f00575264e9d54d1fa6	DEU                             
+32af59a47b8c7e1c982ae797fc491180	DEU                             
+0020f19414b5f2874a0bfacd9d511b84	DEU                             
+de12bbf91bc797df25ab4ae9cee1946b	DEU                             
+89adcf990042dfdac7fd23685b3f1e37	DEU                             
+3bd94845163385cecefc5265a2e5a525	DEU                             
+99bd5eff92fc3ba728a9da5aa1971488	DEU                             
+24ff2b4548c6bc357d9d9ab47882661e	DEU                             
+829922527f0e7d64a3cfda67e24351e3	DEU                             
+aa86b6fc103fc757e14f03afe6eb0c0a	DEU                             
+5ec1e9fa36898eaf6d1021be67e0d00c	DEU                             
+8ce896355a45f5b9959eb676b8b5580c	DEU                             
+5f992768f7bb9592bed35b07197c87d0	DEU                             
+f644bd92037985f8eb20311bc6d5ed94	DEU                             
+1e8563d294da81043c2772b36753efaf	DEU                             
+362f8cdd1065b0f33e73208eb358991d	DEU                             
+6d57b25c282247075f5e03cde27814df	DEU                             
+9b1088b616414d0dc515ab1f2b4922f1	DEU                             
+0fbddeb130361265f1ba6f86b00f0968	DEU                             
+f0e1f32b93f622ea3ddbf6b55b439812	DEU                             
+53a0aafa942245f18098ccd58b4121aa	DEU                             
+0780d2d1dbd538fec3cdd8699b08ea02	DEU                             
+58db028cf01dd425e5af6c7d511291c1	DEU                             
+2252d763a2a4ac815b122a0176e3468f	DEU                             
+11d396b078f0ae37570c8ef0f45937ad	DEU                             
+585b13106ecfd7ede796242aeaed4ea8	DEU                             
+6c1fcd3c91bc400e5c16f467d75dced3	DEU                             
+7d878673694ff2498fbea0e5ba27e0ea	DEU                             
+33f03dd57f667d41ac77c6baec352a81	DEU                             
+3509af6be9fe5defc1500f5c77e38563	DEU                             
+0640cfbf1d269b69c535ea4e288dfd96	DEU                             
+36648510adbf2a3b2028197a60b5dada	DEU                             
+eb3bfb5a3ccdd4483aabc307ae236066	DEU                             
+1ebd63d759e9ff532d5ce63ecb818731	DEU                             
+059792b70fc0686fb296e7fcae0bda50	DEU                             
+7dfe9aa0ca5bb31382879ccd144cc3ae	DEU                             
+fb28e62c0e801a787d55d97615e89771	DEU                             
+652208d2aa8cdd769632dbaeb7a16358	DEU                             
+278c094627c0dd891d75ea7a3d0d021e	DEU                             
+0a56095b73dcbd2a76bb9d4831881cb3	DEU                             
+ff578d3db4dc3311b3098c8365d54e6b	DEU                             
+4548a3b9c1e31cf001041dc0d166365b	DEU                             
+5842a0c2470fe12ee3acfeec16c79c57	DEU                             
+96682d9c9f1bed695dbf9176d3ee234c	DEU                             
+12e93f5fab5f7d16ef37711ef264d282	DEU                             
+4094ffd492ba473a2a7bea1b19b1662d	DEU                             
+4ee21b1371ba008a26b313c7622256f8	DEU                             
+4453eb658c6a304675bd52ca75fbae6d	DEU                             
+360c000b499120147c8472998859a9fe	DEU                             
+4bb93d90453dd63cc1957a033f7855c7	DEU                             
+c05d504b806ad065c9b548c0cb1334cd	DEU                             
+b96a3cb81197e8308c87f6296174fe3e	DEU                             
+095849fbdc267416abc6ddb48be311d7	DEU                             
+72778afd2696801f5f3a1f35d0e4e357	DEU                             
+5c0adc906f34f9404d65a47eea76dac0	DEU                             
+fdcf3cdc04f367257c92382e032b6293	DEU                             
+88dd124c0720845cba559677f3afa15d	DEU                             
+f4f870098db58eeae93742dd2bcaf2b2	DEU                             
+d433b7c1ce696b94a8d8f72de6cfbeaa	DEU                             
+28bb59d835e87f3fd813a58074ca0e11	DEU                             
+cafe9e68e8f90b3e1328da8858695b31	DEU                             
+ad62209fb63910acf40280cea3647ec5	DEU                             
+9e84832a15f2698f67079a3224c2b6fb	DEU                             
+4a7d9e528dada8409e88865225fb27c4	DEU                             
+d3e98095eeccaa253050d67210ef02bb	DEU                             
+c3490492512b7fe65cdb0c7305044675	DEU                             
+e61e30572fd58669ae9ea410774e0eb6	DEU                             
+485065ad2259054abf342d7ae3fe27e6	DEU                             
+278606b1ac0ae7ef86e86342d1f259c3	DEU                             
+a538bfe6fe150a92a72d78f89733dbd0	DEU                             
+09d8e20a5368ce1e5c421a04cb566434	DEU                             
+4366d01be1b2ddef162fc0ebb6933508	DEU                             
+52b133bfecec2fba79ecf451de3cf3bb	DEU                             
+f042da2a954a1521114551a6f9e22c75	DEU                             
+405c7f920b019235f244315a564a8aed	DEU                             
+3656edf3a40a25ccd00d414c9ecbb635	DEU                             
+6d89517dbd1a634b097f81f5bdbb07a2	DEU                             
+5af874093e5efcbaeb4377b84c5f2ec5	DEU                             
+5037c1968f3b239541c546d32dec39eb	DEU                             
+deaccc41a952e269107cc9a507dfa131	DEU                             
+a29c1c4f0a97173007be3b737e8febcc	DEU                             
+4fab532a185610bb854e0946f4def6a4	DEU                             
+e6fd7b62a39c109109d33fcd3b5e129d	DEU                             
+da29e297c23e7868f1d50ec5a6a4359b	DEU                             
+96048e254d2e02ba26f53edd271d3f88	DEU                             
+c2275e8ac71d308946a63958bc7603a1	DEU                             
+b785a5ffad5e7e36ccac25c51d5d8908	DEU                             
+63c0a328ae2bee49789212822f79b83f	DEU                             
+5eed658c4b7b68a0ecc49205b68d54e7	DEU                             
+145bd9cf987b6f96fa6f3b3b326303c9	DEU                             
+c238980432ab6442df9b2c6698c43e47	DEU                             
+8cadf0ad04644ce2947bf3aa2817816e	DEU                             
+85fac49d29a31f1f9a8a18d6b04b9fc9	DEU                             
+b81ee269be538a500ed057b3222c86a2	DEU                             
+cf71a88972b5e06d8913cf53c916e6e4	DEU                             
+5518086aebc9159ba7424be0073ce5c9	DEU                             
+302ebe0389198972c223f4b72894780a	DEU                             
+ac62ad2816456aa712809bf01327add1	DEU                             
+470f3f69a2327481d26309dc65656f44	DEU                             
+e254616b4a5bd5aaa54f90a3985ed184	DEU                             
+3c5c578b7cf5cc0d23c1730d1d51436a	DEU                             
+213c449bd4bcfcdb6bffecf55b2c30b4	DEU                             
+4ea353ae22a1c0d26327638f600aeac8	DEU                             
+d399575133268305c24d87f1c2ef054a	DEU                             
+54c09bacc963763eb8742fa1da44a968	DEU                             
+cba95a42c53bdc6fbf3ddf9bf10a4069	DEU                             
+88a51a2e269e7026f0734f3ef3244e89	DEU                             
+dde31adc1b0014ce659a65c8b4d6ce42	DEU                             
+332d6b94de399f86d499be57f8a5a5ca	DEU                             
+b73377a1ec60e58d4eeb03347268c11b	DEU                             
+e3419706e1838c7ce6c25a28bef0c248	DEU                             
+213c302f84c5d45929b66a20074075df	DEU                             
+22c030759ab12f97e941af558566505e	DEU                             
+f5507c2c7beee622b98ade0b93abb7fe	DEU                             
+41bee031bd7d2fdb14ff48c92f4d7984	DEU                             
+39a464d24bf08e6e8df586eb5fa7ee30	DEU                             
+f7c3dcc7ba01d0ead8e0cfb59cdf6afc	DEU                             
+0b9d35d460b848ad46ec0568961113bf	DEU                             
+546bb05114b78748d142c67cdbdd34fd	DEU                             
+4ac863b6f6fa5ef02afdd9c1ca2a5e24	DEU                             
+1e2bcbb679ccfdea27b28bd1ea9f2e67	DEU                             
+64d9f86ed9eeac2695ec7847fe7ea313	DEU                             
+65b029279eb0f99c0a565926566f6759	DEU                             
+9bfbfab5220218468ecb02ed546e3d90	DEU                             
+be41b6cfece7dfa1b4e4d226fb999607	DEU                             
+32917b03e82a83d455dd6b7f8609532c	DEU                             
+b20a4217acaf4316739c6a5f6679ef60	DEU                             
+178227c5aef3b3ded144b9e19867a370	DEU                             
+75cde58f0e5563f287f2d4afb0ce4b7e	DEU                             
+b74881ac32a010e91ac7fcbcfebe210e	DEU                             
+fd85bfffd5a0667738f6110281b25db8	DEU                             
+6e4b91e3d1950bcad012dbfbdd0fff09	DEU                             
+32a02a8a7927de4a39e9e14f2dc46ac6	DEU                             
+747f992097b9e5c9df7585931537150a	DEU                             
+0ddd0b1b6329e9cb9a64c4d947e641a8	DEU                             
+89eec5d48b8969bf61eea38e4b3cfdbf	DEU                             
+703b1360391d2aef7b9ec688b00849bb	DEU                             
+b4b46e6ce2c563dd296e8bae768e1b9d	DEU                             
+1a1bfb986176c0ba845ae4f43d027f58	DEU                             
+7ecdb1a0eb7c01d081acf2b7e11531c0	DEU                             
+8e9f5b1fc0e61f9a289aba4c59e49521	DEU                             
+536d1ccb9cce397f948171765c0120d4	DEU                             
+15b70a4565372e2da0d330568fe1d795	DEU                             
+46e1d00c2019ff857c307085c58e0015	DEU                             
+fb5f71046fd15a0a22d7bda38971f142	DEU                             
+512914f31042dacd2a05bfcebaacdb96	DEU                             
+d96d9dac0f19368234a1fe2d4daf7f7c	DEU                             
+5aa3856374df5daa99d3d33e6a38a865	DEU                             
+afd755c6a62ac0a0947a39c4f2cd2c20	DEU                             
+ead662696e0486cb7a478ecd13a0b5c5	DEU                             
+62165afb63fc004e619dff4d2132517c	DEU                             
+90bebabe0c80676a4f6207ee0f8caa4c	DEU                             
+ee8cde73a364c2b066f795edda1a303a	DEU                             
+92e25f3ba88109b777bd65b3b3de28a9	DEU                             
+4f6ae7ce964e64fdc143602aaaab1c26	DEU                             
+2f39cfcedf45336beb2e966e80b93e22	DEU                             
+5b3c70181a572c8d92d906ca20298d93	DEU                             
+c02f12329daf99e6297001ef684d6285	DEU                             
+f64162c264d5679d130b6e8ae84d704e	DEU                             
+0674a20e29104e21d141843a86421323	DEU                             
+24dd5b3de900b9ee06f913a550beb64c	DEU                             
+2eb6fb05d553b296096973cb97912cc0	DEU                             
+50681f5168e67b62daa1837d8f693001	DEU                             
+ada3962af4845c243fcd1ccafc815b09	DEU                             
+07759c4afc493965a5420e03bdc9b773	DEU                             
+8989ab42027d29679d1dedc518eb04bd	DEU                             
+266674d0a44a3a0102ab80021ddfd451	DEU                             
+50e7b1ba464091976138ec6a57b08ba0	DEU                             
+a51211ef8cbbf7b49bfb27c099c30ce1	DEU                             
+c45ca1e791f2849d9d11b3948fdefb74	DEU                             
+b05f3966288598b02cda4a41d6d1eb6b	DEU                             
+6ff4735b0fc4160e081440b3f7238925	DEU                             
+d5282bd6b63b4cd51b50b40d192f1161	DEU                             
+5159fd46698ae21d56f1684c2041bd79	DEU                             
+c63ecd19a0ca74c22dfcf3063c9805d2	DEU                             
+e08f00b43f7aa539eb60cfa149afd92e	DEU                             
+5ef6a0f70220936a0158ad66fd5d9082	DEU                             
+25ebb3d62ad1160c96bbdea951ad2f34	DEU                             
+d97a4c5c71013baac562c2b5126909e1	DEU                             
+1ebe59bfb566a19bc3ce5f4fb6c79cd3	DEU                             
+7f499363c322c1243827700c67a7591c	DEU                             
+2040754b0f9589a89ce88912bcf0648e	DEU                             
+13cd421d8a1cb48800543b9317aa2f52	DEU                             
+4b9f3b159347c34232c9f4b220cb22de	DEU                             
+81a17f1bf76469b18fbe410d8ec77da8	DEU                             
+15137b95180ccc986f6321acffb9cb6f	DEU                             
+20d32d36893828d060096b2cd149820b	DEU                             
+546f8a4844ac636dd18025dcc673a3ab	DEU                             
+ce5e821f2dcc57569eae793f628c99cf	DEU                             
+cd11b262d721d8b3f35ad2d2af8431dd	DEU                             
+15cee64305c1b40a4fac10c26ffa227d	DEU                             
+3771bd5f354df475660a24613fcb7a8c	DEU                             
+f43bb3f980f58c66fc81874924043946	DEU                             
+069cdf9184e271a3c6d45ad7e86fcac2	DEU                             
+49f6021766f78bffb3f824eb199acfbc	DEU                             
+f04de6fafc611682779eb2eb36bdbe25	DEU                             
+f7c31a68856cab2620244be2df27c728	DEU                             
+ae2056f2540325e2de91f64f5ac130b6	DEU                             
+eced087124a41417845c0b0f4ff44ba9	DEU                             
+edaf03c0c66aa548df3cebdae0f94545	DEU                             
+16cbdd4df5f89d771dccfa1111d7f4bc	DEU                             
+9abdb4a0588186fc4425b29080e820a2	DEU                             
+06a4594d3b323539e9dc4820625d01b8	DEU                             
+b5c7675d6faefd09e871a6c1157e9353	DEU                             
+df8457281db2cba8bbcb4b3b80f2b9a3	DEU                             
+f85df6e18a73a6d1f5ccb59ee51558ae	DEU                             
+0308321fc4f75ddaed8208c24f2cb918	DEU                             
+7acb475eda543ccd0622d546c5772c5a	DEU                             
+ba8d3efe842e0755020a2f1bc5533585	DEU                             
+5a154476dd67358f4dab8500076dece3	DEU                             
+b8e18040dc07eead8e6741733653a740	DEU                             
+0bc244b6aa99080c3d37fea06d328193	DEU                             
 \.
 
 
@@ -3719,6 +4052,14 @@ f9030edd3045787fcbcfd47da5246596	6bc91856db67c4e90b455638fa43e0bd
 1e9413d4cc9af0ad12a6707776573ba0	5e651777820428286fde01ffe87cb4b7
 b20a4217acaf4316739c6a5f6679ef60	5e651777820428286fde01ffe87cb4b7
 1ca632ac231052e4116239ccb8952dfe	5e651777820428286fde01ffe87cb4b7
+baa9d4eef21c7b89f42720313b5812d4	45dbcc9d20cd0f431b1f4774cd0a0bf3
+62a40f6fa589c7007ded80d26ad1c3a9	45dbcc9d20cd0f431b1f4774cd0a0bf3
+7d9488e60660507d0f88850245ddc7a5	45dbcc9d20cd0f431b1f4774cd0a0bf3
+abb4decfc5a094f45911b94337e7e2c4	45dbcc9d20cd0f431b1f4774cd0a0bf3
+a716390764a4896d99837e99f9e009c9	cf8e56fdc88304e772838b2a47d8c23b
+28a95ef0eabe44a27f49bbaecaa8a847	cf8e56fdc88304e772838b2a47d8c23b
+16cbdd4df5f89d771dccfa1111d7f4bc	3eda085ef6acc8b084dda9440115af56
+e061c04af9609876757f0b33d14c63e5	3eda085ef6acc8b084dda9440115af56
 \.
 
 
@@ -5080,6 +5421,13 @@ f9030edd3045787fcbcfd47da5246596	17b8dff9566f6c98062ad5811c762f44
 215513a2c867f8b24d5aea58c9abfff6	2df929d9b6150c082888b66e8129ee3f
 215513a2c867f8b24d5aea58c9abfff6	caac3244eefed8cffee878acae427e28
 1ca632ac231052e4116239ccb8952dfe	7fa69773873856d74f68a6824ca4b691
+62a40f6fa589c7007ded80d26ad1c3a9	caac3244eefed8cffee878acae427e28
+62a40f6fa589c7007ded80d26ad1c3a9	fd00614e73cb66fd71ab13c970a074d8
+62a40f6fa589c7007ded80d26ad1c3a9	2df929d9b6150c082888b66e8129ee3f
+7d9488e60660507d0f88850245ddc7a5	caac3244eefed8cffee878acae427e28
+7d9488e60660507d0f88850245ddc7a5	7fa69773873856d74f68a6824ca4b691
+abb4decfc5a094f45911b94337e7e2c4	caac3244eefed8cffee878acae427e28
+e061c04af9609876757f0b33d14c63e5	178c690e12310890294b6fefeb0c2442
 \.
 
 
@@ -5094,6 +5442,8 @@ f10fa26efffb6c69534e7b0f7890272d	Rockfield Open Air 2018	2018-08-17	55ff4adc7d42
 9e829f734a90920dd15d3b93134ee270	EMP Persistence Tour 2016	2016-01-22	427a371fadd4cce654dd30c27a36acb0	0	31.20	2
 52b133bfecec2fba79ecf451de3cf3bb	Völkerball	2016-05-05	657d564cc1dbaf58e2f2135b57d02d99	0	23.50	2
 8307a775d42c5bfbaab36501bf6a3f6c	Noche de los Muertos - 2017	2017-10-31	c5159d0425e9c5737c8884eb38d70dd9	0	15	2
+45dbcc9d20cd0f431b1f4774cd0a0bf3	"The Tide of Death and fractured Dreams" European Tour 2024	2024-05-15	427a371fadd4cce654dd30c27a36acb0	0	36.0	2
+cf8e56fdc88304e772838b2a47d8c23b	Thrash Metal Fest - 05.2024	2024-05-16	0b186d7eb0143e60ced4af3380f5faa8	0	30.0	2
 ea99873fab477c85c634eec0fe139eaf	Open air Hamm 43.	2013-06-14	ea72b9f0db73025c8aaedae0f7b874f8	1	22.0	1
 1f1a45b3cca4a65dae6fad7aa6cac17e	Open air Hamm 45.	2015-06-12	ea72b9f0db73025c8aaedae0f7b874f8	1	22.0	1
 5c22297e2817e4a0c9ee608a67bcf297	Open air Hamm 47.	2017-07-07	ea72b9f0db73025c8aaedae0f7b874f8	1	25	2
@@ -5110,6 +5460,7 @@ fd5ccee80a5d5a1a16944aefe2b840c5	Celebrating the music of Jimi Hendrix	2024-05-0
 18ef7142c02d84033cc9d41687981691	Ravaging Europe 2023	2023-03-29	6d488d592421aa8391ff259ef1c8b744	0	28.70	2
 220f8c4b62141ad5acd8b11d4d0f2bd3	Heretic Hordes I	2024-05-03	6d488d592421aa8391ff259ef1c8b744	0	35.00	2
 6bc91856db67c4e90b455638fa43e0bd	Shades of Sorrow European Tour 2024	2024-05-04	0b186d7eb0143e60ced4af3380f5faa8	0	27.30	2
+3eda085ef6acc8b084dda9440115af56	Back to the Roots Tour - 05.2024	2024-05-17	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	23.20	2
 02ce1b3a6156c9f73724ea3efabde2e8	Angelus Apatrida - Tour 2022	2022-07-28	0b186d7eb0143e60ced4af3380f5faa8	0	16.50	2
 c9a70f42ce4dcd82a99ed83a5117b890	Where Owls know my name EU|UK Tour 2019	2019-09-22	427a371fadd4cce654dd30c27a36acb0	0	24.70	2
 d5cd210a82be3dd1a7879b83ba5657c0	15 Years New Evil Music, Festival	2019-10-12	4751a5b2d9992dca6e462e3b14695284	0	44.0	2
@@ -5499,6 +5850,7 @@ d5750853c14498dc264065bcf7e05a29	Tribute to Megadeth
 07b91b89a1fd5e90b9035bf112a3e6e5	Blackened Folk Metal
 f829960b3a62def55e90a3054491ead7	Middle Eastern Doom Metal
 d4fe504b565a2bcbec1bb4c56445e857	Funeral Doom Metal
+178c690e12310890294b6fefeb0c2442	Tribute to Slayer
 \.
 
 
@@ -5653,7 +6005,7 @@ CREATE OR REPLACE VIEW music.v_events_mod AS
 --
 
 ALTER TABLE ONLY geo.countries_continents
-    ADD CONSTRAINT countries_continents_id_continent_fkey FOREIGN KEY (id_continent) REFERENCES geo.continents(id_continent);
+    ADD CONSTRAINT countries_continents_id_continent_fkey FOREIGN KEY (id_continent) REFERENCES geo.continents(id_continent) ON UPDATE CASCADE;
 
 
 --
@@ -5661,7 +6013,7 @@ ALTER TABLE ONLY geo.countries_continents
 --
 
 ALTER TABLE ONLY geo.countries_continents
-    ADD CONSTRAINT countries_continents_id_country_fkey FOREIGN KEY (id_country) REFERENCES geo.countries(id_country);
+    ADD CONSTRAINT countries_continents_id_country_fkey FOREIGN KEY (id_country) REFERENCES geo.countries(id_country) ON UPDATE CASCADE;
 
 
 --
@@ -5677,7 +6029,7 @@ ALTER TABLE ONLY music.bands_countries
 --
 
 ALTER TABLE ONLY music.bands_countries
-    ADD CONSTRAINT bands_countries_id_country_fkey FOREIGN KEY (id_country) REFERENCES geo.countries(id_country);
+    ADD CONSTRAINT bands_countries_id_country_fkey FOREIGN KEY (id_country) REFERENCES geo.countries(id_country) ON UPDATE CASCADE;
 
 
 --
