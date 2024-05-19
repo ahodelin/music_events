@@ -215,4 +215,5 @@ var eventsInfo = {
  {"id_event":"45dbcc9d20cd0f431b1f4774cd0a0bf3","year":2024,"date":"15.05.2024","event":"'The Tide of Death and fractured Dreams' European Tour 2024","place":"Wiesbaden (Schlachthof)","bands":4},
  {"id_event":"cf8e56fdc88304e772838b2a47d8c23b","year":2024,"date":"16.05.2024","event":"Thrash Metal Fest - 05.2024","place":"Weinheim (Café Central)","bands":2},
  {"id_event":"3eda085ef6acc8b084dda9440115af56","year":2024,"date":"17.05.2024","event":"Back to the Roots Tour - 05.2024","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
+ {"id_event":"ac4ad77eed8faf4ef8d91fb1df7fe196","year":2024,"date":"18.05.2024","event":"Fleshcrawl + Fleshsphere + Torment of Souls","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
 ]};
