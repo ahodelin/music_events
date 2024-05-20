@@ -528,7 +528,7 @@ CREATE VIEW music.v_countries AS
    FROM (geo.countries c
      JOIN music.bands_countries bc ON ((c.id_country = bc.id_country)))
   GROUP BY c.country, c.flag, c.id_country
-  ORDER BY (count(DISTINCT bc.id_band)) DESC;
+  ORDER BY (count(DISTINCT bc.id_band)) DESC, c.country;
 
 
 --
@@ -538,15 +538,7 @@ CREATE VIEW music.v_countries AS
 CREATE VIEW music.v_events AS
  SELECT e.id_event,
     date_part('year'::text, e.date_event) AS year,
-    ((((
-        CASE
-            WHEN (date_part('day'::text, e.date_event) < (10)::double precision) THEN ('0'::text || (date_part('day'::text, e.date_event))::text)
-            ELSE (date_part('day'::text, e.date_event))::text
-        END || '.'::text) ||
-        CASE
-            WHEN (date_part('month'::text, e.date_event) < (10)::double precision) THEN ('0'::text || (date_part('month'::text, e.date_event))::text)
-            ELSE (date_part('month'::text, e.date_event))::text
-        END) || '.'::text) || date_part('year'::text, e.date_event)) AS date,
+    to_char((e.date_event)::timestamp with time zone, 'DD.MM.YYYY'::text) AS date,
     e.event,
     p.place,
     count(DISTINCT be.id_band) AS bands
@@ -13854,15 +13846,7 @@ ALTER TABLE ONLY music.generes
 
 CREATE OR REPLACE VIEW music.v_events_mod AS
  SELECT date_part('year'::text, e.date_event) AS year,
-    ((((
-        CASE
-            WHEN (date_part('day'::text, e.date_event) < (10)::double precision) THEN ('0'::text || (date_part('day'::text, e.date_event))::text)
-            ELSE (date_part('day'::text, e.date_event))::text
-        END || '.'::text) ||
-        CASE
-            WHEN (date_part('month'::text, e.date_event) < (10)::double precision) THEN ('0'::text || (date_part('month'::text, e.date_event))::text)
-            ELSE (date_part('month'::text, e.date_event))::text
-        END) || '.'::text) || date_part('year'::text, e.date_event)) AS date,
+    to_char((e.date_event)::timestamp with time zone, 'DD.MM.YYYY'::text) AS date,
     e.event,
     p.place,
     count(DISTINCT be.id_band) AS bands,

@@ -201,32 +201,3 @@ join music.events e
 group by cube(b.band, e."event")
 order by e."event", b.band;
 
-alter table music.events 
-alter column persons type int2,
-alter column duration type int2;
-
--- music.v_events_mod source
-drop view music.v_events_mod ;
-
-CREATE OR REPLACE VIEW music.v_events_mod
-AS SELECT date_part('year'::text, e.date_event) AS year,
-    (((
-        CASE
-            WHEN date_part('day'::text, e.date_event) < 10::double precision THEN '0'::text || date_part('day'::text, e.date_event)::text
-            ELSE date_part('day'::text, e.date_event)::text
-        END || '.'::text) ||
-        CASE
-            WHEN date_part('month'::text, e.date_event) < 10::double precision THEN '0'::text || date_part('month'::text, e.date_event)::text
-            ELSE date_part('month'::text, e.date_event)::text
-        END) || '.'::text) || date_part('year'::text, e.date_event) AS date,
-    e.event,
-    p.place,
-    count(DISTINCT be.id_band) AS bands,
-    e.duration + 1 AS days
-   FROM music.events e
-     JOIN geo.places p ON p.id_place = e.id_place
-     JOIN music.bands_events be ON be.id_event = e.id_event
-  GROUP BY e.event, p.place, e.date_event, e.id_event
-  ORDER BY e.date_event;
-
-
