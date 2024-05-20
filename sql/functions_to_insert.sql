@@ -1,12 +1,16 @@
 -- New events
--- drop function music.insert_events;
-create or replace function music.insert_events(
-  eve varchar, 
+-- DROP FUNCTION music.insert_events(varchar, date, varchar, int2, numeric, int2);
+
+CREATE OR REPLACE FUNCTION music.insert_events(
+  eve character varying, 
   dat date, 
-  plac varchar,
-  dur int )
-returns text 
-as $$ 
+  plac character varying, 
+  dur int2, 
+  pri numeric, 
+  per int2)
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$ 
 declare 
   i_p varchar;
   i_e varchar;
@@ -28,12 +32,13 @@ begin
   	end if;
   
   	insert into music.events
-    values (md5(eve), eve, dat, md5(plac), dur);
+    values (md5(eve), eve, dat, md5(plac), dur, pri, per);
     return 'Added event';  
   else return 'Event alredy exist';
     
   end if;end;
-$$ language plpgsql;
+$function$
+;
 
 -- Bands on events
 create or replace function music.insert_bands_on_events(
@@ -81,12 +86,12 @@ $$ language plpgsql;
 
 
 -- Bands on contries
-create or replace function music.insert_bands_on_countries(
-  ban varchar,
-  countr varchar 
-  )
-returns text 
-as $$ 
+-- DROP FUNCTION music.insert_bands_on_countries(varchar, varchar);
+
+CREATE OR REPLACE FUNCTION music.insert_bands_on_countries(ban character varying, countr character varying)
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$ 
 declare 
   i_band varchar;
   i_countr varchar;
@@ -94,7 +99,7 @@ begin
 	
   select id_band, id_country into i_band, i_countr
   from music.bands_countries bc
-  where id_band = md5(ban) and id_country = md5(countr) for update;
+  where id_band = md5(ban) and id_country = countr for update;
  
   if found then
     return 'This combination of band and country exist';
@@ -102,7 +107,7 @@ begin
 	 
     select id_country into i_countr 
     from geo.countries c  
-    where country = countr for update;
+    where id_country = countr for update;
  
     if not found then    
       return 'Please insert this country first';
@@ -118,22 +123,22 @@ begin
     end if; 
   
     insert into music.bands_countries
-    values(md5(ban), md5(countr));
+    values(md5(ban), countr);
     return 'Band - County added'; 
    
   end if;
 	  
 end;
-$$ language plpgsql;
-
+$function$
+;
 
 -- Bands plays generes
-create or replace function music.insert_bands_to_generes(
-  ban varchar,
-  gene varchar 
-  )
-returns text 
-as $$ 
+-- DROP FUNCTION music.insert_bands_to_genres(varchar, varchar);
+
+CREATE OR REPLACE FUNCTION music.insert_bands_to_genres(ban character varying, gene character varying)
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$ 
 declare 
   i_band varchar;
   i_gene varchar;
@@ -171,5 +176,5 @@ begin
     
   end if;  
 end;
-$$ language plpgsql;
-
+$function$
+;

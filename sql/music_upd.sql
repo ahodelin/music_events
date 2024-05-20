@@ -23,7 +23,7 @@ select music.insert_bands_on_events('', '');
 select music.insert_bands_on_countries('', '');
 
 -- Music genre
-select music.insert_bands_to_generes('', '');
+select music.insert_bands_to_genres('', '');
 */
 
 /*
@@ -64,23 +64,23 @@ select music.insert_bands_on_countries('Napoli Violenta', 'ITA');
 select music.insert_bands_on_countries('Rectal Depravity', 'CHE');
 
 -- Music genre
-select music.insert_bands_to_generes('Satan''s Revenge on Mankind', 'Porno Gore Grind');
-select music.insert_bands_to_generes('Haunted Cemetery', 'Death Metal');
-select music.insert_bands_to_generes('Hour of Penance', 'Technical Death Metal');
-select music.insert_bands_to_generes('Hour of Penance', 'Brutal Death Metal');
-select music.insert_bands_to_generes('Public Grave', 'Death Metal');
-select music.insert_bands_to_generes('Embrace your Punishment', 'Deathcore');
-select music.insert_bands_to_generes('Embrace your Punishment', 'Hardcore');
-select music.insert_bands_to_generes('Embrace your Punishment', 'Brutal Death Metal');
-select music.insert_bands_to_generes('Embrace your Punishment', 'Brutal Hardcore');
-select music.insert_bands_to_generes('Zementmord', 'Grindcore');
-select music.insert_bands_to_generes('Lunatic Dictator', 'Death Metal');
-select music.insert_bands_to_generes('Lunatic Dictator', 'Thrash Metal');
-select music.insert_bands_to_generes('These Days & Those Days', 'Slamming Hardcore Death');
-select music.insert_bands_to_generes('Napoli Violenta', 'Grindcore');
-select music.insert_bands_to_generes('Napoli Violenta', 'Hardcore');
-select music.insert_bands_to_generes('Rectal Depravity', 'Death Metal');
-select music.insert_bands_to_generes('Rectal Depravity', 'Goregrind');
+select music.insert_bands_to_genres('Satan''s Revenge on Mankind', 'Porno Gore Grind');
+select music.insert_bands_to_genres('Haunted Cemetery', 'Death Metal');
+select music.insert_bands_to_genres('Hour of Penance', 'Technical Death Metal');
+select music.insert_bands_to_genres('Hour of Penance', 'Brutal Death Metal');
+select music.insert_bands_to_genres('Public Grave', 'Death Metal');
+select music.insert_bands_to_genres('Embrace your Punishment', 'Deathcore');
+select music.insert_bands_to_genres('Embrace your Punishment', 'Hardcore');
+select music.insert_bands_to_genres('Embrace your Punishment', 'Brutal Death Metal');
+select music.insert_bands_to_genres('Embrace your Punishment', 'Brutal Hardcore');
+select music.insert_bands_to_genres('Zementmord', 'Grindcore');
+select music.insert_bands_to_genres('Lunatic Dictator', 'Death Metal');
+select music.insert_bands_to_genres('Lunatic Dictator', 'Thrash Metal');
+select music.insert_bands_to_genres('These Days & Those Days', 'Slamming Hardcore Death');
+select music.insert_bands_to_genres('Napoli Violenta', 'Grindcore');
+select music.insert_bands_to_genres('Napoli Violenta', 'Hardcore');
+select music.insert_bands_to_genres('Rectal Depravity', 'Death Metal');
+select music.insert_bands_to_genres('Rectal Depravity', 'Goregrind');
 
 
 */
@@ -101,9 +101,9 @@ select music.insert_bands_on_countries('Fragments of unbecoming', 'DEU');
 
 
 -- Music genre
-select music.insert_bands_to_generes('Dying Fetus', 'Brutal Death Metal');
-select music.insert_bands_to_generes('Dying Fetus', 'Grindcore');
-select music.insert_bands_to_generes('Fragments of unbecoming', 'Melodic Death Metal');
+select music.insert_bands_to_genres('Dying Fetus', 'Brutal Death Metal');
+select music.insert_bands_to_genres('Dying Fetus', 'Grindcore');
+select music.insert_bands_to_genres('Fragments of unbecoming', 'Melodic Death Metal');
 */
 
 
