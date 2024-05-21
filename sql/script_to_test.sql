@@ -107,3 +107,5 @@ group by cube(b.band, e."event")
 order by e."event", b.band;
 
 refresh materialized view music.mv_musical_info;
+
+
