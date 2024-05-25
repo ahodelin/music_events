@@ -9,22 +9,36 @@ insert into geo.countries_continents
 
 
 
-/*
+
 -- New events
-select music.insert_events('', '2024.06.', '', 0, -.0, 2);
+select music.insert_events('Open Stage - 23.05.2024', '2024.05.23', 'Mainz (Alexander the Great)', 0, 0.0, 2);
+select music.insert_events('Morbide Klänge III', '2024.05.24', 'Mainz (M8 im Haus der Jugend)', 0, 15.0, 2);
+
 
 
 -- Bands on events
-select music.insert_bands_on_events('', '');
-select music.insert_bands_on_events('', '');
+select music.insert_bands_on_events('Astral Wrath', 'Open Stage - 23.05.2024');
+select music.insert_bands_on_events('Witchkrieg', 'Open Stage - 23.05.2024');
+select music.insert_bands_on_events('Goath', 'Morbide Klänge III');
+select music.insert_bands_on_events('Arkuum', 'Morbide Klänge III');
+select music.insert_bands_on_events('Putridarium', 'Morbide Klänge III');
 
 
 -- Bands from countries
-select music.insert_bands_on_countries('', '');
+select music.insert_bands_on_countries('Astral Wrath', '150');
+select music.insert_bands_on_countries('Arkuum', 'DEU');
+select music.insert_bands_on_countries('Putridarium', 'DEU');
 
 -- Music genre
-select music.insert_bands_to_genres('', '');
-*/
+select music.insert_bands_to_genres('Astral Wrath', 'Death Metal');
+select music.insert_bands_to_genres('Arkuum', 'Atmospheric Post-Black Metal');
+select music.insert_bands_to_genres('Putridarium', 'Death Metal');
+select music.insert_bands_to_genres('Putridarium', 'Doom Metal');
+
+update music.bands 
+set note = 'Ukraine + Germany'
+where band = 'Astral Wrath';
+
 
 /*
 -- New events
