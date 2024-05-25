@@ -216,6 +216,6 @@ var eventsInfo = {
  {"id_event":"cf8e56fdc88304e772838b2a47d8c23b","year":2024,"date":"16.05.2024","event":"Thrash Metal Fest - 05.2024","place":"Weinheim (Café Central)","bands":2},
  {"id_event":"3eda085ef6acc8b084dda9440115af56","year":2024,"date":"17.05.2024","event":"Back to the Roots Tour - 05.2024","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
  {"id_event":"ac4ad77eed8faf4ef8d91fb1df7fe196","year":2024,"date":"18.05.2024","event":"Fleshcrawl + Fleshsphere + Torment of Souls","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
- {"id_event":"69a41d5dad2039585f9bc6016b1c002a","year":2024,"date":"24.05.2024","event":"Open Stage - 23.05.2024","place":"Mainz (M8 im Haus der Jugend)","bands":2},
+ {"id_event":"69a41d5dad2039585f9bc6016b1c002a","year":2024,"date":"23.05.2024","event":"Open Stage - 23.05.2024","place":"Mainz (M8 im Haus der Jugend)","bands":2},
  {"id_event":"bd1c4e61080082f4ce21cea49e37712b","year":2024,"date":"24.05.2024","event":"Morbide Klänge III","place":"Mainz (M8 im Haus der Jugend)","bands":3},
 ]};
