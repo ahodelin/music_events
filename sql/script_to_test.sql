@@ -108,4 +108,44 @@ order by e."event", b.band;
 
 refresh materialized view music.mv_musical_info;
 
+SELECT music.insert_event('Test_Event', '2024-05-25', 'Test_Place', 0, 0.0, 2);
+
+delete from music.events where event = 'Test_Event';
+delete from geo.places where place = 'Test_Place'
+
+
+ DROP FUNCTION music.insert_event(varchar, date, varchar, int2, numeric, int2);
+
+CREATE OR REPLACE FUNCTION music.insert_event(eve character varying, dat date, plac character varying, dur int, pri numeric, per int)
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$ 
+declare 
+  i_p varchar;
+  i_e varchar;
+begin
+	
+  select id_event into i_e 
+  from music.events e 
+  where "event" = eve for update;
+ 
+  if not found then
+  
+    select id_place into i_p
+    from geo.places
+    where place = plac for update;
+   
+    if not found then 
+      insert into geo.places
+  	  values (md5(plac), plac);
+  	end if;
+  
+  	insert into music.events
+    values (md5(eve), eve, dat, md5(plac), dur, pri, per);
+    return 'Added event';  
+  else return 'Event alredy exist';
+    
+  end if;end;
+$function$
+;
 

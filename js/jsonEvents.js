@@ -218,4 +218,5 @@ var eventsInfo = {
  {"id_event":"ac4ad77eed8faf4ef8d91fb1df7fe196","year":2024,"date":"18.05.2024","event":"Fleshcrawl + Fleshsphere + Torment of Souls","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
  {"id_event":"69a41d5dad2039585f9bc6016b1c002a","year":2024,"date":"23.05.2024","event":"Open Stage - 23.05.2024","place":"Mainz (M8 im Haus der Jugend)","bands":2},
  {"id_event":"bd1c4e61080082f4ce21cea49e37712b","year":2024,"date":"24.05.2024","event":"Morbide Klänge III","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+ {"id_event":"c51b848ef0fde1cc943bb57bbfad7a11","year":2024,"date":"31.05.2024","event":"Grabbenacht Festival 2024","place":"Schriesheim","bands":15},
 ]};

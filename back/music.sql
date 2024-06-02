@@ -158,13 +158,70 @@ begin
     if not found then
   	  insert into music.bands
   	  values (md5(ban), ban, 'y');
+  	 
+  	  insert into music.bands_events
+      values (md5(ban), md5(eve));
+     
+      return 'New Band - Event inserted';
+     
+    else
+      insert into music.bands_events
+      values (md5(ban), md5(eve));
+     
+      return 'Band - Event inserted';  
     end if;
-  
-    insert into music.bands_events
-    values (md5(ban), md5(eve));
-    return 'Band - Event inserted';
   end if;
-  
+end;
+$$;
+
+
+--
+-- Name: insert_bands_on_events_mod(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.insert_bands_on_events_mod(ban character varying, eve character varying) RETURNS text
+    LANGUAGE plpgsql
+    AS $$ 
+declare 
+  i_band varchar;
+  i_e varchar;
+begin 
+	
+  select id_band, id_event into i_band, i_e
+  from music.bands_events be 
+  where id_band = md5(ban) and id_event = md5(eve) for update;
+ 
+ if found then
+   return 'This combination Band - Event exist.';
+ end if;
+ 
+  select id_event into i_e 
+  from music.events e 
+  where "event" = eve for update;
+ 
+  if not found then    
+    return 'This event does not exist';
+  else 
+    select id_band into i_band
+    from music.bands
+    where band  = ban for update ;
+ 
+    if not found then
+  	  insert into music.bands
+  	  values (md5(ban), ban, 'y');
+  	 
+  	  insert into music.bands_events
+      values (md5(ban), md5(eve));
+     
+      return 'New Band - Event inserted';
+     
+    else
+      insert into music.bands_events
+      values (md5(ban), md5(eve));
+     
+      return 'Band - Event inserted';  
+    end if;
+  end if;
 end;
 $$;
 
@@ -217,10 +274,10 @@ $$;
 
 
 --
--- Name: insert_events(character varying, date, character varying, smallint, numeric, smallint); Type: FUNCTION; Schema: music; Owner: -
+-- Name: insert_event(character varying, date, character varying, integer, numeric, integer); Type: FUNCTION; Schema: music; Owner: -
 --
 
-CREATE FUNCTION music.insert_events(eve character varying, dat date, plac character varying, dur smallint, pri numeric, per smallint) RETURNS text
+CREATE FUNCTION music.insert_event(eve character varying, dat date, plac character varying, dur integer, pri numeric, per integer) RETURNS text
     LANGUAGE plpgsql
     AS $$ 
 declare 
@@ -1637,6 +1694,14 @@ abb4decfc5a094f45911b94337e7e2c4	Mélancholia	y	t	\N
 e061c04af9609876757f0b33d14c63e5	South of Hessen	y	t	\N
 c6947b2d7fb2553635d75d160c92a2c5	Putridarium	y	t	\N
 59f900c93aee445bd51d0d3fbc722cad	Astral Wrath	y	t	Ukraine + Germany
+e60c4acd9218333d7c7ac50e5aa0f51e	Rectal Depravity	y	t	\N
+6e53c7c95acd615f2b29a536bc16dc43	Satan's Revenge on Mankind	y	t	\N
+aed7ba45d0a57ddaef5da5df666de7b4	Hour of Penance	y	t	\N
+94fea925f38999882458ab87ffda8b3a	Volière	y	t	\N
+de26f398ee613b636ddc998946a40e68	Zementmord	y	t	\N
+5f31d4e87e7903f8ca2a4f8842dd4fe7	Lunatic Dictator	y	t	\N
+ef18843fbbf66c6aa6851c6345f7c4ac	These Days & Those Days	y	t	\N
+8134a4079be58b29064131065f6a4c21	Napoli Violenta	y	t	\N
 \.
 
 
@@ -1659,13 +1724,21 @@ bfc9ace5d2a11fae56d038d68c601f00	USA
 63ae1791fc0523f47bea9485ffec8b8c	NLD                             
 59f900c93aee445bd51d0d3fbc722cad	150                             
 c6947b2d7fb2553635d75d160c92a2c5	DEU                             
+6e53c7c95acd615f2b29a536bc16dc43	DEU                             
 b570e354b7ebc40e20029fcc7a15e5a7	USA                             
 6c607fc8c0adc99559bc14e01170fee1	USA                             
 891a55e21dfacf2f97c450c77e7c3ea7	USA                             
+aed7ba45d0a57ddaef5da5df666de7b4	ITA                             
+de26f398ee613b636ddc998946a40e68	DEU                             
+5f31d4e87e7903f8ca2a4f8842dd4fe7	DEU                             
 8b0ee5a501cef4a5699fd3b2d4549e8f	USA                             
+ef18843fbbf66c6aa6851c6345f7c4ac	CHE                             
 3f15c445cb553524b235b01ab75fe9a6	USA                             
 656d1497f7e25fe0559c6be81a4bccae	USA                             
+8134a4079be58b29064131065f6a4c21	ITA                             
+e60c4acd9218333d7c7ac50e5aa0f51e	CHE                             
 f60ab90d94b9cafe6b32f6a93ee8fcda	USA                             
+94fea925f38999882458ab87ffda8b3a	BEL                             
 a7f9797e4cd716e1516f9d4845b0e1e2	USA                             
 3d6ff25ab61ad55180a6aee9b64515bf	USA                             
 660813131789b822f0c75c667e23fc85	USA                             
@@ -3678,6 +3751,21 @@ e061c04af9609876757f0b33d14c63e5	3eda085ef6acc8b084dda9440115af56
 e254616b4a5bd5aaa54f90a3985ed184	bd1c4e61080082f4ce21cea49e37712b
 3771bd5f354df475660a24613fcb7a8c	bd1c4e61080082f4ce21cea49e37712b
 c6947b2d7fb2553635d75d160c92a2c5	bd1c4e61080082f4ce21cea49e37712b
+e60c4acd9218333d7c7ac50e5aa0f51e	c51b848ef0fde1cc943bb57bbfad7a11
+b5d1848944ce92433b626211ed9e46f8	c51b848ef0fde1cc943bb57bbfad7a11
+6e53c7c95acd615f2b29a536bc16dc43	c51b848ef0fde1cc943bb57bbfad7a11
+952dc6362e304f00575264e9d54d1fa6	c51b848ef0fde1cc943bb57bbfad7a11
+ce2caf05154395724e4436f042b8fa53	c51b848ef0fde1cc943bb57bbfad7a11
+1e9413d4cc9af0ad12a6707776573ba0	c51b848ef0fde1cc943bb57bbfad7a11
+32af59a47b8c7e1c982ae797fc491180	c51b848ef0fde1cc943bb57bbfad7a11
+4276250c9b1b839b9508825303c5c5ae	c51b848ef0fde1cc943bb57bbfad7a11
+aed7ba45d0a57ddaef5da5df666de7b4	c51b848ef0fde1cc943bb57bbfad7a11
+51053ffab2737bd21724ed0b7e6c56f7	c51b848ef0fde1cc943bb57bbfad7a11
+94fea925f38999882458ab87ffda8b3a	c51b848ef0fde1cc943bb57bbfad7a11
+de26f398ee613b636ddc998946a40e68	c51b848ef0fde1cc943bb57bbfad7a11
+5f31d4e87e7903f8ca2a4f8842dd4fe7	c51b848ef0fde1cc943bb57bbfad7a11
+ef18843fbbf66c6aa6851c6345f7c4ac	c51b848ef0fde1cc943bb57bbfad7a11
+8134a4079be58b29064131065f6a4c21	c51b848ef0fde1cc943bb57bbfad7a11
 \.
 
 
@@ -5049,6 +5137,19 @@ ade72e999b4e78925b18cf48d1faafa4	f008a5f1cb81bcfa397f7c1987f2bf55
 59f900c93aee445bd51d0d3fbc722cad	17b8dff9566f6c98062ad5811c762f44
 c6947b2d7fb2553635d75d160c92a2c5	17b8dff9566f6c98062ad5811c762f44
 c6947b2d7fb2553635d75d160c92a2c5	885ba57d521cd859bacf6f76fb37ef7c
+6e53c7c95acd615f2b29a536bc16dc43	6154b23b25e0bc2b8e4caa53c85531e5
+aed7ba45d0a57ddaef5da5df666de7b4	2df929d9b6150c082888b66e8129ee3f
+aed7ba45d0a57ddaef5da5df666de7b4	7fa69773873856d74f68a6824ca4b691
+de26f398ee613b636ddc998946a40e68	10a17b42501166d3bf8fbdff7e1d52b6
+5f31d4e87e7903f8ca2a4f8842dd4fe7	17b8dff9566f6c98062ad5811c762f44
+5f31d4e87e7903f8ca2a4f8842dd4fe7	a29864963573d7bb061691ff823b97dd
+ef18843fbbf66c6aa6851c6345f7c4ac	59fa15acc0c5773f6b64ad427b62c14b
+8134a4079be58b29064131065f6a4c21	10a17b42501166d3bf8fbdff7e1d52b6
+8134a4079be58b29064131065f6a4c21	1c800aa97116d9afd83204d65d50199a
+e60c4acd9218333d7c7ac50e5aa0f51e	17b8dff9566f6c98062ad5811c762f44
+e60c4acd9218333d7c7ac50e5aa0f51e	deb8040131c3f6a3caf6a616b34ac482
+94fea925f38999882458ab87ffda8b3a	7fa69773873856d74f68a6824ca4b691
+94fea925f38999882458ab87ffda8b3a	deb8040131c3f6a3caf6a616b34ac482
 \.
 
 
@@ -5277,6 +5378,7 @@ a1ba44498f1b706e9ec67d6c50842b42	Exorcised Gods/Harvest their Bodies/Call of Cha
 bc9dd8d4890a5523a876931328350747	Dortmund Deathfest 2023	2023-08-04	581032b233cfa02398169948de14c2dd	1	79	2
 bd1c4e61080082f4ce21cea49e37712b	Morbide Klänge III	2024-05-24	620f9da22d73cc8d5680539a4c87402b	0	15.0	2
 69a41d5dad2039585f9bc6016b1c002a	Open Stage - 23.05.2024	2024-05-23	620f9da22d73cc8d5680539a4c87402b	0	15.0	2
+c51b848ef0fde1cc943bb57bbfad7a11	Grabbenacht Festival 2024	2024-05-31	7adc966f52e671b15ea54075581c862b	1	49.0	2
 \.
 
 
@@ -5474,6 +5576,8 @@ d5750853c14498dc264065bcf7e05a29	Tribute to Megadeth
 f829960b3a62def55e90a3054491ead7	Middle Eastern Doom Metal
 d4fe504b565a2bcbec1bb4c56445e857	Funeral Doom Metal
 178c690e12310890294b6fefeb0c2442	Tribute to Slayer
+6154b23b25e0bc2b8e4caa53c85531e5	Porno Gore Grind
+59fa15acc0c5773f6b64ad427b62c14b	Slamming Hardcore Death
 \.
 
 
