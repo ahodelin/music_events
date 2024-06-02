@@ -176,57 +176,6 @@ $$;
 
 
 --
--- Name: insert_bands_on_events_mod(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
---
-
-CREATE FUNCTION music.insert_bands_on_events_mod(ban character varying, eve character varying) RETURNS text
-    LANGUAGE plpgsql
-    AS $$ 
-declare 
-  i_band varchar;
-  i_e varchar;
-begin 
-	
-  select id_band, id_event into i_band, i_e
-  from music.bands_events be 
-  where id_band = md5(ban) and id_event = md5(eve) for update;
- 
- if found then
-   return 'This combination Band - Event exist.';
- end if;
- 
-  select id_event into i_e 
-  from music.events e 
-  where "event" = eve for update;
- 
-  if not found then    
-    return 'This event does not exist';
-  else 
-    select id_band into i_band
-    from music.bands
-    where band  = ban for update ;
- 
-    if not found then
-  	  insert into music.bands
-  	  values (md5(ban), ban, 'y');
-  	 
-  	  insert into music.bands_events
-      values (md5(ban), md5(eve));
-     
-      return 'New Band - Event inserted';
-     
-    else
-      insert into music.bands_events
-      values (md5(ban), md5(eve));
-     
-      return 'Band - Event inserted';  
-    end if;
-  end if;
-end;
-$$;
-
-
---
 -- Name: insert_bands_to_genres(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
 --
 
@@ -274,10 +223,10 @@ $$;
 
 
 --
--- Name: insert_event(character varying, date, character varying, integer, numeric, integer); Type: FUNCTION; Schema: music; Owner: -
+-- Name: insert_event(character varying, date, character varying, smallint, numeric, smallint); Type: FUNCTION; Schema: music; Owner: -
 --
 
-CREATE FUNCTION music.insert_event(eve character varying, dat date, plac character varying, dur integer, pri numeric, per integer) RETURNS text
+CREATE FUNCTION music.insert_event(eve character varying, dat date, plac character varying, dur smallint, pri numeric, per smallint) RETURNS text
     LANGUAGE plpgsql
     AS $$ 
 declare 
@@ -3766,6 +3715,8 @@ de26f398ee613b636ddc998946a40e68	c51b848ef0fde1cc943bb57bbfad7a11
 5f31d4e87e7903f8ca2a4f8842dd4fe7	c51b848ef0fde1cc943bb57bbfad7a11
 ef18843fbbf66c6aa6851c6345f7c4ac	c51b848ef0fde1cc943bb57bbfad7a11
 8134a4079be58b29064131065f6a4c21	c51b848ef0fde1cc943bb57bbfad7a11
+5842a0c2470fe12ee3acfeec16c79c57	c51b848ef0fde1cc943bb57bbfad7a11
+5eed658c4b7b68a0ecc49205b68d54e7	c51b848ef0fde1cc943bb57bbfad7a11
 \.
 
 

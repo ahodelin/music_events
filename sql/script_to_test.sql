@@ -114,9 +114,9 @@ delete from music.events where event = 'Test_Event';
 delete from geo.places where place = 'Test_Place'
 
 
- DROP FUNCTION music.insert_event(varchar, date, varchar, int2, numeric, int2);
+ DROP FUNCTION music.insert_event(varchar, date, varchar, int, numeric, int);
 
-CREATE OR REPLACE FUNCTION music.insert_event(eve character varying, dat date, plac character varying, dur int, pri numeric, per int)
+CREATE OR REPLACE FUNCTION music.insert_event(eve character varying, dat date, plac character varying, dur int2, pri numeric, per int2)
  RETURNS text
  LANGUAGE plpgsql
 AS $function$ 
