@@ -78,53 +78,6 @@ $$;
 
 
 --
--- Name: insert_bands_on_countries_old(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
---
-
-CREATE FUNCTION music.insert_bands_on_countries_old(ban character varying, countr character varying) RETURNS text
-    LANGUAGE plpgsql
-    AS $$ 
-declare 
-  i_band varchar;
-  i_countr varchar;
-begin 
-	
-  select id_band, id_country into i_band, i_countr
-  from music.bands_countries bc
-  where id_band = md5(ban) and id_country = md5(countr) for update;
- 
-  if found then
-    return 'This combination of band and country exist';
-  else
-	 
-    select id_country into i_countr 
-    from geo.countries c  
-    where country = countr for update;
- 
-    if not found then    
-      return 'Please insert this country first';
-    end if;
-   
-    select id_band into i_band
-    from music.bands
-    where band = ban for update ;
- 
-    if not found then
-  	  insert into music.bands
-  	  values (md5(ban), ban, 'y');
-    end if; 
-  
-    insert into music.bands_countries
-    values(md5(ban), md5(countr));
-    return 'Band - County added'; 
-   
-  end if;
-	  
-end;
-$$;
-
-
---
 -- Name: insert_bands_on_events(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
 --
 
@@ -384,7 +337,9 @@ CREATE MATERIALIZED VIEW music.mv_musical_info AS
     g.genere,
     e.event,
     e.date_event,
-    p.place
+    p.place,
+    e.duration,
+    (e.price * (e.persons)::numeric) AS price
    FROM (((((((music.bands b
      JOIN music.bands_countries bc ON ((b.id_band = bc.id_band)))
      JOIN geo.countries c ON ((c.id_country = bc.id_country)))
