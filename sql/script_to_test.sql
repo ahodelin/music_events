@@ -83,4 +83,9 @@ select distinct "event", price from music.mv_musical_info mmi;
 select sum(price) from
   (select distinct "event", price from music.mv_musical_info mmi) t;
 
+select md5(lower(band)) new_id, id_band, lower(regexp_replace(band, '\s|\W', '', 'g')) for_id,  band from music.bands order by band ;
  
+select count(distinct(lower(regexp_replace(band, '\s|\W', '', 'g')))) from music.bands;
+
+
+select count(distinct (lower(regexp_replace(genere, '\s|\W', '', 'g')))) from music.generes g;
