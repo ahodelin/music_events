@@ -44,7 +44,7 @@ begin
 	
   select id_band, id_country into i_band, i_countr
   from music.bands_countries bc
-  where id_band = md5(ban) and id_country = countr for update;
+  where id_band = md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))) and id_country = countr for update;
  
   if found then
     return 'This combination of band and country exist';
@@ -64,11 +64,11 @@ begin
  
     if not found then
   	  insert into music.bands
-  	  values (md5(ban), ban, 'y');
+  	  values (md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), ban, 'y');
     end if; 
   
     insert into music.bands_countries
-    values(md5(ban), countr);
+    values(md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), countr);
     return 'Band - County added'; 
    
   end if;
@@ -91,7 +91,7 @@ begin
 	
   select id_band, id_event into i_band, i_e
   from music.bands_events be 
-  where id_band = md5(ban) and id_event = md5(eve) for update;
+  where id_band = md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))) and id_event = md5(lower(regexp_replace(eve, '\s|\W', '', 'g'))) for update;
  
  if found then
    return 'This combination Band - Event exist.';
@@ -110,16 +110,16 @@ begin
  
     if not found then
   	  insert into music.bands
-  	  values (md5(ban), ban, 'y');
+  	  values (md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), ban, 'y');
   	 
   	  insert into music.bands_events
-      values (md5(ban), md5(eve));
+      values (md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), md5(lower(regexp_replace(eve, '\s|\W', '', 'g'))));
      
       return 'New Band - Event inserted';
      
     else
       insert into music.bands_events
-      values (md5(ban), md5(eve));
+      values (md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), md5(lower(regexp_replace(eve, '\s|\W', '', 'g'))));
      
       return 'Band - Event inserted';  
     end if;
@@ -142,7 +142,7 @@ begin
 	
   select id_genere, id_band into i_gene, i_band
   from music.bands_generes bg 
-  where id_band = md5(ban) and id_genere = md5(gene) for update;
+  where id_band = md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))) and id_genere = md5(lower(regexp_replace(gene, '\s|\W', '', 'g'))) for update;
   
   if found then
     return 'This combination of band and genere exist';
@@ -154,7 +154,7 @@ begin
  
     if not found then    
       insert into music.generes
-  	  values (md5(gene), gene);
+  	  values (md5(lower(regexp_replace(gene, '\s|\W', '', 'g'))), gene);
     end if;
 	
     select id_band into i_band
@@ -163,11 +163,11 @@ begin
  
     if not found then
   	  insert into music.bands
-  	  values (md5(ban), ban, 'y');
+  	  values (md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), ban, 'y');
     end if;
   
     insert into music.bands_generes
-    values(md5(ban), md5(gene));
+    values(md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), md5(lower(regexp_replace(gene, '\s|\W', '', 'g'))));
     return 'Band - Genere added';
     
   end if;  
@@ -199,11 +199,11 @@ begin
    
     if not found then 
       insert into geo.places
-  	  values (md5(plac), plac);
+  	  values (md5(lower(regexp_replace(plac, '\s|\W', '', 'g'))), plac);
   	end if;
   
   	insert into music.events
-    values (md5(eve), eve, dat, md5(plac), dur, pri, per);
+    values (md5(lower(regexp_replace(eve, '\s|\W', '', 'g'))), eve, dat, md5(lower(regexp_replace(plac, '\s|\W', '', 'g'))), dur, pri, per);
     return 'Added event';  
   else return 'Event alredy exist';
     
@@ -681,79 +681,79 @@ MLT	150
 --
 
 COPY geo.places (id_place, place) FROM stdin;
-875ec5037fe25fad96113c57da62f9fe	Landau (Gloria Kulturpalast)
-8bb89006a86a427f89e49efe7f1635c1	Mainz (Alexander the Great)
-2a8f2b9aef561f19faad529d927dba17	Offenbach (Stadthalle)
-c6e9ff60da2342ba2a0ce4d9b6fc6ff1	Aschaffenburg (Colos-Saal)
-741ae9098af4e50aecf13b0ef08ecc47	Barleben
-beeb45e34fe94369bed94ce75eb1e841	Lichtenfels (Stadhalle)
-0b186d7eb0143e60ced4af3380f5faa8	Weinheim (Café Central)
-620f9da22d73cc8d5680539a4c87402b	Mainz (M8 im Haus der Jugend)
-4e637199a58a4ff2ec4b956d06e472e8	Worms (Schwarzer Bär)
-828d35ecd5412f7bc1ba369d5d657f9f	Heidelberg (halle 02)
-858d53d9bd193393481e4e8b24d10bba	Aschaffenburg (JUKUZ)
-19a1767aab9e93163ad90f2dfe82ec71	Mainz (Rheinhufer)
-4e592038a4c7b6cdc3e7b92d98867506	Frankfurt am Main (Nachtleben)
-29ae00a7e41558eb2ed8c0995a702d7a	Mainz (Alte Ziegelei)
-1e9e26a0456c1694d069e119dae54240	Oberursel
-38085fa2d02ff7710a42a0c61ab311e2	Offenbach (Capitol)
-d1ad016a5b257743ef75594c67c52935	Rüsselsheim (Das Rind)
-d379f693135eefa77bc9732f97fcaaf1	Hockenheim (Hockenheim-Ring)
-7adc966f52e671b15ea54075581c862b	Schriesheim
-427a371fadd4cce654dd30c27a36acb0	Wiesbaden (Schlachthof)
-f3c1ffc50f4f8d0a857533164e8da867	Mainz (KUZ - Kulturzentrum)
-4751a5b2d9992dca6e462e3b14695284	Mannheim (MS Connexion Complex)
-d5c76ce146e0b3f46e69e870e9d48181	Rockenhausen
-59c2a4862605f1128b334896c17cab7b	Magdeburg (Factory)
-3b0409f1b5830369aac22e3c5b9b9815	Ballenstedt
-55ff4adc7d421cf9e05b68d25ee22341	Mainz-Kastel (Reduit)
-bb1bac023b4f02a5507f1047970d1aca	Neuborn
-21760b1bbe36b4dae8fa9e0c274f76bf	Mannheim (Maimarkt)
-50bd324043e0b113bea1b5aa0422806f	Neckargemünd (Metal Club Odinwald)
-7786a0fc094d859eb469868003b142db	Mannheim (SAP Arena)
-657d564cc1dbaf58e2f2135b57d02d99	Bad Kreuznach (Jakob-Kiefer-Halle)
-41b6f7fdc3453cc5f989c347d9b4b674	Havana (Sala Maxim Rock)
-012d8da36e8518d229988fe061f3c376	Ulm (Hexenhaus)
-14b82c93c42422209e5b5aad5b7b772e	Mainz (Kulturcafé auf dem Campus)
-3611a0c17388412df8e42cf1858d5e99	Kaiserslautern (Irish House)
-99d75d9948711c04161016c0d2280dd9	Bonn (Bla)
-2898437c2420ae271ae3310552ad6d70	Darmstadt (Goldene Krone)
-871568e58a911610979cadc2c1e94122	Hirschaid
-6d998a5f2c8b461a654f7f9e34ab4368	Lindau (Club Vaudeville)
-fbde8601308ae84be23d6de78e10d14c	Wacken
-0643057438c69f0c17bf84c9495d2b7e	Andernach
-e16b7534e6149fb73a7c2d9b02b61a7d	Büchold
-93a57b9586b3285867e6b87031559aea	Frankfurt am Main (Ponyhof Club)
-927ba3593d3a4597eac931a25b53a137	Frankfurt am Main (Das Bett)
-c2e2354512feb29acf171d655a159dd0	Frankfurt am Main (Festhalle)
-a93597b8b03e112e11f4cda2c1587b6f	Frankfurt am Main (Jahrhunderthalle)
-a247cd14d4d2259d6f2bc87dcb3fdfb6	Mörlenbach (LIVE MUSIC HALL Weiher)
-d8634af954a0d50828522b6c6a6053c2	Kusel (Kinett)
-67eb541ae5d82ae8606697eba4119bf2	Köln (Live Music Hall)
-fa788dff4144faf1179fc82d60ccd571	Frankfurt am Main (Haus Sindlingen)
-4a887b8a68acf9b04d9d027bddedb06b	Leipzig
-e1d73a013c55de0ebff0e36b7c07ee77	Wernigerode
-5ef87fb605db6ba57e23c29fed883ac7	Frankfurt am Main (Batschkapp)
-f9b213d4a497239d3969131d12cb900d	Mainz (Volkspark)
-245dd888dae44ef00b3aa74214912f40	Turgau/Entenfang
-b26918c7403ba9006251abb5aed9b568	Buchenbach
-581032b233cfa02398169948de14c2dd	Dotmund (JunkYard)
-28b01417bfa80ac2a9d3521137485589	Weilburg-Kubach (Bürgerhalle)
-d7925427b71cf5c69dea1361e790154e	Frankfurt am Main (Schöppche-Keller)
-d6a89e194d2558258305d49f06856e57	Frankfurt am Main (ELFER Club)
-94707aea9e845e5e0ec91cd63f5982d6	Bechtheim (Gasthaus Bechtheimer Hof)
-46103b15f2a58bf3c7d03c4d9a954779	Weibersbrunn (Mehrzweckhalle)
-e5fe851ccb28deccc27178ac003727e2	Hofheim (Jazzkeller)
-5a90e8cdd17fb102f309e2bbd460e289	Wiesbaden (GMZ Georg-Buch-Haus)
-f0a8e858b19385f9c627d8b752c81a6c	Alzey (Oberhaus)
-e2b11d2fc694a779d25220b9e5cb88ad	Ludwigshafen am Rhein (Bon Scott Rock Cafe)
-c5159d0425e9c5737c8884eb38d70dd9	Mainz (Zitadelle - Die Kulturei)
-ea72b9f0db73025c8aaedae0f7b874f8	Hamm
-89c0549ca41bb77ccdf081193ca1e45f	Karlsruhe (Alter Schlachthof - Substage)
-6db34279cf6070892349b478135302e7	Ludwigshafen (Kulturzentrum dasHaus)
-446c20c5e383ff30350166d5ab741efb	Mainz (Kulturclub schon schön)
-6d488d592421aa8391ff259ef1c8b744	Mannheim (7er Club)
-ca838f25ade35ddc0337a6f0ea710f4b	Mühltal (Steinbruch Theater)
+6dde0719f779b373e62a7283e717d384	Landau (Gloria Kulturpalast)
+17648f3308a5acb119d9aee1b5eafceb	Mainz (Alexander the Great)
+76f9a958c2ebbd2f42456523d749fb5e	Offenbach (Stadthalle)
+eca8fc96e027328005753be360587de2	Aschaffenburg (Colos-Saal)
+05be609ce9831967baa4f12664dc4d73	Barleben
+dd6f8f3663df773b485d8281c2ccd323	Lichtenfels (Stadhalle)
+f3a90318abb3e16166d96055fd6f9096	Weinheim (Café Central)
+a91bcaf7db7d174ee2966d9c293fd575	Mainz (M8 im Haus der Jugend)
+fc9917fb6f46c0eb12f1e429a33ba66b	Worms (Schwarzer Bär)
+c72b4173a6a7131bf31a711212305fd3	Heidelberg (halle 02)
+b10506e85b6bf48eace09359fb36d5e0	Aschaffenburg (JUKUZ)
+1b90e6739989e49dd0c81f338b61c134	Mainz (Rheinhufer)
+5208c9de2f1b498a350984d55bcbc314	Frankfurt am Main (Nachtleben)
+3a98149817a5aafba14c1b822db056fa	Mainz (Alte Ziegelei)
+990c04bd6b40c3ca7352a838e2208dac	Oberursel
+f7f2bc012754bd5d77de32e5c2674553	Offenbach (Capitol)
+6e763e01d71c71e3b53502c35bfbb98c	Rüsselsheim (Das Rind)
+0dbca791a775eab280cc7766794627cb	Hockenheim (Hockenheim-Ring)
+010c9e9e86100e63919a6051b399d662	Schriesheim
+588671317bf1864e5a95445ec51aac65	Wiesbaden (Schlachthof)
+99b522e44d05813118dcf562022b4a2a	Mainz (KUZ - Kulturzentrum)
+49d6cee27482319877690f7d0409abbd	Mannheim (MS Connexion Complex)
+3264a9d4fedca758f18391ecca28f0e5	Rockenhausen
+539960fca282c1966cfa15e15aca1d84	Magdeburg (Factory)
+ed2c8a76cc01eeb645011e8154737a49	Ballenstedt
+d5a4559236ce011e72312e02aafc05d0	Mainz-Kastel (Reduit)
+6c33b0a7db1a4982d74edfe98239cec5	Neuborn
+f17fc1362e3637ae8ede170a2a5d6bea	Mannheim (Maimarkt)
+29935ed69008b59e8758afcf7eeb7d7b	Neckargemünd (Metal Club Odinwald)
+840b0d06d6be5d714e2228a4be26cbcc	Mannheim (SAP Arena)
+15f10194f67b967b0f0b5a22561a7c95	Bad Kreuznach (Jakob-Kiefer-Halle)
+406b32caecad16e87606fa84a77f4e35	Havana (Sala Maxim Rock)
+d61cb6460de2df9d1d64dc35cb293f6a	Ulm (Hexenhaus)
+6c55ed753e5b2355307bf2b494f2384a	Mainz (Kulturcafé auf dem Campus)
+44ab9f5977e8956f9dd15003efc8743b	Kaiserslautern (Irish House)
+eb83e6da9292e995b44f789c42bb7e65	Bonn (Bla)
+6ddb911ae1e79899c2d90067b761d6b4	Darmstadt (Goldene Krone)
+ca7fb13a9cd0887dfabbb573c070fb2e	Hirschaid
+968e5509ddd33538eec4fff752bda4ff	Lindau (Club Vaudeville)
+481c1aef68fb3531c92c85ccf1e8643d	Wacken
+6a21939c14c8f6030de787b05d66c3ef	Andernach
+4806febaa9c494fdd030ee4163e33c8c	Büchold
+0280c9c3b98763f5a8d2ce7e97ce1b05	Frankfurt am Main (Ponyhof Club)
+83b0fe992121ae7d39f6bcc58a48160c	Frankfurt am Main (Das Bett)
+50eb9f93583f844e0684af399dc7fc3c	Frankfurt am Main (Festhalle)
+400c46fc5f22decc791a97c27363df40	Frankfurt am Main (Jahrhunderthalle)
+09ddc8804dd5908fef3c8c0c474ad238	Mörlenbach (LIVE MUSIC HALL Weiher)
+9f629f2265000ff7abf380b363b2de49	Kusel (Kinett)
+69e2a1bbdd4b334d3da05ae012836b18	Köln (Live Music Hall)
+69bdcf616a03acef49e3697d73adcbb3	Frankfurt am Main (Haus Sindlingen)
+efeaa516107a31ce2d1217e055b767f7	Leipzig
+a7f15733dd688dee75571597f8636ba7	Wernigerode
+779076573cef469faf694cd40d92f40a	Frankfurt am Main (Batschkapp)
+692fc1deabc4b9afa9387af15c02b19a	Mainz (Volkspark)
+cb6036cdf8009fc4b41eb0e56eab553d	Turgau/Entenfang
+cf1c12d42f59db3667fc162556aab169	Buchenbach
+85683aa688e302e1de7ec78dc4440dff	Dotmund (JunkYard)
+10effefa9cc583f38ff0518dcaa72ef5	Weilburg-Kubach (Bürgerhalle)
+fc36c84b02e473bec246e5d2cfc513ef	Frankfurt am Main (Schöppche-Keller)
+5948b7ac21c1697473de19197df1f172	Frankfurt am Main (ELFER Club)
+6032938ceb573d952fdae1a40ef39837	Bechtheim (Gasthaus Bechtheimer Hof)
+b13f71a1a5f7e89c2603d5241c2aca25	Weibersbrunn (Mehrzweckhalle)
+817974aa11f84c9ebc640d3de92737f5	Hofheim (Jazzkeller)
+738af31c1a528baa30e7df31384e550b	Wiesbaden (GMZ Georg-Buch-Haus)
+b00bae5a5f8ff8830d486747e78d7d8d	Alzey (Oberhaus)
+9ca0396f7fce5729940fcef7383728b3	Ludwigshafen am Rhein (Bon Scott Rock Cafe)
+f0f0e638999829b846be6e20b5591898	Mainz (Zitadelle - Die Kulturei)
+7590124802ade834dbe9e7c0d2c1a897	Hamm
+051fa36efd99a2ae24d56b198e7b1992	Karlsruhe (Alter Schlachthof - Substage)
+5515ceaeca4b8b62ee5275de54ea77ad	Ludwigshafen (Kulturzentrum dasHaus)
+cccce7f0011bc27dee7c60945cd5f962	Mainz (Kulturclub schon schön)
+e248bb7c1164a44fa358593e28769a23	Mannheim (7er Club)
+2dd00779b7dd00b6cbbc574779ba1f40	Mühltal (Steinbruch Theater)
 \.
 
 
@@ -762,850 +762,850 @@ ca838f25ade35ddc0337a6f0ea710f4b	Mühltal (Steinbruch Theater)
 --
 
 COPY music.bands (id_band, band, likes, active, note) FROM stdin;
-8b427a493fc39574fc801404bc032a2f	1000Mods	y	t	\N
-721c28f4c74928cc9e0bb3fef345e408	Aborted	y	t	\N
-0a7ba3f35a9750ff956dca1d548dad12	Abrogation	y	t	\N
-54b72f3169fea84731d3bcba785eac49	Acranius	y	t	\N
-d05a0e65818a69cc689b38c0c0007834	ADDICT	y	t	\N
-dcabc7299e2b9ed5b05c33273e5fdd19	Aeon of Disease	y	t	\N
-5ce10014f645da4156ddd2cd0965986e	Agnostic Front	y	t	\N
-a332f1280622f9628fccd1b7aac7370a	Agrypnie	y	t	\N
-249789ae53c239814de8e606ff717ec9	Airborn	m	t	\N
-fe5b73c2c2cd2d9278c3835c791289b6	All its Grace	y	t	\N
-942c9f2520684c22eb6216a92b711f9e	Amon Amarth	y	t	\N
-7cd7921da2e6aab79c441a0c2ffc969b	Amorphis	y	t	\N
-948098e746bdf1c1045c12f042ea98c2	Analepsy	y	t	\N
-59d153c1c2408b702189623231b7898a	Angelus Apatrida	y	t	\N
-06efe152a554665e02b8dc4f620bf3f1	Anthrax	y	t	\N
-14ab730fe0172d780da6d9e5d432c129	AntiPeeWee	m	t	\N
-449b4d758aa7151bc1bbb24c3ffb40bb	Anubis	m	t	\N
-5df92b70e2855656e9b3ffdf313d7379	Anüs	y	t	\N
-3e75cd2f2f6733ea4901458a7ce4236d	Apey & The Pea	n	t	\N
-108c58fc39b79afc55fac7d9edf4aa2a	Arch Enemy	y	t	\N
-28bc31b338dbd482802b77ed1fd82a50	Arroganz	y	t	\N
-49c4097bae6c6ea96f552e38cfb6c2d1	Artillery	n	t	\N
-e3f0bf612190af6c3fad41214115e004	Asomvel	y	t	\N
-fb47f889f2c7c4fee1553d0f817b8aaa	Asphyx	y	t	\N
-264721f3fc2aee2d28dadcdff432dbc1	Atomwinter	m	t	\N
-9a322166803a48932356586f05ef83c7	At the Gates	y	t	\N
-75ab0270163731ee05f35640d56ef473	Audrey Horne	m	t	\N
-9d3ac6904ce73645c6234803cd7e47ca	Außerwelt	y	t	\N
-d1fb4e47d8421364f49199ee395ad1d3	Aversions Crown	y	t	\N
-44012166c6633196dc30563db3ffd017	Avowal	y	t	\N
-905a40c3533830252a909603c6fa1e6a	Avulsed	y	t	\N
-aed85c73079b54830cd50a75c0958a90	Baleful Abyss (Zombieslut)	y	t	\N
-da2110633f62b16a571c40318e4e4c1c	Battle against the Empire	y	t	\N
-529a1d385b4a8ca97ea7369477c7b6a7	Battle Beast	m	t	\N
-be20385e18333edb329d4574f364a1f0	Behemoth	y	t	\N
-ee69e7d19f11ca58843ec2e9e77ddb38	Benediction	y	t	\N
-925bd435e2718d623768dbf1bc1cfb60	Benighted	y	t	\N
-ad01952b3c254c8ebefaf6f73ae62f7d	Betrayal	y	t	\N
-7c7ab6fbcb47bd5df1e167ca28220ee9	Betraying the Martyrs	m	t	\N
-e8afde257f8a2cbbd39d866ddfc06103	Bitchfork	y	t	\N
-8f1f10cb698cb995fd69a671af6ecd58	Black Crown Initiate	y	t	\N
-bbddc022ee323e0a2b2d8c67e5cd321f	Black Medusa	y	t	\N
-74b3b7be6ed71b946a151d164ad8ede5	Black Reunion	y	t	\N
-d9ab6b54c3bd5b212e8dc3a14e7699ef	Blæck Fox	y	t	\N
-679eaa47efb2f814f2642966ee6bdfe1	Blessed Hellride	y	t	\N
-e1db3add02ca4c1af33edc5a970a3bdc	Blizzen	m	t	\N
-1c6987adbe5ab3e4364685e8caed0f59	Bloodbound	y	t	\N
-cf4ee20655dd3f8f0a553c73ffe3f72a	Blood Fire Death	y	t	\N
-b3ffff8517114caf70b9e70734dbaf6f	Bloodred Hourglass	y	t	\N
-a4cbfb212102da21b82d94be555ac3ec	Blood Red Throne	y	t	\N
-10d91715ea91101cfe0767c812da8151	Bloodspot	y	t	\N
-1209f43dbecaba22f3514bf40135f991	Bobby Sixkiller and the Renegades	y	t	\N
-dcff9a127428ffb03fc02fdf6cc39575	Böhse Onkelz	m	t	\N
-6c00bb1a64f660600a6c1545377f92dc	Bokassa	y	t	\N
-55159d04cc4faebd64689d3b74a94009	Booze & Glory	m	t	\N
-b6da055500e3d92698575a3cfc74906c	Born from Pain	m	t	\N
-1e9413d4cc9af0ad12a6707776573ba0	Bösedeath	y	t	\N
-b01fbaf98cfbc1b72e8bca0b2e48769c	Bowel Evacuation	y	t	\N
-4b98a8c164586e11779a0ef9421ad0ee	Brainstorm	m	t	\N
-897edb97d775897f69fa168a88b01c19	Brand of Sacrifice	y	t	\N
-eeaeec364c925e0c821660c7a953546e	Broken Teeth	m	t	\N
-7533f96ec01fd81438833f71539c7d4e	Bullet	m	t	\N
-11635778f116ce6922f6068638a39028	Burn	m	t	\N
-d449a9b2eed8b0556dc7be9cda36b67b	Bury Tomorrow	y	t	\N
-7eaf9a47aa47f3c65595ae107feab05d	Caliban	y	t	\N
-7463543d784aa59ca86359a50ef58c8e	Cancer	y	t	\N
-c4f0f5cedeffc6265ec3220ab594d56b	Candlemass	m	t	\N
-63bd9a49dd18fbc89c2ec1e1b689ddda	Cannibal Corpse	y	t	\N
-63ae1791fc0523f47bea9485ffec8b8c	Carach Angren	y	t	\N
-c4c7cb77b45a448aa3ca63082671ad97	Carnal Decay	y	t	\N
-5435326cf392e2cd8ad7768150cd5df6	Carnation	y	t	\N
-828d51c39c87aad9b1407d409fa58e36	CCCP	y	t	\N
-d2ff1e521585a91a94fb22752dd0ab45	Chapel of Disease	y	t	\N
-6f199e29c5782bd05a4fef98e7e41419	Circle of Execution	y	t	\N
-6830afd7158930ca7d1959ce778eb681	Combichrist	y	t	\N
-a61b878c2b563f289de2109fa0f42144	Conan	m	t	\N
-e67e51d5f41cfc9162ef7fd977d1f9f5	Condemned	y	t	\N
-3d2ff8abd980d730b2f4fd0abae52f60	Converge	m	t	\N
-ffa7450fd138573d8ae665134bccd02c	Corpsessed	y	t	\N
-faabbecd319372311ed0781d17b641d1	Counterparts	m	t	\N
-9f19396638dd8111f2cee938fdf4e455	Critical Mess	y	t	\N
-fdcbfded0aaf369d936a70324b39c978	Crossplane	y	t	\N
-1056b63fdc3c5015cc4591aa9989c14f	Crusher	y	t	\N
-b5d9c5289fe97968a5634b3e138bf9e2	Cryptopsy	y	t	\N
-1734b04cf734cb291d97c135d74b4b87	Cytotoxin	y	t	\N
-7d6b45c02283175f490558068d1fc81b	Dagoba	y	t	\N
-8d7a18d54e82fcfb7a11566ce94b9109	Daily Insanity	y	t	\N
-dddb04bc0d058486d0ef0212c6ea0682	Darkall Slaves	y	t	\N
-0e2ea6aa669710389cf4d6e2ddf408c4	Darkened Nocturn Slaughtercult	y	t	\N
-63ad3072dc5472bb44c2c42ede26d90f	Darkness	m	t	\N
-2aae4f711c09481c8353003202e05359	Dark Zodiak	y	t	\N
-28f843fa3a493a3720c4c45942ad970e	Dawn of Disease	y	t	\N
-9bc2ca9505a273b06aa0b285061cd1de	Dead Congregation	y	t	\N
-51fa80e44b7555c4130bd06c53f4835c	Cradle of Filth	y	t	\N
-17bcf0bc2768911a378a55f42acedba7	Gwar	m	t	\N
-ce2caf05154395724e4436f042b8fa53	Begging for Incest	y	t	\N
-b0ce1e93de9839d07dab8d268ca23728	Colours of Autumn	y	t	\N
-348bcdb386eb9cb478b55a7574622b7c	Bloodgod	y	f	\N
-d3ed8223151e14b936436c336a4c7278	Batushka	y	t	Krzysztof Drabikowski's Batushka
-b1bdad87bd3c4ac2c22473846d301a9e	Al Goregrind	m	f	\N
-9138c2cc0326412f2515623f4c850eb3	Dead Eyed Sleeper (Legacy)	y	t	\N
-44b7bda13ac1febe84d8607ca8bbf439	Death Angel	y	t	\N
-d857ab11d383a7e4d4239a54cbf2a63d	Deathrite	y	t	\N
-c74b5aa120021cbe18dcddd70d8622da	Deathstorm	y	t	\N
-3af7c6d148d216f13f66669acb8d5c59	Debauchery's Balgeroth	y	t	\N
-522b6c44eb0aedf4970f2990a2f2a812	Decapitated	y	t	\N
-f4219e8fec02ce146754a5be8a85f246	Decaying Days	y	t	\N
-c5f022ef2f3211dc1e3b8062ffe764f0	Defaced	y	t	\N
-0ab20b5ad4d15b445ed94fa4eebb18d8	Defocus	y	t	\N
-7fc454efb6df96e012e0f937723d24aa	Demored	y	t	\N
-8edfa58b1aedb58629b80e5be2b2bd92	Denyal	y	t	\N
-8589a6a4d8908d7e8813e9a1c5693d70	Depulsed	y	t	\N
-947ce14614263eab49f780d68555aef8	Deranged	y	t	\N
-7c83727aa466b3b1b9d6556369714fcf	Desbroce	y	t	\N
-71e32909a1bec1edfc09aec09ca2ac17	Desdemonia	y	t	\N
-3d01ff8c75214314c4ca768c30e6807b	Deserted Fear	y	t	\N
-7771012413f955f819866e517b275cb4	Destinity	y	t	\N
-36f969b6aeff175204078b0533eae1a0	Deströyer 666	y	t	\N
-1bc1f7348d79a353ea4f594de9dd1392	Devil Driver	y	t	\N
-2082a7d613f976e7b182a3fe80a28958	Dimmu Borgir	y	t	\N
-d9bc1db8c13da3a131d853237e1f05b2	Disbelief	y	t	\N
-9cf73d0300eea453f17c6faaeb871c55	Discreation	m	t	\N
-4dddd8579760abb62aa4b1910725e73c	Disquiet	m	t	\N
-d6de9c99f5cfa46352b2bc0be5c98c41	Dissecdead	y	t	\N
-5194c60496c6f02e8b169de9a0aa542c	Double Crush Syndrome	m	t	\N
-8654991720656374d632a5bb0c20ff11	Downfall of Gaia	m	t	\N
-6a0e9ce4e2da4f2cbcd1292fddaa0ac6	Down to Nothing	m	t	\N
-fe228019addf1d561d0123caae8d1e52	Dragonsfire	n	t	\N
-1104831a0d0fe7d2a6a4198c781e0e0d	Dust Bolt	y	t	\N
-889aaf9cd0894206af758577cf5cf071	Dyscarnate	y	t	\N
-410d913416c022077c5c1709bf104d3c	EDGEBALL	n	t	\N
-c5dc33e23743fb951b3fe7f1f477b794	Einherjer	y	t	\N
-97ee29f216391d19f8769f79a1218a71	Eisregen	y	t	\N
-b885447285ece8226facd896c04cdba2	Ektomorf	y	t	\N
-f07c3eef5b7758026d45a12c7e2f6134	Embrace Decay	y	t	\N
-0b6e98d660e2901c33333347da37ad36	Emerald	n	t	\N
-6d3b28f48c848a21209a84452d66c0c4	Eminenz	y	t	\N
-8c69497eba819ee79a964a0d790368fb	Endlevel	y	t	\N
-1197a69404ee9475146f3d631de12bde	End of Green	y	t	\N
-d730e65d54d6c0479561d25724afd813	Enforcer	n	t	\N
-457f098eeb8e1518008449e9b1cb580d	Enisum	y	t	\N
-ac94d15f46f10707a39c4bc513cd9f98	Enterprise Earth	y	t	\N
-37f02eba79e0a3d29dfd6a4cf2f4d019	Epica	n	t	\N
-39e83bc14e95fcbc05848fc33c30821f	Epicardiectomy	y	t	\N
-f0c051b57055b052a3b7da1608f3039e	Eradicator	m	t	\N
-e08383c479d96a8a762e23a99fd8bf84	Ereb Altor	m	t	\N
-ff5b48d38ce7d0c47c57555d4783a118	Evertale	m	t	\N
-8945663993a728ab19a3853e5b820a42	Evil Invaders	y	t	\N
-28a95ef0eabe44a27f49bbaecaa8a847	Exhorder	y	t	\N
-0cdf051c93865faa15cbc5cd3d2b69fb	Exodus	y	t	\N
-4b503a03f3f1aec6e5b4d53dd8148498	Extermination Dismemberment	y	t	\N
-887d6449e3544dca547a2ddba8f2d894	Exumer	y	t	\N
-2672777b38bc4ce58c49cf4c82813a42	Fallen Temple	y	t	\N
-832dd1d8efbdb257c2c7d3e505142f48	Far from ready	m	t	\N
-f37ab058561fb6d233b9c2a0b080d4d1	Feuerschwanz	y	t	\N
-3be3e956aeb5dc3b16285463e02af25b	Finsterforst	y	t	\N
-42563d0088d6ac1a47648fc7621e77c6	Firtan	y	t	\N
-7df8865bbec157552b8a579e0ed9bfe3	Five Finger Death Punch	y	t	\N
-c883319a1db14bc28eff8088c5eba10e	Fjoergyn	y	t	\N
-6b7cf117ecf0fea745c4c375c1480cb5	Fleshcrawl	y	t	\N
-187ebdf7947f4b61e0725c93227676a4	Fleshgod Apocalypse	y	t	\N
-4276250c9b1b839b9508825303c5c5ae	Fleshsphere	y	t	\N
-7462f03404f29ea618bcc9d52de8e647	Flesh Trading Company	y	t	\N
-5efb7d24387b25d8325839be958d9adf	Fracture	m	t	\N
-9db9bc745a7568b51b3a968d215ddad6	From North	m	t	\N
-cddf835bea180bd14234a825be7a7a82	Funeral Whore	y	t	\N
-fdc90583bd7a58b91384dea3d1659cde	Furies	n	t	\N
-401357e57c765967393ba391a338e89b	Ghost	y	t	\N
-e64b94f14765cee7e05b4bec8f5fee31	Gingerpig	m	t	\N
-d0a1fd0467dc892f0dc27711637c864e	God Dethroned	y	t	\N
-e271e871e304f59e62a263ffe574ea2d	GodSkill	y	t	\N
-a8d9eeed285f1d47836a5546a280a256	Godslave	y	t	\N
-abbf8e3e3c3e78be8bd886484c1283c1	Grabak	y	t	\N
-87f44124fb8d24f4c832138baede45c7	Grand Magus	y	t	\N
-ed24ff8971b1fa43a1efbb386618ce35	Grave	y	t	\N
-33b6f1b596a60fa87baef3d2c05b7c04	Grave Pleasures	m	t	\N
-426fdc79046e281c5322161f011ce68c	Graveyard	y	t	\N
-988d10abb9f42e7053450af19ad64c7f	Gut	n	t	\N
-b89e91ccf14bfd7f485dd7be7d789b0a	H2O	m	t	\N
-87ded0ea2f4029da0a0022000d59232b	Hadal Maw	m	t	\N
-2a024edafb06c7882e2e1f7b57f2f951	Hailstone	m	t	\N
-2fa2f1801dd37d6eb9fe4e34a782e397	Hämatom	y	t	\N
-e0c2b0cc2e71294cd86916807fef62cb	Hammer King	m	t	\N
-52ee4c6902f6ead006b0fb2f3e2d7771	Hängerbänd	y	t	\N
-4f48e858e9ed95709458e17027bb94bf	Hark	y	t	\N
-e0de9c10bbf73520385ea5dcbdf62073	Hatebreed	y	t	\N
-065b56757c6f6a0fba7ab0c64e4c1ae1	Hate Eternal	y	t	\N
-952dc6362e304f00575264e9d54d1fa6	Haunted Cemetery	y	t	\N
-5cd1c3c856115627b4c3e93991f2d9cd	Havok	y	t	\N
-0903a7e60f0eb20fdc8cc0b8dbd45526	Hell Boullevard	y	t	\N
-32af59a47b8c7e1c982ae797fc491180	Hellknife	y	t	\N
-fb8be6409408481ad69166324bdade9c	Hell:On	y	t	\N
-bd4184ee062e4982b878b6b188793f5b	Hellripper	y	t	\N
-0020f19414b5f2874a0bfacd9d511b84	Helrunar	y	t	\N
-de12bbf91bc797df25ab4ae9cee1946b	Hexenizer	y	t	\N
-237e378c239b44bff1e9a42ab866580c	Hierophant	y	t	\N
-89adcf990042dfdac7fd23685b3f1e37	High Fighter	m	t	\N
-44f2dc3400ce17fad32a189178ae72fa	Hills have Eyes	m	t	\N
-3bd94845163385cecefc5265a2e5a525	Hollowed	y	t	\N
-0b0d1c3752576d666c14774b8233889f	Hollow World	m	t	\N
-3614c45db20ee41e068c2ab7969eb3b5	Ellende	y	t	\N
-9d969d25c9f506c5518bb090ad5f8266	Embryectomy	y	t	\N
-ade72e999b4e78925b18cf48d1faafa4	Exorcised Gods	y	t	\N
-a4902fb3d5151e823c74dfd51551b4b0	Horisont	m	t	\N
-99bd5eff92fc3ba728a9da5aa1971488	Horresque	y	t	\N
-24ff2b4548c6bc357d9d9ab47882661e	Humator	y	t	\N
-776da10f7e18ffde35ea94d144dc60a3	Hypocrisy	y	t	\N
-829922527f0e7d64a3cfda67e24351e3	Ichor	y	t	\N
-bfc9ace5d2a11fae56d038d68c601f00	I Declare War	y	t	\N
-443866d78de61ab3cd3e0e9bf97a34f6	Igel vs. Shark	m	t	\N
-b570e354b7ebc40e20029fcc7a15e5a7	Ignite	n	t	\N
-7492a1ca2669793b485b295798f5d782	I'll be damned	m	t	\N
-63d7f33143522ba270cb2c87f724b126	Illdisposed	y	t	\N
-aa86b6fc103fc757e14f03afe6eb0c0a	Imperium Dekadenz	y	t	\N
-91a337f89fe65fec1c97f52a821c1178	Inconcessus Lux Lucis	y	t	\N
-5ec1e9fa36898eaf6d1021be67e0d00c	Indian Nightmare	n	t	\N
-8ce896355a45f5b9959eb676b8b5580c	Infected World	m	t	\N
-bbce8e45250a239a252752fac7137e00	In Flames	y	t	\N
-baa9d4eef21c7b89f42720313b5812d4	Ingested	y	t	\N
-2414366fe63cf7017444181acacb6347	Inhumate	y	t	\N
-1ac0c8e8c04cf2d6f02fdb8292e74588	Insanity Alert	m	t	\N
-5f992768f7bb9592bed35b07197c87d0	Insulter	m	t	\N
-ca5a010309ffb20190558ec20d97e5b2	In the Woods	n	t	\N
-f644bd92037985f8eb20311bc6d5ed94	Into Darkness	y	t	\N
-a825b2b87f3b61c9660b81f340f6e519	Iron Bastards	m	t	\N
-891a55e21dfacf2f97c450c77e7c3ea7	Iron Reagan	y	t	\N
-ef6369d9794dbe861a56100e92a3c71d	Isole	m	t	\N
-73affe574e6d4dc2fa72b46dc9dd4815	Jinjer	n	t	\N
-649db5c9643e1c17b3a44579980da0ad	Kaasschaaf	y	t	\N
-1e8563d294da81043c2772b36753efaf	Kadavar	m	t	\N
-362f8cdd1065b0f33e73208eb358991d	Kambrium	y	t	\N
-820de5995512273916b117944d6da15a	Kataklysm	y	t	\N
-6d57b25c282247075f5e03cde27814df	Knockdown Brutality	y	t	\N
-bbb668ff900efa57d936e726a09e4fe8	Korpiklaani	y	t	\N
-2501f7ba78cc0fd07efb7c17666ff12e	Korpse	y	t	\N
-76700087e932c3272e05694610d604ba	Kosmokrator	m	t	\N
-9b1088b616414d0dc515ab1f2b4922f1	Kreator	y	t	\N
-dfdef9b5190f331de20fe029babf032e	Lacrimas Profundere	m	t	\N
-4cfab0d66614c6bb6d399837656c590e	Legion of the Damned	y	t	\N
-5b22d1d5846a2b6b6d0cf342e912d124	Light to the blind	m	t	\N
-4261335bcdc95bd89fd530ba35afbf4c	Liver Values	m	t	\N
-2cfe35095995e8dd15ab7b867e178c15	Lonewolf	y	t	\N
-2cf65e28c586eeb98daaecf6eb573e7a	Lordi	m	t	\N
-3cdb47307aeb005121b09c41c8d8bee6	Los Skeleteros	y	t	\N
-53407737e93f53afdfc588788b8288e8	Lyra's Legacy	n	t	\N
-006fc2724417174310cf06d2672e34d2	Määt	y	t	\N
-7db066b46f48d010fdb8c87337cdeda4	Madball	y	t	\N
-a3f5542dc915b94a5e10dab658bb0959	Manegarm	y	t	\N
-2ac79000a90b015badf6747312c0ccad	Mantar	y	t	\N
-eb2c788da4f36fba18b85ae75aff0344	Marduk	y	t	\N
-626dceb92e4249628c1e76a2c955cd24	Meatknife	y	t	\N
-8fda25275801e4a40df6c73078baf753	Mecalimb	m	t	\N
-3a2a7f86ca87268be9b9e0557b013565	Membaris	m	t	\N
-ac03fad3be179a237521ec4ef2620fb0	Metal Inquisitor	n	t	\N
-8b0ee5a501cef4a5699fd3b2d4549e8f	Metallica	y	t	\N
-7e2b83d69e6c93adf203e13bc7d6f444	Milking the Goatmachine	y	t	\N
-0fbddeb130361265f1ba6f86b00f0968	Mindflair	y	t	\N
-3f15c445cb553524b235b01ab75fe9a6	Ministry	y	t	\N
-656d1497f7e25fe0559c6be81a4bccae	Misery Index	y	t	\N
-f60ab90d94b9cafe6b32f6a93ee8fcda	Mizery	m	t	\N
-8775f64336ee5e9a8114fbe3a5a628c5	MØL	y	t	\N
-e872b77ff7ac24acc5fa373ebe9bb492	Molotov	y	t	\N
-f0e1f32b93f622ea3ddbf6b55b439812	Mono Inc.	m	t	\N
-53a0aafa942245f18098ccd58b4121aa	Moontowers	n	t	\N
-0780d2d1dbd538fec3cdd8699b08ea02	Morasth	y	t	\N
-4a45ac6d83b85125b4163a40364e7b2c	More Than A Thousand	m	t	\N
-2252d763a2a4ac815b122a0176e3468f	Mosaic	y	t	\N
-11d396b078f0ae37570c8ef0f45937ad	Motörblast	y	t	\N
-585b13106ecfd7ede796242aeaed4ea8	Motorowl	y	t	\N
-6c1fcd3c91bc400e5c16f467d75dced3	Mr. Irish Bastard	y	t	\N
-a7f9797e4cd716e1516f9d4845b0e1e2	Municipal Waste	m	t	\N
-7d878673694ff2498fbea0e5ba27e0ea	Nailed to Obscurity	y	t	\N
-0844ad55f17011abed4a5208a3a05b74	Napalm Death	y	t	\N
-6738f9acd4740d945178c649d6981734	Nasty	m	t	\N
+370cde851ed429f1269f243dd714cce2	1000Mods	y	t	\N
+dfb7069bfc6e0064a6c667626eca07b4	Aborted	y	t	\N
+eaacb8ee01500f18e370303be3d5c591	Dead Eyed Sleeper (Legacy)	y	t	\N
+1b62f034014b1d242c84c6fe7e6470f0	Horisont	m	t	\N
+b02ba5a5e65487122c2c1c67351c3ea0	Horresque	y	t	\N
+ea3b6b67824411a4cfaa5c8789282f48	Humator	y	t	\N
+024e91d84c3426913db8367f4df2ceb3	Poltergeist	m	t	\N
+773b5037f85efc8cc0ff3fe0bddf2eb8	Porn the Gore	y	t	\N
+46ea4c445a9ff8e288258e3ec9cd1cf0	Power Trip	y	t	\N
+5f07809ecfce3af23ed5550c6adf0d78	Unleashed	m	t	\N
+baceebebc179d3cdb726f5cbfaa81dfe	Ur	y	t	\N
+8b3f40e0243e2307a1818d3f456df153	Crypta	y	t	\N
+8b0cfde05d166f42a11a01814ef7fa86	Lost Society	n	t	\N
+c0118be307a26886822e1194e8ae246d	Venom	y	t	\N
+a66394e41d764b4c5646446a8ba2028b	Moonspell	n	t	\N
+e9e0664816c35d64f26fc1382708617b	Striker	n	t	\N
+f29f7213d1c86c493ca7b4045e5255a9	Auðn	y	t	\N
+65f889eb579641f6e5f58b5a48f3ec12	Ill Niño	m	t	\N
+7a43dd4c2bb9bea14a95ff3acd4dfb18	Creeping Death	y	t	\N
+c8bc4f15477ea3131abb1a3f0649fac2	Dropdead	y	t	\N
+d0e551d6887e0657952b3c5beb7fed74	Gutrectomy	y	t	\N
+f8b3eaefc682f8476cc28caf71cb2c73	Los Mezcaleros	n	t	\N
+312793778e3248b6577e3882a77f68f3	Abrogation	y	t	\N
+dd3e531c469005b17115dbf611b01c88	Acranius	y	t	\N
+dd15d5adf6349f5ca53e7a2641d41ab7	ADDICT	y	t	\N
+4a27a1ef21d32d1b30d55f092af0d5a7	Aeon of Disease	y	t	\N
+ef297890615f388057b6a2c0a2cbc7ab	Agnostic Front	y	t	\N
+398af626887ad21cd66aeb272b8337be	Agrypnie	y	t	\N
+786d3481362b8dee6370dfb9b6df38a2	Airborn	m	t	\N
+eb999c99126a456f9db3c5d3b449fa7f	All its Grace	y	t	\N
+0f9fb8452cc5754f83e084693d406721	Amon Amarth	y	t	\N
+0959583c7f421c0bb8adb20e8faeeea1	Amorphis	y	t	\N
+dab701a389943f0d407c6e583abef934	Analepsy	y	t	\N
+8ac49bad86eacffcea299416cd92c3b7	Angelus Apatrida	y	t	\N
+b7f0e9013f8bfb209f4f6b2258b6c9c8	Anthrax	y	t	\N
+3c6444d9a22c3287b8c483117188b3f4	AntiPeeWee	m	t	\N
+0da2e7fa0ba90f4ae031b0d232b8a57a	Anubis	m	t	\N
+2f623623ce7eeb08c30868be121b268a	Anüs	y	t	\N
+71b6971b6323b97f298af11ed5455e55	Apey & The Pea	n	t	\N
+b66781a52770d78b260f15d125d1380b	Arch Enemy	y	t	\N
+35bde21520f1490f0333133a9ae5b4fc	Arroganz	y	t	\N
+36233ed8c181dfacc945ad598fb4f1a1	Artillery	n	t	\N
+221fa1624ee1e31376cb112dd2487953	Asomvel	y	t	\N
+5958cd5ce011ea83c06cb921b1c85bb3	Asphyx	y	t	\N
+4a9cd04fd04ab718420ee464645ccb8b	Atomwinter	m	t	\N
+739260d8cb379c357340977fe962d37a	At the Gates	y	t	\N
+8765cfbf81024c3bd45924fee9159982	Audrey Horne	m	t	\N
+824f75181a2bbd69fb2698377ea8a952	Außerwelt	y	t	\N
+4190210961bce8bf2ac072c878ee7902	Aversions Crown	y	t	\N
+d92ee81a401d93bb2a7eba395e181c04	Avowal	y	t	\N
+50737756bd539f702d8e6e75cf388a31	Avulsed	y	t	\N
+15ba70625527d7bb48962e6ba1a465f7	Odd Couple	y	t	\N
+a571d94b6ed1fa1e0cfff9c04bbeb94d	Tiny Fingers	y	t	\N
+e37e9fd6bde7509157f864942572c267	Crimson Fire	n	t	\N
+5e62fc773369f140db419401204200e8	Apostasie	y	t	\N
+9592b3ad4d7f96bc644c7d6f34c06576	Carnifex	y	t	\N
+fd1a5654154eed3c0a0820ab54fb90a7	Vexed	y	t	\N
+2045b9a6609f6d5bca3374fd370e54ff	Welded	y	t	\N
+78b532c25e4a99287940b1706359d455	Hell Patröl	y	t	\N
+fc935f341286c735b575bd50196c904b	Alltheniko	y	t	\N
+f159fc50b5af54fecf21d5ea6ec37bad	Bütcher	y	t	\N
+265dbcbd2bce07dfa721ed3daaa30912	Martyr	n	t	\N
+ec4f407118924fdc6af3335c8d2961d9	Megalive	y	t	\N
+11a7f956c37bf0459e9c80b16cc72107	Spitfire	y	t	\N
+41e744bdf3114b14f5873dfb46921dc4	Devil's Hours	y	t	\N
+e37015150c8944d90e306f19eaa98de8	Reflexor	y	t	\N
+ed795c86ba21438108f11843f7214c95	Fintroll	y	t	\N
+dbc940d02a217c923c52d3989be9b391	Metsatöll	y	t	\N
+8845da022807c76120b5b6f50c218d9a	Suotana	y	t	\N
+f520f53edf44d466fb64269d5a67b69a	Keep of Kalessin	y	t	\N
+61e5d7cb15bd519ceddcf7ba9a22cbc6	Gasbrand	y	t	\N
+9563a6fd049d7c1859196f614b04b959	Medico Peste	y	t	\N
+90fb95c00db3fde6b86e6accf2178fa7	Devastator	y	t	\N
+b80aecda9ce9783dab49037eec5e4388	Tears of Fire	y	t	Location: Germany
+b81dd41873676af0f9533d413774fa8d	Slaughter Messiah	m	t	\N
+094655515b3991e73686f45e4fe352fe	Nakkeknaekker	y	t	\N
+fbe95242f85d4bbe067ddc781191afb5	Plaguemace	y	t	\N
+fc46b0aa6469133caf668f87435bfd9f	Cognitive	y	t	\N
+8872fbd923476b7cf96913260ec59e66	Macabre Demise	y	t	\N
+ad759a3d4f679008ffdfb07cdbda2bb0	Baleful Abyss (Zombieslut)	y	t	\N
+3480c10b83b05850ec18b6372e235139	Battle against the Empire	y	t	\N
+28bc0abd0cf390a4472b1f60bd0cfe4a	Battle Beast	m	t	\N
+844de407cd83ea1716f1ff57ea029285	Behemoth	y	t	\N
+df24a5dd8a37d3d203952bb787069ea2	Benediction	y	t	\N
+048d40092f9bd3c450e4bdeeff69e8c3	Benighted	y	t	\N
+c5d3d165539ddf2020f82c17a61f783d	Betrayal	y	t	\N
+33b39f2721f79a6bb6bb5e1b2834b0bd	Betraying the Martyrs	m	t	\N
+d2d67d63c28a15822569c5033f26b133	Bitchfork	y	t	\N
+c827a8c6d72ff66b08f9e2ab64e21c01	Black Crown Initiate	y	t	\N
+b1d18f9e5399464bbe5dea0cca8fe064	Black Medusa	y	t	\N
+f986b00063e79f7c061f40e6cfbbd039	Black Reunion	y	t	\N
+7c7e63c9501a790a3134392e39c3012e	Blæck Fox	y	t	\N
+e3e9ccd75f789b9689913b30cb528be0	Blessed Hellride	y	t	\N
+d02f33b44582e346050cefadce93eb95	Blizzen	m	t	\N
+298a577c621a7a1c365465f694e0bd13	Bloodbound	y	t	\N
+707270d99f92250a07347773736df5cc	Blood Fire Death	y	t	\N
+fecc75d978ad94aaa4e17b3ff9ded487	Bloodred Hourglass	y	t	\N
+333ca835f34af241fe46af8e7a037e17	Blood Red Throne	y	t	\N
+ee36fdf153967a0b99d3340aadeb4720	Bloodspot	y	t	\N
+13291409351c97f8c187790ece4f5a97	Bobby Sixkiller and the Renegades	y	t	\N
+647a73dd79f06cdf74e1fa7524700161	Böhse Onkelz	m	t	\N
+be2c012d60e32fbf456cd8184a51973d	Bokassa	y	t	\N
+cbefc03cdd1940f37a7033620f8ff69f	Booze & Glory	m	t	\N
+b145159df60e1549d1ba922fc8a92448	Born from Pain	m	t	\N
+d9c849266ee3ac1463262df200b3aab8	Bösedeath	y	t	\N
+8b22cf31089892b4c57361d261bd63f7	Bowel Evacuation	y	t	\N
+ab1d9c0bfcc2843b8ea371f48ed884bb	Brainstorm	m	t	\N
+16a56d0941a310c3dc4f967041574300	Brand of Sacrifice	y	t	\N
+2eb42b9c31ac030455e5a4a79bccf603	Broken Teeth	m	t	\N
+a0cdbd2af8f1ddbb2748a2eaddce55da	Bullet	m	t	\N
+a985c9764e0e6d738ff20f2328a0644b	Burn	m	t	\N
+ea3f5f97f06167f4819498b4dd56508e	Bury Tomorrow	y	t	\N
+e2be3c3c22484d1872c7b225339c0962	Caliban	y	t	\N
+a99dca5593185c498b63a5eed917bd4f	Cancer	y	t	\N
+3b6d90f85e8dadcb3c02922e730e4a9d	Candlemass	m	t	\N
+573f13e31f1be6dea396ad9b08701c47	Cannibal Corpse	y	t	\N
+1fbd4bcce346fd2b2ffb41f6e767ea84	Carach Angren	y	t	\N
+9436650a453053e775897ef5733e88fe	Carnal Decay	y	t	\N
+cf6a93131b0349f37afeb9319b802136	Carnation	y	t	\N
+bca8f048f2c5ff787950eb1ba088c70e	CCCP	y	t	\N
+e093d52bb2d4ff4973e72f6eb577714b	Chapel of Disease	y	t	\N
+5629d465ed80efff6e25b8775b98c2d1	Circle of Execution	y	t	\N
+3a7e46261a591b3e65d1e7d0b2439b20	Combichrist	y	t	\N
+c9dc004fc3d039ad7fb49456e5902b01	Conan	m	t	\N
+748ac622dcfda98f59c3c99593226a75	Condemned	y	t	\N
+f00bbb7747929fafa9d1afd071dba78e	Converge	m	t	\N
+9a6c0d8ea613c5b002ff958275318b08	Corpsessed	y	t	\N
+67cc86339b2654a35fcc57da8fc9d33d	Counterparts	m	t	\N
+6916ed9292a811c895e259c542af0e8a	Critical Mess	y	t	\N
+fd401865b6db200e5eb8a1ac1b1fbab1	Crossplane	y	t	\N
+218d618a041c057d0e05799670e7e2c8	Crusher	y	t	\N
+a4bcd57d5cda816e4ffd1f83031a36ca	Cryptopsy	y	t	\N
+ec5c65bfe530446b696f04e51aa19201	Cytotoxin	y	t	\N
+14af57131cbbf57afb206c8707fdab6c	Dagoba	y	t	\N
+a45ff5de3a96b103a192f1f133d0b0cf	Daily Insanity	y	t	\N
+de3e4c12f56a35dc1ee6866b1ddd9d53	Darkall Slaves	y	t	\N
+88726e1a911181e20cf8be52e1027f26	Darkened Nocturn Slaughtercult	y	t	\N
+9b7d722b58370498cd39104b2d971978	Darkness	m	t	\N
+ac61757d33fc8563eb2409ed08e21974	Dark Zodiak	y	t	\N
+93299af7c9e3c63c7b3d9bb2242c9d6b	Dawn of Disease	y	t	\N
+afb6e0f1e02be39880596a490c900775	Dead Congregation	y	t	\N
+11a5f9f425fd6da2d010808e5bf759ab	Cradle of Filth	y	t	\N
+bc5daaf162914ff1200789d069256d36	Gwar	m	t	\N
+a6c27c0fb9ef87788c1345041e840f95	Begging for Incest	y	t	\N
+98e8599d1486fadca0bf7aa171400dd8	Colours of Autumn	y	t	\N
+66857d7c2810238438483356343ff26e	Bloodgod	y	f	\N
+aa5e46574bdc6034f4d49540c0c2d1ad	Batushka	y	t	Krzysztof Drabikowski's Batushka
+13d81f0ed06478714344fd0f1a6a81bb	Al Goregrind	m	f	\N
+9a8d3efa0c3389083df65f4383b155fb	Death Angel	y	t	\N
+22ef651048289b302401afe2044c5c01	Deathrite	y	t	\N
+9ff04a674682ece6ee93ca851db56387	Deathstorm	y	t	\N
+08f8c67c20c4ba43e8ba6fa771039c94	Debauchery's Balgeroth	y	t	\N
+3577f7160794aa4ba4d79d0381aefdb1	Decapitated	y	t	\N
+b4c5b422ab8969880d9f0f0e9124f0d7	Decaying Days	y	t	\N
+16fe483d0681e0c86177a33e22452e13	Defaced	y	t	\N
+01a9f3fdd96daef6bc85160bd21d35dc	Defocus	y	t	\N
+2187711aeaa2944a707c9eabaa2df72a	Demored	y	t	\N
+6a4e8bab29666632262eb20c336e85e2	Denyal	y	t	\N
+ac8eab98e370e2a8711bad327f5f7c55	Depulsed	y	t	\N
+02677b661c84417492e1c1cb0b0563b2	Deranged	y	t	\N
+53199d92b173437f0207a916e8bcc23a	Desbroce	y	t	\N
+4db3435be88015c70683b4368d9b313b	Desdemonia	y	t	\N
+53a5da370321dac39033a5fe6af13e77	Deserted Fear	y	t	\N
+b0cc1a3a1aee13a213ee73e3d4a2ce70	Destinity	y	t	\N
+2f090f093a2868dccca81a791bc4941f	Deströyer 666	y	t	\N
+717ec52870493e8460d6aeddd9b7def8	Devil Driver	y	t	\N
+9d1ecaf46d6433f9dd224111440cfa3b	Dimmu Borgir	y	t	\N
+c2ab38206dce633f15d66048ad744f03	Disbelief	y	t	\N
+630500eabc48c986552cb01798a31746	Discreation	m	t	\N
+e5ea2ac2170d4f9c2bdbd74ab46523f7	Disquiet	m	t	\N
+ceffa7550e5d24a8c808d3516b5d6432	Dissecdead	y	t	\N
+81200f74b5d831e3e206a66fe4158370	Double Crush Syndrome	m	t	\N
+5e6ff2b64b4c0163ab83ab371abe910b	Downfall of Gaia	m	t	\N
+71f4e9782d5f2a5381f5cdf7c5a35d89	Down to Nothing	m	t	\N
+262a49b104426ba0d1559f8785931b9d	Dragonsfire	n	t	\N
+0add3cab2a932f085109a462423c3250	Dust Bolt	y	t	\N
+20a75b90511c108e3512189ccb72b0ac	Dyscarnate	y	t	\N
+7d6ede8454373d4ca5565436cbfeb5c0	EDGEBALL	n	t	\N
+92ad5e8d66bac570a0611f2f1b3e43cc	Einherjer	y	t	\N
+90669320cd8e4a09bf655310bffdb9ba	Eisregen	y	t	\N
+20de83abafcb071d854ca5fd57dec0e8	Ektomorf	y	t	\N
+4900e24b2d0a0c5e06cf3db8b0638800	Embrace Decay	y	t	\N
+bd9059497b4af2bb913a8522747af2de	Emerald	n	t	\N
+b9ffbdbbe63789cc6fa9ee2548a1b2ed	Eminenz	y	t	\N
+cfe122252751e124bfae54a7323bf02d	Endlevel	y	t	\N
+7f3e5839689216583047809a7f6bd0ff	End of Green	y	t	\N
+491801c872c67db465fda0f8f180569d	Enforcer	n	t	\N
+647dadd75e050b230269e43a4fe351e2	Enisum	y	t	\N
+05ee6afed8d828d4e7ed35b0483527f7	Enterprise Earth	y	t	\N
+5fa07e5db79f9a1dccb28d65d6337aa6	Epica	n	t	\N
+0feeee5d5e0738c1929bf064b184409b	Epicardiectomy	y	t	\N
+38734dcdff827db1dc3215e23b4e0890	Eradicator	m	t	\N
+3e28a735f3fc31a9c8c30b47872634bf	Ereb Altor	m	t	\N
+02fd1596536ea89e779d37ded52ac353	Evertale	m	t	\N
+25f5d73866a52be9d0e2e059955dfd56	Evil Invaders	y	t	\N
+9639834b69063b336bb744a537f80772	Exhorder	y	t	\N
+272a23811844499845c6e33712c8ba6c	Exodus	y	t	\N
+8cd1cca18fb995d268006113a3d6e4bf	Extermination Dismemberment	y	t	\N
+2b068ea64f42b2ccd841bb3127ab20af	Exumer	y	t	\N
+979b5de4a280c434213dd8559cf51bc0	Fallen Temple	y	t	\N
+45d592ef3a8dc14dccc087e734582e82	Far from ready	m	t	\N
+71a520b6d0673d926d02651b269cf92c	Feuerschwanz	y	t	\N
+22aaaebe901de8370917dcc53f53dbf6	Finsterforst	y	t	\N
+aa98c9e445775e7c945661e91cf7e7aa	Firtan	y	t	\N
+4e9b4bdef9478154fc3ac7f5ebfb6418	Five Finger Death Punch	y	t	\N
+198445c0bbe110ff65ac5ef88f026aff	Fjoergyn	y	t	\N
+abc73489d8f0d1586a2568211bdeb32f	Fleshcrawl	y	t	\N
+458da4fc3da734a6853e26af3944bf75	Fleshgod Apocalypse	y	t	\N
+26ad58455460d75558a595528825b672	Fleshsphere	y	t	\N
+6e064a31dc53ab956403ec3654c81f1f	Flesh Trading Company	y	t	\N
+dddfdb5f2d7991d93f0f97dce1ef0f45	Fracture	m	t	\N
+56b07537df0c44402f5f87a8dcb8402c	From North	m	t	\N
+e6793169497d66ac959a7beb35d6d497	Funeral Whore	y	t	\N
+0ab01e57304a70cf4f7f037bd8afbe49	Furies	n	t	\N
+71144850f4fb4cc55fc0ee6935badddf	Ghost	y	t	\N
+eed35187b83d0f2e0042cf221905163c	Gingerpig	m	t	\N
+b615ea28d44d2e863a911ed76386b52a	God Dethroned	y	t	\N
+bda66e37bf0bfbca66f8c78c5c8032b8	GodSkill	y	t	\N
+2799b4abf06a5ec5e262d81949e2d18c	Godslave	y	t	\N
+a20050efc491a9784b5cced21116ba68	Grabak	y	t	\N
+05fcf330d8fafb0a1f17ce30ff60b924	Grand Magus	y	t	\N
+386a023bd38fab85cb531824bfe9a879	Grave	y	t	\N
+abe78132c8e446430297d08bd1ecdab0	Grave Pleasures	m	t	\N
+7b3ab6743cf8f7ea8491211e3336e41d	Graveyard	y	t	\N
+bd4ca3a838ce3972af46b6e2d85985f2	Gut	n	t	\N
+6caa47f7b3472053b152f84ce72c182c	H2O	m	t	\N
+a05a13286752cb6fc14f39f51cedd9ce	Hadal Maw	m	t	\N
+781c745a0d6b02cdecadf2e44d445d1a	Hailstone	m	t	\N
+71ac59780209b4c074690c44a3bba3b7	Hämatom	y	t	\N
+82f43cc1bda0b09efff9b356af97c7ab	Hammer King	m	t	\N
+d908b6b9019639bced6d1e31463eea85	Hängerbänd	y	t	\N
+1437c187d64f0ac45b6b077a989d5648	Hark	y	t	\N
+4be3e31b7598745d0e96c098bbf7a1d7	Hatebreed	y	t	\N
+d1e0bdb2b2227bdd5e47850eec61f9ea	Hate Eternal	y	t	\N
+123131d2d4bd15a0db8f07090a383157	Haunted Cemetery	y	t	\N
+78bbff6bf39602a577c9d8a117116330	Havok	y	t	\N
+2054decb2290dbaab1c813fd86cc5f8b	Hell Boullevard	y	t	\N
+6adc39f4242fd1ca59f184e033514209	Hellknife	y	t	\N
+281eb11c857bbe8b6ad06dc1458e2751	Hell:On	y	t	\N
+dfa61d19b62369a37743b38215836df9	Hellripper	y	t	\N
+efe9ed664a375d10f96359977213d620	Helrunar	y	t	\N
+30a100fe6a043e64ed36abb039bc9130	Hexenizer	y	t	\N
+c5f4e658dfe7b7af3376f06d7cd18a2a	Hierophant	y	t	\N
+dcab0d84960cda81718e38ee47688a75	High Fighter	m	t	\N
+3aa1c6d08d286053722d17291dc3f116	Hills have Eyes	m	t	\N
+818ce28daba77cbd2c4235548400ffb2	Hollowed	y	t	\N
+6d25c7ad58121b3effe2c464b851c27a	Hollow World	m	t	\N
+8791e43a8287ccbc21f61be21e90ce43	Ellende	y	t	\N
+5c59b6aa317b306a1312a67fe69bf512	Embryectomy	y	t	\N
+cd004b87e2adfb72b28752a6ef6cd639	Exorcised Gods	y	t	\N
+f2a863a08c3e22cc942264ac4bc606e3	Hypocrisy	y	t	\N
+eb39fa9323a6b3cbc8533cd3dadb9f76	Ichor	y	t	\N
+768207c883fd6447d67f3d5bc09211bd	I Declare War	y	t	\N
+8981b4a0834d2d59e1d0dceb6022caae	Igel vs. Shark	m	t	\N
+a7e071b3de48cec1dd24de6cbe6c7bf1	Ignite	n	t	\N
+f3ac75dfbf1ce980d70dc3dea1bf4636	I'll be damned	m	t	\N
+de1e0ed5433f5e95c8f48e18e1c75ff6	Illdisposed	y	t	\N
+e20976feda6d915a74c751cbf488a241	Imperium Dekadenz	y	t	\N
+b3d0eb96687420dc4e5b10602ac42690	Inconcessus Lux Lucis	y	t	\N
+e4f13074d445d798488cb00fa0c5fbd4	Indian Nightmare	n	t	\N
+5dd5b236a364c53feb6db53d1a6a5ab9	Infected World	m	t	\N
+486bf23406dec9844b97f966f4636c9b	In Flames	y	t	\N
+1fd7fc9c73539bee88e1ec137b5f9ad2	Ingested	y	t	\N
+ef3c0bf190876fd31d5132848e99df61	Inhumate	y	t	\N
+2569a68a03a04a2cd73197d2cc546ff2	Insanity Alert	m	t	\N
+05c87189f6c230c90bb1693567233100	Insulter	m	t	\N
+77bfe8d21f1ecc592062f91c9253d8ab	In the Woods	n	t	\N
+018b60f1dc74563ca02f0a14ee272e4d	Into Darkness	y	t	\N
+40fcfb323cd116cf8199485c35012098	Iron Bastards	m	t	\N
+d68956b2b5557e8f1be27a4632045c1e	Iron Reagan	y	t	\N
+ba9bfb4d7c1652a200d1d432f83c5fd1	Isole	m	t	\N
+4dde2c290e3ee11bd3bd1ecd27d7039a	Jinjer	n	t	\N
+34fd3085dc67c39bf1692938cf3dbdd9	Kaasschaaf	y	t	\N
+fcf66a6d6cfbcb1d4a101213b8500445	Kadavar	m	t	\N
+d5ec808c760249f11fbcde2bf4977cc6	Kambrium	y	t	\N
+5637bae1665ae86050cb41fb1cdcc3ee	Kataklysm	y	t	\N
+0cd2b45507cc7c4ead2aaa71c59af730	Knockdown Brutality	y	t	\N
+34ef35a77324b889aab18380ad34b51a	Korpiklaani	y	t	\N
+869bb972f8bef83979774fa123c56a4e	Korpse	y	t	\N
+472e67129f0c7add77c7c907dac3351f	Kosmokrator	m	t	\N
+23f5e1973b5a048ffaaa0bd0183b5f87	Kreator	y	t	\N
+08b84204877dce2a08abce50d9aeceed	Lacrimas Profundere	m	t	\N
+309263122a445662099a3dabce2a4f17	Legion of the Damned	y	t	\N
+c833c98be699cd7828a5106a37d12c2e	Light to the blind	m	t	\N
+40a259aebdbb405d2dc1d25b05f04989	Liver Values	m	t	\N
+563fcbf5f44e03e0eeb9c8d6e4c8e127	Lonewolf	y	t	\N
+f1022ae1bc6b46d51889e0bb5ea8b64f	Lordi	m	t	\N
+ed783268eca01bff52c0f135643a9ef7	Los Skeleteros	y	t	\N
+f49f851c639e639b295b45f0e00c4b4c	Lyra's Legacy	n	t	\N
+9b55ad92062221ec1bc80f950f667a6b	Määt	y	t	\N
+f6708813faedbf607111d83fdce91828	Madball	y	t	\N
+f3b8f1a2417bdc483f4e2306ac6004b2	Manegarm	y	t	\N
+bf2c8729bf5c149067d8e978ea3dcd32	Mantar	y	t	\N
+72b73895941b319645450521aad394e8	Marduk	y	t	\N
+436f76ddf806e8c3cbdc9494867d0f79	Meatknife	y	t	\N
+4e7054dff89623f323332052d0c7ff6e	Mecalimb	m	t	\N
+5cc06303f490f3c34a464dfdc1bfb120	Membaris	m	t	\N
+cbf6de82cf77ca17d17d293d6d29a2b2	Metal Inquisitor	n	t	\N
+3c2234a7ce973bc1700e0c743d6a819c	Metallica	y	t	\N
+cd0bc2c8738b2fef2d78d197223b17d5	Milking the Goatmachine	y	t	\N
+2c5705766131b389fa1d88088f1bb8a8	Mindflair	y	t	\N
+3e98ecfa6a4c765c5522f897a4a8de23	Ministry	y	t	\N
+db472eaf615920784c2b83fc90e8dcc5	Misery Index	y	t	\N
+6772cdb774a6ce03a928d187def5453f	Mizery	m	t	\N
+f655d84d670525246ee7d57995f71c10	MØL	y	t	\N
+cb80a6a84ec46f085ea6b2ff30a88d80	Molotov	y	t	\N
+6a13b854e05f5ba6d2a0d873546fc32d	Mono Inc.	m	t	\N
+24af2861df3c72c8f1b947333bd215fc	Moontowers	n	t	\N
+7bc374006774a2eda5288fea8f1872e3	Morasth	y	t	\N
+846a0115f0214c93a5a126f0f9697228	More Than A Thousand	m	t	\N
+0964b5218635a1c51ff24543ee242514	Mosaic	y	t	\N
+c52d5020aad50e03d48581ffb34cd1c3	Motörblast	y	t	\N
+dcdcd2f22b1d5f85fa5dd68fa89e3756	Motorowl	y	t	\N
+c82b23ed65bb8e8229c54e9e94ba1479	Mr. Irish Bastard	y	t	\N
+0182742917720e1b2cf59ff671738253	Municipal Waste	m	t	\N
+91abd5e520ec0a40ce4360bfd7c5d573	Nailed to Obscurity	y	t	\N
+e6624ef1aeab84f521056a142b5b2d12	Napalm Death	y	t	\N
+3ddbf46000c2fbd44759f3b4672b64db	Nasty	m	t	\N
 33f03dd57f667d41ac77c6baec352a81	need2destroy	y	t	\N
-3509af6be9fe5defc1500f5c77e38563	Nekrovault	y	t	\N
-0640cfbf1d269b69c535ea4e288dfd96	Nepumuc	m	t	\N
-a716390764a4896d99837e99f9e009c9	Nervosa	y	t	\N
-e74a88c71835c14d92d583a1ed87cc6c	Nifelheim	y	t	\N
-3d6ff25ab61ad55180a6aee9b64515bf	Nile	y	t	\N
-36648510adbf2a3b2028197a60b5dada	NIOR	y	t	\N
-eb3bfb5a3ccdd4483aabc307ae236066	No Brainer	y	t	\N
-1ebd63d759e9ff532d5ce63ecb818731	Nocte Obducta	m	t	\N
-1c06fc6740d924cab33dce73643d84b9	Nocturnal Graves	y	t	\N
-4a2a0d0c29a49d9126dcb19230aa1994	No Return	y	t	\N
-059792b70fc0686fb296e7fcae0bda50	Obscenity	m	t	\N
-7dfe9aa0ca5bb31382879ccd144cc3ae	Of Colours	y	t	\N
-a650d82df8ca65bb69a45242ab66b399	Omnium Gatherum	y	t	\N
-3dda886448fe98771c001b56a4da9893	Omophagia	y	t	\N
-d73310b95e8b4dece44e2a55dd1274e6	Orbit Culture	y	t	\N
-fb28e62c0e801a787d55d97615e89771	Orcus Patera	y	t	\N
-652208d2aa8cdd769632dbaeb7a16358	Orden Ogan	y	t	\N
-660813131789b822f0c75c667e23fc85	Overkill	m	t	\N
-b5f7b25b0154c34540eea8965f90984d	Pain City	y	t	\N
-a7a9c1b4e7f10bd1fdf77aff255154f7	Papa Roach	m	t	\N
-e64d38b05d197d60009a43588b2e4583	Paradise Lost	m	t	\N
-88711444ece8fe638ae0fb11c64e2df3	Party Cannon	y	t	\N
-278c094627c0dd891d75ea7a3d0d021e	Paxtilence	y	t	\N
-0a56095b73dcbd2a76bb9d4831881cb3	Phantom Winter	n	t	\N
-ff578d3db4dc3311b3098c8365d54e6b	Pighead	y	t	\N
-80fcd08f6e887f6cfbedd2156841ab2b	P.O. Box	y	t	\N
-db38e12f9903b156f9dc91fce2ef3919	Pokerface	m	t	\N
-58db028cf01dd425e5af6c7d511291c1	Moronic	y	f	\N
-6c607fc8c0adc99559bc14e01170fee1	Incite	y	t	\N
-90d127641ffe2a600891cd2e3992685b	Poltergeist	m	t	\N
-2e7a848dc99bd27acb36636124855faf	Porn the Gore	y	t	\N
-79566192cda6b33a9ff59889eede2d66	Power Trip	y	t	\N
-3964d4f40b6166aa9d370855bd20f662	Prediction	y	t	\N
-4548a3b9c1e31cf001041dc0d166365b	Pripjat	y	t	\N
-450948d9f14e07ba5e3015c2d726b452	Promethee	y	t	\N
-c4678a2e0eef323aeb196670f2bc8a6e	Prostitute Desfigurement	y	t	\N
-c1923ca7992dc6e79d28331abbb64e72	Psycroptic	y	t	\N
-5842a0c2470fe12ee3acfeec16c79c57	Public Grave	y	t	\N
-96682d9c9f1bed695dbf9176d3ee234c	Purify	y	t	\N
-7f29efc2495ce308a8f4aa7bfc11d701	Randy Hansen	y	t	\N
-12e93f5fab5f7d16ef37711ef264d282	Raw Ensemble	y	t	\N
-4094ffd492ba473a2a7bea1b19b1662d	Reactory	y	t	\N
-02d44fbbe1bfacd6eaa9b20299b1cb78	Rectal Smegma	y	t	\N
-9ab8f911c74597493400602dc4d2b412	Refuge	y	t	\N
-11f8d9ec8f6803ea61733840f13bc246	Relics of Humanity	y	t	\N
-54f0b93fa83225e4a712b70c68c0ab6f	Revelation Steel	m	t	\N
-1cdd53cece78d6e8dffcf664fa3d1be2	Revel in Flesh	y	t	\N
-1e88302efcfc873691f0c31be4e2a388	Rezet	y	t	\N
-2af9e4497582a6faa68a42ac2d512735	Rings of Saturn	y	t	\N
-13caf3d14133dfb51067264d857eaf70	Risk it	y	t	\N
-1e14d6b40d8e81d8d856ba66225dcbf3	Riverroth	m	t	\N
-5b20ea1312a1a21beaa8b86fe3a07140	Rivers of Nihil	y	t	\N
-fa03eb688ad8aa1db593d33dabd89bad	Root	y	t	\N
-7a4fafa7badd04d5d3114ab67b0caf9d	Saltatio Mortis	n	t	\N
-4cabe475dd501f3fd4da7273b5890c33	Samael	y	t	\N
-f8e7112b86fcd9210dfaf32c00d6d375	Sanguine	n	t	\N
-91c9ed0262dea7446a4f3a3e1cdd0698	Satan's Fall	n	t	\N
-79ce9bd96a3184b1ee7c700aa2927e67	Schizophrenia	y	t	\N
-218f2bdae8ad3bb60482b201e280ffdc	Scordatura	y	t	\N
-4927f3218b038c780eb795766dfd04ee	Scornebeke	y	t	\N
-0a97b893b92a7df612eadfe97589f242	Scrvmp	y	t	\N
-31d8a0a978fad885b57a685b1a0229df	Seii Taishogun	y	t	\N
-7ef36a3325a61d4f1cff91acbe77c7e3	Sensles	m	t	\N
-5b709b96ee02a30be5eee558e3058245	Sepultura	y	t	\N
-19baf8a6a25030ced87cd0ce733365a9	Serrabulho	y	t	\N
-91b18e22d4963b216af00e1dd43b5d05	Shoot the Girl first	n	t	\N
-6bd19bad2b0168d4481b19f9c25b4a9f	Shores of Null	y	t	\N
-53369c74c3cacdc38bdcdeda9284fe3c	Siberian Meat Grinder	y	t	\N
-6bafe8cf106c32d485c469d36c056989	Sick of it all	y	t	\N
-66599a31754b5ac2a202c46c2b577c8e	Six Feet Under	m	t	\N
-4453eb658c6a304675bd52ca75fbae6d	Skeleton Pit	y	t	\N
-5e4317ada306a255748447aef73fff68	Skeletonwitch	y	t	\N
-360c000b499120147c8472998859a9fe	Skinned Alive	y	t	\N
-e62a773154e1179b0cc8c5592207cb10	Skull Fist	n	t	\N
-4bb93d90453dd63cc1957a033f7855c7	Slaughterra	y	t	\N
-f29d276fd930f1ad7687ed7e22929b64	Sleepers' Guilt	y	t	\N
-249229ca88aa4a8815315bb085cf4d61	Slipknot	y	t	\N
-c05d504b806ad065c9b548c0cb1334cd	Sober Truth	m	t	\N
-b96a3cb81197e8308c87f6296174fe3e	Sodom	y	t	\N
-8edf4531385941dfc85e3f3d3e32d24f	Soilwork	y	t	\N
-90d523ebbf276f516090656ebfccdc9f	Solstafir	n	t	\N
-94ca28ea8d99549c2280bcc93f98c853	Soulburn	y	t	\N
-076365679712e4206301117486c3d0ec	Soulfly	y	t	\N
-abd7ab19ff758cf4c1a2667e5bbac444	Spasm	y	t	\N
-0af74c036db52f48ad6cbfef6fee2999	Stam1na	y	t	\N
-095849fbdc267416abc6ddb48be311d7	Stillbirth	y	t	\N
-72778afd2696801f5f3a1f35d0e4e357	Still Patient?	m	t	\N
-5c0adc906f34f9404d65a47eea76dac0	Stonefall	y	t	\N
-fdcf3cdc04f367257c92382e032b6293	Storm	y	t	\N
-8bc31f7cc79c177ab7286dda04e2d1e5	Street Dogs	y	t	\N
-88dd124c0720845cba559677f3afa15d	Sucking Leech	y	t	\N
-2df8905eae6823023de6604dc5346c29	Suicidal Angels	y	t	\N
-7e0d5240ec5d34a30b6f24909e5edcb4	Suicidal Tendencies	y	t	\N
-f4f870098db58eeae93742dd2bcaf2b2	Sulphur Aeon	y	t	\N
-d433b7c1ce696b94a8d8f72de6cfbeaa	Sun of the Sleepless	y	t	\N
-28bb59d835e87f3fd813a58074ca0e11	Supreme Carnage	y	t	\N
-bbc155fb2b111bf61c4f5ff892915e6b	Switch	y	t	\N
-f953fa7b33e7b6503f4380895bbe41c8	Take Offense	m	t	\N
-ad62209fb63910acf40280cea3647ec5	Task Force Beer	y	t	\N
-0a267617c0b5b4d53e43a7d4e4c522ad	Teethgrinder	y	t	\N
-058fcf8b126253956deb3ce672d107a7	Terror	y	t	\N
-b14814d0ee12ffadc8f09ab9c604a9d0	Testament	y	t	\N
-5447110e1e461c8c22890580c796277a	The black Dahlia Murder	y	t	\N
-9e84832a15f2698f67079a3224c2b6fb	The Creatures from the Tomb	y	t	\N
-4a7d9e528dada8409e88865225fb27c4	The Feelgood McLouds	y	t	\N
-d3e98095eeccaa253050d67210ef02bb	The Idiots	y	t	\N
-c3490492512b7fe65cdb0c7305044675	The Jailbreakers	y	t	\N
-e61e30572fd58669ae9ea410774e0eb6	The Monolith Project	y	t	\N
-990813672e87b667add44c712bb28d3d	The Ominous Circle	y	t	\N
-8143ee8032c71f6f3f872fc5bb2a4fed	The Phobos Ensemble	m	t	\N
-485065ad2259054abf342d7ae3fe27e6	The Privateer	m	t	\N
-278606b1ac0ae7ef86e86342d1f259c3	The Prophecy 23	y	t	\N
-c127f32dc042184d12b8c1433a77e8c4	The Vintage Caravan	m	t	\N
-e4b3296f8a9e2a378eb3eb9576b91a37	Thornafire	y	t	\N
-09d8e20a5368ce1e5c421a04cb566434	Thrudvangar	y	t	\N
-4366d01be1b2ddef162fc0ebb6933508	Thunderstorm	m	t	\N
-46174766ce49edbbbc40e271c87b5a83	Thy Antichrist	y	t	\N
-4fa857a989df4e1deea676a43dceea07	Too many Assholes	y	t	\N
-36cbc41c1c121f2c68f5776a118ea027	Tornado	m	t	\N
-da867941c8bacf9be8e59bc13d765f92	Traitors	y	t	\N
-6ee2e6d391fa98d7990b502e72c7ec58	Trancemission	m	t	\N
-a4977b96c7e5084fcce21a0d07b045f8	Tribulation	y	t	\N
-1da77fa5b97c17be83cc3d0693c405cf	Twitching Tongues	m	t	\N
-e0f39406f0e15487dd9d3997b2f5ca61	Übergang	y	t	\N
-399033f75fcf47d6736c9c5209222ab8	Undertow	y	t	\N
-6f195d8f9fe09d45d2e680f7d7157541	Une Misere	y	t	\N
-cafe9e68e8f90b3e1328da8858695b31	Tankard	y	t	\N
-4ee21b1371ba008a26b313c7622256f8	Shambala	m	f	\N
-2113f739f81774557041db616ee851e6	Unleashed	m	t	\N
-32814ff4ca9a26b8d430a8c0bc8dc63e	Ur	y	t	\N
-e29ef4beb480eab906ffa7c05aeec23d	Vader	y	t	\N
-2447873ddeeecaa165263091c0cbb22f	Vargsheim	y	t	\N
-86482a1e94052aa18cd803a51104cdb9	Vektor	y	t	\N
-fcd1c1b547d03e760d1defa4d2b98783	Victorius	n	t	\N
-6369ba49db4cf35b35a7c47e3d4a4fd0	Visdom	m	t	\N
-935b48a84528c4280ec208ce529deea0	Visions of Disfigurement	y	t	\N
-52b133bfecec2fba79ecf451de3cf3bb	Völkerball	y	t	\N
-559ccea48c3460ebc349587d35e808dd	Vomitory	y	t	\N
-8e11b2f987a99ed900a44aa1aa8bd3d0	Vortex	n	t	\N
-59f06d56c38ac98effb4c6da117b0305	Walls of Jericho	y	t	\N
-804803e43d2c779d00004a6e87f28e30	Warbringer	y	t	\N
-f042da2a954a1521114551a6f9e22c75	Warfield	y	t	\N
-b1d465aaf3ccf8701684211b1623adf2	Warkings	m	t	\N
-4f840b1febbbcdb12b9517cd0a91e8f4	When Plagues Collide	y	t	\N
-c2855b6617a1b08fed3824564e15a653	Whitechapel	m	t	\N
-405c7f920b019235f244315a564a8aed	Who killed Janis	m	t	\N
-8e62fc75d9d0977d0be4771df05b3c2f	Wintersun	y	t	\N
-cd9483c1733b17f57d11a77c9404893c	Wisdom in Chains	m	t	\N
-3656edf3a40a25ccd00d414c9ecbb635	Witchfucker	y	t	\N
-6d89517dbd1a634b097f81f5bdbb07a2	Witchhunter	m	t	\N
-db46d9a37b31baa64cb51604a2e4939a	Within Destruction	y	t	\N
-5af874093e5efcbaeb4377b84c5f2ec5	Wizard	m	t	\N
-8a6f1a01e4b0d9e272126a8646a72088	Wolfheart	y	t	\N
-5037c1968f3b239541c546d32dec39eb	World of Tomorrow	m	t	\N
-3e52c77d795b7055eeff0c44687724a1	Xaon	y	t	\N
-5952dff7a6b1b3c94238ad3c6a42b904	Zebrahead	m	t	\N
-deaccc41a952e269107cc9a507dfa131	Zodiac	y	t	\N
-bb4cc149e8027369e71eb1bb36cd98e0	Zombi	m	t	\N
-754230e2c158107a2e93193c829e9e59	Crisix	y	t	\N
-a29c1c4f0a97173007be3b737e8febcc	Redgrin	y	t	\N
-4fab532a185610bb854e0946f4def6a4	Torment of Souls	y	t	\N
-e25ee917084bdbdc8506b56abef0f351	Skelethal	y	t	\N
-e6fd7b62a39c109109d33fcd3b5e129d	Keitzer	y	t	\N
-da29e297c23e7868f1d50ec5a6a4359b	Blodtåke	y	t	\N
-96048e254d2e02ba26f53edd271d3f88	Souldevourer	y	t	\N
-c2275e8ac71d308946a63958bc7603a1	Fabulous Desaster	y	t	\N
-3bcbddf6c114327fc72ea06bcb02f9ef	Satan Worship	y	t	\N
-dde3e0b0cc344a7b072bbab8c429f4ff	The Laws Kill Destroy (Fábio Jhasko's Sarcófago tribute)	y	t	\N
-b785a5ffad5e7e36ccac25c51d5d8908	Mortal Peril	y	t	\N
-63c0a328ae2bee49789212822f79b83f	Infected Inzestor	y	t	\N
-83d15841023cff02eafedb1c87df9b11	Birdflesh	m	t	\N
-f03bde11d261f185cbacfa32c1c6538c	Master	y	t	\N
-f6540bc63be4c0cb21811353c0d24f69	Misanthropia	y	t	\N
-ea16d031090828264793e860a00cc995	Severe Torture	y	t	\N
-5eed658c4b7b68a0ecc49205b68d54e7	Undying Lust for Cadaverous Molestation (UxLxCxM)	y	t	\N
-96e3cdb363fe6df2723be5b994ad117a	Lecks inc.	y	t	\N
-4ad6c928711328d1cf0167bc87079a14	Hate	y	t	\N
-a0fb30950d2a150c1d2624716f216316	Belphegor	y	t	\N
-c8d551145807972d194691247e7102a2	I am Morbid	y	t	\N
-45b568ce63ea724c415677711b4328a7	Baest	y	t	\N
-145bd9cf987b6f96fa6f3b3b326303c9	Der rote Milan	y	t	\N
-c238980432ab6442df9b2c6698c43e47	Äera	y	t	\N
-39a25b9c88ce401ca54fd7479d1c8b73	Jesajah	y	t	\N
-8cadf0ad04644ce2947bf3aa2817816e	Balberskult	y	t	\N
-85fac49d29a31f1f9a8a18d6b04b9fc9	Hellburst	y	t	\N
-b81ee269be538a500ed057b3222c86a2	Crypts	y	t	\N
-5518086aebc9159ba7424be0073ce5c9	Wound	y	t	\N
-2c4e2c9948ddac6145e529c2ae7296da	Venefixion	y	t	\N
-c9af1c425ca093648e919c2e471df3bd	Asagraum	y	t	\N
-0291e38d9a3d398052be0ca52a7b1592	Possession	y	t	\N
-8852173e80d762d62f0bcb379d82ebdb	Grave Miasma	m	t	\N
-000f49c98c428aff4734497823d04f45	Sacramentum﻿	m	t	\N
-dea293bdffcfb292b244b6fe92d246dc	Impaled Nazarene	m	t	\N
-cf71a88972b5e06d8913cf53c916e6e4	Bloodland	y	t	\N
-ac62ad2816456aa712809bf01327add1	LAWMÄNNER	n	t	\N
-302ebe0389198972c223f4b72894780a	Stagewar	m	t	\N
-470f3f69a2327481d26309dc65656f44	The Fog	y	t	\N
-e254616b4a5bd5aaa54f90a3985ed184	Goath	y	t	\N
-3c5c578b7cf5cc0d23c1730d1d51436a	Velvet Viper	n	t	\N
-eaeaed2d9f3137518a5c8c7e6733214f	Elmsfire	m	t	\N
-8ccd65d7f0f028405867991ae3eaeb56	Poisöned Speed	y	t	\N
-781acc7e58c9a746d58f6e65ab1e90c4	Harakiri For The Sky	y	t	\N
-e5a674a93987de4a52230105907fffe9	Nachtblut	y	t	\N
-a2459c5c8a50215716247769c3dea40b	Mister Misery	m	t	\N
-e285e4ecb358b92237298f67526beff7	Pyogenesis	n	t	\N
-d832b654664d104f0fbb9b6674a09a11	Schöngeist	y	t	\N
-2aeb128c6d3eb7e79acb393b50e1cf7b	Enter Tragedy	y	t	\N
-213c449bd4bcfcdb6bffecf55b2c30b4	Erdling	y	t	\N
-4ea353ae22a1c0d26327638f600aeac8	Stahlmann	y	t	\N
-66244bb43939f81c100f03922cdc3439	Sabaton	y	t	\N
-a538bfe6fe150a92a72d78f89733dbd0	The Spirit	y	t	\N
-02f36cf6fe7b187306b2a7d423cafc2c	Orca	y	t	\N
-26830d74f9ed8e7e4ea4e82e28fa4761	Kryn	m	t	\N
-ccff6df2a54baa3adeb0bddb8067e7c0	V.I.D.A	y	t	\N
-368ff974da0defe085637b7199231c0a	Impartial	m	t	\N
-c2e88140e99f33883dac39daee70ac36	Lycanthrope	m	t	\N
-93f4aac22b526b5f0c908462da306ffc	Speedemon	y	t	\N
-1bb6d0271ea775dfdfa7f9fe1048147a	Almøst Human	y	t	\N
-f17c7007dd2ed483b9df587c1fdac2c7	Moral Putrefaction	y	t	\N
-03022be9e2729189e226cca023a2c9bf	Cadaver	y	t	\N
-4d79c341966242c047f3833289ee3a13	Criminal	y	t	\N
-32921081f86e80cd10138b8959260e1a	Tranatopsy	y	t	\N
-3041a64f7587a6768d8e307b2662785b	Ludicia	y	t	\N
-ab7b69efdaf168cbbe9a5b03d901be74	Komodo	m	t	\N
-8259dc0bcebabcb0696496ca406dd672	Typhus	m	t	\N
-57b9fe77adaac4846c238e995adb6ee2	Múr	y	t	\N
-2654d6e7cec2ef045ca1772a980fbc4c	Fusion Bomb	y	t	\N
-6a8538b37162b23d68791b9a0c54a5bf	Mork	y	t	\N
-3921cb3f97a88349e153beb5492f6ef4	Gaerea	y	t	\N
-f9f57e175d62861bb5f2bda44a078df7	Kampfar	m	t	\N
-9ee30f495029e1fdf6567045f2079be1	Crypta	y	t	\N
-57eba43d6bec2a8115e94d6fbb42bc75	Lost Society	n	t	\N
-071dbd416520d14b2e3688145801de41	Venom	y	t	\N
-9fc7c7342d41c7c53c6e8e4b9bc53fc4	Moonspell	n	t	\N
-5588cb8830fdb8ac7159b7cf5d1e611e	Striker	n	t	\N
-a5a8afc6c35c2625298b9ce4cc447b39	Auðn	y	t	\N
-6ff24c538936b5b53e88258f88294666	Ill Niño	m	t	\N
-d399575133268305c24d87f1c2ef054a	Implore	y	t	\N
-71e720cd3fcc3cdb99f2f4dc7122e078	Mythraeum	y	t	\N
-743c89c3e93b9295c1ae6e750047fb1e	The Risen Dread	y	t	\N
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	Pestilence	y	t	\N
-c58de8415b504a6ffa5d0b14967f91bb	Onslaught	y	t	\N
-2d1f30c9fc8d7200bdf15b730c4cd757	Blood Incantation	y	t	\N
-a1cebab6ecfd371779f9c18e36cbba0c	Cattle Decapitation	y	t	\N
-54c09bacc963763eb8742fa1da44a968	Misanthropic	y	t	\N
-0870b61c5e913cb405d250e80c9ba9b9	Leng Tch'e	y	t	\N
-e563e0ba5dbf7c9417681c407d016277	Bloodtruth	y	t	\N
-1745438c6be58479227d8c0d0220eec5	Organectomy	y	t	\N
-7e5550d889d46d55df3065d742b5da51	Gutslit	y	t	\N
-393a71c997d856ed5bb85a9695be6e46	Coffin Feeder	y	t	\N
-20f0ae2f661bf20e506108c40c33a6f3	Suffocation	y	t	\N
-3ed0c2ad2c9e6e7b161e6fe0175fe113	Acéldama	y	t	\N
-96604499bfc96fcdb6da0faa204ff2fe	Gore Dimension	y	t	\N
-dd18fa7a5052f2bce8ff7cb4a30903ea	Gutalax	y	t	\N
-fd9a5c27c20cd89e4ffcc1592563abcf	Bound to Prevail	y	t	\N
-a5475ebd65796bee170ad9f1ef746394	Basement Torture Killings	y	t	\N
-1fda271217bb4c043c691fc6344087c1	Kanine	y	t	\N
-cba95a42c53bdc6fbf3ddf9bf10a4069	Profanity	y	t	\N
-fe2c9aea6c702e6b82bc19b4a5d76f90	Hurakan	y	t	\N
-bb66c20c42c26f1874525c3ab956ec41	Brutal Sphincter	y	t	\N
-aad365e95c3d5fadb5fdf9517c371e89	Tortharry	y	t	\N
-88a51a2e269e7026f0734f3ef3244e89	Human Prey	y	t	\N
-5c1a922f41003eb7a19b570c33b99ff4	Phrymerial	y	t	\N
-de506362ebfcf7c632d659aa1f2b465d	Cumbeast	y	t	\N
-1a8780e5531549bd454a04630a74cd4d	Monasteries	y	t	\N
-c0d7362d0f52d119f1beb38b12c0b651	Côte D' Aver	y	t	\N
-edd506a412c4f830215d4c0f1ac06e55	Vomit the Soul	y	t	\N
-dde31adc1b0014ce659a65c8b4d6ce42	Endseeker	y	t	\N
-4267b5081fdfb47c085db24b58d949e0	Wormed	y	t	\N
-8f7de32e3b76c02859d6b007417bd509	Beheaded	y	t	\N
-332d6b94de399f86d499be57f8a5a5ca	Shores of Lunacy	y	t	\N
-b73377a1ec60e58d4eeb03347268c11b	April in Flames	y	t	\N
-e3419706e1838c7ce6c25a28bef0c248	Asinis	y	t	\N
-382ed38ecc68052678c5ac5646298b63	Mike Litoris Complot	y	t	\N
-213c302f84c5d45929b66a20074075df	Lesson in Violence	y	t	\N
-22c030759ab12f97e941af558566505e	Urinal Tribunal	y	t	\N
-f5507c2c7beee622b98ade0b93abb7fe	Melodramatic Fools	y	t	\N
-41bee031bd7d2fdb14ff48c92f4d7984	Cypecore	y	t	\N
-39a464d24bf08e6e8df586eb5fa7ee30	Shot Crew	y	t	\N
-f7c3dcc7ba01d0ead8e0cfb59cdf6afc	Impending Mindfuck	y	t	\N
-4b42093adfc268ce8974a3fa8c4f6bca	Thron	y	t	\N
-70d0b58ef51e537361d676f05ea39c7b	Heretoir	m	t	\N
-6f0eadd7aadf134b1b84d9761808d5ad	Asphagor	y	t	\N
-6896f30283ad47ceb4a17c8c8d625891	Drill Star Autopsy	y	t	\N
-25118c5df9a2865a8bc97feb4aff4a18	Zero Degree	y	t	\N
-5a53bed7a0e05c2b865537d96a39646f	Ferndal	y	t	\N
-29b7417c5145049d6593a0d88759b9ee	Avataria	y	t	\N
-4176aa79eae271d1b82015feceb00571	Graveworm	y	t	\N
-c81794404ad68d298e9ceb75f69cf810	Agathodaimon	y	t	\N
-d0386252fd85f76fc517724666cf59ae	Iron Savior	n	t	\N
-0cddbf403096e44a08bc37d1e2e99b0f	Saxorior	y	t	\N
-546bb05114b78748d142c67cdbdd34fd	Empyreal	y	t	\N
-4ac863b6f6fa5ef02afdd9c1ca2a5e24	Eridu	y	t	\N
-1e2bcbb679ccfdea27b28bd1ea9f2e67	Jarl	y	t	\N
-0b9d35d460b848ad46ec0568961113bf	Torian	n	t	\N
-b7e529a8e9af2a2610182b3d3fc33698	Machine Head	y	t	\N
-1c62394f457ee9a56b0885f622299ea2	The Halo Effect	y	t	\N
-64d9f86ed9eeac2695ec7847fe7ea313	Credic	y	t	\N
-b04d1a151c786ee00092110333873a37	Glemsel	y	t	\N
-65b029279eb0f99c0a565926566f6759	Naxen	y	t	\N
-9bfbfab5220218468ecb02ed546e3d90	Horns of Domination	y	t	\N
-be41b6cfece7dfa1b4e4d226fb999607	Beltez	y	t	\N
-9c158607f29eaf8f567cc6304ada9c6d	Ninkharsag	y	t	\N
-ca7e3b5c1860730cfd7b400de217fef2	Hemelbestormer	y	t	\N
-8f4e7c5f66d6ee5698c01de29affc562	Algebra	y	t	\N
-f0bf2458b4c1a22fc329f036dd439f08	Comaniac	y	t	\N
-25fa2cdf2be085aa5394db743677fb69	Cryptosis	y	t	\N
-32917b03e82a83d455dd6b7f8609532c	Fatal Fire	n	t	\N
-0bcf509f7eb2db3b663f5782c8c4a86e	Dispised Icon	y	t	\N
-4ffc374ef33b65b6acb388167ec542c0	Viscera	y	t	\N
-42c9b99c6b409bc9990658f6e7829542	Oceano	y	t	\N
-0c2277f470a7e9a2d70195ba32e1b08a	Distant	y	t	\N
-47b23e889175dde5d6057db61cb52847	Crowbar	y	t	\N
-bb51d2b900ba638568e48193aada8a6c	Sacred Reich	y	t	\N
-92df3fd170b0285cd722e855a2968393	Guineapig	y	t	\N
-b20a4217acaf4316739c6a5f6679ef60	Plasma	y	t	\N
-34b1dade51ffdab56daebcf6ac981371	The Hu	y	t	\N
-9d57ebbd1d3b135839b78221388394a1	Volbeat	y	t	\N
-1833e2cfde2a7cf621d60288da14830c	Bad Wolves	m	t	\N
-65976b6494d411d609160a2dfd98f903	Skindred	m	t	\N
-178227c5aef3b3ded144b9e19867a370	Diaroe	y	t	\N
-75cde58f0e5563f287f2d4afb0ce4b7e	Depression	y	t	\N
-b74881ac32a010e91ac7fcbcfebe210e	Placenta Powerfist	y	t	\N
-351af29ee203c740c3209a0e0a8e9c22	Fulci	y	t	\N
-bbdbdf297183a1c24be29ed89711f744	Revocation	y	t	\N
-6e512379810ecf71206459e6a1e64154	Goatwhore	y	t	\N
-f3b65f675d13d81c12d3bb30b0190cd1	Alluvial	y	t	\N
-1918775515a9c7b8db011fd35a443b82	Creeping Death	y	t	\N
-15bf34427540dd1945e5992583412b2f	Dropdead	y	t	\N
-ba8033b8cfb1ebfc91a5d03b3a268d9f	Escuela Grind	y	t	\N
-fd85bfffd5a0667738f6110281b25db8	Necrotted	y	t	\N
-6e4b91e3d1950bcad012dbfbdd0fff09	Legal Hate	y	t	\N
-32a02a8a7927de4a39e9e14f2dc46ac6	Deep Dirty	y	t	\N
-747f992097b9e5c9df7585931537150a	Blood	y	t	\N
-13c260ca90c0f47c9418790429220899	Schirenc Plays Pungent Stench	y	t	\N
-19819b153eb0990c821bc106e34ab3e1	Mason	y	t	\N
-b619e7f3135359e3f778e90d1942e6f5	Antagonism	y	t	\N
-0ddd0b1b6329e9cb9a64c4d947e641a8	Plagueborne	y	t	\N
-30354302ae1c0715ccad2649da3d9443	Orobas	y	t	\N
-89eec5d48b8969bf61eea38e4b3cfdbf	Kilminister	y	t	\N
-703b1360391d2aef7b9ec688b00849bb	Vomit Spell	y	t	\N
-b4b46e6ce2c563dd296e8bae768e1b9d	Servant	y	t	\N
-5c8c8b827ae259b8e4f8cb567a577a3e	Shaârghot	y	t	\N
-7f00429970ee9fd2a3185f777ff79922	Ragnarök Nordic & Viking Folk	y	t	\N
-92e2cf901fe43bb77d99af2ff42ade77	Perchta	y	t	\N
-1a1bfb986176c0ba845ae4f43d027f58	Estampie	y	t	\N
-7ecdb1a0eb7c01d081acf2b7e11531c0	Rauhbein	y	t	\N
-094caa14a3a49bf282d8f0f262a01f43	Apocalypse Orchestra	y	t	\N
-c4ddbffb73c1c34d20bd5b3f425ce4b1	Elvenking	m	t	\N
-110cb86243320511676f788dbc46f633	HateSphere	y	t	\N
-8e9f5b1fc0e61f9a289aba4c59e49521	sign of death	y	t	\N
-014dbc80621be3ddc6dd0150bc6571ff	Nervecell	y	t	\N
-536d1ccb9cce397f948171765c0120d4	WeedWizard	y	t	\N
-15b70a4565372e2da0d330568fe1d795	Human Waste	y	t	\N
-8e331f2ea604deea899bfd0a494309ba	Braincasket	y	t	\N
-46e1d00c2019ff857c307085c58e0015	5 Stabbed 4 Corpses	y	t	\N
-6afdd78eac862dd63833a3ce5964b74b	Pusboil	y	t	\N
-fb5f71046fd15a0a22d7bda38971f142	Vibrio Cholera	y	t	\N
-512914f31042dacd2a05bfcebaacdb96	Demorphed	y	t	\N
-d96d9dac0f19368234a1fe2d4daf7f7c	OPS - Orphan Playground Sniper	y	t	\N
-5aa3856374df5daa99d3d33e6a38a865	Vor die Hunde	y	t	\N
-e83655f0458b6c309866fbde556be35a	Hereza	y	t	\N
-92dd59a949dfceab979dd25ac858f204	Gorgatron	y	t	\N
-ee1bc524d6d3410e94a99706dcb12319	Rottenness	y	t	\N
-c09ffd48de204e4610d474ade2cf3a0d	Nuclear Vomit	y	t	\N
-3e7f48e97425d4c532a0787e54843863	Dead Man's Hand	y	t	\N
-bfff088b67e0fc6d1b80dbd6b6f0620c	The Gentlemen's Revenge	y	t	\N
-233dedc0bee8bbdf7930eab3dd54daee	Gunnar	n	t	\N
-80f19b325c934c8396780d0c66a87c99	The Hollywood Vampires	y	t	\N
-3ccca65d3d9843b81f4e251dcf8a3e8c	Sting	y	t	\N
-9144b4f0da4c96565c47c38f0bc16593	Shaggy	y	t	\N
-8b3d594047e4544f608c2ebb151aeb45	Witchkrieg	y	t	\N
-ca03a570b4d4a22329359dc105a9ef22	Harlott	y	t	\N
-f5eaa9c89bd215868235b0c068050883	Angstskíg	m	t	\N
-9f10d335198e90990f3437c5733468e7	Tiamat	m	t	\N
-b34f0dad8c934ee71aaabb2a675f9822	Gorleben	m	t	\N
-c6458620084029f07681a55746ee4d69	Bitchhammer	m	t	\N
-dcd3968ac5b1ab25328f4ed42cdf2e2b	Infest	y	t	\N
-6e25aa27fcd893613fac13b0312fe36d	Corrupt	y	t	\N
-63e961dd2daa48ed1dade27a54f03ec4	Incantation	y	t	\N
-4cc6d79ef4cf3af13b6c9b77783e688b	Embryo	y	t	\N
-da34d04ff19376defc2facc252e52cf0	Shampoon Killer	y	t	\N
-eaf446aca5ddd602d0ab194667e7bec1	Boötes Void	y	t	\N
-ee325100d772dd075010b61b6f33c82a	Sněť	y	t	\N
-950d43371e8291185e524550ad3fd0df	Kadaverficker	y	t	\N
-2aa7757363ff360f3a08283c1d157b2c	Maceration	y	t	\N
-d71218f2abfdd51d95ba7995b93bd536	Mephorash	y	t	\N
-12c0763f59f7697824567a3ca32191db	Haemorrhage	y	t	\N
-4e14f71c5702f5f71ad7de50587e2409	Methane	y	t	\N
-8f7d02638c253eb2d03118800c623203	Necrosy	y	t	\N
-d2ec9ebbccaa3c6925b86d1bd528d12f	Massacre	y	t	\N
-2cca468dcaea0a807f756b1de2b3ec7b	Sirrush	y	t	\N
-c8c012313f10e2d0830f3fbc5afca619	Midnight	y	t	\N
-cf3ecbdc9b5ae9c5a87ab05403691350	Mystifier	y	t	\N
-9323fc63b40460bcb68a7ad9840bad5a	Possessed	y	t	\N
-6429807f6febbf061ac85089a8c3173d	LIK	y	t	\N
-7b959644258e567b32d7c38e21fdb6fa	Ash Nazg Búrz	y	t	\N
-b08c5a0f666c5f8a83a7bcafe51ec49b	Seth	y	t	\N
-eb626abaffa54be81830da1b29a3f1d8	Demonical	y	t	\N
-dd663d37df2cb0b5e222614dd720f6d3	Arkona	y	t	\N
-71aabfaa43d427516f4020c7178de31c	Darkfall	y	t	\N
-32f27ae0d5337bb62c636e3f6f17b0ff	Totensucht	y	t	\N
-d9a6c1fcbafa92784f501ca419fe4090	Saor	y	t	\N
-afd755c6a62ac0a0947a39c4f2cd2c20	Home Reared Meat	y	t	\N
-b69b0e9285e4fa15470b0969836ac5ae	Nyctopia	y	t	\N
-79d924bae828df8e676ba27e5dfc5f42	Riot City	n	t	\N
-84557a1d9eb96a680c0557724e1d0532	Defleshed	y	t	\N
-ead662696e0486cb7a478ecd13a0b5c5	Resurrected	y	t	\N
-62165afb63fc004e619dff4d2132517c	Phantom Corporation	y	t	\N
-b5d1848944ce92433b626211ed9e46f8	Bodyfarm	y	t	\N
-92e67ef6f0f8c77b1dd631bd3b37ebca	Krisiun	y	t	\N
-fe1f86f611c34fba898e4c90b71ec981	Bloodbath	y	t	\N
-8c22a88267727dd513bf8ca278661e4d	Deicide	y	t	\N
-541455f74d6f393174ff14b99e01b22d	Matt Miller	y	t	\N
-90bebabe0c80676a4f6207ee0f8caa4c	Groundville Bastards	y	t	\N
-ee8cde73a364c2b066f795edda1a303a	The Killer Apes	y	t	\N
-92e25f3ba88109b777bd65b3b3de28a9	Pinch Black	y	t	\N
-3e3b4203ce868f55b084eb4f2da535d3	Putrid Pile	y	t	\N
-88ae6d397912fe633198a78a3b10f82e	Signs of the Swarm	y	t	\N
-d2ec80fcff98ecb676da474dfcb5fe5c	Squash Bowels	y	t	\N
-e31fabfff3891257949efc248dfa97e2	VILE	y	t	\N
-4f6ae7ce964e64fdc143602aaaab1c26	Suffocate Bastard	y	t	\N
-fe1fbc7d376820477e38b5fa497e4509	Fleshless	y	t	\N
-b4087680a00055c7b9551c6a1ef50816	Anime Torment	y	t	\N
-e318f5bc96fd248b69f6a969a320769e	Kraanium	y	t	\N
-56525146be490541a00c20a1dab0a465	Viscera Trail	y	t	\N
-186aab3d817bd38f76c754001b0ab04d	Holy Moses	m	f	\N
-2f39cfcedf45336beb2e966e80b93e22	Gutrectomy	y	t	\N
-51053ffab2737bd21724ed0b7e6c56f7	Embrace your Punishment	y	t	\N
-869d4f93046289e11b591fc7a740bc43	Devangelic	y	t	\N
-edb40909b64e73b547843287929818de	Monument of Misanthropy	y	t	\N
-5b3c70181a572c8d92d906ca20298d93	Ruins of Perception	y	t	\N
-37b93f83b5fe94e766346ef212283282	Vulvectomy	y	t	\N
-dbde8de43043d69c4fdd3e50a72b859d	Torsofuck	y	t	\N
-fd1bd629160356260c497da84df860e2	Crepitation	y	t	\N
-3dba6c9259786defe62551e38665a94a	Amputated	y	t	\N
-34d29649cb20a10a5e6b59c531077a59	Colpocleisis	y	t	\N
-c02f12329daf99e6297001ef684d6285	Kinski	y	t	\N
-be3c26bf034e9e62057314f3945f87be	Cephalic Carnage	m	t	\N
-986a4f4e41790e819dc8b2a297aa8c87	Malignancy	m	t	\N
-f64162c264d5679d130b6e8ae84d704e	Invoker	y	t	\N
-0674a20e29104e21d141843a86421323	Torturized	y	t	\N
-24dd5b3de900b9ee06f913a550beb64c	Groza	y	t	\N
-fe7838d63434580c47798cbc5c2c8c63	Flammenaar	y	t	\N
-e47c5fcf4a752dfcfbccaab5988193ef	Asenblut	y	t	\N
-3d482a4abe7d814a741b06cb6306d598	Obscurity	y	t	\N
-856256d0fddf6bfd898ef43777a80f0c	Aetherian	y	t	\N
-b5bc9b34286d4d4943fc301fe9b46e46	Convictive	y	t	\N
-589a30eb4a7274605385d3414ae82aaa	Nameless Death	y	t	\N
-d79d3a518bd9912fb38fa2ef71c39750	Matricide	y	t	\N
-5ff09619b7364339a105a1cbcb8d65fd	Angelcrypt	y	t	\N
-2eb6fb05d553b296096973cb97912cc0	Macbeth	m	t	\N
-50681f5168e67b62daa1837d8f693001	The Shit Shakers	y	t	\N
-e163173b9350642f7c855bf37c144ce0	Jo Carley and the old dry skulls	y	t	\N
-69af98a8916998443129c057ee04aec4	Skaphos	y	t	\N
-57338bd22a6c5ba32f90981ffb25ef23	Warside	y	t	\N
-48aeffb54173796a88ef8c4eb06dbf10	Horrible Creatures	y	t	\N
-07759c4afc493965a5420e03bdc9b773	Magefa	y	t	\N
-8989ab42027d29679d1dedc518eb04bd	On every Page	y	t	\N
-a51211ef8cbbf7b49bfb27c099c30ce1	Mindreaper	y	t	\N
-0dc9cb94cdd3a9e89383d344a103ed5b	Infected Chaos	y	t	\N
-c45ca1e791f2849d9d11b3948fdefb74	Maniacs Brainacts	y	t	\N
-54f89c837a689f7f27667efb92e3e6b1	Isn't	y	t	\N
-49f6021766f78bffb3f824eb199acfbc	Wotolom	y	t	\N
-f04de6fafc611682779eb2eb36bdbe25	Lack of Senses	m	t	\N
-266674d0a44a3a0102ab80021ddfd451	Disrooted	m	t	\N
-50e7b1ba464091976138ec6a57b08ba0	Guardians Gate	m	t	\N
-ada3962af4845c243fcd1ccafc815b09	Arctic Winter	y	t	\N
-b05f3966288598b02cda4a41d6d1eb6b	Epicedium	y	t	\N
-c7d1a2a30826683fd366e7fd6527e79c	Crescent	y	t	\N
-6ff4735b0fc4160e081440b3f7238925	Purgatory	y	t	\N
-100691b7539d5ae455b6f4a18394420c	Torture Killer	y	t	\N
-d5282bd6b63b4cd51b50b40d192f1161	Ton Steine Scherben	y	t	\N
-5159fd46698ae21d56f1684c2041bd79	Are we used to it	y	t	\N
-c63ecd19a0ca74c22dfcf3063c9805d2	Contrast	y	t	\N
-e08f00b43f7aa539eb60cfa149afd92e	Alteration	y	t	\N
-793955e5d62f9b22bae3b59463c9ef63	Soulburner	y	t	\N
-e4f2a1b2efa9caa67e58fa9610903ef0	Hellgarden	y	t	\N
-25ebb3d62ad1160c96bbdea951ad2f34	Destruction	y	t	\N
-57f003f2f413eedf53362b020f467be4	Whiplash	y	t	\N
-5ef6a0f70220936a0158ad66fd5d9082	Journey of D.C.	y	t	\N
-d97a4c5c71013baac562c2b5126909e1	Hellbent on Rocking	y	t	\N
-1ebe59bfb566a19bc3ce5f4fb6c79cd3	Lost on Airfield	y	t	\N
-5f572d201a24500b2db6eca489a6a620	Defacing God	y	t	\N
-ac6dc9583812a034be2f5aacbf439236	Triagone	y	t	\N
-7f499363c322c1243827700c67a7591c	Losing my Grip	y	t	\N
-2040754b0f9589a89ce88912bcf0648e	LEYKA	y	t	\N
-13cd421d8a1cb48800543b9317aa2f52	Decreate	y	t	\N
-4b9f3b159347c34232c9f4b220cb22de	Spreading Miasma	y	t	\N
-81a17f1bf76469b18fbe410d8ec77da8	Root of all Evil	y	t	\N
-81a86312a4aa3660f273d6ed5e4a6c7d	No Face no Case	m	t	\N
-77f2b3ea9e4bd785f5ff322bae51ba07	Children of Bodom	y	f	\N
-2876f7ecdae220b3c0dcb91ff13d0590	Ctulu	y	f	\N
-121189969c46f49b8249633c2d5a7bfa	Slayer	y	f	\N
-546f8a4844ac636dd18025dcc673a3ab	Harvest their Bodies	y	t	\N
-20d32d36893828d060096b2cd149820b	Call of Charon	y	t	\N
-15137b95180ccc986f6321acffb9cb6f	Trennjaeger	y	t	\N
-692649c1372f37ed50339b91337e7fec	Cavalera Conspiracy	y	t	\N
-0f512371d62ae34741d14dde50ab4529	Cliteater	y	f	\N
-0646225016fba179076d7df56260d1b2	Uburen	y	t	\N
-ce5e821f2dcc57569eae793f628c99cf	Kanonenfieber	y	t	\N
-cd11b262d721d8b3f35ad2d2af8431dd	Rats of Gomorrah (Divide)	y	t	Change name from Divide to Rats of Gomorrah
-3771bd5f354df475660a24613fcb7a8c	Arkuum	y	t	\N
-f43bb3f980f58c66fc81874924043946	Gernotshagen	y	t	\N
-15cee64305c1b40a4fac10c26ffa227d	Soul Grinder	y	t	\N
-069cdf9184e271a3c6d45ad7e86fcac2	Rise of Kronos (Surface)	y	t	Change name from Surface to Rise of Kronos
-e9782409a3511c3535149cdfb5b76364	Slamentation	y	t	\N
-f7c31a68856cab2620244be2df27c728	Blue Collar Punks	y	t	\N
-ae2056f2540325e2de91f64f5ac130b6	Knife1	m	t	They play Hardcore
-eced087124a41417845c0b0f4ff44ba9	Knife2	y	t	\N
-edaf03c0c66aa548df3cebdae0f94545	Imha Tarikat	y	t	\N
-16cbdd4df5f89d771dccfa1111d7f4bc	Spearhead	y	t	\N
-9abdb4a0588186fc4425b29080e820a2	Bresslufd	y	t	\N
-06a4594d3b323539e9dc4820625d01b8	NineUnderZero	y	t	\N
-b5c7675d6faefd09e871a6c1157e9353	PushSeven12	n	t	\N
-ae653e4f46c5928cc4b4b171efbcf881	Abbath	y	t	\N
-1683f5557c9db93b35d1d2ae450baa21	Toxic Holocaust	y	t	\N
-df8457281db2cba8bbcb4b3b80f2b9a3	Liverless	y	t	\N
-f85df6e18a73a6d1f5ccb59ee51558ae	Rigorious	y	t	\N
-0308321fc4f75ddaed8208c24f2cb918	Abrasive	y	t	\N
-4ceb1f68d8a260c644c25799629a5615	Necromorphic Despair	y	t	\N
-7acb475eda543ccd0622d546c5772c5a	Chordotomy	y	t	\N
-ba8d3efe842e0755020a2f1bc5533585	Ascendancy	m	t	\N
-5a154476dd67358f4dab8500076dece3	Screwed Death	m	t	\N
-b8e18040dc07eead8e6741733653a740	Mother	y	t	\N
-0bc244b6aa99080c3d37fea06d328193	Munich Fiends	y	t	\N
-b46e412d7f90e277a1b9370cfeb26abe	Los Mezcaleros	n	t	\N
-49920f80faa980ca10fea8f31ddd5fc9	Odd Couple	y	t	\N
-fddfe79923a5373a44237e0e60f5c845	Tiny Fingers	y	t	\N
-277ce66a47017ca1ce55714d5d2232b2	Crimson Fire	n	t	\N
-2ad8a3ceb96c6bf74695f896999019d8	Apostasie	y	t	\N
-fc4734cc48ce1595c9dbbe806f663af8	Carnifex	y	t	\N
-567ddbaeec9bc3c5f0348a21ebd914b1	Vexed	y	t	\N
-25cde5325befa9538b771717514351fb	Welded	y	t	\N
-cf2676445aa6abcc43a4b0d4b01b42a1	Hell Patröl	y	t	\N
-3005cc8298f189f94923611386015c78	Alltheniko	y	t	\N
-7f2679aa5b1116cc22bab4ee10018f59	Bütcher	y	t	\N
-8a1acf425fb1bca48fb543edcc20a90d	Martyr	n	t	\N
-c2d7bbc06d62144545c45b9060b0a629	Megalive	y	t	\N
-62254b7ab0a2b3d3138bde893dde64a3	Spitfire	y	t	\N
-f291caafeb623728ebf0166ac4cb0825	Devil's Hours	y	t	\N
-1a46202030819f7419e300997199c955	Reflexor	y	t	\N
-1f94ea2f8cb55dd130ec2254c7c2238c	Fintroll	y	t	\N
-8d788b28d613c227ea3c87ac898a8256	Metsatöll	y	t	\N
-5226c9e67aff4f963aea67c95cd5f3f0	Suotana	y	t	\N
-e58ecda1a7b9bfdff6a10d398f468c3f	Keep of Kalessin	y	t	\N
-183bea99848e19bdb720ba5774d216ba	Gasbrand	y	t	\N
-495ddc6ae449bf858afe5512d28563f5	Medico Peste	y	t	\N
-b2b4ae56a4531455e275770dc577b68e	Devastator	y	t	\N
-3b0b94c18b8d65aec3a8ca7f4dae720d	Tears of Fire	y	t	Location: Germany
-f9d5d4c7b26c7b832ee503b767d5df52	Slaughter Messiah	m	t	\N
-5d56713e4586c9b1920eb1a3d4597564	Nakkeknaekker	y	t	\N
-f9030edd3045787fcbcfd47da5246596	Plaguemace	y	t	\N
-215513a2c867f8b24d5aea58c9abfff6	Cognitive	y	t	\N
-1ca632ac231052e4116239ccb8952dfe	Macabre Demise	y	t	\N
-62a40f6fa589c7007ded80d26ad1c3a9	Fallujah	y	t	\N
-7d9488e60660507d0f88850245ddc7a5	Vulvodynia	y	t	\N
-abb4decfc5a094f45911b94337e7e2c4	Mélancholia	y	t	\N
-e061c04af9609876757f0b33d14c63e5	South of Hessen	y	t	\N
-c6947b2d7fb2553635d75d160c92a2c5	Putridarium	y	t	\N
-59f900c93aee445bd51d0d3fbc722cad	Astral Wrath	y	t	Ukraine + Germany
-e60c4acd9218333d7c7ac50e5aa0f51e	Rectal Depravity	y	t	\N
-6e53c7c95acd615f2b29a536bc16dc43	Satan's Revenge on Mankind	y	t	\N
-aed7ba45d0a57ddaef5da5df666de7b4	Hour of Penance	y	t	\N
-94fea925f38999882458ab87ffda8b3a	Volière	y	t	\N
-de26f398ee613b636ddc998946a40e68	Zementmord	y	t	\N
-5f31d4e87e7903f8ca2a4f8842dd4fe7	Lunatic Dictator	y	t	\N
-ef18843fbbf66c6aa6851c6345f7c4ac	These Days & Those Days	y	t	\N
-8134a4079be58b29064131065f6a4c21	Napoli Violenta	y	t	\N
+38b2886223461f15d65ff861921932b5	Nekrovault	y	t	\N
+dfca36a68db327258a2b0d5e3abe86af	Nepumuc	m	t	\N
+07d82d98170ab334bc66554bafa673cf	Nervosa	y	t	\N
+42f6dd3a6e21d6df71db509662d19ca4	Nifelheim	y	t	\N
+118c9af69a42383387e8ce6ab22867d7	Nile	y	t	\N
+07f467f03da5f904144b0ad3bc00a26d	NIOR	y	t	\N
+e29470b6da77fb63e9b381fa58022c84	No Brainer	y	t	\N
+0a3a1f7ca8d6cf9b2313f69db9e97eb8	Nocte Obducta	m	t	\N
+2d1ba9aa05ea4d94a0acb6b8dde29d6b	Nocturnal Graves	y	t	\N
+3fae5bf538a263e96ff12986bf06b13f	No Return	y	t	\N
+34a9067cace79f5ea8a6e137b7a1a5c8	Obscenity	m	t	\N
+a9ef9373c9051dc4a3e2f2118537bb2d	Of Colours	y	t	\N
+009f51181eb8c6bb5bb792af9a2fdd07	Omnium Gatherum	y	t	\N
+e63a014f1310b8c7cbe5e2b0fd66f638	Omophagia	y	t	\N
+55b6aa6562faa9381e43ea82a4991079	Orbit Culture	y	t	\N
+1dc7d7d977193974deaa993eb373e714	Orcus Patera	y	t	\N
+5ab944fac5f6a0d98dc248a879ec70ff	Orden Ogan	y	t	\N
+0a0f6b88354de7afe84b8a07dfadcc26	Overkill	m	t	\N
+240e556541427d81f4ed1eda86f33ad3	Pain City	y	t	\N
+d162c87d4d4b2a8f6dda58d4fba5987f	Papa Roach	m	t	\N
+21077194453dcf49c2105fda6bb89c79	Paradise Lost	m	t	\N
+5bd15db3f3bb125cf3222745f4fe383f	Party Cannon	y	t	\N
+1e71013b49bbd3b2aaa276623203453f	Paxtilence	y	t	\N
+2e4e6a5f485b2c7e22f9974633c2b900	Phantom Winter	n	t	\N
+541fa0085b17ef712791151ca285f1a7	Pighead	y	t	\N
+f2ba1f213e72388912791eb68adc3401	P.O. Box	y	t	\N
+210e99a095e594f2547e1bb8a9ac6fa7	Pokerface	m	t	\N
+6cec93398cd662d79163b10a7b921a1b	Moronic	y	f	\N
+6ca47c71d99f608d4773b95f9b859142	Incite	y	t	\N
+c41b9ec75e920b610e8907e066074b30	Prediction	y	t	\N
+a91887f44d8d9fdcaa401d1c719630d7	Pripjat	y	t	\N
+cd80c766840b7011fbf48355c0142431	Promethee	y	t	\N
+4f5b2e20e9b7e5cc3f53256583033752	Prostitute Desfigurement	y	t	\N
+7b675f4c76aed34cf2d5943d83198142	Psycroptic	y	t	\N
+1f56e4b8b8a0da3b8ec5b32970e4b0d8	Public Grave	y	t	\N
+fcc491ba532309d8942df543beaec67e	Purify	y	t	\N
+662d17c67dcabc738b8620d3076f7e46	Randy Hansen	y	t	\N
+c349bc9795ba303aa49e44f64301290e	Raw Ensemble	y	t	\N
+aa5808895fd2fca01d080618f08dca51	Reactory	y	t	\N
+66597873e0974fb365454a5087291094	Rectal Smegma	y	t	\N
+6ffa656be5ff3db085578f54a05d4ddb	Refuge	y	t	\N
+891b302f7508f0772a8fdb71ccbf9868	Relics of Humanity	y	t	\N
+dddbd203ace7db250884ded880ea7be4	Revelation Steel	m	t	\N
+a7eda23a9421a074fe5ec966810018d7	Revel in Flesh	y	t	\N
+ddae1d7419331078626bc217b23ea8c7	Rezet	y	t	\N
+c82a107cd7673a4368b7252aa57810fc	Rings of Saturn	y	t	\N
+1cc93e4af82b1b7e08bace9a92d1f762	Risk it	y	t	\N
+fb80cd69a40a73fb3b9f22cf58fd4776	Riverroth	m	t	\N
+6d779916de27702814e4874dcf4f9e3a	Rivers of Nihil	y	t	\N
+63a9f0ea7bb98050796b649e85481845	Root	y	t	\N
+7d3618373e07c4ce8896006919bbb531	Saltatio Mortis	n	t	\N
+93025091752efa184fd034f285573afe	Samael	y	t	\N
+460bf623f241651a7527a63d32569dc0	Sanguine	n	t	\N
+ef75c0b43ae9ba972900e83c5ccf5cac	Satan's Fall	n	t	\N
+182a1e726ac1c8ae851194cea6df0393	Schizophrenia	y	t	\N
+0d8ef82742e1d5de19b5feb5ecb3aed3	Scordatura	y	t	\N
+90802bdf218986ffc70f8a086e1df172	Scornebeke	y	t	\N
+d1ba47339d5eb2254dd3f2cc9f7e444f	Scrvmp	y	t	\N
+7cb94a8039f617f505df305a1dc2cc61	Seii Taishogun	y	t	\N
+a9afdc809b94392fb1c2e873dbb02781	Sensles	m	t	\N
+576fea4a0c5425ba382fff5f593a33f1	Sepultura	y	t	\N
+55696bac6cdd14d47cbe7940665e21d3	Serrabulho	y	t	\N
+f79485ffe5db7e276e1e625b0be0dbec	Shoot the Girl first	n	t	\N
+eb4558fa99c7f8d548cbcb32a14d469c	Shores of Null	y	t	\N
+d76db99cdd16bd0e53d5e07bcf6225c8	Siberian Meat Grinder	y	t	\N
+4c576d921b99dad80e4bcf9b068c2377	Sick of it all	y	t	\N
+13c8bd3a0d92bd186fc5162eded4431d	Six Feet Under	m	t	\N
+50026a2dff40e4194e184b756a7ed319	Skeleton Pit	y	t	\N
+92edfbaa71b7361a3081991627b0e583	Skeletonwitch	y	t	\N
+062c44f03dce5bf39f81d0bf953926fc	Skinned Alive	y	t	\N
+79cbf009784a729575e50a3ef4a3b1cc	Skull Fist	n	t	\N
+6f60a61fcc05cb4d42c81ade04392cfc	Slaughterra	y	t	\N
+073f87af06b8d8bc561bb3f74e5f714f	Sleepers' Guilt	y	t	\N
+f34c903e17cfeea18e499d4627eeb3ec	Slipknot	y	t	\N
+03fec47975e0e1e2d0bc723af47281de	Sober Truth	m	t	\N
+118b96dde2f8773b011dfb27e51b2f95	Sodom	y	t	\N
+7df470ec0292985d8f0e37aa6c2b38d5	Soilwork	y	t	\N
+75241d56d63a68adcd51d828eb76ca80	Solstafir	n	t	\N
+381b834c6bf7b25b9b627c9eeb81dd8a	Soulburn	y	t	\N
+cabcfb35912d17067131f7d2634ac270	Soulfly	y	t	\N
+60a105e79a86c8197cec9f973576874b	Spasm	y	t	\N
+e6cbb2e0653a61e35d26df2bcb6bc4c7	Stam1na	y	t	\N
+e039d55ed63a723001867bc4eb842c00	Stillbirth	y	t	\N
+010fb41a1a7714387391d5ea1ecdfaf7	Still Patient?	m	t	\N
+3123e3df482127074cdd5f830072c898	Stonefall	y	t	\N
+849c829d658baaeff512d766b0db3cce	Storm	y	t	\N
+3b8d2a5ff1b16509377ce52a92255ffe	Street Dogs	y	t	\N
+2460cdf9598c810ac857d6ee9a84935a	Sucking Leech	y	t	\N
+01bcfac216d2a08cd25930234e59f1a1	Suicidal Angels	y	t	\N
+c63b6261b8bb8145bc0fd094b9732c24	Suicidal Tendencies	y	t	\N
+5ef02a06b43b002e3bc195b3613b7022	Sulphur Aeon	y	t	\N
+5934340f46d5ab773394d7a8ac9e86d5	Sun of the Sleepless	y	t	\N
+1c4af233da7b64071abf94d79c41a361	Supreme Carnage	y	t	\N
+b36eb6a54154f7301f004e1e61c87ce8	Switch	y	t	\N
+bbbb086d59122dbb940740d6bac65976	Take Offense	m	t	\N
+26c2bb18f3a9a0c6d1392dae296cfea7	Task Force Beer	y	t	\N
+6af2c726b2d705f08d05a7ee9509916e	Teethgrinder	y	t	\N
+3a232003be172b49eb64e4d3e9af1434	Terror	y	t	\N
+e3c8afbeb0ec4736db977d18e7e37020	Testament	y	t	\N
+f32badb09f6aacb398d3cd690d90a668	The black Dahlia Murder	y	t	\N
+99761fad57f035550a1ca48e47f35157	The Creatures from the Tomb	y	t	\N
+87bd9baf0b0d760d1f0ca9a8e9526161	The Feelgood McLouds	y	t	\N
+f975b4517b002a52839c42e86b34dc96	The Idiots	y	t	\N
+5b5fc236828ee2239072fd8826553b0a	The Jailbreakers	y	t	\N
+218ac7d899a995dc53cabe52da9ed678	The Monolith Project	y	t	\N
+364be07c2428493479a07dbefdacc11f	The Ominous Circle	y	t	\N
+56bf60ca682b8f68e8843ad8a55c6b17	The Phobos Ensemble	m	t	\N
+8ee257802fc6a4d44679ddee10bf24a9	The Privateer	m	t	\N
+94a62730604a985647986b509818efee	The Prophecy 23	y	t	\N
+09c00610ca567a64c82da81cc92cb846	The Vintage Caravan	m	t	\N
+bc834c26e0c9279cd3139746ab2881f1	Thornafire	y	t	\N
+64a25557d4bf0102cd8f60206c460595	Thrudvangar	y	t	\N
+445a222489d55b5768ec2f17b1c3ea34	Thunderstorm	m	t	\N
+fd0a7850818a9a642a125b588d83e537	Thy Antichrist	y	t	\N
+93aa5f758ad31ae4b8ac40044ba6c110	Too many Assholes	y	t	\N
+99bdf8d95da8972f6979bead2f2e2090	Tornado	m	t	\N
+123f90461d74091a96637955d14a1401	Traitors	y	t	\N
+60eb61670a5385e3150cd87f915b0967	Trancemission	m	t	\N
+b454fdfc910ad8f6b7509072cf0b4031	Tribulation	y	t	\N
+06c5c89047bfd6012e6fb3c2bd3cb24b	Twitching Tongues	m	t	\N
+156c19a6d9137e04b94500642d1cb8c2	Übergang	y	t	\N
+827bf758c7ce2ac0f857379e9e933f77	Undertow	y	t	\N
+e2afc3f96b4a23d451c171c5fc852d0f	Une Misere	y	t	\N
+cd3296ec8f7773892de22dfade4f1b04	Tankard	y	t	\N
+05bea3ed3fcd45441c9c6af3a2d9952d	Shambala	m	f	\N
+2db1850a4fe292bd2706ffd78dbe44b9	Vader	y	t	\N
+a30c1309e683fcf26c104b49227d2220	Vargsheim	y	t	\N
+246d570b4e453d4cb6e370070c902755	Vektor	y	t	\N
+dd0e61ab23e212d958112dd06ad0bfd2	Victorius	n	t	\N
+5a534330e31944ed43cb6d35f4ad23c7	Visdom	m	t	\N
+96aa953534221db484e6ec75b64fcc4d	Visions of Disfigurement	y	t	\N
+75fea12b82439420d1f400a4fcf3386b	Völkerball	y	t	\N
+951af0076709a6da6872f9cdf41c852b	Vomitory	y	t	\N
+5c19e1e0521f7b789a37a21c5cd5737b	Vortex	n	t	\N
+863e7a3d6d4a74739bca7dd81db5d51f	Walls of Jericho	y	t	\N
+ce14eb923a380597f2aff8b65a742048	Warbringer	y	t	\N
+a7111b594249d6a038281deb74ef0d04	Warfield	y	t	\N
+02670bc3f496ce7b1393712f58033f6c	Warkings	m	t	\N
+70492d5f3af58ace303d1c5dfc210088	When Plagues Collide	y	t	\N
+26211992c1edc0ab3a6b6506cac8bb52	Whitechapel	m	t	\N
+384e94f762d3a408cd913c14b19ac5e0	Who killed Janis	m	t	\N
+3b544a6f1963395bd3ae0aeebdf1edd8	Wintersun	y	t	\N
+511ac85b55c0c400422462064d6c77ed	Wisdom in Chains	m	t	\N
+f9ff0bcbb45bdf8a67395fa0ab3737b5	Witchfucker	y	t	\N
+39ce458f2caa87bc7b759cd8cb16e62f	Witchhunter	m	t	\N
+00a0d9697a08c1e5d4ba28d95da73292	Within Destruction	y	t	\N
+d8d3a01ba7e5d44394b6f0a8533f4647	Wizard	m	t	\N
+a2a607567311cb7a5a609146b977f4a9	Wolfheart	y	t	\N
+913df019fed1f80dc49b38f02d8bae41	World of Tomorrow	m	t	\N
+3cd94848f6ccb600295135e86f1b46a7	Xaon	y	t	\N
+b00114f9fc38b48cc42a4972d7e07df6	Zebrahead	m	t	\N
+a2761eea97ee9fe09464d5e70da6dd06	Zodiac	y	t	\N
+9d514e6b301cfe7bdc270212d5565eaf	Zombi	m	t	\N
+852c0b6d5b315c823cdf0382ca78e47f	Crisix	y	t	\N
+a2c31c455e3d0ea3f3bdbea294fe186b	Redgrin	y	t	\N
+ffd2da11d45ed35a039951a8b462e7fb	Torment of Souls	y	t	\N
+16c88f2a44ab7ecdccef28154f3a0109	Skelethal	y	t	\N
+191bab5800bd381ecf16485f91e85bc3	Keitzer	y	t	\N
+876eed60be80010455ff50a62ccf1256	Blodtåke	y	t	\N
+f4e4ef312f9006d0ae6ca30c8a6a32ff	Souldevourer	y	t	\N
+c311f3f7c84d1524104b369499bd582f	Fabulous Desaster	y	t	\N
+1629fa6d4b8adb36b0e4a245b234b826	Satan Worship	y	t	\N
+270fb708bd03433e554e0d7345630c8e	The Laws Kill Destroy (Fábio Jhasko's Sarcófago tribute)	y	t	\N
+9d1e68b7debd0c8dc86d5d6500884ab4	Mortal Peril	y	t	\N
+8987e9c300bc2fc5e5cf795616275539	Infected Inzestor	y	t	\N
+ba5e6ab17c7e5769b11f98bfe8b692d0	Birdflesh	m	t	\N
+eb0a191797624dd3a48fa681d3061212	Master	y	t	\N
+13de0a41f18c0d71f5f6efff6080440f	Misanthropia	y	t	\N
+5885f60f8c705921cf7411507b8cadc0	Severe Torture	y	t	\N
+f31ba1d770aac9bc0dcee3fc15c60a46	Undying Lust for Cadaverous Molestation (UxLxCxM)	y	t	\N
+0ae3b7f3ca9e9ddca932de0f0df00f8a	Lecks inc.	y	t	\N
+0e609404e53b251f786b41b7be93cc19	Hate	y	t	\N
+b1006928600959429230393369fe43b6	Belphegor	y	t	\N
+478aedea838b8b4a0936b129a4c6e853	I am Morbid	y	t	\N
+f2856ad30734c5f838185cc08f71b1e4	Baest	y	t	\N
+410044b393ebe6a519fde1bdb26d95e8	Der rote Milan	y	t	\N
+abca417a801cd10e57e54a3cb6c7444b	Äera	y	t	\N
+867872f29491a6473dae8075c740993e	Jesajah	y	t	\N
+c937fc1b6be0464ec9d17389913871e4	Balberskult	y	t	\N
+e9648f919ee5adda834287bbdf6210fd	Hellburst	y	t	\N
+1f86700588aed0390dd27c383b7fc963	Crypts	y	t	\N
+faec47e96bfb066b7c4b8c502dc3f649	Wound	y	t	\N
+16cf4474c5334c1d9194d003c9fb75c1	Venefixion	y	t	\N
+8e38937886f365bb96aa1c189c63c5ea	Asagraum	y	t	\N
+8ed55fda3382add32869157c5b41ed47	Possession	y	t	\N
+4e9dfdbd352f73b74e5e51b12b20923e	Grave Miasma	m	t	\N
+88059eaa73469bb47bd41c5c3cdd1b50	Sacramentum﻿	m	t	\N
+56e8538c55d35a1c23286442b4bccd26	Impaled Nazarene	m	t	\N
+375974f4fad5caae6175c121e38174d0	Bloodland	y	t	\N
+f4b526ea92d3389d318a36e51480b4c8	LAWMÄNNER	n	t	\N
+3929665297ca814b966cb254980262cb	Stagewar	m	t	\N
+fbc2b3cebe54dd00b53967c5cf4b9192	The Fog	y	t	\N
+644f6462ec9801cdc932e5c8698ee7f9	Goath	y	t	\N
+dbf1b3eb1f030affb41473a8fa69bc0c	Velvet Viper	n	t	\N
+61725742f52de502605eadeac19b837b	Elmsfire	m	t	\N
+2fb81ca1d0a935be4cb49028268baa3f	Poisöned Speed	y	t	\N
+ca3fecb0d12232d1dd99d0b0d83c39ec	Harakiri For The Sky	y	t	\N
+b3626b52d8b98e9aebebaa91ea2a2c91	Nachtblut	y	t	\N
+347fb42f546e982de2a1027a2544bfd0	Mister Misery	m	t	\N
+97724184152a2620b76e2f93902ed679	Pyogenesis	n	t	\N
+4bffc4178bd669b13ba0d91ea0522899	Schöngeist	y	t	\N
+b084dc5276d0211fae267a279e2959f0	Enter Tragedy	y	t	\N
+f66935eb80766ec0c3acee20d40db157	Erdling	y	t	\N
+cd1c06e4da41121b7362540fbe8cd62c	Stahlmann	y	t	\N
+9459200394693a7140196f07e6e717fd	Sabaton	y	t	\N
+4e74055927fd771c2084c92ca2ae56a7	The Spirit	y	t	\N
+a753c3945400cd54c7ffd35fc07fe031	Orca	y	t	\N
+8af17e883671377a23e5b8262de11af4	Kryn	m	t	\N
+d1fded22db9fc8872e86fff12d511207	V.I.D.A	y	t	\N
+c526681b295049215e5f1c2066639f4a	Impartial	m	t	\N
+3969716fc4acd0ec0c39c8a745e9459a	Lycanthrope	m	t	\N
+b7b99e418cff42d14dbf2d63ecee12a8	Speedemon	y	t	\N
+96b4b857b15ae915ce3aa5e406c99cb4	Almøst Human	y	t	\N
+8b5a84ba35fa73f74df6f2d5a788e109	Moral Putrefaction	y	t	\N
+57f622908a4d6c381241a1293d894c88	Cadaver	y	t	\N
+48438b67b2ac4e5dc9df6f3723fd4ccd	Criminal	y	t	\N
+56a5afe00fae48b02301860599898e63	Tranatopsy	y	t	\N
+3e8d4b3893a9ebbbd86e648c90cbbe63	Ludicia	y	t	\N
+c46e8abb68aae0bcdc68021a46f71a65	Komodo	m	t	\N
+e4f74be13850fc65559a3ed855bf35a8	Typhus	m	t	\N
+7b52c8c4a26e381408ee64ff6b98e231	Múr	y	t	\N
+278af3c810bb9de0f355ce115b5a2f54	Fusion Bomb	y	t	\N
+5c61f833c2fb87caab0a48e4c51fa629	Mork	y	t	\N
+2859f0ed0630ecc1589b6868fd1dde41	Gaerea	y	t	\N
+c5068f914571c27e04cd66a4ec5c1631	Kampfar	m	t	\N
+fc239fd89fd7c9edbf2bf27d1d894bc0	Implore	y	t	\N
+24701da4bd9d3ae0e64d263b72ad20e8	Mythraeum	y	t	\N
+031d6cc33621c51283322daf69e799f5	The Risen Dread	y	t	\N
+a8ace0f003d8249d012c27fe27b258b5	Pestilence	y	t	\N
+255661921f4ad57d02b1de9062eb6421	Onslaught	y	t	\N
+5d53b2be2fe7e27daa27b94724c3b6de	Blood Incantation	y	t	\N
+57126705faf40e4b5227c8a0302d13b2	Cattle Decapitation	y	t	\N
+51cb62b41cd9deaaa2dd98c773a09ebb	Misanthropic	y	t	\N
+cba8cb3c568de75a884eaacde9434443	Leng Tch'e	y	t	\N
+19cbbb1b1e68c42f3415fb1654b2d390	Bloodtruth	y	t	\N
+f44f1e343975f5157f3faf9184bc7ade	Organectomy	y	t	\N
+1e986acf38de5f05edc2c42f4a49d37e	Gutslit	y	t	\N
+10627ac0e35cfed4a0ca5b97a06b9d9f	Coffin Feeder	y	t	\N
+b834eadeaf680f6ffcb13068245a1fed	Suffocation	y	t	\N
+1ec58ca10ed8a67b1c7de3d353a2885b	Acéldama	y	t	\N
+8f523603c24072fb8ccb547503ee4c0f	Gore Dimension	y	t	\N
+43a4893e6200f462bb9fe406e68e71c0	Gutalax	y	t	\N
+9c31bcca97bb68ec33c5a3ead4786f3e	Bound to Prevail	y	t	\N
+c445544f1de39b071a4fca8bb33c2772	Basement Torture Killings	y	t	\N
+29891bf2e4eff9763aef15dc862c373f	Kanine	y	t	\N
+c8fbeead5c59de4e8f07ab39e7874213	Profanity	y	t	\N
+8fa1a366d4f2e520bc9354658c4709f1	Hurakan	y	t	\N
+812f48abd93f276576541ec5b79d48a2	Brutal Sphincter	y	t	\N
+d29c61c11e6b7fb7df6d5135e5786ee1	Tortharry	y	t	\N
+7013a75091bf79f04f07eecc248f8ee6	Human Prey	y	t	\N
+58e42b779d54e174aad9a9fb79e7ebbc	Phrymerial	y	t	\N
+67493f858802a478bfe539c8e30a7e44	Cumbeast	y	t	\N
+f7910d943cc815a4a0081668ac2119b2	Monasteries	y	t	\N
+955a5cfd6e05ed30eec7c79d2371ebcf	Côte D' Aver	y	t	\N
+03201e85fc6aa56d2cb9374e84bf52ca	Vomit the Soul	y	t	\N
+e7a227585002db9fee2f0ed56ee5a59f	Endseeker	y	t	\N
+bc111d75a59fe7191a159fd4ee927981	Wormed	y	t	\N
+017e06f9b9bccafa230a81b60ea34c46	Beheaded	y	t	\N
+22c2fc8a3a81503d40d4e532ac0e22ab	Shores of Lunacy	y	t	\N
+482818d4eb4ca4c709dcce4cc2ab413d	April in Flames	y	t	\N
+ec788cc8478763d79a18160a99dbb618	Asinis	y	t	\N
+d2f62cd276ef7cab5dcf9218d68f5bcf	Mike Litoris Complot	y	t	\N
+e71bd61e28ae2a584cb17ed776075b55	Lesson in Violence	y	t	\N
+49a41ffa9c91f7353ec37cda90966866	Urinal Tribunal	y	t	\N
+1c13f340d154b44e41c996ec08d76749	Melodramatic Fools	y	t	\N
+d5b95b21ce47502980eebfcf8d2913e0	Cypecore	y	t	\N
+0b6bcec891d17cd7858525799c65da27	Shot Crew	y	t	\N
+3cb077e20dabc945228ea58813672973	Impending Mindfuck	y	t	\N
+8734f7ff367f59fc11ad736e63e818f9	Thron	y	t	\N
+98aa80527e97026656ec54cdd0f94dff	Heretoir	m	t	\N
+430a03604913a64c33f460ec6f854c36	Asphagor	y	t	\N
+319480a02920dc261209240eed190360	Drill Star Autopsy	y	t	\N
+4ca1c3ed413577a259e29dfa053f99db	Zero Degree	y	t	\N
+2eed213e6871d0e43cc061b109b1abd4	Ferndal	y	t	\N
+fdedcd75d695d1c0eb790a5ee3ba90b5	Avataria	y	t	\N
+ed9b92eb1706415c42f88dc91284da8a	Graveworm	y	t	\N
+fb1afbea5c0c2e23396ef429d0e42c52	Agathodaimon	y	t	\N
+316a289ef71c950545271754abf583f1	Iron Savior	n	t	\N
+33b3bfc86d7a57e42aa30e7d1c2517be	Saxorior	y	t	\N
+8351282db025fc2222fc61ec8dd1df23	Empyreal	y	t	\N
+60eb202340e8035af9e96707f85730e5	Eridu	y	t	\N
+d2f79e6a931cd5b5acd5f3489dece82a	Jarl	y	t	\N
+3189b8c5e007c634d7e28ef93be2b774	Torian	n	t	\N
+a89af36e042b5aa91d6efea0cc283c02	Machine Head	y	t	\N
+eb2743e9025319c014c9011acf1a1679	The Halo Effect	y	t	\N
+c27297705354ef77feb349e949d2e19e	Credic	y	t	\N
+3258eb5f24b395695f56eee13b690da6	Glemsel	y	t	\N
+8f7939c28270f3187210641e96a98ba7	Naxen	y	t	\N
+bcf744fa5f256d6c3051dd86943524f6	Horns of Domination	y	t	\N
+3ba296bfb94ad521be221cf9140f8e10	Beltez	y	t	\N
+18e21eae8f909cbb44b5982b44bbf02f	Ninkharsag	y	t	\N
+3438d9050b2bf1e6dc0179818298bd41	Hemelbestormer	y	t	\N
+384712ec65183407ac811fff2f4c4798	Algebra	y	t	\N
+a76c5f98a56fc03100d6a7936980c563	Comaniac	y	t	\N
+66cc7344291ae2a297bf2aa93d886e22	Cryptosis	y	t	\N
+34ca5622469ad1951a3c4dc5603cea0f	Fatal Fire	n	t	\N
+be632fd63d0f90906194973ede449873	Dispised Icon	y	t	\N
+933c8182650ca4ae087544beff5bb52d	Viscera	y	t	\N
+e3de2cf8ac892a0d8616eefc4a4f59bd	Oceano	y	t	\N
+623c5a1c99aceaf0b07ae233d1888e0a	Distant	y	t	\N
+34e927c45cf3ccebb09b006b00f4e02d	Crowbar	y	t	\N
+c091e33f684c206b73b25417f6640b71	Sacred Reich	y	t	\N
+bcc770bb6652b1b08643d98fd7167f5c	Guineapig	y	t	\N
+73cb08d143f893e645292dd04967f526	Plasma	y	t	\N
+eb3a9fb71b84790e50acd81cc1aa4862	The Hu	y	t	\N
+13909e3013727a91ee750bfd8660d7bc	Volbeat	y	t	\N
+74e8b6c4be8a0f5dd843e2d1d7385a36	Bad Wolves	m	t	\N
+2dde74b7ec594b9bd78da66f1c5cafdc	Skindred	m	t	\N
+5324a886a2667283dbfe7f7974ff6fc0	Diaroe	y	t	\N
+28c5f9ffd175dcd53aa3e9da9b00dde7	Depression	y	t	\N
+b798aa74946ce75baee5806352e96272	Placenta Powerfist	y	t	\N
+6315887dd67ff4f91d51e956b06a3878	Fulci	y	t	\N
+df99cee44099ff57acbf7932670614dd	Revocation	y	t	\N
+6b141e284f88f656b776148cde8e019c	Goatwhore	y	t	\N
+b84cdd396f01275b63bdaf7f61ed5a43	Alluvial	y	t	\N
+9133f1146bbdd783f34025bf90a8e148	Escuela Grind	y	t	\N
+9d74605e4b1d19d83992a991230e89ef	Necrotted	y	t	\N
+ca54e4f7704e7b8374d0968143813fe6	Legal Hate	y	t	\N
+c245b4779defd5c69ffebbfdd239dd1b	Deep Dirty	y	t	\N
+6b157916b43b09df5a22f658ccb92b64	Blood	y	t	\N
+67cd9b4b7b33511f30e85e21b2d3b204	Schirenc Plays Pungent Stench	y	t	\N
+5c29c2e513aadfe372fd0af7553b5a6c	Mason	y	t	\N
+e4b1d8cc71fd9c1fbc40fdc1a1a5d5b3	Antagonism	y	t	\N
+b12daab6c83b1a45aa32cd9c2bc78360	Plagueborne	y	t	\N
+9722f54adb556b548bb9ecce61a4d167	Orobas	y	t	\N
+04d53bc45dc1343f266585b52dbe09b0	Kilminister	y	t	\N
+0c31e51349871cfb59cfbfaaed82eb18	Vomit Spell	y	t	\N
+41dabe0c59a3233e3691f3c893eb789e	Servant	y	t	\N
+113ab4d243afc4114902d317ad41bb39	Shaârghot	y	t	\N
+cc70416ca37c5b31e7609fcc68ca009e	Ragnarök Nordic & Viking Folk	y	t	\N
+7b91dc9ecdfa3ea7d347588a63537bb9	Perchta	y	t	\N
+55c63b0540793d537ed29f5c41eb9c3e	Estampie	y	t	\N
+43bd0d50fe7d58d8fce10c6d4232ca1e	Rauhbein	y	t	\N
+cf38e7d92bb08c96c50ddc723b624f9d	Apocalypse Orchestra	y	t	\N
+5f449b146ce14c780eee323dfc5391e8	Elvenking	m	t	\N
+eef7d6da9ba6d0bed2078a5f253f4cfc	HateSphere	y	t	\N
+ad51cbe70d798b5aec08caf64ce66094	sign of death	y	t	\N
+45e410efd11014464dd36fb707a5a9e1	Nervecell	y	t	\N
+8fdc3e13751b8f525f259d27f2531e87	WeedWizard	y	t	\N
+05e76572fb3d16ca990a91681758bbee	Human Waste	y	t	\N
+cfc61472d8abd7c54b81924119983ed9	Braincasket	y	t	\N
+1fe0175f73e5b381213057da98b8f5fb	5 Stabbed 4 Corpses	y	t	\N
+d44be0e711c2711876734b330500e5b9	Pusboil	y	t	\N
+c295bb30bf534e960a6acf7435f0e46a	Vibrio Cholera	y	t	\N
+ab3ca496cbc01a5a9ed650c4d0e26168	Demorphed	y	t	\N
+538eaaef4d029c255ad8416c01ab5719	OPS - Orphan Playground Sniper	y	t	\N
+1de3f08835ab9d572e79ac0fca13c5c2	Vor die Hunde	y	t	\N
+4c02510c3f16e13edc27eff1ef2e452c	Hereza	y	t	\N
+7cbd455ff5af40e28a1eb97849f00723	Gorgatron	y	t	\N
+3d4fe2107d6302760654b4217cf32f17	Rottenness	y	t	\N
+3c8ce0379b610d36c3723b198b982197	Nuclear Vomit	y	t	\N
+d0dae91314459033160dc47a79aa165e	Dead Man's Hand	y	t	\N
+5878f5f2b1ca134da32312175d640134	The Gentlemen's Revenge	y	t	\N
+7eeea2463ae5da9990cab53c014864fa	Gunnar	n	t	\N
+b1c7516fef4a901df12871838f934cf6	The Hollywood Vampires	y	t	\N
+4669569c9a870431c4896de37675a784	Sting	y	t	\N
+9d36a42a36b62b3f665c7fa07f07563b	Shaggy	y	t	\N
+087c643d95880c5a89fc13f3246bebae	Witchkrieg	y	t	\N
+be553803806b8634990c2eb7351ed489	Harlott	y	t	\N
+8bdd6b50b8ecca33e04837fde8ffe51e	Angstskíg	m	t	\N
+18b751c8288c0fabe7b986963016884f	Tiamat	m	t	\N
+30b8affc1afeb50c76ad57d7eda1f08f	Gorleben	m	t	\N
+a8a43e21de5b4d83a6a7374112871079	Bitchhammer	m	t	\N
+9614cbc86659974da853dee20280b8c4	Infest	y	t	\N
+bc2f39d437ff13dff05f5cfda14327cc	Corrupt	y	t	\N
+39530e3fe26ee7c557392d479cc9c93f	Incantation	y	t	\N
+537e5aa87fcfb168be5c953d224015ff	Embryo	y	t	\N
+80d331992feb02627ae8b30687c7bb78	Shampoon Killer	y	t	\N
+f6eb4364ba53708b24a4141962feb82e	Boötes Void	y	t	\N
+2cd225725d4811d813a5ea1b701db0db	Sněť	y	t	\N
+2f6fc683428eb5f8b22cc5021dc9d40d	Kadaverficker	y	t	\N
+2d5a306f74749cc6cbe9b6cd47e73162	Maceration	y	t	\N
+dba84ece8f49717c47ab72acc3ed2965	Mephorash	y	t	\N
+559314721edf178fa138534f7a1611b9	Haemorrhage	y	t	\N
+d192d350b6eace21e325ecf9b0f1ebd1	Methane	y	t	\N
+d6a020f7b50fb4512fd3c843af752809	Necrosy	y	t	\N
+73f4b98d80efb8888a2b32073417e21e	Massacre	y	t	\N
+711a7acac82d7522230e3c7d0efc3f89	Sirrush	y	t	\N
+1506aeeb8c3a699b1e3c87db03156428	Midnight	y	t	\N
+4f58423d9f925c8e8bd73409926730e8	Mystifier	y	t	\N
+96390e27bc7e2980e044791420612545	Possessed	y	t	\N
+d2c2b83008dce38013577ef83a101a1b	LIK	y	t	\N
+c1e8b6d7a1c20870d5955bcdc04363e4	Ash Nazg Búrz	y	t	\N
+480a0efd668e568595d42ac78340fe2a	Seth	y	t	\N
+d25956f771b58b6b00f338a41ca05396	Demonical	y	t	\N
+95a1f9b6006151e00b1a4cda721f469d	Arkona	y	t	\N
+5159ae414608a804598452b279491c5c	Darkfall	y	t	\N
+9bdbe50a5be5b9c92dccf2d1ef05eefd	Totensucht	y	t	\N
+8c4e8003f8d708dc3b6d486d74d9a585	Saor	y	t	\N
+b6eba7850fd20fa8dce81167f1a6edca	Home Reared Meat	y	t	\N
+5f27f488f7c8b9e4b81f59c6d776e25c	Nyctopia	y	t	\N
+1a5235c012c18789e81960333a76cd7a	Riot City	n	t	\N
+7f950b15aa65a26e8500cfffd7f89de0	Defleshed	y	t	\N
+77f94851e582202f940198a26728e71f	Resurrected	y	t	\N
+baeb191b42ec09353b389f951d19b357	Phantom Corporation	y	t	\N
+c21fe390daecee9e70b8f4b091ae316f	Bodyfarm	y	t	\N
+8aeadeeff3e1a3e1c8a6a69d9312c530	Krisiun	y	t	\N
+a4e0f3b7db0875f65bb3f55ab0aab7c6	Bloodbath	y	t	\N
+37b43a655dec0e3504142003fce04a07	Deicide	y	t	\N
+781734c0e9c01b14adc3a78a4c262d83	Matt Miller	y	t	\N
+89b5ac8fb4c102c174adf2fed752a970	Groundville Bastards	y	t	\N
+cc31970696ef00b4c6e28dba4252e45d	The Killer Apes	y	t	\N
+92e1aca33d97fa75c1e81a9db61454bb	Pinch Black	y	t	\N
+0ba2f4073dd8eff1f91650af5dc67db4	Putrid Pile	y	t	\N
+bd555d95b1ccba75afca868636b1b931	Signs of the Swarm	y	t	\N
+a93376e58f4c73737cf5ed7d88c2169c	Squash Bowels	y	t	\N
+cd3faaaf1bebf8d009aa59f887d17ef2	VILE	y	t	\N
+33538745a71fe2d30689cac96737e8f7	Suffocate Bastard	y	t	\N
+586ac67e6180a1f16a4d3b81e33eaa94	Fleshless	y	t	\N
+ca1720fd6350760c43139622c4753557	Anime Torment	y	t	\N
+645b264cb978b22bb2d2c70433723ec0	Kraanium	y	t	\N
+45816111a5b644493b68cfedfb1a0cc0	Viscera Trail	y	t	\N
+5bb416e14ac19276a4b450d343e4e981	Holy Moses	m	f	\N
+06c1680c65972c4332be73e726de9e74	Embrace your Punishment	y	t	\N
+4671068076f66fb346c4f62cbfb7f9fe	Devangelic	y	t	\N
+10407de3db48761373a403b8ddf09782	Monument of Misanthropy	y	t	\N
+77ac561c759a27b7d660d7cf0534a9c3	Ruins of Perception	y	t	\N
+3771036a0740658b11cf5eb73d9263b3	Vulvectomy	y	t	\N
+6b37fe4703bd962004cdccda304cc18e	Torsofuck	y	t	\N
+371d905385644b0ecb176fd73184239c	Crepitation	y	t	\N
+d871ebaec65bbfa0b6b97aefae5d9150	Amputated	y	t	\N
+28bb3f229ca1eeb05ef939248f7709ce	Colpocleisis	y	t	\N
+861613f5a80abdf5a15ea283daa64be3	Kinski	y	t	\N
+080d2dc6fa136fc49fc65eee1b556b46	Cephalic Carnage	m	t	\N
+2df9857b999e21569c3fcce516f0f20e	Malignancy	m	t	\N
+d5a5e9d2edeb2b2c685364461f1dfd46	Invoker	y	t	\N
+1fcf2f2315b251ebe462da320491ea9f	Torturized	y	t	\N
+7022f6b60d9642d91eebba98185cd9ba	Groza	y	t	\N
+0d01b12a6783b4e60d2e09e16431f00a	Flammenaar	y	t	\N
+9c81c8c060b39e7437b2d913f036776b	Asenblut	y	t	\N
+4522c5141f18b2a408fc8c1b00827bc3	Obscurity	y	t	\N
+5ec194adf19442544d8a94f4696f17dc	Aetherian	y	t	\N
+31e2d1e0b364475375cb17ad76aa71f2	Convictive	y	t	\N
+dff880ae9847f6fa8ed628ed4ee5741b	Nameless Death	y	t	\N
+521c8a16cf07590faee5cf30bcfb98b6	Matricide	y	t	\N
+a77c14ecd429dd5dedf3dc5ea8d44b99	Angelcrypt	y	t	\N
+b8d794c48196d514010ce2c2269b4102	Macbeth	m	t	\N
+a0abb504e661e34f5d269f113d39ea96	The Shit Shakers	y	t	\N
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	Jo Carley and the old dry skulls	y	t	\N
+69a6a78ace079846a8f0d3f89beada2c	Skaphos	y	t	\N
+43ff5aadca6d8a60dd3da21716358c7d	Warside	y	t	\N
+95800513c555e1e95a430e312ddff817	Horrible Creatures	y	t	\N
+42085fca2ddb606f4284e718074d5561	Magefa	y	t	\N
+e2226498712065ccfca00ecb57b8ed2f	On every Page	y	t	\N
+db732a1a9861777294f7dc54eeca2b3e	Mindreaper	y	t	\N
+1ace9926ad3a6dab09d16602fd2fcccc	Infected Chaos	y	t	\N
+05256decaa2ee2337533d95c7de3db9d	Maniacs Brainacts	y	t	\N
+c664656f67e963f4c0f651195f818ce0	Isn't	y	t	\N
+032d53a86540806303b4c81586308e58	Wotolom	y	t	\N
+df800795b697445f2b7dc0096d75f4df	Lack of Senses	m	t	\N
+810f28b77fa6c866fbcceb6c8aa7bac4	Disrooted	m	t	\N
+7fcdd5f715be5fce835b68b9e63e1733	Guardians Gate	m	t	\N
+5214513d882cf478e028201a0d9031c0	Arctic Winter	y	t	\N
+0e4f0487408be5baf091b74ba765dce7	Epicedium	y	t	\N
+8cd7fa96a5143f7105ca92de7ff0bac7	Crescent	y	t	\N
+bdbafc49aa8c3e75e9bd1e0ee24411b4	Purgatory	y	t	\N
+5863c78fb68ef1812a572e8f08a4e521	Torture Killer	y	t	\N
+a822d5d4cdcb5d1b340a54798ac410b7	Ton Steine Scherben	y	t	\N
+08e2440159e71c7020394db19541aabc	Are we used to it	y	t	\N
+c8fd07f040a8f2dc85f5b2d3804ea3db	Contrast	y	t	\N
+866208c5b4a74b32974bffb0f90311ca	Alteration	y	t	\N
+fd3ab918dab082b1af1df5f9dbc0041f	Soulburner	y	t	\N
+cb0785d67b1ea8952fae42efd82864a7	Hellgarden	y	t	\N
+a0d3b444bd04cd165b4e076c9fc18bee	Destruction	y	t	\N
+c846d80d826291f2a6a0d7a57e540307	Whiplash	y	t	\N
+d0b02893ceb72d11a3471fe18d7089fd	Journey of D.C.	y	t	\N
+6db22194a183d7da810dcc29ea360c17	Hellbent on Rocking	y	t	\N
+ab5428d229c61532af41ec2ca258bf30	Lost on Airfield	y	t	\N
+78a7bdfe7277f187e84b52dea7b75b0b	Defacing God	y	t	\N
+f36fba9e93f6402ba551291e34242338	Triagone	y	t	\N
+e6489b9cc39c95e53401cb601c4cae09	Losing my Grip	y	t	\N
+4622209440a0ade57b18f21ae41963d9	LEYKA	y	t	\N
+867e7f73257c5adf6a4696f252556431	Decreate	y	t	\N
+f999abbe163f001f55134273441f35c0	Spreading Miasma	y	t	\N
+9527fff55f2c38fa44281cd0e4d511ba	Root of all Evil	y	t	\N
+04c8327cc71521b265f2dc7cbe996e13	No Face no Case	m	t	\N
+f8b01df5282702329fcd1cae8877bb5f	Children of Bodom	y	f	\N
+658a9bbd0e85d854a9e140672a46ce3a	Ctulu	y	f	\N
+0925467e1cc53074a440dae7ae67e3e9	Slayer	y	f	\N
+c18bdeb4f181c22f04555ea453111da1	Harvest their Bodies	y	t	\N
+4338a835aa6e3198deba95c25dd9e3de	Call of Charon	y	t	\N
+6829c770c1de2fd9bd88fe91f1d42f56	Trennjaeger	y	t	\N
+b14521c0461b445a7ac2425e922c72df	Cavalera Conspiracy	y	t	\N
+31da4ab7750e057e56224eff51bce705	Cliteater	y	f	\N
+6fa204dccaff0ec60f96db5fb5e69b33	Uburen	y	t	\N
+2587d892c1261be043d443d06bd5b220	Kanonenfieber	y	t	\N
+b9fd9676338e36e6493489ec5dc041fe	Rats of Gomorrah (Divide)	y	t	Change name from Divide to Rats of Gomorrah
+61a6502cfdff1a1668892f52c7a00669	Arkuum	y	t	\N
+d69462bef6601bb8d6e3ffda067399d9	Gernotshagen	y	t	\N
+04728a6272117e0dc4ec29b0f7202ad8	Soul Grinder	y	t	\N
+268e1d80ad914af7d2e0f6d78eea6f98	Rise of Kronos (Surface)	y	t	Change name from Surface to Rise of Kronos
+0ada417f5b4361074360211e63449f34	Slamentation	y	t	\N
+53c25598fe4f1f71a1c596bd4997245c	Blue Collar Punks	y	t	\N
+8518eafd8feec0d8c056d396122a175a	Knife1	m	t	They play Hardcore
+4bcbcb65040e0347a1ffb5858836c49c	Knife2	y	t	\N
+0d949e45a18d81db3491a7b451e99560	Imha Tarikat	y	t	\N
+5c3278fb76fa2676984396d33ba90613	Spearhead	y	t	\N
+dda8e0792843816587427399f34bd726	Bresslufd	y	t	\N
+f1a37824dfc280b208e714bd80d5a294	NineUnderZero	y	t	\N
+786a755c895da064ccd4f9e8eb7e484e	PushSeven12	n	t	\N
+f68a3eafcc0bb036ee8fde7fc91cde13	Abbath	y	t	\N
+78f5c568100eb61401870fa0fa4fd7cb	Toxic Holocaust	y	t	\N
+ab42c2d958e2571ce5403391e9910c40	Liverless	y	t	\N
+b86f86db61493cc2d757a5cefc5ef425	Rigorious	y	t	\N
+98dd2a77f081989a185cb652662eea41	Abrasive	y	t	\N
+c1a08f1ea753843e2b4f5f3d2cb41b7b	Necromorphic Despair	y	t	\N
+807dbc2d5a3525045a4b7d882e3768ee	Chordotomy	y	t	\N
+45d62f43d6f59291905d097790f74ade	Ascendancy	m	t	\N
+2df0462e6f564f34f68866045b2a8a44	Screwed Death	m	t	\N
+6ee6a213cb02554a63b1867143572e70	Mother	y	t	\N
+496a6164d8bf65daf6ebd4616c95b4b7	Munich Fiends	y	t	\N
+db1440c4bae3edf98e3dab7caf2e7fed	Fallujah	y	t	\N
+bff322dbe273a1e2d1fe37f81acccbe4	Vulvodynia	y	t	\N
+36b208182f04f44c80937e980c3c28fd	Mélancholia	y	t	\N
+a1af2abbd036f0499296239b29b40a5f	South of Hessen	y	t	\N
+89d60b9528242c8c53ecbfde131eba21	Putridarium	y	t	\N
+e8d17786fed9fa5ddaf13881496106e4	Astral Wrath	y	t	Ukraine + Germany
+0371892b7f65ffb9c1544ee35c6330ad	Rectal Depravity	y	t	\N
+bf5c782ca6b0130372ac41ebd703463e	Satan's Revenge on Mankind	y	t	\N
+f041991eb3263fd3e5d919026e772f57	Hour of Penance	y	t	\N
+70409bc559ef6c8aabcf16941a29788b	Volière	y	t	\N
+0ecef959ca1f43d538966f7eb9a7e2ec	Zementmord	y	t	\N
+169c9d1bfabf9dec8f84e1f874d5e788	Lunatic Dictator	y	t	\N
+01ffa9ce7c50b906e4f5b6a2516ba94b	These Days & Those Days	y	t	\N
+d104b6ae44b0ac6649723bac21761d41	Napoli Violenta	y	t	\N
 \.
 
 
@@ -1614,850 +1614,850 @@ ef18843fbbf66c6aa6851c6345f7c4ac	These Days & Those Days	y	t	\N
 --
 
 COPY music.bands_countries (id_band, id_country) FROM stdin;
-fb47f889f2c7c4fee1553d0f817b8aaa	NLD                             
-348bcdb386eb9cb478b55a7574622b7c	NLD                             
-925bd435e2718d623768dbf1bc1cfb60	FRA                             
-7c7ab6fbcb47bd5df1e167ca28220ee9	FRA                             
-0cdf051c93865faa15cbc5cd3d2b69fb	USA                             
-b89e91ccf14bfd7f485dd7be7d789b0a	USA                             
-e0de9c10bbf73520385ea5dcbdf62073	USA                             
-065b56757c6f6a0fba7ab0c64e4c1ae1	USA                             
-b6da055500e3d92698575a3cfc74906c	NLD                             
-5cd1c3c856115627b4c3e93991f2d9cd	USA                             
-bfc9ace5d2a11fae56d038d68c601f00	USA                             
-63ae1791fc0523f47bea9485ffec8b8c	NLD                             
-59f900c93aee445bd51d0d3fbc722cad	150                             
-c6947b2d7fb2553635d75d160c92a2c5	DEU                             
-6e53c7c95acd615f2b29a536bc16dc43	DEU                             
-b570e354b7ebc40e20029fcc7a15e5a7	USA                             
-6c607fc8c0adc99559bc14e01170fee1	USA                             
-891a55e21dfacf2f97c450c77e7c3ea7	USA                             
-aed7ba45d0a57ddaef5da5df666de7b4	ITA                             
-de26f398ee613b636ddc998946a40e68	DEU                             
-5f31d4e87e7903f8ca2a4f8842dd4fe7	DEU                             
-8b0ee5a501cef4a5699fd3b2d4549e8f	USA                             
-ef18843fbbf66c6aa6851c6345f7c4ac	CHE                             
-3f15c445cb553524b235b01ab75fe9a6	USA                             
-656d1497f7e25fe0559c6be81a4bccae	USA                             
-8134a4079be58b29064131065f6a4c21	ITA                             
-e60c4acd9218333d7c7ac50e5aa0f51e	CHE                             
-f60ab90d94b9cafe6b32f6a93ee8fcda	USA                             
-94fea925f38999882458ab87ffda8b3a	BEL                             
-a7f9797e4cd716e1516f9d4845b0e1e2	USA                             
-3d6ff25ab61ad55180a6aee9b64515bf	USA                             
-660813131789b822f0c75c667e23fc85	USA                             
-a7a9c1b4e7f10bd1fdf77aff255154f7	USA                             
-79566192cda6b33a9ff59889eede2d66	USA                             
-7f29efc2495ce308a8f4aa7bfc11d701	USA                             
-5b20ea1312a1a21beaa8b86fe3a07140	USA                             
-6bafe8cf106c32d485c469d36c056989	USA                             
-66599a31754b5ac2a202c46c2b577c8e	USA                             
-5e4317ada306a255748447aef73fff68	USA                             
-121189969c46f49b8249633c2d5a7bfa	USA                             
-249229ca88aa4a8815315bb085cf4d61	USA                             
-076365679712e4206301117486c3d0ec	USA                             
-fc4734cc48ce1595c9dbbe806f663af8	USA                             
-86482a1e94052aa18cd803a51104cdb9	USA                             
-59f06d56c38ac98effb4c6da117b0305	USA                             
-e3f0bf612190af6c3fad41214115e004	GBR                             
-ee69e7d19f11ca58843ec2e9e77ddb38	GBR                             
-897edb97d775897f69fa168a88b01c19	CAN                             
-3e75cd2f2f6733ea4901458a7ce4236d	HUN                             
-d3ed8223151e14b936436c336a4c7278	POL                             
-be20385e18333edb329d4574f364a1f0	POL                             
-49c4097bae6c6ea96f552e38cfb6c2d1	DNK                             
-449b4d758aa7151bc1bbb24c3ffb40bb	CUB                             
-0a7ba3f35a9750ff956dca1d548dad12	DEU                             
-54b72f3169fea84731d3bcba785eac49	DEU                             
-d05a0e65818a69cc689b38c0c0007834	DEU                             
-dcabc7299e2b9ed5b05c33273e5fdd19	DEU                             
-a332f1280622f9628fccd1b7aac7370a	DEU                             
-b1bdad87bd3c4ac2c22473846d301a9e	DEU                             
-fe5b73c2c2cd2d9278c3835c791289b6	DEU                             
-7d6b45c02283175f490558068d1fc81b	FRA                             
-dddb04bc0d058486d0ef0212c6ea0682	FRA                             
-7771012413f955f819866e517b275cb4	FRA                             
-4dddd8579760abb62aa4b1910725e73c	NLD                             
-37f02eba79e0a3d29dfd6a4cf2f4d019	NLD                             
-804803e43d2c779d00004a6e87f28e30	USA                             
-c2855b6617a1b08fed3824564e15a653	USA                             
-cd9483c1733b17f57d11a77c9404893c	USA                             
-5952dff7a6b1b3c94238ad3c6a42b904	USA                             
-bb4cc149e8027369e71eb1bb36cd98e0	USA                             
-39e83bc14e95fcbc05848fc33c30821f	CZE                             
-c8d551145807972d194691247e7102a2	USA                             
-2d1f30c9fc8d7200bdf15b730c4cd757	USA                             
-a1cebab6ecfd371779f9c18e36cbba0c	USA                             
-17bcf0bc2768911a378a55f42acedba7	USA                             
-71e720cd3fcc3cdb99f2f4dc7122e078	USA                             
-20f0ae2f661bf20e506108c40c33a6f3	USA                             
-42c9b99c6b409bc9990658f6e7829542	USA                             
-bb51d2b900ba638568e48193aada8a6c	USA                             
-1833e2cfde2a7cf621d60288da14830c	USA                             
-bbdbdf297183a1c24be29ed89711f744	USA                             
-6e512379810ecf71206459e6a1e64154	USA                             
-f3b65f675d13d81c12d3bb30b0190cd1	USA                             
-1918775515a9c7b8db011fd35a443b82	USA                             
-15bf34427540dd1945e5992583412b2f	USA                             
-ba8033b8cfb1ebfc91a5d03b3a268d9f	USA                             
-233dedc0bee8bbdf7930eab3dd54daee	USA                             
-80f19b325c934c8396780d0c66a87c99	USA                             
-6e25aa27fcd893613fac13b0312fe36d	USA                             
-63e961dd2daa48ed1dade27a54f03ec4	USA                             
-d2ec9ebbccaa3c6925b86d1bd528d12f	USA                             
-c8c012313f10e2d0830f3fbc5afca619	USA                             
-9323fc63b40460bcb68a7ad9840bad5a	USA                             
-8c22a88267727dd513bf8ca278661e4d	USA                             
-541455f74d6f393174ff14b99e01b22d	USA                             
-3e3b4203ce868f55b084eb4f2da535d3	USA                             
-88ae6d397912fe633198a78a3b10f82e	USA                             
-e31fabfff3891257949efc248dfa97e2	USA                             
-986a4f4e41790e819dc8b2a297aa8c87	USA                             
-be3c26bf034e9e62057314f3945f87be	USA                             
-57f003f2f413eedf53362b020f467be4	USA                             
-692649c1372f37ed50339b91337e7fec	USA                             
-1683f5557c9db93b35d1d2ae450baa21	USA                             
-a61b878c2b563f289de2109fa0f42144	GBR                             
-51fa80e44b7555c4130bd06c53f4835c	GBR                             
-889aaf9cd0894206af758577cf5cf071	GBR                             
-faabbecd319372311ed0781d17b641d1	CAN                             
-b5d9c5289fe97968a5634b3e138bf9e2	CAN                             
-4b503a03f3f1aec6e5b4d53dd8148498	BLR                             
-7c83727aa466b3b1b9d6556369714fcf	CUB                             
-9f19396638dd8111f2cee938fdf4e455	DEU                             
-fdcbfded0aaf369d936a70324b39c978	DEU                             
-1056b63fdc3c5015cc4591aa9989c14f	DEU                             
-2876f7ecdae220b3c0dcb91ff13d0590	DEU                             
-1734b04cf734cb291d97c135d74b4b87	DEU                             
-8d7a18d54e82fcfb7a11566ce94b9109	DEU                             
-0e2ea6aa669710389cf4d6e2ddf408c4	DEU                             
-63ad3072dc5472bb44c2c42ede26d90f	DEU                             
-2aae4f711c09481c8353003202e05359	DEU                             
-fdc90583bd7a58b91384dea3d1659cde	FRA                             
-2414366fe63cf7017444181acacb6347	FRA                             
-a825b2b87f3b61c9660b81f340f6e519	FRA                             
-7df8865bbec157552b8a579e0ed9bfe3	USA                             
-cddf835bea180bd14234a825be7a7a82	NLD                             
-215513a2c867f8b24d5aea58c9abfff6	USA                             
-62a40f6fa589c7007ded80d26ad1c3a9	USA                             
-74b3b7be6ed71b946a151d164ad8ede5	GBR                             
-e64b94f14765cee7e05b4bec8f5fee31	NLD                             
-d0a1fd0467dc892f0dc27711637c864e	NLD                             
-649db5c9643e1c17b3a44579980da0ad	NLD                             
-55159d04cc4faebd64689d3b74a94009	GBR                             
-eeaeec364c925e0c821660c7a953546e	GBR                             
-4f48e858e9ed95709458e17027bb94bf	GBR                             
-2501f7ba78cc0fd07efb7c17666ff12e	NLD                             
-dd18fa7a5052f2bce8ff7cb4a30903ea	CZE                             
-bd4184ee062e4982b878b6b188793f5b	GBR                             
-91a337f89fe65fec1c97f52a821c1178	GBR                             
-baa9d4eef21c7b89f42720313b5812d4	GBR                             
-820de5995512273916b117944d6da15a	CAN                             
-fb8be6409408481ad69166324bdade9c	UKR                             
-73affe574e6d4dc2fa72b46dc9dd4815	UKR                             
-7492a1ca2669793b485b295798f5d782	DNK                             
-63d7f33143522ba270cb2c87f724b126	DNK                             
-33b6f1b596a60fa87baef3d2c05b7c04	FIN                             
-bbb668ff900efa57d936e726a09e4fe8	FIN                             
-ca5a010309ffb20190558ec20d97e5b2	NOR                             
-9db9bc745a7568b51b3a968d215ddad6	SWE                             
-401357e57c765967393ba391a338e89b	SWE                             
-87f44124fb8d24f4c832138baede45c7	SWE                             
-ed24ff8971b1fa43a1efbb386618ce35	SWE                             
-a4902fb3d5151e823c74dfd51551b4b0	SWE                             
-776da10f7e18ffde35ea94d144dc60a3	SWE                             
-bbce8e45250a239a252752fac7137e00	SWE                             
-ef6369d9794dbe861a56100e92a3c71d	SWE                             
-187ebdf7947f4b61e0725c93227676a4	ITA                             
-0903a7e60f0eb20fdc8cc0b8dbd45526	ITA                             
-237e378c239b44bff1e9a42ab866580c	ITA                             
-44f2dc3400ce17fad32a189178ae72fa	PRT                             
-426fdc79046e281c5322161f011ce68c	ESP                             
-443866d78de61ab3cd3e0e9bf97a34f6	AUT                             
-1ac0c8e8c04cf2d6f02fdb8292e74588	AUT                             
-76700087e932c3272e05694610d604ba	BEL                             
-87ded0ea2f4029da0a0022000d59232b	AUS                             
-0b0d1c3752576d666c14774b8233889f	AUS                             
-42563d0088d6ac1a47648fc7621e77c6	DEU                             
-c883319a1db14bc28eff8088c5eba10e	DEU                             
-6b7cf117ecf0fea745c4c375c1480cb5	DEU                             
-4276250c9b1b839b9508825303c5c5ae	DEU                             
-7462f03404f29ea618bcc9d52de8e647	DEU                             
-5efb7d24387b25d8325839be958d9adf	DEU                             
-e271e871e304f59e62a263ffe574ea2d	DEU                             
-a8d9eeed285f1d47836a5546a280a256	DEU                             
-abbf8e3e3c3e78be8bd886484c1283c1	DEU                             
-2cfe35095995e8dd15ab7b867e178c15	FRA                             
-4a2a0d0c29a49d9126dcb19230aa1994	FRA                             
-80fcd08f6e887f6cfbedd2156841ab2b	FRA                             
-7db066b46f48d010fdb8c87337cdeda4	USA                             
-4cfab0d66614c6bb6d399837656c590e	NLD                             
-c4678a2e0eef323aeb196670f2bc8a6e	NLD                             
-0844ad55f17011abed4a5208a3a05b74	GBR                             
-e64d38b05d197d60009a43588b2e4583	GBR                             
-88711444ece8fe638ae0fb11c64e2df3	GBR                             
-e872b77ff7ac24acc5fa373ebe9bb492	MEX                             
-db38e12f9903b156f9dc91fce2ef3919	RUS                             
-a716390764a4896d99837e99f9e009c9	BRA                             
-b885447285ece8226facd896c04cdba2	HUN                             
-522b6c44eb0aedf4970f2990a2f2a812	POL                             
-2e7a848dc99bd27acb36636124855faf	ROU                             
-8775f64336ee5e9a8114fbe3a5a628c5	DNK                             
-7cd7921da2e6aab79c441a0c2ffc969b	FIN                             
-529a1d385b4a8ca97ea7369477c7b6a7	FIN                             
-b3ffff8517114caf70b9e70734dbaf6f	FIN                             
-77f2b3ea9e4bd785f5ff322bae51ba07	FIN                             
-ffa7450fd138573d8ae665134bccd02c	FIN                             
-2cf65e28c586eeb98daaecf6eb573e7a	FIN                             
-a650d82df8ca65bb69a45242ab66b399	FIN                             
-75ab0270163731ee05f35640d56ef473	NOR                             
-a4cbfb212102da21b82d94be555ac3ec	NOR                             
-6c00bb1a64f660600a6c1545377f92dc	NOR                             
-6830afd7158930ca7d1959ce778eb681	NOR                             
-2082a7d613f976e7b182a3fe80a28958	NOR                             
-c5dc33e23743fb951b3fe7f1f477b794	NOR                             
-8fda25275801e4a40df6c73078baf753	NOR                             
-b5f7b25b0154c34540eea8965f90984d	NOR                             
-942c9f2520684c22eb6216a92b711f9e	SWE                             
-5df92b70e2855656e9b3ffdf313d7379	SWE                             
-108c58fc39b79afc55fac7d9edf4aa2a	SWE                             
-9a322166803a48932356586f05ef83c7	SWE                             
-1c6987adbe5ab3e4364685e8caed0f59	SWE                             
-7533f96ec01fd81438833f71539c7d4e	SWE                             
-c4f0f5cedeffc6265ec3220ab594d56b	SWE                             
-947ce14614263eab49f780d68555aef8	SWE                             
-d730e65d54d6c0479561d25724afd813	SWE                             
-e08383c479d96a8a762e23a99fd8bf84	SWE                             
-a3f5542dc915b94a5e10dab658bb0959	SWE                             
-eb2c788da4f36fba18b85ae75aff0344	SWE                             
-e74a88c71835c14d92d583a1ed87cc6c	SWE                             
-d73310b95e8b4dece44e2a55dd1274e6	SWE                             
-6429807f6febbf061ac85089a8c3173d	SWE                             
-66244bb43939f81c100f03922cdc3439	SWE                             
-83d15841023cff02eafedb1c87df9b11	SWE                             
-26830d74f9ed8e7e4ea4e82e28fa4761	HRV                             
-dfdef9b5190f331de20fe029babf032e	DEU                             
-5b22d1d5846a2b6b6d0cf342e912d124	DEU                             
-4261335bcdc95bd89fd530ba35afbf4c	DEU                             
-3cdb47307aeb005121b09c41c8d8bee6	DEU                             
-53407737e93f53afdfc588788b8288e8	DEU                             
-006fc2724417174310cf06d2672e34d2	DEU                             
-2ac79000a90b015badf6747312c0ccad	DEU                             
-626dceb92e4249628c1e76a2c955cd24	DEU                             
-3a2a7f86ca87268be9b9e0557b013565	DEU                             
-ac03fad3be179a237521ec4ef2620fb0	DEU                             
-7e2b83d69e6c93adf203e13bc7d6f444	DEU                             
-91b18e22d4963b216af00e1dd43b5d05	FRA                             
-02d44fbbe1bfacd6eaa9b20299b1cb78	NLD                             
-2af9e4497582a6faa68a42ac2d512735	USA                             
-f8e7112b86fcd9210dfaf32c00d6d375	GBR                             
-218f2bdae8ad3bb60482b201e280ffdc	GBR                             
-65976b6494d411d609160a2dfd98f903	GBR                             
-5b709b96ee02a30be5eee558e3058245	BRA                             
-94ca28ea8d99549c2280bcc93f98c853	NLD                             
-e4b3296f8a9e2a378eb3eb9576b91a37	CHL                             
-e62a773154e1179b0cc8c5592207cb10	CAN                             
-0a267617c0b5b4d53e43a7d4e4c522ad	NLD                             
-11f8d9ec8f6803ea61733840f13bc246	BLR                             
-53369c74c3cacdc38bdcdeda9284fe3c	RUS                             
-fa03eb688ad8aa1db593d33dabd89bad	CZE                             
-91c9ed0262dea7446a4f3a3e1cdd0698	FIN                             
-0af74c036db52f48ad6cbfef6fee2999	FIN                             
-90d523ebbf276f516090656ebfccdc9f	ISL                             
-abd7ab19ff758cf4c1a2667e5bbac444	CZE                             
-c127f32dc042184d12b8c1433a77e8c4	ISL                             
-8edf4531385941dfc85e3f3d3e32d24f	SWE                             
-8b427a493fc39574fc801404bc032a2f	GRC                             
-9bc2ca9505a273b06aa0b285061cd1de	GRC                             
-9d969d25c9f506c5518bb090ad5f8266	GRC                             
-2df8905eae6823023de6604dc5346c29	GRC                             
-8259dc0bcebabcb0696496ca406dd672	GRC                             
-249789ae53c239814de8e606ff717ec9	ITA                             
-c4ddbffb73c1c34d20bd5b3f425ce4b1	ITA                             
-457f098eeb8e1518008449e9b1cb580d	ITA                             
-6bd19bad2b0168d4481b19f9c25b4a9f	ITA                             
-e563e0ba5dbf7c9417681c407d016277	ITA                             
-edd506a412c4f830215d4c0f1ac06e55	ITA                             
-fd9a5c27c20cd89e4ffcc1592563abcf	MLT                             
-8f7de32e3b76c02859d6b007417bd509	MLT                             
-948098e746bdf1c1045c12f042ea98c2	PRT                             
-4a45ac6d83b85125b4163a40364e7b2c	PRT                             
-19baf8a6a25030ced87cd0ce733365a9	PRT                             
-990813672e87b667add44c712bb28d3d	PRT                             
-9fc7c7342d41c7c53c6e8e4b9bc53fc4	PRT                             
-3921cb3f97a88349e153beb5492f6ef4	PRT                             
-93f4aac22b526b5f0c908462da306ffc	PRT                             
-1e14d6b40d8e81d8d856ba66225dcbf3	SRB                             
-59d153c1c2408b702189623231b7898a	ESP                             
-905a40c3533830252a909603c6fa1e6a	ESP                             
-5c1a922f41003eb7a19b570c33b99ff4	ESP                             
-4267b5081fdfb47c085db24b58d949e0	ESP                             
-e8afde257f8a2cbbd39d866ddfc06103	AUT                             
-c74b5aa120021cbe18dcddd70d8622da	AUT                             
-3614c45db20ee41e068c2ab7969eb3b5	AUT                             
-3964d4f40b6166aa9d370855bd20f662	AUT                             
-31d8a0a978fad885b57a685b1a0229df	AUT                             
-8143ee8032c71f6f3f872fc5bb2a4fed	AUT                             
-46174766ce49edbbbc40e271c87b5a83	COL                             
-bbc155fb2b111bf61c4f5ff892915e6b	CUB                             
-9ab8f911c74597493400602dc4d2b412	DEU                             
-54f0b93fa83225e4a712b70c68c0ab6f	DEU                             
-1cdd53cece78d6e8dffcf664fa3d1be2	DEU                             
-1e88302efcfc873691f0c31be4e2a388	DEU                             
-13caf3d14133dfb51067264d857eaf70	DEU                             
-7a4fafa7badd04d5d3114ab67b0caf9d	DEU                             
-4927f3218b038c780eb795766dfd04ee	DEU                             
-0a97b893b92a7df612eadfe97589f242	DEU                             
-7ef36a3325a61d4f1cff91acbe77c7e3	DEU                             
-e25ee917084bdbdc8506b56abef0f351	FRA                             
-8e11b2f987a99ed900a44aa1aa8bd3d0	NLD                             
-96e3cdb363fe6df2723be5b994ad117a	FRA                             
-2c4e2c9948ddac6145e529c2ae7296da	FRA                             
-f6540bc63be4c0cb21811353c0d24f69	NLD                             
-da867941c8bacf9be8e59bc13d765f92	USA                             
-935b48a84528c4280ec208ce529deea0	GBR                             
-8852173e80d762d62f0bcb379d82ebdb	GBR                             
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	NLD                             
-ea16d031090828264793e860a00cc995	NLD                             
-b1d465aaf3ccf8701684211b1623adf2	150                             
-c9af1c425ca093648e919c2e471df3bd	NLD                             
-dde3e0b0cc344a7b072bbab8c429f4ff	BRA                             
-e29ef4beb480eab906ffa7c05aeec23d	POL                             
-4ad6c928711328d1cf0167bc87079a14	POL                             
-45b568ce63ea724c415677711b4328a7	DNK                             
-36cbc41c1c121f2c68f5776a118ea027	FIN                             
-8e62fc75d9d0977d0be4771df05b3c2f	FIN                             
-f03bde11d261f185cbacfa32c1c6538c	CZE                             
-8a6f1a01e4b0d9e272126a8646a72088	FIN                             
-dea293bdffcfb292b244b6fe92d246dc	FIN                             
-6f195d8f9fe09d45d2e680f7d7157541	ISL                             
-3bcbddf6c114327fc72ea06bcb02f9ef	001                             
-a4977b96c7e5084fcce21a0d07b045f8	SWE                             
-2113f739f81774557041db616ee851e6	SWE                             
-559ccea48c3460ebc349587d35e808dd	SWE                             
-000f49c98c428aff4734497823d04f45	SWE                             
-db46d9a37b31baa64cb51604a2e4939a	SVN                             
-754230e2c158107a2e93193c829e9e59	ESP                             
-a0fb30950d2a150c1d2624716f216316	AUT                             
-39a25b9c88ce401ca54fd7479d1c8b73	AUT                             
-781acc7e58c9a746d58f6e65ab1e90c4	AUT                             
-edb40909b64e73b547843287929818de	AUT                             
-721c28f4c74928cc9e0bb3fef345e408	BEL                             
-5435326cf392e2cd8ad7768150cd5df6	BEL                             
-8945663993a728ab19a3853e5b820a42	BEL                             
-6738f9acd4740d945178c649d6981734	BEL                             
-79ce9bd96a3184b1ee7c700aa2927e67	BEL                             
-4f840b1febbbcdb12b9517cd0a91e8f4	BEL                             
-0291e38d9a3d398052be0ca52a7b1592	BEL                             
-0870b61c5e913cb405d250e80c9ba9b9	BEL                             
-393a71c997d856ed5bb85a9695be6e46	BEL                             
-bb66c20c42c26f1874525c3ab956ec41	BEL                             
-71e32909a1bec1edfc09aec09ca2ac17	LUX                             
-f29d276fd930f1ad7687ed7e22929b64	LUX                             
-2654d6e7cec2ef045ca1772a980fbc4c	LUX                             
-382ed38ecc68052678c5ac5646298b63	LUX                             
-c4c7cb77b45a448aa3ca63082671ad97	CHE                             
-6f199e29c5782bd05a4fef98e7e41419	CHE                             
-c5f022ef2f3211dc1e3b8062ffe764f0	CHE                             
-0b6e98d660e2901c33333347da37ad36	CHE                             
-3dda886448fe98771c001b56a4da9893	CHE                             
-90d127641ffe2a600891cd2e3992685b	CHE                             
-4fa857a989df4e1deea676a43dceea07	DEU                             
-6ee2e6d391fa98d7990b502e72c7ec58	DEU                             
-e0f39406f0e15487dd9d3997b2f5ca61	DEU                             
-399033f75fcf47d6736c9c5209222ab8	DEU                             
-32814ff4ca9a26b8d430a8c0bc8dc63e	DEU                             
-2447873ddeeecaa165263091c0cbb22f	DEU                             
-fcd1c1b547d03e760d1defa4d2b98783	DEU                             
-6369ba49db4cf35b35a7c47e3d4a4fd0	DEU                             
-1fda271217bb4c043c691fc6344087c1	FRA                             
-fe2c9aea6c702e6b82bc19b4a5d76f90	FRA                             
-c0d7362d0f52d119f1beb38b12c0b651	NLD                             
-6ff24c538936b5b53e88258f88294666	USA                             
-aad365e95c3d5fadb5fdf9517c371e89	CZE                             
-071dbd416520d14b2e3688145801de41	GBR                             
-c58de8415b504a6ffa5d0b14967f91bb	GBR                             
-a5475ebd65796bee170ad9f1ef746394	GBR                             
-1a8780e5531549bd454a04630a74cd4d	GBR                             
-3ed0c2ad2c9e6e7b161e6fe0175fe113	CRI                             
-32921081f86e80cd10138b8959260e1a	MEX                             
-ab7b69efdaf168cbbe9a5b03d901be74	PAN                             
-ccff6df2a54baa3adeb0bddb8067e7c0	ARG                             
-9ee30f495029e1fdf6567045f2079be1	BRA                             
-4d79c341966242c047f3833289ee3a13	CHL                             
-5588cb8830fdb8ac7159b7cf5d1e611e	CAN                             
-3041a64f7587a6768d8e307b2662785b	IDN                             
-02f36cf6fe7b187306b2a7d423cafc2c	PHL                             
-f17c7007dd2ed483b9df587c1fdac2c7	IND                             
-7e5550d889d46d55df3065d742b5da51	IND                             
-96604499bfc96fcdb6da0faa204ff2fe	TUR                             
-368ff974da0defe085637b7199231c0a	FRO                             
-57eba43d6bec2a8115e94d6fbb42bc75	FIN                             
-de506362ebfcf7c632d659aa1f2b465d	FIN                             
-a5a8afc6c35c2625298b9ce4cc447b39	ISL                             
-57b9fe77adaac4846c238e995adb6ee2	ISL                             
-743c89c3e93b9295c1ae6e750047fb1e	IRL                             
-f9f57e175d62861bb5f2bda44a078df7	NOR                             
-6a8538b37162b23d68791b9a0c54a5bf	NOR                             
-03022be9e2729189e226cca023a2c9bf	NOR                             
-a2459c5c8a50215716247769c3dea40b	SWE                             
-eaeaed2d9f3137518a5c8c7e6733214f	DEU                             
-8ccd65d7f0f028405867991ae3eaeb56	DEU                             
-e5a674a93987de4a52230105907fffe9	DEU                             
-e285e4ecb358b92237298f67526beff7	DEU                             
-d832b654664d104f0fbb9b6674a09a11	DEU                             
-2aeb128c6d3eb7e79acb393b50e1cf7b	DEU                             
-b619e7f3135359e3f778e90d1942e6f5	FRA                             
-5c8c8b827ae259b8e4f8cb567a577a3e	FRA                             
-25fa2cdf2be085aa5394db743677fb69	NLD                             
-b7e529a8e9af2a2610182b3d3fc33698	USA                             
-9c158607f29eaf8f567cc6304ada9c6d	GBR                             
-4ffc374ef33b65b6acb388167ec542c0	GBR                             
-0bcf509f7eb2db3b663f5782c8c4a86e	CAN                             
-0c2277f470a7e9a2d70195ba32e1b08a	NLD                             
-34b1dade51ffdab56daebcf6ac981371	MNG                             
-c09ffd48de204e4610d474ade2cf3a0d	POL                             
-b04d1a151c786ee00092110333873a37	DNK                             
-9d57ebbd1d3b135839b78221388394a1	DNK                             
-30354302ae1c0715ccad2649da3d9443	DNK                             
-110cb86243320511676f788dbc46f633	DNK                             
-1c62394f457ee9a56b0885f622299ea2	SWE                             
-8e331f2ea604deea899bfd0a494309ba	NLD                             
-094caa14a3a49bf282d8f0f262a01f43	SWE                             
-e83655f0458b6c309866fbde556be35a	HRV                             
-4176aa79eae271d1b82015feceb00571	ITA                             
-014dbc80621be3ddc6dd0150bc6571ff	ARE                             
-92df3fd170b0285cd722e855a2968393	ITA                             
-351af29ee203c740c3209a0e0a8e9c22	ITA                             
-7f00429970ee9fd2a3185f777ff79922	ITA                             
-6f0eadd7aadf134b1b84d9761808d5ad	AUT                             
-13c260ca90c0f47c9418790429220899	AUT                             
-92e2cf901fe43bb77d99af2ff42ade77	AUT                             
-ca7e3b5c1860730cfd7b400de217fef2	BEL                             
-450948d9f14e07ba5e3015c2d726b452	CHE                             
-4cabe475dd501f3fd4da7273b5890c33	CHE                             
-3e52c77d795b7055eeff0c44687724a1	CHE                             
-1bb6d0271ea775dfdfa7f9fe1048147a	CHE                             
-8f4e7c5f66d6ee5698c01de29affc562	CHE                             
-f0bf2458b4c1a22fc329f036dd439f08	CHE                             
-6afdd78eac862dd63833a3ce5964b74b	CHE                             
-d1fb4e47d8421364f49199ee395ad1d3	AUS                             
-36f969b6aeff175204078b0533eae1a0	AUS                             
-1c06fc6740d924cab33dce73643d84b9	AUS                             
-c1923ca7992dc6e79d28331abbb64e72	AUS                             
-c2e88140e99f33883dac39daee70ac36	AUS                             
-19819b153eb0990c821bc106e34ab3e1	AUS                             
-ca03a570b4d4a22329359dc105a9ef22	AUS                             
-1745438c6be58479227d8c0d0220eec5	NZL                             
-4b42093adfc268ce8974a3fa8c4f6bca	DEU                             
-70d0b58ef51e537361d676f05ea39c7b	DEU                             
-6896f30283ad47ceb4a17c8c8d625891	DEU                             
-25118c5df9a2865a8bc97feb4aff4a18	DEU                             
-5a53bed7a0e05c2b865537d96a39646f	DEU                             
-29b7417c5145049d6593a0d88759b9ee	DEU                             
-c81794404ad68d298e9ceb75f69cf810	DEU                             
-d0386252fd85f76fc517724666cf59ae	DEU                             
-0cddbf403096e44a08bc37d1e2e99b0f	DEU                             
-b08c5a0f666c5f8a83a7bcafe51ec49b	FRA                             
-b5d1848944ce92433b626211ed9e46f8	NLD                             
-51053ffab2737bd21724ed0b7e6c56f7	FRA                             
-92dd59a949dfceab979dd25ac858f204	USA                             
-3ccca65d3d9843b81f4e251dcf8a3e8c	GBR                             
-d9a6c1fcbafa92784f501ca419fe4090	GBR                             
-b69b0e9285e4fa15470b0969836ac5ae	GBR                             
-0f512371d62ae34741d14dde50ab4529	NLD                             
-da34d04ff19376defc2facc252e52cf0	CZE                             
-fd1bd629160356260c497da84df860e2	GBR                             
-ee325100d772dd075010b61b6f33c82a	CZE                             
-fe1fbc7d376820477e38b5fa497e4509	CZE                             
-3dba6c9259786defe62551e38665a94a	GBR                             
-34d29649cb20a10a5e6b59c531077a59	GBR                             
-b4087680a00055c7b9551c6a1ef50816	CZE                             
-9144b4f0da4c96565c47c38f0bc16593	JAM                             
-ee1bc524d6d3410e94a99706dcb12319	MEX                             
-7b959644258e567b32d7c38e21fdb6fa	MEX                             
-cf3ecbdc9b5ae9c5a87ab05403691350	BRA                             
-92e67ef6f0f8c77b1dd631bd3b37ebca	BRA                             
-79d924bae828df8e676ba27e5dfc5f42	CAN                             
-56525146be490541a00c20a1dab0a465	ISR                             
-dd663d37df2cb0b5e222614dd720f6d3	POL                             
-d2ec80fcff98ecb676da474dfcb5fe5c	POL                             
-f5eaa9c89bd215868235b0c068050883	DNK                             
-2aa7757363ff360f3a08283c1d157b2c	DNK                             
-dbde8de43043d69c4fdd3e50a72b859d	FIN                             
-e318f5bc96fd248b69f6a969a320769e	NOR                             
-9f10d335198e90990f3437c5733468e7	SWE                             
-d71218f2abfdd51d95ba7995b93bd536	SWE                             
-4e14f71c5702f5f71ad7de50587e2409	SWE                             
-eb626abaffa54be81830da1b29a3f1d8	SWE                             
-84557a1d9eb96a680c0557724e1d0532	SWE                             
-fe1f86f611c34fba898e4c90b71ec981	SWE                             
-4cc6d79ef4cf3af13b6c9b77783e688b	ITA                             
-8f7d02638c253eb2d03118800c623203	ITA                             
-2cca468dcaea0a807f756b1de2b3ec7b	ITA                             
-869d4f93046289e11b591fc7a740bc43	ITA                             
-37b93f83b5fe94e766346ef212283282	ITA                             
-dcd3968ac5b1ab25328f4ed42cdf2e2b	SRB                             
-12c0763f59f7697824567a3ca32191db	ESP                             
-71aabfaa43d427516f4020c7178de31c	AUT                             
-bfff088b67e0fc6d1b80dbd6b6f0620c	DEU                             
-3e7f48e97425d4c532a0787e54843863	DEU                             
-8b3d594047e4544f608c2ebb151aeb45	DEU                             
-eaf446aca5ddd602d0ab194667e7bec1	DEU                             
-b34f0dad8c934ee71aaabb2a675f9822	DEU                             
-c6458620084029f07681a55746ee4d69	DEU                             
-950d43371e8291185e524550ad3fd0df	DEU                             
-186aab3d817bd38f76c754001b0ab04d	DEU                             
-32f27ae0d5337bb62c636e3f6f17b0ff	DEU                             
-57338bd22a6c5ba32f90981ffb25ef23	FRA                             
-69af98a8916998443129c057ee04aec4	FRA                             
-e163173b9350642f7c855bf37c144ce0	GBR                             
-48aeffb54173796a88ef8c4eb06dbf10	CZE                             
-54f89c837a689f7f27667efb92e3e6b1	150                             
-e9782409a3511c3535149cdfb5b76364	150                             
-81a86312a4aa3660f273d6ed5e4a6c7d	CZE                             
-c7d1a2a30826683fd366e7fd6527e79c	EGY                             
-793955e5d62f9b22bae3b59463c9ef63	CHL                             
-e4f2a1b2efa9caa67e58fa9610903ef0	CHL                             
-d79d3a518bd9912fb38fa2ef71c39750	ISR                             
-5f572d201a24500b2db6eca489a6a620	DNK                             
-100691b7539d5ae455b6f4a18394420c	FIN                             
-0646225016fba179076d7df56260d1b2	NOR                             
-ae653e4f46c5928cc4b4b171efbcf881	NOR                             
-856256d0fddf6bfd898ef43777a80f0c	GRC                             
-5ff09619b7364339a105a1cbcb8d65fd	MLT                             
-0dc9cb94cdd3a9e89383d344a103ed5b	AUT                             
-ac6dc9583812a034be2f5aacbf439236	BEL                             
-4ceb1f68d8a260c644c25799629a5615	BEL                             
-fe7838d63434580c47798cbc5c2c8c63	DEU                             
-e47c5fcf4a752dfcfbccaab5988193ef	DEU                             
-3d482a4abe7d814a741b06cb6306d598	DEU                             
-b5bc9b34286d4d4943fc301fe9b46e46	DEU                             
-589a30eb4a7274605385d3414ae82aaa	DEU                             
-5ce10014f645da4156ddd2cd0965986e	USA                             
-06efe152a554665e02b8dc4f620bf3f1	USA                             
-8f1f10cb698cb995fd69a671af6ecd58	USA                             
-11635778f116ce6922f6068638a39028	USA                             
-8a1acf425fb1bca48fb543edcc20a90d	NLD                             
-63bd9a49dd18fbc89c2ec1e1b689ddda	USA                             
-e67e51d5f41cfc9162ef7fd977d1f9f5	USA                             
-3d2ff8abd980d730b2f4fd0abae52f60	USA                             
-47b23e889175dde5d6057db61cb52847	USA                             
-44b7bda13ac1febe84d8607ca8bbf439	USA                             
-3b0b94c18b8d65aec3a8ca7f4dae720d	IRN                             
-8589a6a4d8908d7e8813e9a1c5693d70	USA                             
-1bc1f7348d79a353ea4f594de9dd1392	USA                             
-6a0e9ce4e2da4f2cbcd1292fddaa0ac6	USA                             
-ac94d15f46f10707a39c4bc513cd9f98	USA                             
-28a95ef0eabe44a27f49bbaecaa8a847	USA                             
-567ddbaeec9bc3c5f0348a21ebd914b1	GBR                             
-b2b4ae56a4531455e275770dc577b68e	GBR                             
-fddfe79923a5373a44237e0e60f5c845	ISR                             
-495ddc6ae449bf858afe5512d28563f5	POL                             
-f9030edd3045787fcbcfd47da5246596	DNK                             
-5d56713e4586c9b1920eb1a3d4597564	DNK                             
-8d788b28d613c227ea3c87ac898a8256	EST                             
-1f94ea2f8cb55dd130ec2254c7c2238c	FIN                             
-5226c9e67aff4f963aea67c95cd5f3f0	FIN                             
-e58ecda1a7b9bfdff6a10d398f468c3f	NOR                             
-277ce66a47017ca1ce55714d5d2232b2	GRC                             
-3005cc8298f189f94923611386015c78	ITA                             
-7f2679aa5b1116cc22bab4ee10018f59	BEL                             
-b46e412d7f90e277a1b9370cfeb26abe	DEU                             
-49920f80faa980ca10fea8f31ddd5fc9	DEU                             
-2ad8a3ceb96c6bf74695f896999019d8	DEU                             
-25cde5325befa9538b771717514351fb	DEU                             
-cf2676445aa6abcc43a4b0d4b01b42a1	DEU                             
-c2d7bbc06d62144545c45b9060b0a629	DEU                             
-62254b7ab0a2b3d3138bde893dde64a3	DEU                             
-f291caafeb623728ebf0166ac4cb0825	DEU                             
-1a46202030819f7419e300997199c955	DEU                             
-183bea99848e19bdb720ba5774d216ba	DEU                             
-f9d5d4c7b26c7b832ee503b767d5df52	BEL                             
-8bc31f7cc79c177ab7286dda04e2d1e5	USA                             
-7e0d5240ec5d34a30b6f24909e5edcb4	USA                             
-f953fa7b33e7b6503f4380895bbe41c8	USA                             
-058fcf8b126253956deb3ce672d107a7	USA                             
-b14814d0ee12ffadc8f09ab9c604a9d0	USA                             
-5447110e1e461c8c22890580c796277a	USA                             
-1da77fa5b97c17be83cc3d0693c405cf	USA                             
-d449a9b2eed8b0556dc7be9cda36b67b	GBR                             
-7463543d784aa59ca86359a50ef58c8e	GBR                             
-14ab730fe0172d780da6d9e5d432c129	DEU                             
-28bc31b338dbd482802b77ed1fd82a50	DEU                             
-264721f3fc2aee2d28dadcdff432dbc1	DEU                             
-9d3ac6904ce73645c6234803cd7e47ca	DEU                             
-44012166c6633196dc30563db3ffd017	DEU                             
-aed85c73079b54830cd50a75c0958a90	DEU                             
-da2110633f62b16a571c40318e4e4c1c	DEU                             
-ce2caf05154395724e4436f042b8fa53	DEU                             
-ad01952b3c254c8ebefaf6f73ae62f7d	DEU                             
-bbddc022ee323e0a2b2d8c67e5cd321f	DEU                             
-d9ab6b54c3bd5b212e8dc3a14e7699ef	DEU                             
-679eaa47efb2f814f2642966ee6bdfe1	DEU                             
-e1db3add02ca4c1af33edc5a970a3bdc	DEU                             
-cf4ee20655dd3f8f0a553c73ffe3f72a	DEU                             
-10d91715ea91101cfe0767c812da8151	DEU                             
-1209f43dbecaba22f3514bf40135f991	DEU                             
-dcff9a127428ffb03fc02fdf6cc39575	DEU                             
-1e9413d4cc9af0ad12a6707776573ba0	DEU                             
-b01fbaf98cfbc1b72e8bca0b2e48769c	DEU                             
-4b98a8c164586e11779a0ef9421ad0ee	DEU                             
-1ca632ac231052e4116239ccb8952dfe	DEU                             
-e061c04af9609876757f0b33d14c63e5	DEU                             
-7d9488e60660507d0f88850245ddc7a5	ZAF                             
-abb4decfc5a094f45911b94337e7e2c4	AUS                             
-7eaf9a47aa47f3c65595ae107feab05d	DEU                             
-828d51c39c87aad9b1407d409fa58e36	DEU                             
-d2ff1e521585a91a94fb22752dd0ab45	DEU                             
-b0ce1e93de9839d07dab8d268ca23728	DEU                             
-28f843fa3a493a3720c4c45942ad970e	DEU                             
-9138c2cc0326412f2515623f4c850eb3	DEU                             
-d857ab11d383a7e4d4239a54cbf2a63d	DEU                             
-3af7c6d148d216f13f66669acb8d5c59	DEU                             
-f4219e8fec02ce146754a5be8a85f246	DEU                             
-0ab20b5ad4d15b445ed94fa4eebb18d8	DEU                             
-7fc454efb6df96e012e0f937723d24aa	DEU                             
-8edfa58b1aedb58629b80e5be2b2bd92	DEU                             
-3d01ff8c75214314c4ca768c30e6807b	DEU                             
-d9bc1db8c13da3a131d853237e1f05b2	DEU                             
-9cf73d0300eea453f17c6faaeb871c55	DEU                             
-d6de9c99f5cfa46352b2bc0be5c98c41	DEU                             
-5194c60496c6f02e8b169de9a0aa542c	DEU                             
-8654991720656374d632a5bb0c20ff11	DEU                             
-fe228019addf1d561d0123caae8d1e52	DEU                             
-1104831a0d0fe7d2a6a4198c781e0e0d	DEU                             
-410d913416c022077c5c1709bf104d3c	DEU                             
-97ee29f216391d19f8769f79a1218a71	DEU                             
-f07c3eef5b7758026d45a12c7e2f6134	DEU                             
-6d3b28f48c848a21209a84452d66c0c4	DEU                             
-8c69497eba819ee79a964a0d790368fb	DEU                             
-1197a69404ee9475146f3d631de12bde	DEU                             
-f0c051b57055b052a3b7da1608f3039e	DEU                             
-ff5b48d38ce7d0c47c57555d4783a118	DEU                             
-ade72e999b4e78925b18cf48d1faafa4	DEU                             
-887d6449e3544dca547a2ddba8f2d894	DEU                             
-2672777b38bc4ce58c49cf4c82813a42	DEU                             
-832dd1d8efbdb257c2c7d3e505142f48	DEU                             
-f37ab058561fb6d233b9c2a0b080d4d1	DEU                             
-3be3e956aeb5dc3b16285463e02af25b	DEU                             
-988d10abb9f42e7053450af19ad64c7f	DEU                             
-2a024edafb06c7882e2e1f7b57f2f951	DEU                             
-2fa2f1801dd37d6eb9fe4e34a782e397	DEU                             
-e0c2b0cc2e71294cd86916807fef62cb	DEU                             
-52ee4c6902f6ead006b0fb2f3e2d7771	DEU                             
-952dc6362e304f00575264e9d54d1fa6	DEU                             
-32af59a47b8c7e1c982ae797fc491180	DEU                             
-0020f19414b5f2874a0bfacd9d511b84	DEU                             
-de12bbf91bc797df25ab4ae9cee1946b	DEU                             
-89adcf990042dfdac7fd23685b3f1e37	DEU                             
-3bd94845163385cecefc5265a2e5a525	DEU                             
-99bd5eff92fc3ba728a9da5aa1971488	DEU                             
-24ff2b4548c6bc357d9d9ab47882661e	DEU                             
-829922527f0e7d64a3cfda67e24351e3	DEU                             
-aa86b6fc103fc757e14f03afe6eb0c0a	DEU                             
-5ec1e9fa36898eaf6d1021be67e0d00c	DEU                             
-8ce896355a45f5b9959eb676b8b5580c	DEU                             
-5f992768f7bb9592bed35b07197c87d0	DEU                             
-f644bd92037985f8eb20311bc6d5ed94	DEU                             
-1e8563d294da81043c2772b36753efaf	DEU                             
-362f8cdd1065b0f33e73208eb358991d	DEU                             
-6d57b25c282247075f5e03cde27814df	DEU                             
-9b1088b616414d0dc515ab1f2b4922f1	DEU                             
-0fbddeb130361265f1ba6f86b00f0968	DEU                             
-f0e1f32b93f622ea3ddbf6b55b439812	DEU                             
-53a0aafa942245f18098ccd58b4121aa	DEU                             
-0780d2d1dbd538fec3cdd8699b08ea02	DEU                             
-58db028cf01dd425e5af6c7d511291c1	DEU                             
-2252d763a2a4ac815b122a0176e3468f	DEU                             
-11d396b078f0ae37570c8ef0f45937ad	DEU                             
-585b13106ecfd7ede796242aeaed4ea8	DEU                             
-6c1fcd3c91bc400e5c16f467d75dced3	DEU                             
-7d878673694ff2498fbea0e5ba27e0ea	DEU                             
+312793778e3248b6577e3882a77f68f3	DEU                             
+dd3e531c469005b17115dbf611b01c88	DEU                             
+dd15d5adf6349f5ca53e7a2641d41ab7	DEU                             
+4a27a1ef21d32d1b30d55f092af0d5a7	DEU                             
+398af626887ad21cd66aeb272b8337be	DEU                             
+eb999c99126a456f9db3c5d3b449fa7f	DEU                             
+0da2e7fa0ba90f4ae031b0d232b8a57a	CUB                             
+71b6971b6323b97f298af11ed5455e55	HUN                             
+36233ed8c181dfacc945ad598fb4f1a1	DNK                             
+221fa1624ee1e31376cb112dd2487953	GBR                             
+5958cd5ce011ea83c06cb921b1c85bb3	NLD                             
+844de407cd83ea1716f1ff57ea029285	POL                             
+df24a5dd8a37d3d203952bb787069ea2	GBR                             
+048d40092f9bd3c450e4bdeeff69e8c3	FRA                             
+33b39f2721f79a6bb6bb5e1b2834b0bd	FRA                             
+b145159df60e1549d1ba922fc8a92448	NLD                             
+16a56d0941a310c3dc4f967041574300	CAN                             
+e2be3c3c22484d1872c7b225339c0962	DEU                             
+1fbd4bcce346fd2b2ffb41f6e767ea84	NLD                             
+bca8f048f2c5ff787950eb1ba088c70e	DEU                             
+e093d52bb2d4ff4973e72f6eb577714b	DEU                             
+c9dc004fc3d039ad7fb49456e5902b01	GBR                             
+67cc86339b2654a35fcc57da8fc9d33d	CAN                             
+6916ed9292a811c895e259c542af0e8a	DEU                             
+fd401865b6db200e5eb8a1ac1b1fbab1	DEU                             
+218d618a041c057d0e05799670e7e2c8	DEU                             
+a4bcd57d5cda816e4ffd1f83031a36ca	CAN                             
+ec5c65bfe530446b696f04e51aa19201	DEU                             
+14af57131cbbf57afb206c8707fdab6c	FRA                             
+a45ff5de3a96b103a192f1f133d0b0cf	DEU                             
+de3e4c12f56a35dc1ee6866b1ddd9d53	FRA                             
+88726e1a911181e20cf8be52e1027f26	DEU                             
+9b7d722b58370498cd39104b2d971978	DEU                             
+ac61757d33fc8563eb2409ed08e21974	DEU                             
+93299af7c9e3c63c7b3d9bb2242c9d6b	DEU                             
+11a5f9f425fd6da2d010808e5bf759ab	GBR                             
+bc5daaf162914ff1200789d069256d36	USA                             
+98e8599d1486fadca0bf7aa171400dd8	DEU                             
+66857d7c2810238438483356343ff26e	NLD                             
+aa5e46574bdc6034f4d49540c0c2d1ad	POL                             
+13d81f0ed06478714344fd0f1a6a81bb	DEU                             
+eaacb8ee01500f18e370303be3d5c591	DEU                             
+22ef651048289b302401afe2044c5c01	DEU                             
+f986b00063e79f7c061f40e6cfbbd039	GBR                             
+cbefc03cdd1940f37a7033620f8ff69f	GBR                             
+2eb42b9c31ac030455e5a4a79bccf603	GBR                             
+08f8c67c20c4ba43e8ba6fa771039c94	DEU                             
+b4c5b422ab8969880d9f0f0e9124f0d7	DEU                             
+01a9f3fdd96daef6bc85160bd21d35dc	DEU                             
+2187711aeaa2944a707c9eabaa2df72a	DEU                             
+6a4e8bab29666632262eb20c336e85e2	DEU                             
+53199d92b173437f0207a916e8bcc23a	CUB                             
+53a5da370321dac39033a5fe6af13e77	DEU                             
+b0cc1a3a1aee13a213ee73e3d4a2ce70	FRA                             
+c2ab38206dce633f15d66048ad744f03	DEU                             
+630500eabc48c986552cb01798a31746	DEU                             
+e5ea2ac2170d4f9c2bdbd74ab46523f7	NLD                             
+ceffa7550e5d24a8c808d3516b5d6432	DEU                             
+81200f74b5d831e3e206a66fe4158370	DEU                             
+5e6ff2b64b4c0163ab83ab371abe910b	DEU                             
+262a49b104426ba0d1559f8785931b9d	DEU                             
+0add3cab2a932f085109a462423c3250	DEU                             
+20a75b90511c108e3512189ccb72b0ac	GBR                             
+7d6ede8454373d4ca5565436cbfeb5c0	DEU                             
+aa98c9e445775e7c945661e91cf7e7aa	DEU                             
+4e9b4bdef9478154fc3ac7f5ebfb6418	USA                             
+198445c0bbe110ff65ac5ef88f026aff	DEU                             
+abc73489d8f0d1586a2568211bdeb32f	DEU                             
+458da4fc3da734a6853e26af3944bf75	ITA                             
+26ad58455460d75558a595528825b672	DEU                             
+0f9fb8452cc5754f83e084693d406721	SWE                             
+0959583c7f421c0bb8adb20e8faeeea1	FIN                             
+2f623623ce7eeb08c30868be121b268a	SWE                             
+b66781a52770d78b260f15d125d1380b	SWE                             
+739260d8cb379c357340977fe962d37a	SWE                             
+8765cfbf81024c3bd45924fee9159982	NOR                             
+28bc0abd0cf390a4472b1f60bd0cfe4a	FIN                             
+298a577c621a7a1c365465f694e0bd13	SWE                             
+fecc75d978ad94aaa4e17b3ff9ded487	FIN                             
+333ca835f34af241fe46af8e7a037e17	NOR                             
+be2c012d60e32fbf456cd8184a51973d	NOR                             
+a0cdbd2af8f1ddbb2748a2eaddce55da	SWE                             
+3b6d90f85e8dadcb3c02922e730e4a9d	SWE                             
+3a7e46261a591b3e65d1e7d0b2439b20	NOR                             
+9a6c0d8ea613c5b002ff958275318b08	FIN                             
+3577f7160794aa4ba4d79d0381aefdb1	POL                             
+02677b661c84417492e1c1cb0b0563b2	SWE                             
+9d1ecaf46d6433f9dd224111440cfa3b	NOR                             
+92ad5e8d66bac570a0611f2f1b3e43cc	NOR                             
+90669320cd8e4a09bf655310bffdb9ba	DEU                             
+20de83abafcb071d854ca5fd57dec0e8	HUN                             
+370cde851ed429f1269f243dd714cce2	GRC                             
+786d3481362b8dee6370dfb9b6df38a2	ITA                             
+dab701a389943f0d407c6e583abef934	PRT                             
+8ac49bad86eacffcea299416cd92c3b7	ESP                             
+50737756bd539f702d8e6e75cf388a31	ESP                             
+d2d67d63c28a15822569c5033f26b133	AUT                             
+afb6e0f1e02be39880596a490c900775	GRC                             
+9ff04a674682ece6ee93ca851db56387	AUT                             
+4900e24b2d0a0c5e06cf3db8b0638800	DEU                             
+b9ffbdbbe63789cc6fa9ee2548a1b2ed	DEU                             
+cfe122252751e124bfae54a7323bf02d	DEU                             
+7f3e5839689216583047809a7f6bd0ff	DEU                             
+491801c872c67db465fda0f8f180569d	SWE                             
+647dadd75e050b230269e43a4fe351e2	ITA                             
+5fa07e5db79f9a1dccb28d65d6337aa6	NLD                             
+0feeee5d5e0738c1929bf064b184409b	CZE                             
+38734dcdff827db1dc3215e23b4e0890	DEU                             
+3e28a735f3fc31a9c8c30b47872634bf	SWE                             
+02fd1596536ea89e779d37ded52ac353	DEU                             
+dfb7069bfc6e0064a6c667626eca07b4	BEL                             
+9436650a453053e775897ef5733e88fe	CHE                             
+cf6a93131b0349f37afeb9319b802136	BEL                             
+5629d465ed80efff6e25b8775b98c2d1	CHE                             
+16fe483d0681e0c86177a33e22452e13	CHE                             
+4db3435be88015c70683b4368d9b313b	LUX                             
+bd9059497b4af2bb913a8522747af2de	CHE                             
+25f5d73866a52be9d0e2e059955dfd56	BEL                             
+272a23811844499845c6e33712c8ba6c	USA                             
+8cd1cca18fb995d268006113a3d6e4bf	BLR                             
+2b068ea64f42b2ccd841bb3127ab20af	DEU                             
+979b5de4a280c434213dd8559cf51bc0	DEU                             
+45d592ef3a8dc14dccc087e734582e82	DEU                             
+71a520b6d0673d926d02651b269cf92c	DEU                             
+22aaaebe901de8370917dcc53f53dbf6	DEU                             
+6e064a31dc53ab956403ec3654c81f1f	DEU                             
+dddfdb5f2d7991d93f0f97dce1ef0f45	DEU                             
+56b07537df0c44402f5f87a8dcb8402c	SWE                             
+e6793169497d66ac959a7beb35d6d497	NLD                             
+0ab01e57304a70cf4f7f037bd8afbe49	FRA                             
+71144850f4fb4cc55fc0ee6935badddf	SWE                             
+eed35187b83d0f2e0042cf221905163c	NLD                             
+b615ea28d44d2e863a911ed76386b52a	NLD                             
+bda66e37bf0bfbca66f8c78c5c8032b8	DEU                             
+2799b4abf06a5ec5e262d81949e2d18c	DEU                             
+a20050efc491a9784b5cced21116ba68	DEU                             
+05fcf330d8fafb0a1f17ce30ff60b924	SWE                             
+386a023bd38fab85cb531824bfe9a879	SWE                             
+abe78132c8e446430297d08bd1ecdab0	FIN                             
+7b3ab6743cf8f7ea8491211e3336e41d	ESP                             
+bd4ca3a838ce3972af46b6e2d85985f2	DEU                             
+6caa47f7b3472053b152f84ce72c182c	USA                             
+a05a13286752cb6fc14f39f51cedd9ce	AUS                             
+781c745a0d6b02cdecadf2e44d445d1a	DEU                             
+71ac59780209b4c074690c44a3bba3b7	DEU                             
+82f43cc1bda0b09efff9b356af97c7ab	DEU                             
+d908b6b9019639bced6d1e31463eea85	DEU                             
+1437c187d64f0ac45b6b077a989d5648	GBR                             
+4be3e31b7598745d0e96c098bbf7a1d7	USA                             
+d1e0bdb2b2227bdd5e47850eec61f9ea	USA                             
+123131d2d4bd15a0db8f07090a383157	DEU                             
+78bbff6bf39602a577c9d8a117116330	USA                             
+2054decb2290dbaab1c813fd86cc5f8b	ITA                             
+6adc39f4242fd1ca59f184e033514209	DEU                             
+281eb11c857bbe8b6ad06dc1458e2751	UKR                             
+dfa61d19b62369a37743b38215836df9	GBR                             
+efe9ed664a375d10f96359977213d620	DEU                             
+30a100fe6a043e64ed36abb039bc9130	DEU                             
+c5f4e658dfe7b7af3376f06d7cd18a2a	ITA                             
+dcab0d84960cda81718e38ee47688a75	DEU                             
+3aa1c6d08d286053722d17291dc3f116	PRT                             
+818ce28daba77cbd2c4235548400ffb2	DEU                             
+6d25c7ad58121b3effe2c464b851c27a	AUS                             
+8791e43a8287ccbc21f61be21e90ce43	AUT                             
+5c59b6aa317b306a1312a67fe69bf512	GRC                             
+cd004b87e2adfb72b28752a6ef6cd639	DEU                             
+1b62f034014b1d242c84c6fe7e6470f0	SWE                             
+b02ba5a5e65487122c2c1c67351c3ea0	DEU                             
+ea3b6b67824411a4cfaa5c8789282f48	DEU                             
+f2a863a08c3e22cc942264ac4bc606e3	SWE                             
+eb39fa9323a6b3cbc8533cd3dadb9f76	DEU                             
+768207c883fd6447d67f3d5bc09211bd	USA                             
+61725742f52de502605eadeac19b837b	DEU                             
+2fb81ca1d0a935be4cb49028268baa3f	DEU                             
+4190210961bce8bf2ac072c878ee7902	AUS                             
+2f090f093a2868dccca81a791bc4941f	AUS                             
+8981b4a0834d2d59e1d0dceb6022caae	AUT                             
+a7e071b3de48cec1dd24de6cbe6c7bf1	USA                             
+f3ac75dfbf1ce980d70dc3dea1bf4636	DNK                             
+de1e0ed5433f5e95c8f48e18e1c75ff6	DNK                             
+e20976feda6d915a74c751cbf488a241	DEU                             
+b3d0eb96687420dc4e5b10602ac42690	GBR                             
+e4f13074d445d798488cb00fa0c5fbd4	DEU                             
+5dd5b236a364c53feb6db53d1a6a5ab9	DEU                             
+486bf23406dec9844b97f966f4636c9b	SWE                             
+1fd7fc9c73539bee88e1ec137b5f9ad2	GBR                             
+ef3c0bf190876fd31d5132848e99df61	FRA                             
+2569a68a03a04a2cd73197d2cc546ff2	AUT                             
+05c87189f6c230c90bb1693567233100	DEU                             
+77bfe8d21f1ecc592062f91c9253d8ab	NOR                             
+018b60f1dc74563ca02f0a14ee272e4d	DEU                             
+40fcfb323cd116cf8199485c35012098	FRA                             
+d68956b2b5557e8f1be27a4632045c1e	USA                             
+ba9bfb4d7c1652a200d1d432f83c5fd1	SWE                             
+4dde2c290e3ee11bd3bd1ecd27d7039a	UKR                             
+34fd3085dc67c39bf1692938cf3dbdd9	NLD                             
+fcf66a6d6cfbcb1d4a101213b8500445	DEU                             
+d5ec808c760249f11fbcde2bf4977cc6	DEU                             
+5637bae1665ae86050cb41fb1cdcc3ee	CAN                             
+2d1ba9aa05ea4d94a0acb6b8dde29d6b	AUS                             
+cd80c766840b7011fbf48355c0142431	CHE                             
+7b675f4c76aed34cf2d5943d83198142	AUS                             
+93025091752efa184fd034f285573afe	CHE                             
+0cd2b45507cc7c4ead2aaa71c59af730	DEU                             
+34ef35a77324b889aab18380ad34b51a	FIN                             
+869bb972f8bef83979774fa123c56a4e	NLD                             
+472e67129f0c7add77c7c907dac3351f	BEL                             
+23f5e1973b5a048ffaaa0bd0183b5f87	DEU                             
+08b84204877dce2a08abce50d9aeceed	DEU                             
+309263122a445662099a3dabce2a4f17	NLD                             
+c833c98be699cd7828a5106a37d12c2e	DEU                             
+40a259aebdbb405d2dc1d25b05f04989	DEU                             
+563fcbf5f44e03e0eeb9c8d6e4c8e127	FRA                             
+f1022ae1bc6b46d51889e0bb5ea8b64f	FIN                             
+ed783268eca01bff52c0f135643a9ef7	DEU                             
+f49f851c639e639b295b45f0e00c4b4c	DEU                             
+9b55ad92062221ec1bc80f950f667a6b	DEU                             
+f6708813faedbf607111d83fdce91828	USA                             
+f3b8f1a2417bdc483f4e2306ac6004b2	SWE                             
+bf2c8729bf5c149067d8e978ea3dcd32	DEU                             
+72b73895941b319645450521aad394e8	SWE                             
+436f76ddf806e8c3cbdc9494867d0f79	DEU                             
+4e7054dff89623f323332052d0c7ff6e	NOR                             
+5cc06303f490f3c34a464dfdc1bfb120	DEU                             
+cbf6de82cf77ca17d17d293d6d29a2b2	DEU                             
+3c2234a7ce973bc1700e0c743d6a819c	USA                             
+7cbd455ff5af40e28a1eb97849f00723	USA                             
+3d4fe2107d6302760654b4217cf32f17	MEX                             
+d0dae91314459033160dc47a79aa165e	DEU                             
+5878f5f2b1ca134da32312175d640134	DEU                             
+4669569c9a870431c4896de37675a784	GBR                             
+9d36a42a36b62b3f665c7fa07f07563b	JAM                             
+cd0bc2c8738b2fef2d78d197223b17d5	DEU                             
+2c5705766131b389fa1d88088f1bb8a8	DEU                             
+3e98ecfa6a4c765c5522f897a4a8de23	USA                             
+db472eaf615920784c2b83fc90e8dcc5	USA                             
+6772cdb774a6ce03a928d187def5453f	USA                             
+f655d84d670525246ee7d57995f71c10	DNK                             
+cb80a6a84ec46f085ea6b2ff30a88d80	MEX                             
+6a13b854e05f5ba6d2a0d873546fc32d	DEU                             
+24af2861df3c72c8f1b947333bd215fc	DEU                             
+7bc374006774a2eda5288fea8f1872e3	DEU                             
+846a0115f0214c93a5a126f0f9697228	PRT                             
+0964b5218635a1c51ff24543ee242514	DEU                             
+c52d5020aad50e03d48581ffb34cd1c3	DEU                             
+dcdcd2f22b1d5f85fa5dd68fa89e3756	DEU                             
+c82b23ed65bb8e8229c54e9e94ba1479	DEU                             
+0182742917720e1b2cf59ff671738253	USA                             
+91abd5e520ec0a40ce4360bfd7c5d573	DEU                             
+e6624ef1aeab84f521056a142b5b2d12	GBR                             
+3ddbf46000c2fbd44759f3b4672b64db	BEL                             
+38b2886223461f15d65ff861921932b5	DEU                             
+dfca36a68db327258a2b0d5e3abe86af	DEU                             
+07d82d98170ab334bc66554bafa673cf	BRA                             
+42f6dd3a6e21d6df71db509662d19ca4	SWE                             
+118c9af69a42383387e8ce6ab22867d7	USA                             
+07f467f03da5f904144b0ad3bc00a26d	DEU                             
+e29470b6da77fb63e9b381fa58022c84	DEU                             
+0a3a1f7ca8d6cf9b2313f69db9e97eb8	DEU                             
+3fae5bf538a263e96ff12986bf06b13f	FRA                             
+34a9067cace79f5ea8a6e137b7a1a5c8	DEU                             
+a9ef9373c9051dc4a3e2f2118537bb2d	DEU                             
+009f51181eb8c6bb5bb792af9a2fdd07	FIN                             
+e63a014f1310b8c7cbe5e2b0fd66f638	CHE                             
+55b6aa6562faa9381e43ea82a4991079	SWE                             
+1dc7d7d977193974deaa993eb373e714	DEU                             
+5ab944fac5f6a0d98dc248a879ec70ff	DEU                             
+0a0f6b88354de7afe84b8a07dfadcc26	USA                             
+240e556541427d81f4ed1eda86f33ad3	NOR                             
+d162c87d4d4b2a8f6dda58d4fba5987f	USA                             
+21077194453dcf49c2105fda6bb89c79	GBR                             
+5bd15db3f3bb125cf3222745f4fe383f	GBR                             
+1e71013b49bbd3b2aaa276623203453f	DEU                             
+2e4e6a5f485b2c7e22f9974633c2b900	DEU                             
+541fa0085b17ef712791151ca285f1a7	DEU                             
+f2ba1f213e72388912791eb68adc3401	FRA                             
+210e99a095e594f2547e1bb8a9ac6fa7	RUS                             
+6cec93398cd662d79163b10a7b921a1b	DEU                             
+6ca47c71d99f608d4773b95f9b859142	USA                             
+024e91d84c3426913db8367f4df2ceb3	CHE                             
+773b5037f85efc8cc0ff3fe0bddf2eb8	ROU                             
+46ea4c445a9ff8e288258e3ec9cd1cf0	USA                             
+c41b9ec75e920b610e8907e066074b30	AUT                             
+a91887f44d8d9fdcaa401d1c719630d7	DEU                             
+4f5b2e20e9b7e5cc3f53256583033752	NLD                             
+1f56e4b8b8a0da3b8ec5b32970e4b0d8	DEU                             
+0d01b12a6783b4e60d2e09e16431f00a	DEU                             
+9c81c8c060b39e7437b2d913f036776b	DEU                             
+ef297890615f388057b6a2c0a2cbc7ab	USA                             
+b7f0e9013f8bfb209f4f6b2258b6c9c8	USA                             
+c827a8c6d72ff66b08f9e2ab64e21c01	USA                             
+a985c9764e0e6d738ff20f2328a0644b	USA                             
+573f13e31f1be6dea396ad9b08701c47	USA                             
+748ac622dcfda98f59c3c99593226a75	USA                             
+f00bbb7747929fafa9d1afd071dba78e	USA                             
+9a8d3efa0c3389083df65f4383b155fb	USA                             
+ac8eab98e370e2a8711bad327f5f7c55	USA                             
+717ec52870493e8460d6aeddd9b7def8	USA                             
+71f4e9782d5f2a5381f5cdf7c5a35d89	USA                             
+05ee6afed8d828d4e7ed35b0483527f7	USA                             
+9639834b69063b336bb744a537f80772	USA                             
+fcc491ba532309d8942df543beaec67e	DEU                             
+662d17c67dcabc738b8620d3076f7e46	USA                             
+c349bc9795ba303aa49e44f64301290e	DEU                             
+aa5808895fd2fca01d080618f08dca51	DEU                             
+66597873e0974fb365454a5087291094	NLD                             
+6ffa656be5ff3db085578f54a05d4ddb	DEU                             
+891b302f7508f0772a8fdb71ccbf9868	BLR                             
+dddbd203ace7db250884ded880ea7be4	DEU                             
+a7eda23a9421a074fe5ec966810018d7	DEU                             
+ddae1d7419331078626bc217b23ea8c7	DEU                             
+c82a107cd7673a4368b7252aa57810fc	USA                             
+1cc93e4af82b1b7e08bace9a92d1f762	DEU                             
+fb80cd69a40a73fb3b9f22cf58fd4776	SRB                             
+6d779916de27702814e4874dcf4f9e3a	USA                             
+63a9f0ea7bb98050796b649e85481845	CZE                             
+7d3618373e07c4ce8896006919bbb531	DEU                             
+460bf623f241651a7527a63d32569dc0	GBR                             
+ef75c0b43ae9ba972900e83c5ccf5cac	FIN                             
+182a1e726ac1c8ae851194cea6df0393	BEL                             
+0d8ef82742e1d5de19b5feb5ecb3aed3	GBR                             
+90802bdf218986ffc70f8a086e1df172	DEU                             
+d1ba47339d5eb2254dd3f2cc9f7e444f	DEU                             
+7cb94a8039f617f505df305a1dc2cc61	AUT                             
+a9afdc809b94392fb1c2e873dbb02781	DEU                             
+576fea4a0c5425ba382fff5f593a33f1	BRA                             
+55696bac6cdd14d47cbe7940665e21d3	PRT                             
+34e927c45cf3ccebb09b006b00f4e02d	USA                             
+f8b3eaefc682f8476cc28caf71cb2c73	DEU                             
+3c6444d9a22c3287b8c483117188b3f4	DEU                             
+35bde21520f1490f0333133a9ae5b4fc	DEU                             
+4a9cd04fd04ab718420ee464645ccb8b	DEU                             
+824f75181a2bbd69fb2698377ea8a952	DEU                             
+d92ee81a401d93bb2a7eba395e181c04	DEU                             
+ad759a3d4f679008ffdfb07cdbda2bb0	DEU                             
+3480c10b83b05850ec18b6372e235139	DEU                             
+c5d3d165539ddf2020f82c17a61f783d	DEU                             
+b1d18f9e5399464bbe5dea0cca8fe064	DEU                             
+7c7e63c9501a790a3134392e39c3012e	DEU                             
+e3e9ccd75f789b9689913b30cb528be0	DEU                             
+d02f33b44582e346050cefadce93eb95	DEU                             
+707270d99f92250a07347773736df5cc	DEU                             
+ee36fdf153967a0b99d3340aadeb4720	DEU                             
+13291409351c97f8c187790ece4f5a97	DEU                             
+647a73dd79f06cdf74e1fa7524700161	DEU                             
+d9c849266ee3ac1463262df200b3aab8	DEU                             
+8b22cf31089892b4c57361d261bd63f7	DEU                             
+ab1d9c0bfcc2843b8ea371f48ed884bb	DEU                             
+ea3f5f97f06167f4819498b4dd56508e	GBR                             
+a99dca5593185c498b63a5eed917bd4f	GBR                             
+a6c27c0fb9ef87788c1345041e840f95	DEU                             
+f79485ffe5db7e276e1e625b0be0dbec	FRA                             
+eb4558fa99c7f8d548cbcb32a14d469c	ITA                             
+d76db99cdd16bd0e53d5e07bcf6225c8	RUS                             
+4c576d921b99dad80e4bcf9b068c2377	USA                             
+13c8bd3a0d92bd186fc5162eded4431d	USA                             
+50026a2dff40e4194e184b756a7ed319	DEU                             
+92edfbaa71b7361a3081991627b0e583	USA                             
+062c44f03dce5bf39f81d0bf953926fc	DEU                             
+79cbf009784a729575e50a3ef4a3b1cc	CAN                             
+6f60a61fcc05cb4d42c81ade04392cfc	DEU                             
+073f87af06b8d8bc561bb3f74e5f714f	LUX                             
+f34c903e17cfeea18e499d4627eeb3ec	USA                             
+03fec47975e0e1e2d0bc723af47281de	DEU                             
+118b96dde2f8773b011dfb27e51b2f95	DEU                             
+7df470ec0292985d8f0e37aa6c2b38d5	SWE                             
+75241d56d63a68adcd51d828eb76ca80	ISL                             
+381b834c6bf7b25b9b627c9eeb81dd8a	NLD                             
+cabcfb35912d17067131f7d2634ac270	USA                             
+60a105e79a86c8197cec9f973576874b	CZE                             
+e6cbb2e0653a61e35d26df2bcb6bc4c7	FIN                             
+e039d55ed63a723001867bc4eb842c00	DEU                             
+010fb41a1a7714387391d5ea1ecdfaf7	DEU                             
+3123e3df482127074cdd5f830072c898	DEU                             
+849c829d658baaeff512d766b0db3cce	DEU                             
+3b8d2a5ff1b16509377ce52a92255ffe	USA                             
+2460cdf9598c810ac857d6ee9a84935a	DEU                             
 33f03dd57f667d41ac77c6baec352a81	DEU                             
-3509af6be9fe5defc1500f5c77e38563	DEU                             
-0640cfbf1d269b69c535ea4e288dfd96	DEU                             
-36648510adbf2a3b2028197a60b5dada	DEU                             
-eb3bfb5a3ccdd4483aabc307ae236066	DEU                             
-1ebd63d759e9ff532d5ce63ecb818731	DEU                             
-059792b70fc0686fb296e7fcae0bda50	DEU                             
-7dfe9aa0ca5bb31382879ccd144cc3ae	DEU                             
-fb28e62c0e801a787d55d97615e89771	DEU                             
-652208d2aa8cdd769632dbaeb7a16358	DEU                             
-278c094627c0dd891d75ea7a3d0d021e	DEU                             
-0a56095b73dcbd2a76bb9d4831881cb3	DEU                             
-ff578d3db4dc3311b3098c8365d54e6b	DEU                             
-4548a3b9c1e31cf001041dc0d166365b	DEU                             
-5842a0c2470fe12ee3acfeec16c79c57	DEU                             
-96682d9c9f1bed695dbf9176d3ee234c	DEU                             
-12e93f5fab5f7d16ef37711ef264d282	DEU                             
-4094ffd492ba473a2a7bea1b19b1662d	DEU                             
-4ee21b1371ba008a26b313c7622256f8	DEU                             
-4453eb658c6a304675bd52ca75fbae6d	DEU                             
-360c000b499120147c8472998859a9fe	DEU                             
-4bb93d90453dd63cc1957a033f7855c7	DEU                             
-c05d504b806ad065c9b548c0cb1334cd	DEU                             
-b96a3cb81197e8308c87f6296174fe3e	DEU                             
-095849fbdc267416abc6ddb48be311d7	DEU                             
-72778afd2696801f5f3a1f35d0e4e357	DEU                             
-5c0adc906f34f9404d65a47eea76dac0	DEU                             
-fdcf3cdc04f367257c92382e032b6293	DEU                             
-88dd124c0720845cba559677f3afa15d	DEU                             
-f4f870098db58eeae93742dd2bcaf2b2	DEU                             
-d433b7c1ce696b94a8d8f72de6cfbeaa	DEU                             
-28bb59d835e87f3fd813a58074ca0e11	DEU                             
-cafe9e68e8f90b3e1328da8858695b31	DEU                             
-ad62209fb63910acf40280cea3647ec5	DEU                             
-9e84832a15f2698f67079a3224c2b6fb	DEU                             
-4a7d9e528dada8409e88865225fb27c4	DEU                             
-d3e98095eeccaa253050d67210ef02bb	DEU                             
-c3490492512b7fe65cdb0c7305044675	DEU                             
-e61e30572fd58669ae9ea410774e0eb6	DEU                             
-485065ad2259054abf342d7ae3fe27e6	DEU                             
-278606b1ac0ae7ef86e86342d1f259c3	DEU                             
-a538bfe6fe150a92a72d78f89733dbd0	DEU                             
-09d8e20a5368ce1e5c421a04cb566434	DEU                             
-4366d01be1b2ddef162fc0ebb6933508	DEU                             
-52b133bfecec2fba79ecf451de3cf3bb	DEU                             
-f042da2a954a1521114551a6f9e22c75	DEU                             
-405c7f920b019235f244315a564a8aed	DEU                             
-3656edf3a40a25ccd00d414c9ecbb635	DEU                             
-6d89517dbd1a634b097f81f5bdbb07a2	DEU                             
-5af874093e5efcbaeb4377b84c5f2ec5	DEU                             
-5037c1968f3b239541c546d32dec39eb	DEU                             
-deaccc41a952e269107cc9a507dfa131	DEU                             
-a29c1c4f0a97173007be3b737e8febcc	DEU                             
-4fab532a185610bb854e0946f4def6a4	DEU                             
-e6fd7b62a39c109109d33fcd3b5e129d	DEU                             
-da29e297c23e7868f1d50ec5a6a4359b	DEU                             
-96048e254d2e02ba26f53edd271d3f88	DEU                             
-c2275e8ac71d308946a63958bc7603a1	DEU                             
-b785a5ffad5e7e36ccac25c51d5d8908	DEU                             
-63c0a328ae2bee49789212822f79b83f	DEU                             
-5eed658c4b7b68a0ecc49205b68d54e7	DEU                             
-145bd9cf987b6f96fa6f3b3b326303c9	DEU                             
-c238980432ab6442df9b2c6698c43e47	DEU                             
-8cadf0ad04644ce2947bf3aa2817816e	DEU                             
-85fac49d29a31f1f9a8a18d6b04b9fc9	DEU                             
-b81ee269be538a500ed057b3222c86a2	DEU                             
-cf71a88972b5e06d8913cf53c916e6e4	DEU                             
-5518086aebc9159ba7424be0073ce5c9	DEU                             
-302ebe0389198972c223f4b72894780a	DEU                             
-ac62ad2816456aa712809bf01327add1	DEU                             
-470f3f69a2327481d26309dc65656f44	DEU                             
-e254616b4a5bd5aaa54f90a3985ed184	DEU                             
-3c5c578b7cf5cc0d23c1730d1d51436a	DEU                             
-213c449bd4bcfcdb6bffecf55b2c30b4	DEU                             
-4ea353ae22a1c0d26327638f600aeac8	DEU                             
-d399575133268305c24d87f1c2ef054a	DEU                             
-54c09bacc963763eb8742fa1da44a968	DEU                             
-cba95a42c53bdc6fbf3ddf9bf10a4069	DEU                             
-88a51a2e269e7026f0734f3ef3244e89	DEU                             
-dde31adc1b0014ce659a65c8b4d6ce42	DEU                             
-332d6b94de399f86d499be57f8a5a5ca	DEU                             
-b73377a1ec60e58d4eeb03347268c11b	DEU                             
-e3419706e1838c7ce6c25a28bef0c248	DEU                             
-213c302f84c5d45929b66a20074075df	DEU                             
-22c030759ab12f97e941af558566505e	DEU                             
-f5507c2c7beee622b98ade0b93abb7fe	DEU                             
-41bee031bd7d2fdb14ff48c92f4d7984	DEU                             
-39a464d24bf08e6e8df586eb5fa7ee30	DEU                             
-f7c3dcc7ba01d0ead8e0cfb59cdf6afc	DEU                             
-0b9d35d460b848ad46ec0568961113bf	DEU                             
-546bb05114b78748d142c67cdbdd34fd	DEU                             
-4ac863b6f6fa5ef02afdd9c1ca2a5e24	DEU                             
-1e2bcbb679ccfdea27b28bd1ea9f2e67	DEU                             
-64d9f86ed9eeac2695ec7847fe7ea313	DEU                             
-65b029279eb0f99c0a565926566f6759	DEU                             
-9bfbfab5220218468ecb02ed546e3d90	DEU                             
-be41b6cfece7dfa1b4e4d226fb999607	DEU                             
-32917b03e82a83d455dd6b7f8609532c	DEU                             
-b20a4217acaf4316739c6a5f6679ef60	DEU                             
-178227c5aef3b3ded144b9e19867a370	DEU                             
-75cde58f0e5563f287f2d4afb0ce4b7e	DEU                             
-b74881ac32a010e91ac7fcbcfebe210e	DEU                             
-fd85bfffd5a0667738f6110281b25db8	DEU                             
-6e4b91e3d1950bcad012dbfbdd0fff09	DEU                             
-32a02a8a7927de4a39e9e14f2dc46ac6	DEU                             
-747f992097b9e5c9df7585931537150a	DEU                             
-0ddd0b1b6329e9cb9a64c4d947e641a8	DEU                             
-89eec5d48b8969bf61eea38e4b3cfdbf	DEU                             
-703b1360391d2aef7b9ec688b00849bb	DEU                             
-b4b46e6ce2c563dd296e8bae768e1b9d	DEU                             
-1a1bfb986176c0ba845ae4f43d027f58	DEU                             
-7ecdb1a0eb7c01d081acf2b7e11531c0	DEU                             
-8e9f5b1fc0e61f9a289aba4c59e49521	DEU                             
-536d1ccb9cce397f948171765c0120d4	DEU                             
-15b70a4565372e2da0d330568fe1d795	DEU                             
-46e1d00c2019ff857c307085c58e0015	DEU                             
-fb5f71046fd15a0a22d7bda38971f142	DEU                             
-512914f31042dacd2a05bfcebaacdb96	DEU                             
-d96d9dac0f19368234a1fe2d4daf7f7c	DEU                             
-5aa3856374df5daa99d3d33e6a38a865	DEU                             
-afd755c6a62ac0a0947a39c4f2cd2c20	DEU                             
-ead662696e0486cb7a478ecd13a0b5c5	DEU                             
-62165afb63fc004e619dff4d2132517c	DEU                             
-90bebabe0c80676a4f6207ee0f8caa4c	DEU                             
-ee8cde73a364c2b066f795edda1a303a	DEU                             
-92e25f3ba88109b777bd65b3b3de28a9	DEU                             
-4f6ae7ce964e64fdc143602aaaab1c26	DEU                             
-2f39cfcedf45336beb2e966e80b93e22	DEU                             
-5b3c70181a572c8d92d906ca20298d93	DEU                             
-c02f12329daf99e6297001ef684d6285	DEU                             
-f64162c264d5679d130b6e8ae84d704e	DEU                             
-0674a20e29104e21d141843a86421323	DEU                             
-24dd5b3de900b9ee06f913a550beb64c	DEU                             
-2eb6fb05d553b296096973cb97912cc0	DEU                             
-50681f5168e67b62daa1837d8f693001	DEU                             
-ada3962af4845c243fcd1ccafc815b09	DEU                             
-07759c4afc493965a5420e03bdc9b773	DEU                             
-8989ab42027d29679d1dedc518eb04bd	DEU                             
-266674d0a44a3a0102ab80021ddfd451	DEU                             
-50e7b1ba464091976138ec6a57b08ba0	DEU                             
-a51211ef8cbbf7b49bfb27c099c30ce1	DEU                             
-c45ca1e791f2849d9d11b3948fdefb74	DEU                             
-b05f3966288598b02cda4a41d6d1eb6b	DEU                             
-6ff4735b0fc4160e081440b3f7238925	DEU                             
-d5282bd6b63b4cd51b50b40d192f1161	DEU                             
-5159fd46698ae21d56f1684c2041bd79	DEU                             
-c63ecd19a0ca74c22dfcf3063c9805d2	DEU                             
-e08f00b43f7aa539eb60cfa149afd92e	DEU                             
-5ef6a0f70220936a0158ad66fd5d9082	DEU                             
-25ebb3d62ad1160c96bbdea951ad2f34	DEU                             
-d97a4c5c71013baac562c2b5126909e1	DEU                             
-1ebe59bfb566a19bc3ce5f4fb6c79cd3	DEU                             
-7f499363c322c1243827700c67a7591c	DEU                             
-2040754b0f9589a89ce88912bcf0648e	DEU                             
-13cd421d8a1cb48800543b9317aa2f52	DEU                             
-4b9f3b159347c34232c9f4b220cb22de	DEU                             
-81a17f1bf76469b18fbe410d8ec77da8	DEU                             
-15137b95180ccc986f6321acffb9cb6f	DEU                             
-20d32d36893828d060096b2cd149820b	DEU                             
-546f8a4844ac636dd18025dcc673a3ab	DEU                             
-ce5e821f2dcc57569eae793f628c99cf	DEU                             
-cd11b262d721d8b3f35ad2d2af8431dd	DEU                             
-15cee64305c1b40a4fac10c26ffa227d	DEU                             
-3771bd5f354df475660a24613fcb7a8c	DEU                             
-f43bb3f980f58c66fc81874924043946	DEU                             
-069cdf9184e271a3c6d45ad7e86fcac2	DEU                             
-49f6021766f78bffb3f824eb199acfbc	DEU                             
-f04de6fafc611682779eb2eb36bdbe25	DEU                             
-f7c31a68856cab2620244be2df27c728	DEU                             
-ae2056f2540325e2de91f64f5ac130b6	DEU                             
-eced087124a41417845c0b0f4ff44ba9	DEU                             
-edaf03c0c66aa548df3cebdae0f94545	DEU                             
-16cbdd4df5f89d771dccfa1111d7f4bc	DEU                             
-9abdb4a0588186fc4425b29080e820a2	DEU                             
-06a4594d3b323539e9dc4820625d01b8	DEU                             
-b5c7675d6faefd09e871a6c1157e9353	DEU                             
-df8457281db2cba8bbcb4b3b80f2b9a3	DEU                             
-f85df6e18a73a6d1f5ccb59ee51558ae	DEU                             
-0308321fc4f75ddaed8208c24f2cb918	DEU                             
-7acb475eda543ccd0622d546c5772c5a	DEU                             
-ba8d3efe842e0755020a2f1bc5533585	DEU                             
-5a154476dd67358f4dab8500076dece3	DEU                             
-b8e18040dc07eead8e6741733653a740	DEU                             
-0bc244b6aa99080c3d37fea06d328193	DEU                             
+01bcfac216d2a08cd25930234e59f1a1	GRC                             
+c63b6261b8bb8145bc0fd094b9732c24	USA                             
+5ef02a06b43b002e3bc195b3613b7022	DEU                             
+5934340f46d5ab773394d7a8ac9e86d5	DEU                             
+1c4af233da7b64071abf94d79c41a361	DEU                             
+b36eb6a54154f7301f004e1e61c87ce8	CUB                             
+bbbb086d59122dbb940740d6bac65976	USA                             
+26c2bb18f3a9a0c6d1392dae296cfea7	DEU                             
+6af2c726b2d705f08d05a7ee9509916e	NLD                             
+3a232003be172b49eb64e4d3e9af1434	USA                             
+e3c8afbeb0ec4736db977d18e7e37020	USA                             
+f32badb09f6aacb398d3cd690d90a668	USA                             
+99761fad57f035550a1ca48e47f35157	DEU                             
+87bd9baf0b0d760d1f0ca9a8e9526161	DEU                             
+f975b4517b002a52839c42e86b34dc96	DEU                             
+5b5fc236828ee2239072fd8826553b0a	DEU                             
+218ac7d899a995dc53cabe52da9ed678	DEU                             
+364be07c2428493479a07dbefdacc11f	PRT                             
+56bf60ca682b8f68e8843ad8a55c6b17	AUT                             
+8ee257802fc6a4d44679ddee10bf24a9	DEU                             
+94a62730604a985647986b509818efee	DEU                             
+09c00610ca567a64c82da81cc92cb846	ISL                             
+bc834c26e0c9279cd3139746ab2881f1	CHL                             
+64a25557d4bf0102cd8f60206c460595	DEU                             
+445a222489d55b5768ec2f17b1c3ea34	DEU                             
+fd0a7850818a9a642a125b588d83e537	COL                             
+93aa5f758ad31ae4b8ac40044ba6c110	DEU                             
+99bdf8d95da8972f6979bead2f2e2090	FIN                             
+123f90461d74091a96637955d14a1401	USA                             
+60eb61670a5385e3150cd87f915b0967	DEU                             
+b454fdfc910ad8f6b7509072cf0b4031	SWE                             
+06c5c89047bfd6012e6fb3c2bd3cb24b	USA                             
+156c19a6d9137e04b94500642d1cb8c2	DEU                             
+827bf758c7ce2ac0f857379e9e933f77	DEU                             
+e2afc3f96b4a23d451c171c5fc852d0f	ISL                             
+cd3296ec8f7773892de22dfade4f1b04	DEU                             
+05bea3ed3fcd45441c9c6af3a2d9952d	DEU                             
+5f07809ecfce3af23ed5550c6adf0d78	SWE                             
+baceebebc179d3cdb726f5cbfaa81dfe	DEU                             
+2db1850a4fe292bd2706ffd78dbe44b9	POL                             
+a30c1309e683fcf26c104b49227d2220	DEU                             
+246d570b4e453d4cb6e370070c902755	USA                             
+dd0e61ab23e212d958112dd06ad0bfd2	DEU                             
+5a534330e31944ed43cb6d35f4ad23c7	DEU                             
+96aa953534221db484e6ec75b64fcc4d	GBR                             
+75fea12b82439420d1f400a4fcf3386b	DEU                             
+951af0076709a6da6872f9cdf41c852b	SWE                             
+5c19e1e0521f7b789a37a21c5cd5737b	NLD                             
+863e7a3d6d4a74739bca7dd81db5d51f	USA                             
+ce14eb923a380597f2aff8b65a742048	USA                             
+a7111b594249d6a038281deb74ef0d04	DEU                             
+02670bc3f496ce7b1393712f58033f6c	150                             
+70492d5f3af58ace303d1c5dfc210088	BEL                             
+26211992c1edc0ab3a6b6506cac8bb52	USA                             
+384e94f762d3a408cd913c14b19ac5e0	DEU                             
+3b544a6f1963395bd3ae0aeebdf1edd8	FIN                             
+511ac85b55c0c400422462064d6c77ed	USA                             
+f9ff0bcbb45bdf8a67395fa0ab3737b5	DEU                             
+39ce458f2caa87bc7b759cd8cb16e62f	DEU                             
+00a0d9697a08c1e5d4ba28d95da73292	SVN                             
+d8d3a01ba7e5d44394b6f0a8533f4647	DEU                             
+a2a607567311cb7a5a609146b977f4a9	FIN                             
+913df019fed1f80dc49b38f02d8bae41	DEU                             
+3cd94848f6ccb600295135e86f1b46a7	CHE                             
+b00114f9fc38b48cc42a4972d7e07df6	USA                             
+a2761eea97ee9fe09464d5e70da6dd06	DEU                             
+9d514e6b301cfe7bdc270212d5565eaf	USA                             
+852c0b6d5b315c823cdf0382ca78e47f	ESP                             
+a2c31c455e3d0ea3f3bdbea294fe186b	DEU                             
+ffd2da11d45ed35a039951a8b462e7fb	DEU                             
+16c88f2a44ab7ecdccef28154f3a0109	FRA                             
+191bab5800bd381ecf16485f91e85bc3	DEU                             
+876eed60be80010455ff50a62ccf1256	DEU                             
+f4e4ef312f9006d0ae6ca30c8a6a32ff	DEU                             
+c311f3f7c84d1524104b369499bd582f	DEU                             
+1629fa6d4b8adb36b0e4a245b234b826	001                             
+270fb708bd03433e554e0d7345630c8e	BRA                             
+9d1e68b7debd0c8dc86d5d6500884ab4	DEU                             
+8987e9c300bc2fc5e5cf795616275539	DEU                             
+ba5e6ab17c7e5769b11f98bfe8b692d0	SWE                             
+eb0a191797624dd3a48fa681d3061212	CZE                             
+13de0a41f18c0d71f5f6efff6080440f	NLD                             
+5885f60f8c705921cf7411507b8cadc0	NLD                             
+f31ba1d770aac9bc0dcee3fc15c60a46	DEU                             
+0ae3b7f3ca9e9ddca932de0f0df00f8a	FRA                             
+0e609404e53b251f786b41b7be93cc19	POL                             
+b1006928600959429230393369fe43b6	AUT                             
+478aedea838b8b4a0936b129a4c6e853	USA                             
+f2856ad30734c5f838185cc08f71b1e4	DNK                             
+410044b393ebe6a519fde1bdb26d95e8	DEU                             
+abca417a801cd10e57e54a3cb6c7444b	DEU                             
+867872f29491a6473dae8075c740993e	AUT                             
+c937fc1b6be0464ec9d17389913871e4	DEU                             
+e9648f919ee5adda834287bbdf6210fd	DEU                             
+1f86700588aed0390dd27c383b7fc963	DEU                             
+faec47e96bfb066b7c4b8c502dc3f649	DEU                             
+16cf4474c5334c1d9194d003c9fb75c1	FRA                             
+8e38937886f365bb96aa1c189c63c5ea	NLD                             
+8ed55fda3382add32869157c5b41ed47	BEL                             
+4e9dfdbd352f73b74e5e51b12b20923e	GBR                             
+88059eaa73469bb47bd41c5c3cdd1b50	SWE                             
+56e8538c55d35a1c23286442b4bccd26	FIN                             
+375974f4fad5caae6175c121e38174d0	DEU                             
+f4b526ea92d3389d318a36e51480b4c8	DEU                             
+3929665297ca814b966cb254980262cb	DEU                             
+fbc2b3cebe54dd00b53967c5cf4b9192	DEU                             
+644f6462ec9801cdc932e5c8698ee7f9	DEU                             
+dbf1b3eb1f030affb41473a8fa69bc0c	DEU                             
+ca3fecb0d12232d1dd99d0b0d83c39ec	AUT                             
+b3626b52d8b98e9aebebaa91ea2a2c91	DEU                             
+347fb42f546e982de2a1027a2544bfd0	SWE                             
+97724184152a2620b76e2f93902ed679	DEU                             
+4bffc4178bd669b13ba0d91ea0522899	DEU                             
+b084dc5276d0211fae267a279e2959f0	DEU                             
+f66935eb80766ec0c3acee20d40db157	DEU                             
+cd1c06e4da41121b7362540fbe8cd62c	DEU                             
+9459200394693a7140196f07e6e717fd	SWE                             
+4e74055927fd771c2084c92ca2ae56a7	DEU                             
+a753c3945400cd54c7ffd35fc07fe031	PHL                             
+8af17e883671377a23e5b8262de11af4	HRV                             
+d1fded22db9fc8872e86fff12d511207	ARG                             
+c526681b295049215e5f1c2066639f4a	FRO                             
+3969716fc4acd0ec0c39c8a745e9459a	AUS                             
+b7b99e418cff42d14dbf2d63ecee12a8	PRT                             
+96b4b857b15ae915ce3aa5e406c99cb4	CHE                             
+8b5a84ba35fa73f74df6f2d5a788e109	IND                             
+57f622908a4d6c381241a1293d894c88	NOR                             
+48438b67b2ac4e5dc9df6f3723fd4ccd	CHL                             
+56a5afe00fae48b02301860599898e63	MEX                             
+3e8d4b3893a9ebbbd86e648c90cbbe63	IDN                             
+c46e8abb68aae0bcdc68021a46f71a65	PAN                             
+e4f74be13850fc65559a3ed855bf35a8	GRC                             
+7b52c8c4a26e381408ee64ff6b98e231	ISL                             
+278af3c810bb9de0f355ce115b5a2f54	LUX                             
+5c61f833c2fb87caab0a48e4c51fa629	NOR                             
+2859f0ed0630ecc1589b6868fd1dde41	PRT                             
+c5068f914571c27e04cd66a4ec5c1631	NOR                             
+8b3f40e0243e2307a1818d3f456df153	BRA                             
+8b0cfde05d166f42a11a01814ef7fa86	FIN                             
+c0118be307a26886822e1194e8ae246d	GBR                             
+a66394e41d764b4c5646446a8ba2028b	PRT                             
+e9e0664816c35d64f26fc1382708617b	CAN                             
+f29f7213d1c86c493ca7b4045e5255a9	ISL                             
+65f889eb579641f6e5f58b5a48f3ec12	USA                             
+fc239fd89fd7c9edbf2bf27d1d894bc0	DEU                             
+24701da4bd9d3ae0e64d263b72ad20e8	USA                             
+031d6cc33621c51283322daf69e799f5	IRL                             
+a8ace0f003d8249d012c27fe27b258b5	NLD                             
+255661921f4ad57d02b1de9062eb6421	GBR                             
+5d53b2be2fe7e27daa27b94724c3b6de	USA                             
+57126705faf40e4b5227c8a0302d13b2	USA                             
+51cb62b41cd9deaaa2dd98c773a09ebb	DEU                             
+cba8cb3c568de75a884eaacde9434443	BEL                             
+19cbbb1b1e68c42f3415fb1654b2d390	ITA                             
+f44f1e343975f5157f3faf9184bc7ade	NZL                             
+1e986acf38de5f05edc2c42f4a49d37e	IND                             
+10627ac0e35cfed4a0ca5b97a06b9d9f	BEL                             
+b834eadeaf680f6ffcb13068245a1fed	USA                             
+1ec58ca10ed8a67b1c7de3d353a2885b	CRI                             
+8f523603c24072fb8ccb547503ee4c0f	TUR                             
+43a4893e6200f462bb9fe406e68e71c0	CZE                             
+9c31bcca97bb68ec33c5a3ead4786f3e	MLT                             
+c445544f1de39b071a4fca8bb33c2772	GBR                             
+29891bf2e4eff9763aef15dc862c373f	FRA                             
+c8fbeead5c59de4e8f07ab39e7874213	DEU                             
+8fa1a366d4f2e520bc9354658c4709f1	FRA                             
+812f48abd93f276576541ec5b79d48a2	BEL                             
+d29c61c11e6b7fb7df6d5135e5786ee1	CZE                             
+7013a75091bf79f04f07eecc248f8ee6	DEU                             
+58e42b779d54e174aad9a9fb79e7ebbc	ESP                             
+67493f858802a478bfe539c8e30a7e44	FIN                             
+f7910d943cc815a4a0081668ac2119b2	GBR                             
+955a5cfd6e05ed30eec7c79d2371ebcf	NLD                             
+03201e85fc6aa56d2cb9374e84bf52ca	ITA                             
+e7a227585002db9fee2f0ed56ee5a59f	DEU                             
+bc111d75a59fe7191a159fd4ee927981	ESP                             
+017e06f9b9bccafa230a81b60ea34c46	MLT                             
+22c2fc8a3a81503d40d4e532ac0e22ab	DEU                             
+482818d4eb4ca4c709dcce4cc2ab413d	DEU                             
+ec788cc8478763d79a18160a99dbb618	DEU                             
+d2f62cd276ef7cab5dcf9218d68f5bcf	LUX                             
+e71bd61e28ae2a584cb17ed776075b55	DEU                             
+49a41ffa9c91f7353ec37cda90966866	DEU                             
+1c13f340d154b44e41c996ec08d76749	DEU                             
+d5b95b21ce47502980eebfcf8d2913e0	DEU                             
+0b6bcec891d17cd7858525799c65da27	DEU                             
+3cb077e20dabc945228ea58813672973	DEU                             
+8734f7ff367f59fc11ad736e63e818f9	DEU                             
+98aa80527e97026656ec54cdd0f94dff	DEU                             
+430a03604913a64c33f460ec6f854c36	AUT                             
+319480a02920dc261209240eed190360	DEU                             
+4ca1c3ed413577a259e29dfa053f99db	DEU                             
+2eed213e6871d0e43cc061b109b1abd4	DEU                             
+fdedcd75d695d1c0eb790a5ee3ba90b5	DEU                             
+ed9b92eb1706415c42f88dc91284da8a	ITA                             
+fb1afbea5c0c2e23396ef429d0e42c52	DEU                             
+316a289ef71c950545271754abf583f1	DEU                             
+33b3bfc86d7a57e42aa30e7d1c2517be	DEU                             
+8351282db025fc2222fc61ec8dd1df23	DEU                             
+60eb202340e8035af9e96707f85730e5	DEU                             
+d2f79e6a931cd5b5acd5f3489dece82a	DEU                             
+3189b8c5e007c634d7e28ef93be2b774	DEU                             
+a89af36e042b5aa91d6efea0cc283c02	USA                             
+eb2743e9025319c014c9011acf1a1679	SWE                             
+c27297705354ef77feb349e949d2e19e	DEU                             
+3258eb5f24b395695f56eee13b690da6	DNK                             
+8f7939c28270f3187210641e96a98ba7	DEU                             
+bcf744fa5f256d6c3051dd86943524f6	DEU                             
+3ba296bfb94ad521be221cf9140f8e10	DEU                             
+18e21eae8f909cbb44b5982b44bbf02f	GBR                             
+3438d9050b2bf1e6dc0179818298bd41	BEL                             
+384712ec65183407ac811fff2f4c4798	CHE                             
+a76c5f98a56fc03100d6a7936980c563	CHE                             
+66cc7344291ae2a297bf2aa93d886e22	NLD                             
+34ca5622469ad1951a3c4dc5603cea0f	DEU                             
+be632fd63d0f90906194973ede449873	CAN                             
+933c8182650ca4ae087544beff5bb52d	GBR                             
+e3de2cf8ac892a0d8616eefc4a4f59bd	USA                             
+623c5a1c99aceaf0b07ae233d1888e0a	NLD                             
+c091e33f684c206b73b25417f6640b71	USA                             
+bcc770bb6652b1b08643d98fd7167f5c	ITA                             
+73cb08d143f893e645292dd04967f526	DEU                             
+eb3a9fb71b84790e50acd81cc1aa4862	MNG                             
+13909e3013727a91ee750bfd8660d7bc	DNK                             
+74e8b6c4be8a0f5dd843e2d1d7385a36	USA                             
+2dde74b7ec594b9bd78da66f1c5cafdc	GBR                             
+5324a886a2667283dbfe7f7974ff6fc0	DEU                             
+28c5f9ffd175dcd53aa3e9da9b00dde7	DEU                             
+b798aa74946ce75baee5806352e96272	DEU                             
+6315887dd67ff4f91d51e956b06a3878	ITA                             
+df99cee44099ff57acbf7932670614dd	USA                             
+6b141e284f88f656b776148cde8e019c	USA                             
+b84cdd396f01275b63bdaf7f61ed5a43	USA                             
+7a43dd4c2bb9bea14a95ff3acd4dfb18	USA                             
+c8bc4f15477ea3131abb1a3f0649fac2	USA                             
+9133f1146bbdd783f34025bf90a8e148	USA                             
+9d74605e4b1d19d83992a991230e89ef	DEU                             
+ca54e4f7704e7b8374d0968143813fe6	DEU                             
+c245b4779defd5c69ffebbfdd239dd1b	DEU                             
+6b157916b43b09df5a22f658ccb92b64	DEU                             
+67cd9b4b7b33511f30e85e21b2d3b204	AUT                             
+5c29c2e513aadfe372fd0af7553b5a6c	AUS                             
+e4b1d8cc71fd9c1fbc40fdc1a1a5d5b3	FRA                             
+b12daab6c83b1a45aa32cd9c2bc78360	DEU                             
+9722f54adb556b548bb9ecce61a4d167	DNK                             
+04d53bc45dc1343f266585b52dbe09b0	DEU                             
+0c31e51349871cfb59cfbfaaed82eb18	DEU                             
+41dabe0c59a3233e3691f3c893eb789e	DEU                             
+113ab4d243afc4114902d317ad41bb39	FRA                             
+cc70416ca37c5b31e7609fcc68ca009e	ITA                             
+7b91dc9ecdfa3ea7d347588a63537bb9	AUT                             
+55c63b0540793d537ed29f5c41eb9c3e	DEU                             
+43bd0d50fe7d58d8fce10c6d4232ca1e	DEU                             
+cf38e7d92bb08c96c50ddc723b624f9d	SWE                             
+5f449b146ce14c780eee323dfc5391e8	ITA                             
+eef7d6da9ba6d0bed2078a5f253f4cfc	DNK                             
+ad51cbe70d798b5aec08caf64ce66094	DEU                             
+45e410efd11014464dd36fb707a5a9e1	ARE                             
+8fdc3e13751b8f525f259d27f2531e87	DEU                             
+05e76572fb3d16ca990a91681758bbee	DEU                             
+cfc61472d8abd7c54b81924119983ed9	NLD                             
+1fe0175f73e5b381213057da98b8f5fb	DEU                             
+d44be0e711c2711876734b330500e5b9	CHE                             
+c295bb30bf534e960a6acf7435f0e46a	DEU                             
+ab3ca496cbc01a5a9ed650c4d0e26168	DEU                             
+538eaaef4d029c255ad8416c01ab5719	DEU                             
+1de3f08835ab9d572e79ac0fca13c5c2	DEU                             
+4c02510c3f16e13edc27eff1ef2e452c	HRV                             
+3c8ce0379b610d36c3723b198b982197	POL                             
+7eeea2463ae5da9990cab53c014864fa	USA                             
+b1c7516fef4a901df12871838f934cf6	USA                             
+087c643d95880c5a89fc13f3246bebae	DEU                             
+be553803806b8634990c2eb7351ed489	AUS                             
+8bdd6b50b8ecca33e04837fde8ffe51e	DNK                             
+18b751c8288c0fabe7b986963016884f	SWE                             
+30b8affc1afeb50c76ad57d7eda1f08f	DEU                             
+a8a43e21de5b4d83a6a7374112871079	DEU                             
+9614cbc86659974da853dee20280b8c4	SRB                             
+bc2f39d437ff13dff05f5cfda14327cc	USA                             
+39530e3fe26ee7c557392d479cc9c93f	USA                             
+537e5aa87fcfb168be5c953d224015ff	ITA                             
+80d331992feb02627ae8b30687c7bb78	CZE                             
+f6eb4364ba53708b24a4141962feb82e	DEU                             
+2cd225725d4811d813a5ea1b701db0db	CZE                             
+2f6fc683428eb5f8b22cc5021dc9d40d	DEU                             
+2d5a306f74749cc6cbe9b6cd47e73162	DNK                             
+dba84ece8f49717c47ab72acc3ed2965	SWE                             
+559314721edf178fa138534f7a1611b9	ESP                             
+d192d350b6eace21e325ecf9b0f1ebd1	SWE                             
+d6a020f7b50fb4512fd3c843af752809	ITA                             
+73f4b98d80efb8888a2b32073417e21e	USA                             
+711a7acac82d7522230e3c7d0efc3f89	ITA                             
+1506aeeb8c3a699b1e3c87db03156428	USA                             
+4f58423d9f925c8e8bd73409926730e8	BRA                             
+96390e27bc7e2980e044791420612545	USA                             
+d2c2b83008dce38013577ef83a101a1b	SWE                             
+c1e8b6d7a1c20870d5955bcdc04363e4	MEX                             
+480a0efd668e568595d42ac78340fe2a	FRA                             
+d25956f771b58b6b00f338a41ca05396	SWE                             
+95a1f9b6006151e00b1a4cda721f469d	POL                             
+5159ae414608a804598452b279491c5c	AUT                             
+9bdbe50a5be5b9c92dccf2d1ef05eefd	DEU                             
+8c4e8003f8d708dc3b6d486d74d9a585	GBR                             
+b6eba7850fd20fa8dce81167f1a6edca	DEU                             
+5f27f488f7c8b9e4b81f59c6d776e25c	GBR                             
+1a5235c012c18789e81960333a76cd7a	CAN                             
+7f950b15aa65a26e8500cfffd7f89de0	SWE                             
+77f94851e582202f940198a26728e71f	DEU                             
+baeb191b42ec09353b389f951d19b357	DEU                             
+c21fe390daecee9e70b8f4b091ae316f	NLD                             
+8aeadeeff3e1a3e1c8a6a69d9312c530	BRA                             
+a4e0f3b7db0875f65bb3f55ab0aab7c6	SWE                             
+37b43a655dec0e3504142003fce04a07	USA                             
+781734c0e9c01b14adc3a78a4c262d83	USA                             
+89b5ac8fb4c102c174adf2fed752a970	DEU                             
+cc31970696ef00b4c6e28dba4252e45d	DEU                             
+92e1aca33d97fa75c1e81a9db61454bb	DEU                             
+0ba2f4073dd8eff1f91650af5dc67db4	USA                             
+bd555d95b1ccba75afca868636b1b931	USA                             
+a93376e58f4c73737cf5ed7d88c2169c	POL                             
+cd3faaaf1bebf8d009aa59f887d17ef2	USA                             
+33538745a71fe2d30689cac96737e8f7	DEU                             
+586ac67e6180a1f16a4d3b81e33eaa94	CZE                             
+ca1720fd6350760c43139622c4753557	CZE                             
+645b264cb978b22bb2d2c70433723ec0	NOR                             
+45816111a5b644493b68cfedfb1a0cc0	ISR                             
+5bb416e14ac19276a4b450d343e4e981	DEU                             
+d0e551d6887e0657952b3c5beb7fed74	DEU                             
+06c1680c65972c4332be73e726de9e74	FRA                             
+4671068076f66fb346c4f62cbfb7f9fe	ITA                             
+10407de3db48761373a403b8ddf09782	AUT                             
+77ac561c759a27b7d660d7cf0534a9c3	DEU                             
+3771036a0740658b11cf5eb73d9263b3	ITA                             
+6b37fe4703bd962004cdccda304cc18e	FIN                             
+371d905385644b0ecb176fd73184239c	GBR                             
+d871ebaec65bbfa0b6b97aefae5d9150	GBR                             
+28bb3f229ca1eeb05ef939248f7709ce	GBR                             
+861613f5a80abdf5a15ea283daa64be3	DEU                             
+080d2dc6fa136fc49fc65eee1b556b46	USA                             
+2df9857b999e21569c3fcce516f0f20e	USA                             
+d5a5e9d2edeb2b2c685364461f1dfd46	DEU                             
+1fcf2f2315b251ebe462da320491ea9f	DEU                             
+7022f6b60d9642d91eebba98185cd9ba	DEU                             
+4522c5141f18b2a408fc8c1b00827bc3	DEU                             
+5ec194adf19442544d8a94f4696f17dc	GRC                             
+31e2d1e0b364475375cb17ad76aa71f2	DEU                             
+dff880ae9847f6fa8ed628ed4ee5741b	DEU                             
+521c8a16cf07590faee5cf30bcfb98b6	ISR                             
+a77c14ecd429dd5dedf3dc5ea8d44b99	MLT                             
+b8d794c48196d514010ce2c2269b4102	DEU                             
+a0abb504e661e34f5d269f113d39ea96	DEU                             
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	GBR                             
+69a6a78ace079846a8f0d3f89beada2c	FRA                             
+43ff5aadca6d8a60dd3da21716358c7d	FRA                             
+95800513c555e1e95a430e312ddff817	CZE                             
+42085fca2ddb606f4284e718074d5561	DEU                             
+e2226498712065ccfca00ecb57b8ed2f	DEU                             
+db732a1a9861777294f7dc54eeca2b3e	DEU                             
+1ace9926ad3a6dab09d16602fd2fcccc	AUT                             
+05256decaa2ee2337533d95c7de3db9d	DEU                             
+c664656f67e963f4c0f651195f818ce0	150                             
+032d53a86540806303b4c81586308e58	DEU                             
+df800795b697445f2b7dc0096d75f4df	DEU                             
+810f28b77fa6c866fbcceb6c8aa7bac4	DEU                             
+7fcdd5f715be5fce835b68b9e63e1733	DEU                             
+5214513d882cf478e028201a0d9031c0	DEU                             
+0e4f0487408be5baf091b74ba765dce7	DEU                             
+8cd7fa96a5143f7105ca92de7ff0bac7	EGY                             
+bdbafc49aa8c3e75e9bd1e0ee24411b4	DEU                             
+5863c78fb68ef1812a572e8f08a4e521	FIN                             
+a822d5d4cdcb5d1b340a54798ac410b7	DEU                             
+08e2440159e71c7020394db19541aabc	DEU                             
+c8fd07f040a8f2dc85f5b2d3804ea3db	DEU                             
+866208c5b4a74b32974bffb0f90311ca	DEU                             
+fd3ab918dab082b1af1df5f9dbc0041f	CHL                             
+cb0785d67b1ea8952fae42efd82864a7	CHL                             
+a0d3b444bd04cd165b4e076c9fc18bee	DEU                             
+c846d80d826291f2a6a0d7a57e540307	USA                             
+d0b02893ceb72d11a3471fe18d7089fd	DEU                             
+6db22194a183d7da810dcc29ea360c17	DEU                             
+ab5428d229c61532af41ec2ca258bf30	DEU                             
+78a7bdfe7277f187e84b52dea7b75b0b	DNK                             
+f36fba9e93f6402ba551291e34242338	BEL                             
+e6489b9cc39c95e53401cb601c4cae09	DEU                             
+4622209440a0ade57b18f21ae41963d9	DEU                             
+867e7f73257c5adf6a4696f252556431	DEU                             
+f999abbe163f001f55134273441f35c0	DEU                             
+9527fff55f2c38fa44281cd0e4d511ba	DEU                             
+04c8327cc71521b265f2dc7cbe996e13	CZE                             
+f8b01df5282702329fcd1cae8877bb5f	FIN                             
+658a9bbd0e85d854a9e140672a46ce3a	DEU                             
+0925467e1cc53074a440dae7ae67e3e9	USA                             
+c18bdeb4f181c22f04555ea453111da1	DEU                             
+4338a835aa6e3198deba95c25dd9e3de	DEU                             
+6829c770c1de2fd9bd88fe91f1d42f56	DEU                             
+b14521c0461b445a7ac2425e922c72df	USA                             
+31da4ab7750e057e56224eff51bce705	NLD                             
+6fa204dccaff0ec60f96db5fb5e69b33	NOR                             
+2587d892c1261be043d443d06bd5b220	DEU                             
+b9fd9676338e36e6493489ec5dc041fe	DEU                             
+61a6502cfdff1a1668892f52c7a00669	DEU                             
+d69462bef6601bb8d6e3ffda067399d9	DEU                             
+04728a6272117e0dc4ec29b0f7202ad8	DEU                             
+268e1d80ad914af7d2e0f6d78eea6f98	DEU                             
+0ada417f5b4361074360211e63449f34	150                             
+53c25598fe4f1f71a1c596bd4997245c	DEU                             
+8518eafd8feec0d8c056d396122a175a	DEU                             
+4bcbcb65040e0347a1ffb5858836c49c	DEU                             
+0d949e45a18d81db3491a7b451e99560	DEU                             
+5c3278fb76fa2676984396d33ba90613	DEU                             
+dda8e0792843816587427399f34bd726	DEU                             
+f1a37824dfc280b208e714bd80d5a294	DEU                             
+786a755c895da064ccd4f9e8eb7e484e	DEU                             
+f68a3eafcc0bb036ee8fde7fc91cde13	NOR                             
+78f5c568100eb61401870fa0fa4fd7cb	USA                             
+ab42c2d958e2571ce5403391e9910c40	DEU                             
+b86f86db61493cc2d757a5cefc5ef425	DEU                             
+98dd2a77f081989a185cb652662eea41	DEU                             
+c1a08f1ea753843e2b4f5f3d2cb41b7b	BEL                             
+807dbc2d5a3525045a4b7d882e3768ee	DEU                             
+45d62f43d6f59291905d097790f74ade	DEU                             
+2df0462e6f564f34f68866045b2a8a44	DEU                             
+6ee6a213cb02554a63b1867143572e70	DEU                             
+496a6164d8bf65daf6ebd4616c95b4b7	DEU                             
+15ba70625527d7bb48962e6ba1a465f7	DEU                             
+a571d94b6ed1fa1e0cfff9c04bbeb94d	ISR                             
+e37e9fd6bde7509157f864942572c267	GRC                             
+5e62fc773369f140db419401204200e8	DEU                             
+9592b3ad4d7f96bc644c7d6f34c06576	USA                             
+fd1a5654154eed3c0a0820ab54fb90a7	GBR                             
+2045b9a6609f6d5bca3374fd370e54ff	DEU                             
+78b532c25e4a99287940b1706359d455	DEU                             
+fc935f341286c735b575bd50196c904b	ITA                             
+f159fc50b5af54fecf21d5ea6ec37bad	BEL                             
+265dbcbd2bce07dfa721ed3daaa30912	NLD                             
+ec4f407118924fdc6af3335c8d2961d9	DEU                             
+11a7f956c37bf0459e9c80b16cc72107	DEU                             
+41e744bdf3114b14f5873dfb46921dc4	DEU                             
+e37015150c8944d90e306f19eaa98de8	DEU                             
+ed795c86ba21438108f11843f7214c95	FIN                             
+dbc940d02a217c923c52d3989be9b391	EST                             
+8845da022807c76120b5b6f50c218d9a	FIN                             
+f520f53edf44d466fb64269d5a67b69a	NOR                             
+61e5d7cb15bd519ceddcf7ba9a22cbc6	DEU                             
+9563a6fd049d7c1859196f614b04b959	POL                             
+90fb95c00db3fde6b86e6accf2178fa7	GBR                             
+b80aecda9ce9783dab49037eec5e4388	IRN                             
+b81dd41873676af0f9533d413774fa8d	BEL                             
+094655515b3991e73686f45e4fe352fe	DNK                             
+fbe95242f85d4bbe067ddc781191afb5	DNK                             
+fc46b0aa6469133caf668f87435bfd9f	USA                             
+8872fbd923476b7cf96913260ec59e66	DEU                             
+db1440c4bae3edf98e3dab7caf2e7fed	USA                             
+bff322dbe273a1e2d1fe37f81acccbe4	ZAF                             
+36b208182f04f44c80937e980c3c28fd	AUS                             
+a1af2abbd036f0499296239b29b40a5f	DEU                             
+89d60b9528242c8c53ecbfde131eba21	DEU                             
+e8d17786fed9fa5ddaf13881496106e4	150                             
+0371892b7f65ffb9c1544ee35c6330ad	CHE                             
+bf5c782ca6b0130372ac41ebd703463e	DEU                             
+f041991eb3263fd3e5d919026e772f57	ITA                             
+70409bc559ef6c8aabcf16941a29788b	BEL                             
+0ecef959ca1f43d538966f7eb9a7e2ec	DEU                             
+169c9d1bfabf9dec8f84e1f874d5e788	DEU                             
+01ffa9ce7c50b906e4f5b6a2516ba94b	CHE                             
+d104b6ae44b0ac6649723bac21761d41	ITA                             
 \.
 
 
@@ -2466,1212 +2466,1212 @@ b8e18040dc07eead8e6741733653a740	DEU
 --
 
 COPY music.bands_events (id_band, id_event) FROM stdin;
-0020f19414b5f2874a0bfacd9d511b84	6b09e6ae26a0d03456b17df4c0964a2f
-0020f19414b5f2874a0bfacd9d511b84	d5cd210a82be3dd1a7879b83ba5657c0
-0020f19414b5f2874a0bfacd9d511b84	f8549f73852c778caa3e9c09558739f2
-006fc2724417174310cf06d2672e34d2	084c45f4c0bf86930df25ae1c59b3fe6
-02d44fbbe1bfacd6eaa9b20299b1cb78	633f06bd0bd191373d667af54af0939b
-058fcf8b126253956deb3ce672d107a7	63a722e7e0aa4866721305fab1342530
-058fcf8b126253956deb3ce672d107a7	9e829f734a90920dd15d3b93134ee270
-059792b70fc0686fb296e7fcae0bda50	084c45f4c0bf86930df25ae1c59b3fe6
-0640cfbf1d269b69c535ea4e288dfd96	7e2e7fa5ce040664bf7aaaef1cebd897
-065b56757c6f6a0fba7ab0c64e4c1ae1	0a85beacde1a467e23452f40b4710030
-06efe152a554665e02b8dc4f620bf3f1	42c7a1c1e7836f74ced153a27d98cef0
-076365679712e4206301117486c3d0ec	ec9a23a8132c85ca37af85c69a2743c5
-0780d2d1dbd538fec3cdd8699b08ea02	ff3bed6eb88bb82b3a77ddaf50933689
-0844ad55f17011abed4a5208a3a05b74	8640cd270510da320a9dd71429b95531
-0903a7e60f0eb20fdc8cc0b8dbd45526	dae84dc2587a374c667d0ba291f33481
-095849fbdc267416abc6ddb48be311d7	a7fe0b5f5ae6fbfa811d754074e03d95
-09d8e20a5368ce1e5c421a04cb566434	2a6b51056784227b35e412c444f54359
-0a267617c0b5b4d53e43a7d4e4c522ad	a7fe0b5f5ae6fbfa811d754074e03d95
-0a56095b73dcbd2a76bb9d4831881cb3	ff3bed6eb88bb82b3a77ddaf50933689
-0a7ba3f35a9750ff956dca1d548dad12	f5a56d2eb1cd18bf3059cc15519097ea
-0a97b893b92a7df612eadfe97589f242	00f269da8a1eee6c08cebcc093968ee1
-0af74c036db52f48ad6cbfef6fee2999	dae84dc2587a374c667d0ba291f33481
-0b0d1c3752576d666c14774b8233889f	cc4617b9ce3c2eee5d1e566eb2fbb1f6
-0b6e98d660e2901c33333347da37ad36	abefb7041d2488eadeedba9a0829b753
-0cdf051c93865faa15cbc5cd3d2b69fb	0aa506a505f1115202f993ee4d650480
-0e2ea6aa669710389cf4d6e2ddf408c4	0a85beacde1a467e23452f40b4710030
-0fbddeb130361265f1ba6f86b00f0968	a7fe0b5f5ae6fbfa811d754074e03d95
-1056b63fdc3c5015cc4591aa9989c14f	1ea2f5c46c57c12dea2fed56cb87566f
-1056b63fdc3c5015cc4591aa9989c14f	20b7e40ecd659c47ca991e0d420a54eb
-1056b63fdc3c5015cc4591aa9989c14f	53812183e083ed8a87818371d6b3dbfb
-1056b63fdc3c5015cc4591aa9989c14f	abefb7041d2488eadeedba9a0829b753
-108c58fc39b79afc55fac7d9edf4aa2a	43bcb284a3d1a0eea2c7923d45b7f14e
-108c58fc39b79afc55fac7d9edf4aa2a	64896cd59778f32b1c61561a21af6598
-108c58fc39b79afc55fac7d9edf4aa2a	ec9a23a8132c85ca37af85c69a2743c5
-10d91715ea91101cfe0767c812da8151	1104831a0d0fe7d2a6a4198c781e0e0d
-1104831a0d0fe7d2a6a4198c781e0e0d	1104831a0d0fe7d2a6a4198c781e0e0d
-1104831a0d0fe7d2a6a4198c781e0e0d	372ca4be7841a47ba693d4de7d220981
-11635778f116ce6922f6068638a39028	1fad423d9d1f48b7bd6d31c8d5cb17ed
-11f8d9ec8f6803ea61733840f13bc246	189f11691712600d4e1b0bdb4122e8aa
-1209f43dbecaba22f3514bf40135f991	53812183e083ed8a87818371d6b3dbfb
-121189969c46f49b8249633c2d5a7bfa	42c7a1c1e7836f74ced153a27d98cef0
-13caf3d14133dfb51067264d857eaf70	9e829f734a90920dd15d3b93134ee270
-14ab730fe0172d780da6d9e5d432c129	abefb7041d2488eadeedba9a0829b753
-1734b04cf734cb291d97c135d74b4b87	00da417154f2da39e79c9dcf4d7502fa
-1734b04cf734cb291d97c135d74b4b87	f8ead2514f0df3c6e8ec84b992dd6e44
-187ebdf7947f4b61e0725c93227676a4	060fd8422f03df6eca94da7605b3a9cd
-19baf8a6a25030ced87cd0ce733365a9	a7fe0b5f5ae6fbfa811d754074e03d95
-1ac0c8e8c04cf2d6f02fdb8292e74588	63a722e7e0aa4866721305fab1342530
-1ac0c8e8c04cf2d6f02fdb8292e74588	abefb7041d2488eadeedba9a0829b753
-1bc1f7348d79a353ea4f594de9dd1392	a72c5a8b761c2fc1097f162eeda5d5db
-1c06fc6740d924cab33dce73643d84b9	f861455af8364fc3fe01aef3fc597905
-1c6987adbe5ab3e4364685e8caed0f59	d2a4c05671f768ba487ad365d2a0fb6e
-1cdd53cece78d6e8dffcf664fa3d1be2	189f11691712600d4e1b0bdb4122e8aa
-1cdd53cece78d6e8dffcf664fa3d1be2	85c434b11120b4ba2f116e89843a594e
-1cdd53cece78d6e8dffcf664fa3d1be2	f5a56d2eb1cd18bf3059cc15519097ea
-1da77fa5b97c17be83cc3d0693c405cf	9e829f734a90920dd15d3b93134ee270
-1e14d6b40d8e81d8d856ba66225dcbf3	abefb7041d2488eadeedba9a0829b753
-1e8563d294da81043c2772b36753efaf	a72c5a8b761c2fc1097f162eeda5d5db
-1e88302efcfc873691f0c31be4e2a388	488af8bdc554488b6c8854fae6ae8610
-1e9413d4cc9af0ad12a6707776573ba0	00f269da8a1eee6c08cebcc093968ee1
-1e9413d4cc9af0ad12a6707776573ba0	85c434b11120b4ba2f116e89843a594e
-1e9413d4cc9af0ad12a6707776573ba0	d8f60019c8e6cdbb84839791fd989d81
-1ebd63d759e9ff532d5ce63ecb818731	ca69aebb5919e75661d929c1fbd39582
-2082a7d613f976e7b182a3fe80a28958	dae84dc2587a374c667d0ba291f33481
-2113f739f81774557041db616ee851e6	633f06bd0bd191373d667af54af0939b
-218f2bdae8ad3bb60482b201e280ffdc	a7fe0b5f5ae6fbfa811d754074e03d95
-2252d763a2a4ac815b122a0176e3468f	d5cd210a82be3dd1a7879b83ba5657c0
-237e378c239b44bff1e9a42ab866580c	a122cd22f946f0c229745d88d89b05bd
-2414366fe63cf7017444181acacb6347	00f269da8a1eee6c08cebcc093968ee1
-2447873ddeeecaa165263091c0cbb22f	f8549f73852c778caa3e9c09558739f2
-249229ca88aa4a8815315bb085cf4d61	553a00f0c40ce1b1107f833da69988e4
-249789ae53c239814de8e606ff717ec9	abefb7041d2488eadeedba9a0829b753
-24ff2b4548c6bc357d9d9ab47882661e	3af7c6d148d216f13f66669acb8d5c59
-2501f7ba78cc0fd07efb7c17666ff12e	d8f74ab86e77455ffbd398065ee109a8
-264721f3fc2aee2d28dadcdff432dbc1	f68790d8b2f82aad75f0c27be554ee48
-2672777b38bc4ce58c49cf4c82813a42	5e65cc6b7435c63dac4b2baf17ab5838
-278606b1ac0ae7ef86e86342d1f259c3	1104831a0d0fe7d2a6a4198c781e0e0d
-278c094627c0dd891d75ea7a3d0d021e	abefb7041d2488eadeedba9a0829b753
-2876f7ecdae220b3c0dcb91ff13d0590	6b09e6ae26a0d03456b17df4c0964a2f
-28a95ef0eabe44a27f49bbaecaa8a847	0a85beacde1a467e23452f40b4710030
-28bb59d835e87f3fd813a58074ca0e11	d8f60019c8e6cdbb84839791fd989d81
-28bc31b338dbd482802b77ed1fd82a50	d5cd210a82be3dd1a7879b83ba5657c0
-28f843fa3a493a3720c4c45942ad970e	0a85beacde1a467e23452f40b4710030
-28f843fa3a493a3720c4c45942ad970e	8368e0fd31972c67de1117fb0fe12268
-28f843fa3a493a3720c4c45942ad970e	d2a4c05671f768ba487ad365d2a0fb6e
-28f843fa3a493a3720c4c45942ad970e	d8f60019c8e6cdbb84839791fd989d81
-2a024edafb06c7882e2e1f7b57f2f951	d2a4c05671f768ba487ad365d2a0fb6e
-2aae4f711c09481c8353003202e05359	6b09e6ae26a0d03456b17df4c0964a2f
-2ac79000a90b015badf6747312c0ccad	9afc751ca7f2d91d23c453b32fd21864
-2ac79000a90b015badf6747312c0ccad	d5cd210a82be3dd1a7879b83ba5657c0
-2ac79000a90b015badf6747312c0ccad	ec9a23a8132c85ca37af85c69a2743c5
-2af9e4497582a6faa68a42ac2d512735	06e5f3d0d817c436d351a9cf1bf94dfa
-2cf65e28c586eeb98daaecf6eb573e7a	dae84dc2587a374c667d0ba291f33481
-2cfe35095995e8dd15ab7b867e178c15	abefb7041d2488eadeedba9a0829b753
-2df8905eae6823023de6604dc5346c29	0aa506a505f1115202f993ee4d650480
-2e7a848dc99bd27acb36636124855faf	00f269da8a1eee6c08cebcc093968ee1
-2fa2f1801dd37d6eb9fe4e34a782e397	dae84dc2587a374c667d0ba291f33481
-31d8a0a978fad885b57a685b1a0229df	a7fe0b5f5ae6fbfa811d754074e03d95
-32814ff4ca9a26b8d430a8c0bc8dc63e	ff3bed6eb88bb82b3a77ddaf50933689
-32af59a47b8c7e1c982ae797fc491180	189f11691712600d4e1b0bdb4122e8aa
-32af59a47b8c7e1c982ae797fc491180	62f7101086340682e5bc58a86976cfb5
-33b6f1b596a60fa87baef3d2c05b7c04	3f15c445cb553524b235b01ab75fe9a6
-348bcdb386eb9cb478b55a7574622b7c	f5a56d2eb1cd18bf3059cc15519097ea
-3509af6be9fe5defc1500f5c77e38563	f68790d8b2f82aad75f0c27be554ee48
-360c000b499120147c8472998859a9fe	85c434b11120b4ba2f116e89843a594e
-3614c45db20ee41e068c2ab7969eb3b5	2a6b51056784227b35e412c444f54359
-362f8cdd1065b0f33e73208eb358991d	d2a4c05671f768ba487ad365d2a0fb6e
-3656edf3a40a25ccd00d414c9ecbb635	a7fe0b5f5ae6fbfa811d754074e03d95
-36648510adbf2a3b2028197a60b5dada	372ca4be7841a47ba693d4de7d220981
-36cbc41c1c121f2c68f5776a118ea027	f5a56d2eb1cd18bf3059cc15519097ea
-36f969b6aeff175204078b0533eae1a0	f861455af8364fc3fe01aef3fc597905
-37f02eba79e0a3d29dfd6a4cf2f4d019	dae84dc2587a374c667d0ba291f33481
-3964d4f40b6166aa9d370855bd20f662	abefb7041d2488eadeedba9a0829b753
-39e83bc14e95fcbc05848fc33c30821f	a7fe0b5f5ae6fbfa811d754074e03d95
-3a2a7f86ca87268be9b9e0557b013565	62f7101086340682e5bc58a86976cfb5
-3af7c6d148d216f13f66669acb8d5c59	3af7c6d148d216f13f66669acb8d5c59
-3af7c6d148d216f13f66669acb8d5c59	d5cd210a82be3dd1a7879b83ba5657c0
-3bd94845163385cecefc5265a2e5a525	53812183e083ed8a87818371d6b3dbfb
-3be3e956aeb5dc3b16285463e02af25b	6b09e6ae26a0d03456b17df4c0964a2f
-3cdb47307aeb005121b09c41c8d8bee6	a626f2fb0794eeb25b074b4c43776634
-3cdb47307aeb005121b09c41c8d8bee6	d1832e7b44502c04ec5819ef3085371a
-3d01ff8c75214314c4ca768c30e6807b	0a85beacde1a467e23452f40b4710030
-3d01ff8c75214314c4ca768c30e6807b	6d5c464f0c139d97e715c51b43983695
-3d01ff8c75214314c4ca768c30e6807b	85c434b11120b4ba2f116e89843a594e
-3d01ff8c75214314c4ca768c30e6807b	a122cd22f946f0c229745d88d89b05bd
-3d2ff8abd980d730b2f4fd0abae52f60	3f15c445cb553524b235b01ab75fe9a6
-3d6ff25ab61ad55180a6aee9b64515bf	0a85beacde1a467e23452f40b4710030
-3dda886448fe98771c001b56a4da9893	a7fe0b5f5ae6fbfa811d754074e03d95
-3e52c77d795b7055eeff0c44687724a1	6b09e6ae26a0d03456b17df4c0964a2f
-3e75cd2f2f6733ea4901458a7ce4236d	a2cc2bc245b90654e721d7040c028647
-3f15c445cb553524b235b01ab75fe9a6	3f15c445cb553524b235b01ab75fe9a6
-401357e57c765967393ba391a338e89b	12e7b1918420daf69b976a5949f9ba85
-401357e57c765967393ba391a338e89b	e1baa5fa38e1e6c824f2011f89475f03
-405c7f920b019235f244315a564a8aed	0e4e0056244fb82f89e66904ad62fdaf
-4094ffd492ba473a2a7bea1b19b1662d	20cf9df7281c50060aaf023e04fd5082
-410d913416c022077c5c1709bf104d3c	1ea2f5c46c57c12dea2fed56cb87566f
-42563d0088d6ac1a47648fc7621e77c6	f8549f73852c778caa3e9c09558739f2
-4261335bcdc95bd89fd530ba35afbf4c	00f269da8a1eee6c08cebcc093968ee1
-426fdc79046e281c5322161f011ce68c	0a85beacde1a467e23452f40b4710030
-4276250c9b1b839b9508825303c5c5ae	189f11691712600d4e1b0bdb4122e8aa
-4366d01be1b2ddef162fc0ebb6933508	1ea2f5c46c57c12dea2fed56cb87566f
-4366d01be1b2ddef162fc0ebb6933508	f10fa26efffb6c69534e7b0f7890272d
-44012166c6633196dc30563db3ffd017	62f7101086340682e5bc58a86976cfb5
-443866d78de61ab3cd3e0e9bf97a34f6	372ca4be7841a47ba693d4de7d220981
-4453eb658c6a304675bd52ca75fbae6d	d2a4c05671f768ba487ad365d2a0fb6e
-449b4d758aa7151bc1bbb24c3ffb40bb	be95780f2b4fba1a76846b716e69ed6d
-44b7bda13ac1febe84d8607ca8bbf439	0aa506a505f1115202f993ee4d650480
-44f2dc3400ce17fad32a189178ae72fa	d3284558d8cda50eb33b5e5ce91da2af
-450948d9f14e07ba5e3015c2d726b452	d3284558d8cda50eb33b5e5ce91da2af
-4548a3b9c1e31cf001041dc0d166365b	0a85beacde1a467e23452f40b4710030
-4548a3b9c1e31cf001041dc0d166365b	20cf9df7281c50060aaf023e04fd5082
-457f098eeb8e1518008449e9b1cb580d	6b09e6ae26a0d03456b17df4c0964a2f
-46174766ce49edbbbc40e271c87b5a83	d45cf5e6b7af0cee99b37f15b13360ed
-47b23e889175dde5d6057db61cb52847	372ca4be7841a47ba693d4de7d220981
-485065ad2259054abf342d7ae3fe27e6	d2a4c05671f768ba487ad365d2a0fb6e
-4927f3218b038c780eb795766dfd04ee	6b09e6ae26a0d03456b17df4c0964a2f
-49c4097bae6c6ea96f552e38cfb6c2d1	0a85beacde1a467e23452f40b4710030
-4a2a0d0c29a49d9126dcb19230aa1994	2a6b51056784227b35e412c444f54359
-4a45ac6d83b85125b4163a40364e7b2c	d3284558d8cda50eb33b5e5ce91da2af
-4a7d9e528dada8409e88865225fb27c4	ca69aebb5919e75661d929c1fbd39582
-4b503a03f3f1aec6e5b4d53dd8148498	d8f74ab86e77455ffbd398065ee109a8
-4b98a8c164586e11779a0ef9421ad0ee	ec9a23a8132c85ca37af85c69a2743c5
-4cabe475dd501f3fd4da7273b5890c33	a72c5a8b761c2fc1097f162eeda5d5db
-4cfab0d66614c6bb6d399837656c590e	dae84dc2587a374c667d0ba291f33481
-4dddd8579760abb62aa4b1910725e73c	f5a56d2eb1cd18bf3059cc15519097ea
-4ee21b1371ba008a26b313c7622256f8	7126a50ce66fe18b84a7bfb3defea15f
-4ee21b1371ba008a26b313c7622256f8	ca69aebb5919e75661d929c1fbd39582
-4f48e858e9ed95709458e17027bb94bf	a61b878c2b563f289de2109fa0f42144
-4f840b1febbbcdb12b9517cd0a91e8f4	e471494f42d963b13f025c0636c43763
-4fa857a989df4e1deea676a43dceea07	a7fe0b5f5ae6fbfa811d754074e03d95
-5037c1968f3b239541c546d32dec39eb	e471494f42d963b13f025c0636c43763
-5194c60496c6f02e8b169de9a0aa542c	d2a4c05671f768ba487ad365d2a0fb6e
-51fa80e44b7555c4130bd06c53f4835c	d45cf5e6b7af0cee99b37f15b13360ed
-51fa80e44b7555c4130bd06c53f4835c	dae84dc2587a374c667d0ba291f33481
-522b6c44eb0aedf4970f2990a2f2a812	5e45d87cab8e0b30fba4603b4821bfcd
-529a1d385b4a8ca97ea7369477c7b6a7	d2a4c05671f768ba487ad365d2a0fb6e
-52b133bfecec2fba79ecf451de3cf3bb	52b133bfecec2fba79ecf451de3cf3bb
-52b133bfecec2fba79ecf451de3cf3bb	fcbfd4ea93701414772acad10ad93a5f
-52ee4c6902f6ead006b0fb2f3e2d7771	0e4e0056244fb82f89e66904ad62fdaf
-52ee4c6902f6ead006b0fb2f3e2d7771	a7ea7b6c1894204987ce4694c1febe03
-52ee4c6902f6ead006b0fb2f3e2d7771	f10fa26efffb6c69534e7b0f7890272d
-53369c74c3cacdc38bdcdeda9284fe3c	8224efe45b1d8a1ebc0b9fb0a5405ac6
-53407737e93f53afdfc588788b8288e8	abefb7041d2488eadeedba9a0829b753
-53a0aafa942245f18098ccd58b4121aa	abefb7041d2488eadeedba9a0829b753
-5435326cf392e2cd8ad7768150cd5df6	a122cd22f946f0c229745d88d89b05bd
-5447110e1e461c8c22890580c796277a	a72c5a8b761c2fc1097f162eeda5d5db
-54b72f3169fea84731d3bcba785eac49	00da417154f2da39e79c9dcf4d7502fa
-54b72f3169fea84731d3bcba785eac49	633f06bd0bd191373d667af54af0939b
-54f0b93fa83225e4a712b70c68c0ab6f	4c90356614158305d8527b80886d2c1e
-55159d04cc4faebd64689d3b74a94009	8224efe45b1d8a1ebc0b9fb0a5405ac6
-559ccea48c3460ebc349587d35e808dd	633f06bd0bd191373d667af54af0939b
-5842a0c2470fe12ee3acfeec16c79c57	00f269da8a1eee6c08cebcc093968ee1
-585b13106ecfd7ede796242aeaed4ea8	ca69aebb5919e75661d929c1fbd39582
-58db028cf01dd425e5af6c7d511291c1	00f269da8a1eee6c08cebcc093968ee1
-58db028cf01dd425e5af6c7d511291c1	85c434b11120b4ba2f116e89843a594e
-5952dff7a6b1b3c94238ad3c6a42b904	0e33f8fbbb12367a6e8159a3b096898a
-59d153c1c2408b702189623231b7898a	4bc4f9db3d901e8efe90f60d85a0420d
-59f06d56c38ac98effb4c6da117b0305	1fad423d9d1f48b7bd6d31c8d5cb17ed
-59f06d56c38ac98effb4c6da117b0305	8224efe45b1d8a1ebc0b9fb0a5405ac6
-5af874093e5efcbaeb4377b84c5f2ec5	d2a4c05671f768ba487ad365d2a0fb6e
-5b20ea1312a1a21beaa8b86fe3a07140	c9a70f42ce4dcd82a99ed83a5117b890
-5b22d1d5846a2b6b6d0cf342e912d124	d1ee83d5951b1668e95b22446c38ba1c
-5b709b96ee02a30be5eee558e3058245	c8ee19d8e2f21851dc16db65d7b138bc
-5c0adc906f34f9404d65a47eea76dac0	53812183e083ed8a87818371d6b3dbfb
-5c0adc906f34f9404d65a47eea76dac0	ec9a23a8132c85ca37af85c69a2743c5
-5cd1c3c856115627b4c3e93991f2d9cd	372ca4be7841a47ba693d4de7d220981
-5ce10014f645da4156ddd2cd0965986e	1fad423d9d1f48b7bd6d31c8d5cb17ed
-5ce10014f645da4156ddd2cd0965986e	ec9a23a8132c85ca37af85c69a2743c5
-5df92b70e2855656e9b3ffdf313d7379	00f269da8a1eee6c08cebcc093968ee1
-5e4317ada306a255748447aef73fff68	9afc751ca7f2d91d23c453b32fd21864
-5ec1e9fa36898eaf6d1021be67e0d00c	0a85beacde1a467e23452f40b4710030
-5efb7d24387b25d8325839be958d9adf	53812183e083ed8a87818371d6b3dbfb
-5f992768f7bb9592bed35b07197c87d0	abefb7041d2488eadeedba9a0829b753
-626dceb92e4249628c1e76a2c955cd24	a7fe0b5f5ae6fbfa811d754074e03d95
-6369ba49db4cf35b35a7c47e3d4a4fd0	ec9a23a8132c85ca37af85c69a2743c5
-63ad3072dc5472bb44c2c42ede26d90f	0a85beacde1a467e23452f40b4710030
-63ad3072dc5472bb44c2c42ede26d90f	abefb7041d2488eadeedba9a0829b753
-63ae1791fc0523f47bea9485ffec8b8c	d45cf5e6b7af0cee99b37f15b13360ed
-63bd9a49dd18fbc89c2ec1e1b689ddda	0dcd062f5beffeaae2efae21ef9f3755
-63d7f33143522ba270cb2c87f724b126	0a85beacde1a467e23452f40b4710030
-63d7f33143522ba270cb2c87f724b126	633f06bd0bd191373d667af54af0939b
-63d7f33143522ba270cb2c87f724b126	6b09e6ae26a0d03456b17df4c0964a2f
-649db5c9643e1c17b3a44579980da0ad	a7fe0b5f5ae6fbfa811d754074e03d95
-652208d2aa8cdd769632dbaeb7a16358	a72c5a8b761c2fc1097f162eeda5d5db
-656d1497f7e25fe0559c6be81a4bccae	633f06bd0bd191373d667af54af0939b
-65976b6494d411d609160a2dfd98f903	0e33f8fbbb12367a6e8159a3b096898a
-660813131789b822f0c75c667e23fc85	dae84dc2587a374c667d0ba291f33481
-66599a31754b5ac2a202c46c2b577c8e	f5a56d2eb1cd18bf3059cc15519097ea
-6738f9acd4740d945178c649d6981734	372ca4be7841a47ba693d4de7d220981
-679eaa47efb2f814f2642966ee6bdfe1	a7ea7b6c1894204987ce4694c1febe03
-6830afd7158930ca7d1959ce778eb681	dae84dc2587a374c667d0ba291f33481
-6a0e9ce4e2da4f2cbcd1292fddaa0ac6	1fad423d9d1f48b7bd6d31c8d5cb17ed
-6b7cf117ecf0fea745c4c375c1480cb5	633f06bd0bd191373d667af54af0939b
-6bafe8cf106c32d485c469d36c056989	8224efe45b1d8a1ebc0b9fb0a5405ac6
-6bafe8cf106c32d485c469d36c056989	a72c5a8b761c2fc1097f162eeda5d5db
-6bd19bad2b0168d4481b19f9c25b4a9f	d5cd210a82be3dd1a7879b83ba5657c0
-6c00bb1a64f660600a6c1545377f92dc	12e7b1918420daf69b976a5949f9ba85
-6c1fcd3c91bc400e5c16f467d75dced3	dae84dc2587a374c667d0ba291f33481
-6c607fc8c0adc99559bc14e01170fee1	f5a56d2eb1cd18bf3059cc15519097ea
-6d3b28f48c848a21209a84452d66c0c4	2a6b51056784227b35e412c444f54359
-6d57b25c282247075f5e03cde27814df	00f269da8a1eee6c08cebcc093968ee1
-6ee2e6d391fa98d7990b502e72c7ec58	4c90356614158305d8527b80886d2c1e
-6f195d8f9fe09d45d2e680f7d7157541	5e45d87cab8e0b30fba4603b4821bfcd
-6f199e29c5782bd05a4fef98e7e41419	a2cc2bc245b90654e721d7040c028647
-71e32909a1bec1edfc09aec09ca2ac17	6b09e6ae26a0d03456b17df4c0964a2f
-721c28f4c74928cc9e0bb3fef345e408	5e45d87cab8e0b30fba4603b4821bfcd
-721c28f4c74928cc9e0bb3fef345e408	c8ee19d8e2f21851dc16db65d7b138bc
-721c28f4c74928cc9e0bb3fef345e408	f8ead2514f0df3c6e8ec84b992dd6e44
-72778afd2696801f5f3a1f35d0e4e357	7126a50ce66fe18b84a7bfb3defea15f
-73affe574e6d4dc2fa72b46dc9dd4815	64896cd59778f32b1c61561a21af6598
-73affe574e6d4dc2fa72b46dc9dd4815	9418ebabb93c5c1f47a05666913ec6e4
-7462f03404f29ea618bcc9d52de8e647	0a85beacde1a467e23452f40b4710030
-7463543d784aa59ca86359a50ef58c8e	0a85beacde1a467e23452f40b4710030
-7492a1ca2669793b485b295798f5d782	372ca4be7841a47ba693d4de7d220981
-74b3b7be6ed71b946a151d164ad8ede5	0e4e0056244fb82f89e66904ad62fdaf
-7533f96ec01fd81438833f71539c7d4e	372ca4be7841a47ba693d4de7d220981
-75ab0270163731ee05f35640d56ef473	a72c5a8b761c2fc1097f162eeda5d5db
-76700087e932c3272e05694610d604ba	f68790d8b2f82aad75f0c27be554ee48
-776da10f7e18ffde35ea94d144dc60a3	43bcb284a3d1a0eea2c7923d45b7f14e
-776da10f7e18ffde35ea94d144dc60a3	663ea93736c204faee5f6c339203be3e
-776da10f7e18ffde35ea94d144dc60a3	dae84dc2587a374c667d0ba291f33481
-7771012413f955f819866e517b275cb4	6b09e6ae26a0d03456b17df4c0964a2f
-77f2b3ea9e4bd785f5ff322bae51ba07	dae84dc2587a374c667d0ba291f33481
-79566192cda6b33a9ff59889eede2d66	63a722e7e0aa4866721305fab1342530
-79ce9bd96a3184b1ee7c700aa2927e67	4bc4f9db3d901e8efe90f60d85a0420d
-7a4fafa7badd04d5d3114ab67b0caf9d	dae84dc2587a374c667d0ba291f33481
-7c7ab6fbcb47bd5df1e167ca28220ee9	ec9a23a8132c85ca37af85c69a2743c5
-7c83727aa466b3b1b9d6556369714fcf	be95780f2b4fba1a76846b716e69ed6d
-7cd7921da2e6aab79c441a0c2ffc969b	9418ebabb93c5c1f47a05666913ec6e4
-7cd7921da2e6aab79c441a0c2ffc969b	ca69aebb5919e75661d929c1fbd39582
-7d6b45c02283175f490558068d1fc81b	ca69aebb5919e75661d929c1fbd39582
-7d878673694ff2498fbea0e5ba27e0ea	9418ebabb93c5c1f47a05666913ec6e4
-7d878673694ff2498fbea0e5ba27e0ea	d2a4c05671f768ba487ad365d2a0fb6e
-7d878673694ff2498fbea0e5ba27e0ea	dae84dc2587a374c667d0ba291f33481
-7db066b46f48d010fdb8c87337cdeda4	63a722e7e0aa4866721305fab1342530
-7df8865bbec157552b8a579e0ed9bfe3	42c7a1c1e7836f74ced153a27d98cef0
-7dfe9aa0ca5bb31382879ccd144cc3ae	dd50d5dcc02ea12c31e0ff495891dc22
-7e0d5240ec5d34a30b6f24909e5edcb4	1fad423d9d1f48b7bd6d31c8d5cb17ed
-7e0d5240ec5d34a30b6f24909e5edcb4	42c7a1c1e7836f74ced153a27d98cef0
-7e0d5240ec5d34a30b6f24909e5edcb4	dd50d5dcc02ea12c31e0ff495891dc22
-7e2b83d69e6c93adf203e13bc7d6f444	85c434b11120b4ba2f116e89843a594e
-7e2b83d69e6c93adf203e13bc7d6f444	d5cd210a82be3dd1a7879b83ba5657c0
-7e2b83d69e6c93adf203e13bc7d6f444	dae84dc2587a374c667d0ba291f33481
-7eaf9a47aa47f3c65595ae107feab05d	dae84dc2587a374c667d0ba291f33481
-7ef36a3325a61d4f1cff91acbe77c7e3	4c90356614158305d8527b80886d2c1e
-7f29efc2495ce308a8f4aa7bfc11d701	c5593cbec8087184815492eee880f9a8
-7fc454efb6df96e012e0f937723d24aa	084c45f4c0bf86930df25ae1c59b3fe6
-804803e43d2c779d00004a6e87f28e30	a72c5a8b761c2fc1097f162eeda5d5db
-80fcd08f6e887f6cfbedd2156841ab2b	a72c5a8b761c2fc1097f162eeda5d5db
-8143ee8032c71f6f3f872fc5bb2a4fed	a2cc2bc245b90654e721d7040c028647
-820de5995512273916b117944d6da15a	060fd8422f03df6eca94da7605b3a9cd
-820de5995512273916b117944d6da15a	663ea93736c204faee5f6c339203be3e
-828d51c39c87aad9b1407d409fa58e36	f10fa26efffb6c69534e7b0f7890272d
-829922527f0e7d64a3cfda67e24351e3	d8f60019c8e6cdbb84839791fd989d81
-832dd1d8efbdb257c2c7d3e505142f48	372ca4be7841a47ba693d4de7d220981
-8589a6a4d8908d7e8813e9a1c5693d70	189f11691712600d4e1b0bdb4122e8aa
-86482a1e94052aa18cd803a51104cdb9	ec9a23a8132c85ca37af85c69a2743c5
-8654991720656374d632a5bb0c20ff11	a61b878c2b563f289de2109fa0f42144
-8775f64336ee5e9a8114fbe3a5a628c5	c9a70f42ce4dcd82a99ed83a5117b890
-87ded0ea2f4029da0a0022000d59232b	cc4617b9ce3c2eee5d1e566eb2fbb1f6
-87f44124fb8d24f4c832138baede45c7	939fec794a3b41bc213c4df0c66c96f5
-87f44124fb8d24f4c832138baede45c7	dae84dc2587a374c667d0ba291f33481
-88711444ece8fe638ae0fb11c64e2df3	00f269da8a1eee6c08cebcc093968ee1
-887d6449e3544dca547a2ddba8f2d894	20cf9df7281c50060aaf023e04fd5082
-889aaf9cd0894206af758577cf5cf071	060fd8422f03df6eca94da7605b3a9cd
-88dd124c0720845cba559677f3afa15d	00f269da8a1eee6c08cebcc093968ee1
-891a55e21dfacf2f97c450c77e7c3ea7	9e829f734a90920dd15d3b93134ee270
-8945663993a728ab19a3853e5b820a42	4bc4f9db3d901e8efe90f60d85a0420d
-8945663993a728ab19a3853e5b820a42	9afc751ca7f2d91d23c453b32fd21864
-897edb97d775897f69fa168a88b01c19	06e5f3d0d817c436d351a9cf1bf94dfa
-89adcf990042dfdac7fd23685b3f1e37	a61b878c2b563f289de2109fa0f42144
-8a6f1a01e4b0d9e272126a8646a72088	d45cf5e6b7af0cee99b37f15b13360ed
-8b0ee5a501cef4a5699fd3b2d4549e8f	12e7b1918420daf69b976a5949f9ba85
-8b0ee5a501cef4a5699fd3b2d4549e8f	26a40a3dc89f8b78c61fa31d1137482c
-8b427a493fc39574fc801404bc032a2f	ca69aebb5919e75661d929c1fbd39582
-8bc31f7cc79c177ab7286dda04e2d1e5	a72c5a8b761c2fc1097f162eeda5d5db
-8c69497eba819ee79a964a0d790368fb	d5cd210a82be3dd1a7879b83ba5657c0
-8ce896355a45f5b9959eb676b8b5580c	7126a50ce66fe18b84a7bfb3defea15f
-8d7a18d54e82fcfb7a11566ce94b9109	2a6b51056784227b35e412c444f54359
-8e11b2f987a99ed900a44aa1aa8bd3d0	abefb7041d2488eadeedba9a0829b753
-8e62fc75d9d0977d0be4771df05b3c2f	64896cd59778f32b1c61561a21af6598
-8e62fc75d9d0977d0be4771df05b3c2f	dae84dc2587a374c667d0ba291f33481
-8edf4531385941dfc85e3f3d3e32d24f	372ca4be7841a47ba693d4de7d220981
-8edf4531385941dfc85e3f3d3e32d24f	9418ebabb93c5c1f47a05666913ec6e4
-8edf4531385941dfc85e3f3d3e32d24f	c8ee19d8e2f21851dc16db65d7b138bc
-8edfa58b1aedb58629b80e5be2b2bd92	7e2e7fa5ce040664bf7aaaef1cebd897
-8edfa58b1aedb58629b80e5be2b2bd92	a72c5a8b761c2fc1097f162eeda5d5db
-8f1f10cb698cb995fd69a671af6ecd58	c9a70f42ce4dcd82a99ed83a5117b890
-8fda25275801e4a40df6c73078baf753	f5a56d2eb1cd18bf3059cc15519097ea
-905a40c3533830252a909603c6fa1e6a	00f269da8a1eee6c08cebcc093968ee1
-90d127641ffe2a600891cd2e3992685b	2a6b51056784227b35e412c444f54359
-90d523ebbf276f516090656ebfccdc9f	372ca4be7841a47ba693d4de7d220981
-9138c2cc0326412f2515623f4c850eb3	189f11691712600d4e1b0bdb4122e8aa
-9138c2cc0326412f2515623f4c850eb3	85c434b11120b4ba2f116e89843a594e
-91a337f89fe65fec1c97f52a821c1178	f861455af8364fc3fe01aef3fc597905
-4bb93d90453dd63cc1957a033f7855c7	d1ee83d5951b1668e95b22446c38ba1c
-91b18e22d4963b216af00e1dd43b5d05	ec9a23a8132c85ca37af85c69a2743c5
-91c9ed0262dea7446a4f3a3e1cdd0698	abefb7041d2488eadeedba9a0829b753
-925bd435e2718d623768dbf1bc1cfb60	85c434b11120b4ba2f116e89843a594e
-925bd435e2718d623768dbf1bc1cfb60	f8ead2514f0df3c6e8ec84b992dd6e44
-935b48a84528c4280ec208ce529deea0	a7fe0b5f5ae6fbfa811d754074e03d95
-942c9f2520684c22eb6216a92b711f9e	43bcb284a3d1a0eea2c7923d45b7f14e
-942c9f2520684c22eb6216a92b711f9e	939fec794a3b41bc213c4df0c66c96f5
-942c9f2520684c22eb6216a92b711f9e	dae84dc2587a374c667d0ba291f33481
-947ce14614263eab49f780d68555aef8	a7fe0b5f5ae6fbfa811d754074e03d95
-948098e746bdf1c1045c12f042ea98c2	d8f74ab86e77455ffbd398065ee109a8
-952dc6362e304f00575264e9d54d1fa6	a7fe0b5f5ae6fbfa811d754074e03d95
-96682d9c9f1bed695dbf9176d3ee234c	20b7e40ecd659c47ca991e0d420a54eb
-96682d9c9f1bed695dbf9176d3ee234c	53812183e083ed8a87818371d6b3dbfb
-96682d9c9f1bed695dbf9176d3ee234c	568177b2430c48380b6d8dab67dbe98c
-96682d9c9f1bed695dbf9176d3ee234c	c150d400f383afb8e8427813549a82d3
-96682d9c9f1bed695dbf9176d3ee234c	c3b4e4db5f94fac6979eb07371836e81
-96682d9c9f1bed695dbf9176d3ee234c	eb2330cf8b87aa13aad89f32d6cfda18
-97ee29f216391d19f8769f79a1218a71	d5cd210a82be3dd1a7879b83ba5657c0
-988d10abb9f42e7053450af19ad64c7f	85c434b11120b4ba2f116e89843a594e
-990813672e87b667add44c712bb28d3d	d8f60019c8e6cdbb84839791fd989d81
-99bd5eff92fc3ba728a9da5aa1971488	084c45f4c0bf86930df25ae1c59b3fe6
-9a322166803a48932356586f05ef83c7	6d5c464f0c139d97e715c51b43983695
-9ab8f911c74597493400602dc4d2b412	2a6b51056784227b35e412c444f54359
-9b1088b616414d0dc515ab1f2b4922f1	c8ee19d8e2f21851dc16db65d7b138bc
-9bc2ca9505a273b06aa0b285061cd1de	f68790d8b2f82aad75f0c27be554ee48
-9bc2ca9505a273b06aa0b285061cd1de	f861455af8364fc3fe01aef3fc597905
-9cf73d0300eea453f17c6faaeb871c55	f68790d8b2f82aad75f0c27be554ee48
-9d3ac6904ce73645c6234803cd7e47ca	6b09e6ae26a0d03456b17df4c0964a2f
-9d969d25c9f506c5518bb090ad5f8266	d8f74ab86e77455ffbd398065ee109a8
-9db9bc745a7568b51b3a968d215ddad6	dae84dc2587a374c667d0ba291f33481
-9e84832a15f2698f67079a3224c2b6fb	a7fe0b5f5ae6fbfa811d754074e03d95
-9f19396638dd8111f2cee938fdf4e455	2a6b51056784227b35e412c444f54359
-a332f1280622f9628fccd1b7aac7370a	d5cd210a82be3dd1a7879b83ba5657c0
-a3f5542dc915b94a5e10dab658bb0959	8368e0fd31972c67de1117fb0fe12268
-a4902fb3d5151e823c74dfd51551b4b0	372ca4be7841a47ba693d4de7d220981
-a4977b96c7e5084fcce21a0d07b045f8	64896cd59778f32b1c61561a21af6598
-a4cbfb212102da21b82d94be555ac3ec	00f269da8a1eee6c08cebcc093968ee1
-a538bfe6fe150a92a72d78f89733dbd0	663ea93736c204faee5f6c339203be3e
-a61b878c2b563f289de2109fa0f42144	a61b878c2b563f289de2109fa0f42144
-a650d82df8ca65bb69a45242ab66b399	dae84dc2587a374c667d0ba291f33481
-a716390764a4896d99837e99f9e009c9	488af8bdc554488b6c8854fae6ae8610
-a716390764a4896d99837e99f9e009c9	dae84dc2587a374c667d0ba291f33481
-a7a9c1b4e7f10bd1fdf77aff255154f7	42c7a1c1e7836f74ced153a27d98cef0
-a7f9797e4cd716e1516f9d4845b0e1e2	1fad423d9d1f48b7bd6d31c8d5cb17ed
-a7f9797e4cd716e1516f9d4845b0e1e2	8224efe45b1d8a1ebc0b9fb0a5405ac6
-a825b2b87f3b61c9660b81f340f6e519	ec9a23a8132c85ca37af85c69a2743c5
-a8d9eeed285f1d47836a5546a280a256	6b09e6ae26a0d03456b17df4c0964a2f
-a8d9eeed285f1d47836a5546a280a256	ca69aebb5919e75661d929c1fbd39582
-aa86b6fc103fc757e14f03afe6eb0c0a	f8549f73852c778caa3e9c09558739f2
-abbf8e3e3c3e78be8bd886484c1283c1	2a6b51056784227b35e412c444f54359
-abd7ab19ff758cf4c1a2667e5bbac444	633f06bd0bd191373d667af54af0939b
-ac03fad3be179a237521ec4ef2620fb0	0a85beacde1a467e23452f40b4710030
-ac03fad3be179a237521ec4ef2620fb0	a72c5a8b761c2fc1097f162eeda5d5db
-ac94d15f46f10707a39c4bc513cd9f98	06e5f3d0d817c436d351a9cf1bf94dfa
-ad01952b3c254c8ebefaf6f73ae62f7d	0dcd062f5beffeaae2efae21ef9f3755
-ad62209fb63910acf40280cea3647ec5	a7fe0b5f5ae6fbfa811d754074e03d95
-ade72e999b4e78925b18cf48d1faafa4	e471494f42d963b13f025c0636c43763
-aed85c73079b54830cd50a75c0958a90	633f06bd0bd191373d667af54af0939b
-aed85c73079b54830cd50a75c0958a90	a7fe0b5f5ae6fbfa811d754074e03d95
-b01fbaf98cfbc1b72e8bca0b2e48769c	00f269da8a1eee6c08cebcc093968ee1
-b0ce1e93de9839d07dab8d268ca23728	7126a50ce66fe18b84a7bfb3defea15f
-069cdf9184e271a3c6d45ad7e86fcac2	3af7c6d148d216f13f66669acb8d5c59
-b14814d0ee12ffadc8f09ab9c604a9d0	939fec794a3b41bc213c4df0c66c96f5
-b1bdad87bd3c4ac2c22473846d301a9e	3af7c6d148d216f13f66669acb8d5c59
-b1bdad87bd3c4ac2c22473846d301a9e	85c434b11120b4ba2f116e89843a594e
-b1d465aaf3ccf8701684211b1623adf2	dae84dc2587a374c667d0ba291f33481
-b3ffff8517114caf70b9e70734dbaf6f	dae84dc2587a374c667d0ba291f33481
-b570e354b7ebc40e20029fcc7a15e5a7	372ca4be7841a47ba693d4de7d220981
-b570e354b7ebc40e20029fcc7a15e5a7	8224efe45b1d8a1ebc0b9fb0a5405ac6
-b570e354b7ebc40e20029fcc7a15e5a7	9e829f734a90920dd15d3b93134ee270
-b5d9c5289fe97968a5634b3e138bf9e2	f8ead2514f0df3c6e8ec84b992dd6e44
-b5f7b25b0154c34540eea8965f90984d	a7ea7b6c1894204987ce4694c1febe03
-b6da055500e3d92698575a3cfc74906c	63a722e7e0aa4866721305fab1342530
-b885447285ece8226facd896c04cdba2	8640cd270510da320a9dd71429b95531
-b885447285ece8226facd896c04cdba2	a2cc2bc245b90654e721d7040c028647
-b89e91ccf14bfd7f485dd7be7d789b0a	9e829f734a90920dd15d3b93134ee270
-b96a3cb81197e8308c87f6296174fe3e	0aa506a505f1115202f993ee4d650480
-baa9d4eef21c7b89f42720313b5812d4	5e45d87cab8e0b30fba4603b4821bfcd
-bb4cc149e8027369e71eb1bb36cd98e0	e1baa5fa38e1e6c824f2011f89475f03
-bbb668ff900efa57d936e726a09e4fe8	dae84dc2587a374c667d0ba291f33481
-bbc155fb2b111bf61c4f5ff892915e6b	be95780f2b4fba1a76846b716e69ed6d
-bbce8e45250a239a252752fac7137e00	bbce8e45250a239a252752fac7137e00
-bd4184ee062e4982b878b6b188793f5b	abefb7041d2488eadeedba9a0829b753
-be20385e18333edb329d4574f364a1f0	553a00f0c40ce1b1107f833da69988e4
-bfc9ace5d2a11fae56d038d68c601f00	00da417154f2da39e79c9dcf4d7502fa
-c05d504b806ad065c9b548c0cb1334cd	568177b2430c48380b6d8dab67dbe98c
-c127f32dc042184d12b8c1433a77e8c4	ec9a23a8132c85ca37af85c69a2743c5
-c1923ca7992dc6e79d28331abbb64e72	cc4617b9ce3c2eee5d1e566eb2fbb1f6
-c2855b6617a1b08fed3824564e15a653	060fd8422f03df6eca94da7605b3a9cd
-c3490492512b7fe65cdb0c7305044675	dcda9434b422f9aa793f0a8874922306
-c4678a2e0eef323aeb196670f2bc8a6e	633f06bd0bd191373d667af54af0939b
-c4c7cb77b45a448aa3ca63082671ad97	00f269da8a1eee6c08cebcc093968ee1
-c4ddbffb73c1c34d20bd5b3f425ce4b1	dae84dc2587a374c667d0ba291f33481
-c4f0f5cedeffc6265ec3220ab594d56b	8640cd270510da320a9dd71429b95531
-c5dc33e23743fb951b3fe7f1f477b794	8368e0fd31972c67de1117fb0fe12268
-c5f022ef2f3211dc1e3b8062ffe764f0	00f269da8a1eee6c08cebcc093968ee1
-c74b5aa120021cbe18dcddd70d8622da	0a85beacde1a467e23452f40b4710030
-c883319a1db14bc28eff8088c5eba10e	2a6b51056784227b35e412c444f54359
-ca5a010309ffb20190558ec20d97e5b2	d5cd210a82be3dd1a7879b83ba5657c0
-cafe9e68e8f90b3e1328da8858695b31	ca69aebb5919e75661d929c1fbd39582
-cafe9e68e8f90b3e1328da8858695b31	d2a4c05671f768ba487ad365d2a0fb6e
-cd9483c1733b17f57d11a77c9404893c	9e829f734a90920dd15d3b93134ee270
-cddf835bea180bd14234a825be7a7a82	d8f60019c8e6cdbb84839791fd989d81
-ce2caf05154395724e4436f042b8fa53	00f269da8a1eee6c08cebcc093968ee1
-ce2caf05154395724e4436f042b8fa53	d8f74ab86e77455ffbd398065ee109a8
-cf4ee20655dd3f8f0a553c73ffe3f72a	2a6b51056784227b35e412c444f54359
-d05a0e65818a69cc689b38c0c0007834	abefb7041d2488eadeedba9a0829b753
-d0a1fd0467dc892f0dc27711637c864e	2a6b51056784227b35e412c444f54359
-d1fb4e47d8421364f49199ee395ad1d3	cc4617b9ce3c2eee5d1e566eb2fbb1f6
-d2ff1e521585a91a94fb22752dd0ab45	0a85beacde1a467e23452f40b4710030
-d3e98095eeccaa253050d67210ef02bb	dd50d5dcc02ea12c31e0ff495891dc22
-d3ed8223151e14b936436c336a4c7278	d45cf5e6b7af0cee99b37f15b13360ed
-d433b7c1ce696b94a8d8f72de6cfbeaa	d5cd210a82be3dd1a7879b83ba5657c0
-d449a9b2eed8b0556dc7be9cda36b67b	ca69aebb5919e75661d929c1fbd39582
-d6de9c99f5cfa46352b2bc0be5c98c41	2a6b51056784227b35e412c444f54359
-d730e65d54d6c0479561d25724afd813	ca69aebb5919e75661d929c1fbd39582
-d73310b95e8b4dece44e2a55dd1274e6	c9a70f42ce4dcd82a99ed83a5117b890
-d857ab11d383a7e4d4239a54cbf2a63d	084c45f4c0bf86930df25ae1c59b3fe6
-d857ab11d383a7e4d4239a54cbf2a63d	9afc751ca7f2d91d23c453b32fd21864
-d9ab6b54c3bd5b212e8dc3a14e7699ef	ff3bed6eb88bb82b3a77ddaf50933689
-da2110633f62b16a571c40318e4e4c1c	53812183e083ed8a87818371d6b3dbfb
-da867941c8bacf9be8e59bc13d765f92	06e5f3d0d817c436d351a9cf1bf94dfa
-db38e12f9903b156f9dc91fce2ef3919	2a6b51056784227b35e412c444f54359
-db46d9a37b31baa64cb51604a2e4939a	cc4617b9ce3c2eee5d1e566eb2fbb1f6
-dcabc7299e2b9ed5b05c33273e5fdd19	f68790d8b2f82aad75f0c27be554ee48
-dcff9a127428ffb03fc02fdf6cc39575	42c7a1c1e7836f74ced153a27d98cef0
-dd18fa7a5052f2bce8ff7cb4a30903ea	85c434b11120b4ba2f116e89843a594e
-dddb04bc0d058486d0ef0212c6ea0682	189f11691712600d4e1b0bdb4122e8aa
-de12bbf91bc797df25ab4ae9cee1946b	6b09e6ae26a0d03456b17df4c0964a2f
-deaccc41a952e269107cc9a507dfa131	8640cd270510da320a9dd71429b95531
-dfdef9b5190f331de20fe029babf032e	dae84dc2587a374c667d0ba291f33481
-e08383c479d96a8a762e23a99fd8bf84	d5cd210a82be3dd1a7879b83ba5657c0
-e0c2b0cc2e71294cd86916807fef62cb	d2a4c05671f768ba487ad365d2a0fb6e
-e0de9c10bbf73520385ea5dcbdf62073	63a722e7e0aa4866721305fab1342530
-e0de9c10bbf73520385ea5dcbdf62073	ca69aebb5919e75661d929c1fbd39582
-e0f39406f0e15487dd9d3997b2f5ca61	20cf9df7281c50060aaf023e04fd5082
-e1db3add02ca4c1af33edc5a970a3bdc	d2a4c05671f768ba487ad365d2a0fb6e
-e271e871e304f59e62a263ffe574ea2d	c150d400f383afb8e8427813549a82d3
-e29ef4beb480eab906ffa7c05aeec23d	dae84dc2587a374c667d0ba291f33481
-e3f0bf612190af6c3fad41214115e004	ca69aebb5919e75661d929c1fbd39582
-e4b3296f8a9e2a378eb3eb9576b91a37	6b09e6ae26a0d03456b17df4c0964a2f
-e61e30572fd58669ae9ea410774e0eb6	00f269da8a1eee6c08cebcc093968ee1
-e62a773154e1179b0cc8c5592207cb10	ca69aebb5919e75661d929c1fbd39582
-e64b94f14765cee7e05b4bec8f5fee31	ec9a23a8132c85ca37af85c69a2743c5
-e64d38b05d197d60009a43588b2e4583	372ca4be7841a47ba693d4de7d220981
-e67e51d5f41cfc9162ef7fd977d1f9f5	189f11691712600d4e1b0bdb4122e8aa
-e74a88c71835c14d92d583a1ed87cc6c	6d5c464f0c139d97e715c51b43983695
-e872b77ff7ac24acc5fa373ebe9bb492	e872b77ff7ac24acc5fa373ebe9bb492
-e8afde257f8a2cbbd39d866ddfc06103	00f269da8a1eee6c08cebcc093968ee1
-eb2c788da4f36fba18b85ae75aff0344	0a85beacde1a467e23452f40b4710030
-ed24ff8971b1fa43a1efbb386618ce35	dae84dc2587a374c667d0ba291f33481
-ee69e7d19f11ca58843ec2e9e77ddb38	ca69aebb5919e75661d929c1fbd39582
-eeaeec364c925e0c821660c7a953546e	63a722e7e0aa4866721305fab1342530
-ef6369d9794dbe861a56100e92a3c71d	d5cd210a82be3dd1a7879b83ba5657c0
-f042da2a954a1521114551a6f9e22c75	4c90356614158305d8527b80886d2c1e
-f042da2a954a1521114551a6f9e22c75	568177b2430c48380b6d8dab67dbe98c
-f042da2a954a1521114551a6f9e22c75	d2a4c05671f768ba487ad365d2a0fb6e
-f07c3eef5b7758026d45a12c7e2f6134	53812183e083ed8a87818371d6b3dbfb
-f07c3eef5b7758026d45a12c7e2f6134	c3b4e4db5f94fac6979eb07371836e81
-f0c051b57055b052a3b7da1608f3039e	eb2330cf8b87aa13aad89f32d6cfda18
-f0e1f32b93f622ea3ddbf6b55b439812	dae84dc2587a374c667d0ba291f33481
-f29d276fd930f1ad7687ed7e22929b64	2a6b51056784227b35e412c444f54359
-f29d276fd930f1ad7687ed7e22929b64	d2a4c05671f768ba487ad365d2a0fb6e
-f37ab058561fb6d233b9c2a0b080d4d1	dae84dc2587a374c667d0ba291f33481
-f4219e8fec02ce146754a5be8a85f246	189f11691712600d4e1b0bdb4122e8aa
-f4f870098db58eeae93742dd2bcaf2b2	0a85beacde1a467e23452f40b4710030
-f60ab90d94b9cafe6b32f6a93ee8fcda	1fad423d9d1f48b7bd6d31c8d5cb17ed
-f644bd92037985f8eb20311bc6d5ed94	00f269da8a1eee6c08cebcc093968ee1
-f8e7112b86fcd9210dfaf32c00d6d375	0e33f8fbbb12367a6e8159a3b096898a
-f953fa7b33e7b6503f4380895bbe41c8	8224efe45b1d8a1ebc0b9fb0a5405ac6
-fa03eb688ad8aa1db593d33dabd89bad	abefb7041d2488eadeedba9a0829b753
-faabbecd319372311ed0781d17b641d1	a72c5a8b761c2fc1097f162eeda5d5db
-fb28e62c0e801a787d55d97615e89771	f10fa26efffb6c69534e7b0f7890272d
-fb47f889f2c7c4fee1553d0f817b8aaa	85c434b11120b4ba2f116e89843a594e
-fb8be6409408481ad69166324bdade9c	0a85beacde1a467e23452f40b4710030
-fcd1c1b547d03e760d1defa4d2b98783	6b09e6ae26a0d03456b17df4c0964a2f
-fdc90583bd7a58b91384dea3d1659cde	abefb7041d2488eadeedba9a0829b753
-fe228019addf1d561d0123caae8d1e52	abefb7041d2488eadeedba9a0829b753
-fe5b73c2c2cd2d9278c3835c791289b6	a72c5a8b761c2fc1097f162eeda5d5db
-fe5b73c2c2cd2d9278c3835c791289b6	d1ee83d5951b1668e95b22446c38ba1c
-ff578d3db4dc3311b3098c8365d54e6b	189f11691712600d4e1b0bdb4122e8aa
-ff578d3db4dc3311b3098c8365d54e6b	a7fe0b5f5ae6fbfa811d754074e03d95
-ff5b48d38ce7d0c47c57555d4783a118	d2a4c05671f768ba487ad365d2a0fb6e
-ffa7450fd138573d8ae665134bccd02c	0a85beacde1a467e23452f40b4710030
-fdcf3cdc04f367257c92382e032b6293	d0f1ffdb2d3a20a41f9c0f10df3b9386
-bbddc022ee323e0a2b2d8c67e5cd321f	d0f1ffdb2d3a20a41f9c0f10df3b9386
-4bb93d90453dd63cc1957a033f7855c7	d0f1ffdb2d3a20a41f9c0f10df3b9386
-94ca28ea8d99549c2280bcc93f98c853	73d6ec35ad0e4ef8f213ba89d8bfd7d7
-24ff2b4548c6bc357d9d9ab47882661e	73d6ec35ad0e4ef8f213ba89d8bfd7d7
-1cdd53cece78d6e8dffcf664fa3d1be2	441306dd21b61d9a52e04b9e177cc9b5
-6d89517dbd1a634b097f81f5bdbb07a2	441306dd21b61d9a52e04b9e177cc9b5
-eb3bfb5a3ccdd4483aabc307ae236066	441306dd21b61d9a52e04b9e177cc9b5
-0ab20b5ad4d15b445ed94fa4eebb18d8	441306dd21b61d9a52e04b9e177cc9b5
-33f03dd57f667d41ac77c6baec352a81	441306dd21b61d9a52e04b9e177cc9b5
-399033f75fcf47d6736c9c5209222ab8	441306dd21b61d9a52e04b9e177cc9b5
-d9bc1db8c13da3a131d853237e1f05b2	441306dd21b61d9a52e04b9e177cc9b5
-1197a69404ee9475146f3d631de12bde	441306dd21b61d9a52e04b9e177cc9b5
-12e93f5fab5f7d16ef37711ef264d282	441306dd21b61d9a52e04b9e177cc9b5
-fdcbfded0aaf369d936a70324b39c978	13afebb96e2d2d27345bd3b1fefc4db0
-52ee4c6902f6ead006b0fb2f3e2d7771	13afebb96e2d2d27345bd3b1fefc4db0
-96682d9c9f1bed695dbf9176d3ee234c	f3603438cf79ee848cb2f5e4a5884663
-1056b63fdc3c5015cc4591aa9989c14f	f3603438cf79ee848cb2f5e4a5884663
-754230e2c158107a2e93193c829e9e59	3c61b014201d6f62468d72d0363f7725
-1ac0c8e8c04cf2d6f02fdb8292e74588	3c61b014201d6f62468d72d0363f7725
-f042da2a954a1521114551a6f9e22c75	a71ac13634cd0b6d26e52d11c76f0a63
-4fab532a185610bb854e0946f4def6a4	a71ac13634cd0b6d26e52d11c76f0a63
-a29c1c4f0a97173007be3b737e8febcc	a71ac13634cd0b6d26e52d11c76f0a63
-96048e254d2e02ba26f53edd271d3f88	8d821ce4aedb7300e067cfa9eb7f1eee
-da29e297c23e7868f1d50ec5a6a4359b	8d821ce4aedb7300e067cfa9eb7f1eee
-e6fd7b62a39c109109d33fcd3b5e129d	8d821ce4aedb7300e067cfa9eb7f1eee
-e25ee917084bdbdc8506b56abef0f351	8d821ce4aedb7300e067cfa9eb7f1eee
-6b7cf117ecf0fea745c4c375c1480cb5	8d821ce4aedb7300e067cfa9eb7f1eee
-99bd5eff92fc3ba728a9da5aa1971488	8d821ce4aedb7300e067cfa9eb7f1eee
-754230e2c158107a2e93193c829e9e59	fce1fb772d7bd71211bb915625ac11af
-754230e2c158107a2e93193c829e9e59	95f89582ba9dcfbed475ebb3c06162db
-96682d9c9f1bed695dbf9176d3ee234c	fce1fb772d7bd71211bb915625ac11af
-c2275e8ac71d308946a63958bc7603a1	95f89582ba9dcfbed475ebb3c06162db
-dde3e0b0cc344a7b072bbab8c429f4ff	9f1a399c301132b273f595b1cfc5e99d
-3bcbddf6c114327fc72ea06bcb02f9ef	9f1a399c301132b273f595b1cfc5e99d
-b785a5ffad5e7e36ccac25c51d5d8908	23fcfcbd4fa686b213960a04f49856f4
-fb47f889f2c7c4fee1553d0f817b8aaa	d3582717412a80f08b23f8add23a1f35
-2aae4f711c09481c8353003202e05359	23fcfcbd4fa686b213960a04f49856f4
-4bb93d90453dd63cc1957a033f7855c7	54bf7e97edddf051b2a98b21b6d47e6a
-f042da2a954a1521114551a6f9e22c75	bb378a3687cc64953bf36ccea6eb5a27
-abd7ab19ff758cf4c1a2667e5bbac444	46ffa374af00ed2b76c1cfaa98b76e90
-63c0a328ae2bee49789212822f79b83f	46ffa374af00ed2b76c1cfaa98b76e90
-28bc31b338dbd482802b77ed1fd82a50	46ffa374af00ed2b76c1cfaa98b76e90
-83d15841023cff02eafedb1c87df9b11	46ffa374af00ed2b76c1cfaa98b76e90
-d9bc1db8c13da3a131d853237e1f05b2	46ffa374af00ed2b76c1cfaa98b76e90
-99bd5eff92fc3ba728a9da5aa1971488	46ffa374af00ed2b76c1cfaa98b76e90
-f03bde11d261f185cbacfa32c1c6538c	46ffa374af00ed2b76c1cfaa98b76e90
-f6540bc63be4c0cb21811353c0d24f69	46ffa374af00ed2b76c1cfaa98b76e90
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	46ffa374af00ed2b76c1cfaa98b76e90
-ea16d031090828264793e860a00cc995	46ffa374af00ed2b76c1cfaa98b76e90
-5eed658c4b7b68a0ecc49205b68d54e7	46ffa374af00ed2b76c1cfaa98b76e90
-a0fb30950d2a150c1d2624716f216316	0cd1c230352e99227f43acc46129d6b4
-4ad6c928711328d1cf0167bc87079a14	0cd1c230352e99227f43acc46129d6b4
-96e3cdb363fe6df2723be5b994ad117a	0cd1c230352e99227f43acc46129d6b4
-c8d551145807972d194691247e7102a2	0cd1c230352e99227f43acc46129d6b4
-96682d9c9f1bed695dbf9176d3ee234c	6f14a4e8ecdf87e02d77cec09b6c98b9
-f0c051b57055b052a3b7da1608f3039e	6f14a4e8ecdf87e02d77cec09b6c98b9
-3d01ff8c75214314c4ca768c30e6807b	808e3291422cea1b35c76af1b5ba5326
-99bd5eff92fc3ba728a9da5aa1971488	808e3291422cea1b35c76af1b5ba5326
-2a024edafb06c7882e2e1f7b57f2f951	808e3291422cea1b35c76af1b5ba5326
-45b568ce63ea724c415677711b4328a7	20970f44b43a10d7282a77eda20866e2
-10d91715ea91101cfe0767c812da8151	20970f44b43a10d7282a77eda20866e2
-99bd5eff92fc3ba728a9da5aa1971488	9feb9a9930d633ef18e1dae581b65327
-c238980432ab6442df9b2c6698c43e47	9feb9a9930d633ef18e1dae581b65327
-145bd9cf987b6f96fa6f3b3b326303c9	9feb9a9930d633ef18e1dae581b65327
-39a25b9c88ce401ca54fd7479d1c8b73	8342e65069254a6fd6d2bbc87aff8192
-8cadf0ad04644ce2947bf3aa2817816e	8342e65069254a6fd6d2bbc87aff8192
-85fac49d29a31f1f9a8a18d6b04b9fc9	8342e65069254a6fd6d2bbc87aff8192
-b81ee269be538a500ed057b3222c86a2	8342e65069254a6fd6d2bbc87aff8192
-cf71a88972b5e06d8913cf53c916e6e4	8342e65069254a6fd6d2bbc87aff8192
-5518086aebc9159ba7424be0073ce5c9	8342e65069254a6fd6d2bbc87aff8192
-2c4e2c9948ddac6145e529c2ae7296da	8342e65069254a6fd6d2bbc87aff8192
-c9af1c425ca093648e919c2e471df3bd	8342e65069254a6fd6d2bbc87aff8192
-0291e38d9a3d398052be0ca52a7b1592	8342e65069254a6fd6d2bbc87aff8192
-8852173e80d762d62f0bcb379d82ebdb	8342e65069254a6fd6d2bbc87aff8192
-000f49c98c428aff4734497823d04f45	8342e65069254a6fd6d2bbc87aff8192
-dea293bdffcfb292b244b6fe92d246dc	8342e65069254a6fd6d2bbc87aff8192
-1cdd53cece78d6e8dffcf664fa3d1be2	8342e65069254a6fd6d2bbc87aff8192
-d0a1fd0467dc892f0dc27711637c864e	8342e65069254a6fd6d2bbc87aff8192
-302ebe0389198972c223f4b72894780a	320951dccf4030808c979375af8356b6
-ac62ad2816456aa712809bf01327add1	320951dccf4030808c979375af8356b6
-470f3f69a2327481d26309dc65656f44	320951dccf4030808c979375af8356b6
-e254616b4a5bd5aaa54f90a3985ed184	320951dccf4030808c979375af8356b6
-3c5c578b7cf5cc0d23c1730d1d51436a	320951dccf4030808c979375af8356b6
-eaeaed2d9f3137518a5c8c7e6733214f	320951dccf4030808c979375af8356b6
-8ccd65d7f0f028405867991ae3eaeb56	320951dccf4030808c979375af8356b6
-d0a1fd0467dc892f0dc27711637c864e	320951dccf4030808c979375af8356b6
-5f992768f7bb9592bed35b07197c87d0	320951dccf4030808c979375af8356b6
-b1bdad87bd3c4ac2c22473846d301a9e	320951dccf4030808c979375af8356b6
-9ee30f495029e1fdf6567045f2079be1	fc0dc52ba0b7a645c4d70c0df70abb40
-071dbd416520d14b2e3688145801de41	fc0dc52ba0b7a645c4d70c0df70abb40
-781acc7e58c9a746d58f6e65ab1e90c4	7712d7dceef5a521b4a554c431752979
-e5a674a93987de4a52230105907fffe9	7712d7dceef5a521b4a554c431752979
-a2459c5c8a50215716247769c3dea40b	7712d7dceef5a521b4a554c431752979
-e285e4ecb358b92237298f67526beff7	7712d7dceef5a521b4a554c431752979
-dfdef9b5190f331de20fe029babf032e	7712d7dceef5a521b4a554c431752979
-d832b654664d104f0fbb9b6674a09a11	7712d7dceef5a521b4a554c431752979
-2aeb128c6d3eb7e79acb393b50e1cf7b	7712d7dceef5a521b4a554c431752979
-213c449bd4bcfcdb6bffecf55b2c30b4	7712d7dceef5a521b4a554c431752979
-4ea353ae22a1c0d26327638f600aeac8	7712d7dceef5a521b4a554c431752979
-8b0ee5a501cef4a5699fd3b2d4549e8f	6118dc6a9a96e892fa5bbaac3ccb6d99
-66244bb43939f81c100f03922cdc3439	6118dc6a9a96e892fa5bbaac3ccb6d99
-7df8865bbec157552b8a579e0ed9bfe3	6118dc6a9a96e892fa5bbaac3ccb6d99
-be20385e18333edb329d4574f364a1f0	6118dc6a9a96e892fa5bbaac3ccb6d99
-8edfa58b1aedb58629b80e5be2b2bd92	9c697f7def422e3f6f885d3ec9741603
-da2110633f62b16a571c40318e4e4c1c	9c697f7def422e3f6f885d3ec9741603
-5b709b96ee02a30be5eee558e3058245	b1e4aa22275a6a4b3213b44fc342f9fe
-754230e2c158107a2e93193c829e9e59	b1e4aa22275a6a4b3213b44fc342f9fe
-96682d9c9f1bed695dbf9176d3ee234c	31c3824b57ad0919df18a79978c701e9
-2df8905eae6823023de6604dc5346c29	31c3824b57ad0919df18a79978c701e9
-776da10f7e18ffde35ea94d144dc60a3	fc0dc52ba0b7a645c4d70c0df70abb40
-2df8905eae6823023de6604dc5346c29	fc0dc52ba0b7a645c4d70c0df70abb40
-02d44fbbe1bfacd6eaa9b20299b1cb78	fc0dc52ba0b7a645c4d70c0df70abb40
-a4977b96c7e5084fcce21a0d07b045f8	fc0dc52ba0b7a645c4d70c0df70abb40
-9fc7c7342d41c7c53c6e8e4b9bc53fc4	fc0dc52ba0b7a645c4d70c0df70abb40
-2ac79000a90b015badf6747312c0ccad	fc0dc52ba0b7a645c4d70c0df70abb40
-652208d2aa8cdd769632dbaeb7a16358	fc0dc52ba0b7a645c4d70c0df70abb40
-1ac0c8e8c04cf2d6f02fdb8292e74588	fc0dc52ba0b7a645c4d70c0df70abb40
-5588cb8830fdb8ac7159b7cf5d1e611e	fc0dc52ba0b7a645c4d70c0df70abb40
-4ad6c928711328d1cf0167bc87079a14	fc0dc52ba0b7a645c4d70c0df70abb40
-a5a8afc6c35c2625298b9ce4cc447b39	fc0dc52ba0b7a645c4d70c0df70abb40
-a538bfe6fe150a92a72d78f89733dbd0	fc0dc52ba0b7a645c4d70c0df70abb40
-44b7bda13ac1febe84d8607ca8bbf439	fc0dc52ba0b7a645c4d70c0df70abb40
-d399575133268305c24d87f1c2ef054a	fc0dc52ba0b7a645c4d70c0df70abb40
-6ff24c538936b5b53e88258f88294666	fc0dc52ba0b7a645c4d70c0df70abb40
-02f36cf6fe7b187306b2a7d423cafc2c	fc0dc52ba0b7a645c4d70c0df70abb40
-26830d74f9ed8e7e4ea4e82e28fa4761	fc0dc52ba0b7a645c4d70c0df70abb40
-ccff6df2a54baa3adeb0bddb8067e7c0	fc0dc52ba0b7a645c4d70c0df70abb40
-4d79c341966242c047f3833289ee3a13	fc0dc52ba0b7a645c4d70c0df70abb40
-c58de8415b504a6ffa5d0b14967f91bb	fc0dc52ba0b7a645c4d70c0df70abb40
-03022be9e2729189e226cca023a2c9bf	fc0dc52ba0b7a645c4d70c0df70abb40
-c2e88140e99f33883dac39daee70ac36	fc0dc52ba0b7a645c4d70c0df70abb40
-368ff974da0defe085637b7199231c0a	fc0dc52ba0b7a645c4d70c0df70abb40
-93f4aac22b526b5f0c908462da306ffc	fc0dc52ba0b7a645c4d70c0df70abb40
-71e720cd3fcc3cdb99f2f4dc7122e078	fc0dc52ba0b7a645c4d70c0df70abb40
-f17c7007dd2ed483b9df587c1fdac2c7	fc0dc52ba0b7a645c4d70c0df70abb40
-32921081f86e80cd10138b8959260e1a	fc0dc52ba0b7a645c4d70c0df70abb40
-ab7b69efdaf168cbbe9a5b03d901be74	fc0dc52ba0b7a645c4d70c0df70abb40
-57b9fe77adaac4846c238e995adb6ee2	fc0dc52ba0b7a645c4d70c0df70abb40
-3921cb3f97a88349e153beb5492f6ef4	fc0dc52ba0b7a645c4d70c0df70abb40
-3041a64f7587a6768d8e307b2662785b	fc0dc52ba0b7a645c4d70c0df70abb40
-8259dc0bcebabcb0696496ca406dd672	fc0dc52ba0b7a645c4d70c0df70abb40
-2654d6e7cec2ef045ca1772a980fbc4c	fc0dc52ba0b7a645c4d70c0df70abb40
-6a8538b37162b23d68791b9a0c54a5bf	fc0dc52ba0b7a645c4d70c0df70abb40
-559ccea48c3460ebc349587d35e808dd	fc0dc52ba0b7a645c4d70c0df70abb40
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	fc0dc52ba0b7a645c4d70c0df70abb40
-f9f57e175d62861bb5f2bda44a078df7	fc0dc52ba0b7a645c4d70c0df70abb40
-17bcf0bc2768911a378a55f42acedba7	fc0dc52ba0b7a645c4d70c0df70abb40
-a0fb30950d2a150c1d2624716f216316	fc0dc52ba0b7a645c4d70c0df70abb40
-1bb6d0271ea775dfdfa7f9fe1048147a	fc0dc52ba0b7a645c4d70c0df70abb40
-b04d1a151c786ee00092110333873a37	95cc14735b9cc969baa1fe1d8e4196ae
-65b029279eb0f99c0a565926566f6759	95cc14735b9cc969baa1fe1d8e4196ae
-9bfbfab5220218468ecb02ed546e3d90	95cc14735b9cc969baa1fe1d8e4196ae
-be41b6cfece7dfa1b4e4d226fb999607	95cc14735b9cc969baa1fe1d8e4196ae
-9c158607f29eaf8f567cc6304ada9c6d	95cc14735b9cc969baa1fe1d8e4196ae
-ca7e3b5c1860730cfd7b400de217fef2	95cc14735b9cc969baa1fe1d8e4196ae
-86482a1e94052aa18cd803a51104cdb9	700b8ca4c946e01dc92ab6c33757cafb
-f0bf2458b4c1a22fc329f036dd439f08	700b8ca4c946e01dc92ab6c33757cafb
-25fa2cdf2be085aa5394db743677fb69	700b8ca4c946e01dc92ab6c33757cafb
-8f4e7c5f66d6ee5698c01de29affc562	700b8ca4c946e01dc92ab6c33757cafb
-32917b03e82a83d455dd6b7f8609532c	b5b9346b4a9da4233b62daad23cf36ed
-1209f43dbecaba22f3514bf40135f991	b5b9346b4a9da4233b62daad23cf36ed
-3cdb47307aeb005121b09c41c8d8bee6	f87736b916e7d1ac60d0b7b1b7ca97b4
-522b6c44eb0aedf4970f2990a2f2a812	57dc48deed395dc3a98caea535768d2f
-4ffc374ef33b65b6acb388167ec542c0	57dc48deed395dc3a98caea535768d2f
-0c2277f470a7e9a2d70195ba32e1b08a	57dc48deed395dc3a98caea535768d2f
-42c9b99c6b409bc9990658f6e7829542	57dc48deed395dc3a98caea535768d2f
-0bcf509f7eb2db3b663f5782c8c4a86e	57dc48deed395dc3a98caea535768d2f
-3d01ff8c75214314c4ca768c30e6807b	bf742e78e40e9b736c8f8cc47a37277c
-8c69497eba819ee79a964a0d790368fb	bf742e78e40e9b736c8f8cc47a37277c
-2d1f30c9fc8d7200bdf15b730c4cd757	fc0dc52ba0b7a645c4d70c0df70abb40
-a1cebab6ecfd371779f9c18e36cbba0c	fc0dc52ba0b7a645c4d70c0df70abb40
-743c89c3e93b9295c1ae6e750047fb1e	fc0dc52ba0b7a645c4d70c0df70abb40
-54c09bacc963763eb8742fa1da44a968	7c02da151320d3aa28b1e0f54b0264b0
-828d51c39c87aad9b1407d409fa58e36	7c02da151320d3aa28b1e0f54b0264b0
-52ee4c6902f6ead006b0fb2f3e2d7771	7c02da151320d3aa28b1e0f54b0264b0
-095849fbdc267416abc6ddb48be311d7	824428dadd859deaf1af1916aea84cfc
-e563e0ba5dbf7c9417681c407d016277	824428dadd859deaf1af1916aea84cfc
-1745438c6be58479227d8c0d0220eec5	824428dadd859deaf1af1916aea84cfc
-7e5550d889d46d55df3065d742b5da51	824428dadd859deaf1af1916aea84cfc
-0870b61c5e913cb405d250e80c9ba9b9	824428dadd859deaf1af1916aea84cfc
-393a71c997d856ed5bb85a9695be6e46	824428dadd859deaf1af1916aea84cfc
-baa9d4eef21c7b89f42720313b5812d4	824428dadd859deaf1af1916aea84cfc
-20f0ae2f661bf20e506108c40c33a6f3	824428dadd859deaf1af1916aea84cfc
-96604499bfc96fcdb6da0faa204ff2fe	824428dadd859deaf1af1916aea84cfc
-3ed0c2ad2c9e6e7b161e6fe0175fe113	824428dadd859deaf1af1916aea84cfc
-57eba43d6bec2a8115e94d6fbb42bc75	fc0dc52ba0b7a645c4d70c0df70abb40
-dd18fa7a5052f2bce8ff7cb4a30903ea	824428dadd859deaf1af1916aea84cfc
-fd9a5c27c20cd89e4ffcc1592563abcf	824428dadd859deaf1af1916aea84cfc
-a5475ebd65796bee170ad9f1ef746394	824428dadd859deaf1af1916aea84cfc
-1fda271217bb4c043c691fc6344087c1	824428dadd859deaf1af1916aea84cfc
-cba95a42c53bdc6fbf3ddf9bf10a4069	824428dadd859deaf1af1916aea84cfc
-fe2c9aea6c702e6b82bc19b4a5d76f90	824428dadd859deaf1af1916aea84cfc
-bb66c20c42c26f1874525c3ab956ec41	824428dadd859deaf1af1916aea84cfc
-aad365e95c3d5fadb5fdf9517c371e89	824428dadd859deaf1af1916aea84cfc
-2501f7ba78cc0fd07efb7c17666ff12e	824428dadd859deaf1af1916aea84cfc
-925bd435e2718d623768dbf1bc1cfb60	824428dadd859deaf1af1916aea84cfc
-88a51a2e269e7026f0734f3ef3244e89	824428dadd859deaf1af1916aea84cfc
-5c1a922f41003eb7a19b570c33b99ff4	824428dadd859deaf1af1916aea84cfc
-de506362ebfcf7c632d659aa1f2b465d	824428dadd859deaf1af1916aea84cfc
-1a8780e5531549bd454a04630a74cd4d	824428dadd859deaf1af1916aea84cfc
-c0d7362d0f52d119f1beb38b12c0b651	824428dadd859deaf1af1916aea84cfc
-edd506a412c4f830215d4c0f1ac06e55	824428dadd859deaf1af1916aea84cfc
-39e83bc14e95fcbc05848fc33c30821f	824428dadd859deaf1af1916aea84cfc
-948098e746bdf1c1045c12f042ea98c2	824428dadd859deaf1af1916aea84cfc
-dde31adc1b0014ce659a65c8b4d6ce42	824428dadd859deaf1af1916aea84cfc
-4b503a03f3f1aec6e5b4d53dd8148498	824428dadd859deaf1af1916aea84cfc
-4267b5081fdfb47c085db24b58d949e0	824428dadd859deaf1af1916aea84cfc
-8f7de32e3b76c02859d6b007417bd509	824428dadd859deaf1af1916aea84cfc
-332d6b94de399f86d499be57f8a5a5ca	9922a07485d25c089f12792a50c5bfad
-b73377a1ec60e58d4eeb03347268c11b	9922a07485d25c089f12792a50c5bfad
-e3419706e1838c7ce6c25a28bef0c248	9922a07485d25c089f12792a50c5bfad
-d9bc1db8c13da3a131d853237e1f05b2	9922a07485d25c089f12792a50c5bfad
-3af7c6d148d216f13f66669acb8d5c59	9922a07485d25c089f12792a50c5bfad
-382ed38ecc68052678c5ac5646298b63	9922a07485d25c089f12792a50c5bfad
-213c302f84c5d45929b66a20074075df	9922a07485d25c089f12792a50c5bfad
-22c030759ab12f97e941af558566505e	9922a07485d25c089f12792a50c5bfad
-f5507c2c7beee622b98ade0b93abb7fe	9922a07485d25c089f12792a50c5bfad
-8c69497eba819ee79a964a0d790368fb	9922a07485d25c089f12792a50c5bfad
-095849fbdc267416abc6ddb48be311d7	9922a07485d25c089f12792a50c5bfad
-41bee031bd7d2fdb14ff48c92f4d7984	9922a07485d25c089f12792a50c5bfad
-754230e2c158107a2e93193c829e9e59	9922a07485d25c089f12792a50c5bfad
-b885447285ece8226facd896c04cdba2	9922a07485d25c089f12792a50c5bfad
-39a464d24bf08e6e8df586eb5fa7ee30	9922a07485d25c089f12792a50c5bfad
-f7c3dcc7ba01d0ead8e0cfb59cdf6afc	40c1eb30fa7abc7fdb3d8e35c61f6a7c
-095849fbdc267416abc6ddb48be311d7	40c1eb30fa7abc7fdb3d8e35c61f6a7c
-7e5550d889d46d55df3065d742b5da51	40c1eb30fa7abc7fdb3d8e35c61f6a7c
-1745438c6be58479227d8c0d0220eec5	40c1eb30fa7abc7fdb3d8e35c61f6a7c
-4b42093adfc268ce8974a3fa8c4f6bca	4eb278e51ecc7a4e052416dc604ad5c5
-70d0b58ef51e537361d676f05ea39c7b	4eb278e51ecc7a4e052416dc604ad5c5
-6f0eadd7aadf134b1b84d9761808d5ad	4eb278e51ecc7a4e052416dc604ad5c5
-6896f30283ad47ceb4a17c8c8d625891	4eb278e51ecc7a4e052416dc604ad5c5
-25118c5df9a2865a8bc97feb4aff4a18	4eb278e51ecc7a4e052416dc604ad5c5
-5a53bed7a0e05c2b865537d96a39646f	4eb278e51ecc7a4e052416dc604ad5c5
-29b7417c5145049d6593a0d88759b9ee	4eb278e51ecc7a4e052416dc604ad5c5
-4176aa79eae271d1b82015feceb00571	4eb278e51ecc7a4e052416dc604ad5c5
-c81794404ad68d298e9ceb75f69cf810	4eb278e51ecc7a4e052416dc604ad5c5
-d0386252fd85f76fc517724666cf59ae	4eb278e51ecc7a4e052416dc604ad5c5
-0cddbf403096e44a08bc37d1e2e99b0f	4eb278e51ecc7a4e052416dc604ad5c5
-0b9d35d460b848ad46ec0568961113bf	4eb278e51ecc7a4e052416dc604ad5c5
-546bb05114b78748d142c67cdbdd34fd	4eb278e51ecc7a4e052416dc604ad5c5
-4ac863b6f6fa5ef02afdd9c1ca2a5e24	4eb278e51ecc7a4e052416dc604ad5c5
-1e2bcbb679ccfdea27b28bd1ea9f2e67	4eb278e51ecc7a4e052416dc604ad5c5
-4b42093adfc268ce8974a3fa8c4f6bca	8342e65069254a6fd6d2bbc87aff8192
-942c9f2520684c22eb6216a92b711f9e	5c32c0f1d91f2c6579bb1e0b4da7d10c
-b7e529a8e9af2a2610182b3d3fc33698	5c32c0f1d91f2c6579bb1e0b4da7d10c
-1c62394f457ee9a56b0885f622299ea2	5c32c0f1d91f2c6579bb1e0b4da7d10c
-3af7c6d148d216f13f66669acb8d5c59	e1c9ae13502e64fd6fa4121f4af7fb0e
-64d9f86ed9eeac2695ec7847fe7ea313	e1c9ae13502e64fd6fa4121f4af7fb0e
-4fab532a185610bb854e0946f4def6a4	52270ed38759952c9cbd6487b265a3a7
-1cdd53cece78d6e8dffcf664fa3d1be2	52270ed38759952c9cbd6487b265a3a7
-dd18fa7a5052f2bce8ff7cb4a30903ea	0e94c08f1e572c5415f66d193fbc322a
-abd7ab19ff758cf4c1a2667e5bbac444	0e94c08f1e572c5415f66d193fbc322a
-92df3fd170b0285cd722e855a2968393	0e94c08f1e572c5415f66d193fbc322a
-b20a4217acaf4316739c6a5f6679ef60	0e94c08f1e572c5415f66d193fbc322a
-5b709b96ee02a30be5eee558e3058245	fb40042479b7dab1545b6ff8b011e288
-bb51d2b900ba638568e48193aada8a6c	fb40042479b7dab1545b6ff8b011e288
-47b23e889175dde5d6057db61cb52847	fb40042479b7dab1545b6ff8b011e288
-34b1dade51ffdab56daebcf6ac981371	cb155874b040e90a5653d5d13bab932b
-9d57ebbd1d3b135839b78221388394a1	161882776281e759c9c63d385457ce2c
-1833e2cfde2a7cf621d60288da14830c	161882776281e759c9c63d385457ce2c
-65976b6494d411d609160a2dfd98f903	161882776281e759c9c63d385457ce2c
-178227c5aef3b3ded144b9e19867a370	f10521a3f832fd2c698b1ac0319ea29a
-7e2b83d69e6c93adf203e13bc7d6f444	f10521a3f832fd2c698b1ac0319ea29a
-75cde58f0e5563f287f2d4afb0ce4b7e	f10521a3f832fd2c698b1ac0319ea29a
-351af29ee203c740c3209a0e0a8e9c22	f10521a3f832fd2c698b1ac0319ea29a
-b74881ac32a010e91ac7fcbcfebe210e	f10521a3f832fd2c698b1ac0319ea29a
-b20a4217acaf4316739c6a5f6679ef60	f10521a3f832fd2c698b1ac0319ea29a
-095849fbdc267416abc6ddb48be311d7	f10521a3f832fd2c698b1ac0319ea29a
-1918775515a9c7b8db011fd35a443b82	9f348351c96df42bcc7496c2010d4d1d
-f3b65f675d13d81c12d3bb30b0190cd1	9f348351c96df42bcc7496c2010d4d1d
-6e512379810ecf71206459e6a1e64154	9f348351c96df42bcc7496c2010d4d1d
-bbdbdf297183a1c24be29ed89711f744	9f348351c96df42bcc7496c2010d4d1d
-0844ad55f17011abed4a5208a3a05b74	63cc3a7986e4e746cdb607be909b90d4
-53369c74c3cacdc38bdcdeda9284fe3c	63cc3a7986e4e746cdb607be909b90d4
-15bf34427540dd1945e5992583412b2f	63cc3a7986e4e746cdb607be909b90d4
-ba8033b8cfb1ebfc91a5d03b3a268d9f	63cc3a7986e4e746cdb607be909b90d4
-fd85bfffd5a0667738f6110281b25db8	7fc85de86476aadededbf6716f2eebad
-fd85bfffd5a0667738f6110281b25db8	00da417154f2da39e79c9dcf4d7502fa
-fd85bfffd5a0667738f6110281b25db8	441306dd21b61d9a52e04b9e177cc9b5
-6e4b91e3d1950bcad012dbfbdd0fff09	7fc85de86476aadededbf6716f2eebad
-4fab532a185610bb854e0946f4def6a4	7fc85de86476aadededbf6716f2eebad
-32a02a8a7927de4a39e9e14f2dc46ac6	7fc85de86476aadededbf6716f2eebad
-e6fd7b62a39c109109d33fcd3b5e129d	7fc85de86476aadededbf6716f2eebad
-5435326cf392e2cd8ad7768150cd5df6	7fc85de86476aadededbf6716f2eebad
-747f992097b9e5c9df7585931537150a	7fc85de86476aadededbf6716f2eebad
-1cdd53cece78d6e8dffcf664fa3d1be2	7fc85de86476aadededbf6716f2eebad
-1734b04cf734cb291d97c135d74b4b87	7fc85de86476aadededbf6716f2eebad
-ee69e7d19f11ca58843ec2e9e77ddb38	7fc85de86476aadededbf6716f2eebad
-fb47f889f2c7c4fee1553d0f817b8aaa	7fc85de86476aadededbf6716f2eebad
-13c260ca90c0f47c9418790429220899	7fc85de86476aadededbf6716f2eebad
-8945663993a728ab19a3853e5b820a42	18ef7142c02d84033cc9d41687981691
-19819b153eb0990c821bc106e34ab3e1	18ef7142c02d84033cc9d41687981691
-79ce9bd96a3184b1ee7c700aa2927e67	18ef7142c02d84033cc9d41687981691
-804803e43d2c779d00004a6e87f28e30	18ef7142c02d84033cc9d41687981691
-b619e7f3135359e3f778e90d1942e6f5	6b6bceac41ce67726a6218b1155f2e70
-1104831a0d0fe7d2a6a4198c781e0e0d	6b6bceac41ce67726a6218b1155f2e70
-754230e2c158107a2e93193c829e9e59	6b6bceac41ce67726a6218b1155f2e70
-1ac0c8e8c04cf2d6f02fdb8292e74588	6b6bceac41ce67726a6218b1155f2e70
-fb28e62c0e801a787d55d97615e89771	60bb0152f453d3f043b4dabee1a60513
-54c09bacc963763eb8742fa1da44a968	60bb0152f453d3f043b4dabee1a60513
-0ddd0b1b6329e9cb9a64c4d947e641a8	60bb0152f453d3f043b4dabee1a60513
-30354302ae1c0715ccad2649da3d9443	60bb0152f453d3f043b4dabee1a60513
-89eec5d48b8969bf61eea38e4b3cfdbf	6d7c6c981877a0dedcb276ef841e10aa
-5518086aebc9159ba7424be0073ce5c9	6f745abd8c203f0f0e821ceeb77e5d24
-703b1360391d2aef7b9ec688b00849bb	6f745abd8c203f0f0e821ceeb77e5d24
-b4b46e6ce2c563dd296e8bae768e1b9d	6f745abd8c203f0f0e821ceeb77e5d24
-110cb86243320511676f788dbc46f633	d5fba38ea6078ea36b9ac0539a8d40c9
-8e9f5b1fc0e61f9a289aba4c59e49521	d5fba38ea6078ea36b9ac0539a8d40c9
-5c8c8b827ae259b8e4f8cb567a577a3e	97a06553981fd4531de6d5542136b854
-7f00429970ee9fd2a3185f777ff79922	97a06553981fd4531de6d5542136b854
-92e2cf901fe43bb77d99af2ff42ade77	97a06553981fd4531de6d5542136b854
-c4ddbffb73c1c34d20bd5b3f425ce4b1	97a06553981fd4531de6d5542136b854
-1a1bfb986176c0ba845ae4f43d027f58	97a06553981fd4531de6d5542136b854
-7ecdb1a0eb7c01d081acf2b7e11531c0	97a06553981fd4531de6d5542136b854
-094caa14a3a49bf282d8f0f262a01f43	97a06553981fd4531de6d5542136b854
-1cdd53cece78d6e8dffcf664fa3d1be2	7d126fe510b243454713c0ac4cd66011
-54b72f3169fea84731d3bcba785eac49	7d126fe510b243454713c0ac4cd66011
-8e9f5b1fc0e61f9a289aba4c59e49521	7d126fe510b243454713c0ac4cd66011
-014dbc80621be3ddc6dd0150bc6571ff	7d126fe510b243454713c0ac4cd66011
-9bfbfab5220218468ecb02ed546e3d90	8342e65069254a6fd6d2bbc87aff8192
-6d57b25c282247075f5e03cde27814df	7d126fe510b243454713c0ac4cd66011
-e8afde257f8a2cbbd39d866ddfc06103	7d126fe510b243454713c0ac4cd66011
-536d1ccb9cce397f948171765c0120d4	7d126fe510b243454713c0ac4cd66011
-15b70a4565372e2da0d330568fe1d795	7d126fe510b243454713c0ac4cd66011
-8e331f2ea604deea899bfd0a494309ba	7d126fe510b243454713c0ac4cd66011
-ff578d3db4dc3311b3098c8365d54e6b	7d126fe510b243454713c0ac4cd66011
-46e1d00c2019ff857c307085c58e0015	7d126fe510b243454713c0ac4cd66011
-6afdd78eac862dd63833a3ce5964b74b	7d126fe510b243454713c0ac4cd66011
-fb5f71046fd15a0a22d7bda38971f142	7d126fe510b243454713c0ac4cd66011
-512914f31042dacd2a05bfcebaacdb96	7d126fe510b243454713c0ac4cd66011
-d96d9dac0f19368234a1fe2d4daf7f7c	7d126fe510b243454713c0ac4cd66011
-5aa3856374df5daa99d3d33e6a38a865	7d126fe510b243454713c0ac4cd66011
-e83655f0458b6c309866fbde556be35a	7d126fe510b243454713c0ac4cd66011
-92dd59a949dfceab979dd25ac858f204	7d126fe510b243454713c0ac4cd66011
-ee1bc524d6d3410e94a99706dcb12319	7d126fe510b243454713c0ac4cd66011
-c09ffd48de204e4610d474ade2cf3a0d	7d126fe510b243454713c0ac4cd66011
-3e7f48e97425d4c532a0787e54843863	9c553520982c65b603e9d741eaa56b09
-bfff088b67e0fc6d1b80dbd6b6f0620c	9c553520982c65b603e9d741eaa56b09
-34b1dade51ffdab56daebcf6ac981371	2cd4ca525a2d7af5ffa5f6286998ceb0
-233dedc0bee8bbdf7930eab3dd54daee	2cd4ca525a2d7af5ffa5f6286998ceb0
-80f19b325c934c8396780d0c66a87c99	e59ace10fad0af976f723748e6fd2ea8
-3ccca65d3d9843b81f4e251dcf8a3e8c	89b8688929aebb711cffaa22561b1395
-9144b4f0da4c96565c47c38f0bc16593	89b8688929aebb711cffaa22561b1395
-10d91715ea91101cfe0767c812da8151	2200574eb6396407ec9fc642c91f0e5a
-8b3d594047e4544f608c2ebb151aeb45	2200574eb6396407ec9fc642c91f0e5a
-ca03a570b4d4a22329359dc105a9ef22	2200574eb6396407ec9fc642c91f0e5a
-7fc454efb6df96e012e0f937723d24aa	cb16e5f28a9e5532485fe35beca8d438
-f5eaa9c89bd215868235b0c068050883	cb16e5f28a9e5532485fe35beca8d438
-dcd3968ac5b1ab25328f4ed42cdf2e2b	cb16e5f28a9e5532485fe35beca8d438
-6e25aa27fcd893613fac13b0312fe36d	cb16e5f28a9e5532485fe35beca8d438
-3614c45db20ee41e068c2ab7969eb3b5	cb16e5f28a9e5532485fe35beca8d438
-63e961dd2daa48ed1dade27a54f03ec4	cb16e5f28a9e5532485fe35beca8d438
-2113f739f81774557041db616ee851e6	cb16e5f28a9e5532485fe35beca8d438
-9f10d335198e90990f3437c5733468e7	cb16e5f28a9e5532485fe35beca8d438
-4cc6d79ef4cf3af13b6c9b77783e688b	cb16e5f28a9e5532485fe35beca8d438
-da34d04ff19376defc2facc252e52cf0	cb16e5f28a9e5532485fe35beca8d438
-eaf446aca5ddd602d0ab194667e7bec1	cb16e5f28a9e5532485fe35beca8d438
-b34f0dad8c934ee71aaabb2a675f9822	cb16e5f28a9e5532485fe35beca8d438
-c6458620084029f07681a55746ee4d69	cb16e5f28a9e5532485fe35beca8d438
-ee325100d772dd075010b61b6f33c82a	cb16e5f28a9e5532485fe35beca8d438
-950d43371e8291185e524550ad3fd0df	cb16e5f28a9e5532485fe35beca8d438
-2aa7757363ff360f3a08283c1d157b2c	cb16e5f28a9e5532485fe35beca8d438
-d71218f2abfdd51d95ba7995b93bd536	cb16e5f28a9e5532485fe35beca8d438
-186aab3d817bd38f76c754001b0ab04d	cb16e5f28a9e5532485fe35beca8d438
-12c0763f59f7697824567a3ca32191db	cb16e5f28a9e5532485fe35beca8d438
-4e14f71c5702f5f71ad7de50587e2409	cb16e5f28a9e5532485fe35beca8d438
-8f7d02638c253eb2d03118800c623203	cb16e5f28a9e5532485fe35beca8d438
-70d0b58ef51e537361d676f05ea39c7b	cb16e5f28a9e5532485fe35beca8d438
-237e378c239b44bff1e9a42ab866580c	cb16e5f28a9e5532485fe35beca8d438
-9ee30f495029e1fdf6567045f2079be1	cb16e5f28a9e5532485fe35beca8d438
-d2ec9ebbccaa3c6925b86d1bd528d12f	cb16e5f28a9e5532485fe35beca8d438
-2cca468dcaea0a807f756b1de2b3ec7b	cb16e5f28a9e5532485fe35beca8d438
-c8c012313f10e2d0830f3fbc5afca619	cb16e5f28a9e5532485fe35beca8d438
-cafe9e68e8f90b3e1328da8858695b31	cb16e5f28a9e5532485fe35beca8d438
-cf3ecbdc9b5ae9c5a87ab05403691350	cb16e5f28a9e5532485fe35beca8d438
-9323fc63b40460bcb68a7ad9840bad5a	cb16e5f28a9e5532485fe35beca8d438
-6a8538b37162b23d68791b9a0c54a5bf	cb16e5f28a9e5532485fe35beca8d438
-cba95a42c53bdc6fbf3ddf9bf10a4069	cb16e5f28a9e5532485fe35beca8d438
-6429807f6febbf061ac85089a8c3173d	084c45f4c0bf86930df25ae1c59b3fe6
-7b959644258e567b32d7c38e21fdb6fa	cb16e5f28a9e5532485fe35beca8d438
-b08c5a0f666c5f8a83a7bcafe51ec49b	ddfe34c53312f205cb9ee1df3ee0cd0e
-eb626abaffa54be81830da1b29a3f1d8	ddfe34c53312f205cb9ee1df3ee0cd0e
-f4f870098db58eeae93742dd2bcaf2b2	ddfe34c53312f205cb9ee1df3ee0cd0e
-dd663d37df2cb0b5e222614dd720f6d3	ddfe34c53312f205cb9ee1df3ee0cd0e
-71aabfaa43d427516f4020c7178de31c	ddfe34c53312f205cb9ee1df3ee0cd0e
-32f27ae0d5337bb62c636e3f6f17b0ff	ddfe34c53312f205cb9ee1df3ee0cd0e
-187ebdf7947f4b61e0725c93227676a4	ddfe34c53312f205cb9ee1df3ee0cd0e
-d9a6c1fcbafa92784f501ca419fe4090	ddfe34c53312f205cb9ee1df3ee0cd0e
-4176aa79eae271d1b82015feceb00571	ddfe34c53312f205cb9ee1df3ee0cd0e
-c81794404ad68d298e9ceb75f69cf810	ddfe34c53312f205cb9ee1df3ee0cd0e
-fd85bfffd5a0667738f6110281b25db8	ddfe34c53312f205cb9ee1df3ee0cd0e
-7b959644258e567b32d7c38e21fdb6fa	ddfe34c53312f205cb9ee1df3ee0cd0e
-b4b46e6ce2c563dd296e8bae768e1b9d	ddfe34c53312f205cb9ee1df3ee0cd0e
-afd755c6a62ac0a0947a39c4f2cd2c20	ddfe34c53312f205cb9ee1df3ee0cd0e
-b69b0e9285e4fa15470b0969836ac5ae	ddfe34c53312f205cb9ee1df3ee0cd0e
-bd4184ee062e4982b878b6b188793f5b	0962c746a7d30ba0f037b21fb8e32858
-79d924bae828df8e676ba27e5dfc5f42	0962c746a7d30ba0f037b21fb8e32858
-950d43371e8291185e524550ad3fd0df	bc9dd8d4890a5523a876931328350747
-1fda271217bb4c043c691fc6344087c1	bc9dd8d4890a5523a876931328350747
-dde31adc1b0014ce659a65c8b4d6ce42	bc9dd8d4890a5523a876931328350747
-45b568ce63ea724c415677711b4328a7	bc9dd8d4890a5523a876931328350747
-7463543d784aa59ca86359a50ef58c8e	bc9dd8d4890a5523a876931328350747
-84557a1d9eb96a680c0557724e1d0532	bc9dd8d4890a5523a876931328350747
-c8d551145807972d194691247e7102a2	bc9dd8d4890a5523a876931328350747
-820de5995512273916b117944d6da15a	bc9dd8d4890a5523a876931328350747
-ead662696e0486cb7a478ecd13a0b5c5	bc9dd8d4890a5523a876931328350747
-62165afb63fc004e619dff4d2132517c	bc9dd8d4890a5523a876931328350747
-edd506a412c4f830215d4c0f1ac06e55	bc9dd8d4890a5523a876931328350747
-095849fbdc267416abc6ddb48be311d7	bc9dd8d4890a5523a876931328350747
-393a71c997d856ed5bb85a9695be6e46	bc9dd8d4890a5523a876931328350747
-dd18fa7a5052f2bce8ff7cb4a30903ea	bc9dd8d4890a5523a876931328350747
-79ce9bd96a3184b1ee7c700aa2927e67	bc9dd8d4890a5523a876931328350747
-b5d1848944ce92433b626211ed9e46f8	bc9dd8d4890a5523a876931328350747
-a4cbfb212102da21b82d94be555ac3ec	bc9dd8d4890a5523a876931328350747
-92e67ef6f0f8c77b1dd631bd3b37ebca	bc9dd8d4890a5523a876931328350747
-fe1f86f611c34fba898e4c90b71ec981	bc9dd8d4890a5523a876931328350747
-8c22a88267727dd513bf8ca278661e4d	bc9dd8d4890a5523a876931328350747
-9323fc63b40460bcb68a7ad9840bad5a	1be77f077186f07ab5b59287427b15c2
-541455f74d6f393174ff14b99e01b22d	1be77f077186f07ab5b59287427b15c2
-3e3b4203ce868f55b084eb4f2da535d3	e396e5afb7cf4c68b9adce7af6adad8c
-88ae6d397912fe633198a78a3b10f82e	e396e5afb7cf4c68b9adce7af6adad8c
-d2ec80fcff98ecb676da474dfcb5fe5c	e396e5afb7cf4c68b9adce7af6adad8c
-d399575133268305c24d87f1c2ef054a	e396e5afb7cf4c68b9adce7af6adad8c
-e31fabfff3891257949efc248dfa97e2	e396e5afb7cf4c68b9adce7af6adad8c
-4f6ae7ce964e64fdc143602aaaab1c26	e396e5afb7cf4c68b9adce7af6adad8c
-cd11b262d721d8b3f35ad2d2af8431dd	cb16e5f28a9e5532485fe35beca8d438
-069cdf9184e271a3c6d45ad7e86fcac2	bc9dd8d4890a5523a876931328350747
-96682d9c9f1bed695dbf9176d3ee234c	fa64fb0e05a9c0e32010d73760dfa53f
-fe1fbc7d376820477e38b5fa497e4509	e396e5afb7cf4c68b9adce7af6adad8c
-b4087680a00055c7b9551c6a1ef50816	e396e5afb7cf4c68b9adce7af6adad8c
-0ddd0b1b6329e9cb9a64c4d947e641a8	e396e5afb7cf4c68b9adce7af6adad8c
-13c260ca90c0f47c9418790429220899	e396e5afb7cf4c68b9adce7af6adad8c
-986a4f4e41790e819dc8b2a297aa8c87	e396e5afb7cf4c68b9adce7af6adad8c
-7e2b83d69e6c93adf203e13bc7d6f444	e396e5afb7cf4c68b9adce7af6adad8c
-e318f5bc96fd248b69f6a969a320769e	e396e5afb7cf4c68b9adce7af6adad8c
-56525146be490541a00c20a1dab0a465	e396e5afb7cf4c68b9adce7af6adad8c
-0a267617c0b5b4d53e43a7d4e4c522ad	e396e5afb7cf4c68b9adce7af6adad8c
-2f39cfcedf45336beb2e966e80b93e22	e396e5afb7cf4c68b9adce7af6adad8c
-51053ffab2737bd21724ed0b7e6c56f7	e396e5afb7cf4c68b9adce7af6adad8c
-869d4f93046289e11b591fc7a740bc43	e396e5afb7cf4c68b9adce7af6adad8c
-edb40909b64e73b547843287929818de	e396e5afb7cf4c68b9adce7af6adad8c
-5b3c70181a572c8d92d906ca20298d93	e396e5afb7cf4c68b9adce7af6adad8c
-1fda271217bb4c043c691fc6344087c1	e396e5afb7cf4c68b9adce7af6adad8c
-be3c26bf034e9e62057314f3945f87be	e396e5afb7cf4c68b9adce7af6adad8c
-37b93f83b5fe94e766346ef212283282	e396e5afb7cf4c68b9adce7af6adad8c
-dbde8de43043d69c4fdd3e50a72b859d	e396e5afb7cf4c68b9adce7af6adad8c
-0f512371d62ae34741d14dde50ab4529	e396e5afb7cf4c68b9adce7af6adad8c
-54b72f3169fea84731d3bcba785eac49	e396e5afb7cf4c68b9adce7af6adad8c
-fd85bfffd5a0667738f6110281b25db8	e396e5afb7cf4c68b9adce7af6adad8c
-fd1bd629160356260c497da84df860e2	e396e5afb7cf4c68b9adce7af6adad8c
-3dba6c9259786defe62551e38665a94a	e396e5afb7cf4c68b9adce7af6adad8c
-9d969d25c9f506c5518bb090ad5f8266	e396e5afb7cf4c68b9adce7af6adad8c
-ce2caf05154395724e4436f042b8fa53	e396e5afb7cf4c68b9adce7af6adad8c
-34d29649cb20a10a5e6b59c531077a59	e396e5afb7cf4c68b9adce7af6adad8c
-c02f12329daf99e6297001ef684d6285	e396e5afb7cf4c68b9adce7af6adad8c
-3af7c6d148d216f13f66669acb8d5c59	477a7e7627b4482929c215de7d3c4a76
-f64162c264d5679d130b6e8ae84d704e	477a7e7627b4482929c215de7d3c4a76
-0674a20e29104e21d141843a86421323	477a7e7627b4482929c215de7d3c4a76
-24dd5b3de900b9ee06f913a550beb64c	477a7e7627b4482929c215de7d3c4a76
-fe7838d63434580c47798cbc5c2c8c63	477a7e7627b4482929c215de7d3c4a76
-e47c5fcf4a752dfcfbccaab5988193ef	477a7e7627b4482929c215de7d3c4a76
-3d482a4abe7d814a741b06cb6306d598	477a7e7627b4482929c215de7d3c4a76
-d9bc1db8c13da3a131d853237e1f05b2	477a7e7627b4482929c215de7d3c4a76
-d0a1fd0467dc892f0dc27711637c864e	477a7e7627b4482929c215de7d3c4a76
-856256d0fddf6bfd898ef43777a80f0c	477a7e7627b4482929c215de7d3c4a76
-b5bc9b34286d4d4943fc301fe9b46e46	477a7e7627b4482929c215de7d3c4a76
-589a30eb4a7274605385d3414ae82aaa	477a7e7627b4482929c215de7d3c4a76
-d79d3a518bd9912fb38fa2ef71c39750	477a7e7627b4482929c215de7d3c4a76
-5ff09619b7364339a105a1cbcb8d65fd	477a7e7627b4482929c215de7d3c4a76
-42563d0088d6ac1a47648fc7621e77c6	477a7e7627b4482929c215de7d3c4a76
-2eb6fb05d553b296096973cb97912cc0	477a7e7627b4482929c215de7d3c4a76
-50681f5168e67b62daa1837d8f693001	7e834ee3aea78e49afb45728dbb63de2
-e163173b9350642f7c855bf37c144ce0	7e834ee3aea78e49afb45728dbb63de2
-e29ef4beb480eab906ffa7c05aeec23d	b4bc434cadf0eb32a339ac495a2268e8
-559ccea48c3460ebc349587d35e808dd	b4bc434cadf0eb32a339ac495a2268e8
-69af98a8916998443129c057ee04aec4	b4bc434cadf0eb32a339ac495a2268e8
-57338bd22a6c5ba32f90981ffb25ef23	b4bc434cadf0eb32a339ac495a2268e8
-48aeffb54173796a88ef8c4eb06dbf10	331460836901954849fb420c890f1c44
-07759c4afc493965a5420e03bdc9b773	331460836901954849fb420c890f1c44
-48aeffb54173796a88ef8c4eb06dbf10	7e8a1347517055c0af14a3df27f42a4d
-8989ab42027d29679d1dedc518eb04bd	7e8a1347517055c0af14a3df27f42a4d
-266674d0a44a3a0102ab80021ddfd451	7e8a1347517055c0af14a3df27f42a4d
-50e7b1ba464091976138ec6a57b08ba0	7e8a1347517055c0af14a3df27f42a4d
-a51211ef8cbbf7b49bfb27c099c30ce1	7e8a1347517055c0af14a3df27f42a4d
-0dc9cb94cdd3a9e89383d344a103ed5b	7e8a1347517055c0af14a3df27f42a4d
-c45ca1e791f2849d9d11b3948fdefb74	7e8a1347517055c0af14a3df27f42a4d
-54f89c837a689f7f27667efb92e3e6b1	7e8a1347517055c0af14a3df27f42a4d
-ada3962af4845c243fcd1ccafc815b09	331460836901954849fb420c890f1c44
-ada3962af4845c243fcd1ccafc815b09	7e8a1347517055c0af14a3df27f42a4d
-897edb97d775897f69fa168a88b01c19	bc9dd8d4890a5523a876931328350747
-b05f3966288598b02cda4a41d6d1eb6b	0e4288f287e446bf417ba4e0664a1c26
-1e9413d4cc9af0ad12a6707776573ba0	0e4288f287e446bf417ba4e0664a1c26
-e6fd7b62a39c109109d33fcd3b5e129d	0e4288f287e446bf417ba4e0664a1c26
-c7d1a2a30826683fd366e7fd6527e79c	0e4288f287e446bf417ba4e0664a1c26
-6ff4735b0fc4160e081440b3f7238925	0e4288f287e446bf417ba4e0664a1c26
-f4f870098db58eeae93742dd2bcaf2b2	0e4288f287e446bf417ba4e0664a1c26
-100691b7539d5ae455b6f4a18394420c	0e4288f287e446bf417ba4e0664a1c26
-d5282bd6b63b4cd51b50b40d192f1161	3aa0df8e70b789a940e8a4df74c1c1de
-8b3d594047e4544f608c2ebb151aeb45	b0f45689c096147b963b998eccdbc19e
-5159fd46698ae21d56f1684c2041bd79	b0f45689c096147b963b998eccdbc19e
-92e25f3ba88109b777bd65b3b3de28a9	3048f2df2a1969708f48957002d0ea46
-c63ecd19a0ca74c22dfcf3063c9805d2	3048f2df2a1969708f48957002d0ea46
-e08f00b43f7aa539eb60cfa149afd92e	3048f2df2a1969708f48957002d0ea46
-793955e5d62f9b22bae3b59463c9ef63	3048f2df2a1969708f48957002d0ea46
-e4f2a1b2efa9caa67e58fa9610903ef0	3048f2df2a1969708f48957002d0ea46
-25ebb3d62ad1160c96bbdea951ad2f34	dad100b64679b43501647a37e886a148
-754230e2c158107a2e93193c829e9e59	dad100b64679b43501647a37e886a148
-d730e65d54d6c0479561d25724afd813	dad100b64679b43501647a37e886a148
-57f003f2f413eedf53362b020f467be4	dad100b64679b43501647a37e886a148
-b20a4217acaf4316739c6a5f6679ef60	98bbd03f950cbc96d6639a4b7b43e76a
-5ef6a0f70220936a0158ad66fd5d9082	98bbd03f950cbc96d6639a4b7b43e76a
-52ee4c6902f6ead006b0fb2f3e2d7771	ef91a35f7de705463fc18a852a0eaa9c
-d97a4c5c71013baac562c2b5126909e1	ef91a35f7de705463fc18a852a0eaa9c
-92e25f3ba88109b777bd65b3b3de28a9	1ac607a573d595a27f07adef0073a8fd
-54c09bacc963763eb8742fa1da44a968	1ac607a573d595a27f07adef0073a8fd
-1ebe59bfb566a19bc3ce5f4fb6c79cd3	1ac607a573d595a27f07adef0073a8fd
-92e67ef6f0f8c77b1dd631bd3b37ebca	2d2f874ab54161fb8158d43487e77eb6
-45b568ce63ea724c415677711b4328a7	2d2f874ab54161fb8158d43487e77eb6
-5f572d201a24500b2db6eca489a6a620	2d2f874ab54161fb8158d43487e77eb6
-ac6dc9583812a034be2f5aacbf439236	2d2f874ab54161fb8158d43487e77eb6
-59d153c1c2408b702189623231b7898a	8df16d3b3a2ca21ba921c310aadb7803
-bb51d2b900ba638568e48193aada8a6c	8df16d3b3a2ca21ba921c310aadb7803
-44b7bda13ac1febe84d8607ca8bbf439	8df16d3b3a2ca21ba921c310aadb7803
-7f499363c322c1243827700c67a7591c	dedb3aef6ecd0d48a7e7a41d8545a2d9
-2040754b0f9589a89ce88912bcf0648e	dedb3aef6ecd0d48a7e7a41d8545a2d9
-b0ce1e93de9839d07dab8d268ca23728	dedb3aef6ecd0d48a7e7a41d8545a2d9
-13cd421d8a1cb48800543b9317aa2f52	dedb3aef6ecd0d48a7e7a41d8545a2d9
-5b3c70181a572c8d92d906ca20298d93	dedb3aef6ecd0d48a7e7a41d8545a2d9
-de506362ebfcf7c632d659aa1f2b465d	dedb3aef6ecd0d48a7e7a41d8545a2d9
-5c1a922f41003eb7a19b570c33b99ff4	dedb3aef6ecd0d48a7e7a41d8545a2d9
-095849fbdc267416abc6ddb48be311d7	dedb3aef6ecd0d48a7e7a41d8545a2d9
-4b9f3b159347c34232c9f4b220cb22de	dedb3aef6ecd0d48a7e7a41d8545a2d9
-ade72e999b4e78925b18cf48d1faafa4	dedb3aef6ecd0d48a7e7a41d8545a2d9
-81a17f1bf76469b18fbe410d8ec77da8	dedb3aef6ecd0d48a7e7a41d8545a2d9
-332d6b94de399f86d499be57f8a5a5ca	dedb3aef6ecd0d48a7e7a41d8545a2d9
-2f39cfcedf45336beb2e966e80b93e22	dedb3aef6ecd0d48a7e7a41d8545a2d9
-81a86312a4aa3660f273d6ed5e4a6c7d	dedb3aef6ecd0d48a7e7a41d8545a2d9
-ade72e999b4e78925b18cf48d1faafa4	a1ba44498f1b706e9ec67d6c50842b42
-546f8a4844ac636dd18025dcc673a3ab	a1ba44498f1b706e9ec67d6c50842b42
-20d32d36893828d060096b2cd149820b	a1ba44498f1b706e9ec67d6c50842b42
-15137b95180ccc986f6321acffb9cb6f	a1ba44498f1b706e9ec67d6c50842b42
-692649c1372f37ed50339b91337e7fec	86726dd04d66ca3def8c4e2ccfbbf3e2
-6c607fc8c0adc99559bc14e01170fee1	86726dd04d66ca3def8c4e2ccfbbf3e2
-0646225016fba179076d7df56260d1b2	b8a9f22cb877ce0189a3ce04e105f0c1
-ce5e821f2dcc57569eae793f628c99cf	b8a9f22cb877ce0189a3ce04e105f0c1
-d3ed8223151e14b936436c336a4c7278	b8a9f22cb877ce0189a3ce04e105f0c1
-1cdd53cece78d6e8dffcf664fa3d1be2	d3582717412a80f08b23f8add23a1f35
-63d7f33143522ba270cb2c87f724b126	d3582717412a80f08b23f8add23a1f35
-ad01952b3c254c8ebefaf6f73ae62f7d	d3582717412a80f08b23f8add23a1f35
-cd11b262d721d8b3f35ad2d2af8431dd	fc0dc52ba0b7a645c4d70c0df70abb40
-e47c5fcf4a752dfcfbccaab5988193ef	6a1b89e9076bdcb811ab7b4b6b5fbb23
-3771bd5f354df475660a24613fcb7a8c	6a1b89e9076bdcb811ab7b4b6b5fbb23
-f43bb3f980f58c66fc81874924043946	6a1b89e9076bdcb811ab7b4b6b5fbb23
-b5d1848944ce92433b626211ed9e46f8	68884e33784d424fef2065652b743ee7
-9cf73d0300eea453f17c6faaeb871c55	68884e33784d424fef2065652b743ee7
-cd11b262d721d8b3f35ad2d2af8431dd	68884e33784d424fef2065652b743ee7
-15cee64305c1b40a4fac10c26ffa227d	68884e33784d424fef2065652b743ee7
-069cdf9184e271a3c6d45ad7e86fcac2	c150d400f383afb8e8427813549a82d3
-069cdf9184e271a3c6d45ad7e86fcac2	d5cd210a82be3dd1a7879b83ba5657c0
-069cdf9184e271a3c6d45ad7e86fcac2	e1c9ae13502e64fd6fa4121f4af7fb0e
-3be3e956aeb5dc3b16285463e02af25b	6a1b89e9076bdcb811ab7b4b6b5fbb23
-6b7cf117ecf0fea745c4c375c1480cb5	68884e33784d424fef2065652b743ee7
-bb66c20c42c26f1874525c3ab956ec41	cc0c4b3208cad5143bf8aec2c74ac9df
-32a02a8a7927de4a39e9e14f2dc46ac6	cc0c4b3208cad5143bf8aec2c74ac9df
-e9782409a3511c3535149cdfb5b76364	cc0c4b3208cad5143bf8aec2c74ac9df
-382ed38ecc68052678c5ac5646298b63	cc0c4b3208cad5143bf8aec2c74ac9df
-90bebabe0c80676a4f6207ee0f8caa4c	fa64fb0e05a9c0e32010d73760dfa53f
-ee8cde73a364c2b066f795edda1a303a	fa64fb0e05a9c0e32010d73760dfa53f
-54c09bacc963763eb8742fa1da44a968	fa64fb0e05a9c0e32010d73760dfa53f
-92e25f3ba88109b777bd65b3b3de28a9	fa64fb0e05a9c0e32010d73760dfa53f
-49f6021766f78bffb3f824eb199acfbc	4454869140a41f593eb7d8575d0f97c8
-8b3d594047e4544f608c2ebb151aeb45	4454869140a41f593eb7d8575d0f97c8
-f04de6fafc611682779eb2eb36bdbe25	4454869140a41f593eb7d8575d0f97c8
-8edfa58b1aedb58629b80e5be2b2bd92	91b0a2f2ba6b8909cc412bf37e35f779
-f7c31a68856cab2620244be2df27c728	91b0a2f2ba6b8909cc412bf37e35f779
-11d396b078f0ae37570c8ef0f45937ad	55feb5f143059bd9a7a647ba7daab977
-11d396b078f0ae37570c8ef0f45937ad	85500121e0087db5354d72b484d1a90e
-ae2056f2540325e2de91f64f5ac130b6	e471494f42d963b13f025c0636c43763
-b96a3cb81197e8308c87f6296174fe3e	b5b0b9a19e53b658857004f145d6a94f
-eced087124a41417845c0b0f4ff44ba9	b5b0b9a19e53b658857004f145d6a94f
-94ca28ea8d99549c2280bcc93f98c853	b5b0b9a19e53b658857004f145d6a94f
-edaf03c0c66aa548df3cebdae0f94545	b5b0b9a19e53b658857004f145d6a94f
-d9bc1db8c13da3a131d853237e1f05b2	ee46f6424a052ac12d2c76309c260a36
-4276250c9b1b839b9508825303c5c5ae	ee46f6424a052ac12d2c76309c260a36
-16cbdd4df5f89d771dccfa1111d7f4bc	ee46f6424a052ac12d2c76309c260a36
-9abdb4a0588186fc4425b29080e820a2	ee46f6424a052ac12d2c76309c260a36
-06a4594d3b323539e9dc4820625d01b8	180e57969fd1e8948ebdf21ff1b57d3d
-b5c7675d6faefd09e871a6c1157e9353	180e57969fd1e8948ebdf21ff1b57d3d
-ae653e4f46c5928cc4b4b171efbcf881	04fdcbd453ccdcfc343ffc7ab6b27a8d
-1683f5557c9db93b35d1d2ae450baa21	04fdcbd453ccdcfc343ffc7ab6b27a8d
-bd4184ee062e4982b878b6b188793f5b	04fdcbd453ccdcfc343ffc7ab6b27a8d
-96682d9c9f1bed695dbf9176d3ee234c	379d64538f810914012edc9981039183
-df8457281db2cba8bbcb4b3b80f2b9a3	379d64538f810914012edc9981039183
-f85df6e18a73a6d1f5ccb59ee51558ae	379d64538f810914012edc9981039183
-0308321fc4f75ddaed8208c24f2cb918	0b305bfbd40df03ea4a962caa5bfc8f4
-4ceb1f68d8a260c644c25799629a5615	0b305bfbd40df03ea4a962caa5bfc8f4
-7acb475eda543ccd0622d546c5772c5a	0b305bfbd40df03ea4a962caa5bfc8f4
-e6fd7b62a39c109109d33fcd3b5e129d	0b305bfbd40df03ea4a962caa5bfc8f4
-e318f5bc96fd248b69f6a969a320769e	0b305bfbd40df03ea4a962caa5bfc8f4
-f042da2a954a1521114551a6f9e22c75	d691b12bf758d4895b52dd338feb3a10
-ba8d3efe842e0755020a2f1bc5533585	d691b12bf758d4895b52dd338feb3a10
-5a154476dd67358f4dab8500076dece3	d691b12bf758d4895b52dd338feb3a10
-b8e18040dc07eead8e6741733653a740	95f435dc4c76d20082aafca8e5a394c9
-0bc244b6aa99080c3d37fea06d328193	95f435dc4c76d20082aafca8e5a394c9
-59d153c1c2408b702189623231b7898a	02ce1b3a6156c9f73724ea3efabde2e8
-b46e412d7f90e277a1b9370cfeb26abe	8307a775d42c5bfbaab36501bf6a3f6c
-49920f80faa980ca10fea8f31ddd5fc9	5c22297e2817e4a0c9ee608a67bcf297
-fddfe79923a5373a44237e0e60f5c845	5c22297e2817e4a0c9ee608a67bcf297
-2df8905eae6823023de6604dc5346c29	ae89cc8a42502f057aa1d7cbdf5105a8
-2654d6e7cec2ef045ca1772a980fbc4c	ae89cc8a42502f057aa1d7cbdf5105a8
-277ce66a47017ca1ce55714d5d2232b2	ae89cc8a42502f057aa1d7cbdf5105a8
-cf4ee20655dd3f8f0a553c73ffe3f72a	e3e419c6d94bb9333e21fbfa231367a0
-2ad8a3ceb96c6bf74695f896999019d8	e3e419c6d94bb9333e21fbfa231367a0
-721c28f4c74928cc9e0bb3fef345e408	fd4a13ab709b0975de3c7528ca3aab0e
-fc4734cc48ce1595c9dbbe806f663af8	fd4a13ab709b0975de3c7528ca3aab0e
-bbdbdf297183a1c24be29ed89711f744	fd4a13ab709b0975de3c7528ca3aab0e
-567ddbaeec9bc3c5f0348a21ebd914b1	fd4a13ab709b0975de3c7528ca3aab0e
-f042da2a954a1521114551a6f9e22c75	573a39e7d69678efec23ba7a9e99f0f5
-25cde5325befa9538b771717514351fb	573a39e7d69678efec23ba7a9e99f0f5
-cf2676445aa6abcc43a4b0d4b01b42a1	573a39e7d69678efec23ba7a9e99f0f5
-c2275e8ac71d308946a63958bc7603a1	573a39e7d69678efec23ba7a9e99f0f5
-3005cc8298f189f94923611386015c78	573a39e7d69678efec23ba7a9e99f0f5
-7f2679aa5b1116cc22bab4ee10018f59	573a39e7d69678efec23ba7a9e99f0f5
-8a1acf425fb1bca48fb543edcc20a90d	573a39e7d69678efec23ba7a9e99f0f5
-f042da2a954a1521114551a6f9e22c75	b8fabad72c3fd0540815a6cd8d126a14
-c2d7bbc06d62144545c45b9060b0a629	b8fabad72c3fd0540815a6cd8d126a14
-cf2676445aa6abcc43a4b0d4b01b42a1	b8fabad72c3fd0540815a6cd8d126a14
-62254b7ab0a2b3d3138bde893dde64a3	b8fabad72c3fd0540815a6cd8d126a14
-a332f1280622f9628fccd1b7aac7370a	1d8cf922eebeba04d4aa27b8b5e412c3
-99bd5eff92fc3ba728a9da5aa1971488	1d8cf922eebeba04d4aa27b8b5e412c3
-f291caafeb623728ebf0166ac4cb0825	1d8cf922eebeba04d4aa27b8b5e412c3
-96682d9c9f1bed695dbf9176d3ee234c	31b7b744437a5b46fb982fcdf1b94851
-1a46202030819f7419e300997199c955	31b7b744437a5b46fb982fcdf1b94851
-1f94ea2f8cb55dd130ec2254c7c2238c	2c6a917b013e933d5ef1aa0a6216e575
-8d788b28d613c227ea3c87ac898a8256	2c6a917b013e933d5ef1aa0a6216e575
-5226c9e67aff4f963aea67c95cd5f3f0	2c6a917b013e933d5ef1aa0a6216e575
-7f29efc2495ce308a8f4aa7bfc11d701	fd5ccee80a5d5a1a16944aefe2b840c5
-4ad6c928711328d1cf0167bc87079a14	f853b43cbe11fe4cdef7009f0f98d4f2
-e58ecda1a7b9bfdff6a10d398f468c3f	f853b43cbe11fe4cdef7009f0f98d4f2
-183bea99848e19bdb720ba5774d216ba	220f8c4b62141ad5acd8b11d4d0f2bd3
-495ddc6ae449bf858afe5512d28563f5	220f8c4b62141ad5acd8b11d4d0f2bd3
-3b0b94c18b8d65aec3a8ca7f4dae720d	220f8c4b62141ad5acd8b11d4d0f2bd3
-b2b4ae56a4531455e275770dc577b68e	220f8c4b62141ad5acd8b11d4d0f2bd3
-f9d5d4c7b26c7b832ee503b767d5df52	220f8c4b62141ad5acd8b11d4d0f2bd3
-9ee30f495029e1fdf6567045f2079be1	6bc91856db67c4e90b455638fa43e0bd
-5d56713e4586c9b1920eb1a3d4597564	6bc91856db67c4e90b455638fa43e0bd
-f9030edd3045787fcbcfd47da5246596	6bc91856db67c4e90b455638fa43e0bd
-88711444ece8fe638ae0fb11c64e2df3	5e651777820428286fde01ffe87cb4b7
-215513a2c867f8b24d5aea58c9abfff6	5e651777820428286fde01ffe87cb4b7
-1e9413d4cc9af0ad12a6707776573ba0	5e651777820428286fde01ffe87cb4b7
-b20a4217acaf4316739c6a5f6679ef60	5e651777820428286fde01ffe87cb4b7
-1ca632ac231052e4116239ccb8952dfe	5e651777820428286fde01ffe87cb4b7
-baa9d4eef21c7b89f42720313b5812d4	45dbcc9d20cd0f431b1f4774cd0a0bf3
-62a40f6fa589c7007ded80d26ad1c3a9	45dbcc9d20cd0f431b1f4774cd0a0bf3
-7d9488e60660507d0f88850245ddc7a5	45dbcc9d20cd0f431b1f4774cd0a0bf3
-abb4decfc5a094f45911b94337e7e2c4	45dbcc9d20cd0f431b1f4774cd0a0bf3
-a716390764a4896d99837e99f9e009c9	cf8e56fdc88304e772838b2a47d8c23b
-28a95ef0eabe44a27f49bbaecaa8a847	cf8e56fdc88304e772838b2a47d8c23b
-16cbdd4df5f89d771dccfa1111d7f4bc	3eda085ef6acc8b084dda9440115af56
-e061c04af9609876757f0b33d14c63e5	3eda085ef6acc8b084dda9440115af56
-4fab532a185610bb854e0946f4def6a4	ac4ad77eed8faf4ef8d91fb1df7fe196
-6b7cf117ecf0fea745c4c375c1480cb5	ac4ad77eed8faf4ef8d91fb1df7fe196
-4276250c9b1b839b9508825303c5c5ae	ac4ad77eed8faf4ef8d91fb1df7fe196
-59f900c93aee445bd51d0d3fbc722cad	69a41d5dad2039585f9bc6016b1c002a
-8b3d594047e4544f608c2ebb151aeb45	69a41d5dad2039585f9bc6016b1c002a
-e254616b4a5bd5aaa54f90a3985ed184	bd1c4e61080082f4ce21cea49e37712b
-3771bd5f354df475660a24613fcb7a8c	bd1c4e61080082f4ce21cea49e37712b
-c6947b2d7fb2553635d75d160c92a2c5	bd1c4e61080082f4ce21cea49e37712b
-e60c4acd9218333d7c7ac50e5aa0f51e	c51b848ef0fde1cc943bb57bbfad7a11
-b5d1848944ce92433b626211ed9e46f8	c51b848ef0fde1cc943bb57bbfad7a11
-6e53c7c95acd615f2b29a536bc16dc43	c51b848ef0fde1cc943bb57bbfad7a11
-952dc6362e304f00575264e9d54d1fa6	c51b848ef0fde1cc943bb57bbfad7a11
-ce2caf05154395724e4436f042b8fa53	c51b848ef0fde1cc943bb57bbfad7a11
-1e9413d4cc9af0ad12a6707776573ba0	c51b848ef0fde1cc943bb57bbfad7a11
-32af59a47b8c7e1c982ae797fc491180	c51b848ef0fde1cc943bb57bbfad7a11
-4276250c9b1b839b9508825303c5c5ae	c51b848ef0fde1cc943bb57bbfad7a11
-aed7ba45d0a57ddaef5da5df666de7b4	c51b848ef0fde1cc943bb57bbfad7a11
-51053ffab2737bd21724ed0b7e6c56f7	c51b848ef0fde1cc943bb57bbfad7a11
-94fea925f38999882458ab87ffda8b3a	c51b848ef0fde1cc943bb57bbfad7a11
-de26f398ee613b636ddc998946a40e68	c51b848ef0fde1cc943bb57bbfad7a11
-5f31d4e87e7903f8ca2a4f8842dd4fe7	c51b848ef0fde1cc943bb57bbfad7a11
-ef18843fbbf66c6aa6851c6345f7c4ac	c51b848ef0fde1cc943bb57bbfad7a11
-8134a4079be58b29064131065f6a4c21	c51b848ef0fde1cc943bb57bbfad7a11
-5842a0c2470fe12ee3acfeec16c79c57	c51b848ef0fde1cc943bb57bbfad7a11
-5eed658c4b7b68a0ecc49205b68d54e7	c51b848ef0fde1cc943bb57bbfad7a11
+576fea4a0c5425ba382fff5f593a33f1	70ba638a78552630591ba5c7ff92b93a
+852c0b6d5b315c823cdf0382ca78e47f	70ba638a78552630591ba5c7ff92b93a
+bca8f048f2c5ff787950eb1ba088c70e	8ad5ac467b3776d28a12742decf00657
+d908b6b9019639bced6d1e31463eea85	8ad5ac467b3776d28a12742decf00657
+1dc7d7d977193974deaa993eb373e714	8ad5ac467b3776d28a12742decf00657
+445a222489d55b5768ec2f17b1c3ea34	8ad5ac467b3776d28a12742decf00657
+d9c849266ee3ac1463262df200b3aab8	3fe511194113f53322ccac8a75e6b4ab
+5bd15db3f3bb125cf3222745f4fe383f	3fe511194113f53322ccac8a75e6b4ab
+73cb08d143f893e645292dd04967f526	3fe511194113f53322ccac8a75e6b4ab
+6caa47f7b3472053b152f84ce72c182c	f56f7353a648997c6f5bc4a952cd1bd2
+a7e071b3de48cec1dd24de6cbe6c7bf1	f56f7353a648997c6f5bc4a952cd1bd2
+d68956b2b5557e8f1be27a4632045c1e	f56f7353a648997c6f5bc4a952cd1bd2
+1cc93e4af82b1b7e08bace9a92d1f762	f56f7353a648997c6f5bc4a952cd1bd2
+3a232003be172b49eb64e4d3e9af1434	f56f7353a648997c6f5bc4a952cd1bd2
+06c5c89047bfd6012e6fb3c2bd3cb24b	f56f7353a648997c6f5bc4a952cd1bd2
+511ac85b55c0c400422462064d6c77ed	f56f7353a648997c6f5bc4a952cd1bd2
+75fea12b82439420d1f400a4fcf3386b	75fea12b82439420d1f400a4fcf3386b
+1fd7fc9c73539bee88e1ec137b5f9ad2	08a5c6dec5d631fe995935fd38f389be
+9639834b69063b336bb744a537f80772	99e73f7baf95258d1a2f27df6c67294f
+07d82d98170ab334bc66554bafa673cf	99e73f7baf95258d1a2f27df6c67294f
+01bcfac216d2a08cd25930234e59f1a1	791a234c3e78612495c07d7d49defc4c
+278af3c810bb9de0f355ce115b5a2f54	791a234c3e78612495c07d7d49defc4c
+df99cee44099ff57acbf7932670614dd	0a7d68cf2a103e1c99f7e6d04f1940da
+a7111b594249d6a038281deb74ef0d04	fb57c18df776961bb734a1fa3db6a6d1
+c311f3f7c84d1524104b369499bd582f	fb57c18df776961bb734a1fa3db6a6d1
+a7111b594249d6a038281deb74ef0d04	2d5e1a99b20d1be28ef40573c37eb0a0
+78b532c25e4a99287940b1706359d455	2d5e1a99b20d1be28ef40573c37eb0a0
+ec4f407118924fdc6af3335c8d2961d9	2d5e1a99b20d1be28ef40573c37eb0a0
+11a7f956c37bf0459e9c80b16cc72107	2d5e1a99b20d1be28ef40573c37eb0a0
+b02ba5a5e65487122c2c1c67351c3ea0	2c6ed5b74b30541da64fdbbda4a8bbe3
+41e744bdf3114b14f5873dfb46921dc4	2c6ed5b74b30541da64fdbbda4a8bbe3
+fcc491ba532309d8942df543beaec67e	a3c7a40013e778dc1ce7d4ae7cdcfa6d
+e37015150c8944d90e306f19eaa98de8	a3c7a40013e778dc1ce7d4ae7cdcfa6d
+ed795c86ba21438108f11843f7214c95	6c7cfe3af936c1590949350fc7d912d3
+dbc940d02a217c923c52d3989be9b391	6c7cfe3af936c1590949350fc7d912d3
+8845da022807c76120b5b6f50c218d9a	6c7cfe3af936c1590949350fc7d912d3
+662d17c67dcabc738b8620d3076f7e46	0601414fd50328355d256db5037bc430
+ea3b6b67824411a4cfaa5c8789282f48	71de5246c2f4ac4766041831e93f001a
+381b834c6bf7b25b9b627c9eeb81dd8a	71de5246c2f4ac4766041831e93f001a
+25f5d73866a52be9d0e2e059955dfd56	57e44259dc61f23bef42517695d645f1
+182a1e726ac1c8ae851194cea6df0393	57e44259dc61f23bef42517695d645f1
+ce14eb923a380597f2aff8b65a742048	57e44259dc61f23bef42517695d645f1
+5c29c2e513aadfe372fd0af7553b5a6c	57e44259dc61f23bef42517695d645f1
+61e5d7cb15bd519ceddcf7ba9a22cbc6	e723d4328c7df53576419235b92f4a13
+9563a6fd049d7c1859196f614b04b959	e723d4328c7df53576419235b92f4a13
+90fb95c00db3fde6b86e6accf2178fa7	e723d4328c7df53576419235b92f4a13
+b80aecda9ce9783dab49037eec5e4388	e723d4328c7df53576419235b92f4a13
+b81dd41873676af0f9533d413774fa8d	e723d4328c7df53576419235b92f4a13
+8b3f40e0243e2307a1818d3f456df153	8b3c931e31a2c5dbb3155dab7dade775
+094655515b3991e73686f45e4fe352fe	8b3c931e31a2c5dbb3155dab7dade775
+fbe95242f85d4bbe067ddc781191afb5	8b3c931e31a2c5dbb3155dab7dade775
+5c3278fb76fa2676984396d33ba90613	1f711336d1c518a68db9e2b4dd631e81
+a1af2abbd036f0499296239b29b40a5f	1f711336d1c518a68db9e2b4dd631e81
+abc73489d8f0d1586a2568211bdeb32f	b098c76b1d5ba70577a0c0ba30d2170a
+26ad58455460d75558a595528825b672	b098c76b1d5ba70577a0c0ba30d2170a
+ffd2da11d45ed35a039951a8b462e7fb	b098c76b1d5ba70577a0c0ba30d2170a
+f655d84d670525246ee7d57995f71c10	79b4deb2eac122cc633196f32cf65670
+55b6aa6562faa9381e43ea82a4991079	79b4deb2eac122cc633196f32cf65670
+6d779916de27702814e4874dcf4f9e3a	79b4deb2eac122cc633196f32cf65670
+08f8c67c20c4ba43e8ba6fa771039c94	3479db140a88fa19295f4346b1d84380
+90669320cd8e4a09bf655310bffdb9ba	3479db140a88fa19295f4346b1d84380
+cfe122252751e124bfae54a7323bf02d	3479db140a88fa19295f4346b1d84380
+3e28a735f3fc31a9c8c30b47872634bf	3479db140a88fa19295f4346b1d84380
+efe9ed664a375d10f96359977213d620	3479db140a88fa19295f4346b1d84380
+77bfe8d21f1ecc592062f91c9253d8ab	3479db140a88fa19295f4346b1d84380
+ba9bfb4d7c1652a200d1d432f83c5fd1	3479db140a88fa19295f4346b1d84380
+bf2c8729bf5c149067d8e978ea3dcd32	3479db140a88fa19295f4346b1d84380
+cd0bc2c8738b2fef2d78d197223b17d5	3479db140a88fa19295f4346b1d84380
+0964b5218635a1c51ff24543ee242514	3479db140a88fa19295f4346b1d84380
+eb4558fa99c7f8d548cbcb32a14d469c	3479db140a88fa19295f4346b1d84380
+5934340f46d5ab773394d7a8ac9e86d5	3479db140a88fa19295f4346b1d84380
+268e1d80ad914af7d2e0f6d78eea6f98	3479db140a88fa19295f4346b1d84380
+0e609404e53b251f786b41b7be93cc19	2dac37a155782e0b3d86fc00d42b53d0
+f520f53edf44d466fb64269d5a67b69a	2dac37a155782e0b3d86fc00d42b53d0
+a0cdbd2af8f1ddbb2748a2eaddce55da	8a48b001d26cf3023ac469d68bfba185
+0add3cab2a932f085109a462423c3250	8a48b001d26cf3023ac469d68bfba185
+45d592ef3a8dc14dccc087e734582e82	8a48b001d26cf3023ac469d68bfba185
+78bbff6bf39602a577c9d8a117116330	8a48b001d26cf3023ac469d68bfba185
+1b62f034014b1d242c84c6fe7e6470f0	8a48b001d26cf3023ac469d68bfba185
+8981b4a0834d2d59e1d0dceb6022caae	8a48b001d26cf3023ac469d68bfba185
+a7e071b3de48cec1dd24de6cbe6c7bf1	8a48b001d26cf3023ac469d68bfba185
+f3ac75dfbf1ce980d70dc3dea1bf4636	8a48b001d26cf3023ac469d68bfba185
+3ddbf46000c2fbd44759f3b4672b64db	8a48b001d26cf3023ac469d68bfba185
+07f467f03da5f904144b0ad3bc00a26d	8a48b001d26cf3023ac469d68bfba185
+21077194453dcf49c2105fda6bb89c79	8a48b001d26cf3023ac469d68bfba185
+7df470ec0292985d8f0e37aa6c2b38d5	8a48b001d26cf3023ac469d68bfba185
+75241d56d63a68adcd51d828eb76ca80	8a48b001d26cf3023ac469d68bfba185
+34e927c45cf3ccebb09b006b00f4e02d	8a48b001d26cf3023ac469d68bfba185
+647a73dd79f06cdf74e1fa7524700161	e669a39d1453acd6aefc84913a985f51
+4e9b4bdef9478154fc3ac7f5ebfb6418	e669a39d1453acd6aefc84913a985f51
+d162c87d4d4b2a8f6dda58d4fba5987f	e669a39d1453acd6aefc84913a985f51
+c63b6261b8bb8145bc0fd094b9732c24	e669a39d1453acd6aefc84913a985f51
+0925467e1cc53074a440dae7ae67e3e9	e669a39d1453acd6aefc84913a985f51
+9a8d3efa0c3389083df65f4383b155fb	9952e1e08fb8f493c66f5cf386ba7e06
+c091e33f684c206b73b25417f6640b71	9952e1e08fb8f493c66f5cf386ba7e06
+98e8599d1486fadca0bf7aa171400dd8	8de89ad5eef951fd87bd3e013c63a6c4
+cd004b87e2adfb72b28752a6ef6cd639	8de89ad5eef951fd87bd3e013c63a6c4
+e039d55ed63a723001867bc4eb842c00	8de89ad5eef951fd87bd3e013c63a6c4
+58e42b779d54e174aad9a9fb79e7ebbc	8de89ad5eef951fd87bd3e013c63a6c4
+67493f858802a478bfe539c8e30a7e44	8de89ad5eef951fd87bd3e013c63a6c4
+22c2fc8a3a81503d40d4e532ac0e22ab	8de89ad5eef951fd87bd3e013c63a6c4
+d0e551d6887e0657952b3c5beb7fed74	8de89ad5eef951fd87bd3e013c63a6c4
+77ac561c759a27b7d660d7cf0534a9c3	8de89ad5eef951fd87bd3e013c63a6c4
+e6489b9cc39c95e53401cb601c4cae09	8de89ad5eef951fd87bd3e013c63a6c4
+4622209440a0ade57b18f21ae41963d9	8de89ad5eef951fd87bd3e013c63a6c4
+867e7f73257c5adf6a4696f252556431	8de89ad5eef951fd87bd3e013c63a6c4
+f999abbe163f001f55134273441f35c0	8de89ad5eef951fd87bd3e013c63a6c4
+9527fff55f2c38fa44281cd0e4d511ba	8de89ad5eef951fd87bd3e013c63a6c4
+04c8327cc71521b265f2dc7cbe996e13	8de89ad5eef951fd87bd3e013c63a6c4
+812f48abd93f276576541ec5b79d48a2	9d0ac9b8cb657a5f09f81d6bea3e1798
+d2f62cd276ef7cab5dcf9218d68f5bcf	9d0ac9b8cb657a5f09f81d6bea3e1798
+c245b4779defd5c69ffebbfdd239dd1b	9d0ac9b8cb657a5f09f81d6bea3e1798
+0ada417f5b4361074360211e63449f34	9d0ac9b8cb657a5f09f81d6bea3e1798
+979b5de4a280c434213dd8559cf51bc0	2ac99a5ffc2764063bc246f9fa174a71
+75fea12b82439420d1f400a4fcf3386b	a4ef4e4104ed8bdd818771ca2ea34127
+a6c27c0fb9ef87788c1345041e840f95	cbe2729e13ce90825f88f2fc3a0bce55
+8cd1cca18fb995d268006113a3d6e4bf	cbe2729e13ce90825f88f2fc3a0bce55
+5c59b6aa317b306a1312a67fe69bf512	cbe2729e13ce90825f88f2fc3a0bce55
+869bb972f8bef83979774fa123c56a4e	cbe2729e13ce90825f88f2fc3a0bce55
+13d81f0ed06478714344fd0f1a6a81bb	08f8c67c20c4ba43e8ba6fa771039c94
+08f8c67c20c4ba43e8ba6fa771039c94	08f8c67c20c4ba43e8ba6fa771039c94
+ea3b6b67824411a4cfaa5c8789282f48	08f8c67c20c4ba43e8ba6fa771039c94
+268e1d80ad914af7d2e0f6d78eea6f98	08f8c67c20c4ba43e8ba6fa771039c94
+cd004b87e2adfb72b28752a6ef6cd639	c0f93075617b7dd9db214f46876fb39d
+70492d5f3af58ace303d1c5dfc210088	c0f93075617b7dd9db214f46876fb39d
+913df019fed1f80dc49b38f02d8bae41	c0f93075617b7dd9db214f46876fb39d
+8518eafd8feec0d8c056d396122a175a	c0f93075617b7dd9db214f46876fb39d
+afb6e0f1e02be39880596a490c900775	87d1f3bfe03274952aa29304eb82d9d9
+630500eabc48c986552cb01798a31746	87d1f3bfe03274952aa29304eb82d9d9
+472e67129f0c7add77c7c907dac3351f	87d1f3bfe03274952aa29304eb82d9d9
+38b2886223461f15d65ff861921932b5	87d1f3bfe03274952aa29304eb82d9d9
+22ef651048289b302401afe2044c5c01	bd4a5e87854fd4d729983f3ac9bc7268
+2187711aeaa2944a707c9eabaa2df72a	bd4a5e87854fd4d729983f3ac9bc7268
+b02ba5a5e65487122c2c1c67351c3ea0	bd4a5e87854fd4d729983f3ac9bc7268
+9b55ad92062221ec1bc80f950f667a6b	bd4a5e87854fd4d729983f3ac9bc7268
+34a9067cace79f5ea8a6e137b7a1a5c8	bd4a5e87854fd4d729983f3ac9bc7268
+d2c2b83008dce38013577ef83a101a1b	bd4a5e87854fd4d729983f3ac9bc7268
+a4bcd57d5cda816e4ffd1f83031a36ca	11a728ed9e3a6aac1b46277a7302b15f
+ec5c65bfe530446b696f04e51aa19201	11a728ed9e3a6aac1b46277a7302b15f
+22ef651048289b302401afe2044c5c01	5fd9b4c8df6e69c50106703b7d050a3d
+25f5d73866a52be9d0e2e059955dfd56	5fd9b4c8df6e69c50106703b7d050a3d
+bf2c8729bf5c149067d8e978ea3dcd32	5fd9b4c8df6e69c50106703b7d050a3d
+92edfbaa71b7361a3081991627b0e583	5fd9b4c8df6e69c50106703b7d050a3d
+d9c849266ee3ac1463262df200b3aab8	eeba68f0a1003dce9bd66066b82dc1b6
+13d81f0ed06478714344fd0f1a6a81bb	eeba68f0a1003dce9bd66066b82dc1b6
+eaacb8ee01500f18e370303be3d5c591	eeba68f0a1003dce9bd66066b82dc1b6
+53a5da370321dac39033a5fe6af13e77	eeba68f0a1003dce9bd66066b82dc1b6
+bd4ca3a838ce3972af46b6e2d85985f2	eeba68f0a1003dce9bd66066b82dc1b6
+cd0bc2c8738b2fef2d78d197223b17d5	eeba68f0a1003dce9bd66066b82dc1b6
+6cec93398cd662d79163b10a7b921a1b	eeba68f0a1003dce9bd66066b82dc1b6
+a7eda23a9421a074fe5ec966810018d7	eeba68f0a1003dce9bd66066b82dc1b6
+062c44f03dce5bf39f81d0bf953926fc	eeba68f0a1003dce9bd66066b82dc1b6
+43a4893e6200f462bb9fe406e68e71c0	eeba68f0a1003dce9bd66066b82dc1b6
+cb80a6a84ec46f085ea6b2ff30a88d80	cb80a6a84ec46f085ea6b2ff30a88d80
+ef297890615f388057b6a2c0a2cbc7ab	921e9baf14e4134100c7b7a475b1bb06
+a985c9764e0e6d738ff20f2328a0644b	921e9baf14e4134100c7b7a475b1bb06
+71f4e9782d5f2a5381f5cdf7c5a35d89	921e9baf14e4134100c7b7a475b1bb06
+6772cdb774a6ce03a928d187def5453f	921e9baf14e4134100c7b7a475b1bb06
+0182742917720e1b2cf59ff671738253	921e9baf14e4134100c7b7a475b1bb06
+c63b6261b8bb8145bc0fd094b9732c24	921e9baf14e4134100c7b7a475b1bb06
+863e7a3d6d4a74739bca7dd81db5d51f	921e9baf14e4134100c7b7a475b1bb06
+486bf23406dec9844b97f966f4636c9b	486bf23406dec9844b97f966f4636c9b
+f2a863a08c3e22cc942264ac4bc606e3	07da0c8ead421197cc73463cf5a5eefc
+5637bae1665ae86050cb41fb1cdcc3ee	07da0c8ead421197cc73463cf5a5eefc
+4e74055927fd771c2084c92ca2ae56a7	07da0c8ead421197cc73463cf5a5eefc
+dfb7069bfc6e0064a6c667626eca07b4	133416b949a72009242c85d5af911b93
+23f5e1973b5a048ffaaa0bd0183b5f87	133416b949a72009242c85d5af911b93
+576fea4a0c5425ba382fff5f593a33f1	133416b949a72009242c85d5af911b93
+7df470ec0292985d8f0e37aa6c2b38d5	133416b949a72009242c85d5af911b93
+71144850f4fb4cc55fc0ee6935badddf	20b32a6bbc813658d242a65c08bc8140
+9d514e6b301cfe7bdc270212d5565eaf	20b32a6bbc813658d242a65c08bc8140
+3aa1c6d08d286053722d17291dc3f116	50e128ce6587bfcaedf317f6deb69695
+846a0115f0214c93a5a126f0f9697228	50e128ce6587bfcaedf317f6deb69695
+cd80c766840b7011fbf48355c0142431	50e128ce6587bfcaedf317f6deb69695
+c9dc004fc3d039ad7fb49456e5902b01	c9dc004fc3d039ad7fb49456e5902b01
+5e6ff2b64b4c0163ab83ab371abe910b	c9dc004fc3d039ad7fb49456e5902b01
+1437c187d64f0ac45b6b077a989d5648	c9dc004fc3d039ad7fb49456e5902b01
+dcab0d84960cda81718e38ee47688a75	c9dc004fc3d039ad7fb49456e5902b01
+9a8d3efa0c3389083df65f4383b155fb	1e144cd25de2ab5d9153d38c674c1f4b
+272a23811844499845c6e33712c8ba6c	1e144cd25de2ab5d9153d38c674c1f4b
+118b96dde2f8773b011dfb27e51b2f95	1e144cd25de2ab5d9153d38c674c1f4b
+01bcfac216d2a08cd25930234e59f1a1	1e144cd25de2ab5d9153d38c674c1f4b
+dddbd203ace7db250884ded880ea7be4	332be9c531b1ec341c13e5a676962820
+a9afdc809b94392fb1c2e873dbb02781	332be9c531b1ec341c13e5a676962820
+60eb61670a5385e3150cd87f915b0967	332be9c531b1ec341c13e5a676962820
+a7111b594249d6a038281deb74ef0d04	332be9c531b1ec341c13e5a676962820
+fcc491ba532309d8942df543beaec67e	fbae6c1da1deba5dd51f5d07007ec5ab
+03fec47975e0e1e2d0bc723af47281de	fbae6c1da1deba5dd51f5d07007ec5ab
+a7111b594249d6a038281deb74ef0d04	fbae6c1da1deba5dd51f5d07007ec5ab
+3c2234a7ce973bc1700e0c743d6a819c	90445b62432a3d8e1f7b3640029e6fed
+05fcf330d8fafb0a1f17ce30ff60b924	759144a13dee6936c81d0fce2eaaba06
+e3c8afbeb0ec4736db977d18e7e37020	759144a13dee6936c81d0fce2eaaba06
+38734dcdff827db1dc3215e23b4e0890	da4794bdc2159737a4c338392a856359
+fcc491ba532309d8942df543beaec67e	da4794bdc2159737a4c338392a856359
+460bf623f241651a7527a63d32569dc0	f015a601161f02a451557258793a96a1
+b00114f9fc38b48cc42a4972d7e07df6	f015a601161f02a451557258793a96a1
+2dde74b7ec594b9bd78da66f1c5cafdc	f015a601161f02a451557258793a96a1
+f00bbb7747929fafa9d1afd071dba78e	3e98ecfa6a4c765c5522f897a4a8de23
+abe78132c8e446430297d08bd1ecdab0	3e98ecfa6a4c765c5522f897a4a8de23
+3e98ecfa6a4c765c5522f897a4a8de23	3e98ecfa6a4c765c5522f897a4a8de23
+ed783268eca01bff52c0f135643a9ef7	e5847f38992d20bb78aafd080c5226d4
+b66781a52770d78b260f15d125d1380b	2b6e496456bb2be5444c941692fa5d17
+4dde2c290e3ee11bd3bd1ecd27d7039a	2b6e496456bb2be5444c941692fa5d17
+b454fdfc910ad8f6b7509072cf0b4031	2b6e496456bb2be5444c941692fa5d17
+3b544a6f1963395bd3ae0aeebdf1edd8	2b6e496456bb2be5444c941692fa5d17
+b145159df60e1549d1ba922fc8a92448	603ef2d9ef2057c8719d0715a7de32d1
+2eb42b9c31ac030455e5a4a79bccf603	603ef2d9ef2057c8719d0715a7de32d1
+4be3e31b7598745d0e96c098bbf7a1d7	603ef2d9ef2057c8719d0715a7de32d1
+2569a68a03a04a2cd73197d2cc546ff2	603ef2d9ef2057c8719d0715a7de32d1
+f6708813faedbf607111d83fdce91828	603ef2d9ef2057c8719d0715a7de32d1
+46ea4c445a9ff8e288258e3ec9cd1cf0	603ef2d9ef2057c8719d0715a7de32d1
+3a232003be172b49eb64e4d3e9af1434	603ef2d9ef2057c8719d0715a7de32d1
+ed783268eca01bff52c0f135643a9ef7	6e18512149a51931a4faa1f51d69a61f
+312793778e3248b6577e3882a77f68f3	65302b172b9b95b0f8f692caef2e19e8
+66857d7c2810238438483356343ff26e	65302b172b9b95b0f8f692caef2e19e8
+e5ea2ac2170d4f9c2bdbd74ab46523f7	65302b172b9b95b0f8f692caef2e19e8
+4e7054dff89623f323332052d0c7ff6e	65302b172b9b95b0f8f692caef2e19e8
+6ca47c71d99f608d4773b95f9b859142	65302b172b9b95b0f8f692caef2e19e8
+a7eda23a9421a074fe5ec966810018d7	65302b172b9b95b0f8f692caef2e19e8
+13c8bd3a0d92bd186fc5162eded4431d	65302b172b9b95b0f8f692caef2e19e8
+99bdf8d95da8972f6979bead2f2e2090	65302b172b9b95b0f8f692caef2e19e8
+d92ee81a401d93bb2a7eba395e181c04	24756eb800986d0cb679e4c78d8a06c2
+6adc39f4242fd1ca59f184e033514209	24756eb800986d0cb679e4c78d8a06c2
+5cc06303f490f3c34a464dfdc1bfb120	24756eb800986d0cb679e4c78d8a06c2
+c5d3d165539ddf2020f82c17a61f783d	91f86c2abd4b3c5f884c3947c424f70a
+573f13e31f1be6dea396ad9b08701c47	91f86c2abd4b3c5f884c3947c424f70a
+b1d18f9e5399464bbe5dea0cca8fe064	3fd69863958a8c69582d9f5bd6c82681
+6f60a61fcc05cb4d42c81ade04392cfc	3fd69863958a8c69582d9f5bd6c82681
+849c829d658baaeff512d766b0db3cce	3fd69863958a8c69582d9f5bd6c82681
+218d618a041c057d0e05799670e7e2c8	87ba4cfe4768f0efa1a69dacb770810c
+fcc491ba532309d8942df543beaec67e	87ba4cfe4768f0efa1a69dacb770810c
+6a4e8bab29666632262eb20c336e85e2	e70608c5455336dfc61d221e145f51cd
+dfca36a68db327258a2b0d5e3abe86af	e70608c5455336dfc61d221e145f51cd
+2b068ea64f42b2ccd841bb3127ab20af	21913ca002c17ce3cf8a0331b2dad1c8
+a91887f44d8d9fdcaa401d1c719630d7	21913ca002c17ce3cf8a0331b2dad1c8
+aa5808895fd2fca01d080618f08dca51	21913ca002c17ce3cf8a0331b2dad1c8
+156c19a6d9137e04b94500642d1cb8c2	21913ca002c17ce3cf8a0331b2dad1c8
+5b5fc236828ee2239072fd8826553b0a	91e2010dfd20c93ee84ffd12694b0f24
+a7111b594249d6a038281deb74ef0d04	1b76db5ef5f13c3451dcc06344fae248
+fcc491ba532309d8942df543beaec67e	e6273b4e07720dbd6ed7870371b86d24
+852c0b6d5b315c823cdf0382ca78e47f	e6273b4e07720dbd6ed7870371b86d24
+852c0b6d5b315c823cdf0382ca78e47f	943f6abbf24d69a145fbac5cc30c1a5c
+c311f3f7c84d1524104b369499bd582f	943f6abbf24d69a145fbac5cc30c1a5c
+2569a68a03a04a2cd73197d2cc546ff2	d3bda1e9de8bc6d585f37b739264d649
+852c0b6d5b315c823cdf0382ca78e47f	d3bda1e9de8bc6d585f37b739264d649
+fd401865b6db200e5eb8a1ac1b1fbab1	40512bf59a621ffaaea463f137f395ec
+d908b6b9019639bced6d1e31463eea85	40512bf59a621ffaaea463f137f395ec
+01a9f3fdd96daef6bc85160bd21d35dc	c4968fa5ec8f129c7fd49ffa5cb64d6e
+c2ab38206dce633f15d66048ad744f03	c4968fa5ec8f129c7fd49ffa5cb64d6e
+7f3e5839689216583047809a7f6bd0ff	c4968fa5ec8f129c7fd49ffa5cb64d6e
+e29470b6da77fb63e9b381fa58022c84	c4968fa5ec8f129c7fd49ffa5cb64d6e
+c349bc9795ba303aa49e44f64301290e	c4968fa5ec8f129c7fd49ffa5cb64d6e
+a7eda23a9421a074fe5ec966810018d7	c4968fa5ec8f129c7fd49ffa5cb64d6e
+827bf758c7ce2ac0f857379e9e933f77	c4968fa5ec8f129c7fd49ffa5cb64d6e
+39ce458f2caa87bc7b759cd8cb16e62f	c4968fa5ec8f129c7fd49ffa5cb64d6e
+9d74605e4b1d19d83992a991230e89ef	c4968fa5ec8f129c7fd49ffa5cb64d6e
+8ac49bad86eacffcea299416cd92c3b7	cb14876022caa93cf2a4a934fad74fe9
+25f5d73866a52be9d0e2e059955dfd56	cb14876022caa93cf2a4a934fad74fe9
+182a1e726ac1c8ae851194cea6df0393	cb14876022caa93cf2a4a934fad74fe9
+16a56d0941a310c3dc4f967041574300	c4c0e84be1600267ea2bd626c25dc626
+05ee6afed8d828d4e7ed35b0483527f7	c4c0e84be1600267ea2bd626c25dc626
+c82a107cd7673a4368b7252aa57810fc	c4c0e84be1600267ea2bd626c25dc626
+123f90461d74091a96637955d14a1401	c4c0e84be1600267ea2bd626c25dc626
+a9ef9373c9051dc4a3e2f2118537bb2d	d4dafcc2060475c01e6b4f6f3cb5c488
+c63b6261b8bb8145bc0fd094b9732c24	d4dafcc2060475c01e6b4f6f3cb5c488
+f975b4517b002a52839c42e86b34dc96	d4dafcc2060475c01e6b4f6f3cb5c488
+afb6e0f1e02be39880596a490c900775	f4e988e1e599ea5ff2d9519e59511757
+2f090f093a2868dccca81a791bc4941f	f4e988e1e599ea5ff2d9519e59511757
+b3d0eb96687420dc4e5b10602ac42690	f4e988e1e599ea5ff2d9519e59511757
+2d1ba9aa05ea4d94a0acb6b8dde29d6b	f4e988e1e599ea5ff2d9519e59511757
+93299af7c9e3c63c7b3d9bb2242c9d6b	a01b8b09fc0dea9192cb02b077bfae9f
+92ad5e8d66bac570a0611f2f1b3e43cc	a01b8b09fc0dea9192cb02b077bfae9f
+f3b8f1a2417bdc483f4e2306ac6004b2	a01b8b09fc0dea9192cb02b077bfae9f
+dfb7069bfc6e0064a6c667626eca07b4	ec29ea3adb2b584841d5d185e5f9135b
+3577f7160794aa4ba4d79d0381aefdb1	ec29ea3adb2b584841d5d185e5f9135b
+1fd7fc9c73539bee88e1ec137b5f9ad2	ec29ea3adb2b584841d5d185e5f9135b
+e2afc3f96b4a23d451c171c5fc852d0f	ec29ea3adb2b584841d5d185e5f9135b
+28bc0abd0cf390a4472b1f60bd0cfe4a	6fa3e357c27d47966023568346d51a09
+d02f33b44582e346050cefadce93eb95	6fa3e357c27d47966023568346d51a09
+298a577c621a7a1c365465f694e0bd13	6fa3e357c27d47966023568346d51a09
+93299af7c9e3c63c7b3d9bb2242c9d6b	6fa3e357c27d47966023568346d51a09
+81200f74b5d831e3e206a66fe4158370	6fa3e357c27d47966023568346d51a09
+02fd1596536ea89e779d37ded52ac353	6fa3e357c27d47966023568346d51a09
+781c745a0d6b02cdecadf2e44d445d1a	6fa3e357c27d47966023568346d51a09
+82f43cc1bda0b09efff9b356af97c7ab	6fa3e357c27d47966023568346d51a09
+d5ec808c760249f11fbcde2bf4977cc6	6fa3e357c27d47966023568346d51a09
+91abd5e520ec0a40ce4360bfd7c5d573	6fa3e357c27d47966023568346d51a09
+50026a2dff40e4194e184b756a7ed319	6fa3e357c27d47966023568346d51a09
+073f87af06b8d8bc561bb3f74e5f714f	6fa3e357c27d47966023568346d51a09
+8ee257802fc6a4d44679ddee10bf24a9	6fa3e357c27d47966023568346d51a09
+cd3296ec8f7773892de22dfade4f1b04	6fa3e357c27d47966023568346d51a09
+a7111b594249d6a038281deb74ef0d04	6fa3e357c27d47966023568346d51a09
+d8d3a01ba7e5d44394b6f0a8533f4647	6fa3e357c27d47966023568346d51a09
+dd3e531c469005b17115dbf611b01c88	f6fecea2db8afd44e1ad77f699d38fe9
+ad759a3d4f679008ffdfb07cdbda2bb0	f6fecea2db8afd44e1ad77f699d38fe9
+abc73489d8f0d1586a2568211bdeb32f	f6fecea2db8afd44e1ad77f699d38fe9
+de1e0ed5433f5e95c8f48e18e1c75ff6	f6fecea2db8afd44e1ad77f699d38fe9
+db472eaf615920784c2b83fc90e8dcc5	f6fecea2db8afd44e1ad77f699d38fe9
+4f5b2e20e9b7e5cc3f53256583033752	f6fecea2db8afd44e1ad77f699d38fe9
+66597873e0974fb365454a5087291094	f6fecea2db8afd44e1ad77f699d38fe9
+60a105e79a86c8197cec9f973576874b	f6fecea2db8afd44e1ad77f699d38fe9
+5f07809ecfce3af23ed5550c6adf0d78	f6fecea2db8afd44e1ad77f699d38fe9
+951af0076709a6da6872f9cdf41c852b	f6fecea2db8afd44e1ad77f699d38fe9
+786d3481362b8dee6370dfb9b6df38a2	9946f5f348ac677113592c05b1b3905b
+3c6444d9a22c3287b8c483117188b3f4	9946f5f348ac677113592c05b1b3905b
+218d618a041c057d0e05799670e7e2c8	9946f5f348ac677113592c05b1b3905b
+9b7d722b58370498cd39104b2d971978	9946f5f348ac677113592c05b1b3905b
+262a49b104426ba0d1559f8785931b9d	9946f5f348ac677113592c05b1b3905b
+bd9059497b4af2bb913a8522747af2de	9946f5f348ac677113592c05b1b3905b
+0ab01e57304a70cf4f7f037bd8afbe49	9946f5f348ac677113592c05b1b3905b
+dfa61d19b62369a37743b38215836df9	9946f5f348ac677113592c05b1b3905b
+2569a68a03a04a2cd73197d2cc546ff2	9946f5f348ac677113592c05b1b3905b
+05c87189f6c230c90bb1693567233100	9946f5f348ac677113592c05b1b3905b
+563fcbf5f44e03e0eeb9c8d6e4c8e127	9946f5f348ac677113592c05b1b3905b
+f49f851c639e639b295b45f0e00c4b4c	9946f5f348ac677113592c05b1b3905b
+24af2861df3c72c8f1b947333bd215fc	9946f5f348ac677113592c05b1b3905b
+1e71013b49bbd3b2aaa276623203453f	9946f5f348ac677113592c05b1b3905b
+c41b9ec75e920b610e8907e066074b30	9946f5f348ac677113592c05b1b3905b
+fb80cd69a40a73fb3b9f22cf58fd4776	9946f5f348ac677113592c05b1b3905b
+63a9f0ea7bb98050796b649e85481845	9946f5f348ac677113592c05b1b3905b
+398af626887ad21cd66aeb272b8337be	3479db140a88fa19295f4346b1d84380
+0f9fb8452cc5754f83e084693d406721	759144a13dee6936c81d0fce2eaaba06
+ef75c0b43ae9ba972900e83c5ccf5cac	9946f5f348ac677113592c05b1b3905b
+5c19e1e0521f7b789a37a21c5cd5737b	9946f5f348ac677113592c05b1b3905b
+748ac622dcfda98f59c3c99593226a75	be5ea4556ea2b3db3607b8e2887c9dd3
+de3e4c12f56a35dc1ee6866b1ddd9d53	be5ea4556ea2b3db3607b8e2887c9dd3
+eaacb8ee01500f18e370303be3d5c591	be5ea4556ea2b3db3607b8e2887c9dd3
+b4c5b422ab8969880d9f0f0e9124f0d7	be5ea4556ea2b3db3607b8e2887c9dd3
+ac8eab98e370e2a8711bad327f5f7c55	be5ea4556ea2b3db3607b8e2887c9dd3
+26ad58455460d75558a595528825b672	be5ea4556ea2b3db3607b8e2887c9dd3
+6adc39f4242fd1ca59f184e033514209	be5ea4556ea2b3db3607b8e2887c9dd3
+541fa0085b17ef712791151ca285f1a7	be5ea4556ea2b3db3607b8e2887c9dd3
+891b302f7508f0772a8fdb71ccbf9868	be5ea4556ea2b3db3607b8e2887c9dd3
+a7eda23a9421a074fe5ec966810018d7	be5ea4556ea2b3db3607b8e2887c9dd3
+218d618a041c057d0e05799670e7e2c8	2bc0eb6a40bd1e2409b2722039152679
+7d6ede8454373d4ca5565436cbfeb5c0	2bc0eb6a40bd1e2409b2722039152679
+445a222489d55b5768ec2f17b1c3ea34	2bc0eb6a40bd1e2409b2722039152679
+4190210961bce8bf2ac072c878ee7902	9b4752b144d294fc6799532a413fd54e
+a05a13286752cb6fc14f39f51cedd9ce	9b4752b144d294fc6799532a413fd54e
+6d25c7ad58121b3effe2c464b851c27a	9b4752b144d294fc6799532a413fd54e
+7b675f4c76aed34cf2d5943d83198142	9b4752b144d294fc6799532a413fd54e
+00a0d9697a08c1e5d4ba28d95da73292	9b4752b144d294fc6799532a413fd54e
+be2c012d60e32fbf456cd8184a51973d	3e8d7d577a332fc33e2f332ad7311e1e
+71144850f4fb4cc55fc0ee6935badddf	3e8d7d577a332fc33e2f332ad7311e1e
+3c2234a7ce973bc1700e0c743d6a819c	3e8d7d577a332fc33e2f332ad7311e1e
+dd3e531c469005b17115dbf611b01c88	e6513a2614231773cfe00d0bb6178806
+ec5c65bfe530446b696f04e51aa19201	e6513a2614231773cfe00d0bb6178806
+768207c883fd6447d67f3d5bc09211bd	e6513a2614231773cfe00d0bb6178806
+9d74605e4b1d19d83992a991230e89ef	e6513a2614231773cfe00d0bb6178806
+bda66e37bf0bfbca66f8c78c5c8032b8	8b0e6056132f11cfb7968cf303ff0154
+fcc491ba532309d8942df543beaec67e	8b0e6056132f11cfb7968cf303ff0154
+268e1d80ad914af7d2e0f6d78eea6f98	8b0e6056132f11cfb7968cf303ff0154
+20a75b90511c108e3512189ccb72b0ac	d988ef331f5b477753be3bae8b18412f
+458da4fc3da734a6853e26af3944bf75	d988ef331f5b477753be3bae8b18412f
+5637bae1665ae86050cb41fb1cdcc3ee	d988ef331f5b477753be3bae8b18412f
+26211992c1edc0ab3a6b6506cac8bb52	d988ef331f5b477753be3bae8b18412f
+ee36fdf153967a0b99d3340aadeb4720	0add3cab2a932f085109a462423c3250
+0add3cab2a932f085109a462423c3250	0add3cab2a932f085109a462423c3250
+94a62730604a985647986b509818efee	0add3cab2a932f085109a462423c3250
+739260d8cb379c357340977fe962d37a	52bb7665f1523ba2bb7481ee085ce6ec
+53a5da370321dac39033a5fe6af13e77	52bb7665f1523ba2bb7481ee085ce6ec
+42f6dd3a6e21d6df71db509662d19ca4	52bb7665f1523ba2bb7481ee085ce6ec
+abc73489d8f0d1586a2568211bdeb32f	f2da218ba072addd567741ba722037e4
+b02ba5a5e65487122c2c1c67351c3ea0	f2da218ba072addd567741ba722037e4
+16c88f2a44ab7ecdccef28154f3a0109	f2da218ba072addd567741ba722037e4
+191bab5800bd381ecf16485f91e85bc3	f2da218ba072addd567741ba722037e4
+876eed60be80010455ff50a62ccf1256	f2da218ba072addd567741ba722037e4
+f4e4ef312f9006d0ae6ca30c8a6a32ff	f2da218ba072addd567741ba722037e4
+d9c849266ee3ac1463262df200b3aab8	b17a925acc0a591c2be6f84376007717
+93299af7c9e3c63c7b3d9bb2242c9d6b	b17a925acc0a591c2be6f84376007717
+e6793169497d66ac959a7beb35d6d497	b17a925acc0a591c2be6f84376007717
+eb39fa9323a6b3cbc8533cd3dadb9f76	b17a925acc0a591c2be6f84376007717
+1c4af233da7b64071abf94d79c41a361	b17a925acc0a591c2be6f84376007717
+364be07c2428493479a07dbefdacc11f	b17a925acc0a591c2be6f84376007717
+a7111b594249d6a038281deb74ef0d04	8287859246dae330eef7b3a2a8c71390
+a2c31c455e3d0ea3f3bdbea294fe186b	8287859246dae330eef7b3a2a8c71390
+ffd2da11d45ed35a039951a8b462e7fb	8287859246dae330eef7b3a2a8c71390
+cbefc03cdd1940f37a7033620f8ff69f	cb091aafa00685c4b29954ca13e93bad
+a7e071b3de48cec1dd24de6cbe6c7bf1	cb091aafa00685c4b29954ca13e93bad
+0182742917720e1b2cf59ff671738253	cb091aafa00685c4b29954ca13e93bad
+d76db99cdd16bd0e53d5e07bcf6225c8	cb091aafa00685c4b29954ca13e93bad
+4c576d921b99dad80e4bcf9b068c2377	cb091aafa00685c4b29954ca13e93bad
+bbbb086d59122dbb940740d6bac65976	cb091aafa00685c4b29954ca13e93bad
+863e7a3d6d4a74739bca7dd81db5d51f	cb091aafa00685c4b29954ca13e93bad
+cf6a93131b0349f37afeb9319b802136	b04e875801af3b7b787cde914be2aaed
+53a5da370321dac39033a5fe6af13e77	b04e875801af3b7b787cde914be2aaed
+c5f4e658dfe7b7af3376f06d7cd18a2a	b04e875801af3b7b787cde914be2aaed
+0959583c7f421c0bb8adb20e8faeeea1	e1e5ca54159d43c9400d33fdff6ac193
+4dde2c290e3ee11bd3bd1ecd27d7039a	e1e5ca54159d43c9400d33fdff6ac193
+91abd5e520ec0a40ce4360bfd7c5d573	e1e5ca54159d43c9400d33fdff6ac193
+7df470ec0292985d8f0e37aa6c2b38d5	e1e5ca54159d43c9400d33fdff6ac193
+e3e9ccd75f789b9689913b30cb528be0	cc02ce2d003fd86ba60f8688e6c40b97
+d908b6b9019639bced6d1e31463eea85	cc02ce2d003fd86ba60f8688e6c40b97
+240e556541427d81f4ed1eda86f33ad3	cc02ce2d003fd86ba60f8688e6c40b97
+707270d99f92250a07347773736df5cc	de64d3821b97e63cf8800dda1e32ee53
+6916ed9292a811c895e259c542af0e8a	de64d3821b97e63cf8800dda1e32ee53
+a45ff5de3a96b103a192f1f133d0b0cf	de64d3821b97e63cf8800dda1e32ee53
+ceffa7550e5d24a8c808d3516b5d6432	de64d3821b97e63cf8800dda1e32ee53
+dd15d5adf6349f5ca53e7a2641d41ab7	9946f5f348ac677113592c05b1b3905b
+b9ffbdbbe63789cc6fa9ee2548a1b2ed	de64d3821b97e63cf8800dda1e32ee53
+198445c0bbe110ff65ac5ef88f026aff	de64d3821b97e63cf8800dda1e32ee53
+b615ea28d44d2e863a911ed76386b52a	de64d3821b97e63cf8800dda1e32ee53
+a20050efc491a9784b5cced21116ba68	de64d3821b97e63cf8800dda1e32ee53
+8791e43a8287ccbc21f61be21e90ce43	de64d3821b97e63cf8800dda1e32ee53
+3fae5bf538a263e96ff12986bf06b13f	de64d3821b97e63cf8800dda1e32ee53
+210e99a095e594f2547e1bb8a9ac6fa7	de64d3821b97e63cf8800dda1e32ee53
+024e91d84c3426913db8367f4df2ceb3	de64d3821b97e63cf8800dda1e32ee53
+6ffa656be5ff3db085578f54a05d4ddb	de64d3821b97e63cf8800dda1e32ee53
+073f87af06b8d8bc561bb3f74e5f714f	de64d3821b97e63cf8800dda1e32ee53
+64a25557d4bf0102cd8f60206c460595	de64d3821b97e63cf8800dda1e32ee53
+07d82d98170ab334bc66554bafa673cf	2917a0b7da3498cad2a82a57e509346e
+ddae1d7419331078626bc217b23ea8c7	2917a0b7da3498cad2a82a57e509346e
+71b6971b6323b97f298af11ed5455e55	74b2dd70f761e31a1e0860fe18f8cb55
+5629d465ed80efff6e25b8775b98c2d1	74b2dd70f761e31a1e0860fe18f8cb55
+20de83abafcb071d854ca5fd57dec0e8	74b2dd70f761e31a1e0860fe18f8cb55
+56bf60ca682b8f68e8843ad8a55c6b17	74b2dd70f761e31a1e0860fe18f8cb55
+aa98c9e445775e7c945661e91cf7e7aa	3b23d8e33c40737f5ca4b3a0fbb54542
+efe9ed664a375d10f96359977213d620	3b23d8e33c40737f5ca4b3a0fbb54542
+e20976feda6d915a74c751cbf488a241	3b23d8e33c40737f5ca4b3a0fbb54542
+a30c1309e683fcf26c104b49227d2220	3b23d8e33c40737f5ca4b3a0fbb54542
+7c7e63c9501a790a3134392e39c3012e	3d3cf571367952ee016599bba2ef18cb
+7bc374006774a2eda5288fea8f1872e3	3d3cf571367952ee016599bba2ef18cb
+2e4e6a5f485b2c7e22f9974633c2b900	3d3cf571367952ee016599bba2ef18cb
+baceebebc179d3cdb726f5cbfaa81dfe	3d3cf571367952ee016599bba2ef18cb
+f986b00063e79f7c061f40e6cfbbd039	aac480b69f1fe6472ffe7880c8ead350
+d908b6b9019639bced6d1e31463eea85	aac480b69f1fe6472ffe7880c8ead350
+384e94f762d3a408cd913c14b19ac5e0	aac480b69f1fe6472ffe7880c8ead350
+4900e24b2d0a0c5e06cf3db8b0638800	f8bb8ae77ca110cf00ebb5af1d495203
+fcc491ba532309d8942df543beaec67e	f8bb8ae77ca110cf00ebb5af1d495203
+c833c98be699cd7828a5106a37d12c2e	c61c9363d160c5f94193056388d9ced9
+6f60a61fcc05cb4d42c81ade04392cfc	c61c9363d160c5f94193056388d9ced9
+98e8599d1486fadca0bf7aa171400dd8	9bbe76536451d9ad44018b24d51c58aa
+5dd5b236a364c53feb6db53d1a6a5ab9	9bbe76536451d9ad44018b24d51c58aa
+010fb41a1a7714387391d5ea1ecdfaf7	9bbe76536451d9ad44018b24d51c58aa
+05bea3ed3fcd45441c9c6af3a2d9952d	9bbe76536451d9ad44018b24d51c58aa
+6f60a61fcc05cb4d42c81ade04392cfc	220352d001b221b28a0dff0fbd20f77c
+ac61757d33fc8563eb2409ed08e21974	e87aa14aa70c2745548e891915c77ab4
+9d1e68b7debd0c8dc86d5d6500884ab4	e87aa14aa70c2745548e891915c77ab4
+218d618a041c057d0e05799670e7e2c8	75560c8161a6cccdfbd7a8b59332b792
+fcc491ba532309d8942df543beaec67e	75560c8161a6cccdfbd7a8b59332b792
+0da2e7fa0ba90f4ae031b0d232b8a57a	87c20c746bae110cc55c3d32414037df
+53199d92b173437f0207a916e8bcc23a	87c20c746bae110cc55c3d32414037df
+b36eb6a54154f7301f004e1e61c87ce8	87c20c746bae110cc55c3d32414037df
+1629fa6d4b8adb36b0e4a245b234b826	74480c2ba717722022d58038ab1bcd44
+270fb708bd03433e554e0d7345630c8e	74480c2ba717722022d58038ab1bcd44
+e039d55ed63a723001867bc4eb842c00	ebaeb9fa7d6d4de00d7573942a9f9e78
+f44f1e343975f5157f3faf9184bc7ade	ebaeb9fa7d6d4de00d7573942a9f9e78
+1e986acf38de5f05edc2c42f4a49d37e	ebaeb9fa7d6d4de00d7573942a9f9e78
+3cb077e20dabc945228ea58813672973	ebaeb9fa7d6d4de00d7573942a9f9e78
+13d81f0ed06478714344fd0f1a6a81bb	7459412d1907ec1a87e7a5246b27cd00
+b615ea28d44d2e863a911ed76386b52a	7459412d1907ec1a87e7a5246b27cd00
+05c87189f6c230c90bb1693567233100	7459412d1907ec1a87e7a5246b27cd00
+f4b526ea92d3389d318a36e51480b4c8	7459412d1907ec1a87e7a5246b27cd00
+3929665297ca814b966cb254980262cb	7459412d1907ec1a87e7a5246b27cd00
+fbc2b3cebe54dd00b53967c5cf4b9192	7459412d1907ec1a87e7a5246b27cd00
+644f6462ec9801cdc932e5c8698ee7f9	7459412d1907ec1a87e7a5246b27cd00
+dbf1b3eb1f030affb41473a8fa69bc0c	7459412d1907ec1a87e7a5246b27cd00
+61725742f52de502605eadeac19b837b	7459412d1907ec1a87e7a5246b27cd00
+2fb81ca1d0a935be4cb49028268baa3f	7459412d1907ec1a87e7a5246b27cd00
+8734f7ff367f59fc11ad736e63e818f9	9f07b2ac339c32524557ba186f68b2ef
+98aa80527e97026656ec54cdd0f94dff	9f07b2ac339c32524557ba186f68b2ef
+430a03604913a64c33f460ec6f854c36	9f07b2ac339c32524557ba186f68b2ef
+319480a02920dc261209240eed190360	9f07b2ac339c32524557ba186f68b2ef
+4ca1c3ed413577a259e29dfa053f99db	9f07b2ac339c32524557ba186f68b2ef
+2eed213e6871d0e43cc061b109b1abd4	9f07b2ac339c32524557ba186f68b2ef
+fdedcd75d695d1c0eb790a5ee3ba90b5	9f07b2ac339c32524557ba186f68b2ef
+ed9b92eb1706415c42f88dc91284da8a	9f07b2ac339c32524557ba186f68b2ef
+fb1afbea5c0c2e23396ef429d0e42c52	9f07b2ac339c32524557ba186f68b2ef
+316a289ef71c950545271754abf583f1	9f07b2ac339c32524557ba186f68b2ef
+33b3bfc86d7a57e42aa30e7d1c2517be	9f07b2ac339c32524557ba186f68b2ef
+8351282db025fc2222fc61ec8dd1df23	9f07b2ac339c32524557ba186f68b2ef
+60eb202340e8035af9e96707f85730e5	9f07b2ac339c32524557ba186f68b2ef
+d2f79e6a931cd5b5acd5f3489dece82a	9f07b2ac339c32524557ba186f68b2ef
+3189b8c5e007c634d7e28ef93be2b774	9f07b2ac339c32524557ba186f68b2ef
+1dc7d7d977193974deaa993eb373e714	d7010a272554c22fa8d53efc81046bce
+51cb62b41cd9deaaa2dd98c773a09ebb	d7010a272554c22fa8d53efc81046bce
+b12daab6c83b1a45aa32cd9c2bc78360	d7010a272554c22fa8d53efc81046bce
+9722f54adb556b548bb9ecce61a4d167	d7010a272554c22fa8d53efc81046bce
+33f03dd57f667d41ac77c6baec352a81	c4968fa5ec8f129c7fd49ffa5cb64d6e
+eb999c99126a456f9db3c5d3b449fa7f	c61c9363d160c5f94193056388d9ced9
+04d53bc45dc1343f266585b52dbe09b0	3b51208982f00d5380552fc26238893a
+bc5daaf162914ff1200789d069256d36	a17fea2a7b6cf4685417132ff574fd0a
+9a8d3efa0c3389083df65f4383b155fb	a17fea2a7b6cf4685417132ff574fd0a
+f2a863a08c3e22cc942264ac4bc606e3	a17fea2a7b6cf4685417132ff574fd0a
+2569a68a03a04a2cd73197d2cc546ff2	a17fea2a7b6cf4685417132ff574fd0a
+bf2c8729bf5c149067d8e978ea3dcd32	a17fea2a7b6cf4685417132ff574fd0a
+5ab944fac5f6a0d98dc248a879ec70ff	a17fea2a7b6cf4685417132ff574fd0a
+66597873e0974fb365454a5087291094	a17fea2a7b6cf4685417132ff574fd0a
+01bcfac216d2a08cd25930234e59f1a1	a17fea2a7b6cf4685417132ff574fd0a
+b454fdfc910ad8f6b7509072cf0b4031	a17fea2a7b6cf4685417132ff574fd0a
+951af0076709a6da6872f9cdf41c852b	a17fea2a7b6cf4685417132ff574fd0a
+0e609404e53b251f786b41b7be93cc19	a17fea2a7b6cf4685417132ff574fd0a
+b1006928600959429230393369fe43b6	a17fea2a7b6cf4685417132ff574fd0a
+4e74055927fd771c2084c92ca2ae56a7	a17fea2a7b6cf4685417132ff574fd0a
+a753c3945400cd54c7ffd35fc07fe031	a17fea2a7b6cf4685417132ff574fd0a
+8af17e883671377a23e5b8262de11af4	a17fea2a7b6cf4685417132ff574fd0a
+d1fded22db9fc8872e86fff12d511207	a17fea2a7b6cf4685417132ff574fd0a
+c526681b295049215e5f1c2066639f4a	a17fea2a7b6cf4685417132ff574fd0a
+3969716fc4acd0ec0c39c8a745e9459a	a17fea2a7b6cf4685417132ff574fd0a
+b7b99e418cff42d14dbf2d63ecee12a8	a17fea2a7b6cf4685417132ff574fd0a
+96b4b857b15ae915ce3aa5e406c99cb4	a17fea2a7b6cf4685417132ff574fd0a
+8b5a84ba35fa73f74df6f2d5a788e109	a17fea2a7b6cf4685417132ff574fd0a
+57f622908a4d6c381241a1293d894c88	a17fea2a7b6cf4685417132ff574fd0a
+48438b67b2ac4e5dc9df6f3723fd4ccd	a17fea2a7b6cf4685417132ff574fd0a
+56a5afe00fae48b02301860599898e63	a17fea2a7b6cf4685417132ff574fd0a
+3e8d4b3893a9ebbbd86e648c90cbbe63	a17fea2a7b6cf4685417132ff574fd0a
+c46e8abb68aae0bcdc68021a46f71a65	a17fea2a7b6cf4685417132ff574fd0a
+e4f74be13850fc65559a3ed855bf35a8	a17fea2a7b6cf4685417132ff574fd0a
+7b52c8c4a26e381408ee64ff6b98e231	a17fea2a7b6cf4685417132ff574fd0a
+278af3c810bb9de0f355ce115b5a2f54	a17fea2a7b6cf4685417132ff574fd0a
+5c61f833c2fb87caab0a48e4c51fa629	a17fea2a7b6cf4685417132ff574fd0a
+2859f0ed0630ecc1589b6868fd1dde41	a17fea2a7b6cf4685417132ff574fd0a
+c5068f914571c27e04cd66a4ec5c1631	a17fea2a7b6cf4685417132ff574fd0a
+8b3f40e0243e2307a1818d3f456df153	a17fea2a7b6cf4685417132ff574fd0a
+8b0cfde05d166f42a11a01814ef7fa86	a17fea2a7b6cf4685417132ff574fd0a
+c0118be307a26886822e1194e8ae246d	a17fea2a7b6cf4685417132ff574fd0a
+a66394e41d764b4c5646446a8ba2028b	a17fea2a7b6cf4685417132ff574fd0a
+e9e0664816c35d64f26fc1382708617b	a17fea2a7b6cf4685417132ff574fd0a
+f29f7213d1c86c493ca7b4045e5255a9	a17fea2a7b6cf4685417132ff574fd0a
+65f889eb579641f6e5f58b5a48f3ec12	a17fea2a7b6cf4685417132ff574fd0a
+fc239fd89fd7c9edbf2bf27d1d894bc0	a17fea2a7b6cf4685417132ff574fd0a
+24701da4bd9d3ae0e64d263b72ad20e8	a17fea2a7b6cf4685417132ff574fd0a
+031d6cc33621c51283322daf69e799f5	a17fea2a7b6cf4685417132ff574fd0a
+a8ace0f003d8249d012c27fe27b258b5	a17fea2a7b6cf4685417132ff574fd0a
+255661921f4ad57d02b1de9062eb6421	a17fea2a7b6cf4685417132ff574fd0a
+5d53b2be2fe7e27daa27b94724c3b6de	a17fea2a7b6cf4685417132ff574fd0a
+57126705faf40e4b5227c8a0302d13b2	a17fea2a7b6cf4685417132ff574fd0a
+b9fd9676338e36e6493489ec5dc041fe	a17fea2a7b6cf4685417132ff574fd0a
+df99cee44099ff57acbf7932670614dd	5379b1daf8079521f6c7de205e37f878
+6b141e284f88f656b776148cde8e019c	5379b1daf8079521f6c7de205e37f878
+b84cdd396f01275b63bdaf7f61ed5a43	5379b1daf8079521f6c7de205e37f878
+7a43dd4c2bb9bea14a95ff3acd4dfb18	5379b1daf8079521f6c7de205e37f878
+5958cd5ce011ea83c06cb921b1c85bb3	568359348ea05d7114e3d796d7df55f2
+df24a5dd8a37d3d203952bb787069ea2	568359348ea05d7114e3d796d7df55f2
+cf6a93131b0349f37afeb9319b802136	568359348ea05d7114e3d796d7df55f2
+ec5c65bfe530446b696f04e51aa19201	568359348ea05d7114e3d796d7df55f2
+a7eda23a9421a074fe5ec966810018d7	568359348ea05d7114e3d796d7df55f2
+ffd2da11d45ed35a039951a8b462e7fb	568359348ea05d7114e3d796d7df55f2
+191bab5800bd381ecf16485f91e85bc3	568359348ea05d7114e3d796d7df55f2
+9d74605e4b1d19d83992a991230e89ef	568359348ea05d7114e3d796d7df55f2
+ca54e4f7704e7b8374d0968143813fe6	568359348ea05d7114e3d796d7df55f2
+c245b4779defd5c69ffebbfdd239dd1b	568359348ea05d7114e3d796d7df55f2
+6b157916b43b09df5a22f658ccb92b64	568359348ea05d7114e3d796d7df55f2
+67cd9b4b7b33511f30e85e21b2d3b204	568359348ea05d7114e3d796d7df55f2
+fcc491ba532309d8942df543beaec67e	7b5a790fbc109d0dadb7418b17bf24e8
+01bcfac216d2a08cd25930234e59f1a1	7b5a790fbc109d0dadb7418b17bf24e8
+eef7d6da9ba6d0bed2078a5f253f4cfc	5e6a61fa17bf86a738024508581f11d4
+ad51cbe70d798b5aec08caf64ce66094	5e6a61fa17bf86a738024508581f11d4
+3480c10b83b05850ec18b6372e235139	fe36a187902de9cf1aa5f42477fa1318
+6a4e8bab29666632262eb20c336e85e2	fe36a187902de9cf1aa5f42477fa1318
+3480c10b83b05850ec18b6372e235139	208af572d4212c8b20492f11ca9b8b54
+13291409351c97f8c187790ece4f5a97	208af572d4212c8b20492f11ca9b8b54
+218d618a041c057d0e05799670e7e2c8	208af572d4212c8b20492f11ca9b8b54
+4900e24b2d0a0c5e06cf3db8b0638800	208af572d4212c8b20492f11ca9b8b54
+dddfdb5f2d7991d93f0f97dce1ef0f45	208af572d4212c8b20492f11ca9b8b54
+818ce28daba77cbd2c4235548400ffb2	208af572d4212c8b20492f11ca9b8b54
+fcc491ba532309d8942df543beaec67e	208af572d4212c8b20492f11ca9b8b54
+3123e3df482127074cdd5f830072c898	208af572d4212c8b20492f11ca9b8b54
+bca8f048f2c5ff787950eb1ba088c70e	0704b2bfdcfaed5225554f023a7fbf48
+d908b6b9019639bced6d1e31463eea85	0704b2bfdcfaed5225554f023a7fbf48
+51cb62b41cd9deaaa2dd98c773a09ebb	0704b2bfdcfaed5225554f023a7fbf48
+c27297705354ef77feb349e949d2e19e	5e38483d273e5a8b6f777f8017bedf62
+268e1d80ad914af7d2e0f6d78eea6f98	5e38483d273e5a8b6f777f8017bedf62
+e6624ef1aeab84f521056a142b5b2d12	d3c946cf8862b847404204ab7d0cfc39
+d76db99cdd16bd0e53d5e07bcf6225c8	d3c946cf8862b847404204ab7d0cfc39
+c8bc4f15477ea3131abb1a3f0649fac2	d3c946cf8862b847404204ab7d0cfc39
+9133f1146bbdd783f34025bf90a8e148	d3c946cf8862b847404204ab7d0cfc39
+cd0bc2c8738b2fef2d78d197223b17d5	183863a44c8750e908c83bd2d1c194f8
+e039d55ed63a723001867bc4eb842c00	183863a44c8750e908c83bd2d1c194f8
+73cb08d143f893e645292dd04967f526	183863a44c8750e908c83bd2d1c194f8
+5324a886a2667283dbfe7f7974ff6fc0	183863a44c8750e908c83bd2d1c194f8
+28c5f9ffd175dcd53aa3e9da9b00dde7	183863a44c8750e908c83bd2d1c194f8
+b798aa74946ce75baee5806352e96272	183863a44c8750e908c83bd2d1c194f8
+6315887dd67ff4f91d51e956b06a3878	183863a44c8750e908c83bd2d1c194f8
+eb3a9fb71b84790e50acd81cc1aa4862	bc1f2650c6129b22a2cc63f2a90b5597
+53a5da370321dac39033a5fe6af13e77	57c286b274d23dc513ddfd16dd21281e
+cfe122252751e124bfae54a7323bf02d	57c286b274d23dc513ddfd16dd21281e
+3577f7160794aa4ba4d79d0381aefdb1	8be553b6dfad10eac5fed512ef6c2c95
+be632fd63d0f90906194973ede449873	8be553b6dfad10eac5fed512ef6c2c95
+933c8182650ca4ae087544beff5bb52d	8be553b6dfad10eac5fed512ef6c2c95
+e3de2cf8ac892a0d8616eefc4a4f59bd	8be553b6dfad10eac5fed512ef6c2c95
+623c5a1c99aceaf0b07ae233d1888e0a	8be553b6dfad10eac5fed512ef6c2c95
+c2ab38206dce633f15d66048ad744f03	10c5ac379805443742025d6cf619891e
+20de83abafcb071d854ca5fd57dec0e8	10c5ac379805443742025d6cf619891e
+cfe122252751e124bfae54a7323bf02d	10c5ac379805443742025d6cf619891e
+e039d55ed63a723001867bc4eb842c00	10c5ac379805443742025d6cf619891e
+852c0b6d5b315c823cdf0382ca78e47f	10c5ac379805443742025d6cf619891e
+22c2fc8a3a81503d40d4e532ac0e22ab	10c5ac379805443742025d6cf619891e
+482818d4eb4ca4c709dcce4cc2ab413d	10c5ac379805443742025d6cf619891e
+ec788cc8478763d79a18160a99dbb618	10c5ac379805443742025d6cf619891e
+d2f62cd276ef7cab5dcf9218d68f5bcf	10c5ac379805443742025d6cf619891e
+e71bd61e28ae2a584cb17ed776075b55	10c5ac379805443742025d6cf619891e
+49a41ffa9c91f7353ec37cda90966866	10c5ac379805443742025d6cf619891e
+1c13f340d154b44e41c996ec08d76749	10c5ac379805443742025d6cf619891e
+d5b95b21ce47502980eebfcf8d2913e0	10c5ac379805443742025d6cf619891e
+0b6bcec891d17cd7858525799c65da27	10c5ac379805443742025d6cf619891e
+0feeee5d5e0738c1929bf064b184409b	ef925858ea6d5d91b5ca4b3440fa1ad1
+8cd1cca18fb995d268006113a3d6e4bf	ef925858ea6d5d91b5ca4b3440fa1ad1
+1fd7fc9c73539bee88e1ec137b5f9ad2	ef925858ea6d5d91b5ca4b3440fa1ad1
+869bb972f8bef83979774fa123c56a4e	ef925858ea6d5d91b5ca4b3440fa1ad1
+e039d55ed63a723001867bc4eb842c00	ef925858ea6d5d91b5ca4b3440fa1ad1
+cba8cb3c568de75a884eaacde9434443	ef925858ea6d5d91b5ca4b3440fa1ad1
+19cbbb1b1e68c42f3415fb1654b2d390	ef925858ea6d5d91b5ca4b3440fa1ad1
+f44f1e343975f5157f3faf9184bc7ade	ef925858ea6d5d91b5ca4b3440fa1ad1
+1e986acf38de5f05edc2c42f4a49d37e	ef925858ea6d5d91b5ca4b3440fa1ad1
+10627ac0e35cfed4a0ca5b97a06b9d9f	ef925858ea6d5d91b5ca4b3440fa1ad1
+b834eadeaf680f6ffcb13068245a1fed	ef925858ea6d5d91b5ca4b3440fa1ad1
+1ec58ca10ed8a67b1c7de3d353a2885b	ef925858ea6d5d91b5ca4b3440fa1ad1
+8f523603c24072fb8ccb547503ee4c0f	ef925858ea6d5d91b5ca4b3440fa1ad1
+43a4893e6200f462bb9fe406e68e71c0	ef925858ea6d5d91b5ca4b3440fa1ad1
+9c31bcca97bb68ec33c5a3ead4786f3e	ef925858ea6d5d91b5ca4b3440fa1ad1
+c445544f1de39b071a4fca8bb33c2772	ef925858ea6d5d91b5ca4b3440fa1ad1
+29891bf2e4eff9763aef15dc862c373f	ef925858ea6d5d91b5ca4b3440fa1ad1
+c8fbeead5c59de4e8f07ab39e7874213	ef925858ea6d5d91b5ca4b3440fa1ad1
+8fa1a366d4f2e520bc9354658c4709f1	ef925858ea6d5d91b5ca4b3440fa1ad1
+812f48abd93f276576541ec5b79d48a2	ef925858ea6d5d91b5ca4b3440fa1ad1
+d29c61c11e6b7fb7df6d5135e5786ee1	ef925858ea6d5d91b5ca4b3440fa1ad1
+7013a75091bf79f04f07eecc248f8ee6	ef925858ea6d5d91b5ca4b3440fa1ad1
+58e42b779d54e174aad9a9fb79e7ebbc	ef925858ea6d5d91b5ca4b3440fa1ad1
+67493f858802a478bfe539c8e30a7e44	ef925858ea6d5d91b5ca4b3440fa1ad1
+f7910d943cc815a4a0081668ac2119b2	ef925858ea6d5d91b5ca4b3440fa1ad1
+955a5cfd6e05ed30eec7c79d2371ebcf	ef925858ea6d5d91b5ca4b3440fa1ad1
+03201e85fc6aa56d2cb9374e84bf52ca	ef925858ea6d5d91b5ca4b3440fa1ad1
+e7a227585002db9fee2f0ed56ee5a59f	ef925858ea6d5d91b5ca4b3440fa1ad1
+bc111d75a59fe7191a159fd4ee927981	ef925858ea6d5d91b5ca4b3440fa1ad1
+017e06f9b9bccafa230a81b60ea34c46	ef925858ea6d5d91b5ca4b3440fa1ad1
+844de407cd83ea1716f1ff57ea029285	3e55fe6e09f2f7eaacd4052a76bcfb01
+4e9b4bdef9478154fc3ac7f5ebfb6418	3e55fe6e09f2f7eaacd4052a76bcfb01
+3c2234a7ce973bc1700e0c743d6a819c	3e55fe6e09f2f7eaacd4052a76bcfb01
+9459200394693a7140196f07e6e717fd	3e55fe6e09f2f7eaacd4052a76bcfb01
+ee36fdf153967a0b99d3340aadeb4720	e692c8859fbcd0611cde731120ba09ad
+f2856ad30734c5f838185cc08f71b1e4	e692c8859fbcd0611cde731120ba09ad
+53a5da370321dac39033a5fe6af13e77	eb5b5cec91e306a1428f52f89ef1c2ab
+781c745a0d6b02cdecadf2e44d445d1a	eb5b5cec91e306a1428f52f89ef1c2ab
+b02ba5a5e65487122c2c1c67351c3ea0	eb5b5cec91e306a1428f52f89ef1c2ab
+0ae3b7f3ca9e9ddca932de0f0df00f8a	45e481facaabaefb537716312cbb9f67
+048d40092f9bd3c450e4bdeeff69e8c3	ef925858ea6d5d91b5ca4b3440fa1ad1
+0e609404e53b251f786b41b7be93cc19	45e481facaabaefb537716312cbb9f67
+b1006928600959429230393369fe43b6	45e481facaabaefb537716312cbb9f67
+478aedea838b8b4a0936b129a4c6e853	45e481facaabaefb537716312cbb9f67
+0f9fb8452cc5754f83e084693d406721	e58b815b0e0ab96b035629ec796eb579
+b66781a52770d78b260f15d125d1380b	e58b815b0e0ab96b035629ec796eb579
+f2a863a08c3e22cc942264ac4bc606e3	e58b815b0e0ab96b035629ec796eb579
+35bde21520f1490f0333133a9ae5b4fc	dc741cac8e46d127f4ce2524e5dbefa0
+c2ab38206dce633f15d66048ad744f03	dc741cac8e46d127f4ce2524e5dbefa0
+b02ba5a5e65487122c2c1c67351c3ea0	dc741cac8e46d127f4ce2524e5dbefa0
+60a105e79a86c8197cec9f973576874b	dc741cac8e46d127f4ce2524e5dbefa0
+8987e9c300bc2fc5e5cf795616275539	dc741cac8e46d127f4ce2524e5dbefa0
+ba5e6ab17c7e5769b11f98bfe8b692d0	dc741cac8e46d127f4ce2524e5dbefa0
+eb0a191797624dd3a48fa681d3061212	dc741cac8e46d127f4ce2524e5dbefa0
+13de0a41f18c0d71f5f6efff6080440f	dc741cac8e46d127f4ce2524e5dbefa0
+5885f60f8c705921cf7411507b8cadc0	dc741cac8e46d127f4ce2524e5dbefa0
+f31ba1d770aac9bc0dcee3fc15c60a46	dc741cac8e46d127f4ce2524e5dbefa0
+a8ace0f003d8249d012c27fe27b258b5	dc741cac8e46d127f4ce2524e5dbefa0
+ad759a3d4f679008ffdfb07cdbda2bb0	89733d277fcf6ee00cb571b2e1d72019
+02677b661c84417492e1c1cb0b0563b2	89733d277fcf6ee00cb571b2e1d72019
+0feeee5d5e0738c1929bf064b184409b	89733d277fcf6ee00cb571b2e1d72019
+123131d2d4bd15a0db8f07090a383157	89733d277fcf6ee00cb571b2e1d72019
+34fd3085dc67c39bf1692938cf3dbdd9	89733d277fcf6ee00cb571b2e1d72019
+436f76ddf806e8c3cbdc9494867d0f79	89733d277fcf6ee00cb571b2e1d72019
+2c5705766131b389fa1d88088f1bb8a8	89733d277fcf6ee00cb571b2e1d72019
+e63a014f1310b8c7cbe5e2b0fd66f638	89733d277fcf6ee00cb571b2e1d72019
+541fa0085b17ef712791151ca285f1a7	89733d277fcf6ee00cb571b2e1d72019
+0d8ef82742e1d5de19b5feb5ecb3aed3	89733d277fcf6ee00cb571b2e1d72019
+7cb94a8039f617f505df305a1dc2cc61	89733d277fcf6ee00cb571b2e1d72019
+55696bac6cdd14d47cbe7940665e21d3	89733d277fcf6ee00cb571b2e1d72019
+e039d55ed63a723001867bc4eb842c00	89733d277fcf6ee00cb571b2e1d72019
+26c2bb18f3a9a0c6d1392dae296cfea7	89733d277fcf6ee00cb571b2e1d72019
+6af2c726b2d705f08d05a7ee9509916e	89733d277fcf6ee00cb571b2e1d72019
+99761fad57f035550a1ca48e47f35157	89733d277fcf6ee00cb571b2e1d72019
+93aa5f758ad31ae4b8ac40044ba6c110	89733d277fcf6ee00cb571b2e1d72019
+96aa953534221db484e6ec75b64fcc4d	89733d277fcf6ee00cb571b2e1d72019
+f9ff0bcbb45bdf8a67395fa0ab3737b5	89733d277fcf6ee00cb571b2e1d72019
+36233ed8c181dfacc945ad598fb4f1a1	7dc88a28ee5d7dbd7a1011fd098cd6ab
+a99dca5593185c498b63a5eed917bd4f	7dc88a28ee5d7dbd7a1011fd098cd6ab
+e093d52bb2d4ff4973e72f6eb577714b	7dc88a28ee5d7dbd7a1011fd098cd6ab
+9a6c0d8ea613c5b002ff958275318b08	7dc88a28ee5d7dbd7a1011fd098cd6ab
+88726e1a911181e20cf8be52e1027f26	7dc88a28ee5d7dbd7a1011fd098cd6ab
+9b7d722b58370498cd39104b2d971978	7dc88a28ee5d7dbd7a1011fd098cd6ab
+93299af7c9e3c63c7b3d9bb2242c9d6b	7dc88a28ee5d7dbd7a1011fd098cd6ab
+9ff04a674682ece6ee93ca851db56387	7dc88a28ee5d7dbd7a1011fd098cd6ab
+53a5da370321dac39033a5fe6af13e77	7dc88a28ee5d7dbd7a1011fd098cd6ab
+9639834b69063b336bb744a537f80772	7dc88a28ee5d7dbd7a1011fd098cd6ab
+6e064a31dc53ab956403ec3654c81f1f	7dc88a28ee5d7dbd7a1011fd098cd6ab
+7b3ab6743cf8f7ea8491211e3336e41d	7dc88a28ee5d7dbd7a1011fd098cd6ab
+d1e0bdb2b2227bdd5e47850eec61f9ea	7dc88a28ee5d7dbd7a1011fd098cd6ab
+281eb11c857bbe8b6ad06dc1458e2751	7dc88a28ee5d7dbd7a1011fd098cd6ab
+de1e0ed5433f5e95c8f48e18e1c75ff6	7dc88a28ee5d7dbd7a1011fd098cd6ab
+e4f13074d445d798488cb00fa0c5fbd4	7dc88a28ee5d7dbd7a1011fd098cd6ab
+72b73895941b319645450521aad394e8	7dc88a28ee5d7dbd7a1011fd098cd6ab
+cbf6de82cf77ca17d17d293d6d29a2b2	7dc88a28ee5d7dbd7a1011fd098cd6ab
+118c9af69a42383387e8ce6ab22867d7	7dc88a28ee5d7dbd7a1011fd098cd6ab
+a91887f44d8d9fdcaa401d1c719630d7	7dc88a28ee5d7dbd7a1011fd098cd6ab
+5ef02a06b43b002e3bc195b3613b7022	7dc88a28ee5d7dbd7a1011fd098cd6ab
+824f75181a2bbd69fb2698377ea8a952	1a2f8d593b063eccd9b1dc3431e01081
+ac61757d33fc8563eb2409ed08e21974	1a2f8d593b063eccd9b1dc3431e01081
+4db3435be88015c70683b4368d9b313b	1a2f8d593b063eccd9b1dc3431e01081
+b0cc1a3a1aee13a213ee73e3d4a2ce70	1a2f8d593b063eccd9b1dc3431e01081
+647dadd75e050b230269e43a4fe351e2	1a2f8d593b063eccd9b1dc3431e01081
+22aaaebe901de8370917dcc53f53dbf6	1a2f8d593b063eccd9b1dc3431e01081
+2799b4abf06a5ec5e262d81949e2d18c	1a2f8d593b063eccd9b1dc3431e01081
+efe9ed664a375d10f96359977213d620	1a2f8d593b063eccd9b1dc3431e01081
+30a100fe6a043e64ed36abb039bc9130	1a2f8d593b063eccd9b1dc3431e01081
+de1e0ed5433f5e95c8f48e18e1c75ff6	1a2f8d593b063eccd9b1dc3431e01081
+90802bdf218986ffc70f8a086e1df172	1a2f8d593b063eccd9b1dc3431e01081
+bc834c26e0c9279cd3139746ab2881f1	1a2f8d593b063eccd9b1dc3431e01081
+dd0e61ab23e212d958112dd06ad0bfd2	1a2f8d593b063eccd9b1dc3431e01081
+3cd94848f6ccb600295135e86f1b46a7	1a2f8d593b063eccd9b1dc3431e01081
+658a9bbd0e85d854a9e140672a46ce3a	1a2f8d593b063eccd9b1dc3431e01081
+a89af36e042b5aa91d6efea0cc283c02	e6adc3e990efe83510bc9e7a483bec1a
+eb2743e9025319c014c9011acf1a1679	e6adc3e990efe83510bc9e7a483bec1a
+13909e3013727a91ee750bfd8660d7bc	b66fc7effb62197b91e1dacbd7b60f0f
+74e8b6c4be8a0f5dd843e2d1d7385a36	b66fc7effb62197b91e1dacbd7b60f0f
+2dde74b7ec594b9bd78da66f1c5cafdc	b66fc7effb62197b91e1dacbd7b60f0f
+576fea4a0c5425ba382fff5f593a33f1	9295494c6983f977a609c9db84ce25e6
+34e927c45cf3ccebb09b006b00f4e02d	9295494c6983f977a609c9db84ce25e6
+08f8c67c20c4ba43e8ba6fa771039c94	5e38483d273e5a8b6f777f8017bedf62
+08f8c67c20c4ba43e8ba6fa771039c94	10c5ac379805443742025d6cf619891e
+dab701a389943f0d407c6e583abef934	ef925858ea6d5d91b5ca4b3440fa1ad1
+0f9fb8452cc5754f83e084693d406721	e6adc3e990efe83510bc9e7a483bec1a
+c091e33f684c206b73b25417f6640b71	9295494c6983f977a609c9db84ce25e6
+0add3cab2a932f085109a462423c3250	aeead547d2a5b453d09a3efdf052c4cf
+2569a68a03a04a2cd73197d2cc546ff2	aeead547d2a5b453d09a3efdf052c4cf
+852c0b6d5b315c823cdf0382ca78e47f	aeead547d2a5b453d09a3efdf052c4cf
+e4b1d8cc71fd9c1fbc40fdc1a1a5d5b3	aeead547d2a5b453d09a3efdf052c4cf
+3258eb5f24b395695f56eee13b690da6	5165e8c183dbda4c319239e9f631b6f9
+8f7939c28270f3187210641e96a98ba7	5165e8c183dbda4c319239e9f631b6f9
+bcf744fa5f256d6c3051dd86943524f6	5165e8c183dbda4c319239e9f631b6f9
+3ba296bfb94ad521be221cf9140f8e10	5165e8c183dbda4c319239e9f631b6f9
+18e21eae8f909cbb44b5982b44bbf02f	5165e8c183dbda4c319239e9f631b6f9
+3438d9050b2bf1e6dc0179818298bd41	5165e8c183dbda4c319239e9f631b6f9
+08b84204877dce2a08abce50d9aeceed	dc19b6ddc47a55bc9401384b0ff66260
+ca3fecb0d12232d1dd99d0b0d83c39ec	dc19b6ddc47a55bc9401384b0ff66260
+b3626b52d8b98e9aebebaa91ea2a2c91	dc19b6ddc47a55bc9401384b0ff66260
+347fb42f546e982de2a1027a2544bfd0	dc19b6ddc47a55bc9401384b0ff66260
+97724184152a2620b76e2f93902ed679	dc19b6ddc47a55bc9401384b0ff66260
+4bffc4178bd669b13ba0d91ea0522899	dc19b6ddc47a55bc9401384b0ff66260
+b084dc5276d0211fae267a279e2959f0	dc19b6ddc47a55bc9401384b0ff66260
+f66935eb80766ec0c3acee20d40db157	dc19b6ddc47a55bc9401384b0ff66260
+cd1c06e4da41121b7362540fbe8cd62c	dc19b6ddc47a55bc9401384b0ff66260
+0f9fb8452cc5754f83e084693d406721	f64440cda54890f13a4506f88aa21cd2
+fecc75d978ad94aaa4e17b3ff9ded487	f64440cda54890f13a4506f88aa21cd2
+e2be3c3c22484d1872c7b225339c0962	f64440cda54890f13a4506f88aa21cd2
+3a7e46261a591b3e65d1e7d0b2439b20	f64440cda54890f13a4506f88aa21cd2
+11a5f9f425fd6da2d010808e5bf759ab	f64440cda54890f13a4506f88aa21cd2
+9d1ecaf46d6433f9dd224111440cfa3b	f64440cda54890f13a4506f88aa21cd2
+5fa07e5db79f9a1dccb28d65d6337aa6	f64440cda54890f13a4506f88aa21cd2
+71a520b6d0673d926d02651b269cf92c	f64440cda54890f13a4506f88aa21cd2
+56b07537df0c44402f5f87a8dcb8402c	f64440cda54890f13a4506f88aa21cd2
+05fcf330d8fafb0a1f17ce30ff60b924	f64440cda54890f13a4506f88aa21cd2
+386a023bd38fab85cb531824bfe9a879	f64440cda54890f13a4506f88aa21cd2
+71ac59780209b4c074690c44a3bba3b7	f64440cda54890f13a4506f88aa21cd2
+2054decb2290dbaab1c813fd86cc5f8b	f64440cda54890f13a4506f88aa21cd2
+f2a863a08c3e22cc942264ac4bc606e3	f64440cda54890f13a4506f88aa21cd2
+34ef35a77324b889aab18380ad34b51a	f64440cda54890f13a4506f88aa21cd2
+08b84204877dce2a08abce50d9aeceed	f64440cda54890f13a4506f88aa21cd2
+309263122a445662099a3dabce2a4f17	f64440cda54890f13a4506f88aa21cd2
+f1022ae1bc6b46d51889e0bb5ea8b64f	f64440cda54890f13a4506f88aa21cd2
+cd0bc2c8738b2fef2d78d197223b17d5	f64440cda54890f13a4506f88aa21cd2
+6a13b854e05f5ba6d2a0d873546fc32d	f64440cda54890f13a4506f88aa21cd2
+c82b23ed65bb8e8229c54e9e94ba1479	f64440cda54890f13a4506f88aa21cd2
+91abd5e520ec0a40ce4360bfd7c5d573	f64440cda54890f13a4506f88aa21cd2
+07d82d98170ab334bc66554bafa673cf	f64440cda54890f13a4506f88aa21cd2
+009f51181eb8c6bb5bb792af9a2fdd07	f64440cda54890f13a4506f88aa21cd2
+0a0f6b88354de7afe84b8a07dfadcc26	f64440cda54890f13a4506f88aa21cd2
+7d3618373e07c4ce8896006919bbb531	f64440cda54890f13a4506f88aa21cd2
+e6cbb2e0653a61e35d26df2bcb6bc4c7	f64440cda54890f13a4506f88aa21cd2
+2db1850a4fe292bd2706ffd78dbe44b9	f64440cda54890f13a4506f88aa21cd2
+02670bc3f496ce7b1393712f58033f6c	f64440cda54890f13a4506f88aa21cd2
+3b544a6f1963395bd3ae0aeebdf1edd8	f64440cda54890f13a4506f88aa21cd2
+5f449b146ce14c780eee323dfc5391e8	f64440cda54890f13a4506f88aa21cd2
+f8b01df5282702329fcd1cae8877bb5f	f64440cda54890f13a4506f88aa21cd2
+1fbd4bcce346fd2b2ffb41f6e767ea84	55446132347a3c2e38997d77b7641eff
+11a5f9f425fd6da2d010808e5bf759ab	55446132347a3c2e38997d77b7641eff
+aa5e46574bdc6034f4d49540c0c2d1ad	55446132347a3c2e38997d77b7641eff
+fd0a7850818a9a642a125b588d83e537	55446132347a3c2e38997d77b7641eff
+a2a607567311cb7a5a609146b977f4a9	55446132347a3c2e38997d77b7641eff
+2f623623ce7eeb08c30868be121b268a	b0bc16cc4e9fefb213434d718724ec3a
+50737756bd539f702d8e6e75cf388a31	b0bc16cc4e9fefb213434d718724ec3a
+d2d67d63c28a15822569c5033f26b133	b0bc16cc4e9fefb213434d718724ec3a
+333ca835f34af241fe46af8e7a037e17	b0bc16cc4e9fefb213434d718724ec3a
+d9c849266ee3ac1463262df200b3aab8	b0bc16cc4e9fefb213434d718724ec3a
+8b22cf31089892b4c57361d261bd63f7	b0bc16cc4e9fefb213434d718724ec3a
+9436650a453053e775897ef5733e88fe	b0bc16cc4e9fefb213434d718724ec3a
+a6c27c0fb9ef87788c1345041e840f95	b0bc16cc4e9fefb213434d718724ec3a
+16fe483d0681e0c86177a33e22452e13	b0bc16cc4e9fefb213434d718724ec3a
+ef3c0bf190876fd31d5132848e99df61	b0bc16cc4e9fefb213434d718724ec3a
+018b60f1dc74563ca02f0a14ee272e4d	b0bc16cc4e9fefb213434d718724ec3a
+0cd2b45507cc7c4ead2aaa71c59af730	b0bc16cc4e9fefb213434d718724ec3a
+40a259aebdbb405d2dc1d25b05f04989	b0bc16cc4e9fefb213434d718724ec3a
+5bd15db3f3bb125cf3222745f4fe383f	b0bc16cc4e9fefb213434d718724ec3a
+6cec93398cd662d79163b10a7b921a1b	b0bc16cc4e9fefb213434d718724ec3a
+773b5037f85efc8cc0ff3fe0bddf2eb8	b0bc16cc4e9fefb213434d718724ec3a
+1f56e4b8b8a0da3b8ec5b32970e4b0d8	b0bc16cc4e9fefb213434d718724ec3a
+d1ba47339d5eb2254dd3f2cc9f7e444f	b0bc16cc4e9fefb213434d718724ec3a
+2460cdf9598c810ac857d6ee9a84935a	b0bc16cc4e9fefb213434d718724ec3a
+218ac7d899a995dc53cabe52da9ed678	b0bc16cc4e9fefb213434d718724ec3a
+ef297890615f388057b6a2c0a2cbc7ab	1edc35fdd229698b0eeaaa43e7a9c7c5
+b66781a52770d78b260f15d125d1380b	1edc35fdd229698b0eeaaa43e7a9c7c5
+33b39f2721f79a6bb6bb5e1b2834b0bd	1edc35fdd229698b0eeaaa43e7a9c7c5
+ab1d9c0bfcc2843b8ea371f48ed884bb	1edc35fdd229698b0eeaaa43e7a9c7c5
+eed35187b83d0f2e0042cf221905163c	1edc35fdd229698b0eeaaa43e7a9c7c5
+40fcfb323cd116cf8199485c35012098	1edc35fdd229698b0eeaaa43e7a9c7c5
+bf2c8729bf5c149067d8e978ea3dcd32	1edc35fdd229698b0eeaaa43e7a9c7c5
+f79485ffe5db7e276e1e625b0be0dbec	1edc35fdd229698b0eeaaa43e7a9c7c5
+cabcfb35912d17067131f7d2634ac270	1edc35fdd229698b0eeaaa43e7a9c7c5
+3123e3df482127074cdd5f830072c898	1edc35fdd229698b0eeaaa43e7a9c7c5
+09c00610ca567a64c82da81cc92cb846	1edc35fdd229698b0eeaaa43e7a9c7c5
+246d570b4e453d4cb6e370070c902755	1edc35fdd229698b0eeaaa43e7a9c7c5
+5a534330e31944ed43cb6d35f4ad23c7	1edc35fdd229698b0eeaaa43e7a9c7c5
+eb999c99126a456f9db3c5d3b449fa7f	b3622323dbe3bef2319de978869871ad
+8765cfbf81024c3bd45924fee9159982	b3622323dbe3bef2319de978869871ad
+67cc86339b2654a35fcc57da8fc9d33d	b3622323dbe3bef2319de978869871ad
+6a4e8bab29666632262eb20c336e85e2	b3622323dbe3bef2319de978869871ad
+717ec52870493e8460d6aeddd9b7def8	b3622323dbe3bef2319de978869871ad
+fcf66a6d6cfbcb1d4a101213b8500445	b3622323dbe3bef2319de978869871ad
+cbf6de82cf77ca17d17d293d6d29a2b2	b3622323dbe3bef2319de978869871ad
+5ab944fac5f6a0d98dc248a879ec70ff	b3622323dbe3bef2319de978869871ad
+f2ba1f213e72388912791eb68adc3401	b3622323dbe3bef2319de978869871ad
+93025091752efa184fd034f285573afe	b3622323dbe3bef2319de978869871ad
+4c576d921b99dad80e4bcf9b068c2377	b3622323dbe3bef2319de978869871ad
+3b8d2a5ff1b16509377ce52a92255ffe	b3622323dbe3bef2319de978869871ad
+f32badb09f6aacb398d3cd690d90a668	b3622323dbe3bef2319de978869871ad
+ce14eb923a380597f2aff8b65a742048	b3622323dbe3bef2319de978869871ad
+662d17c67dcabc738b8620d3076f7e46	e2a3e66f68255ed0b2a09a64a8ae55fd
+b02ba5a5e65487122c2c1c67351c3ea0	06ed605b83d95d5a8488293416ceb999
+410044b393ebe6a519fde1bdb26d95e8	06ed605b83d95d5a8488293416ceb999
+abca417a801cd10e57e54a3cb6c7444b	06ed605b83d95d5a8488293416ceb999
+844de407cd83ea1716f1ff57ea029285	a565f20390f97f9d86df144e14fe83af
+f34c903e17cfeea18e499d4627eeb3ec	a565f20390f97f9d86df144e14fe83af
+370cde851ed429f1269f243dd714cce2	cfd1317abaf4002e4a091746008541cc
+0959583c7f421c0bb8adb20e8faeeea1	cfd1317abaf4002e4a091746008541cc
+221fa1624ee1e31376cb112dd2487953	cfd1317abaf4002e4a091746008541cc
+df24a5dd8a37d3d203952bb787069ea2	cfd1317abaf4002e4a091746008541cc
+ea3f5f97f06167f4819498b4dd56508e	cfd1317abaf4002e4a091746008541cc
+14af57131cbbf57afb206c8707fdab6c	cfd1317abaf4002e4a091746008541cc
+491801c872c67db465fda0f8f180569d	cfd1317abaf4002e4a091746008541cc
+2799b4abf06a5ec5e262d81949e2d18c	cfd1317abaf4002e4a091746008541cc
+4be3e31b7598745d0e96c098bbf7a1d7	cfd1317abaf4002e4a091746008541cc
+dcdcd2f22b1d5f85fa5dd68fa89e3756	cfd1317abaf4002e4a091746008541cc
+0a3a1f7ca8d6cf9b2313f69db9e97eb8	cfd1317abaf4002e4a091746008541cc
+79cbf009784a729575e50a3ef4a3b1cc	cfd1317abaf4002e4a091746008541cc
+87bd9baf0b0d760d1f0ca9a8e9526161	cfd1317abaf4002e4a091746008541cc
+cd3296ec8f7773892de22dfade4f1b04	cfd1317abaf4002e4a091746008541cc
+05bea3ed3fcd45441c9c6af3a2d9952d	cfd1317abaf4002e4a091746008541cc
+a7eda23a9421a074fe5ec966810018d7	edccf96997e63c09109beba94633a44c
+ffd2da11d45ed35a039951a8b462e7fb	edccf96997e63c09109beba94633a44c
+60a105e79a86c8197cec9f973576874b	85935a51fb2aec086917a4eeeaef066b
+43a4893e6200f462bb9fe406e68e71c0	85935a51fb2aec086917a4eeeaef066b
+bcc770bb6652b1b08643d98fd7167f5c	85935a51fb2aec086917a4eeeaef066b
+73cb08d143f893e645292dd04967f526	85935a51fb2aec086917a4eeeaef066b
+13291409351c97f8c187790ece4f5a97	dc9da3de687b2f6b15b8e0660dabbdbb
+34ca5622469ad1951a3c4dc5603cea0f	dc9da3de687b2f6b15b8e0660dabbdbb
+ed783268eca01bff52c0f135643a9ef7	6c6621659485878b572ac37db7d14947
+38734dcdff827db1dc3215e23b4e0890	d283cb5c455d03f1f4f0ff7f82c93af6
+fcc491ba532309d8942df543beaec67e	d283cb5c455d03f1f4f0ff7f82c93af6
+246d570b4e453d4cb6e370070c902755	1bbb8052b10792e8a86d64245d543d7a
+384712ec65183407ac811fff2f4c4798	1bbb8052b10792e8a86d64245d543d7a
+a76c5f98a56fc03100d6a7936980c563	1bbb8052b10792e8a86d64245d543d7a
+66cc7344291ae2a297bf2aa93d886e22	1bbb8052b10792e8a86d64245d543d7a
+b615ea28d44d2e863a911ed76386b52a	94154f6cf17963a299f6902ae9c7f3d5
+a7eda23a9421a074fe5ec966810018d7	94154f6cf17963a299f6902ae9c7f3d5
+867872f29491a6473dae8075c740993e	94154f6cf17963a299f6902ae9c7f3d5
+c937fc1b6be0464ec9d17389913871e4	94154f6cf17963a299f6902ae9c7f3d5
+e9648f919ee5adda834287bbdf6210fd	94154f6cf17963a299f6902ae9c7f3d5
+1f86700588aed0390dd27c383b7fc963	94154f6cf17963a299f6902ae9c7f3d5
+faec47e96bfb066b7c4b8c502dc3f649	94154f6cf17963a299f6902ae9c7f3d5
+16cf4474c5334c1d9194d003c9fb75c1	94154f6cf17963a299f6902ae9c7f3d5
+8e38937886f365bb96aa1c189c63c5ea	94154f6cf17963a299f6902ae9c7f3d5
+8ed55fda3382add32869157c5b41ed47	94154f6cf17963a299f6902ae9c7f3d5
+4e9dfdbd352f73b74e5e51b12b20923e	94154f6cf17963a299f6902ae9c7f3d5
+88059eaa73469bb47bd41c5c3cdd1b50	94154f6cf17963a299f6902ae9c7f3d5
+56e8538c55d35a1c23286442b4bccd26	94154f6cf17963a299f6902ae9c7f3d5
+375974f4fad5caae6175c121e38174d0	94154f6cf17963a299f6902ae9c7f3d5
+8734f7ff367f59fc11ad736e63e818f9	94154f6cf17963a299f6902ae9c7f3d5
+bcf744fa5f256d6c3051dd86943524f6	94154f6cf17963a299f6902ae9c7f3d5
+c5f4e658dfe7b7af3376f06d7cd18a2a	c724b600052083fae4765a6a7702ee5f
+2187711aeaa2944a707c9eabaa2df72a	c724b600052083fae4765a6a7702ee5f
+8791e43a8287ccbc21f61be21e90ce43	c724b600052083fae4765a6a7702ee5f
+cd3296ec8f7773892de22dfade4f1b04	c724b600052083fae4765a6a7702ee5f
+5f07809ecfce3af23ed5550c6adf0d78	c724b600052083fae4765a6a7702ee5f
+5c61f833c2fb87caab0a48e4c51fa629	c724b600052083fae4765a6a7702ee5f
+8b3f40e0243e2307a1818d3f456df153	c724b600052083fae4765a6a7702ee5f
+c8fbeead5c59de4e8f07ab39e7874213	c724b600052083fae4765a6a7702ee5f
+98aa80527e97026656ec54cdd0f94dff	c724b600052083fae4765a6a7702ee5f
+8bdd6b50b8ecca33e04837fde8ffe51e	c724b600052083fae4765a6a7702ee5f
+18b751c8288c0fabe7b986963016884f	c724b600052083fae4765a6a7702ee5f
+30b8affc1afeb50c76ad57d7eda1f08f	c724b600052083fae4765a6a7702ee5f
+a8a43e21de5b4d83a6a7374112871079	c724b600052083fae4765a6a7702ee5f
+9614cbc86659974da853dee20280b8c4	c724b600052083fae4765a6a7702ee5f
+bc2f39d437ff13dff05f5cfda14327cc	c724b600052083fae4765a6a7702ee5f
+39530e3fe26ee7c557392d479cc9c93f	c724b600052083fae4765a6a7702ee5f
+537e5aa87fcfb168be5c953d224015ff	c724b600052083fae4765a6a7702ee5f
+80d331992feb02627ae8b30687c7bb78	c724b600052083fae4765a6a7702ee5f
+f6eb4364ba53708b24a4141962feb82e	c724b600052083fae4765a6a7702ee5f
+2cd225725d4811d813a5ea1b701db0db	c724b600052083fae4765a6a7702ee5f
+2f6fc683428eb5f8b22cc5021dc9d40d	c724b600052083fae4765a6a7702ee5f
+2d5a306f74749cc6cbe9b6cd47e73162	c724b600052083fae4765a6a7702ee5f
+dba84ece8f49717c47ab72acc3ed2965	c724b600052083fae4765a6a7702ee5f
+559314721edf178fa138534f7a1611b9	c724b600052083fae4765a6a7702ee5f
+d192d350b6eace21e325ecf9b0f1ebd1	c724b600052083fae4765a6a7702ee5f
+d6a020f7b50fb4512fd3c843af752809	c724b600052083fae4765a6a7702ee5f
+73f4b98d80efb8888a2b32073417e21e	c724b600052083fae4765a6a7702ee5f
+711a7acac82d7522230e3c7d0efc3f89	c724b600052083fae4765a6a7702ee5f
+1506aeeb8c3a699b1e3c87db03156428	c724b600052083fae4765a6a7702ee5f
+4f58423d9f925c8e8bd73409926730e8	c724b600052083fae4765a6a7702ee5f
+96390e27bc7e2980e044791420612545	c724b600052083fae4765a6a7702ee5f
+c1e8b6d7a1c20870d5955bcdc04363e4	c724b600052083fae4765a6a7702ee5f
+5bb416e14ac19276a4b450d343e4e981	c724b600052083fae4765a6a7702ee5f
+b9fd9676338e36e6493489ec5dc041fe	c724b600052083fae4765a6a7702ee5f
+faec47e96bfb066b7c4b8c502dc3f649	cb4c2743c35bb374ab32d475ce8cfafe
+0c31e51349871cfb59cfbfaaed82eb18	cb4c2743c35bb374ab32d475ce8cfafe
+41dabe0c59a3233e3691f3c893eb789e	cb4c2743c35bb374ab32d475ce8cfafe
+96390e27bc7e2980e044791420612545	1845ce3f5f191d7265d512beb6be1708
+781734c0e9c01b14adc3a78a4c262d83	1845ce3f5f191d7265d512beb6be1708
+d908b6b9019639bced6d1e31463eea85	e6af11cd729e7b81d4f40453fff9c7f2
+6db22194a183d7da810dcc29ea360c17	e6af11cd729e7b81d4f40453fff9c7f2
+51cb62b41cd9deaaa2dd98c773a09ebb	f88c607c316a2a53973d71db053a3ce6
+92e1aca33d97fa75c1e81a9db61454bb	f88c607c316a2a53973d71db053a3ce6
+ab5428d229c61532af41ec2ca258bf30	f88c607c316a2a53973d71db053a3ce6
+6ca47c71d99f608d4773b95f9b859142	22be8d2b712105db37cc765fae61323e
+b14521c0461b445a7ac2425e922c72df	22be8d2b712105db37cc765fae61323e
+6ee6a213cb02554a63b1867143572e70	1e4eac648958cf2bfe14673996ed2c7e
+496a6164d8bf65daf6ebd4616c95b4b7	1e4eac648958cf2bfe14673996ed2c7e
+191bab5800bd381ecf16485f91e85bc3	84565434746de9ae0cd3baf57fcfd87d
+645b264cb978b22bb2d2c70433723ec0	84565434746de9ae0cd3baf57fcfd87d
+98dd2a77f081989a185cb652662eea41	84565434746de9ae0cd3baf57fcfd87d
+c1a08f1ea753843e2b4f5f3d2cb41b7b	84565434746de9ae0cd3baf57fcfd87d
+807dbc2d5a3525045a4b7d882e3768ee	84565434746de9ae0cd3baf57fcfd87d
+458da4fc3da734a6853e26af3944bf75	b39ff9f6960957839c401d45abdc3cae
+5ef02a06b43b002e3bc195b3613b7022	b39ff9f6960957839c401d45abdc3cae
+ed9b92eb1706415c42f88dc91284da8a	b39ff9f6960957839c401d45abdc3cae
+fb1afbea5c0c2e23396ef429d0e42c52	b39ff9f6960957839c401d45abdc3cae
+9d74605e4b1d19d83992a991230e89ef	b39ff9f6960957839c401d45abdc3cae
+41dabe0c59a3233e3691f3c893eb789e	b39ff9f6960957839c401d45abdc3cae
+c1e8b6d7a1c20870d5955bcdc04363e4	b39ff9f6960957839c401d45abdc3cae
+480a0efd668e568595d42ac78340fe2a	b39ff9f6960957839c401d45abdc3cae
+d25956f771b58b6b00f338a41ca05396	b39ff9f6960957839c401d45abdc3cae
+95a1f9b6006151e00b1a4cda721f469d	b39ff9f6960957839c401d45abdc3cae
+5159ae414608a804598452b279491c5c	b39ff9f6960957839c401d45abdc3cae
+9bdbe50a5be5b9c92dccf2d1ef05eefd	b39ff9f6960957839c401d45abdc3cae
+8c4e8003f8d708dc3b6d486d74d9a585	b39ff9f6960957839c401d45abdc3cae
+b6eba7850fd20fa8dce81167f1a6edca	b39ff9f6960957839c401d45abdc3cae
+5f27f488f7c8b9e4b81f59c6d776e25c	b39ff9f6960957839c401d45abdc3cae
+491801c872c67db465fda0f8f180569d	90710b6a9bf6fbbdea99a274ca058668
+852c0b6d5b315c823cdf0382ca78e47f	90710b6a9bf6fbbdea99a274ca058668
+a0d3b444bd04cd165b4e076c9fc18bee	90710b6a9bf6fbbdea99a274ca058668
+c846d80d826291f2a6a0d7a57e540307	90710b6a9bf6fbbdea99a274ca058668
+f2856ad30734c5f838185cc08f71b1e4	de9415f38659fd6225ddf8734a7b0ff7
+8aeadeeff3e1a3e1c8a6a69d9312c530	de9415f38659fd6225ddf8734a7b0ff7
+78a7bdfe7277f187e84b52dea7b75b0b	de9415f38659fd6225ddf8734a7b0ff7
+f36fba9e93f6402ba551291e34242338	de9415f38659fd6225ddf8734a7b0ff7
+95800513c555e1e95a430e312ddff817	4ba1c22d76444426b678b142977aa084
+e2226498712065ccfca00ecb57b8ed2f	4ba1c22d76444426b678b142977aa084
+db732a1a9861777294f7dc54eeca2b3e	4ba1c22d76444426b678b142977aa084
+1ace9926ad3a6dab09d16602fd2fcccc	4ba1c22d76444426b678b142977aa084
+05256decaa2ee2337533d95c7de3db9d	4ba1c22d76444426b678b142977aa084
+c664656f67e963f4c0f651195f818ce0	4ba1c22d76444426b678b142977aa084
+810f28b77fa6c866fbcceb6c8aa7bac4	4ba1c22d76444426b678b142977aa084
+7fcdd5f715be5fce835b68b9e63e1733	4ba1c22d76444426b678b142977aa084
+5214513d882cf478e028201a0d9031c0	4ba1c22d76444426b678b142977aa084
+b1c7516fef4a901df12871838f934cf6	69d2999875a1e6d7c09bbf157d18a27e
+a7111b594249d6a038281deb74ef0d04	dcad795c824cf4d6337fc9f745e5645f
+45d62f43d6f59291905d097790f74ade	dcad795c824cf4d6337fc9f745e5645f
+2df0462e6f564f34f68866045b2a8a44	dcad795c824cf4d6337fc9f745e5645f
+eb3a9fb71b84790e50acd81cc1aa4862	86615675838b48d2003175dd7665fba3
+7eeea2463ae5da9990cab53c014864fa	86615675838b48d2003175dd7665fba3
+dd3e531c469005b17115dbf611b01c88	95e6dc1125e477e58c9f5bdb1bdd53ac
+d2d67d63c28a15822569c5033f26b133	95e6dc1125e477e58c9f5bdb1bdd53ac
+0cd2b45507cc7c4ead2aaa71c59af730	95e6dc1125e477e58c9f5bdb1bdd53ac
+541fa0085b17ef712791151ca285f1a7	95e6dc1125e477e58c9f5bdb1bdd53ac
+a7eda23a9421a074fe5ec966810018d7	95e6dc1125e477e58c9f5bdb1bdd53ac
+ad51cbe70d798b5aec08caf64ce66094	95e6dc1125e477e58c9f5bdb1bdd53ac
+45e410efd11014464dd36fb707a5a9e1	95e6dc1125e477e58c9f5bdb1bdd53ac
+8fdc3e13751b8f525f259d27f2531e87	95e6dc1125e477e58c9f5bdb1bdd53ac
+05e76572fb3d16ca990a91681758bbee	95e6dc1125e477e58c9f5bdb1bdd53ac
+cfc61472d8abd7c54b81924119983ed9	95e6dc1125e477e58c9f5bdb1bdd53ac
+1fe0175f73e5b381213057da98b8f5fb	95e6dc1125e477e58c9f5bdb1bdd53ac
+d44be0e711c2711876734b330500e5b9	95e6dc1125e477e58c9f5bdb1bdd53ac
+c295bb30bf534e960a6acf7435f0e46a	95e6dc1125e477e58c9f5bdb1bdd53ac
+ab3ca496cbc01a5a9ed650c4d0e26168	95e6dc1125e477e58c9f5bdb1bdd53ac
+538eaaef4d029c255ad8416c01ab5719	95e6dc1125e477e58c9f5bdb1bdd53ac
+1de3f08835ab9d572e79ac0fca13c5c2	95e6dc1125e477e58c9f5bdb1bdd53ac
+4c02510c3f16e13edc27eff1ef2e452c	95e6dc1125e477e58c9f5bdb1bdd53ac
+7cbd455ff5af40e28a1eb97849f00723	95e6dc1125e477e58c9f5bdb1bdd53ac
+3d4fe2107d6302760654b4217cf32f17	95e6dc1125e477e58c9f5bdb1bdd53ac
+3c8ce0379b610d36c3723b198b982197	95e6dc1125e477e58c9f5bdb1bdd53ac
+ee36fdf153967a0b99d3340aadeb4720	f5cd4263f2cbb5e459306b35cef72e9d
+087c643d95880c5a89fc13f3246bebae	f5cd4263f2cbb5e459306b35cef72e9d
+be553803806b8634990c2eb7351ed489	f5cd4263f2cbb5e459306b35cef72e9d
+dfa61d19b62369a37743b38215836df9	69882c9d3cc383cd271732b068979a98
+1a5235c012c18789e81960333a76cd7a	69882c9d3cc383cd271732b068979a98
+2db1850a4fe292bd2706ffd78dbe44b9	39603f44a0fea370f2f6ced327e9b38b
+951af0076709a6da6872f9cdf41c852b	39603f44a0fea370f2f6ced327e9b38b
+69a6a78ace079846a8f0d3f89beada2c	39603f44a0fea370f2f6ced327e9b38b
+43ff5aadca6d8a60dd3da21716358c7d	39603f44a0fea370f2f6ced327e9b38b
+95800513c555e1e95a430e312ddff817	a420ecf82bd099f63cf26c8cbc4cdf05
+42085fca2ddb606f4284e718074d5561	a420ecf82bd099f63cf26c8cbc4cdf05
+5214513d882cf478e028201a0d9031c0	a420ecf82bd099f63cf26c8cbc4cdf05
+92e1aca33d97fa75c1e81a9db61454bb	be31669251922949ee5efe5447a119d1
+c8fd07f040a8f2dc85f5b2d3804ea3db	be31669251922949ee5efe5447a119d1
+866208c5b4a74b32974bffb0f90311ca	be31669251922949ee5efe5447a119d1
+fd3ab918dab082b1af1df5f9dbc0041f	be31669251922949ee5efe5447a119d1
+cb0785d67b1ea8952fae42efd82864a7	be31669251922949ee5efe5447a119d1
+aa5e46574bdc6034f4d49540c0c2d1ad	f7995b1a1bf9683848dd37ab294cfa3f
+6fa204dccaff0ec60f96db5fb5e69b33	f7995b1a1bf9683848dd37ab294cfa3f
+2587d892c1261be043d443d06bd5b220	f7995b1a1bf9683848dd37ab294cfa3f
+fcc491ba532309d8942df543beaec67e	169be8981eff6a53b1bcae79e2f06a05
+51cb62b41cd9deaaa2dd98c773a09ebb	169be8981eff6a53b1bcae79e2f06a05
+89b5ac8fb4c102c174adf2fed752a970	169be8981eff6a53b1bcae79e2f06a05
+cc31970696ef00b4c6e28dba4252e45d	169be8981eff6a53b1bcae79e2f06a05
+92e1aca33d97fa75c1e81a9db61454bb	169be8981eff6a53b1bcae79e2f06a05
+4669569c9a870431c4896de37675a784	42a2eedac863bd01b14540a71331ec65
+9d36a42a36b62b3f665c7fa07f07563b	42a2eedac863bd01b14540a71331ec65
+118b96dde2f8773b011dfb27e51b2f95	a1127140db632705cffe06456b478fa8
+381b834c6bf7b25b9b627c9eeb81dd8a	a1127140db632705cffe06456b478fa8
+4bcbcb65040e0347a1ffb5858836c49c	a1127140db632705cffe06456b478fa8
+0d949e45a18d81db3491a7b451e99560	a1127140db632705cffe06456b478fa8
+c52d5020aad50e03d48581ffb34cd1c3	83bd23b786ae4d9b16f52ed2661611e9
+c2ab38206dce633f15d66048ad744f03	26c07de9d3c6e80d7fdaefec9a7dcdc5
+26ad58455460d75558a595528825b672	26c07de9d3c6e80d7fdaefec9a7dcdc5
+5c3278fb76fa2676984396d33ba90613	26c07de9d3c6e80d7fdaefec9a7dcdc5
+dda8e0792843816587427399f34bd726	26c07de9d3c6e80d7fdaefec9a7dcdc5
+dfa61d19b62369a37743b38215836df9	c4133d7e05b0f42aedd762785de80b70
+f68a3eafcc0bb036ee8fde7fc91cde13	c4133d7e05b0f42aedd762785de80b70
+78f5c568100eb61401870fa0fa4fd7cb	c4133d7e05b0f42aedd762785de80b70
+73cb08d143f893e645292dd04967f526	db92681077141614e2ee9a01df968334
+d0b02893ceb72d11a3471fe18d7089fd	db92681077141614e2ee9a01df968334
+fcc491ba532309d8942df543beaec67e	e26bcb0f8a28cd2229ce77a95d0baf9e
+ab42c2d958e2571ce5403391e9910c40	e26bcb0f8a28cd2229ce77a95d0baf9e
+b86f86db61493cc2d757a5cefc5ef425	e26bcb0f8a28cd2229ce77a95d0baf9e
+c52d5020aad50e03d48581ffb34cd1c3	d84c3f96813116b09480c0572fa45636
+22aaaebe901de8370917dcc53f53dbf6	d1b30328ab686d050b6c107154d6aef8
+9c81c8c060b39e7437b2d913f036776b	d1b30328ab686d050b6c107154d6aef8
+61a6502cfdff1a1668892f52c7a00669	d1b30328ab686d050b6c107154d6aef8
+d69462bef6601bb8d6e3ffda067399d9	d1b30328ab686d050b6c107154d6aef8
+630500eabc48c986552cb01798a31746	4e22c7f7fe57d94f85bf89a469627ba1
+abc73489d8f0d1586a2568211bdeb32f	4e22c7f7fe57d94f85bf89a469627ba1
+c21fe390daecee9e70b8f4b091ae316f	4e22c7f7fe57d94f85bf89a469627ba1
+b9fd9676338e36e6493489ec5dc041fe	4e22c7f7fe57d94f85bf89a469627ba1
+04728a6272117e0dc4ec29b0f7202ad8	4e22c7f7fe57d94f85bf89a469627ba1
+113ab4d243afc4114902d317ad41bb39	33314b620ad609dc87d035654068d01e
+cc70416ca37c5b31e7609fcc68ca009e	33314b620ad609dc87d035654068d01e
+7b91dc9ecdfa3ea7d347588a63537bb9	33314b620ad609dc87d035654068d01e
+55c63b0540793d537ed29f5c41eb9c3e	33314b620ad609dc87d035654068d01e
+43bd0d50fe7d58d8fce10c6d4232ca1e	33314b620ad609dc87d035654068d01e
+cf38e7d92bb08c96c50ddc723b624f9d	33314b620ad609dc87d035654068d01e
+5f449b146ce14c780eee323dfc5391e8	33314b620ad609dc87d035654068d01e
+d9c849266ee3ac1463262df200b3aab8	cac02becf783662df9a61439ed515d75
+5ef02a06b43b002e3bc195b3613b7022	cac02becf783662df9a61439ed515d75
+191bab5800bd381ecf16485f91e85bc3	cac02becf783662df9a61439ed515d75
+0e4f0487408be5baf091b74ba765dce7	cac02becf783662df9a61439ed515d75
+8cd7fa96a5143f7105ca92de7ff0bac7	cac02becf783662df9a61439ed515d75
+bdbafc49aa8c3e75e9bd1e0ee24411b4	cac02becf783662df9a61439ed515d75
+5863c78fb68ef1812a572e8f08a4e521	cac02becf783662df9a61439ed515d75
+08f8c67c20c4ba43e8ba6fa771039c94	b4435108ce3cef02600464daf3cb5f7f
+c2ab38206dce633f15d66048ad744f03	b4435108ce3cef02600464daf3cb5f7f
+aa98c9e445775e7c945661e91cf7e7aa	b4435108ce3cef02600464daf3cb5f7f
+b615ea28d44d2e863a911ed76386b52a	b4435108ce3cef02600464daf3cb5f7f
+d5a5e9d2edeb2b2c685364461f1dfd46	b4435108ce3cef02600464daf3cb5f7f
+1fcf2f2315b251ebe462da320491ea9f	b4435108ce3cef02600464daf3cb5f7f
+7022f6b60d9642d91eebba98185cd9ba	b4435108ce3cef02600464daf3cb5f7f
+0d01b12a6783b4e60d2e09e16431f00a	b4435108ce3cef02600464daf3cb5f7f
+9c81c8c060b39e7437b2d913f036776b	b4435108ce3cef02600464daf3cb5f7f
+4522c5141f18b2a408fc8c1b00827bc3	b4435108ce3cef02600464daf3cb5f7f
+5ec194adf19442544d8a94f4696f17dc	b4435108ce3cef02600464daf3cb5f7f
+31e2d1e0b364475375cb17ad76aa71f2	b4435108ce3cef02600464daf3cb5f7f
+dff880ae9847f6fa8ed628ed4ee5741b	b4435108ce3cef02600464daf3cb5f7f
+521c8a16cf07590faee5cf30bcfb98b6	b4435108ce3cef02600464daf3cb5f7f
+a77c14ecd429dd5dedf3dc5ea8d44b99	b4435108ce3cef02600464daf3cb5f7f
+b8d794c48196d514010ce2c2269b4102	b4435108ce3cef02600464daf3cb5f7f
+087c643d95880c5a89fc13f3246bebae	f0c7879002501eddcb68564fe19b77fc
+032d53a86540806303b4c81586308e58	f0c7879002501eddcb68564fe19b77fc
+df800795b697445f2b7dc0096d75f4df	f0c7879002501eddcb68564fe19b77fc
+f1a37824dfc280b208e714bd80d5a294	efdb143af86d5a0af148b7847e721e55
+786a755c895da064ccd4f9e8eb7e484e	efdb143af86d5a0af148b7847e721e55
+5958cd5ce011ea83c06cb921b1c85bb3	586a67dc71b225f23047ff369fce7451
+c5d3d165539ddf2020f82c17a61f783d	586a67dc71b225f23047ff369fce7451
+de1e0ed5433f5e95c8f48e18e1c75ff6	586a67dc71b225f23047ff369fce7451
+a7eda23a9421a074fe5ec966810018d7	586a67dc71b225f23047ff369fce7451
+6a4e8bab29666632262eb20c336e85e2	ec83b315e34cecd0b3e8323e22ee38bf
+53c25598fe4f1f71a1c596bd4997245c	ec83b315e34cecd0b3e8323e22ee38bf
+dd3e531c469005b17115dbf611b01c88	e184d243eb553fcba592ae848963c1e8
+a6c27c0fb9ef87788c1345041e840f95	e184d243eb553fcba592ae848963c1e8
+5c59b6aa317b306a1312a67fe69bf512	e184d243eb553fcba592ae848963c1e8
+cd0bc2c8738b2fef2d78d197223b17d5	e184d243eb553fcba592ae848963c1e8
+6af2c726b2d705f08d05a7ee9509916e	e184d243eb553fcba592ae848963c1e8
+fc239fd89fd7c9edbf2bf27d1d894bc0	e184d243eb553fcba592ae848963c1e8
+29891bf2e4eff9763aef15dc862c373f	e184d243eb553fcba592ae848963c1e8
+9d74605e4b1d19d83992a991230e89ef	e184d243eb553fcba592ae848963c1e8
+67cd9b4b7b33511f30e85e21b2d3b204	e184d243eb553fcba592ae848963c1e8
+b12daab6c83b1a45aa32cd9c2bc78360	e184d243eb553fcba592ae848963c1e8
+0ba2f4073dd8eff1f91650af5dc67db4	e184d243eb553fcba592ae848963c1e8
+bd555d95b1ccba75afca868636b1b931	e184d243eb553fcba592ae848963c1e8
+a93376e58f4c73737cf5ed7d88c2169c	e184d243eb553fcba592ae848963c1e8
+cd3faaaf1bebf8d009aa59f887d17ef2	e184d243eb553fcba592ae848963c1e8
+33538745a71fe2d30689cac96737e8f7	e184d243eb553fcba592ae848963c1e8
+586ac67e6180a1f16a4d3b81e33eaa94	e184d243eb553fcba592ae848963c1e8
+ca1720fd6350760c43139622c4753557	e184d243eb553fcba592ae848963c1e8
+645b264cb978b22bb2d2c70433723ec0	e184d243eb553fcba592ae848963c1e8
+45816111a5b644493b68cfedfb1a0cc0	e184d243eb553fcba592ae848963c1e8
+d0e551d6887e0657952b3c5beb7fed74	e184d243eb553fcba592ae848963c1e8
+06c1680c65972c4332be73e726de9e74	e184d243eb553fcba592ae848963c1e8
+4671068076f66fb346c4f62cbfb7f9fe	e184d243eb553fcba592ae848963c1e8
+10407de3db48761373a403b8ddf09782	e184d243eb553fcba592ae848963c1e8
+77ac561c759a27b7d660d7cf0534a9c3	e184d243eb553fcba592ae848963c1e8
+3771036a0740658b11cf5eb73d9263b3	e184d243eb553fcba592ae848963c1e8
+6b37fe4703bd962004cdccda304cc18e	e184d243eb553fcba592ae848963c1e8
+371d905385644b0ecb176fd73184239c	e184d243eb553fcba592ae848963c1e8
+d871ebaec65bbfa0b6b97aefae5d9150	e184d243eb553fcba592ae848963c1e8
+28bb3f229ca1eeb05ef939248f7709ce	e184d243eb553fcba592ae848963c1e8
+861613f5a80abdf5a15ea283daa64be3	e184d243eb553fcba592ae848963c1e8
+080d2dc6fa136fc49fc65eee1b556b46	e184d243eb553fcba592ae848963c1e8
+2df9857b999e21569c3fcce516f0f20e	e184d243eb553fcba592ae848963c1e8
+31da4ab7750e057e56224eff51bce705	e184d243eb553fcba592ae848963c1e8
+087c643d95880c5a89fc13f3246bebae	79880b3852adb21098807cc10effe071
+08e2440159e71c7020394db19541aabc	79880b3852adb21098807cc10effe071
+3b6d90f85e8dadcb3c02922e730e4a9d	20a697b57317f75ad33eb50f166d6b00
+20de83abafcb071d854ca5fd57dec0e8	20a697b57317f75ad33eb50f166d6b00
+e6624ef1aeab84f521056a142b5b2d12	20a697b57317f75ad33eb50f166d6b00
+a2761eea97ee9fe09464d5e70da6dd06	20a697b57317f75ad33eb50f166d6b00
+a0abb504e661e34f5d269f113d39ea96	48843160dd4fc4814525fa0f06641f19
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	48843160dd4fc4814525fa0f06641f19
+a822d5d4cdcb5d1b340a54798ac410b7	88ad18798356c6caa8fe161432d88920
+cd004b87e2adfb72b28752a6ef6cd639	c4e2844bff82087c924ad104bdfb6580
+c18bdeb4f181c22f04555ea453111da1	c4e2844bff82087c924ad104bdfb6580
+4338a835aa6e3198deba95c25dd9e3de	c4e2844bff82087c924ad104bdfb6580
+6829c770c1de2fd9bd88fe91f1d42f56	c4e2844bff82087c924ad104bdfb6580
+d0dae91314459033160dc47a79aa165e	57a334acb665ebc52057791d107149f4
+5878f5f2b1ca134da32312175d640134	57a334acb665ebc52057791d107149f4
+333ca835f34af241fe46af8e7a037e17	6439e93ac57a8784706d3155d0fe651f
+a99dca5593185c498b63a5eed917bd4f	6439e93ac57a8784706d3155d0fe651f
+16a56d0941a310c3dc4f967041574300	6439e93ac57a8784706d3155d0fe651f
+5637bae1665ae86050cb41fb1cdcc3ee	6439e93ac57a8784706d3155d0fe651f
+182a1e726ac1c8ae851194cea6df0393	6439e93ac57a8784706d3155d0fe651f
+e039d55ed63a723001867bc4eb842c00	6439e93ac57a8784706d3155d0fe651f
+478aedea838b8b4a0936b129a4c6e853	6439e93ac57a8784706d3155d0fe651f
+f2856ad30734c5f838185cc08f71b1e4	6439e93ac57a8784706d3155d0fe651f
+10627ac0e35cfed4a0ca5b97a06b9d9f	6439e93ac57a8784706d3155d0fe651f
+43a4893e6200f462bb9fe406e68e71c0	6439e93ac57a8784706d3155d0fe651f
+29891bf2e4eff9763aef15dc862c373f	6439e93ac57a8784706d3155d0fe651f
+03201e85fc6aa56d2cb9374e84bf52ca	6439e93ac57a8784706d3155d0fe651f
+e7a227585002db9fee2f0ed56ee5a59f	6439e93ac57a8784706d3155d0fe651f
+2f6fc683428eb5f8b22cc5021dc9d40d	6439e93ac57a8784706d3155d0fe651f
+7f950b15aa65a26e8500cfffd7f89de0	6439e93ac57a8784706d3155d0fe651f
+77f94851e582202f940198a26728e71f	6439e93ac57a8784706d3155d0fe651f
+baeb191b42ec09353b389f951d19b357	6439e93ac57a8784706d3155d0fe651f
+c21fe390daecee9e70b8f4b091ae316f	6439e93ac57a8784706d3155d0fe651f
+8aeadeeff3e1a3e1c8a6a69d9312c530	6439e93ac57a8784706d3155d0fe651f
+a4e0f3b7db0875f65bb3f55ab0aab7c6	6439e93ac57a8784706d3155d0fe651f
+37b43a655dec0e3504142003fce04a07	6439e93ac57a8784706d3155d0fe651f
+268e1d80ad914af7d2e0f6d78eea6f98	6439e93ac57a8784706d3155d0fe651f
+644f6462ec9801cdc932e5c8698ee7f9	cf1c6716920400a1d8ade1584c726f0c
+61a6502cfdff1a1668892f52c7a00669	cf1c6716920400a1d8ade1584c726f0c
+89d60b9528242c8c53ecbfde131eba21	cf1c6716920400a1d8ade1584c726f0c
+087c643d95880c5a89fc13f3246bebae	c0e1ed6923fbe4194174ad87f11179cd
+e8d17786fed9fa5ddaf13881496106e4	c0e1ed6923fbe4194174ad87f11179cd
+d9c849266ee3ac1463262df200b3aab8	078ac0cacb2c674f16940ebd9befedd9
+a6c27c0fb9ef87788c1345041e840f95	078ac0cacb2c674f16940ebd9befedd9
+26ad58455460d75558a595528825b672	078ac0cacb2c674f16940ebd9befedd9
+123131d2d4bd15a0db8f07090a383157	078ac0cacb2c674f16940ebd9befedd9
+6adc39f4242fd1ca59f184e033514209	078ac0cacb2c674f16940ebd9befedd9
+1f56e4b8b8a0da3b8ec5b32970e4b0d8	078ac0cacb2c674f16940ebd9befedd9
+f31ba1d770aac9bc0dcee3fc15c60a46	078ac0cacb2c674f16940ebd9befedd9
+c21fe390daecee9e70b8f4b091ae316f	078ac0cacb2c674f16940ebd9befedd9
+06c1680c65972c4332be73e726de9e74	078ac0cacb2c674f16940ebd9befedd9
+0371892b7f65ffb9c1544ee35c6330ad	078ac0cacb2c674f16940ebd9befedd9
+bf5c782ca6b0130372ac41ebd703463e	078ac0cacb2c674f16940ebd9befedd9
+f041991eb3263fd3e5d919026e772f57	078ac0cacb2c674f16940ebd9befedd9
+70409bc559ef6c8aabcf16941a29788b	078ac0cacb2c674f16940ebd9befedd9
+0ecef959ca1f43d538966f7eb9a7e2ec	078ac0cacb2c674f16940ebd9befedd9
+169c9d1bfabf9dec8f84e1f874d5e788	078ac0cacb2c674f16940ebd9befedd9
+01ffa9ce7c50b906e4f5b6a2516ba94b	078ac0cacb2c674f16940ebd9befedd9
+d104b6ae44b0ac6649723bac21761d41	078ac0cacb2c674f16940ebd9befedd9
+707270d99f92250a07347773736df5cc	6ee6f878dcf139f61d9fae6aef8aa367
+dfb7069bfc6e0064a6c667626eca07b4	0a7d68cf2a103e1c99f7e6d04f1940da
+398af626887ad21cd66aeb272b8337be	2c6ed5b74b30541da64fdbbda4a8bbe3
+8ac49bad86eacffcea299416cd92c3b7	bf65ac5101f339e8c8d756e99c49a829
+c827a8c6d72ff66b08f9e2ab64e21c01	79b4deb2eac122cc633196f32cf65670
+35bde21520f1490f0333133a9ae5b4fc	3479db140a88fa19295f4346b1d84380
+b7f0e9013f8bfb209f4f6b2258b6c9c8	e669a39d1453acd6aefc84913a985f51
+8ac49bad86eacffcea299416cd92c3b7	9952e1e08fb8f493c66f5cf386ba7e06
+dab701a389943f0d407c6e583abef934	cbe2729e13ce90825f88f2fc3a0bce55
+4a27a1ef21d32d1b30d55f092af0d5a7	87d1f3bfe03274952aa29304eb82d9d9
+4a9cd04fd04ab718420ee464645ccb8b	87d1f3bfe03274952aa29304eb82d9d9
+dfb7069bfc6e0064a6c667626eca07b4	11a728ed9e3a6aac1b46277a7302b15f
+048d40092f9bd3c450e4bdeeff69e8c3	11a728ed9e3a6aac1b46277a7302b15f
+5958cd5ce011ea83c06cb921b1c85bb3	eeba68f0a1003dce9bd66066b82dc1b6
+048d40092f9bd3c450e4bdeeff69e8c3	eeba68f0a1003dce9bd66066b82dc1b6
+fc46b0aa6469133caf668f87435bfd9f	3fe511194113f53322ccac8a75e6b4ab
+8872fbd923476b7cf96913260ec59e66	3fe511194113f53322ccac8a75e6b4ab
+f8b3eaefc682f8476cc28caf71cb2c73	e4ee5ac5d137718d0eeb4d310b97d837
+db1440c4bae3edf98e3dab7caf2e7fed	08a5c6dec5d631fe995935fd38f389be
+bff322dbe273a1e2d1fe37f81acccbe4	08a5c6dec5d631fe995935fd38f389be
+36b208182f04f44c80937e980c3c28fd	08a5c6dec5d631fe995935fd38f389be
+15ba70625527d7bb48962e6ba1a465f7	16a83f971efce095272378a2a594e49f
+a571d94b6ed1fa1e0cfff9c04bbeb94d	16a83f971efce095272378a2a594e49f
+e37e9fd6bde7509157f864942572c267	791a234c3e78612495c07d7d49defc4c
+5e62fc773369f140db419401204200e8	6ee6f878dcf139f61d9fae6aef8aa367
+9592b3ad4d7f96bc644c7d6f34c06576	0a7d68cf2a103e1c99f7e6d04f1940da
+fd1a5654154eed3c0a0820ab54fb90a7	0a7d68cf2a103e1c99f7e6d04f1940da
+2045b9a6609f6d5bca3374fd370e54ff	fb57c18df776961bb734a1fa3db6a6d1
+78b532c25e4a99287940b1706359d455	fb57c18df776961bb734a1fa3db6a6d1
+fc935f341286c735b575bd50196c904b	fb57c18df776961bb734a1fa3db6a6d1
+f159fc50b5af54fecf21d5ea6ec37bad	fb57c18df776961bb734a1fa3db6a6d1
+265dbcbd2bce07dfa721ed3daaa30912	fb57c18df776961bb734a1fa3db6a6d1
 \.
 
 
@@ -3680,1382 +3680,1382 @@ ef18843fbbf66c6aa6851c6345f7c4ac	c51b848ef0fde1cc943bb57bbfad7a11
 --
 
 COPY music.bands_generes (id_band, id_genere) FROM stdin;
-0020f19414b5f2874a0bfacd9d511b84	cb6ef856481bc776bba38fbf15b8b3fb
-006fc2724417174310cf06d2672e34d2	17b8dff9566f6c98062ad5811c762f44
-02d44fbbe1bfacd6eaa9b20299b1cb78	7fa69773873856d74f68a6824ca4b691
-02d44fbbe1bfacd6eaa9b20299b1cb78	deb8040131c3f6a3caf6a616b34ac482
-058fcf8b126253956deb3ce672d107a7	6de7f9aa9c912bf8c81a9ce2bfc062bd
-058fcf8b126253956deb3ce672d107a7	7a3808eef413b514776a7202fd2cb94f
-059792b70fc0686fb296e7fcae0bda50	17b8dff9566f6c98062ad5811c762f44
-0640cfbf1d269b69c535ea4e288dfd96	97a6395e2906e8f41d27e53a40aebae4
-065b56757c6f6a0fba7ab0c64e4c1ae1	17b8dff9566f6c98062ad5811c762f44
-06efe152a554665e02b8dc4f620bf3f1	585f02a68092351a078fc43a21a56564
-06efe152a554665e02b8dc4f620bf3f1	a29864963573d7bb061691ff823b97dd
-076365679712e4206301117486c3d0ec	17b8dff9566f6c98062ad5811c762f44
-076365679712e4206301117486c3d0ec	a29864963573d7bb061691ff823b97dd
-076365679712e4206301117486c3d0ec	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-0780d2d1dbd538fec3cdd8699b08ea02	60e1fa5bfa060b5fff1db1ca1bae4f99
-0780d2d1dbd538fec3cdd8699b08ea02	885ba57d521cd859bacf6f76fb37ef7c
-0780d2d1dbd538fec3cdd8699b08ea02	a178914dea39e23c117e164b05b43995
-0780d2d1dbd538fec3cdd8699b08ea02	ed8e37bad13d76c6dbeb58152440b41e
-0844ad55f17011abed4a5208a3a05b74	10a17b42501166d3bf8fbdff7e1d52b6
-0844ad55f17011abed4a5208a3a05b74	17b8dff9566f6c98062ad5811c762f44
-0903a7e60f0eb20fdc8cc0b8dbd45526	4144b216bf706803a5f17d7d0a9cf4a3
-095849fbdc267416abc6ddb48be311d7	7fa69773873856d74f68a6824ca4b691
-095849fbdc267416abc6ddb48be311d7	caac3244eefed8cffee878acae427e28
-09d8e20a5368ce1e5c421a04cb566434	a379c6c3bf4b1a401ce748b34729389a
-0a267617c0b5b4d53e43a7d4e4c522ad	10a17b42501166d3bf8fbdff7e1d52b6
-0a267617c0b5b4d53e43a7d4e4c522ad	17b8dff9566f6c98062ad5811c762f44
-0a267617c0b5b4d53e43a7d4e4c522ad	1d67aeafcd3b898e05a75da0fdc01365
-0a267617c0b5b4d53e43a7d4e4c522ad	a68d5b72c2f98613f511337a59312f78
-0a267617c0b5b4d53e43a7d4e4c522ad	ea9565886c02dbdc4892412537e607d7
-0a56095b73dcbd2a76bb9d4831881cb3	ea9565886c02dbdc4892412537e607d7
-0a7ba3f35a9750ff956dca1d548dad12	01864d382accf1cdb077e42032b16340
-0a97b893b92a7df612eadfe97589f242	eaa57a9b4248ce3968e718895e1c2f04
-0af74c036db52f48ad6cbfef6fee2999	04ae76937270105919847d05aee582b4
-0af74c036db52f48ad6cbfef6fee2999	a29864963573d7bb061691ff823b97dd
-0af74c036db52f48ad6cbfef6fee2999	f41da0c65a8fa3690e6a6877e7112afb
-0b0d1c3752576d666c14774b8233889f	01864d382accf1cdb077e42032b16340
-0b6e98d660e2901c33333347da37ad36	04ae76937270105919847d05aee582b4
-0cdf051c93865faa15cbc5cd3d2b69fb	a29864963573d7bb061691ff823b97dd
-0e2ea6aa669710389cf4d6e2ddf408c4	a68d5b72c2f98613f511337a59312f78
-0fbddeb130361265f1ba6f86b00f0968	10a17b42501166d3bf8fbdff7e1d52b6
-1056b63fdc3c5015cc4591aa9989c14f	a29864963573d7bb061691ff823b97dd
-108c58fc39b79afc55fac7d9edf4aa2a	01864d382accf1cdb077e42032b16340
-10d91715ea91101cfe0767c812da8151	17b8dff9566f6c98062ad5811c762f44
-10d91715ea91101cfe0767c812da8151	a29864963573d7bb061691ff823b97dd
-1104831a0d0fe7d2a6a4198c781e0e0d	a29864963573d7bb061691ff823b97dd
-11635778f116ce6922f6068638a39028	04ae76937270105919847d05aee582b4
-11635778f116ce6922f6068638a39028	6fb9bf02fc5d663c1de8c117382bed0b
-11635778f116ce6922f6068638a39028	f0095594f17b3793be8291117582f96b
-11d396b078f0ae37570c8ef0f45937ad	9ba0204bc48d4b8721344dd83b832afe
-11f8d9ec8f6803ea61733840f13bc246	7fa69773873856d74f68a6824ca4b691
-1209f43dbecaba22f3514bf40135f991	1e612d6c48bc9652afeb616536fced51
-121189969c46f49b8249633c2d5a7bfa	a29864963573d7bb061691ff823b97dd
-13caf3d14133dfb51067264d857eaf70	1c800aa97116d9afd83204d65d50199a
-14ab730fe0172d780da6d9e5d432c129	a29864963573d7bb061691ff823b97dd
-1734b04cf734cb291d97c135d74b4b87	2df929d9b6150c082888b66e8129ee3f
-1734b04cf734cb291d97c135d74b4b87	7fa69773873856d74f68a6824ca4b691
-187ebdf7947f4b61e0725c93227676a4	2df929d9b6150c082888b66e8129ee3f
-187ebdf7947f4b61e0725c93227676a4	97a6395e2906e8f41d27e53a40aebae4
-19baf8a6a25030ced87cd0ce733365a9	10a17b42501166d3bf8fbdff7e1d52b6
-19baf8a6a25030ced87cd0ce733365a9	17b8dff9566f6c98062ad5811c762f44
-1ac0c8e8c04cf2d6f02fdb8292e74588	2e607ef3a19cf3de029e2c5882896d33
-1ac0c8e8c04cf2d6f02fdb8292e74588	a29864963573d7bb061691ff823b97dd
-1bc1f7348d79a353ea4f594de9dd1392	01864d382accf1cdb077e42032b16340
-1bc1f7348d79a353ea4f594de9dd1392	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-1c06fc6740d924cab33dce73643d84b9	eb182befdeccf17696b666b32eb5a313
-1c6987adbe5ab3e4364685e8caed0f59	04ae76937270105919847d05aee582b4
-1c6987adbe5ab3e4364685e8caed0f59	4fb2ada7c5440a256ed0e03c967fce74
-1cdd53cece78d6e8dffcf664fa3d1be2	17b8dff9566f6c98062ad5811c762f44
-1da77fa5b97c17be83cc3d0693c405cf	1c800aa97116d9afd83204d65d50199a
-1e14d6b40d8e81d8d856ba66225dcbf3	a29864963573d7bb061691ff823b97dd
-1e8563d294da81043c2772b36753efaf	1396a3913454b8016ddf671d02e861b1
-1e8563d294da81043c2772b36753efaf	2a78330cc0de19f12ae9c7de65b9d5d5
-1e8563d294da81043c2772b36753efaf	8472603ee3d6dea8e274608e9cbebb6b
-1e8563d294da81043c2772b36753efaf	dcd00c11302e3b16333943340d6b4a6b
-1e88302efcfc873691f0c31be4e2a388	a29864963573d7bb061691ff823b97dd
-1e9413d4cc9af0ad12a6707776573ba0	7fa69773873856d74f68a6824ca4b691
-1ebd63d759e9ff532d5ce63ecb818731	b86219c2df5a0d889f490f88ff22e228
-2082a7d613f976e7b182a3fe80a28958	de62af4f3af4adf9e8c8791071ddafe3
-2113f739f81774557041db616ee851e6	17b8dff9566f6c98062ad5811c762f44
-218f2bdae8ad3bb60482b201e280ffdc	7fa69773873856d74f68a6824ca4b691
-2252d763a2a4ac815b122a0176e3468f	a68d5b72c2f98613f511337a59312f78
-237e378c239b44bff1e9a42ab866580c	17b8dff9566f6c98062ad5811c762f44
-237e378c239b44bff1e9a42ab866580c	a68d5b72c2f98613f511337a59312f78
-2414366fe63cf7017444181acacb6347	10a17b42501166d3bf8fbdff7e1d52b6
-2414366fe63cf7017444181acacb6347	17b8dff9566f6c98062ad5811c762f44
-2447873ddeeecaa165263091c0cbb22f	a68d5b72c2f98613f511337a59312f78
-249229ca88aa4a8815315bb085cf4d61	02d3190ce0f08f32be33da6cc8ec8df8
-249229ca88aa4a8815315bb085cf4d61	bb273189d856ee630d92fbc0274178bb
-249789ae53c239814de8e606ff717ec9	04ae76937270105919847d05aee582b4
-249789ae53c239814de8e606ff717ec9	4fb2ada7c5440a256ed0e03c967fce74
-24ff2b4548c6bc357d9d9ab47882661e	17b8dff9566f6c98062ad5811c762f44
-2501f7ba78cc0fd07efb7c17666ff12e	924ae2289369a9c1d279d1d59088be64
-264721f3fc2aee2d28dadcdff432dbc1	17b8dff9566f6c98062ad5811c762f44
-2672777b38bc4ce58c49cf4c82813a42	a29864963573d7bb061691ff823b97dd
-278606b1ac0ae7ef86e86342d1f259c3	a29864963573d7bb061691ff823b97dd
-278c094627c0dd891d75ea7a3d0d021e	a29864963573d7bb061691ff823b97dd
-2876f7ecdae220b3c0dcb91ff13d0590	a68d5b72c2f98613f511337a59312f78
-28a95ef0eabe44a27f49bbaecaa8a847	a29864963573d7bb061691ff823b97dd
-28a95ef0eabe44a27f49bbaecaa8a847	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-28bb59d835e87f3fd813a58074ca0e11	17b8dff9566f6c98062ad5811c762f44
-28bc31b338dbd482802b77ed1fd82a50	17b8dff9566f6c98062ad5811c762f44
-28bc31b338dbd482802b77ed1fd82a50	a68d5b72c2f98613f511337a59312f78
-28f843fa3a493a3720c4c45942ad970e	01864d382accf1cdb077e42032b16340
-2a024edafb06c7882e2e1f7b57f2f951	01864d382accf1cdb077e42032b16340
-2a024edafb06c7882e2e1f7b57f2f951	a68d5b72c2f98613f511337a59312f78
-2aae4f711c09481c8353003202e05359	17b8dff9566f6c98062ad5811c762f44
-2aae4f711c09481c8353003202e05359	a29864963573d7bb061691ff823b97dd
-2ac79000a90b015badf6747312c0ccad	a68d5b72c2f98613f511337a59312f78
-2ac79000a90b015badf6747312c0ccad	ea9565886c02dbdc4892412537e607d7
-2af9e4497582a6faa68a42ac2d512735	d93cf30d3eb53125668057b982b433a3
-2cf65e28c586eeb98daaecf6eb573e7a	04ae76937270105919847d05aee582b4
-2cf65e28c586eeb98daaecf6eb573e7a	dcd00c11302e3b16333943340d6b4a6b
-2cfe35095995e8dd15ab7b867e178c15	04ae76937270105919847d05aee582b4
-2cfe35095995e8dd15ab7b867e178c15	585f02a68092351a078fc43a21a56564
-2df8905eae6823023de6604dc5346c29	a29864963573d7bb061691ff823b97dd
-2e7a848dc99bd27acb36636124855faf	deb8040131c3f6a3caf6a616b34ac482
-2fa2f1801dd37d6eb9fe4e34a782e397	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-31d8a0a978fad885b57a685b1a0229df	10a17b42501166d3bf8fbdff7e1d52b6
-32814ff4ca9a26b8d430a8c0bc8dc63e	60e1fa5bfa060b5fff1db1ca1bae4f99
-32814ff4ca9a26b8d430a8c0bc8dc63e	885ba57d521cd859bacf6f76fb37ef7c
-32814ff4ca9a26b8d430a8c0bc8dc63e	ea9565886c02dbdc4892412537e607d7
-32af59a47b8c7e1c982ae797fc491180	1d67aeafcd3b898e05a75da0fdc01365
-33b6f1b596a60fa87baef3d2c05b7c04	57a1aaebe3e5e271aca272988c802651
-33b6f1b596a60fa87baef3d2c05b7c04	9c093ec7867ba1df61e27a5943168b90
-33b6f1b596a60fa87baef3d2c05b7c04	f79873ac4ff0e556619b15d82f6da52c
-348bcdb386eb9cb478b55a7574622b7c	17b8dff9566f6c98062ad5811c762f44
-3509af6be9fe5defc1500f5c77e38563	17b8dff9566f6c98062ad5811c762f44
-360c000b499120147c8472998859a9fe	17b8dff9566f6c98062ad5811c762f44
-3614c45db20ee41e068c2ab7969eb3b5	763a34aaa76475a926827873753d534f
-362f8cdd1065b0f33e73208eb358991d	01864d382accf1cdb077e42032b16340
-362f8cdd1065b0f33e73208eb358991d	fa20a7164233ec73db640970dae420cf
-3656edf3a40a25ccd00d414c9ecbb635	885ba57d521cd859bacf6f76fb37ef7c
-3656edf3a40a25ccd00d414c9ecbb635	a68d5b72c2f98613f511337a59312f78
-3656edf3a40a25ccd00d414c9ecbb635	ea9565886c02dbdc4892412537e607d7
-36648510adbf2a3b2028197a60b5dada	02d3190ce0f08f32be33da6cc8ec8df8
-36648510adbf2a3b2028197a60b5dada	7a3808eef413b514776a7202fd2cb94f
-36cbc41c1c121f2c68f5776a118ea027	a29864963573d7bb061691ff823b97dd
-36f969b6aeff175204078b0533eae1a0	a29864963573d7bb061691ff823b97dd
-36f969b6aeff175204078b0533eae1a0	a68d5b72c2f98613f511337a59312f78
-37f02eba79e0a3d29dfd6a4cf2f4d019	303d6389f4089fe9a87559515b84156d
-37f02eba79e0a3d29dfd6a4cf2f4d019	4fb2ada7c5440a256ed0e03c967fce74
-3964d4f40b6166aa9d370855bd20f662	a29864963573d7bb061691ff823b97dd
-3964d4f40b6166aa9d370855bd20f662	a68d5b72c2f98613f511337a59312f78
-39e83bc14e95fcbc05848fc33c30821f	7fa69773873856d74f68a6824ca4b691
-3a2a7f86ca87268be9b9e0557b013565	a68d5b72c2f98613f511337a59312f78
-3af7c6d148d216f13f66669acb8d5c59	17b8dff9566f6c98062ad5811c762f44
-3af7c6d148d216f13f66669acb8d5c59	dcd00c11302e3b16333943340d6b4a6b
-3bd94845163385cecefc5265a2e5a525	a29864963573d7bb061691ff823b97dd
-3bd94845163385cecefc5265a2e5a525	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-3be3e956aeb5dc3b16285463e02af25b	8c42e2739ed83a54e5b2781b504c92de
-3cdb47307aeb005121b09c41c8d8bee6	64ec11b17b6f822930f9deb757fa59e8
-3d01ff8c75214314c4ca768c30e6807b	17b8dff9566f6c98062ad5811c762f44
-3d2ff8abd980d730b2f4fd0abae52f60	2336f976c6d510d2a269a746a7756232
-3d2ff8abd980d730b2f4fd0abae52f60	7a3808eef413b514776a7202fd2cb94f
-3d2ff8abd980d730b2f4fd0abae52f60	f0095594f17b3793be8291117582f96b
-3d2ff8abd980d730b2f4fd0abae52f60	fc8e55855e2f474c28507e4db7ba5f13
-3d6ff25ab61ad55180a6aee9b64515bf	2df929d9b6150c082888b66e8129ee3f
-3d6ff25ab61ad55180a6aee9b64515bf	7fa69773873856d74f68a6824ca4b691
-3dda886448fe98771c001b56a4da9893	17b8dff9566f6c98062ad5811c762f44
-3e52c77d795b7055eeff0c44687724a1	97a6395e2906e8f41d27e53a40aebae4
-3e75cd2f2f6733ea4901458a7ce4236d	65d1fb3d4d28880c964b985cf335e04c
-3e75cd2f2f6733ea4901458a7ce4236d	ea9565886c02dbdc4892412537e607d7
-3f15c445cb553524b235b01ab75fe9a6	34d8a5e79a59df217c6882ee766c850a
-3f15c445cb553524b235b01ab75fe9a6	4895247ad195629fecd388b047a739b4
-401357e57c765967393ba391a338e89b	04ae76937270105919847d05aee582b4
-401357e57c765967393ba391a338e89b	4cfbb125e9878528bab91d12421134d8
-405c7f920b019235f244315a564a8aed	6add228b14f132e14ae9da754ef070c5
-4094ffd492ba473a2a7bea1b19b1662d	a29864963573d7bb061691ff823b97dd
-410d913416c022077c5c1709bf104d3c	c3ee1962dffaa352386a05e845ab9d0d
-42563d0088d6ac1a47648fc7621e77c6	93cce11930403f5b3ce8938a2bde5efa
-42563d0088d6ac1a47648fc7621e77c6	a68d5b72c2f98613f511337a59312f78
-4261335bcdc95bd89fd530ba35afbf4c	eaa57a9b4248ce3968e718895e1c2f04
-426fdc79046e281c5322161f011ce68c	17b8dff9566f6c98062ad5811c762f44
-4276250c9b1b839b9508825303c5c5ae	17b8dff9566f6c98062ad5811c762f44
-4366d01be1b2ddef162fc0ebb6933508	04ae76937270105919847d05aee582b4
-4366d01be1b2ddef162fc0ebb6933508	dcd00c11302e3b16333943340d6b4a6b
-44012166c6633196dc30563db3ffd017	a68d5b72c2f98613f511337a59312f78
-443866d78de61ab3cd3e0e9bf97a34f6	4cfbb125e9878528bab91d12421134d8
-4453eb658c6a304675bd52ca75fbae6d	a29864963573d7bb061691ff823b97dd
-449b4d758aa7151bc1bbb24c3ffb40bb	eaa57a9b4248ce3968e718895e1c2f04
-44b7bda13ac1febe84d8607ca8bbf439	a29864963573d7bb061691ff823b97dd
-44f2dc3400ce17fad32a189178ae72fa	7a3808eef413b514776a7202fd2cb94f
-450948d9f14e07ba5e3015c2d726b452	01864d382accf1cdb077e42032b16340
-450948d9f14e07ba5e3015c2d726b452	7a3808eef413b514776a7202fd2cb94f
-4548a3b9c1e31cf001041dc0d166365b	585f02a68092351a078fc43a21a56564
-4548a3b9c1e31cf001041dc0d166365b	a29864963573d7bb061691ff823b97dd
-457f098eeb8e1518008449e9b1cb580d	a68d5b72c2f98613f511337a59312f78
-457f098eeb8e1518008449e9b1cb580d	ed8e37bad13d76c6dbeb58152440b41e
-46174766ce49edbbbc40e271c87b5a83	a68d5b72c2f98613f511337a59312f78
-47b23e889175dde5d6057db61cb52847	ea9565886c02dbdc4892412537e607d7
-485065ad2259054abf342d7ae3fe27e6	4fb2ada7c5440a256ed0e03c967fce74
-485065ad2259054abf342d7ae3fe27e6	8c42e2739ed83a54e5b2781b504c92de
-4927f3218b038c780eb795766dfd04ee	885ba57d521cd859bacf6f76fb37ef7c
-49c4097bae6c6ea96f552e38cfb6c2d1	a29864963573d7bb061691ff823b97dd
-4a2a0d0c29a49d9126dcb19230aa1994	17b8dff9566f6c98062ad5811c762f44
-4a2a0d0c29a49d9126dcb19230aa1994	a29864963573d7bb061691ff823b97dd
-4a45ac6d83b85125b4163a40364e7b2c	7a3808eef413b514776a7202fd2cb94f
-4a45ac6d83b85125b4163a40364e7b2c	bb273189d856ee630d92fbc0274178bb
-4a45ac6d83b85125b4163a40364e7b2c	f0095594f17b3793be8291117582f96b
-4a7d9e528dada8409e88865225fb27c4	273112316e7fab5a848516666e3a57d1
-4a7d9e528dada8409e88865225fb27c4	ef5131009b7ced0b35ea49c8c7690cef
-4b503a03f3f1aec6e5b4d53dd8148498	924ae2289369a9c1d279d1d59088be64
-4b98a8c164586e11779a0ef9421ad0ee	4fb2ada7c5440a256ed0e03c967fce74
-4cabe475dd501f3fd4da7273b5890c33	34d8a5e79a59df217c6882ee766c850a
-4cabe475dd501f3fd4da7273b5890c33	887f0b9675f70bc312e17c93f248b5aa
-4cfab0d66614c6bb6d399837656c590e	17b8dff9566f6c98062ad5811c762f44
-4cfab0d66614c6bb6d399837656c590e	a29864963573d7bb061691ff823b97dd
-4dddd8579760abb62aa4b1910725e73c	0138eefa704205fd48d98528ddcdd5bc
-4ee21b1371ba008a26b313c7622256f8	c08ed51a7772c1f8352ad69071187515
-4ee21b1371ba008a26b313c7622256f8	ff3a5da5aa221f7e16361efcccf4cbaa
-4f48e858e9ed95709458e17027bb94bf	4cfbb125e9878528bab91d12421134d8
-4f48e858e9ed95709458e17027bb94bf	65d1fb3d4d28880c964b985cf335e04c
-4f48e858e9ed95709458e17027bb94bf	ea9565886c02dbdc4892412537e607d7
-4f840b1febbbcdb12b9517cd0a91e8f4	caac3244eefed8cffee878acae427e28
-4fa857a989df4e1deea676a43dceea07	10a17b42501166d3bf8fbdff7e1d52b6
-5037c1968f3b239541c546d32dec39eb	4c4f4d32429ac8424cb110b4117036e4
-5194c60496c6f02e8b169de9a0aa542c	6add228b14f132e14ae9da754ef070c5
-51fa80e44b7555c4130bd06c53f4835c	ba60b529061c0af9afe655b44957e41b
-51fa80e44b7555c4130bd06c53f4835c	de62af4f3af4adf9e8c8791071ddafe3
-522b6c44eb0aedf4970f2990a2f2a812	17b8dff9566f6c98062ad5811c762f44
-522b6c44eb0aedf4970f2990a2f2a812	2df929d9b6150c082888b66e8129ee3f
-522b6c44eb0aedf4970f2990a2f2a812	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-529a1d385b4a8ca97ea7369477c7b6a7	04ae76937270105919847d05aee582b4
-52b133bfecec2fba79ecf451de3cf3bb	dfda7d5357bc0afc43a89e8ac992216f
-52ee4c6902f6ead006b0fb2f3e2d7771	04ae76937270105919847d05aee582b4
-52ee4c6902f6ead006b0fb2f3e2d7771	1c800aa97116d9afd83204d65d50199a
-53369c74c3cacdc38bdcdeda9284fe3c	2e607ef3a19cf3de029e2c5882896d33
-53369c74c3cacdc38bdcdeda9284fe3c	a29864963573d7bb061691ff823b97dd
-53407737e93f53afdfc588788b8288e8	36e61931478cf781e59da3b5ae2ee64e
-53a0aafa942245f18098ccd58b4121aa	04ae76937270105919847d05aee582b4
-5435326cf392e2cd8ad7768150cd5df6	17b8dff9566f6c98062ad5811c762f44
-5447110e1e461c8c22890580c796277a	01864d382accf1cdb077e42032b16340
-54b72f3169fea84731d3bcba785eac49	7fa69773873856d74f68a6824ca4b691
-54f0b93fa83225e4a712b70c68c0ab6f	04ae76937270105919847d05aee582b4
-55159d04cc4faebd64689d3b74a94009	7349da19c2ad6654280ecf64ce42b837
-559ccea48c3460ebc349587d35e808dd	17b8dff9566f6c98062ad5811c762f44
-5842a0c2470fe12ee3acfeec16c79c57	17b8dff9566f6c98062ad5811c762f44
-585b13106ecfd7ede796242aeaed4ea8	04ae76937270105919847d05aee582b4
-585b13106ecfd7ede796242aeaed4ea8	2a78330cc0de19f12ae9c7de65b9d5d5
-585b13106ecfd7ede796242aeaed4ea8	7ac5b6239ee196614c19db6965c67b31
-585b13106ecfd7ede796242aeaed4ea8	885ba57d521cd859bacf6f76fb37ef7c
-585b13106ecfd7ede796242aeaed4ea8	d5d0458ada103152d94ff3828bf33909
-58db028cf01dd425e5af6c7d511291c1	17b8dff9566f6c98062ad5811c762f44
-5952dff7a6b1b3c94238ad3c6a42b904	02c4d46b0568d199466ef1baa339adc8
-5952dff7a6b1b3c94238ad3c6a42b904	1302a3937910e1487d44cec8f9a09660
-5952dff7a6b1b3c94238ad3c6a42b904	6fa3bbbff822349fee0eaf8cd78c0623
-5952dff7a6b1b3c94238ad3c6a42b904	72616c6de7633d9ac97165fc7887fa3a
-5952dff7a6b1b3c94238ad3c6a42b904	e7faf05839e2f549fb3455df7327942b
-5952dff7a6b1b3c94238ad3c6a42b904	ef5131009b7ced0b35ea49c8c7690cef
-59d153c1c2408b702189623231b7898a	a29864963573d7bb061691ff823b97dd
-59f06d56c38ac98effb4c6da117b0305	7a3808eef413b514776a7202fd2cb94f
-5af874093e5efcbaeb4377b84c5f2ec5	b6a0263862e208f05258353f86fa3318
-5b20ea1312a1a21beaa8b86fe3a07140	2df929d9b6150c082888b66e8129ee3f
-5b22d1d5846a2b6b6d0cf342e912d124	7a3808eef413b514776a7202fd2cb94f
-5b709b96ee02a30be5eee558e3058245	02d3190ce0f08f32be33da6cc8ec8df8
-5b709b96ee02a30be5eee558e3058245	a29864963573d7bb061691ff823b97dd
-5b709b96ee02a30be5eee558e3058245	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-5c0adc906f34f9404d65a47eea76dac0	02d3190ce0f08f32be33da6cc8ec8df8
-5c0adc906f34f9404d65a47eea76dac0	bb273189d856ee630d92fbc0274178bb
-5c0adc906f34f9404d65a47eea76dac0	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-5cd1c3c856115627b4c3e93991f2d9cd	a29864963573d7bb061691ff823b97dd
-5ce10014f645da4156ddd2cd0965986e	2336f976c6d510d2a269a746a7756232
-5ce10014f645da4156ddd2cd0965986e	2e607ef3a19cf3de029e2c5882896d33
-5ce10014f645da4156ddd2cd0965986e	7349da19c2ad6654280ecf64ce42b837
-5df92b70e2855656e9b3ffdf313d7379	10a17b42501166d3bf8fbdff7e1d52b6
-5df92b70e2855656e9b3ffdf313d7379	7fa69773873856d74f68a6824ca4b691
-5e4317ada306a255748447aef73fff68	01864d382accf1cdb077e42032b16340
-5e4317ada306a255748447aef73fff68	a29864963573d7bb061691ff823b97dd
-5ec1e9fa36898eaf6d1021be67e0d00c	04ae76937270105919847d05aee582b4
-5ec1e9fa36898eaf6d1021be67e0d00c	585f02a68092351a078fc43a21a56564
-5ec1e9fa36898eaf6d1021be67e0d00c	5bf88dc6f6501943cc5bc4c42c71b36b
-5efb7d24387b25d8325839be958d9adf	36e61931478cf781e59da3b5ae2ee64e
-5efb7d24387b25d8325839be958d9adf	4fb2ada7c5440a256ed0e03c967fce74
-5f992768f7bb9592bed35b07197c87d0	17b8dff9566f6c98062ad5811c762f44
-5f992768f7bb9592bed35b07197c87d0	a29864963573d7bb061691ff823b97dd
-5f992768f7bb9592bed35b07197c87d0	a68d5b72c2f98613f511337a59312f78
-626dceb92e4249628c1e76a2c955cd24	7fa69773873856d74f68a6824ca4b691
-6369ba49db4cf35b35a7c47e3d4a4fd0	bbc90d6701da0aa2bf7f6f2acb79e18c
-6369ba49db4cf35b35a7c47e3d4a4fd0	dcd00c11302e3b16333943340d6b4a6b
-63ad3072dc5472bb44c2c42ede26d90f	a29864963573d7bb061691ff823b97dd
-63ae1791fc0523f47bea9485ffec8b8c	de62af4f3af4adf9e8c8791071ddafe3
-63bd9a49dd18fbc89c2ec1e1b689ddda	17b8dff9566f6c98062ad5811c762f44
-63d7f33143522ba270cb2c87f724b126	01864d382accf1cdb077e42032b16340
-63d7f33143522ba270cb2c87f724b126	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-649db5c9643e1c17b3a44579980da0ad	10a17b42501166d3bf8fbdff7e1d52b6
-649db5c9643e1c17b3a44579980da0ad	17b8dff9566f6c98062ad5811c762f44
-652208d2aa8cdd769632dbaeb7a16358	4fb2ada7c5440a256ed0e03c967fce74
-656d1497f7e25fe0559c6be81a4bccae	10a17b42501166d3bf8fbdff7e1d52b6
-656d1497f7e25fe0559c6be81a4bccae	17b8dff9566f6c98062ad5811c762f44
-65976b6494d411d609160a2dfd98f903	02d3190ce0f08f32be33da6cc8ec8df8
-65976b6494d411d609160a2dfd98f903	2d4b3247824e58c3c9af547cce7c2c8f
-65976b6494d411d609160a2dfd98f903	bb273189d856ee630d92fbc0274178bb
-660813131789b822f0c75c667e23fc85	a29864963573d7bb061691ff823b97dd
-660813131789b822f0c75c667e23fc85	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-66599a31754b5ac2a202c46c2b577c8e	17b8dff9566f6c98062ad5811c762f44
-66599a31754b5ac2a202c46c2b577c8e	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-66599a31754b5ac2a202c46c2b577c8e	ecbff10e148109728d5ebce3341bb85e
-6738f9acd4740d945178c649d6981734	e6218d584a501be9b1c36ac5ed13f2db
-679eaa47efb2f814f2642966ee6bdfe1	a279b219de7726798fc2497d48bc0402
-679eaa47efb2f814f2642966ee6bdfe1	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-6830afd7158930ca7d1959ce778eb681	34d8a5e79a59df217c6882ee766c850a
-6830afd7158930ca7d1959ce778eb681	b45e0862060b7535e176f48d3e0b89f3
-6a0e9ce4e2da4f2cbcd1292fddaa0ac6	2336f976c6d510d2a269a746a7756232
-6b7cf117ecf0fea745c4c375c1480cb5	17b8dff9566f6c98062ad5811c762f44
-6bafe8cf106c32d485c469d36c056989	2336f976c6d510d2a269a746a7756232
-6bafe8cf106c32d485c469d36c056989	6de7f9aa9c912bf8c81a9ce2bfc062bd
-6bd19bad2b0168d4481b19f9c25b4a9f	262770cfc76233c4f0d7a1e43a36cbf7
-6bd19bad2b0168d4481b19f9c25b4a9f	885ba57d521cd859bacf6f76fb37ef7c
-6c00bb1a64f660600a6c1545377f92dc	1396a3913454b8016ddf671d02e861b1
-6c00bb1a64f660600a6c1545377f92dc	2336f976c6d510d2a269a746a7756232
-6c1fcd3c91bc400e5c16f467d75dced3	268a3b877b5f3694d5d1964c654ca91c
-6c607fc8c0adc99559bc14e01170fee1	a29864963573d7bb061691ff823b97dd
-6c607fc8c0adc99559bc14e01170fee1	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-6d3b28f48c848a21209a84452d66c0c4	17b8dff9566f6c98062ad5811c762f44
-6d3b28f48c848a21209a84452d66c0c4	a68d5b72c2f98613f511337a59312f78
-6d57b25c282247075f5e03cde27814df	eaa57a9b4248ce3968e718895e1c2f04
-6ee2e6d391fa98d7990b502e72c7ec58	04ae76937270105919847d05aee582b4
-6f195d8f9fe09d45d2e680f7d7157541	7a3808eef413b514776a7202fd2cb94f
-6f195d8f9fe09d45d2e680f7d7157541	c5405146cd45f9d9b4f02406c35315a8
-6f199e29c5782bd05a4fef98e7e41419	7a3808eef413b514776a7202fd2cb94f
-71e32909a1bec1edfc09aec09ca2ac17	17b8dff9566f6c98062ad5811c762f44
-721c28f4c74928cc9e0bb3fef345e408	17b8dff9566f6c98062ad5811c762f44
-72778afd2696801f5f3a1f35d0e4e357	1eef6db16bfc0aaf8904df1503895979
-72778afd2696801f5f3a1f35d0e4e357	9c093ec7867ba1df61e27a5943168b90
-73affe574e6d4dc2fa72b46dc9dd4815	7a3808eef413b514776a7202fd2cb94f
-73affe574e6d4dc2fa72b46dc9dd4815	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-73affe574e6d4dc2fa72b46dc9dd4815	f41da0c65a8fa3690e6a6877e7112afb
-7462f03404f29ea618bcc9d52de8e647	04ae76937270105919847d05aee582b4
-7462f03404f29ea618bcc9d52de8e647	17b8dff9566f6c98062ad5811c762f44
-7462f03404f29ea618bcc9d52de8e647	a29864963573d7bb061691ff823b97dd
-7463543d784aa59ca86359a50ef58c8e	17b8dff9566f6c98062ad5811c762f44
-7463543d784aa59ca86359a50ef58c8e	a29864963573d7bb061691ff823b97dd
-7492a1ca2669793b485b295798f5d782	6add228b14f132e14ae9da754ef070c5
-74b3b7be6ed71b946a151d164ad8ede5	b7d08853c905c8cd1467f7bdf0dc176f
-7533f96ec01fd81438833f71539c7d4e	04ae76937270105919847d05aee582b4
-75ab0270163731ee05f35640d56ef473	c08ed51a7772c1f8352ad69071187515
-75ab0270163731ee05f35640d56ef473	dcd00c11302e3b16333943340d6b4a6b
-76700087e932c3272e05694610d604ba	a68d5b72c2f98613f511337a59312f78
-776da10f7e18ffde35ea94d144dc60a3	01864d382accf1cdb077e42032b16340
-7771012413f955f819866e517b275cb4	17b8dff9566f6c98062ad5811c762f44
-7771012413f955f819866e517b275cb4	a29864963573d7bb061691ff823b97dd
-77f2b3ea9e4bd785f5ff322bae51ba07	01864d382accf1cdb077e42032b16340
-77f2b3ea9e4bd785f5ff322bae51ba07	4fb2ada7c5440a256ed0e03c967fce74
-79566192cda6b33a9ff59889eede2d66	2e607ef3a19cf3de029e2c5882896d33
-79566192cda6b33a9ff59889eede2d66	a29864963573d7bb061691ff823b97dd
-79ce9bd96a3184b1ee7c700aa2927e67	17b8dff9566f6c98062ad5811c762f44
-79ce9bd96a3184b1ee7c700aa2927e67	a29864963573d7bb061691ff823b97dd
-7a4fafa7badd04d5d3114ab67b0caf9d	0849fb9eb585f2c20b427a99f1231e40
-7c7ab6fbcb47bd5df1e167ca28220ee9	7a3808eef413b514776a7202fd2cb94f
-7c7ab6fbcb47bd5df1e167ca28220ee9	caac3244eefed8cffee878acae427e28
-7c83727aa466b3b1b9d6556369714fcf	02d3190ce0f08f32be33da6cc8ec8df8
-7c83727aa466b3b1b9d6556369714fcf	10a17b42501166d3bf8fbdff7e1d52b6
-7c83727aa466b3b1b9d6556369714fcf	1c800aa97116d9afd83204d65d50199a
-7c83727aa466b3b1b9d6556369714fcf	5bf88dc6f6501943cc5bc4c42c71b36b
-7cd7921da2e6aab79c441a0c2ffc969b	17b8dff9566f6c98062ad5811c762f44
-7cd7921da2e6aab79c441a0c2ffc969b	36e61931478cf781e59da3b5ae2ee64e
-7cd7921da2e6aab79c441a0c2ffc969b	885ba57d521cd859bacf6f76fb37ef7c
-7cd7921da2e6aab79c441a0c2ffc969b	f41da0c65a8fa3690e6a6877e7112afb
-7d6b45c02283175f490558068d1fc81b	34d8a5e79a59df217c6882ee766c850a
-7d6b45c02283175f490558068d1fc81b	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-7d878673694ff2498fbea0e5ba27e0ea	17b8dff9566f6c98062ad5811c762f44
-7db066b46f48d010fdb8c87337cdeda4	6de7f9aa9c912bf8c81a9ce2bfc062bd
-7df8865bbec157552b8a579e0ed9bfe3	04ae76937270105919847d05aee582b4
-7df8865bbec157552b8a579e0ed9bfe3	a29864963573d7bb061691ff823b97dd
-7df8865bbec157552b8a579e0ed9bfe3	bb273189d856ee630d92fbc0274178bb
-7df8865bbec157552b8a579e0ed9bfe3	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-7df8865bbec157552b8a579e0ed9bfe3	dcd00c11302e3b16333943340d6b4a6b
-7dfe9aa0ca5bb31382879ccd144cc3ae	5cbdaf6af370a627c84c43743e99e016
-7e0d5240ec5d34a30b6f24909e5edcb4	2336f976c6d510d2a269a746a7756232
-7e0d5240ec5d34a30b6f24909e5edcb4	2e607ef3a19cf3de029e2c5882896d33
-7e0d5240ec5d34a30b6f24909e5edcb4	a29864963573d7bb061691ff823b97dd
-7e2b83d69e6c93adf203e13bc7d6f444	10a17b42501166d3bf8fbdff7e1d52b6
-7e2b83d69e6c93adf203e13bc7d6f444	17b8dff9566f6c98062ad5811c762f44
-7eaf9a47aa47f3c65595ae107feab05d	7a3808eef413b514776a7202fd2cb94f
-7ef36a3325a61d4f1cff91acbe77c7e3	0138eefa704205fd48d98528ddcdd5bc
-7f29efc2495ce308a8f4aa7bfc11d701	94876c8f843fa0641ed7bdf6562bdbcf
-7fc454efb6df96e012e0f937723d24aa	17b8dff9566f6c98062ad5811c762f44
-804803e43d2c779d00004a6e87f28e30	a29864963573d7bb061691ff823b97dd
-80fcd08f6e887f6cfbedd2156841ab2b	e7faf05839e2f549fb3455df7327942b
-8143ee8032c71f6f3f872fc5bb2a4fed	17b8dff9566f6c98062ad5811c762f44
-8143ee8032c71f6f3f872fc5bb2a4fed	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-8143ee8032c71f6f3f872fc5bb2a4fed	f41da0c65a8fa3690e6a6877e7112afb
-820de5995512273916b117944d6da15a	01864d382accf1cdb077e42032b16340
-828d51c39c87aad9b1407d409fa58e36	2e607ef3a19cf3de029e2c5882896d33
-829922527f0e7d64a3cfda67e24351e3	17b8dff9566f6c98062ad5811c762f44
-829922527f0e7d64a3cfda67e24351e3	caac3244eefed8cffee878acae427e28
-832dd1d8efbdb257c2c7d3e505142f48	ff7aa8ca226e1b753b0a71d7f0f2e174
-8589a6a4d8908d7e8813e9a1c5693d70	7fa69773873856d74f68a6824ca4b691
-86482a1e94052aa18cd803a51104cdb9	2894c332092204f7389275e1359f8e9b
-8654991720656374d632a5bb0c20ff11	1d67aeafcd3b898e05a75da0fdc01365
-8654991720656374d632a5bb0c20ff11	239401e2c0d502df7c9009439bdb5bd3
-8654991720656374d632a5bb0c20ff11	4428b837e98e3cc023fc5cd583b28b20
-8775f64336ee5e9a8114fbe3a5a628c5	60e1fa5bfa060b5fff1db1ca1bae4f99
-8775f64336ee5e9a8114fbe3a5a628c5	f224a37b854811cb14412ceeca43a6ad
-87ded0ea2f4029da0a0022000d59232b	2df929d9b6150c082888b66e8129ee3f
-87f44124fb8d24f4c832138baede45c7	04ae76937270105919847d05aee582b4
-87f44124fb8d24f4c832138baede45c7	885ba57d521cd859bacf6f76fb37ef7c
-88711444ece8fe638ae0fb11c64e2df3	924ae2289369a9c1d279d1d59088be64
-887d6449e3544dca547a2ddba8f2d894	a29864963573d7bb061691ff823b97dd
-889aaf9cd0894206af758577cf5cf071	17b8dff9566f6c98062ad5811c762f44
-88dd124c0720845cba559677f3afa15d	10a17b42501166d3bf8fbdff7e1d52b6
-891a55e21dfacf2f97c450c77e7c3ea7	2336f976c6d510d2a269a746a7756232
-891a55e21dfacf2f97c450c77e7c3ea7	2e607ef3a19cf3de029e2c5882896d33
-8945663993a728ab19a3853e5b820a42	585f02a68092351a078fc43a21a56564
-897edb97d775897f69fa168a88b01c19	2df929d9b6150c082888b66e8129ee3f
-897edb97d775897f69fa168a88b01c19	7fa69773873856d74f68a6824ca4b691
-89adcf990042dfdac7fd23685b3f1e37	65d1fb3d4d28880c964b985cf335e04c
-89adcf990042dfdac7fd23685b3f1e37	ea9565886c02dbdc4892412537e607d7
-8a6f1a01e4b0d9e272126a8646a72088	01864d382accf1cdb077e42032b16340
-8b0ee5a501cef4a5699fd3b2d4549e8f	04ae76937270105919847d05aee582b4
-8b0ee5a501cef4a5699fd3b2d4549e8f	a29864963573d7bb061691ff823b97dd
-8b427a493fc39574fc801404bc032a2f	1396a3913454b8016ddf671d02e861b1
-8b427a493fc39574fc801404bc032a2f	2a78330cc0de19f12ae9c7de65b9d5d5
-8b427a493fc39574fc801404bc032a2f	ad49b27a742fb199ab722bce67e9c7b2
-8bc31f7cc79c177ab7286dda04e2d1e5	7349da19c2ad6654280ecf64ce42b837
-8bc31f7cc79c177ab7286dda04e2d1e5	d31813e8ef36490c57d4977e637efbd4
-8bc31f7cc79c177ab7286dda04e2d1e5	ef5131009b7ced0b35ea49c8c7690cef
-8c69497eba819ee79a964a0d790368fb	17b8dff9566f6c98062ad5811c762f44
-8c69497eba819ee79a964a0d790368fb	a29864963573d7bb061691ff823b97dd
-8ce896355a45f5b9959eb676b8b5580c	320094e3f180ee372243f1161e9adadc
-8d7a18d54e82fcfb7a11566ce94b9109	04ae76937270105919847d05aee582b4
-8d7a18d54e82fcfb7a11566ce94b9109	a29864963573d7bb061691ff823b97dd
-8e11b2f987a99ed900a44aa1aa8bd3d0	04ae76937270105919847d05aee582b4
-8e62fc75d9d0977d0be4771df05b3c2f	fbe238aca6c496dcd05fb8d6d98f275b
-8edf4531385941dfc85e3f3d3e32d24f	7886613ffb324e4e0065f25868545a63
-8edf4531385941dfc85e3f3d3e32d24f	7a3808eef413b514776a7202fd2cb94f
-8edfa58b1aedb58629b80e5be2b2bd92	1c800aa97116d9afd83204d65d50199a
-8edfa58b1aedb58629b80e5be2b2bd92	5bf88dc6f6501943cc5bc4c42c71b36b
-8edfa58b1aedb58629b80e5be2b2bd92	7a3808eef413b514776a7202fd2cb94f
-8f1f10cb698cb995fd69a671af6ecd58	fd00614e73cb66fd71ab13c970a074d8
-8fda25275801e4a40df6c73078baf753	01864d382accf1cdb077e42032b16340
-8fda25275801e4a40df6c73078baf753	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-905a40c3533830252a909603c6fa1e6a	17b8dff9566f6c98062ad5811c762f44
-90d127641ffe2a600891cd2e3992685b	a29864963573d7bb061691ff823b97dd
-90d523ebbf276f516090656ebfccdc9f	4cfbb125e9878528bab91d12421134d8
-90d523ebbf276f516090656ebfccdc9f	60e1fa5bfa060b5fff1db1ca1bae4f99
-9138c2cc0326412f2515623f4c850eb3	17b8dff9566f6c98062ad5811c762f44
-91a337f89fe65fec1c97f52a821c1178	a68d5b72c2f98613f511337a59312f78
-4bb93d90453dd63cc1957a033f7855c7	17b8dff9566f6c98062ad5811c762f44
-4bb93d90453dd63cc1957a033f7855c7	7a3808eef413b514776a7202fd2cb94f
-4bb93d90453dd63cc1957a033f7855c7	a29864963573d7bb061691ff823b97dd
-91b18e22d4963b216af00e1dd43b5d05	f0095594f17b3793be8291117582f96b
-91b18e22d4963b216af00e1dd43b5d05	fad6ee4f3b0aded7d0974703e35ae032
-91c9ed0262dea7446a4f3a3e1cdd0698	04ae76937270105919847d05aee582b4
-91c9ed0262dea7446a4f3a3e1cdd0698	585f02a68092351a078fc43a21a56564
-925bd435e2718d623768dbf1bc1cfb60	10a17b42501166d3bf8fbdff7e1d52b6
-925bd435e2718d623768dbf1bc1cfb60	7fa69773873856d74f68a6824ca4b691
-935b48a84528c4280ec208ce529deea0	7fa69773873856d74f68a6824ca4b691
-942c9f2520684c22eb6216a92b711f9e	01864d382accf1cdb077e42032b16340
-947ce14614263eab49f780d68555aef8	7fa69773873856d74f68a6824ca4b691
-948098e746bdf1c1045c12f042ea98c2	924ae2289369a9c1d279d1d59088be64
-952dc6362e304f00575264e9d54d1fa6	17b8dff9566f6c98062ad5811c762f44
-96682d9c9f1bed695dbf9176d3ee234c	a29864963573d7bb061691ff823b97dd
-97ee29f216391d19f8769f79a1218a71	0cf6ece7453aa814e08cb7c33bd39846
-97ee29f216391d19f8769f79a1218a71	17b8dff9566f6c98062ad5811c762f44
-97ee29f216391d19f8769f79a1218a71	a68d5b72c2f98613f511337a59312f78
-988d10abb9f42e7053450af19ad64c7f	10a17b42501166d3bf8fbdff7e1d52b6
-988d10abb9f42e7053450af19ad64c7f	781f547374aef3a99c113ad5a9c12981
-990813672e87b667add44c712bb28d3d	17b8dff9566f6c98062ad5811c762f44
-990813672e87b667add44c712bb28d3d	a68d5b72c2f98613f511337a59312f78
-99bd5eff92fc3ba728a9da5aa1971488	1868ffbe3756a1c3f58300f45aa5e1d3
-9a322166803a48932356586f05ef83c7	01864d382accf1cdb077e42032b16340
-9ab8f911c74597493400602dc4d2b412	04ae76937270105919847d05aee582b4
-9ab8f911c74597493400602dc4d2b412	4fb2ada7c5440a256ed0e03c967fce74
-9ab8f911c74597493400602dc4d2b412	585f02a68092351a078fc43a21a56564
-9b1088b616414d0dc515ab1f2b4922f1	a29864963573d7bb061691ff823b97dd
-9bc2ca9505a273b06aa0b285061cd1de	17b8dff9566f6c98062ad5811c762f44
-9cf73d0300eea453f17c6faaeb871c55	17b8dff9566f6c98062ad5811c762f44
-9d3ac6904ce73645c6234803cd7e47ca	239401e2c0d502df7c9009439bdb5bd3
-9d969d25c9f506c5518bb090ad5f8266	924ae2289369a9c1d279d1d59088be64
-9db9bc745a7568b51b3a968d215ddad6	8c42e2739ed83a54e5b2781b504c92de
-9db9bc745a7568b51b3a968d215ddad6	e8376ca6a0ac30b2ad0d64de6061adab
-9e84832a15f2698f67079a3224c2b6fb	7fa69773873856d74f68a6824ca4b691
-9e84832a15f2698f67079a3224c2b6fb	deb8040131c3f6a3caf6a616b34ac482
-9f19396638dd8111f2cee938fdf4e455	17b8dff9566f6c98062ad5811c762f44
-a332f1280622f9628fccd1b7aac7370a	239401e2c0d502df7c9009439bdb5bd3
-a332f1280622f9628fccd1b7aac7370a	f41da0c65a8fa3690e6a6877e7112afb
-a3f5542dc915b94a5e10dab658bb0959	8c42e2739ed83a54e5b2781b504c92de
-a3f5542dc915b94a5e10dab658bb0959	a68d5b72c2f98613f511337a59312f78
-a3f5542dc915b94a5e10dab658bb0959	e8376ca6a0ac30b2ad0d64de6061adab
-a4902fb3d5151e823c74dfd51551b4b0	bca74411b74f01449c61b29131bc545e
-a4902fb3d5151e823c74dfd51551b4b0	c1bfb800f95ae493952b6db9eb4f0209
-a4902fb3d5151e823c74dfd51551b4b0	d5d0458ada103152d94ff3828bf33909
-a4902fb3d5151e823c74dfd51551b4b0	dcd00c11302e3b16333943340d6b4a6b
-a4977b96c7e5084fcce21a0d07b045f8	0cf6ece7453aa814e08cb7c33bd39846
-a4cbfb212102da21b82d94be555ac3ec	17b8dff9566f6c98062ad5811c762f44
-a538bfe6fe150a92a72d78f89733dbd0	17b8dff9566f6c98062ad5811c762f44
-a538bfe6fe150a92a72d78f89733dbd0	a68d5b72c2f98613f511337a59312f78
-a61b878c2b563f289de2109fa0f42144	65805a3772889203be8908bb44d964b3
-a61b878c2b563f289de2109fa0f42144	885ba57d521cd859bacf6f76fb37ef7c
-a650d82df8ca65bb69a45242ab66b399	01864d382accf1cdb077e42032b16340
-a716390764a4896d99837e99f9e009c9	a29864963573d7bb061691ff823b97dd
-a7a9c1b4e7f10bd1fdf77aff255154f7	02d3190ce0f08f32be33da6cc8ec8df8
-a7a9c1b4e7f10bd1fdf77aff255154f7	1302a3937910e1487d44cec8f9a09660
-a7a9c1b4e7f10bd1fdf77aff255154f7	bb273189d856ee630d92fbc0274178bb
-a7a9c1b4e7f10bd1fdf77aff255154f7	dcd00c11302e3b16333943340d6b4a6b
-a7a9c1b4e7f10bd1fdf77aff255154f7	ff7aa8ca226e1b753b0a71d7f0f2e174
-a7f9797e4cd716e1516f9d4845b0e1e2	2e607ef3a19cf3de029e2c5882896d33
-a7f9797e4cd716e1516f9d4845b0e1e2	a29864963573d7bb061691ff823b97dd
-a825b2b87f3b61c9660b81f340f6e519	b7628553175256a081199e493d97bd3b
-a8d9eeed285f1d47836a5546a280a256	a29864963573d7bb061691ff823b97dd
-aa86b6fc103fc757e14f03afe6eb0c0a	a68d5b72c2f98613f511337a59312f78
-abbf8e3e3c3e78be8bd886484c1283c1	a68d5b72c2f98613f511337a59312f78
-abd7ab19ff758cf4c1a2667e5bbac444	deb8040131c3f6a3caf6a616b34ac482
-ac03fad3be179a237521ec4ef2620fb0	04ae76937270105919847d05aee582b4
-ac94d15f46f10707a39c4bc513cd9f98	2df929d9b6150c082888b66e8129ee3f
-ac94d15f46f10707a39c4bc513cd9f98	7fa69773873856d74f68a6824ca4b691
-ad01952b3c254c8ebefaf6f73ae62f7d	17b8dff9566f6c98062ad5811c762f44
-ad62209fb63910acf40280cea3647ec5	10a17b42501166d3bf8fbdff7e1d52b6
-ad62209fb63910acf40280cea3647ec5	17b8dff9566f6c98062ad5811c762f44
-ad62209fb63910acf40280cea3647ec5	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-ade72e999b4e78925b18cf48d1faafa4	caac3244eefed8cffee878acae427e28
-aed85c73079b54830cd50a75c0958a90	17b8dff9566f6c98062ad5811c762f44
-b01fbaf98cfbc1b72e8bca0b2e48769c	781f547374aef3a99c113ad5a9c12981
-b0ce1e93de9839d07dab8d268ca23728	3770d5a677c09a444a026dc7434bff36
-b0ce1e93de9839d07dab8d268ca23728	f0095594f17b3793be8291117582f96b
-b14814d0ee12ffadc8f09ab9c604a9d0	a29864963573d7bb061691ff823b97dd
-b1bdad87bd3c4ac2c22473846d301a9e	7fa69773873856d74f68a6824ca4b691
-b1d465aaf3ccf8701684211b1623adf2	4fb2ada7c5440a256ed0e03c967fce74
-b3ffff8517114caf70b9e70734dbaf6f	01864d382accf1cdb077e42032b16340
-b3ffff8517114caf70b9e70734dbaf6f	a29864963573d7bb061691ff823b97dd
-b570e354b7ebc40e20029fcc7a15e5a7	8dae638cc517185f1e6f065fcd5e8af3
-b5d9c5289fe97968a5634b3e138bf9e2	2df929d9b6150c082888b66e8129ee3f
-b5d9c5289fe97968a5634b3e138bf9e2	7fa69773873856d74f68a6824ca4b691
-b5d9c5289fe97968a5634b3e138bf9e2	caac3244eefed8cffee878acae427e28
-b5f7b25b0154c34540eea8965f90984d	04ae76937270105919847d05aee582b4
-b5f7b25b0154c34540eea8965f90984d	4cfbb125e9878528bab91d12421134d8
-b5f7b25b0154c34540eea8965f90984d	dcd00c11302e3b16333943340d6b4a6b
-b6da055500e3d92698575a3cfc74906c	1c800aa97116d9afd83204d65d50199a
-b6da055500e3d92698575a3cfc74906c	5bf88dc6f6501943cc5bc4c42c71b36b
-b6da055500e3d92698575a3cfc74906c	7a3808eef413b514776a7202fd2cb94f
-b885447285ece8226facd896c04cdba2	a29864963573d7bb061691ff823b97dd
-b885447285ece8226facd896c04cdba2	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-b89e91ccf14bfd7f485dd7be7d789b0a	02c4d46b0568d199466ef1baa339adc8
-b89e91ccf14bfd7f485dd7be7d789b0a	2336f976c6d510d2a269a746a7756232
-b89e91ccf14bfd7f485dd7be7d789b0a	8dae638cc517185f1e6f065fcd5e8af3
-b89e91ccf14bfd7f485dd7be7d789b0a	ef5131009b7ced0b35ea49c8c7690cef
-b96a3cb81197e8308c87f6296174fe3e	a29864963573d7bb061691ff823b97dd
-baa9d4eef21c7b89f42720313b5812d4	7fa69773873856d74f68a6824ca4b691
-baa9d4eef21c7b89f42720313b5812d4	caac3244eefed8cffee878acae427e28
-baa9d4eef21c7b89f42720313b5812d4	e22aa8f4c79b6c4bbeb6bcc7f4e1eb26
-bb4cc149e8027369e71eb1bb36cd98e0	c1bfb800f95ae493952b6db9eb4f0209
-bb4cc149e8027369e71eb1bb36cd98e0	d5d0458ada103152d94ff3828bf33909
-bbb668ff900efa57d936e726a09e4fe8	8c42e2739ed83a54e5b2781b504c92de
-bbc155fb2b111bf61c4f5ff892915e6b	1c800aa97116d9afd83204d65d50199a
-bbce8e45250a239a252752fac7137e00	7a3808eef413b514776a7202fd2cb94f
-bbce8e45250a239a252752fac7137e00	ff7aa8ca226e1b753b0a71d7f0f2e174
-bd4184ee062e4982b878b6b188793f5b	585f02a68092351a078fc43a21a56564
-bd4184ee062e4982b878b6b188793f5b	a68d5b72c2f98613f511337a59312f78
-be20385e18333edb329d4574f364a1f0	17b8dff9566f6c98062ad5811c762f44
-be20385e18333edb329d4574f364a1f0	a68d5b72c2f98613f511337a59312f78
-bfc9ace5d2a11fae56d038d68c601f00	caac3244eefed8cffee878acae427e28
-c05d504b806ad065c9b548c0cb1334cd	a29864963573d7bb061691ff823b97dd
-c05d504b806ad065c9b548c0cb1334cd	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-c127f32dc042184d12b8c1433a77e8c4	1396a3913454b8016ddf671d02e861b1
-c127f32dc042184d12b8c1433a77e8c4	2a78330cc0de19f12ae9c7de65b9d5d5
-c127f32dc042184d12b8c1433a77e8c4	bbc90d6701da0aa2bf7f6f2acb79e18c
-c127f32dc042184d12b8c1433a77e8c4	d5d0458ada103152d94ff3828bf33909
-c127f32dc042184d12b8c1433a77e8c4	dcd00c11302e3b16333943340d6b4a6b
-c1923ca7992dc6e79d28331abbb64e72	2df929d9b6150c082888b66e8129ee3f
-c2855b6617a1b08fed3824564e15a653	caac3244eefed8cffee878acae427e28
-c3490492512b7fe65cdb0c7305044675	5b412998332f677ddcc911605985ee3b
-c4678a2e0eef323aeb196670f2bc8a6e	7fa69773873856d74f68a6824ca4b691
-c4c7cb77b45a448aa3ca63082671ad97	17b8dff9566f6c98062ad5811c762f44
-c4c7cb77b45a448aa3ca63082671ad97	caac3244eefed8cffee878acae427e28
-c4c7cb77b45a448aa3ca63082671ad97	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-c4ddbffb73c1c34d20bd5b3f425ce4b1	8c42e2739ed83a54e5b2781b504c92de
-c4f0f5cedeffc6265ec3220ab594d56b	2bd0f5e2048d09734470145332ecdd24
-c5dc33e23743fb951b3fe7f1f477b794	e8376ca6a0ac30b2ad0d64de6061adab
-c5f022ef2f3211dc1e3b8062ffe764f0	17b8dff9566f6c98062ad5811c762f44
-c74b5aa120021cbe18dcddd70d8622da	a29864963573d7bb061691ff823b97dd
-c883319a1db14bc28eff8088c5eba10e	ad38eede5e5edecd3903f1701acecf8e
-c883319a1db14bc28eff8088c5eba10e	b86219c2df5a0d889f490f88ff22e228
-ca5a010309ffb20190558ec20d97e5b2	a68d5b72c2f98613f511337a59312f78
-ca5a010309ffb20190558ec20d97e5b2	cbfeef2f0e2cd992e0ea65924a0f28a1
-ca5a010309ffb20190558ec20d97e5b2	f41da0c65a8fa3690e6a6877e7112afb
-cafe9e68e8f90b3e1328da8858695b31	a29864963573d7bb061691ff823b97dd
-cd9483c1733b17f57d11a77c9404893c	2336f976c6d510d2a269a746a7756232
-cd9483c1733b17f57d11a77c9404893c	7349da19c2ad6654280ecf64ce42b837
-cd9483c1733b17f57d11a77c9404893c	bb273189d856ee630d92fbc0274178bb
-cd9483c1733b17f57d11a77c9404893c	ef5131009b7ced0b35ea49c8c7690cef
-cddf835bea180bd14234a825be7a7a82	17b8dff9566f6c98062ad5811c762f44
-ce2caf05154395724e4436f042b8fa53	924ae2289369a9c1d279d1d59088be64
-cf4ee20655dd3f8f0a553c73ffe3f72a	f633e7b30932bbf60ed87e8ebc26839d
-d05a0e65818a69cc689b38c0c0007834	a29864963573d7bb061691ff823b97dd
-d0a1fd0467dc892f0dc27711637c864e	1868ffbe3756a1c3f58300f45aa5e1d3
-d1fb4e47d8421364f49199ee395ad1d3	17b8dff9566f6c98062ad5811c762f44
-d1fb4e47d8421364f49199ee395ad1d3	a68d5b72c2f98613f511337a59312f78
-d2ff1e521585a91a94fb22752dd0ab45	17b8dff9566f6c98062ad5811c762f44
-d3e98095eeccaa253050d67210ef02bb	1c800aa97116d9afd83204d65d50199a
-d3e98095eeccaa253050d67210ef02bb	2e607ef3a19cf3de029e2c5882896d33
-d3e98095eeccaa253050d67210ef02bb	7349da19c2ad6654280ecf64ce42b837
-d3e98095eeccaa253050d67210ef02bb	d3fcef9d7f88d2a12ea460c604731cd5
-d3ed8223151e14b936436c336a4c7278	a68d5b72c2f98613f511337a59312f78
-d433b7c1ce696b94a8d8f72de6cfbeaa	a68d5b72c2f98613f511337a59312f78
-d433b7c1ce696b94a8d8f72de6cfbeaa	ed8e37bad13d76c6dbeb58152440b41e
-d449a9b2eed8b0556dc7be9cda36b67b	7a3808eef413b514776a7202fd2cb94f
-d449a9b2eed8b0556dc7be9cda36b67b	836ea59914cc7a8e81ee0dd63f7c21c1
-d449a9b2eed8b0556dc7be9cda36b67b	f0095594f17b3793be8291117582f96b
-d6de9c99f5cfa46352b2bc0be5c98c41	17b8dff9566f6c98062ad5811c762f44
-d730e65d54d6c0479561d25724afd813	04ae76937270105919847d05aee582b4
-d730e65d54d6c0479561d25724afd813	585f02a68092351a078fc43a21a56564
-d73310b95e8b4dece44e2a55dd1274e6	01864d382accf1cdb077e42032b16340
-d73310b95e8b4dece44e2a55dd1274e6	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-d857ab11d383a7e4d4239a54cbf2a63d	10a17b42501166d3bf8fbdff7e1d52b6
-d857ab11d383a7e4d4239a54cbf2a63d	17b8dff9566f6c98062ad5811c762f44
-d9ab6b54c3bd5b212e8dc3a14e7699ef	60e1fa5bfa060b5fff1db1ca1bae4f99
-d9ab6b54c3bd5b212e8dc3a14e7699ef	885ba57d521cd859bacf6f76fb37ef7c
-d9ab6b54c3bd5b212e8dc3a14e7699ef	ea9565886c02dbdc4892412537e607d7
-da2110633f62b16a571c40318e4e4c1c	17095255b1df76ab27dd48f29b215a5f
-da867941c8bacf9be8e59bc13d765f92	2df929d9b6150c082888b66e8129ee3f
-da867941c8bacf9be8e59bc13d765f92	7fa69773873856d74f68a6824ca4b691
-db38e12f9903b156f9dc91fce2ef3919	a29864963573d7bb061691ff823b97dd
-db46d9a37b31baa64cb51604a2e4939a	caac3244eefed8cffee878acae427e28
-dcabc7299e2b9ed5b05c33273e5fdd19	17b8dff9566f6c98062ad5811c762f44
-dcff9a127428ffb03fc02fdf6cc39575	04ae76937270105919847d05aee582b4
-dcff9a127428ffb03fc02fdf6cc39575	5bf88dc6f6501943cc5bc4c42c71b36b
-dcff9a127428ffb03fc02fdf6cc39575	dcd00c11302e3b16333943340d6b4a6b
-dd18fa7a5052f2bce8ff7cb4a30903ea	deb8040131c3f6a3caf6a616b34ac482
-dddb04bc0d058486d0ef0212c6ea0682	7fa69773873856d74f68a6824ca4b691
-de12bbf91bc797df25ab4ae9cee1946b	585f02a68092351a078fc43a21a56564
-de12bbf91bc797df25ab4ae9cee1946b	a29864963573d7bb061691ff823b97dd
-deaccc41a952e269107cc9a507dfa131	bbc90d6701da0aa2bf7f6f2acb79e18c
-deaccc41a952e269107cc9a507dfa131	dcd00c11302e3b16333943340d6b4a6b
-dfdef9b5190f331de20fe029babf032e	0cf6ece7453aa814e08cb7c33bd39846
-dfdef9b5190f331de20fe029babf032e	9c093ec7867ba1df61e27a5943168b90
-e08383c479d96a8a762e23a99fd8bf84	2bd0f5e2048d09734470145332ecdd24
-e08383c479d96a8a762e23a99fd8bf84	a68d5b72c2f98613f511337a59312f78
-e08383c479d96a8a762e23a99fd8bf84	e8376ca6a0ac30b2ad0d64de6061adab
-e0c2b0cc2e71294cd86916807fef62cb	04ae76937270105919847d05aee582b4
-e0de9c10bbf73520385ea5dcbdf62073	7a3808eef413b514776a7202fd2cb94f
-e0f39406f0e15487dd9d3997b2f5ca61	2336f976c6d510d2a269a746a7756232
-e0f39406f0e15487dd9d3997b2f5ca61	2e607ef3a19cf3de029e2c5882896d33
-e0f39406f0e15487dd9d3997b2f5ca61	a29864963573d7bb061691ff823b97dd
-e1db3add02ca4c1af33edc5a970a3bdc	04ae76937270105919847d05aee582b4
-e1db3add02ca4c1af33edc5a970a3bdc	585f02a68092351a078fc43a21a56564
-e271e871e304f59e62a263ffe574ea2d	17b8dff9566f6c98062ad5811c762f44
-e271e871e304f59e62a263ffe574ea2d	caac3244eefed8cffee878acae427e28
-e29ef4beb480eab906ffa7c05aeec23d	17b8dff9566f6c98062ad5811c762f44
-e29ef4beb480eab906ffa7c05aeec23d	a29864963573d7bb061691ff823b97dd
-e3f0bf612190af6c3fad41214115e004	04ae76937270105919847d05aee582b4
-e4b3296f8a9e2a378eb3eb9576b91a37	17b8dff9566f6c98062ad5811c762f44
-e61e30572fd58669ae9ea410774e0eb6	17b8dff9566f6c98062ad5811c762f44
-e61e30572fd58669ae9ea410774e0eb6	a68d5b72c2f98613f511337a59312f78
-e62a773154e1179b0cc8c5592207cb10	04ae76937270105919847d05aee582b4
-e62a773154e1179b0cc8c5592207cb10	585f02a68092351a078fc43a21a56564
-e64b94f14765cee7e05b4bec8f5fee31	4cfbb125e9878528bab91d12421134d8
-e64d38b05d197d60009a43588b2e4583	0cf6ece7453aa814e08cb7c33bd39846
-e64d38b05d197d60009a43588b2e4583	17b8dff9566f6c98062ad5811c762f44
-e64d38b05d197d60009a43588b2e4583	4cfbb125e9878528bab91d12421134d8
-e64d38b05d197d60009a43588b2e4583	885ba57d521cd859bacf6f76fb37ef7c
-e67e51d5f41cfc9162ef7fd977d1f9f5	7fa69773873856d74f68a6824ca4b691
-e74a88c71835c14d92d583a1ed87cc6c	a29864963573d7bb061691ff823b97dd
-e74a88c71835c14d92d583a1ed87cc6c	a68d5b72c2f98613f511337a59312f78
-e872b77ff7ac24acc5fa373ebe9bb492	02d3190ce0f08f32be33da6cc8ec8df8
-e872b77ff7ac24acc5fa373ebe9bb492	2e9dfd2e07792b56179212f5b8f473e6
-e872b77ff7ac24acc5fa373ebe9bb492	72616c6de7633d9ac97165fc7887fa3a
-e872b77ff7ac24acc5fa373ebe9bb492	8bbab0ae4d00ad9ffee6cddaf9338584
-e872b77ff7ac24acc5fa373ebe9bb492	ad6296818a1cb902ac5d1a3950e79dbe
-e872b77ff7ac24acc5fa373ebe9bb492	bfd67ea5a2f5557126b299e33a435ab3
-e872b77ff7ac24acc5fa373ebe9bb492	ff7aa8ca226e1b753b0a71d7f0f2e174
-e8afde257f8a2cbbd39d866ddfc06103	10a17b42501166d3bf8fbdff7e1d52b6
-e8afde257f8a2cbbd39d866ddfc06103	17b8dff9566f6c98062ad5811c762f44
-eb2c788da4f36fba18b85ae75aff0344	a68d5b72c2f98613f511337a59312f78
-ed24ff8971b1fa43a1efbb386618ce35	17b8dff9566f6c98062ad5811c762f44
-ee69e7d19f11ca58843ec2e9e77ddb38	17b8dff9566f6c98062ad5811c762f44
-eeaeec364c925e0c821660c7a953546e	1c800aa97116d9afd83204d65d50199a
-ef6369d9794dbe861a56100e92a3c71d	2bd0f5e2048d09734470145332ecdd24
-f042da2a954a1521114551a6f9e22c75	a29864963573d7bb061691ff823b97dd
-f07c3eef5b7758026d45a12c7e2f6134	4b3bb0b44a6aa876b9e125a2c2a5d6a2
-f0c051b57055b052a3b7da1608f3039e	a29864963573d7bb061691ff823b97dd
-f0e1f32b93f622ea3ddbf6b55b439812	0cf6ece7453aa814e08cb7c33bd39846
-f0e1f32b93f622ea3ddbf6b55b439812	1eef6db16bfc0aaf8904df1503895979
-f0e1f32b93f622ea3ddbf6b55b439812	34d8a5e79a59df217c6882ee766c850a
-f0e1f32b93f622ea3ddbf6b55b439812	ff7aa8ca226e1b753b0a71d7f0f2e174
-f29d276fd930f1ad7687ed7e22929b64	01864d382accf1cdb077e42032b16340
-f37ab058561fb6d233b9c2a0b080d4d1	f82c0cf1d80eca5ea2884bbc7bd04269
-f4219e8fec02ce146754a5be8a85f246	01864d382accf1cdb077e42032b16340
-f4219e8fec02ce146754a5be8a85f246	885ba57d521cd859bacf6f76fb37ef7c
-f4f870098db58eeae93742dd2bcaf2b2	1868ffbe3756a1c3f58300f45aa5e1d3
-f60ab90d94b9cafe6b32f6a93ee8fcda	1c800aa97116d9afd83204d65d50199a
-f644bd92037985f8eb20311bc6d5ed94	17b8dff9566f6c98062ad5811c762f44
-f8e7112b86fcd9210dfaf32c00d6d375	bb273189d856ee630d92fbc0274178bb
-f953fa7b33e7b6503f4380895bbe41c8	2e607ef3a19cf3de029e2c5882896d33
-f953fa7b33e7b6503f4380895bbe41c8	a29864963573d7bb061691ff823b97dd
-fa03eb688ad8aa1db593d33dabd89bad	8de5a5b30fc3e013e9b52811fe6f3356
-fa03eb688ad8aa1db593d33dabd89bad	a68d5b72c2f98613f511337a59312f78
-faabbecd319372311ed0781d17b641d1	2336f976c6d510d2a269a746a7756232
-faabbecd319372311ed0781d17b641d1	7a3808eef413b514776a7202fd2cb94f
-faabbecd319372311ed0781d17b641d1	8dae638cc517185f1e6f065fcd5e8af3
-fb28e62c0e801a787d55d97615e89771	a68d5b72c2f98613f511337a59312f78
-fb47f889f2c7c4fee1553d0f817b8aaa	17b8dff9566f6c98062ad5811c762f44
-fb47f889f2c7c4fee1553d0f817b8aaa	885ba57d521cd859bacf6f76fb37ef7c
-fb8be6409408481ad69166324bdade9c	17b8dff9566f6c98062ad5811c762f44
-fb8be6409408481ad69166324bdade9c	a29864963573d7bb061691ff823b97dd
-fcd1c1b547d03e760d1defa4d2b98783	4fb2ada7c5440a256ed0e03c967fce74
-fdc90583bd7a58b91384dea3d1659cde	04ae76937270105919847d05aee582b4
-fdc90583bd7a58b91384dea3d1659cde	dcd00c11302e3b16333943340d6b4a6b
-fe228019addf1d561d0123caae8d1e52	36e61931478cf781e59da3b5ae2ee64e
-fe5b73c2c2cd2d9278c3835c791289b6	01864d382accf1cdb077e42032b16340
-fe5b73c2c2cd2d9278c3835c791289b6	7a3808eef413b514776a7202fd2cb94f
-ff578d3db4dc3311b3098c8365d54e6b	7fa69773873856d74f68a6824ca4b691
-ff5b48d38ce7d0c47c57555d4783a118	4fb2ada7c5440a256ed0e03c967fce74
-ffa7450fd138573d8ae665134bccd02c	17b8dff9566f6c98062ad5811c762f44
-2447873ddeeecaa165263091c0cbb22f	7a09fdabda255b02b2283e724071944b
-fdcf3cdc04f367257c92382e032b6293	a279b219de7726798fc2497d48bc0402
-fdcf3cdc04f367257c92382e032b6293	885ba57d521cd859bacf6f76fb37ef7c
-bbddc022ee323e0a2b2d8c67e5cd321f	eaa57a9b4248ce3968e718895e1c2f04
-94ca28ea8d99549c2280bcc93f98c853	a68d5b72c2f98613f511337a59312f78
-94ca28ea8d99549c2280bcc93f98c853	885ba57d521cd859bacf6f76fb37ef7c
-94ca28ea8d99549c2280bcc93f98c853	17b8dff9566f6c98062ad5811c762f44
-6d89517dbd1a634b097f81f5bdbb07a2	8a055a3739ca4b38b9c5a188d6295830
-eb3bfb5a3ccdd4483aabc307ae236066	eaa57a9b4248ce3968e718895e1c2f04
-0ab20b5ad4d15b445ed94fa4eebb18d8	7a3808eef413b514776a7202fd2cb94f
-12e93f5fab5f7d16ef37711ef264d282	a29864963573d7bb061691ff823b97dd
-33f03dd57f667d41ac77c6baec352a81	bb273189d856ee630d92fbc0274178bb
-399033f75fcf47d6736c9c5209222ab8	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-399033f75fcf47d6736c9c5209222ab8	0cf6ece7453aa814e08cb7c33bd39846
-399033f75fcf47d6736c9c5209222ab8	885ba57d521cd859bacf6f76fb37ef7c
-d9bc1db8c13da3a131d853237e1f05b2	17b8dff9566f6c98062ad5811c762f44
-d9bc1db8c13da3a131d853237e1f05b2	a29864963573d7bb061691ff823b97dd
-d9bc1db8c13da3a131d853237e1f05b2	ea9565886c02dbdc4892412537e607d7
-1197a69404ee9475146f3d631de12bde	885ba57d521cd859bacf6f76fb37ef7c
-1197a69404ee9475146f3d631de12bde	9c093ec7867ba1df61e27a5943168b90
-fdcbfded0aaf369d936a70324b39c978	eaa57a9b4248ce3968e718895e1c2f04
-fdcbfded0aaf369d936a70324b39c978	6add228b14f132e14ae9da754ef070c5
-754230e2c158107a2e93193c829e9e59	a29864963573d7bb061691ff823b97dd
-a29c1c4f0a97173007be3b737e8febcc	17b8dff9566f6c98062ad5811c762f44
-4fab532a185610bb854e0946f4def6a4	17b8dff9566f6c98062ad5811c762f44
-e25ee917084bdbdc8506b56abef0f351	17b8dff9566f6c98062ad5811c762f44
-e6fd7b62a39c109109d33fcd3b5e129d	17b8dff9566f6c98062ad5811c762f44
-e6fd7b62a39c109109d33fcd3b5e129d	10a17b42501166d3bf8fbdff7e1d52b6
-da29e297c23e7868f1d50ec5a6a4359b	17b8dff9566f6c98062ad5811c762f44
-da29e297c23e7868f1d50ec5a6a4359b	a68d5b72c2f98613f511337a59312f78
-da29e297c23e7868f1d50ec5a6a4359b	885ba57d521cd859bacf6f76fb37ef7c
-96048e254d2e02ba26f53edd271d3f88	17b8dff9566f6c98062ad5811c762f44
-c2275e8ac71d308946a63958bc7603a1	a29864963573d7bb061691ff823b97dd
-3bcbddf6c114327fc72ea06bcb02f9ef	a29864963573d7bb061691ff823b97dd
-3bcbddf6c114327fc72ea06bcb02f9ef	a68d5b72c2f98613f511337a59312f78
-dde3e0b0cc344a7b072bbab8c429f4ff	a29864963573d7bb061691ff823b97dd
-dde3e0b0cc344a7b072bbab8c429f4ff	a68d5b72c2f98613f511337a59312f78
-dde3e0b0cc344a7b072bbab8c429f4ff	17b8dff9566f6c98062ad5811c762f44
-b785a5ffad5e7e36ccac25c51d5d8908	a29864963573d7bb061691ff823b97dd
-63c0a328ae2bee49789212822f79b83f	0d1830fc8ac21dfabd6f33ab01578c0b
-83d15841023cff02eafedb1c87df9b11	10a17b42501166d3bf8fbdff7e1d52b6
-f03bde11d261f185cbacfa32c1c6538c	a29864963573d7bb061691ff823b97dd
-f03bde11d261f185cbacfa32c1c6538c	17b8dff9566f6c98062ad5811c762f44
-f6540bc63be4c0cb21811353c0d24f69	262770cfc76233c4f0d7a1e43a36cbf7
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	17b8dff9566f6c98062ad5811c762f44
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	a29864963573d7bb061691ff823b97dd
-e4f0ad5ef0ac3037084d8a5e3ca1cabc	fd00614e73cb66fd71ab13c970a074d8
-ea16d031090828264793e860a00cc995	17b8dff9566f6c98062ad5811c762f44
-5eed658c4b7b68a0ecc49205b68d54e7	deb8040131c3f6a3caf6a616b34ac482
-a0fb30950d2a150c1d2624716f216316	17b8dff9566f6c98062ad5811c762f44
-a0fb30950d2a150c1d2624716f216316	a68d5b72c2f98613f511337a59312f78
-4ad6c928711328d1cf0167bc87079a14	1868ffbe3756a1c3f58300f45aa5e1d3
-4ad6c928711328d1cf0167bc87079a14	17b8dff9566f6c98062ad5811c762f44
-96e3cdb363fe6df2723be5b994ad117a	efe010f3a24895472e65b173e01b969d
-c8d551145807972d194691247e7102a2	17b8dff9566f6c98062ad5811c762f44
-45b568ce63ea724c415677711b4328a7	17b8dff9566f6c98062ad5811c762f44
-c238980432ab6442df9b2c6698c43e47	9713131159f9810e6f5ae73d82633adb
-145bd9cf987b6f96fa6f3b3b326303c9	a68d5b72c2f98613f511337a59312f78
-39a25b9c88ce401ca54fd7479d1c8b73	a68d5b72c2f98613f511337a59312f78
-8cadf0ad04644ce2947bf3aa2817816e	a68d5b72c2f98613f511337a59312f78
-85fac49d29a31f1f9a8a18d6b04b9fc9	a68d5b72c2f98613f511337a59312f78
-85fac49d29a31f1f9a8a18d6b04b9fc9	a29864963573d7bb061691ff823b97dd
-b81ee269be538a500ed057b3222c86a2	17b8dff9566f6c98062ad5811c762f44
-cf71a88972b5e06d8913cf53c916e6e4	17b8dff9566f6c98062ad5811c762f44
-5518086aebc9159ba7424be0073ce5c9	17b8dff9566f6c98062ad5811c762f44
-5518086aebc9159ba7424be0073ce5c9	01864d382accf1cdb077e42032b16340
-5518086aebc9159ba7424be0073ce5c9	a68d5b72c2f98613f511337a59312f78
-2c4e2c9948ddac6145e529c2ae7296da	17b8dff9566f6c98062ad5811c762f44
-c9af1c425ca093648e919c2e471df3bd	a68d5b72c2f98613f511337a59312f78
-0291e38d9a3d398052be0ca52a7b1592	a68d5b72c2f98613f511337a59312f78
-0291e38d9a3d398052be0ca52a7b1592	17b8dff9566f6c98062ad5811c762f44
-8852173e80d762d62f0bcb379d82ebdb	a68d5b72c2f98613f511337a59312f78
-8852173e80d762d62f0bcb379d82ebdb	17b8dff9566f6c98062ad5811c762f44
-000f49c98c428aff4734497823d04f45	262770cfc76233c4f0d7a1e43a36cbf7
-000f49c98c428aff4734497823d04f45	17b8dff9566f6c98062ad5811c762f44
-dea293bdffcfb292b244b6fe92d246dc	a68d5b72c2f98613f511337a59312f78
-302ebe0389198972c223f4b72894780a	a29864963573d7bb061691ff823b97dd
-ac62ad2816456aa712809bf01327add1	04ae76937270105919847d05aee582b4
-470f3f69a2327481d26309dc65656f44	885ba57d521cd859bacf6f76fb37ef7c
-470f3f69a2327481d26309dc65656f44	17b8dff9566f6c98062ad5811c762f44
-e254616b4a5bd5aaa54f90a3985ed184	17b8dff9566f6c98062ad5811c762f44
-e254616b4a5bd5aaa54f90a3985ed184	a68d5b72c2f98613f511337a59312f78
-3c5c578b7cf5cc0d23c1730d1d51436a	4fb2ada7c5440a256ed0e03c967fce74
-3c5c578b7cf5cc0d23c1730d1d51436a	04ae76937270105919847d05aee582b4
-eaeaed2d9f3137518a5c8c7e6733214f	36e61931478cf781e59da3b5ae2ee64e
-8ccd65d7f0f028405867991ae3eaeb56	04ae76937270105919847d05aee582b4
-8ccd65d7f0f028405867991ae3eaeb56	585f02a68092351a078fc43a21a56564
-781acc7e58c9a746d58f6e65ab1e90c4	239401e2c0d502df7c9009439bdb5bd3
-e5a674a93987de4a52230105907fffe9	564807fb144a93a857bfda85ab34068d
-e5a674a93987de4a52230105907fffe9	a68d5b72c2f98613f511337a59312f78
-a2459c5c8a50215716247769c3dea40b	bb273189d856ee630d92fbc0274178bb
-e285e4ecb358b92237298f67526beff7	885ba57d521cd859bacf6f76fb37ef7c
-e285e4ecb358b92237298f67526beff7	17b8dff9566f6c98062ad5811c762f44
-e285e4ecb358b92237298f67526beff7	0cf6ece7453aa814e08cb7c33bd39846
-e285e4ecb358b92237298f67526beff7	ff7aa8ca226e1b753b0a71d7f0f2e174
-e285e4ecb358b92237298f67526beff7	5bf88dc6f6501943cc5bc4c42c71b36b
-d832b654664d104f0fbb9b6674a09a11	1eef6db16bfc0aaf8904df1503895979
-2aeb128c6d3eb7e79acb393b50e1cf7b	0cf6ece7453aa814e08cb7c33bd39846
-213c449bd4bcfcdb6bffecf55b2c30b4	1eef6db16bfc0aaf8904df1503895979
-213c449bd4bcfcdb6bffecf55b2c30b4	9d78e15bf91aef0090e0a37bab153d98
-213c449bd4bcfcdb6bffecf55b2c30b4	a46700f6342a2525a9fba12d974d786e
-4ea353ae22a1c0d26327638f600aeac8	a46700f6342a2525a9fba12d974d786e
-4ea353ae22a1c0d26327638f600aeac8	1eef6db16bfc0aaf8904df1503895979
-66244bb43939f81c100f03922cdc3439	4fb2ada7c5440a256ed0e03c967fce74
-d399575133268305c24d87f1c2ef054a	1868ffbe3756a1c3f58300f45aa5e1d3
-d399575133268305c24d87f1c2ef054a	10a17b42501166d3bf8fbdff7e1d52b6
-d399575133268305c24d87f1c2ef054a	1d67aeafcd3b898e05a75da0fdc01365
-6ff24c538936b5b53e88258f88294666	02d3190ce0f08f32be33da6cc8ec8df8
-6ff24c538936b5b53e88258f88294666	2da00ba473acb055e8652437024c6fd4
-6ff24c538936b5b53e88258f88294666	bb273189d856ee630d92fbc0274178bb
-6ff24c538936b5b53e88258f88294666	7a3808eef413b514776a7202fd2cb94f
-a5a8afc6c35c2625298b9ce4cc447b39	9713131159f9810e6f5ae73d82633adb
-5588cb8830fdb8ac7159b7cf5d1e611e	04ae76937270105919847d05aee582b4
-5588cb8830fdb8ac7159b7cf5d1e611e	4fb2ada7c5440a256ed0e03c967fce74
-9fc7c7342d41c7c53c6e8e4b9bc53fc4	a68d5b72c2f98613f511337a59312f78
-9fc7c7342d41c7c53c6e8e4b9bc53fc4	0cf6ece7453aa814e08cb7c33bd39846
-071dbd416520d14b2e3688145801de41	a68d5b72c2f98613f511337a59312f78
-071dbd416520d14b2e3688145801de41	585f02a68092351a078fc43a21a56564
-071dbd416520d14b2e3688145801de41	504724f4d7623c2a03384bd0f213e524
-2d1f30c9fc8d7200bdf15b730c4cd757	17b8dff9566f6c98062ad5811c762f44
-a1cebab6ecfd371779f9c18e36cbba0c	fd00614e73cb66fd71ab13c970a074d8
-a1cebab6ecfd371779f9c18e36cbba0c	10a17b42501166d3bf8fbdff7e1d52b6
-57eba43d6bec2a8115e94d6fbb42bc75	a29864963573d7bb061691ff823b97dd
-57eba43d6bec2a8115e94d6fbb42bc75	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-57eba43d6bec2a8115e94d6fbb42bc75	7a3808eef413b514776a7202fd2cb94f
-57eba43d6bec2a8115e94d6fbb42bc75	02d3190ce0f08f32be33da6cc8ec8df8
-9ee30f495029e1fdf6567045f2079be1	17b8dff9566f6c98062ad5811c762f44
-17bcf0bc2768911a378a55f42acedba7	f22794f69ce5910cb4be68ff9026570d
-f9f57e175d62861bb5f2bda44a078df7	cb6ef856481bc776bba38fbf15b8b3fb
-3921cb3f97a88349e153beb5492f6ef4	a68d5b72c2f98613f511337a59312f78
-6a8538b37162b23d68791b9a0c54a5bf	a68d5b72c2f98613f511337a59312f78
-2654d6e7cec2ef045ca1772a980fbc4c	a29864963573d7bb061691ff823b97dd
-57b9fe77adaac4846c238e995adb6ee2	4b3bb0b44a6aa876b9e125a2c2a5d6a2
-8259dc0bcebabcb0696496ca406dd672	a29864963573d7bb061691ff823b97dd
-8259dc0bcebabcb0696496ca406dd672	585f02a68092351a078fc43a21a56564
-ab7b69efdaf168cbbe9a5b03d901be74	04ae76937270105919847d05aee582b4
-ab7b69efdaf168cbbe9a5b03d901be74	a29864963573d7bb061691ff823b97dd
-3041a64f7587a6768d8e307b2662785b	17b8dff9566f6c98062ad5811c762f44
-3041a64f7587a6768d8e307b2662785b	caac3244eefed8cffee878acae427e28
-32921081f86e80cd10138b8959260e1a	17b8dff9566f6c98062ad5811c762f44
-4d79c341966242c047f3833289ee3a13	17b8dff9566f6c98062ad5811c762f44
-4d79c341966242c047f3833289ee3a13	a29864963573d7bb061691ff823b97dd
-4d79c341966242c047f3833289ee3a13	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-c58de8415b504a6ffa5d0b14967f91bb	2336f976c6d510d2a269a746a7756232
-c58de8415b504a6ffa5d0b14967f91bb	a29864963573d7bb061691ff823b97dd
-03022be9e2729189e226cca023a2c9bf	17b8dff9566f6c98062ad5811c762f44
-03022be9e2729189e226cca023a2c9bf	a68d5b72c2f98613f511337a59312f78
-03022be9e2729189e226cca023a2c9bf	a29864963573d7bb061691ff823b97dd
-f17c7007dd2ed483b9df587c1fdac2c7	17b8dff9566f6c98062ad5811c762f44
-1bb6d0271ea775dfdfa7f9fe1048147a	4b3bb0b44a6aa876b9e125a2c2a5d6a2
-743c89c3e93b9295c1ae6e750047fb1e	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-743c89c3e93b9295c1ae6e750047fb1e	7a3808eef413b514776a7202fd2cb94f
-93f4aac22b526b5f0c908462da306ffc	585f02a68092351a078fc43a21a56564
-93f4aac22b526b5f0c908462da306ffc	a29864963573d7bb061691ff823b97dd
-c2e88140e99f33883dac39daee70ac36	04ae76937270105919847d05aee582b4
-368ff974da0defe085637b7199231c0a	7a3808eef413b514776a7202fd2cb94f
-ccff6df2a54baa3adeb0bddb8067e7c0	a29864963573d7bb061691ff823b97dd
-ccff6df2a54baa3adeb0bddb8067e7c0	01864d382accf1cdb077e42032b16340
-ccff6df2a54baa3adeb0bddb8067e7c0	7a3808eef413b514776a7202fd2cb94f
-26830d74f9ed8e7e4ea4e82e28fa4761	5cbdaf6af370a627c84c43743e99e016
-02f36cf6fe7b187306b2a7d423cafc2c	f41da0c65a8fa3690e6a6877e7112afb
-71e720cd3fcc3cdb99f2f4dc7122e078	a68d5b72c2f98613f511337a59312f78
-54c09bacc963763eb8742fa1da44a968	17b8dff9566f6c98062ad5811c762f44
-e563e0ba5dbf7c9417681c407d016277	74d754b83e2656bcc0cb58033a03e6e4
-1745438c6be58479227d8c0d0220eec5	e22aa8f4c79b6c4bbeb6bcc7f4e1eb26
-1745438c6be58479227d8c0d0220eec5	7fa69773873856d74f68a6824ca4b691
-7e5550d889d46d55df3065d742b5da51	7fa69773873856d74f68a6824ca4b691
-0870b61c5e913cb405d250e80c9ba9b9	10a17b42501166d3bf8fbdff7e1d52b6
-393a71c997d856ed5bb85a9695be6e46	caac3244eefed8cffee878acae427e28
-20f0ae2f661bf20e506108c40c33a6f3	7fa69773873856d74f68a6824ca4b691
-20f0ae2f661bf20e506108c40c33a6f3	2df929d9b6150c082888b66e8129ee3f
-96604499bfc96fcdb6da0faa204ff2fe	7fa69773873856d74f68a6824ca4b691
-3ed0c2ad2c9e6e7b161e6fe0175fe113	17b8dff9566f6c98062ad5811c762f44
-3ed0c2ad2c9e6e7b161e6fe0175fe113	7fa69773873856d74f68a6824ca4b691
-fd9a5c27c20cd89e4ffcc1592563abcf	17b8dff9566f6c98062ad5811c762f44
-a5475ebd65796bee170ad9f1ef746394	17b8dff9566f6c98062ad5811c762f44
-a5475ebd65796bee170ad9f1ef746394	10a17b42501166d3bf8fbdff7e1d52b6
-1fda271217bb4c043c691fc6344087c1	f008a5f1cb81bcfa397f7c1987f2bf55
-cba95a42c53bdc6fbf3ddf9bf10a4069	17b8dff9566f6c98062ad5811c762f44
-cba95a42c53bdc6fbf3ddf9bf10a4069	2df929d9b6150c082888b66e8129ee3f
-fe2c9aea6c702e6b82bc19b4a5d76f90	caac3244eefed8cffee878acae427e28
-fe2c9aea6c702e6b82bc19b4a5d76f90	7fa69773873856d74f68a6824ca4b691
-bb66c20c42c26f1874525c3ab956ec41	7fa69773873856d74f68a6824ca4b691
-bb66c20c42c26f1874525c3ab956ec41	deb8040131c3f6a3caf6a616b34ac482
-aad365e95c3d5fadb5fdf9517c371e89	17b8dff9566f6c98062ad5811c762f44
-88a51a2e269e7026f0734f3ef3244e89	7fa69773873856d74f68a6824ca4b691
-5c1a922f41003eb7a19b570c33b99ff4	2df929d9b6150c082888b66e8129ee3f
-5c1a922f41003eb7a19b570c33b99ff4	b1ba0a25e72cac8ac1f43019f45edcc9
-5c1a922f41003eb7a19b570c33b99ff4	17b8dff9566f6c98062ad5811c762f44
-de506362ebfcf7c632d659aa1f2b465d	7fa69773873856d74f68a6824ca4b691
-1a8780e5531549bd454a04630a74cd4d	caac3244eefed8cffee878acae427e28
-c0d7362d0f52d119f1beb38b12c0b651	17b8dff9566f6c98062ad5811c762f44
-c0d7362d0f52d119f1beb38b12c0b651	10a17b42501166d3bf8fbdff7e1d52b6
-edd506a412c4f830215d4c0f1ac06e55	e22aa8f4c79b6c4bbeb6bcc7f4e1eb26
-edd506a412c4f830215d4c0f1ac06e55	7fa69773873856d74f68a6824ca4b691
-dde31adc1b0014ce659a65c8b4d6ce42	17b8dff9566f6c98062ad5811c762f44
-4267b5081fdfb47c085db24b58d949e0	7fa69773873856d74f68a6824ca4b691
-4267b5081fdfb47c085db24b58d949e0	2df929d9b6150c082888b66e8129ee3f
-8f7de32e3b76c02859d6b007417bd509	7fa69773873856d74f68a6824ca4b691
-332d6b94de399f86d499be57f8a5a5ca	caac3244eefed8cffee878acae427e28
-b73377a1ec60e58d4eeb03347268c11b	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-e3419706e1838c7ce6c25a28bef0c248	7a3808eef413b514776a7202fd2cb94f
-382ed38ecc68052678c5ac5646298b63	7fa69773873856d74f68a6824ca4b691
-382ed38ecc68052678c5ac5646298b63	10a17b42501166d3bf8fbdff7e1d52b6
-213c302f84c5d45929b66a20074075df	a29864963573d7bb061691ff823b97dd
-22c030759ab12f97e941af558566505e	10a17b42501166d3bf8fbdff7e1d52b6
-f5507c2c7beee622b98ade0b93abb7fe	a29864963573d7bb061691ff823b97dd
-f5507c2c7beee622b98ade0b93abb7fe	04ae76937270105919847d05aee582b4
-f5507c2c7beee622b98ade0b93abb7fe	dcd00c11302e3b16333943340d6b4a6b
-41bee031bd7d2fdb14ff48c92f4d7984	7a3808eef413b514776a7202fd2cb94f
-41bee031bd7d2fdb14ff48c92f4d7984	7886613ffb324e4e0065f25868545a63
-41bee031bd7d2fdb14ff48c92f4d7984	34d8a5e79a59df217c6882ee766c850a
-39a464d24bf08e6e8df586eb5fa7ee30	4cfbb125e9878528bab91d12421134d8
-39a464d24bf08e6e8df586eb5fa7ee30	eaa57a9b4248ce3968e718895e1c2f04
-f7c3dcc7ba01d0ead8e0cfb59cdf6afc	924ae2289369a9c1d279d1d59088be64
-4b42093adfc268ce8974a3fa8c4f6bca	a68d5b72c2f98613f511337a59312f78
-70d0b58ef51e537361d676f05ea39c7b	239401e2c0d502df7c9009439bdb5bd3
-6f0eadd7aadf134b1b84d9761808d5ad	a68d5b72c2f98613f511337a59312f78
-6896f30283ad47ceb4a17c8c8d625891	17b8dff9566f6c98062ad5811c762f44
-6896f30283ad47ceb4a17c8c8d625891	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-25118c5df9a2865a8bc97feb4aff4a18	01864d382accf1cdb077e42032b16340
-5a53bed7a0e05c2b865537d96a39646f	262770cfc76233c4f0d7a1e43a36cbf7
-29b7417c5145049d6593a0d88759b9ee	0cf6ece7453aa814e08cb7c33bd39846
-29b7417c5145049d6593a0d88759b9ee	4cfbb125e9878528bab91d12421134d8
-4176aa79eae271d1b82015feceb00571	262770cfc76233c4f0d7a1e43a36cbf7
-4176aa79eae271d1b82015feceb00571	17b8dff9566f6c98062ad5811c762f44
-4176aa79eae271d1b82015feceb00571	0cf6ece7453aa814e08cb7c33bd39846
-c81794404ad68d298e9ceb75f69cf810	de62af4f3af4adf9e8c8791071ddafe3
-c81794404ad68d298e9ceb75f69cf810	0cf6ece7453aa814e08cb7c33bd39846
-c81794404ad68d298e9ceb75f69cf810	a68d5b72c2f98613f511337a59312f78
-d0386252fd85f76fc517724666cf59ae	4fb2ada7c5440a256ed0e03c967fce74
-d0386252fd85f76fc517724666cf59ae	585f02a68092351a078fc43a21a56564
-0cddbf403096e44a08bc37d1e2e99b0f	262770cfc76233c4f0d7a1e43a36cbf7
-0b9d35d460b848ad46ec0568961113bf	4fb2ada7c5440a256ed0e03c967fce74
-546bb05114b78748d142c67cdbdd34fd	17b8dff9566f6c98062ad5811c762f44
-546bb05114b78748d142c67cdbdd34fd	262770cfc76233c4f0d7a1e43a36cbf7
-4ac863b6f6fa5ef02afdd9c1ca2a5e24	17b8dff9566f6c98062ad5811c762f44
-4ac863b6f6fa5ef02afdd9c1ca2a5e24	262770cfc76233c4f0d7a1e43a36cbf7
-1e2bcbb679ccfdea27b28bd1ea9f2e67	a68d5b72c2f98613f511337a59312f78
-1c62394f457ee9a56b0885f622299ea2	01864d382accf1cdb077e42032b16340
-b7e529a8e9af2a2610182b3d3fc33698	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-b7e529a8e9af2a2610182b3d3fc33698	a29864963573d7bb061691ff823b97dd
-b7e529a8e9af2a2610182b3d3fc33698	02d3190ce0f08f32be33da6cc8ec8df8
-64d9f86ed9eeac2695ec7847fe7ea313	01864d382accf1cdb077e42032b16340
-b04d1a151c786ee00092110333873a37	a68d5b72c2f98613f511337a59312f78
-65b029279eb0f99c0a565926566f6759	a68d5b72c2f98613f511337a59312f78
-9bfbfab5220218468ecb02ed546e3d90	a68d5b72c2f98613f511337a59312f78
-9bfbfab5220218468ecb02ed546e3d90	885ba57d521cd859bacf6f76fb37ef7c
-9bfbfab5220218468ecb02ed546e3d90	17b8dff9566f6c98062ad5811c762f44
-be41b6cfece7dfa1b4e4d226fb999607	a68d5b72c2f98613f511337a59312f78
-9c158607f29eaf8f567cc6304ada9c6d	a68d5b72c2f98613f511337a59312f78
-ca7e3b5c1860730cfd7b400de217fef2	60e1fa5bfa060b5fff1db1ca1bae4f99
-8f4e7c5f66d6ee5698c01de29affc562	a29864963573d7bb061691ff823b97dd
-f0bf2458b4c1a22fc329f036dd439f08	a29864963573d7bb061691ff823b97dd
-25fa2cdf2be085aa5394db743677fb69	2894c332092204f7389275e1359f8e9b
-32917b03e82a83d455dd6b7f8609532c	eaa57a9b4248ce3968e718895e1c2f04
-0bcf509f7eb2db3b663f5782c8c4a86e	caac3244eefed8cffee878acae427e28
-4ffc374ef33b65b6acb388167ec542c0	caac3244eefed8cffee878acae427e28
-0c2277f470a7e9a2d70195ba32e1b08a	caac3244eefed8cffee878acae427e28
-42c9b99c6b409bc9990658f6e7829542	caac3244eefed8cffee878acae427e28
-bb51d2b900ba638568e48193aada8a6c	a29864963573d7bb061691ff823b97dd
-92df3fd170b0285cd722e855a2968393	deb8040131c3f6a3caf6a616b34ac482
-b20a4217acaf4316739c6a5f6679ef60	17b8dff9566f6c98062ad5811c762f44
-b20a4217acaf4316739c6a5f6679ef60	10a17b42501166d3bf8fbdff7e1d52b6
-b20a4217acaf4316739c6a5f6679ef60	deb8040131c3f6a3caf6a616b34ac482
-34b1dade51ffdab56daebcf6ac981371	8c42e2739ed83a54e5b2781b504c92de
-34b1dade51ffdab56daebcf6ac981371	bb9a7990e74371142d6f4f02353a0db0
-9d57ebbd1d3b135839b78221388394a1	04ae76937270105919847d05aee582b4
-9d57ebbd1d3b135839b78221388394a1	4cfbb125e9878528bab91d12421134d8
-9d57ebbd1d3b135839b78221388394a1	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-1833e2cfde2a7cf621d60288da14830c	04ae76937270105919847d05aee582b4
-1833e2cfde2a7cf621d60288da14830c	dcd00c11302e3b16333943340d6b4a6b
-1833e2cfde2a7cf621d60288da14830c	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-1833e2cfde2a7cf621d60288da14830c	7b327f171695316c16ddca1843a81531
-178227c5aef3b3ded144b9e19867a370	10a17b42501166d3bf8fbdff7e1d52b6
-178227c5aef3b3ded144b9e19867a370	17b8dff9566f6c98062ad5811c762f44
-351af29ee203c740c3209a0e0a8e9c22	7fa69773873856d74f68a6824ca4b691
-b74881ac32a010e91ac7fcbcfebe210e	7fa69773873856d74f68a6824ca4b691
-75cde58f0e5563f287f2d4afb0ce4b7e	17b8dff9566f6c98062ad5811c762f44
-75cde58f0e5563f287f2d4afb0ce4b7e	10a17b42501166d3bf8fbdff7e1d52b6
-bbdbdf297183a1c24be29ed89711f744	2df929d9b6150c082888b66e8129ee3f
-bbdbdf297183a1c24be29ed89711f744	a29864963573d7bb061691ff823b97dd
-6e512379810ecf71206459e6a1e64154	a29864963573d7bb061691ff823b97dd
-6e512379810ecf71206459e6a1e64154	17b8dff9566f6c98062ad5811c762f44
-6e512379810ecf71206459e6a1e64154	a68d5b72c2f98613f511337a59312f78
-f3b65f675d13d81c12d3bb30b0190cd1	fd00614e73cb66fd71ab13c970a074d8
-f3b65f675d13d81c12d3bb30b0190cd1	caac3244eefed8cffee878acae427e28
-f3b65f675d13d81c12d3bb30b0190cd1	7b327f171695316c16ddca1843a81531
-1918775515a9c7b8db011fd35a443b82	17b8dff9566f6c98062ad5811c762f44
-1918775515a9c7b8db011fd35a443b82	1c800aa97116d9afd83204d65d50199a
-15bf34427540dd1945e5992583412b2f	2336f976c6d510d2a269a746a7756232
-ba8033b8cfb1ebfc91a5d03b3a268d9f	5515abb95e50f2f39c3072b4fef777e0
-fd85bfffd5a0667738f6110281b25db8	17b8dff9566f6c98062ad5811c762f44
-fd85bfffd5a0667738f6110281b25db8	caac3244eefed8cffee878acae427e28
-6e4b91e3d1950bcad012dbfbdd0fff09	17b8dff9566f6c98062ad5811c762f44
-6e4b91e3d1950bcad012dbfbdd0fff09	a29864963573d7bb061691ff823b97dd
-32a02a8a7927de4a39e9e14f2dc46ac6	deb8040131c3f6a3caf6a616b34ac482
-747f992097b9e5c9df7585931537150a	17b8dff9566f6c98062ad5811c762f44
-747f992097b9e5c9df7585931537150a	10a17b42501166d3bf8fbdff7e1d52b6
-19819b153eb0990c821bc106e34ab3e1	a29864963573d7bb061691ff823b97dd
-19819b153eb0990c821bc106e34ab3e1	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-13c260ca90c0f47c9418790429220899	17b8dff9566f6c98062ad5811c762f44
-b619e7f3135359e3f778e90d1942e6f5	a29864963573d7bb061691ff823b97dd
-0ddd0b1b6329e9cb9a64c4d947e641a8	17b8dff9566f6c98062ad5811c762f44
-30354302ae1c0715ccad2649da3d9443	1868ffbe3756a1c3f58300f45aa5e1d3
-89eec5d48b8969bf61eea38e4b3cfdbf	9ba0204bc48d4b8721344dd83b832afe
-703b1360391d2aef7b9ec688b00849bb	10a17b42501166d3bf8fbdff7e1d52b6
-703b1360391d2aef7b9ec688b00849bb	17b8dff9566f6c98062ad5811c762f44
-b4b46e6ce2c563dd296e8bae768e1b9d	a68d5b72c2f98613f511337a59312f78
-5c8c8b827ae259b8e4f8cb567a577a3e	34d8a5e79a59df217c6882ee766c850a
-5c8c8b827ae259b8e4f8cb567a577a3e	30a1a8d73498d142609138c37ac3b9f3
-7f00429970ee9fd2a3185f777ff79922	61bb65b2791647f828d25a985a2e60fa
-92e2cf901fe43bb77d99af2ff42ade77	8c42e2739ed83a54e5b2781b504c92de
-92e2cf901fe43bb77d99af2ff42ade77	a68d5b72c2f98613f511337a59312f78
-1a1bfb986176c0ba845ae4f43d027f58	273112316e7fab5a848516666e3a57d1
-7ecdb1a0eb7c01d081acf2b7e11531c0	8c42e2739ed83a54e5b2781b504c92de
-094caa14a3a49bf282d8f0f262a01f43	885ba57d521cd859bacf6f76fb37ef7c
-094caa14a3a49bf282d8f0f262a01f43	156968bdeb9fd240ae047867022d703b
-110cb86243320511676f788dbc46f633	17b8dff9566f6c98062ad5811c762f44
-110cb86243320511676f788dbc46f633	a29864963573d7bb061691ff823b97dd
-110cb86243320511676f788dbc46f633	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-8e9f5b1fc0e61f9a289aba4c59e49521	a29864963573d7bb061691ff823b97dd
-014dbc80621be3ddc6dd0150bc6571ff	17b8dff9566f6c98062ad5811c762f44
-014dbc80621be3ddc6dd0150bc6571ff	a29864963573d7bb061691ff823b97dd
-536d1ccb9cce397f948171765c0120d4	65d1fb3d4d28880c964b985cf335e04c
-536d1ccb9cce397f948171765c0120d4	885ba57d521cd859bacf6f76fb37ef7c
-536d1ccb9cce397f948171765c0120d4	ea9565886c02dbdc4892412537e607d7
-15b70a4565372e2da0d330568fe1d795	7fa69773873856d74f68a6824ca4b691
-8e331f2ea604deea899bfd0a494309ba	7fa69773873856d74f68a6824ca4b691
-46e1d00c2019ff857c307085c58e0015	7fa69773873856d74f68a6824ca4b691
-46e1d00c2019ff857c307085c58e0015	deb8040131c3f6a3caf6a616b34ac482
-6afdd78eac862dd63833a3ce5964b74b	7fa69773873856d74f68a6824ca4b691
-6afdd78eac862dd63833a3ce5964b74b	e22aa8f4c79b6c4bbeb6bcc7f4e1eb26
-fb5f71046fd15a0a22d7bda38971f142	1c800aa97116d9afd83204d65d50199a
-fb5f71046fd15a0a22d7bda38971f142	17b8dff9566f6c98062ad5811c762f44
-512914f31042dacd2a05bfcebaacdb96	17b8dff9566f6c98062ad5811c762f44
-d96d9dac0f19368234a1fe2d4daf7f7c	7fa69773873856d74f68a6824ca4b691
-5aa3856374df5daa99d3d33e6a38a865	10a17b42501166d3bf8fbdff7e1d52b6
-5aa3856374df5daa99d3d33e6a38a865	17b8dff9566f6c98062ad5811c762f44
-5aa3856374df5daa99d3d33e6a38a865	e3bae98a1c48ce980083c79f6416c0f6
-e83655f0458b6c309866fbde556be35a	17b8dff9566f6c98062ad5811c762f44
-92dd59a949dfceab979dd25ac858f204	17b8dff9566f6c98062ad5811c762f44
-92dd59a949dfceab979dd25ac858f204	10a17b42501166d3bf8fbdff7e1d52b6
-ee1bc524d6d3410e94a99706dcb12319	10a17b42501166d3bf8fbdff7e1d52b6
-ee1bc524d6d3410e94a99706dcb12319	7fa69773873856d74f68a6824ca4b691
-c09ffd48de204e4610d474ade2cf3a0d	10a17b42501166d3bf8fbdff7e1d52b6
-c09ffd48de204e4610d474ade2cf3a0d	17b8dff9566f6c98062ad5811c762f44
-bfff088b67e0fc6d1b80dbd6b6f0620c	d34d0c161bbb04228af45f99d2b407a6
-bfff088b67e0fc6d1b80dbd6b6f0620c	6add228b14f132e14ae9da754ef070c5
-3e7f48e97425d4c532a0787e54843863	353d5e79c4f0f22dc9fd189fb293b18c
-233dedc0bee8bbdf7930eab3dd54daee	0ae61bd0474e04c9f1195d4baa0213a0
-80f19b325c934c8396780d0c66a87c99	dcd00c11302e3b16333943340d6b4a6b
-3ccca65d3d9843b81f4e251dcf8a3e8c	4cfbb125e9878528bab91d12421134d8
-3ccca65d3d9843b81f4e251dcf8a3e8c	0ae61bd0474e04c9f1195d4baa0213a0
-3ccca65d3d9843b81f4e251dcf8a3e8c	9a284efda4d46636bd9d5298dfea1335
-9144b4f0da4c96565c47c38f0bc16593	da832711951e70811ef7533835637961
-8b3d594047e4544f608c2ebb151aeb45	a29864963573d7bb061691ff823b97dd
-ca03a570b4d4a22329359dc105a9ef22	a29864963573d7bb061691ff823b97dd
-e83655f0458b6c309866fbde556be35a	a29864963573d7bb061691ff823b97dd
-f5eaa9c89bd215868235b0c068050883	a68d5b72c2f98613f511337a59312f78
-dcd3968ac5b1ab25328f4ed42cdf2e2b	a29864963573d7bb061691ff823b97dd
-dcd3968ac5b1ab25328f4ed42cdf2e2b	17b8dff9566f6c98062ad5811c762f44
-6e25aa27fcd893613fac13b0312fe36d	a29864963573d7bb061691ff823b97dd
-6e25aa27fcd893613fac13b0312fe36d	17b8dff9566f6c98062ad5811c762f44
-63e961dd2daa48ed1dade27a54f03ec4	17b8dff9566f6c98062ad5811c762f44
-9f10d335198e90990f3437c5733468e7	17b8dff9566f6c98062ad5811c762f44
-9f10d335198e90990f3437c5733468e7	885ba57d521cd859bacf6f76fb37ef7c
-9f10d335198e90990f3437c5733468e7	0cf6ece7453aa814e08cb7c33bd39846
-9f10d335198e90990f3437c5733468e7	9c093ec7867ba1df61e27a5943168b90
-4cc6d79ef4cf3af13b6c9b77783e688b	01864d382accf1cdb077e42032b16340
-4cc6d79ef4cf3af13b6c9b77783e688b	7a3808eef413b514776a7202fd2cb94f
-da34d04ff19376defc2facc252e52cf0	7fa69773873856d74f68a6824ca4b691
-eaf446aca5ddd602d0ab194667e7bec1	a68d5b72c2f98613f511337a59312f78
-b34f0dad8c934ee71aaabb2a675f9822	885ba57d521cd859bacf6f76fb37ef7c
-b34f0dad8c934ee71aaabb2a675f9822	17b8dff9566f6c98062ad5811c762f44
-b34f0dad8c934ee71aaabb2a675f9822	1c800aa97116d9afd83204d65d50199a
-c6458620084029f07681a55746ee4d69	a68d5b72c2f98613f511337a59312f78
-c6458620084029f07681a55746ee4d69	a29864963573d7bb061691ff823b97dd
-ee325100d772dd075010b61b6f33c82a	17b8dff9566f6c98062ad5811c762f44
-950d43371e8291185e524550ad3fd0df	ea9565886c02dbdc4892412537e607d7
-950d43371e8291185e524550ad3fd0df	17b8dff9566f6c98062ad5811c762f44
-950d43371e8291185e524550ad3fd0df	10a17b42501166d3bf8fbdff7e1d52b6
-2aa7757363ff360f3a08283c1d157b2c	17b8dff9566f6c98062ad5811c762f44
-d71218f2abfdd51d95ba7995b93bd536	a68d5b72c2f98613f511337a59312f78
-186aab3d817bd38f76c754001b0ab04d	585f02a68092351a078fc43a21a56564
-186aab3d817bd38f76c754001b0ab04d	a29864963573d7bb061691ff823b97dd
-12c0763f59f7697824567a3ca32191db	deb8040131c3f6a3caf6a616b34ac482
-4e14f71c5702f5f71ad7de50587e2409	a279b219de7726798fc2497d48bc0402
-4e14f71c5702f5f71ad7de50587e2409	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-4e14f71c5702f5f71ad7de50587e2409	a29864963573d7bb061691ff823b97dd
-8f7d02638c253eb2d03118800c623203	2df929d9b6150c082888b66e8129ee3f
-d2ec9ebbccaa3c6925b86d1bd528d12f	17b8dff9566f6c98062ad5811c762f44
-2cca468dcaea0a807f756b1de2b3ec7b	a68d5b72c2f98613f511337a59312f78
-2cca468dcaea0a807f756b1de2b3ec7b	17b8dff9566f6c98062ad5811c762f44
-c8c012313f10e2d0830f3fbc5afca619	a68d5b72c2f98613f511337a59312f78
-c8c012313f10e2d0830f3fbc5afca619	585f02a68092351a078fc43a21a56564
-cf3ecbdc9b5ae9c5a87ab05403691350	a68d5b72c2f98613f511337a59312f78
-cf3ecbdc9b5ae9c5a87ab05403691350	17b8dff9566f6c98062ad5811c762f44
-9323fc63b40460bcb68a7ad9840bad5a	17b8dff9566f6c98062ad5811c762f44
-9323fc63b40460bcb68a7ad9840bad5a	a29864963573d7bb061691ff823b97dd
-6429807f6febbf061ac85089a8c3173d	17b8dff9566f6c98062ad5811c762f44
-7b959644258e567b32d7c38e21fdb6fa	a68d5b72c2f98613f511337a59312f78
-b08c5a0f666c5f8a83a7bcafe51ec49b	a68d5b72c2f98613f511337a59312f78
-eb626abaffa54be81830da1b29a3f1d8	17b8dff9566f6c98062ad5811c762f44
-dd663d37df2cb0b5e222614dd720f6d3	a68d5b72c2f98613f511337a59312f78
-71aabfaa43d427516f4020c7178de31c	a29864963573d7bb061691ff823b97dd
-71aabfaa43d427516f4020c7178de31c	01864d382accf1cdb077e42032b16340
-32f27ae0d5337bb62c636e3f6f17b0ff	a68d5b72c2f98613f511337a59312f78
-d9a6c1fcbafa92784f501ca419fe4090	276dd0e596bbc541942c8cd9cc2004e0
-d9a6c1fcbafa92784f501ca419fe4090	a68d5b72c2f98613f511337a59312f78
-afd755c6a62ac0a0947a39c4f2cd2c20	17b8dff9566f6c98062ad5811c762f44
-afd755c6a62ac0a0947a39c4f2cd2c20	caac3244eefed8cffee878acae427e28
-b69b0e9285e4fa15470b0969836ac5ae	a68d5b72c2f98613f511337a59312f78
-79d924bae828df8e676ba27e5dfc5f42	04ae76937270105919847d05aee582b4
-79d924bae828df8e676ba27e5dfc5f42	585f02a68092351a078fc43a21a56564
-fe1f86f611c34fba898e4c90b71ec981	17b8dff9566f6c98062ad5811c762f44
-92e67ef6f0f8c77b1dd631bd3b37ebca	17b8dff9566f6c98062ad5811c762f44
-b5d1848944ce92433b626211ed9e46f8	17b8dff9566f6c98062ad5811c762f44
-62165afb63fc004e619dff4d2132517c	17b8dff9566f6c98062ad5811c762f44
-62165afb63fc004e619dff4d2132517c	8b7bdc272dd85d5058f8fbaa14e66002
-84557a1d9eb96a680c0557724e1d0532	17b8dff9566f6c98062ad5811c762f44
-84557a1d9eb96a680c0557724e1d0532	a29864963573d7bb061691ff823b97dd
-ead662696e0486cb7a478ecd13a0b5c5	7fa69773873856d74f68a6824ca4b691
-ead662696e0486cb7a478ecd13a0b5c5	10a17b42501166d3bf8fbdff7e1d52b6
-8c22a88267727dd513bf8ca278661e4d	17b8dff9566f6c98062ad5811c762f44
-541455f74d6f393174ff14b99e01b22d	fd00614e73cb66fd71ab13c970a074d8
-90bebabe0c80676a4f6207ee0f8caa4c	1e612d6c48bc9652afeb616536fced51
-ee8cde73a364c2b066f795edda1a303a	4cfbb125e9878528bab91d12421134d8
-92e25f3ba88109b777bd65b3b3de28a9	17b8dff9566f6c98062ad5811c762f44
-92e25f3ba88109b777bd65b3b3de28a9	a68d5b72c2f98613f511337a59312f78
-3e3b4203ce868f55b084eb4f2da535d3	7fa69773873856d74f68a6824ca4b691
-88ae6d397912fe633198a78a3b10f82e	caac3244eefed8cffee878acae427e28
-d2ec80fcff98ecb676da474dfcb5fe5c	deb8040131c3f6a3caf6a616b34ac482
-e31fabfff3891257949efc248dfa97e2	7fa69773873856d74f68a6824ca4b691
-e31fabfff3891257949efc248dfa97e2	01864d382accf1cdb077e42032b16340
-4f6ae7ce964e64fdc143602aaaab1c26	7fa69773873856d74f68a6824ca4b691
-fe1fbc7d376820477e38b5fa497e4509	17b8dff9566f6c98062ad5811c762f44
-fe1fbc7d376820477e38b5fa497e4509	10a17b42501166d3bf8fbdff7e1d52b6
-fe1fbc7d376820477e38b5fa497e4509	01864d382accf1cdb077e42032b16340
-fe1fbc7d376820477e38b5fa497e4509	7fa69773873856d74f68a6824ca4b691
-b4087680a00055c7b9551c6a1ef50816	caac3244eefed8cffee878acae427e28
-986a4f4e41790e819dc8b2a297aa8c87	82f71c08ea9ddc4fa9dfb06236a45ba1
-e318f5bc96fd248b69f6a969a320769e	6e8e259537338c1ffacf0df56249227a
-e318f5bc96fd248b69f6a969a320769e	7fa69773873856d74f68a6824ca4b691
-56525146be490541a00c20a1dab0a465	7fa69773873856d74f68a6824ca4b691
-56525146be490541a00c20a1dab0a465	10a17b42501166d3bf8fbdff7e1d52b6
-2f39cfcedf45336beb2e966e80b93e22	6e8e259537338c1ffacf0df56249227a
-2f39cfcedf45336beb2e966e80b93e22	7fa69773873856d74f68a6824ca4b691
-51053ffab2737bd21724ed0b7e6c56f7	caac3244eefed8cffee878acae427e28
-51053ffab2737bd21724ed0b7e6c56f7	1c800aa97116d9afd83204d65d50199a
-51053ffab2737bd21724ed0b7e6c56f7	7fa69773873856d74f68a6824ca4b691
-869d4f93046289e11b591fc7a740bc43	7fa69773873856d74f68a6824ca4b691
-5b3c70181a572c8d92d906ca20298d93	caac3244eefed8cffee878acae427e28
-be3c26bf034e9e62057314f3945f87be	a14c7f19780155d998b8c0d48c4f2f61
-be3c26bf034e9e62057314f3945f87be	17b8dff9566f6c98062ad5811c762f44
-37b93f83b5fe94e766346ef212283282	6e8e259537338c1ffacf0df56249227a
-37b93f83b5fe94e766346ef212283282	7fa69773873856d74f68a6824ca4b691
-dbde8de43043d69c4fdd3e50a72b859d	6e8e259537338c1ffacf0df56249227a
-dbde8de43043d69c4fdd3e50a72b859d	7fa69773873856d74f68a6824ca4b691
-dbde8de43043d69c4fdd3e50a72b859d	deb8040131c3f6a3caf6a616b34ac482
-0f512371d62ae34741d14dde50ab4529	deb8040131c3f6a3caf6a616b34ac482
-fd1bd629160356260c497da84df860e2	7fa69773873856d74f68a6824ca4b691
-3dba6c9259786defe62551e38665a94a	7fa69773873856d74f68a6824ca4b691
-9d969d25c9f506c5518bb090ad5f8266	6e8e259537338c1ffacf0df56249227a
-9d969d25c9f506c5518bb090ad5f8266	7fa69773873856d74f68a6824ca4b691
-34d29649cb20a10a5e6b59c531077a59	6e8e259537338c1ffacf0df56249227a
-34d29649cb20a10a5e6b59c531077a59	7fa69773873856d74f68a6824ca4b691
-c02f12329daf99e6297001ef684d6285	10a17b42501166d3bf8fbdff7e1d52b6
-f64162c264d5679d130b6e8ae84d704e	01864d382accf1cdb077e42032b16340
-f64162c264d5679d130b6e8ae84d704e	262770cfc76233c4f0d7a1e43a36cbf7
-0674a20e29104e21d141843a86421323	17b8dff9566f6c98062ad5811c762f44
-24dd5b3de900b9ee06f913a550beb64c	a68d5b72c2f98613f511337a59312f78
-fe7838d63434580c47798cbc5c2c8c63	a68d5b72c2f98613f511337a59312f78
-e47c5fcf4a752dfcfbccaab5988193ef	17b8dff9566f6c98062ad5811c762f44
-e47c5fcf4a752dfcfbccaab5988193ef	a29864963573d7bb061691ff823b97dd
-e47c5fcf4a752dfcfbccaab5988193ef	93cce11930403f5b3ce8938a2bde5efa
-3d482a4abe7d814a741b06cb6306d598	262770cfc76233c4f0d7a1e43a36cbf7
-3d482a4abe7d814a741b06cb6306d598	89089c3efdb2f18179df6d476e5759de
-3d482a4abe7d814a741b06cb6306d598	01864d382accf1cdb077e42032b16340
-856256d0fddf6bfd898ef43777a80f0c	01864d382accf1cdb077e42032b16340
-b5bc9b34286d4d4943fc301fe9b46e46	a68d5b72c2f98613f511337a59312f78
-589a30eb4a7274605385d3414ae82aaa	01864d382accf1cdb077e42032b16340
-d79d3a518bd9912fb38fa2ef71c39750	7a3808eef413b514776a7202fd2cb94f
-5ff09619b7364339a105a1cbcb8d65fd	17b8dff9566f6c98062ad5811c762f44
-5ff09619b7364339a105a1cbcb8d65fd	a29864963573d7bb061691ff823b97dd
-5ff09619b7364339a105a1cbcb8d65fd	01864d382accf1cdb077e42032b16340
-2eb6fb05d553b296096973cb97912cc0	04ae76937270105919847d05aee582b4
-e163173b9350642f7c855bf37c144ce0	aca2a3c07f76ae685ae818b312e025c5
-e163173b9350642f7c855bf37c144ce0	39d9d9f9143880553c5e2da25c87f33d
-e163173b9350642f7c855bf37c144ce0	59716c97497eb9694541f7c3d37b1a4d
-e163173b9350642f7c855bf37c144ce0	273112316e7fab5a848516666e3a57d1
-e163173b9350642f7c855bf37c144ce0	ead7038498db3f93ac79d28407a6d47c
-e163173b9350642f7c855bf37c144ce0	cd841371c5cd35c94bb823be9f53cf2f
-50681f5168e67b62daa1837d8f693001	9a284efda4d46636bd9d5298dfea1335
-50681f5168e67b62daa1837d8f693001	0cb6959de39db97ee5fad81faa008d8f
-50681f5168e67b62daa1837d8f693001	6add228b14f132e14ae9da754ef070c5
-69af98a8916998443129c057ee04aec4	a68d5b72c2f98613f511337a59312f78
-69af98a8916998443129c057ee04aec4	17b8dff9566f6c98062ad5811c762f44
-57338bd22a6c5ba32f90981ffb25ef23	17b8dff9566f6c98062ad5811c762f44
-48aeffb54173796a88ef8c4eb06dbf10	a29864963573d7bb061691ff823b97dd
-48aeffb54173796a88ef8c4eb06dbf10	17b8dff9566f6c98062ad5811c762f44
-ada3962af4845c243fcd1ccafc815b09	04ae76937270105919847d05aee582b4
-07759c4afc493965a5420e03bdc9b773	17b8dff9566f6c98062ad5811c762f44
-8989ab42027d29679d1dedc518eb04bd	f0095594f17b3793be8291117582f96b
-8989ab42027d29679d1dedc518eb04bd	7a3808eef413b514776a7202fd2cb94f
-54f89c837a689f7f27667efb92e3e6b1	01864d382accf1cdb077e42032b16340
-266674d0a44a3a0102ab80021ddfd451	7a3808eef413b514776a7202fd2cb94f
-266674d0a44a3a0102ab80021ddfd451	01864d382accf1cdb077e42032b16340
-50e7b1ba464091976138ec6a57b08ba0	04ae76937270105919847d05aee582b4
-a51211ef8cbbf7b49bfb27c099c30ce1	01864d382accf1cdb077e42032b16340
-0dc9cb94cdd3a9e89383d344a103ed5b	17b8dff9566f6c98062ad5811c762f44
-c45ca1e791f2849d9d11b3948fdefb74	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-c45ca1e791f2849d9d11b3948fdefb74	a29864963573d7bb061691ff823b97dd
-c45ca1e791f2849d9d11b3948fdefb74	2e607ef3a19cf3de029e2c5882896d33
-c45ca1e791f2849d9d11b3948fdefb74	bb273189d856ee630d92fbc0274178bb
-edb40909b64e73b547843287929818de	7fa69773873856d74f68a6824ca4b691
-897edb97d775897f69fa168a88b01c19	caac3244eefed8cffee878acae427e28
-b05f3966288598b02cda4a41d6d1eb6b	7fa69773873856d74f68a6824ca4b691
-c7d1a2a30826683fd366e7fd6527e79c	1868ffbe3756a1c3f58300f45aa5e1d3
-6ff4735b0fc4160e081440b3f7238925	17b8dff9566f6c98062ad5811c762f44
-100691b7539d5ae455b6f4a18394420c	17b8dff9566f6c98062ad5811c762f44
-d5282bd6b63b4cd51b50b40d192f1161	a48199bd07eec68b1214594af75d7eb3
-d5282bd6b63b4cd51b50b40d192f1161	aca2a3c07f76ae685ae818b312e025c5
-d5282bd6b63b4cd51b50b40d192f1161	08cbc2781f56d15c2c374824c7428a8c
-d5282bd6b63b4cd51b50b40d192f1161	0077c87e06d736b19d6b3978f5e5e6e2
-d5282bd6b63b4cd51b50b40d192f1161	2a78330cc0de19f12ae9c7de65b9d5d5
-5159fd46698ae21d56f1684c2041bd79	ff7aa8ca226e1b753b0a71d7f0f2e174
-5159fd46698ae21d56f1684c2041bd79	7a3808eef413b514776a7202fd2cb94f
-5159fd46698ae21d56f1684c2041bd79	f41da0c65a8fa3690e6a6877e7112afb
-c63ecd19a0ca74c22dfcf3063c9805d2	01864d382accf1cdb077e42032b16340
-e08f00b43f7aa539eb60cfa149afd92e	17b8dff9566f6c98062ad5811c762f44
-793955e5d62f9b22bae3b59463c9ef63	01864d382accf1cdb077e42032b16340
-e4f2a1b2efa9caa67e58fa9610903ef0	a68d5b72c2f98613f511337a59312f78
-57f003f2f413eedf53362b020f467be4	a29864963573d7bb061691ff823b97dd
-57f003f2f413eedf53362b020f467be4	585f02a68092351a078fc43a21a56564
-5ef6a0f70220936a0158ad66fd5d9082	17b8dff9566f6c98062ad5811c762f44
-25ebb3d62ad1160c96bbdea951ad2f34	a29864963573d7bb061691ff823b97dd
-d97a4c5c71013baac562c2b5126909e1	ef5131009b7ced0b35ea49c8c7690cef
-d97a4c5c71013baac562c2b5126909e1	5fa721b23d1df57306a710b77d7897d6
-1ebe59bfb566a19bc3ce5f4fb6c79cd3	dcd00c11302e3b16333943340d6b4a6b
-1ebe59bfb566a19bc3ce5f4fb6c79cd3	84caaa55a818fdacc56b1a78e3059e3b
-5f572d201a24500b2db6eca489a6a620	de62af4f3af4adf9e8c8791071ddafe3
-5f572d201a24500b2db6eca489a6a620	0cf6ece7453aa814e08cb7c33bd39846
-ac6dc9583812a034be2f5aacbf439236	2df929d9b6150c082888b66e8129ee3f
-7f499363c322c1243827700c67a7591c	7a3808eef413b514776a7202fd2cb94f
-7f499363c322c1243827700c67a7591c	caac3244eefed8cffee878acae427e28
-2040754b0f9589a89ce88912bcf0648e	7a3808eef413b514776a7202fd2cb94f
-13cd421d8a1cb48800543b9317aa2f52	01864d382accf1cdb077e42032b16340
-5c1a922f41003eb7a19b570c33b99ff4	86990837f323dde52a011a1f2d1eca0d
-4b9f3b159347c34232c9f4b220cb22de	2df929d9b6150c082888b66e8129ee3f
-81a17f1bf76469b18fbe410d8ec77da8	819de896b7c481c2b870bcf4ca7965fc
-81a86312a4aa3660f273d6ed5e4a6c7d	4c4f4d32429ac8424cb110b4117036e4
-15137b95180ccc986f6321acffb9cb6f	7fa69773873856d74f68a6824ca4b691
-546f8a4844ac636dd18025dcc673a3ab	caac3244eefed8cffee878acae427e28
-20d32d36893828d060096b2cd149820b	7a3808eef413b514776a7202fd2cb94f
-20d32d36893828d060096b2cd149820b	caac3244eefed8cffee878acae427e28
-692649c1372f37ed50339b91337e7fec	17b8dff9566f6c98062ad5811c762f44
-692649c1372f37ed50339b91337e7fec	a29864963573d7bb061691ff823b97dd
-692649c1372f37ed50339b91337e7fec	d5a9c37bc91d6d5d55a3c2e38c3bf97d
-0646225016fba179076d7df56260d1b2	e8376ca6a0ac30b2ad0d64de6061adab
-0646225016fba179076d7df56260d1b2	a68d5b72c2f98613f511337a59312f78
-ce5e821f2dcc57569eae793f628c99cf	262770cfc76233c4f0d7a1e43a36cbf7
-ce5e821f2dcc57569eae793f628c99cf	17b8dff9566f6c98062ad5811c762f44
-cd11b262d721d8b3f35ad2d2af8431dd	17b8dff9566f6c98062ad5811c762f44
-15cee64305c1b40a4fac10c26ffa227d	17b8dff9566f6c98062ad5811c762f44
-3771bd5f354df475660a24613fcb7a8c	c7d1df50d4cb1e00b5b5b3a34a493b90
-f43bb3f980f58c66fc81874924043946	cb6ef856481bc776bba38fbf15b8b3fb
-f43bb3f980f58c66fc81874924043946	8c42e2739ed83a54e5b2781b504c92de
-069cdf9184e271a3c6d45ad7e86fcac2	17b8dff9566f6c98062ad5811c762f44
-069cdf9184e271a3c6d45ad7e86fcac2	a29864963573d7bb061691ff823b97dd
-e9782409a3511c3535149cdfb5b76364	e22aa8f4c79b6c4bbeb6bcc7f4e1eb26
-e9782409a3511c3535149cdfb5b76364	7fa69773873856d74f68a6824ca4b691
-49f6021766f78bffb3f824eb199acfbc	17b8dff9566f6c98062ad5811c762f44
-49f6021766f78bffb3f824eb199acfbc	a68d5b72c2f98613f511337a59312f78
-f04de6fafc611682779eb2eb36bdbe25	4cfbb125e9878528bab91d12421134d8
-f04de6fafc611682779eb2eb36bdbe25	eaa57a9b4248ce3968e718895e1c2f04
-f7c31a68856cab2620244be2df27c728	02c4d46b0568d199466ef1baa339adc8
-ae2056f2540325e2de91f64f5ac130b6	1c800aa97116d9afd83204d65d50199a
-ae2056f2540325e2de91f64f5ac130b6	4c4f4d32429ac8424cb110b4117036e4
-eced087124a41417845c0b0f4ff44ba9	51a0accd339e27727689fc781c4df015
-eced087124a41417845c0b0f4ff44ba9	5bf88dc6f6501943cc5bc4c42c71b36b
-edaf03c0c66aa548df3cebdae0f94545	a68d5b72c2f98613f511337a59312f78
-9abdb4a0588186fc4425b29080e820a2	4cfbb125e9878528bab91d12421134d8
-16cbdd4df5f89d771dccfa1111d7f4bc	2d1930ea91c39cb44ce654c634bd5113
-06a4594d3b323539e9dc4820625d01b8	4cfbb125e9878528bab91d12421134d8
-b5c7675d6faefd09e871a6c1157e9353	4cfbb125e9878528bab91d12421134d8
-b5c7675d6faefd09e871a6c1157e9353	0ae61bd0474e04c9f1195d4baa0213a0
-1683f5557c9db93b35d1d2ae450baa21	a68d5b72c2f98613f511337a59312f78
-1683f5557c9db93b35d1d2ae450baa21	585f02a68092351a078fc43a21a56564
-1683f5557c9db93b35d1d2ae450baa21	a29864963573d7bb061691ff823b97dd
-ae653e4f46c5928cc4b4b171efbcf881	a68d5b72c2f98613f511337a59312f78
-df8457281db2cba8bbcb4b3b80f2b9a3	04ae76937270105919847d05aee582b4
-f85df6e18a73a6d1f5ccb59ee51558ae	4fb2ada7c5440a256ed0e03c967fce74
-0308321fc4f75ddaed8208c24f2cb918	7fa69773873856d74f68a6824ca4b691
-4ceb1f68d8a260c644c25799629a5615	17b8dff9566f6c98062ad5811c762f44
-7acb475eda543ccd0622d546c5772c5a	e22aa8f4c79b6c4bbeb6bcc7f4e1eb26
-7acb475eda543ccd0622d546c5772c5a	7fa69773873856d74f68a6824ca4b691
-ba8d3efe842e0755020a2f1bc5533585	04ae76937270105919847d05aee582b4
-5a154476dd67358f4dab8500076dece3	a29864963573d7bb061691ff823b97dd
-5a154476dd67358f4dab8500076dece3	17b8dff9566f6c98062ad5811c762f44
-b8e18040dc07eead8e6741733653a740	c56931e6d30371f655de27ecbf6c50f0
-0bc244b6aa99080c3d37fea06d328193	9a9f894a69bab7649b304cb577a96566
-b46e412d7f90e277a1b9370cfeb26abe	6add228b14f132e14ae9da754ef070c5
-49920f80faa980ca10fea8f31ddd5fc9	4cfbb125e9878528bab91d12421134d8
-fddfe79923a5373a44237e0e60f5c845	2a78330cc0de19f12ae9c7de65b9d5d5
-fddfe79923a5373a44237e0e60f5c845	5f05cefd0f6a07508d21a1d2be16d9c7
-277ce66a47017ca1ce55714d5d2232b2	04ae76937270105919847d05aee582b4
-2ad8a3ceb96c6bf74695f896999019d8	262770cfc76233c4f0d7a1e43a36cbf7
-fc4734cc48ce1595c9dbbe806f663af8	caac3244eefed8cffee878acae427e28
-567ddbaeec9bc3c5f0348a21ebd914b1	bb273189d856ee630d92fbc0274178bb
-25cde5325befa9538b771717514351fb	a29864963573d7bb061691ff823b97dd
-25cde5325befa9538b771717514351fb	04ae76937270105919847d05aee582b4
-cf2676445aa6abcc43a4b0d4b01b42a1	585f02a68092351a078fc43a21a56564
-3005cc8298f189f94923611386015c78	4fb2ada7c5440a256ed0e03c967fce74
-3005cc8298f189f94923611386015c78	585f02a68092351a078fc43a21a56564
-7f2679aa5b1116cc22bab4ee10018f59	a68d5b72c2f98613f511337a59312f78
-7f2679aa5b1116cc22bab4ee10018f59	585f02a68092351a078fc43a21a56564
-8a1acf425fb1bca48fb543edcc20a90d	4fb2ada7c5440a256ed0e03c967fce74
-8a1acf425fb1bca48fb543edcc20a90d	04ae76937270105919847d05aee582b4
-8a1acf425fb1bca48fb543edcc20a90d	585f02a68092351a078fc43a21a56564
-c2d7bbc06d62144545c45b9060b0a629	d5750853c14498dc264065bcf7e05a29
-62254b7ab0a2b3d3138bde893dde64a3	a29864963573d7bb061691ff823b97dd
-62254b7ab0a2b3d3138bde893dde64a3	585f02a68092351a078fc43a21a56564
-f291caafeb623728ebf0166ac4cb0825	5bf88dc6f6501943cc5bc4c42c71b36b
-1a46202030819f7419e300997199c955	a29864963573d7bb061691ff823b97dd
-1f94ea2f8cb55dd130ec2254c7c2238c	07b91b89a1fd5e90b9035bf112a3e6e5
-8d788b28d613c227ea3c87ac898a8256	8c42e2739ed83a54e5b2781b504c92de
-5226c9e67aff4f963aea67c95cd5f3f0	01864d382accf1cdb077e42032b16340
-5226c9e67aff4f963aea67c95cd5f3f0	4fb2ada7c5440a256ed0e03c967fce74
-e58ecda1a7b9bfdff6a10d398f468c3f	a68d5b72c2f98613f511337a59312f78
-e58ecda1a7b9bfdff6a10d398f468c3f	262770cfc76233c4f0d7a1e43a36cbf7
-e58ecda1a7b9bfdff6a10d398f468c3f	01864d382accf1cdb077e42032b16340
-183bea99848e19bdb720ba5774d216ba	a68d5b72c2f98613f511337a59312f78
-495ddc6ae449bf858afe5512d28563f5	a68d5b72c2f98613f511337a59312f78
-3b0b94c18b8d65aec3a8ca7f4dae720d	a68d5b72c2f98613f511337a59312f78
-3b0b94c18b8d65aec3a8ca7f4dae720d	f829960b3a62def55e90a3054491ead7
-3b0b94c18b8d65aec3a8ca7f4dae720d	d4fe504b565a2bcbec1bb4c56445e857
-b2b4ae56a4531455e275770dc577b68e	a68d5b72c2f98613f511337a59312f78
-b2b4ae56a4531455e275770dc577b68e	a29864963573d7bb061691ff823b97dd
-f9d5d4c7b26c7b832ee503b767d5df52	a68d5b72c2f98613f511337a59312f78
-f9d5d4c7b26c7b832ee503b767d5df52	17b8dff9566f6c98062ad5811c762f44
-f291caafeb623728ebf0166ac4cb0825	7a09fdabda255b02b2283e724071944b
-f9d5d4c7b26c7b832ee503b767d5df52	a29864963573d7bb061691ff823b97dd
-f9030edd3045787fcbcfd47da5246596	17b8dff9566f6c98062ad5811c762f44
-5d56713e4586c9b1920eb1a3d4597564	17b8dff9566f6c98062ad5811c762f44
-215513a2c867f8b24d5aea58c9abfff6	2df929d9b6150c082888b66e8129ee3f
-215513a2c867f8b24d5aea58c9abfff6	caac3244eefed8cffee878acae427e28
-1ca632ac231052e4116239ccb8952dfe	7fa69773873856d74f68a6824ca4b691
-62a40f6fa589c7007ded80d26ad1c3a9	caac3244eefed8cffee878acae427e28
-62a40f6fa589c7007ded80d26ad1c3a9	fd00614e73cb66fd71ab13c970a074d8
-62a40f6fa589c7007ded80d26ad1c3a9	2df929d9b6150c082888b66e8129ee3f
-7d9488e60660507d0f88850245ddc7a5	caac3244eefed8cffee878acae427e28
-7d9488e60660507d0f88850245ddc7a5	7fa69773873856d74f68a6824ca4b691
-abb4decfc5a094f45911b94337e7e2c4	caac3244eefed8cffee878acae427e28
-e061c04af9609876757f0b33d14c63e5	178c690e12310890294b6fefeb0c2442
-ade72e999b4e78925b18cf48d1faafa4	f008a5f1cb81bcfa397f7c1987f2bf55
-59f900c93aee445bd51d0d3fbc722cad	17b8dff9566f6c98062ad5811c762f44
-c6947b2d7fb2553635d75d160c92a2c5	17b8dff9566f6c98062ad5811c762f44
-c6947b2d7fb2553635d75d160c92a2c5	885ba57d521cd859bacf6f76fb37ef7c
-6e53c7c95acd615f2b29a536bc16dc43	6154b23b25e0bc2b8e4caa53c85531e5
-aed7ba45d0a57ddaef5da5df666de7b4	2df929d9b6150c082888b66e8129ee3f
-aed7ba45d0a57ddaef5da5df666de7b4	7fa69773873856d74f68a6824ca4b691
-de26f398ee613b636ddc998946a40e68	10a17b42501166d3bf8fbdff7e1d52b6
-5f31d4e87e7903f8ca2a4f8842dd4fe7	17b8dff9566f6c98062ad5811c762f44
-5f31d4e87e7903f8ca2a4f8842dd4fe7	a29864963573d7bb061691ff823b97dd
-ef18843fbbf66c6aa6851c6345f7c4ac	59fa15acc0c5773f6b64ad427b62c14b
-8134a4079be58b29064131065f6a4c21	10a17b42501166d3bf8fbdff7e1d52b6
-8134a4079be58b29064131065f6a4c21	1c800aa97116d9afd83204d65d50199a
-e60c4acd9218333d7c7ac50e5aa0f51e	17b8dff9566f6c98062ad5811c762f44
-e60c4acd9218333d7c7ac50e5aa0f51e	deb8040131c3f6a3caf6a616b34ac482
-94fea925f38999882458ab87ffda8b3a	7fa69773873856d74f68a6824ca4b691
-94fea925f38999882458ab87ffda8b3a	deb8040131c3f6a3caf6a616b34ac482
+dfb7069bfc6e0064a6c667626eca07b4	3593526a5f465ed766bafb4fb45748a2
+ad759a3d4f679008ffdfb07cdbda2bb0	3593526a5f465ed766bafb4fb45748a2
+844de407cd83ea1716f1ff57ea029285	3593526a5f465ed766bafb4fb45748a2
+4a27a1ef21d32d1b30d55f092af0d5a7	3593526a5f465ed766bafb4fb45748a2
+dd15d5adf6349f5ca53e7a2641d41ab7	9e7315413ae31a070ccae5c580dd1b19
+eb999c99126a456f9db3c5d3b449fa7f	b54875674f7d2d5be9737b0d4c021a21
+eb999c99126a456f9db3c5d3b449fa7f	d30be26d66f0448359f54d923aab2bb9
+33f03dd57f667d41ac77c6baec352a81	917d78ef1f9ba5451bcd9735606e9215
+7f3e5839689216583047809a7f6bd0ff	0c7fde545c06c2bc7383c0430c95fb78
+fd401865b6db200e5eb8a1ac1b1fbab1	86094b61cb9f63b77f982ceae03e95f0
+fd401865b6db200e5eb8a1ac1b1fbab1	3e29d9d93ad04d5bc71d4cdc5a8ad820
+bc5daaf162914ff1200789d069256d36	16875aa2b5eed3e388dcceaa36f56214
+c445544f1de39b071a4fca8bb33c2772	d25334037d936d3257f794a10bb3030f
+29891bf2e4eff9763aef15dc862c373f	8de7ee0c42a9acb04ac0ba7e466ef5fc
+7f950b15aa65a26e8500cfffd7f89de0	3593526a5f465ed766bafb4fb45748a2
+7f950b15aa65a26e8500cfffd7f89de0	9e7315413ae31a070ccae5c580dd1b19
+5c59b6aa317b306a1312a67fe69bf512	7b4b7e3375c9f7424a57a2d9d7bccde5
+5c59b6aa317b306a1312a67fe69bf512	27a7e9871142d8ed01ed795f9906c2fe
+10407de3db48761373a403b8ddf09782	7b4b7e3375c9f7424a57a2d9d7bccde5
+16a56d0941a310c3dc4f967041574300	8bb92c3b9b1b949524aac3b578a052b6
+a0abb504e661e34f5d269f113d39ea96	a4ce5a98a8950c04a3d34a2e2cb8c89f
+58e42b779d54e174aad9a9fb79e7ebbc	371d339c866b69b5ac58127389069fe5
+032d53a86540806303b4c81586308e58	3593526a5f465ed766bafb4fb45748a2
+032d53a86540806303b4c81586308e58	2db87892408abd4d82eb39b78c50c27b
+0ada417f5b4361074360211e63449f34	7b4b7e3375c9f7424a57a2d9d7bccde5
+8518eafd8feec0d8c056d396122a175a	fe81a4f28e6bd176efc8184d58544e66
+df800795b697445f2b7dc0096d75f4df	9a1f30943126974075dbd4d13c8018ac
+df800795b697445f2b7dc0096d75f4df	86094b61cb9f63b77f982ceae03e95f0
+4bcbcb65040e0347a1ffb5858836c49c	f72e9105795af04cd4da64414d9968ad
+8518eafd8feec0d8c056d396122a175a	f47e2dc1975f8d3fb8639e4dd2fff7c0
+53c25598fe4f1f71a1c596bd4997245c	9de74271aea8fca48a4b30e94e71a6b2
+4bcbcb65040e0347a1ffb5858836c49c	c47182e94615627f857515b0a2bc6ee3
+0959583c7f421c0bb8adb20e8faeeea1	3593526a5f465ed766bafb4fb45748a2
+35bde21520f1490f0333133a9ae5b4fc	3593526a5f465ed766bafb4fb45748a2
+5958cd5ce011ea83c06cb921b1c85bb3	3593526a5f465ed766bafb4fb45748a2
+4a9cd04fd04ab718420ee464645ccb8b	3593526a5f465ed766bafb4fb45748a2
+4190210961bce8bf2ac072c878ee7902	3593526a5f465ed766bafb4fb45748a2
+50737756bd539f702d8e6e75cf388a31	3593526a5f465ed766bafb4fb45748a2
+094655515b3991e73686f45e4fe352fe	3593526a5f465ed766bafb4fb45748a2
+fbe95242f85d4bbe067ddc781191afb5	3593526a5f465ed766bafb4fb45748a2
+8ac49bad86eacffcea299416cd92c3b7	9e7315413ae31a070ccae5c580dd1b19
+b7f0e9013f8bfb209f4f6b2258b6c9c8	9e7315413ae31a070ccae5c580dd1b19
+3c6444d9a22c3287b8c483117188b3f4	9e7315413ae31a070ccae5c580dd1b19
+36233ed8c181dfacc945ad598fb4f1a1	9e7315413ae31a070ccae5c580dd1b19
+b81dd41873676af0f9533d413774fa8d	9e7315413ae31a070ccae5c580dd1b19
+35bde21520f1490f0333133a9ae5b4fc	2db87892408abd4d82eb39b78c50c27b
+4190210961bce8bf2ac072c878ee7902	2db87892408abd4d82eb39b78c50c27b
+d92ee81a401d93bb2a7eba395e181c04	2db87892408abd4d82eb39b78c50c27b
+786d3481362b8dee6370dfb9b6df38a2	d725d2ec3a5cfa9f6384d9870df72400
+221fa1624ee1e31376cb112dd2487953	d725d2ec3a5cfa9f6384d9870df72400
+dd3e531c469005b17115dbf611b01c88	7b4b7e3375c9f7424a57a2d9d7bccde5
+2f623623ce7eeb08c30868be121b268a	7b4b7e3375c9f7424a57a2d9d7bccde5
+8872fbd923476b7cf96913260ec59e66	7b4b7e3375c9f7424a57a2d9d7bccde5
+312793778e3248b6577e3882a77f68f3	b54875674f7d2d5be9737b0d4c021a21
+0f9fb8452cc5754f83e084693d406721	b54875674f7d2d5be9737b0d4c021a21
+b66781a52770d78b260f15d125d1380b	b54875674f7d2d5be9737b0d4c021a21
+739260d8cb379c357340977fe962d37a	b54875674f7d2d5be9737b0d4c021a21
+2f623623ce7eeb08c30868be121b268a	d25334037d936d3257f794a10bb3030f
+0959583c7f421c0bb8adb20e8faeeea1	0c7fde545c06c2bc7383c0430c95fb78
+5958cd5ce011ea83c06cb921b1c85bb3	0c7fde545c06c2bc7383c0430c95fb78
+8765cfbf81024c3bd45924fee9159982	2af415a2174b122c80e901297f2d114e
+df24a5dd8a37d3d203952bb787069ea2	3593526a5f465ed766bafb4fb45748a2
+c5d3d165539ddf2020f82c17a61f783d	3593526a5f465ed766bafb4fb45748a2
+d2d67d63c28a15822569c5033f26b133	3593526a5f465ed766bafb4fb45748a2
+333ca835f34af241fe46af8e7a037e17	3593526a5f465ed766bafb4fb45748a2
+ee36fdf153967a0b99d3340aadeb4720	3593526a5f465ed766bafb4fb45748a2
+a99dca5593185c498b63a5eed917bd4f	3593526a5f465ed766bafb4fb45748a2
+573f13e31f1be6dea396ad9b08701c47	3593526a5f465ed766bafb4fb45748a2
+9436650a453053e775897ef5733e88fe	3593526a5f465ed766bafb4fb45748a2
+cf6a93131b0349f37afeb9319b802136	3593526a5f465ed766bafb4fb45748a2
+e093d52bb2d4ff4973e72f6eb577714b	3593526a5f465ed766bafb4fb45748a2
+9a6c0d8ea613c5b002ff958275318b08	3593526a5f465ed766bafb4fb45748a2
+6916ed9292a811c895e259c542af0e8a	3593526a5f465ed766bafb4fb45748a2
+ac61757d33fc8563eb2409ed08e21974	3593526a5f465ed766bafb4fb45748a2
+afb6e0f1e02be39880596a490c900775	3593526a5f465ed766bafb4fb45748a2
+66857d7c2810238438483356343ff26e	3593526a5f465ed766bafb4fb45748a2
+eaacb8ee01500f18e370303be3d5c591	3593526a5f465ed766bafb4fb45748a2
+22ef651048289b302401afe2044c5c01	3593526a5f465ed766bafb4fb45748a2
+08f8c67c20c4ba43e8ba6fa771039c94	3593526a5f465ed766bafb4fb45748a2
+3577f7160794aa4ba4d79d0381aefdb1	3593526a5f465ed766bafb4fb45748a2
+16fe483d0681e0c86177a33e22452e13	3593526a5f465ed766bafb4fb45748a2
+2187711aeaa2944a707c9eabaa2df72a	3593526a5f465ed766bafb4fb45748a2
+4db3435be88015c70683b4368d9b313b	3593526a5f465ed766bafb4fb45748a2
+53a5da370321dac39033a5fe6af13e77	3593526a5f465ed766bafb4fb45748a2
+b0cc1a3a1aee13a213ee73e3d4a2ce70	3593526a5f465ed766bafb4fb45748a2
+c2ab38206dce633f15d66048ad744f03	3593526a5f465ed766bafb4fb45748a2
+630500eabc48c986552cb01798a31746	3593526a5f465ed766bafb4fb45748a2
+ceffa7550e5d24a8c808d3516b5d6432	3593526a5f465ed766bafb4fb45748a2
+20a75b90511c108e3512189ccb72b0ac	3593526a5f465ed766bafb4fb45748a2
+90669320cd8e4a09bf655310bffdb9ba	3593526a5f465ed766bafb4fb45748a2
+b9ffbdbbe63789cc6fa9ee2548a1b2ed	3593526a5f465ed766bafb4fb45748a2
+cfe122252751e124bfae54a7323bf02d	3593526a5f465ed766bafb4fb45748a2
+abc73489d8f0d1586a2568211bdeb32f	3593526a5f465ed766bafb4fb45748a2
+26ad58455460d75558a595528825b672	3593526a5f465ed766bafb4fb45748a2
+6e064a31dc53ab956403ec3654c81f1f	3593526a5f465ed766bafb4fb45748a2
+e6793169497d66ac959a7beb35d6d497	3593526a5f465ed766bafb4fb45748a2
+bda66e37bf0bfbca66f8c78c5c8032b8	3593526a5f465ed766bafb4fb45748a2
+386a023bd38fab85cb531824bfe9a879	3593526a5f465ed766bafb4fb45748a2
+7b3ab6743cf8f7ea8491211e3336e41d	3593526a5f465ed766bafb4fb45748a2
+d1e0bdb2b2227bdd5e47850eec61f9ea	3593526a5f465ed766bafb4fb45748a2
+123131d2d4bd15a0db8f07090a383157	3593526a5f465ed766bafb4fb45748a2
+281eb11c857bbe8b6ad06dc1458e2751	3593526a5f465ed766bafb4fb45748a2
+c5f4e658dfe7b7af3376f06d7cd18a2a	3593526a5f465ed766bafb4fb45748a2
+ea3b6b67824411a4cfaa5c8789282f48	3593526a5f465ed766bafb4fb45748a2
+eb39fa9323a6b3cbc8533cd3dadb9f76	3593526a5f465ed766bafb4fb45748a2
+ef3c0bf190876fd31d5132848e99df61	3593526a5f465ed766bafb4fb45748a2
+05c87189f6c230c90bb1693567233100	3593526a5f465ed766bafb4fb45748a2
+018b60f1dc74563ca02f0a14ee272e4d	3593526a5f465ed766bafb4fb45748a2
+34fd3085dc67c39bf1692938cf3dbdd9	3593526a5f465ed766bafb4fb45748a2
+309263122a445662099a3dabce2a4f17	3593526a5f465ed766bafb4fb45748a2
+9b55ad92062221ec1bc80f950f667a6b	3593526a5f465ed766bafb4fb45748a2
+cd0bc2c8738b2fef2d78d197223b17d5	3593526a5f465ed766bafb4fb45748a2
+db472eaf615920784c2b83fc90e8dcc5	3593526a5f465ed766bafb4fb45748a2
+91abd5e520ec0a40ce4360bfd7c5d573	3593526a5f465ed766bafb4fb45748a2
+e6624ef1aeab84f521056a142b5b2d12	3593526a5f465ed766bafb4fb45748a2
+38b2886223461f15d65ff861921932b5	3593526a5f465ed766bafb4fb45748a2
+3fae5bf538a263e96ff12986bf06b13f	3593526a5f465ed766bafb4fb45748a2
+34a9067cace79f5ea8a6e137b7a1a5c8	3593526a5f465ed766bafb4fb45748a2
+e63a014f1310b8c7cbe5e2b0fd66f638	3593526a5f465ed766bafb4fb45748a2
+21077194453dcf49c2105fda6bb89c79	3593526a5f465ed766bafb4fb45748a2
+6cec93398cd662d79163b10a7b921a1b	3593526a5f465ed766bafb4fb45748a2
+1f56e4b8b8a0da3b8ec5b32970e4b0d8	3593526a5f465ed766bafb4fb45748a2
+a7eda23a9421a074fe5ec966810018d7	3593526a5f465ed766bafb4fb45748a2
+182a1e726ac1c8ae851194cea6df0393	3593526a5f465ed766bafb4fb45748a2
+55696bac6cdd14d47cbe7940665e21d3	3593526a5f465ed766bafb4fb45748a2
+13c8bd3a0d92bd186fc5162eded4431d	3593526a5f465ed766bafb4fb45748a2
+062c44f03dce5bf39f81d0bf953926fc	3593526a5f465ed766bafb4fb45748a2
+6f60a61fcc05cb4d42c81ade04392cfc	3593526a5f465ed766bafb4fb45748a2
+381b834c6bf7b25b9b627c9eeb81dd8a	3593526a5f465ed766bafb4fb45748a2
+cabcfb35912d17067131f7d2634ac270	3593526a5f465ed766bafb4fb45748a2
+1c4af233da7b64071abf94d79c41a361	3593526a5f465ed766bafb4fb45748a2
+26c2bb18f3a9a0c6d1392dae296cfea7	3593526a5f465ed766bafb4fb45748a2
+6af2c726b2d705f08d05a7ee9509916e	3593526a5f465ed766bafb4fb45748a2
+218ac7d899a995dc53cabe52da9ed678	3593526a5f465ed766bafb4fb45748a2
+364be07c2428493479a07dbefdacc11f	3593526a5f465ed766bafb4fb45748a2
+56bf60ca682b8f68e8843ad8a55c6b17	3593526a5f465ed766bafb4fb45748a2
+bc834c26e0c9279cd3139746ab2881f1	3593526a5f465ed766bafb4fb45748a2
+5f07809ecfce3af23ed5550c6adf0d78	3593526a5f465ed766bafb4fb45748a2
+2db1850a4fe292bd2706ffd78dbe44b9	3593526a5f465ed766bafb4fb45748a2
+951af0076709a6da6872f9cdf41c852b	3593526a5f465ed766bafb4fb45748a2
+a2c31c455e3d0ea3f3bdbea294fe186b	3593526a5f465ed766bafb4fb45748a2
+ffd2da11d45ed35a039951a8b462e7fb	3593526a5f465ed766bafb4fb45748a2
+16c88f2a44ab7ecdccef28154f3a0109	3593526a5f465ed766bafb4fb45748a2
+191bab5800bd381ecf16485f91e85bc3	3593526a5f465ed766bafb4fb45748a2
+876eed60be80010455ff50a62ccf1256	3593526a5f465ed766bafb4fb45748a2
+f4e4ef312f9006d0ae6ca30c8a6a32ff	3593526a5f465ed766bafb4fb45748a2
+270fb708bd03433e554e0d7345630c8e	3593526a5f465ed766bafb4fb45748a2
+eb0a191797624dd3a48fa681d3061212	3593526a5f465ed766bafb4fb45748a2
+5885f60f8c705921cf7411507b8cadc0	3593526a5f465ed766bafb4fb45748a2
+0e609404e53b251f786b41b7be93cc19	3593526a5f465ed766bafb4fb45748a2
+b1006928600959429230393369fe43b6	3593526a5f465ed766bafb4fb45748a2
+478aedea838b8b4a0936b129a4c6e853	3593526a5f465ed766bafb4fb45748a2
+f2856ad30734c5f838185cc08f71b1e4	3593526a5f465ed766bafb4fb45748a2
+1f86700588aed0390dd27c383b7fc963	3593526a5f465ed766bafb4fb45748a2
+faec47e96bfb066b7c4b8c502dc3f649	3593526a5f465ed766bafb4fb45748a2
+16cf4474c5334c1d9194d003c9fb75c1	3593526a5f465ed766bafb4fb45748a2
+8ed55fda3382add32869157c5b41ed47	3593526a5f465ed766bafb4fb45748a2
+4e9dfdbd352f73b74e5e51b12b20923e	3593526a5f465ed766bafb4fb45748a2
+88059eaa73469bb47bd41c5c3cdd1b50	3593526a5f465ed766bafb4fb45748a2
+375974f4fad5caae6175c121e38174d0	3593526a5f465ed766bafb4fb45748a2
+fbc2b3cebe54dd00b53967c5cf4b9192	3593526a5f465ed766bafb4fb45748a2
+644f6462ec9801cdc932e5c8698ee7f9	3593526a5f465ed766bafb4fb45748a2
+97724184152a2620b76e2f93902ed679	3593526a5f465ed766bafb4fb45748a2
+4e74055927fd771c2084c92ca2ae56a7	3593526a5f465ed766bafb4fb45748a2
+8b5a84ba35fa73f74df6f2d5a788e109	3593526a5f465ed766bafb4fb45748a2
+57f622908a4d6c381241a1293d894c88	3593526a5f465ed766bafb4fb45748a2
+48438b67b2ac4e5dc9df6f3723fd4ccd	3593526a5f465ed766bafb4fb45748a2
+56a5afe00fae48b02301860599898e63	3593526a5f465ed766bafb4fb45748a2
+3e8d4b3893a9ebbbd86e648c90cbbe63	3593526a5f465ed766bafb4fb45748a2
+8b3f40e0243e2307a1818d3f456df153	3593526a5f465ed766bafb4fb45748a2
+a8ace0f003d8249d012c27fe27b258b5	3593526a5f465ed766bafb4fb45748a2
+5d53b2be2fe7e27daa27b94724c3b6de	3593526a5f465ed766bafb4fb45748a2
+51cb62b41cd9deaaa2dd98c773a09ebb	3593526a5f465ed766bafb4fb45748a2
+1ec58ca10ed8a67b1c7de3d353a2885b	3593526a5f465ed766bafb4fb45748a2
+9c31bcca97bb68ec33c5a3ead4786f3e	3593526a5f465ed766bafb4fb45748a2
+c445544f1de39b071a4fca8bb33c2772	3593526a5f465ed766bafb4fb45748a2
+c8fbeead5c59de4e8f07ab39e7874213	3593526a5f465ed766bafb4fb45748a2
+d29c61c11e6b7fb7df6d5135e5786ee1	3593526a5f465ed766bafb4fb45748a2
+58e42b779d54e174aad9a9fb79e7ebbc	3593526a5f465ed766bafb4fb45748a2
+955a5cfd6e05ed30eec7c79d2371ebcf	3593526a5f465ed766bafb4fb45748a2
+e7a227585002db9fee2f0ed56ee5a59f	3593526a5f465ed766bafb4fb45748a2
+319480a02920dc261209240eed190360	3593526a5f465ed766bafb4fb45748a2
+ed9b92eb1706415c42f88dc91284da8a	3593526a5f465ed766bafb4fb45748a2
+8351282db025fc2222fc61ec8dd1df23	3593526a5f465ed766bafb4fb45748a2
+60eb202340e8035af9e96707f85730e5	3593526a5f465ed766bafb4fb45748a2
+bcf744fa5f256d6c3051dd86943524f6	3593526a5f465ed766bafb4fb45748a2
+73cb08d143f893e645292dd04967f526	3593526a5f465ed766bafb4fb45748a2
+5324a886a2667283dbfe7f7974ff6fc0	3593526a5f465ed766bafb4fb45748a2
+28c5f9ffd175dcd53aa3e9da9b00dde7	3593526a5f465ed766bafb4fb45748a2
+6b141e284f88f656b776148cde8e019c	3593526a5f465ed766bafb4fb45748a2
+7a43dd4c2bb9bea14a95ff3acd4dfb18	3593526a5f465ed766bafb4fb45748a2
+9d74605e4b1d19d83992a991230e89ef	3593526a5f465ed766bafb4fb45748a2
+ca54e4f7704e7b8374d0968143813fe6	3593526a5f465ed766bafb4fb45748a2
+6b157916b43b09df5a22f658ccb92b64	3593526a5f465ed766bafb4fb45748a2
+67cd9b4b7b33511f30e85e21b2d3b204	3593526a5f465ed766bafb4fb45748a2
+b12daab6c83b1a45aa32cd9c2bc78360	3593526a5f465ed766bafb4fb45748a2
+0c31e51349871cfb59cfbfaaed82eb18	3593526a5f465ed766bafb4fb45748a2
+eef7d6da9ba6d0bed2078a5f253f4cfc	3593526a5f465ed766bafb4fb45748a2
+45e410efd11014464dd36fb707a5a9e1	3593526a5f465ed766bafb4fb45748a2
+c295bb30bf534e960a6acf7435f0e46a	3593526a5f465ed766bafb4fb45748a2
+ab3ca496cbc01a5a9ed650c4d0e26168	3593526a5f465ed766bafb4fb45748a2
+1de3f08835ab9d572e79ac0fca13c5c2	3593526a5f465ed766bafb4fb45748a2
+4c02510c3f16e13edc27eff1ef2e452c	3593526a5f465ed766bafb4fb45748a2
+7cbd455ff5af40e28a1eb97849f00723	3593526a5f465ed766bafb4fb45748a2
+3c8ce0379b610d36c3723b198b982197	3593526a5f465ed766bafb4fb45748a2
+18b751c8288c0fabe7b986963016884f	3593526a5f465ed766bafb4fb45748a2
+30b8affc1afeb50c76ad57d7eda1f08f	3593526a5f465ed766bafb4fb45748a2
+9614cbc86659974da853dee20280b8c4	3593526a5f465ed766bafb4fb45748a2
+bc2f39d437ff13dff05f5cfda14327cc	3593526a5f465ed766bafb4fb45748a2
+39530e3fe26ee7c557392d479cc9c93f	3593526a5f465ed766bafb4fb45748a2
+2cd225725d4811d813a5ea1b701db0db	3593526a5f465ed766bafb4fb45748a2
+2f6fc683428eb5f8b22cc5021dc9d40d	3593526a5f465ed766bafb4fb45748a2
+2d5a306f74749cc6cbe9b6cd47e73162	3593526a5f465ed766bafb4fb45748a2
+73f4b98d80efb8888a2b32073417e21e	3593526a5f465ed766bafb4fb45748a2
+711a7acac82d7522230e3c7d0efc3f89	3593526a5f465ed766bafb4fb45748a2
+4f58423d9f925c8e8bd73409926730e8	3593526a5f465ed766bafb4fb45748a2
+96390e27bc7e2980e044791420612545	3593526a5f465ed766bafb4fb45748a2
+d2c2b83008dce38013577ef83a101a1b	3593526a5f465ed766bafb4fb45748a2
+d25956f771b58b6b00f338a41ca05396	3593526a5f465ed766bafb4fb45748a2
+b6eba7850fd20fa8dce81167f1a6edca	3593526a5f465ed766bafb4fb45748a2
+baeb191b42ec09353b389f951d19b357	3593526a5f465ed766bafb4fb45748a2
+c21fe390daecee9e70b8f4b091ae316f	3593526a5f465ed766bafb4fb45748a2
+8aeadeeff3e1a3e1c8a6a69d9312c530	3593526a5f465ed766bafb4fb45748a2
+a4e0f3b7db0875f65bb3f55ab0aab7c6	3593526a5f465ed766bafb4fb45748a2
+37b43a655dec0e3504142003fce04a07	3593526a5f465ed766bafb4fb45748a2
+92e1aca33d97fa75c1e81a9db61454bb	3593526a5f465ed766bafb4fb45748a2
+586ac67e6180a1f16a4d3b81e33eaa94	3593526a5f465ed766bafb4fb45748a2
+080d2dc6fa136fc49fc65eee1b556b46	3593526a5f465ed766bafb4fb45748a2
+1fcf2f2315b251ebe462da320491ea9f	3593526a5f465ed766bafb4fb45748a2
+9c81c8c060b39e7437b2d913f036776b	3593526a5f465ed766bafb4fb45748a2
+a77c14ecd429dd5dedf3dc5ea8d44b99	3593526a5f465ed766bafb4fb45748a2
+69a6a78ace079846a8f0d3f89beada2c	3593526a5f465ed766bafb4fb45748a2
+43ff5aadca6d8a60dd3da21716358c7d	3593526a5f465ed766bafb4fb45748a2
+95800513c555e1e95a430e312ddff817	3593526a5f465ed766bafb4fb45748a2
+42085fca2ddb606f4284e718074d5561	3593526a5f465ed766bafb4fb45748a2
+1ace9926ad3a6dab09d16602fd2fcccc	3593526a5f465ed766bafb4fb45748a2
+bdbafc49aa8c3e75e9bd1e0ee24411b4	3593526a5f465ed766bafb4fb45748a2
+5863c78fb68ef1812a572e8f08a4e521	3593526a5f465ed766bafb4fb45748a2
+866208c5b4a74b32974bffb0f90311ca	3593526a5f465ed766bafb4fb45748a2
+d0b02893ceb72d11a3471fe18d7089fd	3593526a5f465ed766bafb4fb45748a2
+b14521c0461b445a7ac2425e922c72df	3593526a5f465ed766bafb4fb45748a2
+2587d892c1261be043d443d06bd5b220	3593526a5f465ed766bafb4fb45748a2
+b9fd9676338e36e6493489ec5dc041fe	3593526a5f465ed766bafb4fb45748a2
+04728a6272117e0dc4ec29b0f7202ad8	3593526a5f465ed766bafb4fb45748a2
+268e1d80ad914af7d2e0f6d78eea6f98	3593526a5f465ed766bafb4fb45748a2
+c1a08f1ea753843e2b4f5f3d2cb41b7b	3593526a5f465ed766bafb4fb45748a2
+2df0462e6f564f34f68866045b2a8a44	3593526a5f465ed766bafb4fb45748a2
+b81dd41873676af0f9533d413774fa8d	3593526a5f465ed766bafb4fb45748a2
+89d60b9528242c8c53ecbfde131eba21	3593526a5f465ed766bafb4fb45748a2
+e8d17786fed9fa5ddaf13881496106e4	3593526a5f465ed766bafb4fb45748a2
+0371892b7f65ffb9c1544ee35c6330ad	3593526a5f465ed766bafb4fb45748a2
+169c9d1bfabf9dec8f84e1f874d5e788	3593526a5f465ed766bafb4fb45748a2
+fecc75d978ad94aaa4e17b3ff9ded487	9e7315413ae31a070ccae5c580dd1b19
+ee36fdf153967a0b99d3340aadeb4720	9e7315413ae31a070ccae5c580dd1b19
+a99dca5593185c498b63a5eed917bd4f	9e7315413ae31a070ccae5c580dd1b19
+218d618a041c057d0e05799670e7e2c8	9e7315413ae31a070ccae5c580dd1b19
+a45ff5de3a96b103a192f1f133d0b0cf	9e7315413ae31a070ccae5c580dd1b19
+9b7d722b58370498cd39104b2d971978	9e7315413ae31a070ccae5c580dd1b19
+ac61757d33fc8563eb2409ed08e21974	9e7315413ae31a070ccae5c580dd1b19
+9a8d3efa0c3389083df65f4383b155fb	9e7315413ae31a070ccae5c580dd1b19
+9ff04a674682ece6ee93ca851db56387	9e7315413ae31a070ccae5c580dd1b19
+b0cc1a3a1aee13a213ee73e3d4a2ce70	9e7315413ae31a070ccae5c580dd1b19
+2f090f093a2868dccca81a791bc4941f	9e7315413ae31a070ccae5c580dd1b19
+c2ab38206dce633f15d66048ad744f03	9e7315413ae31a070ccae5c580dd1b19
+0add3cab2a932f085109a462423c3250	9e7315413ae31a070ccae5c580dd1b19
+20de83abafcb071d854ca5fd57dec0e8	9e7315413ae31a070ccae5c580dd1b19
+cfe122252751e124bfae54a7323bf02d	9e7315413ae31a070ccae5c580dd1b19
+38734dcdff827db1dc3215e23b4e0890	9e7315413ae31a070ccae5c580dd1b19
+9639834b69063b336bb744a537f80772	9e7315413ae31a070ccae5c580dd1b19
+272a23811844499845c6e33712c8ba6c	9e7315413ae31a070ccae5c580dd1b19
+2b068ea64f42b2ccd841bb3127ab20af	9e7315413ae31a070ccae5c580dd1b19
+979b5de4a280c434213dd8559cf51bc0	9e7315413ae31a070ccae5c580dd1b19
+4e9b4bdef9478154fc3ac7f5ebfb6418	9e7315413ae31a070ccae5c580dd1b19
+6e064a31dc53ab956403ec3654c81f1f	9e7315413ae31a070ccae5c580dd1b19
+2799b4abf06a5ec5e262d81949e2d18c	9e7315413ae31a070ccae5c580dd1b19
+78bbff6bf39602a577c9d8a117116330	9e7315413ae31a070ccae5c580dd1b19
+281eb11c857bbe8b6ad06dc1458e2751	9e7315413ae31a070ccae5c580dd1b19
+30a100fe6a043e64ed36abb039bc9130	9e7315413ae31a070ccae5c580dd1b19
+818ce28daba77cbd2c4235548400ffb2	9e7315413ae31a070ccae5c580dd1b19
+2569a68a03a04a2cd73197d2cc546ff2	9e7315413ae31a070ccae5c580dd1b19
+05c87189f6c230c90bb1693567233100	9e7315413ae31a070ccae5c580dd1b19
+23f5e1973b5a048ffaaa0bd0183b5f87	9e7315413ae31a070ccae5c580dd1b19
+309263122a445662099a3dabce2a4f17	9e7315413ae31a070ccae5c580dd1b19
+3c2234a7ce973bc1700e0c743d6a819c	9e7315413ae31a070ccae5c580dd1b19
+0182742917720e1b2cf59ff671738253	9e7315413ae31a070ccae5c580dd1b19
+07d82d98170ab334bc66554bafa673cf	9e7315413ae31a070ccae5c580dd1b19
+42f6dd3a6e21d6df71db509662d19ca4	9e7315413ae31a070ccae5c580dd1b19
+3fae5bf538a263e96ff12986bf06b13f	9e7315413ae31a070ccae5c580dd1b19
+0a0f6b88354de7afe84b8a07dfadcc26	9e7315413ae31a070ccae5c580dd1b19
+1e71013b49bbd3b2aaa276623203453f	9e7315413ae31a070ccae5c580dd1b19
+210e99a095e594f2547e1bb8a9ac6fa7	9e7315413ae31a070ccae5c580dd1b19
+6ca47c71d99f608d4773b95f9b859142	9e7315413ae31a070ccae5c580dd1b19
+024e91d84c3426913db8367f4df2ceb3	9e7315413ae31a070ccae5c580dd1b19
+46ea4c445a9ff8e288258e3ec9cd1cf0	9e7315413ae31a070ccae5c580dd1b19
+c41b9ec75e920b610e8907e066074b30	9e7315413ae31a070ccae5c580dd1b19
+a91887f44d8d9fdcaa401d1c719630d7	9e7315413ae31a070ccae5c580dd1b19
+fcc491ba532309d8942df543beaec67e	9e7315413ae31a070ccae5c580dd1b19
+c349bc9795ba303aa49e44f64301290e	9e7315413ae31a070ccae5c580dd1b19
+aa5808895fd2fca01d080618f08dca51	9e7315413ae31a070ccae5c580dd1b19
+ddae1d7419331078626bc217b23ea8c7	9e7315413ae31a070ccae5c580dd1b19
+fb80cd69a40a73fb3b9f22cf58fd4776	9e7315413ae31a070ccae5c580dd1b19
+182a1e726ac1c8ae851194cea6df0393	9e7315413ae31a070ccae5c580dd1b19
+576fea4a0c5425ba382fff5f593a33f1	9e7315413ae31a070ccae5c580dd1b19
+d76db99cdd16bd0e53d5e07bcf6225c8	9e7315413ae31a070ccae5c580dd1b19
+50026a2dff40e4194e184b756a7ed319	9e7315413ae31a070ccae5c580dd1b19
+92edfbaa71b7361a3081991627b0e583	9e7315413ae31a070ccae5c580dd1b19
+6f60a61fcc05cb4d42c81ade04392cfc	9e7315413ae31a070ccae5c580dd1b19
+03fec47975e0e1e2d0bc723af47281de	9e7315413ae31a070ccae5c580dd1b19
+118b96dde2f8773b011dfb27e51b2f95	9e7315413ae31a070ccae5c580dd1b19
+cabcfb35912d17067131f7d2634ac270	9e7315413ae31a070ccae5c580dd1b19
+e6cbb2e0653a61e35d26df2bcb6bc4c7	9e7315413ae31a070ccae5c580dd1b19
+01bcfac216d2a08cd25930234e59f1a1	9e7315413ae31a070ccae5c580dd1b19
+c63b6261b8bb8145bc0fd094b9732c24	9e7315413ae31a070ccae5c580dd1b19
+bbbb086d59122dbb940740d6bac65976	9e7315413ae31a070ccae5c580dd1b19
+e3c8afbeb0ec4736db977d18e7e37020	9e7315413ae31a070ccae5c580dd1b19
+94a62730604a985647986b509818efee	9e7315413ae31a070ccae5c580dd1b19
+99bdf8d95da8972f6979bead2f2e2090	9e7315413ae31a070ccae5c580dd1b19
+156c19a6d9137e04b94500642d1cb8c2	9e7315413ae31a070ccae5c580dd1b19
+cd3296ec8f7773892de22dfade4f1b04	9e7315413ae31a070ccae5c580dd1b19
+2db1850a4fe292bd2706ffd78dbe44b9	9e7315413ae31a070ccae5c580dd1b19
+ce14eb923a380597f2aff8b65a742048	9e7315413ae31a070ccae5c580dd1b19
+a7111b594249d6a038281deb74ef0d04	9e7315413ae31a070ccae5c580dd1b19
+852c0b6d5b315c823cdf0382ca78e47f	9e7315413ae31a070ccae5c580dd1b19
+c311f3f7c84d1524104b369499bd582f	9e7315413ae31a070ccae5c580dd1b19
+1629fa6d4b8adb36b0e4a245b234b826	9e7315413ae31a070ccae5c580dd1b19
+270fb708bd03433e554e0d7345630c8e	9e7315413ae31a070ccae5c580dd1b19
+9d1e68b7debd0c8dc86d5d6500884ab4	9e7315413ae31a070ccae5c580dd1b19
+eb0a191797624dd3a48fa681d3061212	9e7315413ae31a070ccae5c580dd1b19
+e9648f919ee5adda834287bbdf6210fd	9e7315413ae31a070ccae5c580dd1b19
+3929665297ca814b966cb254980262cb	9e7315413ae31a070ccae5c580dd1b19
+d1fded22db9fc8872e86fff12d511207	9e7315413ae31a070ccae5c580dd1b19
+b7b99e418cff42d14dbf2d63ecee12a8	9e7315413ae31a070ccae5c580dd1b19
+57f622908a4d6c381241a1293d894c88	9e7315413ae31a070ccae5c580dd1b19
+48438b67b2ac4e5dc9df6f3723fd4ccd	9e7315413ae31a070ccae5c580dd1b19
+c46e8abb68aae0bcdc68021a46f71a65	9e7315413ae31a070ccae5c580dd1b19
+e4f74be13850fc65559a3ed855bf35a8	9e7315413ae31a070ccae5c580dd1b19
+278af3c810bb9de0f355ce115b5a2f54	9e7315413ae31a070ccae5c580dd1b19
+8b0cfde05d166f42a11a01814ef7fa86	9e7315413ae31a070ccae5c580dd1b19
+a8ace0f003d8249d012c27fe27b258b5	9e7315413ae31a070ccae5c580dd1b19
+255661921f4ad57d02b1de9062eb6421	9e7315413ae31a070ccae5c580dd1b19
+e71bd61e28ae2a584cb17ed776075b55	9e7315413ae31a070ccae5c580dd1b19
+1c13f340d154b44e41c996ec08d76749	9e7315413ae31a070ccae5c580dd1b19
+a89af36e042b5aa91d6efea0cc283c02	9e7315413ae31a070ccae5c580dd1b19
+384712ec65183407ac811fff2f4c4798	9e7315413ae31a070ccae5c580dd1b19
+a76c5f98a56fc03100d6a7936980c563	9e7315413ae31a070ccae5c580dd1b19
+c091e33f684c206b73b25417f6640b71	9e7315413ae31a070ccae5c580dd1b19
+df99cee44099ff57acbf7932670614dd	9e7315413ae31a070ccae5c580dd1b19
+6b141e284f88f656b776148cde8e019c	9e7315413ae31a070ccae5c580dd1b19
+ca54e4f7704e7b8374d0968143813fe6	9e7315413ae31a070ccae5c580dd1b19
+5c29c2e513aadfe372fd0af7553b5a6c	9e7315413ae31a070ccae5c580dd1b19
+e4b1d8cc71fd9c1fbc40fdc1a1a5d5b3	9e7315413ae31a070ccae5c580dd1b19
+eef7d6da9ba6d0bed2078a5f253f4cfc	9e7315413ae31a070ccae5c580dd1b19
+ad51cbe70d798b5aec08caf64ce66094	9e7315413ae31a070ccae5c580dd1b19
+45e410efd11014464dd36fb707a5a9e1	9e7315413ae31a070ccae5c580dd1b19
+4c02510c3f16e13edc27eff1ef2e452c	9e7315413ae31a070ccae5c580dd1b19
+087c643d95880c5a89fc13f3246bebae	9e7315413ae31a070ccae5c580dd1b19
+be553803806b8634990c2eb7351ed489	9e7315413ae31a070ccae5c580dd1b19
+a8a43e21de5b4d83a6a7374112871079	9e7315413ae31a070ccae5c580dd1b19
+9614cbc86659974da853dee20280b8c4	9e7315413ae31a070ccae5c580dd1b19
+bc2f39d437ff13dff05f5cfda14327cc	9e7315413ae31a070ccae5c580dd1b19
+d192d350b6eace21e325ecf9b0f1ebd1	9e7315413ae31a070ccae5c580dd1b19
+96390e27bc7e2980e044791420612545	9e7315413ae31a070ccae5c580dd1b19
+5159ae414608a804598452b279491c5c	9e7315413ae31a070ccae5c580dd1b19
+5bb416e14ac19276a4b450d343e4e981	9e7315413ae31a070ccae5c580dd1b19
+9c81c8c060b39e7437b2d913f036776b	9e7315413ae31a070ccae5c580dd1b19
+a77c14ecd429dd5dedf3dc5ea8d44b99	9e7315413ae31a070ccae5c580dd1b19
+95800513c555e1e95a430e312ddff817	9e7315413ae31a070ccae5c580dd1b19
+05256decaa2ee2337533d95c7de3db9d	9e7315413ae31a070ccae5c580dd1b19
+a0d3b444bd04cd165b4e076c9fc18bee	9e7315413ae31a070ccae5c580dd1b19
+c846d80d826291f2a6a0d7a57e540307	9e7315413ae31a070ccae5c580dd1b19
+0925467e1cc53074a440dae7ae67e3e9	9e7315413ae31a070ccae5c580dd1b19
+b14521c0461b445a7ac2425e922c72df	9e7315413ae31a070ccae5c580dd1b19
+268e1d80ad914af7d2e0f6d78eea6f98	9e7315413ae31a070ccae5c580dd1b19
+78f5c568100eb61401870fa0fa4fd7cb	9e7315413ae31a070ccae5c580dd1b19
+2df0462e6f564f34f68866045b2a8a44	9e7315413ae31a070ccae5c580dd1b19
+2045b9a6609f6d5bca3374fd370e54ff	9e7315413ae31a070ccae5c580dd1b19
+11a7f956c37bf0459e9c80b16cc72107	9e7315413ae31a070ccae5c580dd1b19
+e37015150c8944d90e306f19eaa98de8	9e7315413ae31a070ccae5c580dd1b19
+90fb95c00db3fde6b86e6accf2178fa7	9e7315413ae31a070ccae5c580dd1b19
+169c9d1bfabf9dec8f84e1f874d5e788	9e7315413ae31a070ccae5c580dd1b19
+844de407cd83ea1716f1ff57ea029285	2db87892408abd4d82eb39b78c50c27b
+88726e1a911181e20cf8be52e1027f26	2db87892408abd4d82eb39b78c50c27b
+aa5e46574bdc6034f4d49540c0c2d1ad	2db87892408abd4d82eb39b78c50c27b
+2f090f093a2868dccca81a791bc4941f	2db87892408abd4d82eb39b78c50c27b
+90669320cd8e4a09bf655310bffdb9ba	2db87892408abd4d82eb39b78c50c27b
+b9ffbdbbe63789cc6fa9ee2548a1b2ed	2db87892408abd4d82eb39b78c50c27b
+647dadd75e050b230269e43a4fe351e2	2db87892408abd4d82eb39b78c50c27b
+3e28a735f3fc31a9c8c30b47872634bf	2db87892408abd4d82eb39b78c50c27b
+aa98c9e445775e7c945661e91cf7e7aa	2db87892408abd4d82eb39b78c50c27b
+a20050efc491a9784b5cced21116ba68	2db87892408abd4d82eb39b78c50c27b
+781c745a0d6b02cdecadf2e44d445d1a	2db87892408abd4d82eb39b78c50c27b
+dfa61d19b62369a37743b38215836df9	2db87892408abd4d82eb39b78c50c27b
+c5f4e658dfe7b7af3376f06d7cd18a2a	2db87892408abd4d82eb39b78c50c27b
+e20976feda6d915a74c751cbf488a241	2db87892408abd4d82eb39b78c50c27b
+b3d0eb96687420dc4e5b10602ac42690	2db87892408abd4d82eb39b78c50c27b
+05c87189f6c230c90bb1693567233100	2db87892408abd4d82eb39b78c50c27b
+77bfe8d21f1ecc592062f91c9253d8ab	2db87892408abd4d82eb39b78c50c27b
+472e67129f0c7add77c7c907dac3351f	2db87892408abd4d82eb39b78c50c27b
+f3b8f1a2417bdc483f4e2306ac6004b2	2db87892408abd4d82eb39b78c50c27b
+bf2c8729bf5c149067d8e978ea3dcd32	2db87892408abd4d82eb39b78c50c27b
+72b73895941b319645450521aad394e8	2db87892408abd4d82eb39b78c50c27b
+5cc06303f490f3c34a464dfdc1bfb120	2db87892408abd4d82eb39b78c50c27b
+0964b5218635a1c51ff24543ee242514	2db87892408abd4d82eb39b78c50c27b
+42f6dd3a6e21d6df71db509662d19ca4	2db87892408abd4d82eb39b78c50c27b
+1dc7d7d977193974deaa993eb373e714	2db87892408abd4d82eb39b78c50c27b
+c41b9ec75e920b610e8907e066074b30	2db87892408abd4d82eb39b78c50c27b
+63a9f0ea7bb98050796b649e85481845	2db87892408abd4d82eb39b78c50c27b
+381b834c6bf7b25b9b627c9eeb81dd8a	2db87892408abd4d82eb39b78c50c27b
+5934340f46d5ab773394d7a8ac9e86d5	2db87892408abd4d82eb39b78c50c27b
+6af2c726b2d705f08d05a7ee9509916e	2db87892408abd4d82eb39b78c50c27b
+218ac7d899a995dc53cabe52da9ed678	2db87892408abd4d82eb39b78c50c27b
+364be07c2428493479a07dbefdacc11f	2db87892408abd4d82eb39b78c50c27b
+fd0a7850818a9a642a125b588d83e537	2db87892408abd4d82eb39b78c50c27b
+a30c1309e683fcf26c104b49227d2220	2db87892408abd4d82eb39b78c50c27b
+f9ff0bcbb45bdf8a67395fa0ab3737b5	2db87892408abd4d82eb39b78c50c27b
+876eed60be80010455ff50a62ccf1256	2db87892408abd4d82eb39b78c50c27b
+1629fa6d4b8adb36b0e4a245b234b826	2db87892408abd4d82eb39b78c50c27b
+270fb708bd03433e554e0d7345630c8e	2db87892408abd4d82eb39b78c50c27b
+b1006928600959429230393369fe43b6	2db87892408abd4d82eb39b78c50c27b
+410044b393ebe6a519fde1bdb26d95e8	2db87892408abd4d82eb39b78c50c27b
+867872f29491a6473dae8075c740993e	2db87892408abd4d82eb39b78c50c27b
+c937fc1b6be0464ec9d17389913871e4	2db87892408abd4d82eb39b78c50c27b
+e9648f919ee5adda834287bbdf6210fd	2db87892408abd4d82eb39b78c50c27b
+faec47e96bfb066b7c4b8c502dc3f649	2db87892408abd4d82eb39b78c50c27b
+8e38937886f365bb96aa1c189c63c5ea	2db87892408abd4d82eb39b78c50c27b
+8ed55fda3382add32869157c5b41ed47	2db87892408abd4d82eb39b78c50c27b
+4e9dfdbd352f73b74e5e51b12b20923e	2db87892408abd4d82eb39b78c50c27b
+56e8538c55d35a1c23286442b4bccd26	2db87892408abd4d82eb39b78c50c27b
+644f6462ec9801cdc932e5c8698ee7f9	2db87892408abd4d82eb39b78c50c27b
+b3626b52d8b98e9aebebaa91ea2a2c91	2db87892408abd4d82eb39b78c50c27b
+4e74055927fd771c2084c92ca2ae56a7	2db87892408abd4d82eb39b78c50c27b
+57f622908a4d6c381241a1293d894c88	2db87892408abd4d82eb39b78c50c27b
+5c61f833c2fb87caab0a48e4c51fa629	2db87892408abd4d82eb39b78c50c27b
+2859f0ed0630ecc1589b6868fd1dde41	2db87892408abd4d82eb39b78c50c27b
+c0118be307a26886822e1194e8ae246d	2db87892408abd4d82eb39b78c50c27b
+a66394e41d764b4c5646446a8ba2028b	2db87892408abd4d82eb39b78c50c27b
+24701da4bd9d3ae0e64d263b72ad20e8	2db87892408abd4d82eb39b78c50c27b
+8734f7ff367f59fc11ad736e63e818f9	2db87892408abd4d82eb39b78c50c27b
+430a03604913a64c33f460ec6f854c36	2db87892408abd4d82eb39b78c50c27b
+fb1afbea5c0c2e23396ef429d0e42c52	2db87892408abd4d82eb39b78c50c27b
+d2f79e6a931cd5b5acd5f3489dece82a	2db87892408abd4d82eb39b78c50c27b
+3258eb5f24b395695f56eee13b690da6	2db87892408abd4d82eb39b78c50c27b
+8f7939c28270f3187210641e96a98ba7	2db87892408abd4d82eb39b78c50c27b
+bcf744fa5f256d6c3051dd86943524f6	2db87892408abd4d82eb39b78c50c27b
+3ba296bfb94ad521be221cf9140f8e10	2db87892408abd4d82eb39b78c50c27b
+18e21eae8f909cbb44b5982b44bbf02f	2db87892408abd4d82eb39b78c50c27b
+6b141e284f88f656b776148cde8e019c	2db87892408abd4d82eb39b78c50c27b
+41dabe0c59a3233e3691f3c893eb789e	2db87892408abd4d82eb39b78c50c27b
+7b91dc9ecdfa3ea7d347588a63537bb9	2db87892408abd4d82eb39b78c50c27b
+8bdd6b50b8ecca33e04837fde8ffe51e	2db87892408abd4d82eb39b78c50c27b
+a8a43e21de5b4d83a6a7374112871079	2db87892408abd4d82eb39b78c50c27b
+f6eb4364ba53708b24a4141962feb82e	2db87892408abd4d82eb39b78c50c27b
+dba84ece8f49717c47ab72acc3ed2965	2db87892408abd4d82eb39b78c50c27b
+711a7acac82d7522230e3c7d0efc3f89	2db87892408abd4d82eb39b78c50c27b
+1506aeeb8c3a699b1e3c87db03156428	2db87892408abd4d82eb39b78c50c27b
+4f58423d9f925c8e8bd73409926730e8	2db87892408abd4d82eb39b78c50c27b
+c1e8b6d7a1c20870d5955bcdc04363e4	2db87892408abd4d82eb39b78c50c27b
+480a0efd668e568595d42ac78340fe2a	2db87892408abd4d82eb39b78c50c27b
+95a1f9b6006151e00b1a4cda721f469d	2db87892408abd4d82eb39b78c50c27b
+9bdbe50a5be5b9c92dccf2d1ef05eefd	2db87892408abd4d82eb39b78c50c27b
+8c4e8003f8d708dc3b6d486d74d9a585	2db87892408abd4d82eb39b78c50c27b
+5f27f488f7c8b9e4b81f59c6d776e25c	2db87892408abd4d82eb39b78c50c27b
+92e1aca33d97fa75c1e81a9db61454bb	2db87892408abd4d82eb39b78c50c27b
+7022f6b60d9642d91eebba98185cd9ba	2db87892408abd4d82eb39b78c50c27b
+0d01b12a6783b4e60d2e09e16431f00a	2db87892408abd4d82eb39b78c50c27b
+31e2d1e0b364475375cb17ad76aa71f2	2db87892408abd4d82eb39b78c50c27b
+69a6a78ace079846a8f0d3f89beada2c	2db87892408abd4d82eb39b78c50c27b
+cb0785d67b1ea8952fae42efd82864a7	2db87892408abd4d82eb39b78c50c27b
+658a9bbd0e85d854a9e140672a46ce3a	2db87892408abd4d82eb39b78c50c27b
+6fa204dccaff0ec60f96db5fb5e69b33	2db87892408abd4d82eb39b78c50c27b
+0d949e45a18d81db3491a7b451e99560	2db87892408abd4d82eb39b78c50c27b
+f68a3eafcc0bb036ee8fde7fc91cde13	2db87892408abd4d82eb39b78c50c27b
+78f5c568100eb61401870fa0fa4fd7cb	2db87892408abd4d82eb39b78c50c27b
+f159fc50b5af54fecf21d5ea6ec37bad	2db87892408abd4d82eb39b78c50c27b
+f520f53edf44d466fb64269d5a67b69a	2db87892408abd4d82eb39b78c50c27b
+61e5d7cb15bd519ceddcf7ba9a22cbc6	2db87892408abd4d82eb39b78c50c27b
+9563a6fd049d7c1859196f614b04b959	2db87892408abd4d82eb39b78c50c27b
+90fb95c00db3fde6b86e6accf2178fa7	2db87892408abd4d82eb39b78c50c27b
+b80aecda9ce9783dab49037eec5e4388	2db87892408abd4d82eb39b78c50c27b
+b81dd41873676af0f9533d413774fa8d	2db87892408abd4d82eb39b78c50c27b
+28bc0abd0cf390a4472b1f60bd0cfe4a	d725d2ec3a5cfa9f6384d9870df72400
+d02f33b44582e346050cefadce93eb95	d725d2ec3a5cfa9f6384d9870df72400
+298a577c621a7a1c365465f694e0bd13	d725d2ec3a5cfa9f6384d9870df72400
+647a73dd79f06cdf74e1fa7524700161	d725d2ec3a5cfa9f6384d9870df72400
+a0cdbd2af8f1ddbb2748a2eaddce55da	d725d2ec3a5cfa9f6384d9870df72400
+a985c9764e0e6d738ff20f2328a0644b	d725d2ec3a5cfa9f6384d9870df72400
+a45ff5de3a96b103a192f1f133d0b0cf	d725d2ec3a5cfa9f6384d9870df72400
+bd9059497b4af2bb913a8522747af2de	d725d2ec3a5cfa9f6384d9870df72400
+491801c872c67db465fda0f8f180569d	d725d2ec3a5cfa9f6384d9870df72400
+4e9b4bdef9478154fc3ac7f5ebfb6418	d725d2ec3a5cfa9f6384d9870df72400
+6e064a31dc53ab956403ec3654c81f1f	d725d2ec3a5cfa9f6384d9870df72400
+0ab01e57304a70cf4f7f037bd8afbe49	d725d2ec3a5cfa9f6384d9870df72400
+71144850f4fb4cc55fc0ee6935badddf	d725d2ec3a5cfa9f6384d9870df72400
+05fcf330d8fafb0a1f17ce30ff60b924	d725d2ec3a5cfa9f6384d9870df72400
+82f43cc1bda0b09efff9b356af97c7ab	d725d2ec3a5cfa9f6384d9870df72400
+d908b6b9019639bced6d1e31463eea85	d725d2ec3a5cfa9f6384d9870df72400
+e4f13074d445d798488cb00fa0c5fbd4	d725d2ec3a5cfa9f6384d9870df72400
+563fcbf5f44e03e0eeb9c8d6e4c8e127	d725d2ec3a5cfa9f6384d9870df72400
+f1022ae1bc6b46d51889e0bb5ea8b64f	d725d2ec3a5cfa9f6384d9870df72400
+cbf6de82cf77ca17d17d293d6d29a2b2	d725d2ec3a5cfa9f6384d9870df72400
+3c2234a7ce973bc1700e0c743d6a819c	d725d2ec3a5cfa9f6384d9870df72400
+24af2861df3c72c8f1b947333bd215fc	d725d2ec3a5cfa9f6384d9870df72400
+dcdcd2f22b1d5f85fa5dd68fa89e3756	d725d2ec3a5cfa9f6384d9870df72400
+240e556541427d81f4ed1eda86f33ad3	d725d2ec3a5cfa9f6384d9870df72400
+6ffa656be5ff3db085578f54a05d4ddb	d725d2ec3a5cfa9f6384d9870df72400
+dddbd203ace7db250884ded880ea7be4	d725d2ec3a5cfa9f6384d9870df72400
+ef75c0b43ae9ba972900e83c5ccf5cac	d725d2ec3a5cfa9f6384d9870df72400
+79cbf009784a729575e50a3ef4a3b1cc	d725d2ec3a5cfa9f6384d9870df72400
+e6cbb2e0653a61e35d26df2bcb6bc4c7	d725d2ec3a5cfa9f6384d9870df72400
+445a222489d55b5768ec2f17b1c3ea34	d725d2ec3a5cfa9f6384d9870df72400
+60eb61670a5385e3150cd87f915b0967	d725d2ec3a5cfa9f6384d9870df72400
+5c19e1e0521f7b789a37a21c5cd5737b	d725d2ec3a5cfa9f6384d9870df72400
+f4b526ea92d3389d318a36e51480b4c8	d725d2ec3a5cfa9f6384d9870df72400
+dbf1b3eb1f030affb41473a8fa69bc0c	d725d2ec3a5cfa9f6384d9870df72400
+2fb81ca1d0a935be4cb49028268baa3f	d725d2ec3a5cfa9f6384d9870df72400
+3969716fc4acd0ec0c39c8a745e9459a	d725d2ec3a5cfa9f6384d9870df72400
+c46e8abb68aae0bcdc68021a46f71a65	d725d2ec3a5cfa9f6384d9870df72400
+e9e0664816c35d64f26fc1382708617b	d725d2ec3a5cfa9f6384d9870df72400
+1c13f340d154b44e41c996ec08d76749	d725d2ec3a5cfa9f6384d9870df72400
+13909e3013727a91ee750bfd8660d7bc	d725d2ec3a5cfa9f6384d9870df72400
+74e8b6c4be8a0f5dd843e2d1d7385a36	d725d2ec3a5cfa9f6384d9870df72400
+1a5235c012c18789e81960333a76cd7a	d725d2ec3a5cfa9f6384d9870df72400
+b8d794c48196d514010ce2c2269b4102	d725d2ec3a5cfa9f6384d9870df72400
+7fcdd5f715be5fce835b68b9e63e1733	d725d2ec3a5cfa9f6384d9870df72400
+5214513d882cf478e028201a0d9031c0	d725d2ec3a5cfa9f6384d9870df72400
+ab42c2d958e2571ce5403391e9910c40	d725d2ec3a5cfa9f6384d9870df72400
+45d62f43d6f59291905d097790f74ade	d725d2ec3a5cfa9f6384d9870df72400
+e37e9fd6bde7509157f864942572c267	d725d2ec3a5cfa9f6384d9870df72400
+2045b9a6609f6d5bca3374fd370e54ff	d725d2ec3a5cfa9f6384d9870df72400
+265dbcbd2bce07dfa721ed3daaa30912	d725d2ec3a5cfa9f6384d9870df72400
+048d40092f9bd3c450e4bdeeff69e8c3	7b4b7e3375c9f7424a57a2d9d7bccde5
+d9c849266ee3ac1463262df200b3aab8	7b4b7e3375c9f7424a57a2d9d7bccde5
+16a56d0941a310c3dc4f967041574300	7b4b7e3375c9f7424a57a2d9d7bccde5
+748ac622dcfda98f59c3c99593226a75	7b4b7e3375c9f7424a57a2d9d7bccde5
+a4bcd57d5cda816e4ffd1f83031a36ca	7b4b7e3375c9f7424a57a2d9d7bccde5
+ec5c65bfe530446b696f04e51aa19201	7b4b7e3375c9f7424a57a2d9d7bccde5
+de3e4c12f56a35dc1ee6866b1ddd9d53	7b4b7e3375c9f7424a57a2d9d7bccde5
+13d81f0ed06478714344fd0f1a6a81bb	7b4b7e3375c9f7424a57a2d9d7bccde5
+ac8eab98e370e2a8711bad327f5f7c55	7b4b7e3375c9f7424a57a2d9d7bccde5
+02677b661c84417492e1c1cb0b0563b2	7b4b7e3375c9f7424a57a2d9d7bccde5
+05ee6afed8d828d4e7ed35b0483527f7	7b4b7e3375c9f7424a57a2d9d7bccde5
+0feeee5d5e0738c1929bf064b184409b	7b4b7e3375c9f7424a57a2d9d7bccde5
+1fd7fc9c73539bee88e1ec137b5f9ad2	7b4b7e3375c9f7424a57a2d9d7bccde5
+436f76ddf806e8c3cbdc9494867d0f79	7b4b7e3375c9f7424a57a2d9d7bccde5
+118c9af69a42383387e8ce6ab22867d7	7b4b7e3375c9f7424a57a2d9d7bccde5
+541fa0085b17ef712791151ca285f1a7	7b4b7e3375c9f7424a57a2d9d7bccde5
+4f5b2e20e9b7e5cc3f53256583033752	7b4b7e3375c9f7424a57a2d9d7bccde5
+66597873e0974fb365454a5087291094	7b4b7e3375c9f7424a57a2d9d7bccde5
+891b302f7508f0772a8fdb71ccbf9868	7b4b7e3375c9f7424a57a2d9d7bccde5
+0d8ef82742e1d5de19b5feb5ecb3aed3	7b4b7e3375c9f7424a57a2d9d7bccde5
+e039d55ed63a723001867bc4eb842c00	7b4b7e3375c9f7424a57a2d9d7bccde5
+99761fad57f035550a1ca48e47f35157	7b4b7e3375c9f7424a57a2d9d7bccde5
+123f90461d74091a96637955d14a1401	7b4b7e3375c9f7424a57a2d9d7bccde5
+96aa953534221db484e6ec75b64fcc4d	7b4b7e3375c9f7424a57a2d9d7bccde5
+f44f1e343975f5157f3faf9184bc7ade	7b4b7e3375c9f7424a57a2d9d7bccde5
+1e986acf38de5f05edc2c42f4a49d37e	7b4b7e3375c9f7424a57a2d9d7bccde5
+b834eadeaf680f6ffcb13068245a1fed	7b4b7e3375c9f7424a57a2d9d7bccde5
+1ec58ca10ed8a67b1c7de3d353a2885b	7b4b7e3375c9f7424a57a2d9d7bccde5
+8f523603c24072fb8ccb547503ee4c0f	7b4b7e3375c9f7424a57a2d9d7bccde5
+8fa1a366d4f2e520bc9354658c4709f1	7b4b7e3375c9f7424a57a2d9d7bccde5
+812f48abd93f276576541ec5b79d48a2	7b4b7e3375c9f7424a57a2d9d7bccde5
+7013a75091bf79f04f07eecc248f8ee6	7b4b7e3375c9f7424a57a2d9d7bccde5
+67493f858802a478bfe539c8e30a7e44	7b4b7e3375c9f7424a57a2d9d7bccde5
+03201e85fc6aa56d2cb9374e84bf52ca	7b4b7e3375c9f7424a57a2d9d7bccde5
+bc111d75a59fe7191a159fd4ee927981	7b4b7e3375c9f7424a57a2d9d7bccde5
+017e06f9b9bccafa230a81b60ea34c46	7b4b7e3375c9f7424a57a2d9d7bccde5
+d2f62cd276ef7cab5dcf9218d68f5bcf	7b4b7e3375c9f7424a57a2d9d7bccde5
+b798aa74946ce75baee5806352e96272	7b4b7e3375c9f7424a57a2d9d7bccde5
+6315887dd67ff4f91d51e956b06a3878	7b4b7e3375c9f7424a57a2d9d7bccde5
+05e76572fb3d16ca990a91681758bbee	7b4b7e3375c9f7424a57a2d9d7bccde5
+cfc61472d8abd7c54b81924119983ed9	7b4b7e3375c9f7424a57a2d9d7bccde5
+1fe0175f73e5b381213057da98b8f5fb	7b4b7e3375c9f7424a57a2d9d7bccde5
+d44be0e711c2711876734b330500e5b9	7b4b7e3375c9f7424a57a2d9d7bccde5
+538eaaef4d029c255ad8416c01ab5719	7b4b7e3375c9f7424a57a2d9d7bccde5
+3d4fe2107d6302760654b4217cf32f17	7b4b7e3375c9f7424a57a2d9d7bccde5
+80d331992feb02627ae8b30687c7bb78	7b4b7e3375c9f7424a57a2d9d7bccde5
+77f94851e582202f940198a26728e71f	7b4b7e3375c9f7424a57a2d9d7bccde5
+0ba2f4073dd8eff1f91650af5dc67db4	7b4b7e3375c9f7424a57a2d9d7bccde5
+cd3faaaf1bebf8d009aa59f887d17ef2	7b4b7e3375c9f7424a57a2d9d7bccde5
+33538745a71fe2d30689cac96737e8f7	7b4b7e3375c9f7424a57a2d9d7bccde5
+586ac67e6180a1f16a4d3b81e33eaa94	7b4b7e3375c9f7424a57a2d9d7bccde5
+645b264cb978b22bb2d2c70433723ec0	7b4b7e3375c9f7424a57a2d9d7bccde5
+45816111a5b644493b68cfedfb1a0cc0	7b4b7e3375c9f7424a57a2d9d7bccde5
+d0e551d6887e0657952b3c5beb7fed74	7b4b7e3375c9f7424a57a2d9d7bccde5
+06c1680c65972c4332be73e726de9e74	7b4b7e3375c9f7424a57a2d9d7bccde5
+4671068076f66fb346c4f62cbfb7f9fe	7b4b7e3375c9f7424a57a2d9d7bccde5
+3771036a0740658b11cf5eb73d9263b3	7b4b7e3375c9f7424a57a2d9d7bccde5
+6b37fe4703bd962004cdccda304cc18e	7b4b7e3375c9f7424a57a2d9d7bccde5
+371d905385644b0ecb176fd73184239c	7b4b7e3375c9f7424a57a2d9d7bccde5
+d871ebaec65bbfa0b6b97aefae5d9150	7b4b7e3375c9f7424a57a2d9d7bccde5
+28bb3f229ca1eeb05ef939248f7709ce	7b4b7e3375c9f7424a57a2d9d7bccde5
+0e4f0487408be5baf091b74ba765dce7	7b4b7e3375c9f7424a57a2d9d7bccde5
+6829c770c1de2fd9bd88fe91f1d42f56	7b4b7e3375c9f7424a57a2d9d7bccde5
+98dd2a77f081989a185cb652662eea41	7b4b7e3375c9f7424a57a2d9d7bccde5
+807dbc2d5a3525045a4b7d882e3768ee	7b4b7e3375c9f7424a57a2d9d7bccde5
+bff322dbe273a1e2d1fe37f81acccbe4	7b4b7e3375c9f7424a57a2d9d7bccde5
+f041991eb3263fd3e5d919026e772f57	7b4b7e3375c9f7424a57a2d9d7bccde5
+70409bc559ef6c8aabcf16941a29788b	7b4b7e3375c9f7424a57a2d9d7bccde5
+fecc75d978ad94aaa4e17b3ff9ded487	b54875674f7d2d5be9737b0d4c021a21
+93299af7c9e3c63c7b3d9bb2242c9d6b	b54875674f7d2d5be9737b0d4c021a21
+b4c5b422ab8969880d9f0f0e9124f0d7	b54875674f7d2d5be9737b0d4c021a21
+717ec52870493e8460d6aeddd9b7def8	b54875674f7d2d5be9737b0d4c021a21
+781c745a0d6b02cdecadf2e44d445d1a	b54875674f7d2d5be9737b0d4c021a21
+6d25c7ad58121b3effe2c464b851c27a	b54875674f7d2d5be9737b0d4c021a21
+f2a863a08c3e22cc942264ac4bc606e3	b54875674f7d2d5be9737b0d4c021a21
+de1e0ed5433f5e95c8f48e18e1c75ff6	b54875674f7d2d5be9737b0d4c021a21
+d5ec808c760249f11fbcde2bf4977cc6	b54875674f7d2d5be9737b0d4c021a21
+5637bae1665ae86050cb41fb1cdcc3ee	b54875674f7d2d5be9737b0d4c021a21
+4e7054dff89623f323332052d0c7ff6e	b54875674f7d2d5be9737b0d4c021a21
+009f51181eb8c6bb5bb792af9a2fdd07	b54875674f7d2d5be9737b0d4c021a21
+55b6aa6562faa9381e43ea82a4991079	b54875674f7d2d5be9737b0d4c021a21
+cd80c766840b7011fbf48355c0142431	b54875674f7d2d5be9737b0d4c021a21
+92edfbaa71b7361a3081991627b0e583	b54875674f7d2d5be9737b0d4c021a21
+073f87af06b8d8bc561bb3f74e5f714f	b54875674f7d2d5be9737b0d4c021a21
+f32badb09f6aacb398d3cd690d90a668	b54875674f7d2d5be9737b0d4c021a21
+a2a607567311cb7a5a609146b977f4a9	b54875674f7d2d5be9737b0d4c021a21
+faec47e96bfb066b7c4b8c502dc3f649	b54875674f7d2d5be9737b0d4c021a21
+d1fded22db9fc8872e86fff12d511207	b54875674f7d2d5be9737b0d4c021a21
+4ca1c3ed413577a259e29dfa053f99db	b54875674f7d2d5be9737b0d4c021a21
+eb2743e9025319c014c9011acf1a1679	b54875674f7d2d5be9737b0d4c021a21
+c27297705354ef77feb349e949d2e19e	b54875674f7d2d5be9737b0d4c021a21
+537e5aa87fcfb168be5c953d224015ff	b54875674f7d2d5be9737b0d4c021a21
+5159ae414608a804598452b279491c5c	b54875674f7d2d5be9737b0d4c021a21
+cd3faaaf1bebf8d009aa59f887d17ef2	b54875674f7d2d5be9737b0d4c021a21
+586ac67e6180a1f16a4d3b81e33eaa94	b54875674f7d2d5be9737b0d4c021a21
+d5a5e9d2edeb2b2c685364461f1dfd46	b54875674f7d2d5be9737b0d4c021a21
+4522c5141f18b2a408fc8c1b00827bc3	b54875674f7d2d5be9737b0d4c021a21
+5ec194adf19442544d8a94f4696f17dc	b54875674f7d2d5be9737b0d4c021a21
+dff880ae9847f6fa8ed628ed4ee5741b	b54875674f7d2d5be9737b0d4c021a21
+a77c14ecd429dd5dedf3dc5ea8d44b99	b54875674f7d2d5be9737b0d4c021a21
+db732a1a9861777294f7dc54eeca2b3e	b54875674f7d2d5be9737b0d4c021a21
+c664656f67e963f4c0f651195f818ce0	b54875674f7d2d5be9737b0d4c021a21
+810f28b77fa6c866fbcceb6c8aa7bac4	b54875674f7d2d5be9737b0d4c021a21
+c8fd07f040a8f2dc85f5b2d3804ea3db	b54875674f7d2d5be9737b0d4c021a21
+fd3ab918dab082b1af1df5f9dbc0041f	b54875674f7d2d5be9737b0d4c021a21
+867e7f73257c5adf6a4696f252556431	b54875674f7d2d5be9737b0d4c021a21
+f8b01df5282702329fcd1cae8877bb5f	b54875674f7d2d5be9737b0d4c021a21
+8845da022807c76120b5b6f50c218d9a	b54875674f7d2d5be9737b0d4c021a21
+f520f53edf44d466fb64269d5a67b69a	b54875674f7d2d5be9737b0d4c021a21
+e3e9ccd75f789b9689913b30cb528be0	0a8a13bf87abe8696fbae4efe2b7f874
+9436650a453053e775897ef5733e88fe	0a8a13bf87abe8696fbae4efe2b7f874
+14af57131cbbf57afb206c8707fdab6c	0a8a13bf87abe8696fbae4efe2b7f874
+3577f7160794aa4ba4d79d0381aefdb1	0a8a13bf87abe8696fbae4efe2b7f874
+717ec52870493e8460d6aeddd9b7def8	0a8a13bf87abe8696fbae4efe2b7f874
+20de83abafcb071d854ca5fd57dec0e8	0a8a13bf87abe8696fbae4efe2b7f874
+9639834b69063b336bb744a537f80772	0a8a13bf87abe8696fbae4efe2b7f874
+4e9b4bdef9478154fc3ac7f5ebfb6418	0a8a13bf87abe8696fbae4efe2b7f874
+71ac59780209b4c074690c44a3bba3b7	0a8a13bf87abe8696fbae4efe2b7f874
+818ce28daba77cbd2c4235548400ffb2	0a8a13bf87abe8696fbae4efe2b7f874
+de1e0ed5433f5e95c8f48e18e1c75ff6	0a8a13bf87abe8696fbae4efe2b7f874
+4dde2c290e3ee11bd3bd1ecd27d7039a	0a8a13bf87abe8696fbae4efe2b7f874
+4e7054dff89623f323332052d0c7ff6e	0a8a13bf87abe8696fbae4efe2b7f874
+55b6aa6562faa9381e43ea82a4991079	0a8a13bf87abe8696fbae4efe2b7f874
+0a0f6b88354de7afe84b8a07dfadcc26	0a8a13bf87abe8696fbae4efe2b7f874
+6ca47c71d99f608d4773b95f9b859142	0a8a13bf87abe8696fbae4efe2b7f874
+576fea4a0c5425ba382fff5f593a33f1	0a8a13bf87abe8696fbae4efe2b7f874
+13c8bd3a0d92bd186fc5162eded4431d	0a8a13bf87abe8696fbae4efe2b7f874
+03fec47975e0e1e2d0bc723af47281de	0a8a13bf87abe8696fbae4efe2b7f874
+cabcfb35912d17067131f7d2634ac270	0a8a13bf87abe8696fbae4efe2b7f874
+3123e3df482127074cdd5f830072c898	0a8a13bf87abe8696fbae4efe2b7f874
+26c2bb18f3a9a0c6d1392dae296cfea7	0a8a13bf87abe8696fbae4efe2b7f874
+56bf60ca682b8f68e8843ad8a55c6b17	0a8a13bf87abe8696fbae4efe2b7f874
+827bf758c7ce2ac0f857379e9e933f77	0a8a13bf87abe8696fbae4efe2b7f874
+48438b67b2ac4e5dc9df6f3723fd4ccd	0a8a13bf87abe8696fbae4efe2b7f874
+8b0cfde05d166f42a11a01814ef7fa86	0a8a13bf87abe8696fbae4efe2b7f874
+031d6cc33621c51283322daf69e799f5	0a8a13bf87abe8696fbae4efe2b7f874
+482818d4eb4ca4c709dcce4cc2ab413d	0a8a13bf87abe8696fbae4efe2b7f874
+319480a02920dc261209240eed190360	0a8a13bf87abe8696fbae4efe2b7f874
+a89af36e042b5aa91d6efea0cc283c02	0a8a13bf87abe8696fbae4efe2b7f874
+13909e3013727a91ee750bfd8660d7bc	0a8a13bf87abe8696fbae4efe2b7f874
+74e8b6c4be8a0f5dd843e2d1d7385a36	0a8a13bf87abe8696fbae4efe2b7f874
+5c29c2e513aadfe372fd0af7553b5a6c	0a8a13bf87abe8696fbae4efe2b7f874
+eef7d6da9ba6d0bed2078a5f253f4cfc	0a8a13bf87abe8696fbae4efe2b7f874
+d192d350b6eace21e325ecf9b0f1ebd1	0a8a13bf87abe8696fbae4efe2b7f874
+05256decaa2ee2337533d95c7de3db9d	0a8a13bf87abe8696fbae4efe2b7f874
+b14521c0461b445a7ac2425e922c72df	0a8a13bf87abe8696fbae4efe2b7f874
+33b39f2721f79a6bb6bb5e1b2834b0bd	d30be26d66f0448359f54d923aab2bb9
+b145159df60e1549d1ba922fc8a92448	d30be26d66f0448359f54d923aab2bb9
+ea3f5f97f06167f4819498b4dd56508e	d30be26d66f0448359f54d923aab2bb9
+e2be3c3c22484d1872c7b225339c0962	d30be26d66f0448359f54d923aab2bb9
+5629d465ed80efff6e25b8775b98c2d1	d30be26d66f0448359f54d923aab2bb9
+f00bbb7747929fafa9d1afd071dba78e	d30be26d66f0448359f54d923aab2bb9
+67cc86339b2654a35fcc57da8fc9d33d	d30be26d66f0448359f54d923aab2bb9
+01a9f3fdd96daef6bc85160bd21d35dc	d30be26d66f0448359f54d923aab2bb9
+6a4e8bab29666632262eb20c336e85e2	d30be26d66f0448359f54d923aab2bb9
+4be3e31b7598745d0e96c098bbf7a1d7	d30be26d66f0448359f54d923aab2bb9
+3aa1c6d08d286053722d17291dc3f116	d30be26d66f0448359f54d923aab2bb9
+486bf23406dec9844b97f966f4636c9b	d30be26d66f0448359f54d923aab2bb9
+4dde2c290e3ee11bd3bd1ecd27d7039a	d30be26d66f0448359f54d923aab2bb9
+c833c98be699cd7828a5106a37d12c2e	d30be26d66f0448359f54d923aab2bb9
+846a0115f0214c93a5a126f0f9697228	d30be26d66f0448359f54d923aab2bb9
+07f467f03da5f904144b0ad3bc00a26d	d30be26d66f0448359f54d923aab2bb9
+cd80c766840b7011fbf48355c0142431	d30be26d66f0448359f54d923aab2bb9
+6f60a61fcc05cb4d42c81ade04392cfc	d30be26d66f0448359f54d923aab2bb9
+7df470ec0292985d8f0e37aa6c2b38d5	d30be26d66f0448359f54d923aab2bb9
+3a232003be172b49eb64e4d3e9af1434	d30be26d66f0448359f54d923aab2bb9
+e2afc3f96b4a23d451c171c5fc852d0f	d30be26d66f0448359f54d923aab2bb9
+863e7a3d6d4a74739bca7dd81db5d51f	d30be26d66f0448359f54d923aab2bb9
+d1fded22db9fc8872e86fff12d511207	d30be26d66f0448359f54d923aab2bb9
+c526681b295049215e5f1c2066639f4a	d30be26d66f0448359f54d923aab2bb9
+8b0cfde05d166f42a11a01814ef7fa86	d30be26d66f0448359f54d923aab2bb9
+65f889eb579641f6e5f58b5a48f3ec12	d30be26d66f0448359f54d923aab2bb9
+031d6cc33621c51283322daf69e799f5	d30be26d66f0448359f54d923aab2bb9
+ec788cc8478763d79a18160a99dbb618	d30be26d66f0448359f54d923aab2bb9
+d5b95b21ce47502980eebfcf8d2913e0	d30be26d66f0448359f54d923aab2bb9
+537e5aa87fcfb168be5c953d224015ff	d30be26d66f0448359f54d923aab2bb9
+521c8a16cf07590faee5cf30bcfb98b6	d30be26d66f0448359f54d923aab2bb9
+e2226498712065ccfca00ecb57b8ed2f	d30be26d66f0448359f54d923aab2bb9
+810f28b77fa6c866fbcceb6c8aa7bac4	d30be26d66f0448359f54d923aab2bb9
+08e2440159e71c7020394db19541aabc	d30be26d66f0448359f54d923aab2bb9
+e6489b9cc39c95e53401cb601c4cae09	d30be26d66f0448359f54d923aab2bb9
+4622209440a0ade57b18f21ae41963d9	d30be26d66f0448359f54d923aab2bb9
+4338a835aa6e3198deba95c25dd9e3de	d30be26d66f0448359f54d923aab2bb9
+048d40092f9bd3c450e4bdeeff69e8c3	d25334037d936d3257f794a10bb3030f
+d2d67d63c28a15822569c5033f26b133	d25334037d936d3257f794a10bb3030f
+22ef651048289b302401afe2044c5c01	d25334037d936d3257f794a10bb3030f
+53199d92b173437f0207a916e8bcc23a	d25334037d936d3257f794a10bb3030f
+bd4ca3a838ce3972af46b6e2d85985f2	d25334037d936d3257f794a10bb3030f
+ef3c0bf190876fd31d5132848e99df61	d25334037d936d3257f794a10bb3030f
+34fd3085dc67c39bf1692938cf3dbdd9	d25334037d936d3257f794a10bb3030f
+cd0bc2c8738b2fef2d78d197223b17d5	d25334037d936d3257f794a10bb3030f
+2c5705766131b389fa1d88088f1bb8a8	d25334037d936d3257f794a10bb3030f
+db472eaf615920784c2b83fc90e8dcc5	d25334037d936d3257f794a10bb3030f
+e6624ef1aeab84f521056a142b5b2d12	d25334037d936d3257f794a10bb3030f
+7cb94a8039f617f505df305a1dc2cc61	d25334037d936d3257f794a10bb3030f
+55696bac6cdd14d47cbe7940665e21d3	d25334037d936d3257f794a10bb3030f
+2460cdf9598c810ac857d6ee9a84935a	d25334037d936d3257f794a10bb3030f
+26c2bb18f3a9a0c6d1392dae296cfea7	d25334037d936d3257f794a10bb3030f
+6af2c726b2d705f08d05a7ee9509916e	d25334037d936d3257f794a10bb3030f
+93aa5f758ad31ae4b8ac40044ba6c110	d25334037d936d3257f794a10bb3030f
+191bab5800bd381ecf16485f91e85bc3	d25334037d936d3257f794a10bb3030f
+ba5e6ab17c7e5769b11f98bfe8b692d0	d25334037d936d3257f794a10bb3030f
+fc239fd89fd7c9edbf2bf27d1d894bc0	d25334037d936d3257f794a10bb3030f
+57126705faf40e4b5227c8a0302d13b2	d25334037d936d3257f794a10bb3030f
+cba8cb3c568de75a884eaacde9434443	d25334037d936d3257f794a10bb3030f
+955a5cfd6e05ed30eec7c79d2371ebcf	d25334037d936d3257f794a10bb3030f
+d2f62cd276ef7cab5dcf9218d68f5bcf	d25334037d936d3257f794a10bb3030f
+49a41ffa9c91f7353ec37cda90966866	d25334037d936d3257f794a10bb3030f
+73cb08d143f893e645292dd04967f526	d25334037d936d3257f794a10bb3030f
+5324a886a2667283dbfe7f7974ff6fc0	d25334037d936d3257f794a10bb3030f
+28c5f9ffd175dcd53aa3e9da9b00dde7	d25334037d936d3257f794a10bb3030f
+6b157916b43b09df5a22f658ccb92b64	d25334037d936d3257f794a10bb3030f
+0c31e51349871cfb59cfbfaaed82eb18	d25334037d936d3257f794a10bb3030f
+1de3f08835ab9d572e79ac0fca13c5c2	d25334037d936d3257f794a10bb3030f
+7cbd455ff5af40e28a1eb97849f00723	d25334037d936d3257f794a10bb3030f
+3d4fe2107d6302760654b4217cf32f17	d25334037d936d3257f794a10bb3030f
+3c8ce0379b610d36c3723b198b982197	d25334037d936d3257f794a10bb3030f
+2f6fc683428eb5f8b22cc5021dc9d40d	d25334037d936d3257f794a10bb3030f
+77f94851e582202f940198a26728e71f	d25334037d936d3257f794a10bb3030f
+586ac67e6180a1f16a4d3b81e33eaa94	d25334037d936d3257f794a10bb3030f
+45816111a5b644493b68cfedfb1a0cc0	d25334037d936d3257f794a10bb3030f
+861613f5a80abdf5a15ea283daa64be3	d25334037d936d3257f794a10bb3030f
+0ecef959ca1f43d538966f7eb9a7e2ec	d25334037d936d3257f794a10bb3030f
+d104b6ae44b0ac6649723bac21761d41	d25334037d936d3257f794a10bb3030f
+7c7e63c9501a790a3134392e39c3012e	0c7fde545c06c2bc7383c0430c95fb78
+c9dc004fc3d039ad7fb49456e5902b01	0c7fde545c06c2bc7383c0430c95fb78
+b4c5b422ab8969880d9f0f0e9124f0d7	0c7fde545c06c2bc7383c0430c95fb78
+05fcf330d8fafb0a1f17ce30ff60b924	0c7fde545c06c2bc7383c0430c95fb78
+7bc374006774a2eda5288fea8f1872e3	0c7fde545c06c2bc7383c0430c95fb78
+dcdcd2f22b1d5f85fa5dd68fa89e3756	0c7fde545c06c2bc7383c0430c95fb78
+21077194453dcf49c2105fda6bb89c79	0c7fde545c06c2bc7383c0430c95fb78
+90802bdf218986ffc70f8a086e1df172	0c7fde545c06c2bc7383c0430c95fb78
+eb4558fa99c7f8d548cbcb32a14d469c	0c7fde545c06c2bc7383c0430c95fb78
+381b834c6bf7b25b9b627c9eeb81dd8a	0c7fde545c06c2bc7383c0430c95fb78
+849c829d658baaeff512d766b0db3cce	0c7fde545c06c2bc7383c0430c95fb78
+827bf758c7ce2ac0f857379e9e933f77	0c7fde545c06c2bc7383c0430c95fb78
+baceebebc179d3cdb726f5cbfaa81dfe	0c7fde545c06c2bc7383c0430c95fb78
+f9ff0bcbb45bdf8a67395fa0ab3737b5	0c7fde545c06c2bc7383c0430c95fb78
+876eed60be80010455ff50a62ccf1256	0c7fde545c06c2bc7383c0430c95fb78
+fbc2b3cebe54dd00b53967c5cf4b9192	0c7fde545c06c2bc7383c0430c95fb78
+97724184152a2620b76e2f93902ed679	0c7fde545c06c2bc7383c0430c95fb78
+bcf744fa5f256d6c3051dd86943524f6	0c7fde545c06c2bc7383c0430c95fb78
+cf38e7d92bb08c96c50ddc723b624f9d	0c7fde545c06c2bc7383c0430c95fb78
+8fdc3e13751b8f525f259d27f2531e87	0c7fde545c06c2bc7383c0430c95fb78
+18b751c8288c0fabe7b986963016884f	0c7fde545c06c2bc7383c0430c95fb78
+30b8affc1afeb50c76ad57d7eda1f08f	0c7fde545c06c2bc7383c0430c95fb78
+89d60b9528242c8c53ecbfde131eba21	0c7fde545c06c2bc7383c0430c95fb78
+647a73dd79f06cdf74e1fa7524700161	2af415a2174b122c80e901297f2d114e
+08f8c67c20c4ba43e8ba6fa771039c94	2af415a2174b122c80e901297f2d114e
+4e9b4bdef9478154fc3ac7f5ebfb6418	2af415a2174b122c80e901297f2d114e
+0ab01e57304a70cf4f7f037bd8afbe49	2af415a2174b122c80e901297f2d114e
+1b62f034014b1d242c84c6fe7e6470f0	2af415a2174b122c80e901297f2d114e
+fcf66a6d6cfbcb1d4a101213b8500445	2af415a2174b122c80e901297f2d114e
+f1022ae1bc6b46d51889e0bb5ea8b64f	2af415a2174b122c80e901297f2d114e
+240e556541427d81f4ed1eda86f33ad3	2af415a2174b122c80e901297f2d114e
+d162c87d4d4b2a8f6dda58d4fba5987f	2af415a2174b122c80e901297f2d114e
+09c00610ca567a64c82da81cc92cb846	2af415a2174b122c80e901297f2d114e
+445a222489d55b5768ec2f17b1c3ea34	2af415a2174b122c80e901297f2d114e
+5a534330e31944ed43cb6d35f4ad23c7	2af415a2174b122c80e901297f2d114e
+a2761eea97ee9fe09464d5e70da6dd06	2af415a2174b122c80e901297f2d114e
+1c13f340d154b44e41c996ec08d76749	2af415a2174b122c80e901297f2d114e
+74e8b6c4be8a0f5dd843e2d1d7385a36	2af415a2174b122c80e901297f2d114e
+b1c7516fef4a901df12871838f934cf6	2af415a2174b122c80e901297f2d114e
+ab5428d229c61532af41ec2ca258bf30	2af415a2174b122c80e901297f2d114e
+fc46b0aa6469133caf668f87435bfd9f	8bb92c3b9b1b949524aac3b578a052b6
+33b39f2721f79a6bb6bb5e1b2834b0bd	8bb92c3b9b1b949524aac3b578a052b6
+9436650a453053e775897ef5733e88fe	8bb92c3b9b1b949524aac3b578a052b6
+a4bcd57d5cda816e4ffd1f83031a36ca	8bb92c3b9b1b949524aac3b578a052b6
+bda66e37bf0bfbca66f8c78c5c8032b8	8bb92c3b9b1b949524aac3b578a052b6
+cd004b87e2adfb72b28752a6ef6cd639	8bb92c3b9b1b949524aac3b578a052b6
+eb39fa9323a6b3cbc8533cd3dadb9f76	8bb92c3b9b1b949524aac3b578a052b6
+768207c883fd6447d67f3d5bc09211bd	8bb92c3b9b1b949524aac3b578a052b6
+1fd7fc9c73539bee88e1ec137b5f9ad2	8bb92c3b9b1b949524aac3b578a052b6
+e039d55ed63a723001867bc4eb842c00	8bb92c3b9b1b949524aac3b578a052b6
+70492d5f3af58ace303d1c5dfc210088	8bb92c3b9b1b949524aac3b578a052b6
+26211992c1edc0ab3a6b6506cac8bb52	8bb92c3b9b1b949524aac3b578a052b6
+00a0d9697a08c1e5d4ba28d95da73292	8bb92c3b9b1b949524aac3b578a052b6
+3e8d4b3893a9ebbbd86e648c90cbbe63	8bb92c3b9b1b949524aac3b578a052b6
+10627ac0e35cfed4a0ca5b97a06b9d9f	8bb92c3b9b1b949524aac3b578a052b6
+8fa1a366d4f2e520bc9354658c4709f1	8bb92c3b9b1b949524aac3b578a052b6
+f7910d943cc815a4a0081668ac2119b2	8bb92c3b9b1b949524aac3b578a052b6
+22c2fc8a3a81503d40d4e532ac0e22ab	8bb92c3b9b1b949524aac3b578a052b6
+be632fd63d0f90906194973ede449873	8bb92c3b9b1b949524aac3b578a052b6
+933c8182650ca4ae087544beff5bb52d	8bb92c3b9b1b949524aac3b578a052b6
+e3de2cf8ac892a0d8616eefc4a4f59bd	8bb92c3b9b1b949524aac3b578a052b6
+623c5a1c99aceaf0b07ae233d1888e0a	8bb92c3b9b1b949524aac3b578a052b6
+b84cdd396f01275b63bdaf7f61ed5a43	8bb92c3b9b1b949524aac3b578a052b6
+9d74605e4b1d19d83992a991230e89ef	8bb92c3b9b1b949524aac3b578a052b6
+b6eba7850fd20fa8dce81167f1a6edca	8bb92c3b9b1b949524aac3b578a052b6
+bd555d95b1ccba75afca868636b1b931	8bb92c3b9b1b949524aac3b578a052b6
+ca1720fd6350760c43139622c4753557	8bb92c3b9b1b949524aac3b578a052b6
+06c1680c65972c4332be73e726de9e74	8bb92c3b9b1b949524aac3b578a052b6
+77ac561c759a27b7d660d7cf0534a9c3	8bb92c3b9b1b949524aac3b578a052b6
+e6489b9cc39c95e53401cb601c4cae09	8bb92c3b9b1b949524aac3b578a052b6
+c18bdeb4f181c22f04555ea453111da1	8bb92c3b9b1b949524aac3b578a052b6
+4338a835aa6e3198deba95c25dd9e3de	8bb92c3b9b1b949524aac3b578a052b6
+9592b3ad4d7f96bc644c7d6f34c06576	8bb92c3b9b1b949524aac3b578a052b6
+db1440c4bae3edf98e3dab7caf2e7fed	8bb92c3b9b1b949524aac3b578a052b6
+bff322dbe273a1e2d1fe37f81acccbe4	8bb92c3b9b1b949524aac3b578a052b6
+36b208182f04f44c80937e980c3c28fd	8bb92c3b9b1b949524aac3b578a052b6
+b7f0e9013f8bfb209f4f6b2258b6c9c8	a88070859e86a8fb44267f7c6d91d381
+d02f33b44582e346050cefadce93eb95	a88070859e86a8fb44267f7c6d91d381
+491801c872c67db465fda0f8f180569d	a88070859e86a8fb44267f7c6d91d381
+25f5d73866a52be9d0e2e059955dfd56	a88070859e86a8fb44267f7c6d91d381
+dfa61d19b62369a37743b38215836df9	a88070859e86a8fb44267f7c6d91d381
+30a100fe6a043e64ed36abb039bc9130	a88070859e86a8fb44267f7c6d91d381
+e4f13074d445d798488cb00fa0c5fbd4	a88070859e86a8fb44267f7c6d91d381
+563fcbf5f44e03e0eeb9c8d6e4c8e127	a88070859e86a8fb44267f7c6d91d381
+a91887f44d8d9fdcaa401d1c719630d7	a88070859e86a8fb44267f7c6d91d381
+6ffa656be5ff3db085578f54a05d4ddb	a88070859e86a8fb44267f7c6d91d381
+ef75c0b43ae9ba972900e83c5ccf5cac	a88070859e86a8fb44267f7c6d91d381
+79cbf009784a729575e50a3ef4a3b1cc	a88070859e86a8fb44267f7c6d91d381
+2fb81ca1d0a935be4cb49028268baa3f	a88070859e86a8fb44267f7c6d91d381
+b7b99e418cff42d14dbf2d63ecee12a8	a88070859e86a8fb44267f7c6d91d381
+e4f74be13850fc65559a3ed855bf35a8	a88070859e86a8fb44267f7c6d91d381
+c0118be307a26886822e1194e8ae246d	a88070859e86a8fb44267f7c6d91d381
+316a289ef71c950545271754abf583f1	a88070859e86a8fb44267f7c6d91d381
+1506aeeb8c3a699b1e3c87db03156428	a88070859e86a8fb44267f7c6d91d381
+1a5235c012c18789e81960333a76cd7a	a88070859e86a8fb44267f7c6d91d381
+5bb416e14ac19276a4b450d343e4e981	a88070859e86a8fb44267f7c6d91d381
+c846d80d826291f2a6a0d7a57e540307	a88070859e86a8fb44267f7c6d91d381
+78f5c568100eb61401870fa0fa4fd7cb	a88070859e86a8fb44267f7c6d91d381
+78b532c25e4a99287940b1706359d455	a88070859e86a8fb44267f7c6d91d381
+fc935f341286c735b575bd50196c904b	a88070859e86a8fb44267f7c6d91d381
+f159fc50b5af54fecf21d5ea6ec37bad	a88070859e86a8fb44267f7c6d91d381
+265dbcbd2bce07dfa721ed3daaa30912	a88070859e86a8fb44267f7c6d91d381
+11a7f956c37bf0459e9c80b16cc72107	a88070859e86a8fb44267f7c6d91d381
+786d3481362b8dee6370dfb9b6df38a2	be2f0af59429129793d751e4316ec81c
+298a577c621a7a1c365465f694e0bd13	be2f0af59429129793d751e4316ec81c
+ab1d9c0bfcc2843b8ea371f48ed884bb	be2f0af59429129793d751e4316ec81c
+5fa07e5db79f9a1dccb28d65d6337aa6	be2f0af59429129793d751e4316ec81c
+02fd1596536ea89e779d37ded52ac353	be2f0af59429129793d751e4316ec81c
+dddfdb5f2d7991d93f0f97dce1ef0f45	be2f0af59429129793d751e4316ec81c
+5ab944fac5f6a0d98dc248a879ec70ff	be2f0af59429129793d751e4316ec81c
+6ffa656be5ff3db085578f54a05d4ddb	be2f0af59429129793d751e4316ec81c
+8ee257802fc6a4d44679ddee10bf24a9	be2f0af59429129793d751e4316ec81c
+dd0e61ab23e212d958112dd06ad0bfd2	be2f0af59429129793d751e4316ec81c
+02670bc3f496ce7b1393712f58033f6c	be2f0af59429129793d751e4316ec81c
+dbf1b3eb1f030affb41473a8fa69bc0c	be2f0af59429129793d751e4316ec81c
+9459200394693a7140196f07e6e717fd	be2f0af59429129793d751e4316ec81c
+e9e0664816c35d64f26fc1382708617b	be2f0af59429129793d751e4316ec81c
+316a289ef71c950545271754abf583f1	be2f0af59429129793d751e4316ec81c
+3189b8c5e007c634d7e28ef93be2b774	be2f0af59429129793d751e4316ec81c
+f8b01df5282702329fcd1cae8877bb5f	be2f0af59429129793d751e4316ec81c
+b86f86db61493cc2d757a5cefc5ef425	be2f0af59429129793d751e4316ec81c
+fc935f341286c735b575bd50196c904b	be2f0af59429129793d751e4316ec81c
+265dbcbd2bce07dfa721ed3daaa30912	be2f0af59429129793d751e4316ec81c
+8845da022807c76120b5b6f50c218d9a	be2f0af59429129793d751e4316ec81c
+ef297890615f388057b6a2c0a2cbc7ab	f3dcdca4cd0c83a5e855c5434ce98673
+be2c012d60e32fbf456cd8184a51973d	f3dcdca4cd0c83a5e855c5434ce98673
+f00bbb7747929fafa9d1afd071dba78e	f3dcdca4cd0c83a5e855c5434ce98673
+67cc86339b2654a35fcc57da8fc9d33d	f3dcdca4cd0c83a5e855c5434ce98673
+71f4e9782d5f2a5381f5cdf7c5a35d89	f3dcdca4cd0c83a5e855c5434ce98673
+6caa47f7b3472053b152f84ce72c182c	f3dcdca4cd0c83a5e855c5434ce98673
+d68956b2b5557e8f1be27a4632045c1e	f3dcdca4cd0c83a5e855c5434ce98673
+4c576d921b99dad80e4bcf9b068c2377	f3dcdca4cd0c83a5e855c5434ce98673
+c63b6261b8bb8145bc0fd094b9732c24	f3dcdca4cd0c83a5e855c5434ce98673
+156c19a6d9137e04b94500642d1cb8c2	f3dcdca4cd0c83a5e855c5434ce98673
+511ac85b55c0c400422462064d6c77ed	f3dcdca4cd0c83a5e855c5434ce98673
+255661921f4ad57d02b1de9062eb6421	f3dcdca4cd0c83a5e855c5434ce98673
+c8bc4f15477ea3131abb1a3f0649fac2	f3dcdca4cd0c83a5e855c5434ce98673
+b145159df60e1549d1ba922fc8a92448	fe81a4f28e6bd176efc8184d58544e66
+2eb42b9c31ac030455e5a4a79bccf603	fe81a4f28e6bd176efc8184d58544e66
+6a4e8bab29666632262eb20c336e85e2	fe81a4f28e6bd176efc8184d58544e66
+53199d92b173437f0207a916e8bcc23a	fe81a4f28e6bd176efc8184d58544e66
+d908b6b9019639bced6d1e31463eea85	fe81a4f28e6bd176efc8184d58544e66
+6772cdb774a6ce03a928d187def5453f	fe81a4f28e6bd176efc8184d58544e66
+1cc93e4af82b1b7e08bace9a92d1f762	fe81a4f28e6bd176efc8184d58544e66
+b36eb6a54154f7301f004e1e61c87ce8	fe81a4f28e6bd176efc8184d58544e66
+f975b4517b002a52839c42e86b34dc96	fe81a4f28e6bd176efc8184d58544e66
+06c5c89047bfd6012e6fb3c2bd3cb24b	fe81a4f28e6bd176efc8184d58544e66
+7a43dd4c2bb9bea14a95ff3acd4dfb18	fe81a4f28e6bd176efc8184d58544e66
+c295bb30bf534e960a6acf7435f0e46a	fe81a4f28e6bd176efc8184d58544e66
+30b8affc1afeb50c76ad57d7eda1f08f	fe81a4f28e6bd176efc8184d58544e66
+06c1680c65972c4332be73e726de9e74	fe81a4f28e6bd176efc8184d58544e66
+d104b6ae44b0ac6649723bac21761d41	fe81a4f28e6bd176efc8184d58544e66
+71b6971b6323b97f298af11ed5455e55	5446a9fcc158ea011aeb9892ba2dfb15
+7c7e63c9501a790a3134392e39c3012e	5446a9fcc158ea011aeb9892ba2dfb15
+c2ab38206dce633f15d66048ad744f03	5446a9fcc158ea011aeb9892ba2dfb15
+1437c187d64f0ac45b6b077a989d5648	5446a9fcc158ea011aeb9892ba2dfb15
+dcab0d84960cda81718e38ee47688a75	5446a9fcc158ea011aeb9892ba2dfb15
+bf2c8729bf5c149067d8e978ea3dcd32	5446a9fcc158ea011aeb9892ba2dfb15
+2e4e6a5f485b2c7e22f9974633c2b900	5446a9fcc158ea011aeb9892ba2dfb15
+6af2c726b2d705f08d05a7ee9509916e	5446a9fcc158ea011aeb9892ba2dfb15
+baceebebc179d3cdb726f5cbfaa81dfe	5446a9fcc158ea011aeb9892ba2dfb15
+f9ff0bcbb45bdf8a67395fa0ab3737b5	5446a9fcc158ea011aeb9892ba2dfb15
+34e927c45cf3ccebb09b006b00f4e02d	5446a9fcc158ea011aeb9892ba2dfb15
+8fdc3e13751b8f525f259d27f2531e87	5446a9fcc158ea011aeb9892ba2dfb15
+2f6fc683428eb5f8b22cc5021dc9d40d	5446a9fcc158ea011aeb9892ba2dfb15
+ef297890615f388057b6a2c0a2cbc7ab	c7fb67368c25c29b9c10ca91b2d97488
+bca8f048f2c5ff787950eb1ba088c70e	c7fb67368c25c29b9c10ca91b2d97488
+2569a68a03a04a2cd73197d2cc546ff2	c7fb67368c25c29b9c10ca91b2d97488
+d68956b2b5557e8f1be27a4632045c1e	c7fb67368c25c29b9c10ca91b2d97488
+0182742917720e1b2cf59ff671738253	c7fb67368c25c29b9c10ca91b2d97488
+46ea4c445a9ff8e288258e3ec9cd1cf0	c7fb67368c25c29b9c10ca91b2d97488
+d76db99cdd16bd0e53d5e07bcf6225c8	c7fb67368c25c29b9c10ca91b2d97488
+c63b6261b8bb8145bc0fd094b9732c24	c7fb67368c25c29b9c10ca91b2d97488
+bbbb086d59122dbb940740d6bac65976	c7fb67368c25c29b9c10ca91b2d97488
+f975b4517b002a52839c42e86b34dc96	c7fb67368c25c29b9c10ca91b2d97488
+156c19a6d9137e04b94500642d1cb8c2	c7fb67368c25c29b9c10ca91b2d97488
+05256decaa2ee2337533d95c7de3db9d	c7fb67368c25c29b9c10ca91b2d97488
+fc46b0aa6469133caf668f87435bfd9f	0c5544f60e058b8cbf571044aaa6115f
+16a56d0941a310c3dc4f967041574300	0c5544f60e058b8cbf571044aaa6115f
+a4bcd57d5cda816e4ffd1f83031a36ca	0c5544f60e058b8cbf571044aaa6115f
+ec5c65bfe530446b696f04e51aa19201	0c5544f60e058b8cbf571044aaa6115f
+3577f7160794aa4ba4d79d0381aefdb1	0c5544f60e058b8cbf571044aaa6115f
+05ee6afed8d828d4e7ed35b0483527f7	0c5544f60e058b8cbf571044aaa6115f
+458da4fc3da734a6853e26af3944bf75	0c5544f60e058b8cbf571044aaa6115f
+a05a13286752cb6fc14f39f51cedd9ce	0c5544f60e058b8cbf571044aaa6115f
+118c9af69a42383387e8ce6ab22867d7	0c5544f60e058b8cbf571044aaa6115f
+7b675f4c76aed34cf2d5943d83198142	0c5544f60e058b8cbf571044aaa6115f
+6d779916de27702814e4874dcf4f9e3a	0c5544f60e058b8cbf571044aaa6115f
+123f90461d74091a96637955d14a1401	0c5544f60e058b8cbf571044aaa6115f
+b834eadeaf680f6ffcb13068245a1fed	0c5544f60e058b8cbf571044aaa6115f
+c8fbeead5c59de4e8f07ab39e7874213	0c5544f60e058b8cbf571044aaa6115f
+58e42b779d54e174aad9a9fb79e7ebbc	0c5544f60e058b8cbf571044aaa6115f
+bc111d75a59fe7191a159fd4ee927981	0c5544f60e058b8cbf571044aaa6115f
+df99cee44099ff57acbf7932670614dd	0c5544f60e058b8cbf571044aaa6115f
+d6a020f7b50fb4512fd3c843af752809	0c5544f60e058b8cbf571044aaa6115f
+f36fba9e93f6402ba551291e34242338	0c5544f60e058b8cbf571044aaa6115f
+f999abbe163f001f55134273441f35c0	0c5544f60e058b8cbf571044aaa6115f
+db1440c4bae3edf98e3dab7caf2e7fed	0c5544f60e058b8cbf571044aaa6115f
+f041991eb3263fd3e5d919026e772f57	0c5544f60e058b8cbf571044aaa6115f
+4e9b4bdef9478154fc3ac7f5ebfb6418	917d78ef1f9ba5451bcd9735606e9215
+846a0115f0214c93a5a126f0f9697228	917d78ef1f9ba5451bcd9735606e9215
+d162c87d4d4b2a8f6dda58d4fba5987f	917d78ef1f9ba5451bcd9735606e9215
+460bf623f241651a7527a63d32569dc0	917d78ef1f9ba5451bcd9735606e9215
+f34c903e17cfeea18e499d4627eeb3ec	917d78ef1f9ba5451bcd9735606e9215
+3123e3df482127074cdd5f830072c898	917d78ef1f9ba5451bcd9735606e9215
+511ac85b55c0c400422462064d6c77ed	917d78ef1f9ba5451bcd9735606e9215
+347fb42f546e982de2a1027a2544bfd0	917d78ef1f9ba5451bcd9735606e9215
+65f889eb579641f6e5f58b5a48f3ec12	917d78ef1f9ba5451bcd9735606e9215
+2dde74b7ec594b9bd78da66f1c5cafdc	917d78ef1f9ba5451bcd9735606e9215
+05256decaa2ee2337533d95c7de3db9d	917d78ef1f9ba5451bcd9735606e9215
+fd1a5654154eed3c0a0820ab54fb90a7	917d78ef1f9ba5451bcd9735606e9215
+53199d92b173437f0207a916e8bcc23a	8f8351209253e5c5d8ff147b02d3b117
+cb80a6a84ec46f085ea6b2ff30a88d80	8f8351209253e5c5d8ff147b02d3b117
+07f467f03da5f904144b0ad3bc00a26d	8f8351209253e5c5d8ff147b02d3b117
+d162c87d4d4b2a8f6dda58d4fba5987f	8f8351209253e5c5d8ff147b02d3b117
+576fea4a0c5425ba382fff5f593a33f1	8f8351209253e5c5d8ff147b02d3b117
+f34c903e17cfeea18e499d4627eeb3ec	8f8351209253e5c5d8ff147b02d3b117
+3123e3df482127074cdd5f830072c898	8f8351209253e5c5d8ff147b02d3b117
+8b0cfde05d166f42a11a01814ef7fa86	8f8351209253e5c5d8ff147b02d3b117
+65f889eb579641f6e5f58b5a48f3ec12	8f8351209253e5c5d8ff147b02d3b117
+a89af36e042b5aa91d6efea0cc283c02	8f8351209253e5c5d8ff147b02d3b117
+2dde74b7ec594b9bd78da66f1c5cafdc	8f8351209253e5c5d8ff147b02d3b117
+71144850f4fb4cc55fc0ee6935badddf	9a1f30943126974075dbd4d13c8018ac
+eed35187b83d0f2e0042cf221905163c	9a1f30943126974075dbd4d13c8018ac
+1437c187d64f0ac45b6b077a989d5648	9a1f30943126974075dbd4d13c8018ac
+8981b4a0834d2d59e1d0dceb6022caae	9a1f30943126974075dbd4d13c8018ac
+240e556541427d81f4ed1eda86f33ad3	9a1f30943126974075dbd4d13c8018ac
+21077194453dcf49c2105fda6bb89c79	9a1f30943126974075dbd4d13c8018ac
+75241d56d63a68adcd51d828eb76ca80	9a1f30943126974075dbd4d13c8018ac
+0b6bcec891d17cd7858525799c65da27	9a1f30943126974075dbd4d13c8018ac
+fdedcd75d695d1c0eb790a5ee3ba90b5	9a1f30943126974075dbd4d13c8018ac
+13909e3013727a91ee750bfd8660d7bc	9a1f30943126974075dbd4d13c8018ac
+4669569c9a870431c4896de37675a784	9a1f30943126974075dbd4d13c8018ac
+cc31970696ef00b4c6e28dba4252e45d	9a1f30943126974075dbd4d13c8018ac
+dda8e0792843816587427399f34bd726	9a1f30943126974075dbd4d13c8018ac
+f1a37824dfc280b208e714bd80d5a294	9a1f30943126974075dbd4d13c8018ac
+786a755c895da064ccd4f9e8eb7e484e	9a1f30943126974075dbd4d13c8018ac
+15ba70625527d7bb48962e6ba1a465f7	9a1f30943126974075dbd4d13c8018ac
+0da2e7fa0ba90f4ae031b0d232b8a57a	86094b61cb9f63b77f982ceae03e95f0
+b1d18f9e5399464bbe5dea0cca8fe064	86094b61cb9f63b77f982ceae03e95f0
+0cd2b45507cc7c4ead2aaa71c59af730	86094b61cb9f63b77f982ceae03e95f0
+40a259aebdbb405d2dc1d25b05f04989	86094b61cb9f63b77f982ceae03e95f0
+e29470b6da77fb63e9b381fa58022c84	86094b61cb9f63b77f982ceae03e95f0
+d1ba47339d5eb2254dd3f2cc9f7e444f	86094b61cb9f63b77f982ceae03e95f0
+0b6bcec891d17cd7858525799c65da27	86094b61cb9f63b77f982ceae03e95f0
+34ca5622469ad1951a3c4dc5603cea0f	86094b61cb9f63b77f982ceae03e95f0
+45d592ef3a8dc14dccc087e734582e82	d9df3b71eebfa8e6aaf5c72ee758a14d
+486bf23406dec9844b97f966f4636c9b	d9df3b71eebfa8e6aaf5c72ee758a14d
+cb80a6a84ec46f085ea6b2ff30a88d80	d9df3b71eebfa8e6aaf5c72ee758a14d
+6a13b854e05f5ba6d2a0d873546fc32d	d9df3b71eebfa8e6aaf5c72ee758a14d
+d162c87d4d4b2a8f6dda58d4fba5987f	d9df3b71eebfa8e6aaf5c72ee758a14d
+97724184152a2620b76e2f93902ed679	d9df3b71eebfa8e6aaf5c72ee758a14d
+08e2440159e71c7020394db19541aabc	d9df3b71eebfa8e6aaf5c72ee758a14d
+dab701a389943f0d407c6e583abef934	594dec72ea580a8565277a387893e992
+a6c27c0fb9ef87788c1345041e840f95	594dec72ea580a8565277a387893e992
+8cd1cca18fb995d268006113a3d6e4bf	594dec72ea580a8565277a387893e992
+5c59b6aa317b306a1312a67fe69bf512	594dec72ea580a8565277a387893e992
+869bb972f8bef83979774fa123c56a4e	594dec72ea580a8565277a387893e992
+5bd15db3f3bb125cf3222745f4fe383f	594dec72ea580a8565277a387893e992
+3cb077e20dabc945228ea58813672973	594dec72ea580a8565277a387893e992
+22aaaebe901de8370917dcc53f53dbf6	f54c3ccedc098d37a4e7f7a455f5731e
+56b07537df0c44402f5f87a8dcb8402c	f54c3ccedc098d37a4e7f7a455f5731e
+34ef35a77324b889aab18380ad34b51a	f54c3ccedc098d37a4e7f7a455f5731e
+f3b8f1a2417bdc483f4e2306ac6004b2	f54c3ccedc098d37a4e7f7a455f5731e
+8ee257802fc6a4d44679ddee10bf24a9	f54c3ccedc098d37a4e7f7a455f5731e
+eb3a9fb71b84790e50acd81cc1aa4862	f54c3ccedc098d37a4e7f7a455f5731e
+7b91dc9ecdfa3ea7d347588a63537bb9	f54c3ccedc098d37a4e7f7a455f5731e
+43bd0d50fe7d58d8fce10c6d4232ca1e	f54c3ccedc098d37a4e7f7a455f5731e
+5f449b146ce14c780eee323dfc5391e8	f54c3ccedc098d37a4e7f7a455f5731e
+d69462bef6601bb8d6e3ffda067399d9	f54c3ccedc098d37a4e7f7a455f5731e
+dbc940d02a217c923c52d3989be9b391	f54c3ccedc098d37a4e7f7a455f5731e
+a985c9764e0e6d738ff20f2328a0644b	5c63347e836e5543344d9e366e3efff8
+ea3f5f97f06167f4819498b4dd56508e	5c63347e836e5543344d9e366e3efff8
+f00bbb7747929fafa9d1afd071dba78e	5c63347e836e5543344d9e366e3efff8
+98e8599d1486fadca0bf7aa171400dd8	5c63347e836e5543344d9e366e3efff8
+846a0115f0214c93a5a126f0f9697228	5c63347e836e5543344d9e366e3efff8
+f79485ffe5db7e276e1e625b0be0dbec	5c63347e836e5543344d9e366e3efff8
+e2226498712065ccfca00ecb57b8ed2f	5c63347e836e5543344d9e366e3efff8
+90669320cd8e4a09bf655310bffdb9ba	73d0749820562452b33d4e0f4891efcd
+08b84204877dce2a08abce50d9aeceed	73d0749820562452b33d4e0f4891efcd
+6a13b854e05f5ba6d2a0d873546fc32d	73d0749820562452b33d4e0f4891efcd
+21077194453dcf49c2105fda6bb89c79	73d0749820562452b33d4e0f4891efcd
+b454fdfc910ad8f6b7509072cf0b4031	73d0749820562452b33d4e0f4891efcd
+827bf758c7ce2ac0f857379e9e933f77	73d0749820562452b33d4e0f4891efcd
+97724184152a2620b76e2f93902ed679	73d0749820562452b33d4e0f4891efcd
+b084dc5276d0211fae267a279e2959f0	73d0749820562452b33d4e0f4891efcd
+a66394e41d764b4c5646446a8ba2028b	73d0749820562452b33d4e0f4891efcd
+fdedcd75d695d1c0eb790a5ee3ba90b5	73d0749820562452b33d4e0f4891efcd
+ed9b92eb1706415c42f88dc91284da8a	73d0749820562452b33d4e0f4891efcd
+fb1afbea5c0c2e23396ef429d0e42c52	73d0749820562452b33d4e0f4891efcd
+18b751c8288c0fabe7b986963016884f	73d0749820562452b33d4e0f4891efcd
+78a7bdfe7277f187e84b52dea7b75b0b	73d0749820562452b33d4e0f4891efcd
+398af626887ad21cd66aeb272b8337be	bd1340d19723308d52dcf7c3a6b1ea87
+0959583c7f421c0bb8adb20e8faeeea1	bd1340d19723308d52dcf7c3a6b1ea87
+77bfe8d21f1ecc592062f91c9253d8ab	bd1340d19723308d52dcf7c3a6b1ea87
+4dde2c290e3ee11bd3bd1ecd27d7039a	bd1340d19723308d52dcf7c3a6b1ea87
+e6cbb2e0653a61e35d26df2bcb6bc4c7	bd1340d19723308d52dcf7c3a6b1ea87
+56bf60ca682b8f68e8843ad8a55c6b17	bd1340d19723308d52dcf7c3a6b1ea87
+a753c3945400cd54c7ffd35fc07fe031	bd1340d19723308d52dcf7c3a6b1ea87
+08e2440159e71c7020394db19541aabc	bd1340d19723308d52dcf7c3a6b1ea87
+773b5037f85efc8cc0ff3fe0bddf2eb8	ae85ec0052dafef13ff2f2cbcb540b53
+66597873e0974fb365454a5087291094	ae85ec0052dafef13ff2f2cbcb540b53
+60a105e79a86c8197cec9f973576874b	ae85ec0052dafef13ff2f2cbcb540b53
+99761fad57f035550a1ca48e47f35157	ae85ec0052dafef13ff2f2cbcb540b53
+f31ba1d770aac9bc0dcee3fc15c60a46	ae85ec0052dafef13ff2f2cbcb540b53
+43a4893e6200f462bb9fe406e68e71c0	ae85ec0052dafef13ff2f2cbcb540b53
+812f48abd93f276576541ec5b79d48a2	ae85ec0052dafef13ff2f2cbcb540b53
+bcc770bb6652b1b08643d98fd7167f5c	ae85ec0052dafef13ff2f2cbcb540b53
+73cb08d143f893e645292dd04967f526	ae85ec0052dafef13ff2f2cbcb540b53
+c245b4779defd5c69ffebbfdd239dd1b	ae85ec0052dafef13ff2f2cbcb540b53
+1fe0175f73e5b381213057da98b8f5fb	ae85ec0052dafef13ff2f2cbcb540b53
+559314721edf178fa138534f7a1611b9	ae85ec0052dafef13ff2f2cbcb540b53
+a93376e58f4c73737cf5ed7d88c2169c	ae85ec0052dafef13ff2f2cbcb540b53
+6b37fe4703bd962004cdccda304cc18e	ae85ec0052dafef13ff2f2cbcb540b53
+31da4ab7750e057e56224eff51bce705	ae85ec0052dafef13ff2f2cbcb540b53
+0371892b7f65ffb9c1544ee35c6330ad	ae85ec0052dafef13ff2f2cbcb540b53
+70409bc559ef6c8aabcf16941a29788b	ae85ec0052dafef13ff2f2cbcb540b53
+7c7e63c9501a790a3134392e39c3012e	8a743590316d1519ab5ecc8d142415a2
+f655d84d670525246ee7d57995f71c10	8a743590316d1519ab5ecc8d142415a2
+7bc374006774a2eda5288fea8f1872e3	8a743590316d1519ab5ecc8d142415a2
+75241d56d63a68adcd51d828eb76ca80	8a743590316d1519ab5ecc8d142415a2
+baceebebc179d3cdb726f5cbfaa81dfe	8a743590316d1519ab5ecc8d142415a2
+3438d9050b2bf1e6dc0179818298bd41	8a743590316d1519ab5ecc8d142415a2
+ef297890615f388057b6a2c0a2cbc7ab	a2e63ee01401aaeca78be023dfbb8c59
+cbefc03cdd1940f37a7033620f8ff69f	a2e63ee01401aaeca78be023dfbb8c59
+3b8d2a5ff1b16509377ce52a92255ffe	a2e63ee01401aaeca78be023dfbb8c59
+f975b4517b002a52839c42e86b34dc96	a2e63ee01401aaeca78be023dfbb8c59
+511ac85b55c0c400422462064d6c77ed	a2e63ee01401aaeca78be023dfbb8c59
+6caa47f7b3472053b152f84ce72c182c	c875de527ea22b45018e7468fb0ef4a5
+3b8d2a5ff1b16509377ce52a92255ffe	c875de527ea22b45018e7468fb0ef4a5
+87bd9baf0b0d760d1f0ca9a8e9526161	c875de527ea22b45018e7468fb0ef4a5
+511ac85b55c0c400422462064d6c77ed	c875de527ea22b45018e7468fb0ef4a5
+b00114f9fc38b48cc42a4972d7e07df6	c875de527ea22b45018e7468fb0ef4a5
+6db22194a183d7da810dcc29ea360c17	c875de527ea22b45018e7468fb0ef4a5
+3a7e46261a591b3e65d1e7d0b2439b20	abcd9ee1861e1b9a2a5d4d187cf3708e
+14af57131cbbf57afb206c8707fdab6c	abcd9ee1861e1b9a2a5d4d187cf3708e
+3e98ecfa6a4c765c5522f897a4a8de23	abcd9ee1861e1b9a2a5d4d187cf3708e
+6a13b854e05f5ba6d2a0d873546fc32d	abcd9ee1861e1b9a2a5d4d187cf3708e
+93025091752efa184fd034f285573afe	abcd9ee1861e1b9a2a5d4d187cf3708e
+d5b95b21ce47502980eebfcf8d2913e0	abcd9ee1861e1b9a2a5d4d187cf3708e
+113ab4d243afc4114902d317ad41bb39	abcd9ee1861e1b9a2a5d4d187cf3708e
+647a73dd79f06cdf74e1fa7524700161	f72e9105795af04cd4da64414d9968ad
+b145159df60e1549d1ba922fc8a92448	f72e9105795af04cd4da64414d9968ad
+6a4e8bab29666632262eb20c336e85e2	f72e9105795af04cd4da64414d9968ad
+53199d92b173437f0207a916e8bcc23a	f72e9105795af04cd4da64414d9968ad
+e4f13074d445d798488cb00fa0c5fbd4	f72e9105795af04cd4da64414d9968ad
+97724184152a2620b76e2f93902ed679	f72e9105795af04cd4da64414d9968ad
+41e744bdf3114b14f5873dfb46921dc4	f72e9105795af04cd4da64414d9968ad
+7f3e5839689216583047809a7f6bd0ff	7382b86831977a414e676d2b29c73788
+abe78132c8e446430297d08bd1ecdab0	7382b86831977a414e676d2b29c73788
+08b84204877dce2a08abce50d9aeceed	7382b86831977a414e676d2b29c73788
+010fb41a1a7714387391d5ea1ecdfaf7	7382b86831977a414e676d2b29c73788
+18b751c8288c0fabe7b986963016884f	7382b86831977a414e676d2b29c73788
+92ad5e8d66bac570a0611f2f1b3e43cc	5739305712ce3c5e565bc2da4cd389f4
+3e28a735f3fc31a9c8c30b47872634bf	5739305712ce3c5e565bc2da4cd389f4
+56b07537df0c44402f5f87a8dcb8402c	5739305712ce3c5e565bc2da4cd389f4
+f3b8f1a2417bdc483f4e2306ac6004b2	5739305712ce3c5e565bc2da4cd389f4
+6fa204dccaff0ec60f96db5fb5e69b33	5739305712ce3c5e565bc2da4cd389f4
+1b62f034014b1d242c84c6fe7e6470f0	19e9429d9a22a95b78047320098cbf5b
+dcdcd2f22b1d5f85fa5dd68fa89e3756	19e9429d9a22a95b78047320098cbf5b
+09c00610ca567a64c82da81cc92cb846	19e9429d9a22a95b78047320098cbf5b
+9d514e6b301cfe7bdc270212d5565eaf	19e9429d9a22a95b78047320098cbf5b
+0959583c7f421c0bb8adb20e8faeeea1	4396490d79c407ec3313bc29ede9f7c8
+262a49b104426ba0d1559f8785931b9d	4396490d79c407ec3313bc29ede9f7c8
+dddfdb5f2d7991d93f0f97dce1ef0f45	4396490d79c407ec3313bc29ede9f7c8
+f49f851c639e639b295b45f0e00c4b4c	4396490d79c407ec3313bc29ede9f7c8
+61725742f52de502605eadeac19b837b	4396490d79c407ec3313bc29ede9f7c8
+370cde851ed429f1269f243dd714cce2	4607ea6bfb05f395d12f6959cf48aaca
+fcf66a6d6cfbcb1d4a101213b8500445	4607ea6bfb05f395d12f6959cf48aaca
+dcdcd2f22b1d5f85fa5dd68fa89e3756	4607ea6bfb05f395d12f6959cf48aaca
+09c00610ca567a64c82da81cc92cb846	4607ea6bfb05f395d12f6959cf48aaca
+a822d5d4cdcb5d1b340a54798ac410b7	4607ea6bfb05f395d12f6959cf48aaca
+a571d94b6ed1fa1e0cfff9c04bbeb94d	4607ea6bfb05f395d12f6959cf48aaca
+370cde851ed429f1269f243dd714cce2	88ff69ec6aa54fb228d85b92f3b12945
+be2c012d60e32fbf456cd8184a51973d	88ff69ec6aa54fb228d85b92f3b12945
+fcf66a6d6cfbcb1d4a101213b8500445	88ff69ec6aa54fb228d85b92f3b12945
+09c00610ca567a64c82da81cc92cb846	88ff69ec6aa54fb228d85b92f3b12945
+458da4fc3da734a6853e26af3944bf75	93cf908c24c1663d03d67facc359acc2
+dfca36a68db327258a2b0d5e3abe86af	93cf908c24c1663d03d67facc359acc2
+3cd94848f6ccb600295135e86f1b46a7	93cf908c24c1663d03d67facc359acc2
+1fbd4bcce346fd2b2ffb41f6e767ea84	5148c20f58db929fe77e3cb0611dc1c4
+11a5f9f425fd6da2d010808e5bf759ab	5148c20f58db929fe77e3cb0611dc1c4
+9d1ecaf46d6433f9dd224111440cfa3b	5148c20f58db929fe77e3cb0611dc1c4
+fb1afbea5c0c2e23396ef429d0e42c52	5148c20f58db929fe77e3cb0611dc1c4
+78a7bdfe7277f187e84b52dea7b75b0b	5148c20f58db929fe77e3cb0611dc1c4
+81200f74b5d831e3e206a66fe4158370	3e29d9d93ad04d5bc71d4cdc5a8ad820
+f3ac75dfbf1ce980d70dc3dea1bf4636	3e29d9d93ad04d5bc71d4cdc5a8ad820
+384e94f762d3a408cd913c14b19ac5e0	3e29d9d93ad04d5bc71d4cdc5a8ad820
+5878f5f2b1ca134da32312175d640134	3e29d9d93ad04d5bc71d4cdc5a8ad820
+a0abb504e661e34f5d269f113d39ea96	3e29d9d93ad04d5bc71d4cdc5a8ad820
+f8b3eaefc682f8476cc28caf71cb2c73	3e29d9d93ad04d5bc71d4cdc5a8ad820
+398af626887ad21cd66aeb272b8337be	a94bc9e378c8007c95406059d09bb4f3
+824f75181a2bbd69fb2698377ea8a952	a94bc9e378c8007c95406059d09bb4f3
+5e6ff2b64b4c0163ab83ab371abe910b	a94bc9e378c8007c95406059d09bb4f3
+ca3fecb0d12232d1dd99d0b0d83c39ec	a94bc9e378c8007c95406059d09bb4f3
+98aa80527e97026656ec54cdd0f94dff	a94bc9e378c8007c95406059d09bb4f3
+f6708813faedbf607111d83fdce91828	eacaec4715e2e6194f0b148b2c4edd02
+4c576d921b99dad80e4bcf9b068c2377	eacaec4715e2e6194f0b148b2c4edd02
+3a232003be172b49eb64e4d3e9af1434	eacaec4715e2e6194f0b148b2c4edd02
+3b6d90f85e8dadcb3c02922e730e4a9d	1545b040d61dc2d236ca4dea7e2cff46
+3e28a735f3fc31a9c8c30b47872634bf	1545b040d61dc2d236ca4dea7e2cff46
+ba9bfb4d7c1652a200d1d432f83c5fd1	1545b040d61dc2d236ca4dea7e2cff46
+5e6ff2b64b4c0163ab83ab371abe910b	ecf31cb1a268dfd8be55cb3dff9ad09d
+6adc39f4242fd1ca59f184e033514209	ecf31cb1a268dfd8be55cb3dff9ad09d
+6af2c726b2d705f08d05a7ee9509916e	ecf31cb1a268dfd8be55cb3dff9ad09d
+fc239fd89fd7c9edbf2bf27d1d894bc0	ecf31cb1a268dfd8be55cb3dff9ad09d
+647dadd75e050b230269e43a4fe351e2	fff66a4d00c8ed7bb7814ff29d0faca2
+7bc374006774a2eda5288fea8f1872e3	fff66a4d00c8ed7bb7814ff29d0faca2
+5934340f46d5ab773394d7a8ac9e86d5	fff66a4d00c8ed7bb7814ff29d0faca2
+71b6971b6323b97f298af11ed5455e55	4690ec139849f88f1c10347d0cc7d1b5
+1437c187d64f0ac45b6b077a989d5648	4690ec139849f88f1c10347d0cc7d1b5
+dcab0d84960cda81718e38ee47688a75	4690ec139849f88f1c10347d0cc7d1b5
+8fdc3e13751b8f525f259d27f2531e87	4690ec139849f88f1c10347d0cc7d1b5
+09c00610ca567a64c82da81cc92cb846	80a26219c468afbb3a762d5e3cb56f39
+5a534330e31944ed43cb6d35f4ad23c7	80a26219c468afbb3a762d5e3cb56f39
+a2761eea97ee9fe09464d5e70da6dd06	80a26219c468afbb3a762d5e3cb56f39
+b615ea28d44d2e863a911ed76386b52a	afb45735b54991094a6734f53c375faf
+b02ba5a5e65487122c2c1c67351c3ea0	afb45735b54991094a6734f53c375faf
+5ef02a06b43b002e3bc195b3613b7022	afb45735b54991094a6734f53c375faf
+0e609404e53b251f786b41b7be93cc19	afb45735b54991094a6734f53c375faf
+fc239fd89fd7c9edbf2bf27d1d894bc0	afb45735b54991094a6734f53c375faf
+9722f54adb556b548bb9ecce61a4d167	afb45735b54991094a6734f53c375faf
+8cd7fa96a5143f7105ca92de7ff0bac7	afb45735b54991094a6734f53c375faf
+67cc86339b2654a35fcc57da8fc9d33d	e9b9ca12c93fad258ac0360aba14c7bc
+6caa47f7b3472053b152f84ce72c182c	e9b9ca12c93fad258ac0360aba14c7bc
+a7e071b3de48cec1dd24de6cbe6c7bf1	e9b9ca12c93fad258ac0360aba14c7bc
+e3e9ccd75f789b9689913b30cb528be0	53ed714383288793db977e8f7326eb61
+849c829d658baaeff512d766b0db3cce	53ed714383288793db977e8f7326eb61
+d192d350b6eace21e325ecf9b0f1ebd1	53ed714383288793db977e8f7326eb61
+198445c0bbe110ff65ac5ef88f026aff	e66156cc95b698d8f4d04ec6dfbb5ab7
+0a3a1f7ca8d6cf9b2313f69db9e97eb8	e66156cc95b698d8f4d04ec6dfbb5ab7
+cb80a6a84ec46f085ea6b2ff30a88d80	3545b02c56a2568e2bff21a5c410374a
+b00114f9fc38b48cc42a4972d7e07df6	3545b02c56a2568e2bff21a5c410374a
+8b22cf31089892b4c57361d261bd63f7	2634ef92ca50d68809edba7cb6052bd2
+bd4ca3a838ce3972af46b6e2d85985f2	2634ef92ca50d68809edba7cb6052bd2
+913df019fed1f80dc49b38f02d8bae41	f47e2dc1975f8d3fb8639e4dd2fff7c0
+04c8327cc71521b265f2dc7cbe996e13	f47e2dc1975f8d3fb8639e4dd2fff7c0
+e5ea2ac2170d4f9c2bdbd74ab46523f7	a9fa565c9ff23612cb5b522c340b09d1
+a9afdc809b94392fb1c2e873dbb02781	a9fa565c9ff23612cb5b522c340b09d1
+6caa47f7b3472053b152f84ce72c182c	9de74271aea8fca48a4b30e94e71a6b2
+b00114f9fc38b48cc42a4972d7e07df6	9de74271aea8fca48a4b30e94e71a6b2
+1b62f034014b1d242c84c6fe7e6470f0	bcfac7bf0f09d47c614d62c4a88a2771
+9d514e6b301cfe7bdc270212d5565eaf	bcfac7bf0f09d47c614d62c4a88a2771
+d162c87d4d4b2a8f6dda58d4fba5987f	db4560bb40a4c4309950c9bc94a5880c
+b00114f9fc38b48cc42a4972d7e07df6	db4560bb40a4c4309950c9bc94a5880c
+6a13b854e05f5ba6d2a0d873546fc32d	8591e5f94f6bc6bbce534233d5a429b8
+010fb41a1a7714387391d5ea1ecdfaf7	8591e5f94f6bc6bbce534233d5a429b8
+4bffc4178bd669b13ba0d91ea0522899	8591e5f94f6bc6bbce534233d5a429b8
+f66935eb80766ec0c3acee20d40db157	8591e5f94f6bc6bbce534233d5a429b8
+cd1c06e4da41121b7362540fbe8cd62c	8591e5f94f6bc6bbce534233d5a429b8
+8765cfbf81024c3bd45924fee9159982	2633fb17d46136a100ff0e04babcf90b
+05bea3ed3fcd45441c9c6af3a2d9952d	2633fb17d46136a100ff0e04babcf90b
+f2ba1f213e72388912791eb68adc3401	dbcd911ed4e19311c6fdd54423bac8ff
+b00114f9fc38b48cc42a4972d7e07df6	dbcd911ed4e19311c6fdd54423bac8ff
+cb80a6a84ec46f085ea6b2ff30a88d80	aa437deed9ab735d4bd2e5721270fe1a
+39ce458f2caa87bc7b759cd8cb16e62f	710a89d5cb9f3ceb3e6934254a8696e4
+eb4558fa99c7f8d548cbcb32a14d469c	8dbf2602d350002b61aeb50d7b1f5823
+13de0a41f18c0d71f5f6efff6080440f	8dbf2602d350002b61aeb50d7b1f5823
+88059eaa73469bb47bd41c5c3cdd1b50	8dbf2602d350002b61aeb50d7b1f5823
+2eed213e6871d0e43cc061b109b1abd4	8dbf2602d350002b61aeb50d7b1f5823
+ed9b92eb1706415c42f88dc91284da8a	8dbf2602d350002b61aeb50d7b1f5823
+33b3bfc86d7a57e42aa30e7d1c2517be	8dbf2602d350002b61aeb50d7b1f5823
+8351282db025fc2222fc61ec8dd1df23	8dbf2602d350002b61aeb50d7b1f5823
+60eb202340e8035af9e96707f85730e5	8dbf2602d350002b61aeb50d7b1f5823
+d5a5e9d2edeb2b2c685364461f1dfd46	8dbf2602d350002b61aeb50d7b1f5823
+4522c5141f18b2a408fc8c1b00827bc3	8dbf2602d350002b61aeb50d7b1f5823
+2587d892c1261be043d443d06bd5b220	8dbf2602d350002b61aeb50d7b1f5823
+5e62fc773369f140db419401204200e8	8dbf2602d350002b61aeb50d7b1f5823
+f520f53edf44d466fb64269d5a67b69a	8dbf2602d350002b61aeb50d7b1f5823
+71a520b6d0673d926d02651b269cf92c	f5950ade448acc14014ac65eff80d13e
+11a5f9f425fd6da2d010808e5bf759ab	d9394bc9b31837f373476bdde3cb4555
+f00bbb7747929fafa9d1afd071dba78e	4863b843abbe1696e3656c13aa67af90
+f975b4517b002a52839c42e86b34dc96	52a9361c8d305f2a227161a44bcfd37e
+370cde851ed429f1269f243dd714cce2	2fe3f1db170aa816123f28e9875167ab
+5e6ff2b64b4c0163ab83ab371abe910b	c69d790bf21dedfe84a9fb4719e93bd8
+a9ef9373c9051dc4a3e2f2118537bb2d	488d66856880e32fb94d0e791471e015
+8af17e883671377a23e5b8262de11af4	488d66856880e32fb94d0e791471e015
+cb80a6a84ec46f085ea6b2ff30a88d80	c06a06a848c3e27a6fc8e7203ec2b746
+75fea12b82439420d1f400a4fcf3386b	73c823a8a18bd3e6e0de48741791df2e
+64a25557d4bf0102cd8f60206c460595	c70fac279516f5b04a129d64eff982e8
+dcdcd2f22b1d5f85fa5dd68fa89e3756	f28bf03afc0802c0bc6eb584b4003e89
+abe78132c8e446430297d08bd1ecdab0	9d26ef0f0b7d75ea30b8cdaad29f3c08
+d8d3a01ba7e5d44394b6f0a8533f4647	d8cb73495a9e354d9c21b2a91383df69
+c827a8c6d72ff66b08f9e2ab64e21c01	6fa675606729b1ccf2c9f118afab1a78
+a8ace0f003d8249d012c27fe27b258b5	6fa675606729b1ccf2c9f118afab1a78
+57126705faf40e4b5227c8a0302d13b2	6fa675606729b1ccf2c9f118afab1a78
+b84cdd396f01275b63bdaf7f61ed5a43	6fa675606729b1ccf2c9f118afab1a78
+781734c0e9c01b14adc3a78a4c262d83	6fa675606729b1ccf2c9f118afab1a78
+db1440c4bae3edf98e3dab7caf2e7fed	6fa675606729b1ccf2c9f118afab1a78
+efe9ed664a375d10f96359977213d620	3a9ee0dca39438793417d3cda903c50f
+c5068f914571c27e04cd66a4ec5c1631	3a9ee0dca39438793417d3cda903c50f
+d69462bef6601bb8d6e3ffda067399d9	3a9ee0dca39438793417d3cda903c50f
+f655d84d670525246ee7d57995f71c10	3834ca66ed31bf867405bae4cffe4462
+c82b23ed65bb8e8229c54e9e94ba1479	1d1fe01580e2014b5b4d05532937b08d
+7df470ec0292985d8f0e37aa6c2b38d5	6af1540af240e4518095bf9c350e6592
+d5b95b21ce47502980eebfcf8d2913e0	6af1540af240e4518095bf9c350e6592
+8791e43a8287ccbc21f61be21e90ce43	8987193624cb1569dbea7ccbdef6da9d
+3480c10b83b05850ec18b6372e235139	f5ccf3e5aaff8573d851e3db037f78c4
+3b8d2a5ff1b16509377ce52a92255ffe	4bc6884ff3b54bf84c2970cf8cb57a35
+c82a107cd7673a4368b7252aa57810fc	70accb11df7fea2ee734e5849044f3c8
+7d3618373e07c4ce8896006919bbb531	100694588d8a8f56e87fe60639138889
+93025091752efa184fd034f285573afe	3e8f76b0649ca67ad8e74983a81967dd
+a30c1309e683fcf26c104b49227d2220	b9d93d1a014743df713103a89d6dfab5
+41e744bdf3114b14f5873dfb46921dc4	b9d93d1a014743df713103a89d6dfab5
+c52d5020aad50e03d48581ffb34cd1c3	1351b0fdf73876875879089319d8ac18
+04d53bc45dc1343f266585b52dbe09b0	1351b0fdf73876875879089319d8ac18
+3ddbf46000c2fbd44759f3b4672b64db	6bbdbb8ffb00d3c84d0e41be08b52d74
+662d17c67dcabc738b8620d3076f7e46	48cd76244ec92de22070746c3e51903c
+87bd9baf0b0d760d1f0ca9a8e9526161	ea678a9205735898d39982a6854e4be0
+55c63b0540793d537ed29f5c41eb9c3e	ea678a9205735898d39982a6854e4be0
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	ea678a9205735898d39982a6854e4be0
+fcf66a6d6cfbcb1d4a101213b8500445	db187442033cf1a7b36b4f4864cb3e2d
+c9dc004fc3d039ad7fb49456e5902b01	5d8ac336bc2495c7cc4da26ee697f6db
+abe78132c8e446430297d08bd1ecdab0	74395b327e2c89e506e5fb24cdf28d86
+3a7e46261a591b3e65d1e7d0b2439b20	7711321c6e440423ac48fa14fe13662d
+b00114f9fc38b48cc42a4972d7e07df6	f7947636b65c4e40dd72ac4977fba81e
+05bea3ed3fcd45441c9c6af3a2d9952d	716c8362b9535c67f7a3d8bba41e495c
+cb80a6a84ec46f085ea6b2ff30a88d80	091194d34dc129972848b1a6507d3db5
+3e98ecfa6a4c765c5522f897a4a8de23	582ac46d71d166a2ea996507406eb2ef
+5dd5b236a364c53feb6db53d1a6a5ab9	7a62d4197e468e9dc15c90c04a00c9d8
+5b5fc236828ee2239072fd8826553b0a	3b4b6f12576b1161eb56ef870c91cfd2
+40fcfb323cd116cf8199485c35012098	e51d880916bc83c61e116bd2c9007d08
+aa98c9e445775e7c945661e91cf7e7aa	e31bcdc3311e00fe13a85ee759b65391
+9c81c8c060b39e7437b2d913f036776b	e31bcdc3311e00fe13a85ee759b65391
+4900e24b2d0a0c5e06cf3db8b0638800	0f9047d3e34cffa3f65d1c63ed09c7aa
+96b4b857b15ae915ce3aa5e406c99cb4	0f9047d3e34cffa3f65d1c63ed09c7aa
+7b52c8c4a26e381408ee64ff6b98e231	0f9047d3e34cffa3f65d1c63ed09c7aa
+f79485ffe5db7e276e1e625b0be0dbec	01c97e93bae9f24e53f18b9ab33a09bf
+246d570b4e453d4cb6e370070c902755	3d656f422f1599e545bddbd4a00b0ad1
+66cc7344291ae2a297bf2aa93d886e22	3d656f422f1599e545bddbd4a00b0ad1
+3b544a6f1963395bd3ae0aeebdf1edd8	70298a157c0bf97858f6190eae969607
+d5ec808c760249f11fbcde2bf4977cc6	d967887a45ca999480ae3aec9fd17530
+77bfe8d21f1ecc592062f91c9253d8ab	595fe5f4c408660a17d44e1801c232f2
+1fd7fc9c73539bee88e1ec137b5f9ad2	196c7e704b6f026b852b24771bf71ddd
+f44f1e343975f5157f3faf9184bc7ade	196c7e704b6f026b852b24771bf71ddd
+03201e85fc6aa56d2cb9374e84bf52ca	196c7e704b6f026b852b24771bf71ddd
+d44be0e711c2711876734b330500e5b9	196c7e704b6f026b852b24771bf71ddd
+0ada417f5b4361074360211e63449f34	196c7e704b6f026b852b24771bf71ddd
+807dbc2d5a3525045a4b7d882e3768ee	196c7e704b6f026b852b24771bf71ddd
+cb80a6a84ec46f085ea6b2ff30a88d80	f4e72bc32f2c636059d5f3ba44323921
+2054decb2290dbaab1c813fd86cc5f8b	eb8416f378010a87c0bb7b3dcf803c65
+a985c9764e0e6d738ff20f2328a0644b	873cdb7bb058e91ccdbd703bf2c85268
+1b62f034014b1d242c84c6fe7e6470f0	4c0bd4b8244a1199bf0ff9a9e7ea9f97
+707270d99f92250a07347773736df5cc	e7d141392548a9459e0e6e7584c1c80f
+f986b00063e79f7c061f40e6cfbbd039	024837b88bb23cb8a1f0bba69f809c93
+2dde74b7ec594b9bd78da66f1c5cafdc	329f0752061992d0b466b8a2a8760c34
+2d1ba9aa05ea4d94a0acb6b8dde29d6b	0a96c0f13cf38b7e26172c335ce7933c
+13291409351c97f8c187790ece4f5a97	83689c87f9463b158622ef712a5e8751
+89b5ac8fb4c102c174adf2fed752a970	83689c87f9463b158622ef712a5e8751
+7d6ede8454373d4ca5565436cbfeb5c0	b80e8e613789267c95b6b1ef44e48423
+7bc374006774a2eda5288fea8f1872e3	030e39a1278a18828389b194b93211aa
+e2afc3f96b4a23d451c171c5fc852d0f	2e8dbdc23b3287569d32c2bf5fe26e06
+ed783268eca01bff52c0f135643a9ef7	b5c548a4d670c490bbc7e20e74417003
+98e8599d1486fadca0bf7aa171400dd8	39bb71ab4328d2d97bd4710252ca0e16
+13c8bd3a0d92bd186fc5162eded4431d	c8ae0bc02385186afd062503fa77a1bc
+ea3f5f97f06167f4819498b4dd56508e	e1d8dfba59d6e8fe67883a5ff3fdabe4
+198445c0bbe110ff65ac5ef88f026aff	4ac132d03b25a67f35c159e952b9951e
+5fa07e5db79f9a1dccb28d65d6337aa6	c4ba898ee9eeb44ad4c2647e8ebe930a
+63a9f0ea7bb98050796b649e85481845	9d90cd61df8dbf35d395a0e225e3639c
+8987e9c300bc2fc5e5cf795616275539	972855f17f9fffa2f73ced39e72c706e
+0ae3b7f3ca9e9ddca932de0f0df00f8a	fbe6bca8488a519965b8d63d5d7270c5
+abca417a801cd10e57e54a3cb6c7444b	0bb2ac8dea4da36597a8d9dc88f0ed64
+f29f7213d1c86c493ca7b4045e5255a9	0bb2ac8dea4da36597a8d9dc88f0ed64
+b3626b52d8b98e9aebebaa91ea2a2c91	c960a78b4d3e0ce6a4a67f9094ffb446
+f66935eb80766ec0c3acee20d40db157	a8feea8bc8e568f5829eeec3fba8fc29
+cd1c06e4da41121b7362540fbe8cd62c	a8feea8bc8e568f5829eeec3fba8fc29
+f66935eb80766ec0c3acee20d40db157	5c3ed018832788fa9d1111b57da7fba6
+65f889eb579641f6e5f58b5a48f3ec12	880318f1ad9a84c6c58e46899781dca3
+c0118be307a26886822e1194e8ae246d	73c5e4259f031aa3b934d3dfe4128433
+19cbbb1b1e68c42f3415fb1654b2d390	6072e357ce0ffc85924d07f3f59fde6d
+cd004b87e2adfb72b28752a6ef6cd639	8de7ee0c42a9acb04ac0ba7e466ef5fc
+58e42b779d54e174aad9a9fb79e7ebbc	9e9cce9be25a7f0972590e519d967b9c
+eb3a9fb71b84790e50acd81cc1aa4862	c364e34b3108a2a1051940f5f6d389dd
+74e8b6c4be8a0f5dd843e2d1d7385a36	8a1cece259499b3705bc5b42ddcd9169
+b84cdd396f01275b63bdaf7f61ed5a43	8a1cece259499b3705bc5b42ddcd9169
+9133f1146bbdd783f34025bf90a8e148	d0ff6355a52e022c45ae8d7951520142
+113ab4d243afc4114902d317ad41bb39	e845a7698a158850fada750bf0ce091f
+cc70416ca37c5b31e7609fcc68ca009e	853553f865f9bf21df0911e6ce54c7d0
+cf38e7d92bb08c96c50ddc723b624f9d	bc401be0ed7c2f7ce03dfab7faa76466
+1de3f08835ab9d572e79ac0fca13c5c2	3b8f2fd29146bee84451b55c0d80e880
+5878f5f2b1ca134da32312175d640134	75bab3d672e799f6790e8b068d6461e1
+d0dae91314459033160dc47a79aa165e	637fec0bdd87d25870885872fb1c4474
+7eeea2463ae5da9990cab53c014864fa	b21afc54fb48d153c19101658f4a2a48
+4669569c9a870431c4896de37675a784	b21afc54fb48d153c19101658f4a2a48
+786a755c895da064ccd4f9e8eb7e484e	b21afc54fb48d153c19101658f4a2a48
+4669569c9a870431c4896de37675a784	2b21d9d8f81c6e564c84ef0bfa94aa5c
+a0abb504e661e34f5d269f113d39ea96	2b21d9d8f81c6e564c84ef0bfa94aa5c
+9d36a42a36b62b3f665c7fa07f07563b	c2b17b8cb332d071d4ac81167b2a6219
+8c4e8003f8d708dc3b6d486d74d9a585	2f8566ec213384ffa50ef40b2125b657
+baeb191b42ec09353b389f951d19b357	ba08853dd62a1b1d7cbf6ca8a1b4a14b
+2df9857b999e21569c3fcce516f0f20e	6dff21106c4ac0fd7d0251575f4348ab
+645b264cb978b22bb2d2c70433723ec0	27a7e9871142d8ed01ed795f9906c2fe
+d0e551d6887e0657952b3c5beb7fed74	27a7e9871142d8ed01ed795f9906c2fe
+3771036a0740658b11cf5eb73d9263b3	27a7e9871142d8ed01ed795f9906c2fe
+6b37fe4703bd962004cdccda304cc18e	27a7e9871142d8ed01ed795f9906c2fe
+28bb3f229ca1eeb05ef939248f7709ce	27a7e9871142d8ed01ed795f9906c2fe
+080d2dc6fa136fc49fc65eee1b556b46	03677e82c7b8cd3989c8a6cb4e2426fa
+4522c5141f18b2a408fc8c1b00827bc3	9826e03298104619700dc6e7b69ba1b0
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	3a61b71b271203a633e10c5b3fa9f258
+a822d5d4cdcb5d1b340a54798ac410b7	3a61b71b271203a633e10c5b3fa9f258
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	95f292773550fc8d39aaa8ddc9f3cfac
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	e909c2d7067ea37437cf97fe11d91bd0
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	a3e345c35eed0ed54daf356c68904785
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	498059d42123bacbded45916a8636d8c
+a822d5d4cdcb5d1b340a54798ac410b7	6a1f771fc024994f9c170ab5dc6c5bb0
+a822d5d4cdcb5d1b340a54798ac410b7	525f9a6e460f7ea2c6f932a2dc42ef67
+a822d5d4cdcb5d1b340a54798ac410b7	7bd49e2e64f65e2ee987be9709a176bd
+6db22194a183d7da810dcc29ea360c17	2da31ada27f1ba5acc3403440650870a
+ab5428d229c61532af41ec2ca258bf30	ead88b8beaa93bbd5041a88383609ac6
+9527fff55f2c38fa44281cd0e4d511ba	81946bb5619fab717be3cc147b88dec0
+61a6502cfdff1a1668892f52c7a00669	558a32df12c25cc4ffbef306adb35511
+5c3278fb76fa2676984396d33ba90613	4246bdb500b31cb6f2786206dacf8589
+6ee6a213cb02554a63b1867143572e70	f89557d3db6e6413df4955c8d247e89c
+496a6164d8bf65daf6ebd4616c95b4b7	c5e0ef077394352c5f1fef29365e5841
+a571d94b6ed1fa1e0cfff9c04bbeb94d	16518154fcc12cb9c715478443414867
+ec4f407118924fdc6af3335c8d2961d9	6b240b0fbb47884b8ecca1d1b7574b24
+ed795c86ba21438108f11843f7214c95	1daa2df0fcb1df14e6f600785631b964
+b80aecda9ce9783dab49037eec5e4388	f155b26f32e07effd2474272637c4b22
+b80aecda9ce9783dab49037eec5e4388	22bbb483dcba75fc2df016dc284d293b
+a1af2abbd036f0499296239b29b40a5f	1a37b66179fd5fac40dc3c09b0da2f12
+bf5c782ca6b0130372ac41ebd703463e	b13bb1f32f0106bf78a65fd98b522515
+01ffa9ce7c50b906e4f5b6a2516ba94b	8e47a4c0304670944a03089849f42e07
 \.
 
 
@@ -5064,227 +5064,227 @@ e60c4acd9218333d7c7ac50e5aa0f51e	deb8040131c3f6a3caf6a616b34ac482
 --
 
 COPY music.events (id_event, event, date_event, id_place, duration, price, persons) FROM stdin;
-b1e4aa22275a6a4b3213b44fc342f9fe	Sepultura - Quadra Summer Tour - Europe 2022	2022-07-05	6d998a5f2c8b461a654f7f9e34ab4368	0	37.31	2
-f10fa26efffb6c69534e7b0f7890272d	Rockfield Open Air 2018	2018-08-17	55ff4adc7d421cf9e05b68d25ee22341	2	0.00	2
-5e651777820428286fde01ffe87cb4b7	Gutcity Deathfest 2024	2024-05-11	ca838f25ade35ddc0337a6f0ea710f4b	0	30.60	2
-9e829f734a90920dd15d3b93134ee270	EMP Persistence Tour 2016	2016-01-22	427a371fadd4cce654dd30c27a36acb0	0	31.20	2
-52b133bfecec2fba79ecf451de3cf3bb	Völkerball	2016-05-05	657d564cc1dbaf58e2f2135b57d02d99	0	23.50	2
-8307a775d42c5bfbaab36501bf6a3f6c	Noche de los Muertos - 2017	2017-10-31	c5159d0425e9c5737c8884eb38d70dd9	0	15	2
-45dbcc9d20cd0f431b1f4774cd0a0bf3	"The Tide of Death and fractured Dreams" European Tour 2024	2024-05-15	427a371fadd4cce654dd30c27a36acb0	0	36.0	2
-cf8e56fdc88304e772838b2a47d8c23b	Thrash Metal Fest - 05.2024	2024-05-16	0b186d7eb0143e60ced4af3380f5faa8	0	30.0	2
-ea99873fab477c85c634eec0fe139eaf	Open air Hamm 43.	2013-06-14	ea72b9f0db73025c8aaedae0f7b874f8	1	22.0	1
-1f1a45b3cca4a65dae6fad7aa6cac17e	Open air Hamm 45.	2015-06-12	ea72b9f0db73025c8aaedae0f7b874f8	1	22.0	1
-5c22297e2817e4a0c9ee608a67bcf297	Open air Hamm 47.	2017-07-07	ea72b9f0db73025c8aaedae0f7b874f8	1	25	2
-ae89cc8a42502f057aa1d7cbdf5105a8	Profanation over Europe 2024	2024-03-20	427a371fadd4cce654dd30c27a36acb0	0	29.20	2
-e3e419c6d94bb9333e21fbfa231367a0	Tribute Bathory mit	2024-03-23	8bb89006a86a427f89e49efe7f1635c1	0	15	2
-fd4a13ab709b0975de3c7528ca3aab0e	Necromanteum EU/UK Tour 2024	2024-03-30	89c0549ca41bb77ccdf081193ca1e45f	0	43.55	2
-573a39e7d69678efec23ba7a9e99f0f5	Taunus Metal Festival XIV	2024-04-05	1e9e26a0456c1694d069e119dae54240	0	30.00	2
-b8fabad72c3fd0540815a6cd8d126a14	Thrash Attack - 06.04.2024	2024-04-06	6db34279cf6070892349b478135302e7	0	16.52	2
-1d8cf922eebeba04d4aa27b8b5e412c3	Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show	2024-04-12	446c20c5e383ff30350166d5ab741efb	0	22.0	2
-31b7b744437a5b46fb982fcdf1b94851	Super Sweet 16 (Edition 36)	2024-04-20	14b82c93c42422209e5b5aad5b7b772e	0	0	2
-2c6a917b013e933d5ef1aa0a6216e575	Fintroll + Metsatöll + Suotana Tour 2024	2024-04-22	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0	34.00	2
-fd5ccee80a5d5a1a16944aefe2b840c5	Celebrating the music of Jimi Hendrix	2024-05-01	0b186d7eb0143e60ced4af3380f5faa8	0	24.20	2
-73d6ec35ad0e4ef8f213ba89d8bfd7d7	New live rituals a COVID proof celebration of audial darkness	2021-07-23	6d488d592421aa8391ff259ef1c8b744	0	23.20	2
-18ef7142c02d84033cc9d41687981691	Ravaging Europe 2023	2023-03-29	6d488d592421aa8391ff259ef1c8b744	0	28.70	2
-220f8c4b62141ad5acd8b11d4d0f2bd3	Heretic Hordes I	2024-05-03	6d488d592421aa8391ff259ef1c8b744	0	35.00	2
-6bc91856db67c4e90b455638fa43e0bd	Shades of Sorrow European Tour 2024	2024-05-04	0b186d7eb0143e60ced4af3380f5faa8	0	27.30	2
-3eda085ef6acc8b084dda9440115af56	Back to the Roots Tour - 05.2024	2024-05-17	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	23.20	2
-ac4ad77eed8faf4ef8d91fb1df7fe196	Fleshcrawl + Fleshsphere + Torment of Souls	2024-05-18	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	28.70	2
-02ce1b3a6156c9f73724ea3efabde2e8	Angelus Apatrida - Tour 2022	2022-07-28	0b186d7eb0143e60ced4af3380f5faa8	0	16.50	2
-c9a70f42ce4dcd82a99ed83a5117b890	Where Owls know my name EU|UK Tour 2019	2019-09-22	427a371fadd4cce654dd30c27a36acb0	0	24.70	2
-d5cd210a82be3dd1a7879b83ba5657c0	15 Years New Evil Music, Festival	2019-10-12	4751a5b2d9992dca6e462e3b14695284	0	44.0	2
-f853b43cbe11fe4cdef7009f0f98d4f2	Hate, Keep of Kalessin	2024-05-02	0b186d7eb0143e60ced4af3380f5faa8	0	25.30	2
-372ca4be7841a47ba693d4de7d220981	NOAF XIII	2017-08-25	bb1bac023b4f02a5507f1047970d1aca	1	38.00	2
-42c7a1c1e7836f74ced153a27d98cef0	Matapaloz Festival 2017	2017-06-16	d379f693135eefa77bc9732f97fcaaf1	1	170.99	2
-8df16d3b3a2ca21ba921c310aadb7803	Night on the Living Thrash Tour 2023	2023-11-09	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0	39.50	2
-dedb3aef6ecd0d48a7e7a41d8545a2d9	Slaugther Feast 2023	2023-11-10	94707aea9e845e5e0ec91cd63f5982d6	1	29.00	2
-cc0c4b3208cad5143bf8aec2c74ac9df	Slice Me Nice 2023	2023-12-02	e5fe851ccb28deccc27178ac003727e2	0	33.91	2
-5e65cc6b7435c63dac4b2baf17ab5838	Grill' Em All 2017	2017-09-23	29ae00a7e41558eb2ed8c0995a702d7a	0	0.00	2
-fcbfd4ea93701414772acad10ad93a5f	Völkerball in Mainz	2018-07-27	19a1767aab9e93163ad90f2dfe82ec71	0	0.00	2
-d8f74ab86e77455ffbd398065ee109a8	Slamming Annihilation European Tour 2018	2018-05-21	0b186d7eb0143e60ced4af3380f5faa8	0	18.00	2
-3af7c6d148d216f13f66669acb8d5c59	Debauchery's Balgeroth	2018-11-03	0b186d7eb0143e60ced4af3380f5faa8	0	18.00	2
-e471494f42d963b13f025c0636c43763	Knife, Exorcised Gods, World of Tomorrow, When Plages Collide	2018-09-15	d1ad016a5b257743ef75594c67c52935	0	7.60	2
-f68790d8b2f82aad75f0c27be554ee48	The Path of Death 7	2018-10-20	620f9da22d73cc8d5680539a4c87402b	0	15.00	2
-084c45f4c0bf86930df25ae1c59b3fe6	The Path of Death 6	2017-10-14	620f9da22d73cc8d5680539a4c87402b	0	14.00	2
-f8ead2514f0df3c6e8ec84b992dd6e44	Hell over Europe II	2018-11-24	0b186d7eb0143e60ced4af3380f5faa8	0	24.00	2
-9afc751ca7f2d91d23c453b32fd21864	The modern art of setting ablaze tour	2018-12-08	427a371fadd4cce654dd30c27a36acb0	0	23.20	2
-85c434b11120b4ba2f116e89843a594e	Heidelberg Deathfest III	2018-03-24	828d35ecd5412f7bc1ba369d5d657f9f	0	35.00	2
-e872b77ff7ac24acc5fa373ebe9bb492	Molotov	2016-07-25	427a371fadd4cce654dd30c27a36acb0	0	24.50	2
-1fad423d9d1f48b7bd6d31c8d5cb17ed	EMP Persistence Tour 2017	2017-01-24	427a371fadd4cce654dd30c27a36acb0	0	32.30	2
-bbce8e45250a239a252752fac7137e00	In Flames	2017-03-24	38085fa2d02ff7710a42a0c61ab311e2	0	57.45	2
-663ea93736c204faee5f6c339203be3e	Death is just the beginning	2018-10-18	427a371fadd4cce654dd30c27a36acb0	0	32.10	2
-c8ee19d8e2f21851dc16db65d7b138bc	Kreator, Sepultura, Soilwork, Aborted	2017-02-17	427a371fadd4cce654dd30c27a36acb0	0	42.00	2
-e1baa5fa38e1e6c824f2011f89475f03	The Popestar Tour 2017	2017-04-09	427a371fadd4cce654dd30c27a36acb0	0	33.50	2
-d3284558d8cda50eb33b5e5ce91da2af	Before we go Farewell Tour 2016	2016-02-11	427a371fadd4cce654dd30c27a36acb0	0	17.45	2
-a61b878c2b563f289de2109fa0f42144	Conan	2017-03-08	427a371fadd4cce654dd30c27a36acb0	0	18.00	2
-0aa506a505f1115202f993ee4d650480	MTV's Headbangers Ball Tour 2018	2018-12-11	427a371fadd4cce654dd30c27a36acb0	0	39.80	1
-4c90356614158305d8527b80886d2c1e	Rock for Hille Benefiz	2018-10-27	875ec5037fe25fad96113c57da62f9fe	0	25.00	2
-568177b2430c48380b6d8dab67dbe98c	Warfield / Purify / Sober Truth	2018-02-17	4e637199a58a4ff2ec4b956d06e472e8	0	10	2
-26a40a3dc89f8b78c61fa31d1137482c	Worldwired Tour 2018	2018-02-16	7786a0fc094d859eb469868003b142db	0	115.15	2
-939fec794a3b41bc213c4df0c66c96f5	Jomsviking European Tour 2016	2016-11-17	2a8f2b9aef561f19faad529d927dba17	0	40.40	2
-eb2330cf8b87aa13aad89f32d6cfda18	Guido's Super Sweet 16 (30. jubilee)	2018-04-27	8bb89006a86a427f89e49efe7f1635c1	0	9.00	2
-0e33f8fbbb12367a6e8159a3b096898a	Skindred, Zebrahead	2016-12-09	427a371fadd4cce654dd30c27a36acb0	0	25.70	2
-3f15c445cb553524b235b01ab75fe9a6	Ministry	2018-08-06	427a371fadd4cce654dd30c27a36acb0	0	35.80	2
-d1832e7b44502c04ec5819ef3085371a	Dia de los muertos Roadshow 2016	2016-11-11	427a371fadd4cce654dd30c27a36acb0	0	14.70	2
-64896cd59778f32b1c61561a21af6598	Will to power tour 2018	2018-02-06	427a371fadd4cce654dd30c27a36acb0	0	36.70	2
-63a722e7e0aa4866721305fab1342530	EMP Persistence Tour 2018	2018-01-23	427a371fadd4cce654dd30c27a36acb0	0	33.40	2
-a626f2fb0794eeb25b074b4c43776634	Dia de los muertos Roadshow 2018	2018-11-02	427a371fadd4cce654dd30c27a36acb0	0	14.5	2
-f5a56d2eb1cd18bf3059cc15519097ea	X-Mass in Hell Festival West Edition 2018	2018-12-15	4751a5b2d9992dca6e462e3b14695284	0	39	2
-62f7101086340682e5bc58a86976cfb5	Darkness approaching	2019-05-10	620f9da22d73cc8d5680539a4c87402b	0	30.00	2
-0dcd062f5beffeaae2efae21ef9f3755	Cannibal Corpse, European Summer Tour 2019	2019-06-30	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0	30.00	2
-d0f1ffdb2d3a20a41f9c0f10df3b9386	Südpfalz Metalfest	2020-09-25	875ec5037fe25fad96113c57da62f9fe	0	30.00	2
-20b7e40ecd659c47ca991e0d420a54eb	Rockfield Open Air 2017	2017-08-18	55ff4adc7d421cf9e05b68d25ee22341	2	0.00	2
-7e2e7fa5ce040664bf7aaaef1cebd897	Rock-N-Pop Youngsters 2019	2019-03-15	620f9da22d73cc8d5680539a4c87402b	0	0.00	2
-20cf9df7281c50060aaf023e04fd5082	Winter Hostilities 2019-Tour	2019-12-04	427a371fadd4cce654dd30c27a36acb0	0	23.70	2
-dcda9434b422f9aa793f0a8874922306	A Tribute to ACDC 2020	2020-03-07	59c2a4862605f1128b334896c17cab7b	0	15.00	1
-bb378a3687cc64953bf36ccea6eb5a27	Warfield - Café Central	2022-02-05	0b186d7eb0143e60ced4af3380f5faa8	0	0.00	2
-fce1fb772d7bd71211bb915625ac11af	World needs mosh (Wiesbaden)	2021-11-19	427a371fadd4cce654dd30c27a36acb0	0	14.90	2
-95f89582ba9dcfbed475ebb3c06162db	World needs mosh (Bonn)	2021-11-21	99d75d9948711c04161016c0d2280dd9	0	14.90	2
-3c61b014201d6f62468d72d0363f7725	Crisix, Insanity Alert	2021-09-16	0b186d7eb0143e60ced4af3380f5faa8	0	19.70	2
-13afebb96e2d2d27345bd3b1fefc4db0	Crossplane & Hängerbänd	2021-08-06	f3c1ffc50f4f8d0a857533164e8da867	0	18.60	2
-441306dd21b61d9a52e04b9e177cc9b5	Jubiläumswoche 25 Jahre Hexenhaus	2021-07-31	012d8da36e8518d229988fe061f3c376	0	41.90	2
-4bc4f9db3d901e8efe90f60d85a0420d	Descend into Madness Tour 2020	2020-03-11	427a371fadd4cce654dd30c27a36acb0	0	19.20	1
-06e5f3d0d817c436d351a9cf1bf94dfa	The Gidim European Tour 2020	2020-03-05	427a371fadd4cce654dd30c27a36acb0	0	25.90	2
-dd50d5dcc02ea12c31e0ff495891dc22	"Still Cyco Punk" World Wide Tour 2018	2018-11-04	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0	34.00	2
-f861455af8364fc3fe01aef3fc597905	Sons of Rebellion Tour 2019	2019-11-01	4751a5b2d9992dca6e462e3b14695284	0	26.40	2
-8368e0fd31972c67de1117fb0fe12268	Pagan Metal Festival	2019-11-03	0b186d7eb0143e60ced4af3380f5faa8	0	26.30	2
-5e45d87cab8e0b30fba4603b4821bfcd	European Tour Summer 2019	2019-08-13	427a371fadd4cce654dd30c27a36acb0	0	23.70	2
-d2a4c05671f768ba487ad365d2a0fb6e	Metallergrillen 2017	2017-09-01	d5c76ce146e0b3f46e69e870e9d48181	1	33.0	2
-633f06bd0bd191373d667af54af0939b	Heidelberg Deathfest IV	2019-03-23	828d35ecd5412f7bc1ba369d5d657f9f	0	40.00	2
-abefb7041d2488eadeedba9a0829b753	Taunus Metal Festival XI	2019-04-12	1e9e26a0456c1694d069e119dae54240	1	25.00	2
-189f11691712600d4e1b0bdb4122e8aa	Metal Club Odinwald meets Ultimate Ruination Tour	2019-04-27	50bd324043e0b113bea1b5aa0422806f	0	9.00	2
-1ea2f5c46c57c12dea2fed56cb87566f	1. Mainzer Rock & Metal Fastnachts-Party	2019-03-02	620f9da22d73cc8d5680539a4c87402b	0	5.00	2
-cc4617b9ce3c2eee5d1e566eb2fbb1f6	Aversions Crown | Psycroptic	2019-02-21	427a371fadd4cce654dd30c27a36acb0	0	23.70	2
-12e7b1918420daf69b976a5949f9ba85	Worldwired Tour 2019	2019-08-25	21760b1bbe36b4dae8fa9e0c274f76bf	0	98.65	2
-00da417154f2da39e79c9dcf4d7502fa	Prayer Of Annihilation Tour 2019	2019-10-24	4751a5b2d9992dca6e462e3b14695284	0	23.10	2
-c150d400f383afb8e8427813549a82d3	Guido's sassy 17 (30th edition)	2019-04-26	8bb89006a86a427f89e49efe7f1635c1	0	11.00	2
-060fd8422f03df6eca94da7605b3a9cd	MTV's Headbangers Ball Tour 2019	2019-12-14	427a371fadd4cce654dd30c27a36acb0	0	40.75	2
-1104831a0d0fe7d2a6a4198c781e0e0d	Dust Bolt	2019-03-07	427a371fadd4cce654dd30c27a36acb0	0	19.30	2
-6d5c464f0c139d97e715c51b43983695	To Drink from the Night Itself, Europe 2019	2019-12-15	427a371fadd4cce654dd30c27a36acb0	0	38.50	2
-8d821ce4aedb7300e067cfa9eb7f1eee	The Path of Death 9	2021-11-13	620f9da22d73cc8d5680539a4c87402b	0	25.00	2
-d8f60019c8e6cdbb84839791fd989d81	The Path of Death 8	2019-10-26	620f9da22d73cc8d5680539a4c87402b	0	14.00	2
-a71ac13634cd0b6d26e52d11c76f0a63	Warfield/Torment of Souls/Redgrin	2021-10-02	3611a0c17388412df8e42cf1858d5e99	0	10.00	2
-8224efe45b1d8a1ebc0b9fb0a5405ac6	EMP Persistence Tour 2019	2019-01-24	427a371fadd4cce654dd30c27a36acb0	0	33.60	2
-a122cd22f946f0c229745d88d89b05bd	Deserted Fear / Carnation / Hierophant	2019-03-22	427a371fadd4cce654dd30c27a36acb0	0	19.30	2
-9418ebabb93c5c1f47a05666913ec6e4	Amorphis & Soilwork	2019-02-13	427a371fadd4cce654dd30c27a36acb0	0	36.90	2
-a7ea7b6c1894204987ce4694c1febe03	Halloween Party 2019	2019-10-31	8bb89006a86a427f89e49efe7f1635c1	0	11.00	2
-2a6b51056784227b35e412c444f54359	Metal Embrace Festival XII	2018-09-07	741ae9098af4e50aecf13b0ef08ecc47	1	25.00	2
-488af8bdc554488b6c8854fae6ae8610	Downfall of Mankind Tour 2019	2019-05-07	4e592038a4c7b6cdc3e7b92d98867506	0	18.0	2
-a2cc2bc245b90654e721d7040c028647	Ektomorf - The legion of fury tour 2019	2019-04-25	0b186d7eb0143e60ced4af3380f5faa8	0	26.40	2
-f8549f73852c778caa3e9c09558739f2	Eis und Nacht Tour 2020	2020-01-24	0b186d7eb0143e60ced4af3380f5faa8	0	24.10	2
-ff3bed6eb88bb82b3a77ddaf50933689	Doom over Mainz	2019-09-21	620f9da22d73cc8d5680539a4c87402b	0	10.0	2
-0e4e0056244fb82f89e66904ad62fdaf	The Inmost Light Tatoo 2019	2019-02-01	427a371fadd4cce654dd30c27a36acb0	0	10.0	2
-c3b4e4db5f94fac6979eb07371836e81	Heavy metal gegen Mikroplastik	2019-10-19	8bb89006a86a427f89e49efe7f1635c1	0	10.0	2
-d1ee83d5951b1668e95b22446c38ba1c	Light to the blind, Slaughterra, All its Grace	2019-03-29	620f9da22d73cc8d5680539a4c87402b	0	10	2
-7126a50ce66fe18b84a7bfb3defea15f	Rockbahnhof 2019	2019-05-18	bb1bac023b4f02a5507f1047970d1aca	0	0	2
-54bf7e97edddf051b2a98b21b6d47e6a	Slaughterra - Darmstadt	2022-03-05	2898437c2420ae271ae3310552ad6d70	0	15	2
-23fcfcbd4fa686b213960a04f49856f4	Dark Zodiak + Mortal Peril	2021-11-27	2898437c2420ae271ae3310552ad6d70	0	15	2
-f3603438cf79ee848cb2f5e4a5884663	Alexander the Great in Exil	2021-09-11	14b82c93c42422209e5b5aad5b7b772e	0	11	2
-be95780f2b4fba1a76846b716e69ed6d	Friendship & Love Metal Fest	2020-02-15	41b6f7fdc3453cc5f989c347d9b4b674	0	3.00	2
-9f1a399c301132b273f595b1cfc5e99d	SARCOFAGO TRIBUTE (Fabio Jhasko)	2021-11-25	0b186d7eb0143e60ced4af3380f5faa8	0	20	2
-40c1eb30fa7abc7fdb3d8e35c61f6a7c	Brutality Unleashed Tour 2022	2022-09-05	93a57b9586b3285867e6b87031559aea	0	30.00	2
-320951dccf4030808c979375af8356b6	Wild Boar Wars III	2021-08-28	927ba3593d3a4597eac931a25b53a137	0	30.00	2
-4eb278e51ecc7a4e052416dc604ad5c5	Metal Embrace Festival XIV	2022-09-09	741ae9098af4e50aecf13b0ef08ecc47	1	30.00	2
-60bb0152f453d3f043b4dabee1a60513	Death Over Mainz 2023	2023-04-21	620f9da22d73cc8d5680539a4c87402b	0	30.00	2
-6d7c6c981877a0dedcb276ef841e10aa	KILMINISTER - A Tribute to MOTÖRHEAD	2023-05-06	8bb89006a86a427f89e49efe7f1635c1	0	30.00	2
-fc0dc52ba0b7a645c4d70c0df70abb40	Wacken Open Air 2022	2022-08-03	fbde8601308ae84be23d6de78e10d14c	3	238.00	2
-9f348351c96df42bcc7496c2010d4d1d	Netherheaven Europe 2023	2023-01-19	427a371fadd4cce654dd30c27a36acb0	0	30.50	2
-7fc85de86476aadededbf6716f2eebad	Heidelberg Deathfest VI	2023-03-18	828d35ecd5412f7bc1ba369d5d657f9f	0	55.21	2
-31c3824b57ad0919df18a79978c701e9	Post Covid European Summer Madness 2022	2022-07-19	427a371fadd4cce654dd30c27a36acb0	0	26.00	2
-d5fba38ea6078ea36b9ac0539a8d40c9	HateSphere, sign of death	2023-06-03	0b186d7eb0143e60ced4af3380f5faa8	0	18.70	2
-9c697f7def422e3f6f885d3ec9741603	Grill' Em All 2022	2022-07-02	29ae00a7e41558eb2ed8c0995a702d7a	0	0.00	2
-53812183e083ed8a87818371d6b3dbfb	Rockfield Open Air 2019	2019-08-09	55ff4adc7d421cf9e05b68d25ee22341	2	0.00	2
-7c02da151320d3aa28b1e0f54b0264b0	Rockfield Open Air 2022	2022-08-13	55ff4adc7d421cf9e05b68d25ee22341	2	0.00	2
-e1c9ae13502e64fd6fa4121f4af7fb0e	BLUTFEST 2022	2022-10-01	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	23.2	2
-63cc3a7986e4e746cdb607be909b90d4	Campaing for musical destruction	2023-03-03	828d35ecd5412f7bc1ba369d5d657f9f	0	34.00	2
-f10521a3f832fd2c698b1ac0319ea29a	Slice Me Nice 2022	2022-12-03	fa788dff4144faf1179fc82d60ccd571	0	37.22	2
-cb155874b040e90a5653d5d13bab932b	Black Thunder Tour	2022-11-24	67eb541ae5d82ae8606697eba4119bf2	0	36.85	2
-bf742e78e40e9b736c8f8cc47a37277c	Laud as Fuck Fest	2022-11-04	d8634af954a0d50828522b6c6a6053c2	0	21.69	2
-57dc48deed395dc3a98caea535768d2f	Europe 2022	2022-10-30	427a371fadd4cce654dd30c27a36acb0	0	36.00	2
-9922a07485d25c089f12792a50c5bfad	Infernum meets Porkcore Festevil 2022	2022-09-02	e16b7534e6149fb73a7c2d9b02b61a7d	1	67.35	2
-824428dadd859deaf1af1916aea84cfc	Death Feast Open Air 2022	2022-08-25	0643057438c69f0c17bf84c9495d2b7e	2	66.50	2
-6118dc6a9a96e892fa5bbaac3ccb6d99	Download Germany	2022-06-24	d379f693135eefa77bc9732f97fcaaf1	0	139.00	2
-20970f44b43a10d7282a77eda20866e2	Necro Sapiens Tour 2022	2022-05-05	427a371fadd4cce654dd30c27a36acb0	0	19.65	2
-808e3291422cea1b35c76af1b5ba5326	Doomsday Album Release Tour	2022-04-28	427a371fadd4cce654dd30c27a36acb0	0	23.80	2
-0cd1c230352e99227f43acc46129d6b4	Morbidfest	2022-04-19	0b186d7eb0143e60ced4af3380f5faa8	0	33.00	2
-43bcb284a3d1a0eea2c7923d45b7f14e	Berserker World Tour 2019	2019-12-03	a93597b8b03e112e11f4cda2c1587b6f	0	53.95	2
-46ffa374af00ed2b76c1cfaa98b76e90	Heidelberg Deathfest V	2022-03-19	828d35ecd5412f7bc1ba369d5d657f9f	0	42.00	2
-a7fe0b5f5ae6fbfa811d754074e03d95	Grabbenacht Festival 2018	2018-06-01	7adc966f52e671b15ea54075581c862b	1	23.00	2
-0a85beacde1a467e23452f40b4710030	Way of Darkness 2019	2019-10-04	beeb45e34fe94369bed94ce75eb1e841	1	62.00	2
-6b09e6ae26a0d03456b17df4c0964a2f	Metal Embrace Festival XIII	2019-09-06	741ae9098af4e50aecf13b0ef08ecc47	1	25.0	2
-5c32c0f1d91f2c6579bb1e0b4da7d10c	Vikings and Lionhearts Tour 2022	2022-09-28	c2e2354512feb29acf171d655a159dd0	0	74.70	2
-161882776281e759c9c63d385457ce2c	Servant of the Road World Tour	2022-11-29	c2e2354512feb29acf171d655a159dd0	0	86.20	2
-fb40042479b7dab1545b6ff8b011e288	Sepultura - Quadra Tour Europe 2022	2022-11-21	427a371fadd4cce654dd30c27a36acb0	0	37.80	2
-6b6bceac41ce67726a6218b1155f2e70	Easter Mosh	2023-04-12	4751a5b2d9992dca6e462e3b14695284	0	28.60	2
-95cc14735b9cc969baa1fe1d8e4196ae	The Blackest Path	2022-10-08	620f9da22d73cc8d5680539a4c87402b	0	30.00	2
-7712d7dceef5a521b4a554c431752979	29. Wave-Gotik-Treffen	2022-06-05	4a887b8a68acf9b04d9d027bddedb06b	1	130.00	2
-dae84dc2587a374c667d0ba291f33481	Rockharz Open Air 2019	2019-07-03	3b0409f1b5830369aac22e3c5b9b9815	2	112.75	2
-d45cf5e6b7af0cee99b37f15b13360ed	28. Wave-Gotik-Treffen	2019-06-08	4a887b8a68acf9b04d9d027bddedb06b	1	130.00	2
-00f269da8a1eee6c08cebcc093968ee1	Grabbenacht Festival 2019	2019-05-30	7adc966f52e671b15ea54075581c862b	1	28.00	2
-ec9a23a8132c85ca37af85c69a2743c5	NOAF XII	2016-08-26	bb1bac023b4f02a5507f1047970d1aca	1	35.00	2
-a72c5a8b761c2fc1097f162eeda5d5db	NOAF XIV	2018-08-24	bb1bac023b4f02a5507f1047970d1aca	1	42.00	2
-c5593cbec8087184815492eee880f9a8	Randy Hansen live in Frankfurt	2016-04-26	927ba3593d3a4597eac931a25b53a137	0	22.00	2
-9feb9a9930d633ef18e1dae581b65327	Horresque & Guests	2022-05-13	620f9da22d73cc8d5680539a4c87402b	0	10.00	2
-553a00f0c40ce1b1107f833da69988e4	We Are Not Your Kind World Tour	2020-01-29	c2e2354512feb29acf171d655a159dd0	0	80.40	2
-ca69aebb5919e75661d929c1fbd39582	NOAF XV	2019-08-23	bb1bac023b4f02a5507f1047970d1aca	1	42.0	2
-52270ed38759952c9cbd6487b265a3a7	REVEL IN FLESH support: TORMENT OF SOULS	2022-11-18	d8634af954a0d50828522b6c6a6053c2	0	18.02	2
-0e94c08f1e572c5415f66d193fbc322a	Gorecrusher European Tour 2022	2022-11-19	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	25.2	2
-b5b9346b4a9da4233b62daad23cf36ed	On Stage - 22.10.2022	2022-10-22	8bb89006a86a427f89e49efe7f1635c1	0	14	2
-f87736b916e7d1ac60d0b7b1b7ca97b4	Dia de los muertos Roadshow 2015	2015-11-27	427a371fadd4cce654dd30c27a36acb0	0	12.25	2
-6f14a4e8ecdf87e02d77cec09b6c98b9	50 Jahre Doktor Holzbein	2022-04-23	14b82c93c42422209e5b5aad5b7b772e	0	0	2
-700b8ca4c946e01dc92ab6c33757cafb	Activate Europe 2022	2022-10-09	427a371fadd4cce654dd30c27a36acb0	0	23	2
-8342e65069254a6fd6d2bbc87aff8192	Braincrusher in Hell 2020	2022-05-20	871568e58a911610979cadc2c1e94122	1	70.40	2
-cb16e5f28a9e5532485fe35beca8d438	In Flammen Open Air 2023	2023-07-13	245dd888dae44ef00b3aa74214912f40	2	86.90	2
-6f745abd8c203f0f0e821ceeb77e5d24	Morbide Klänge II	2023-05-12	620f9da22d73cc8d5680539a4c87402b	0	15	2
-1be77f077186f07ab5b59287427b15c2	Oblivion European Tour 2023	2023-08-10	0b186d7eb0143e60ced4af3380f5faa8	0	30.00	2
-ef91a35f7de705463fc18a852a0eaa9c	Halloween mit Hängerbänd und Hellbent on Rocking	2023-10-31	8bb89006a86a427f89e49efe7f1635c1	0	30.00	2
-1ac607a573d595a27f07adef0073a8fd	Death Metal night - 10.2023	2023-11-04	620f9da22d73cc8d5680539a4c87402b	0	30.00	2
-86726dd04d66ca3def8c4e2ccfbbf3e2	"Morbid Devastation"-Tour	2023-11-17	427a371fadd4cce654dd30c27a36acb0	0	30.00	2
-95f435dc4c76d20082aafca8e5a394c9	On Stage - 09.03.2024	2024-03-09	8bb89006a86a427f89e49efe7f1635c1	0	14.0	2
-0b305bfbd40df03ea4a962caa5bfc8f4	Heidelberg Deathfest Warm-Up-Show 2024	2024-02-24	0b186d7eb0143e60ced4af3380f5faa8	0	30.70	2
-ddfe34c53312f205cb9ee1df3ee0cd0e	Boarstream Open Air 2023	2023-07-21	b26918c7403ba9006251abb5aed9b568	1	66.60	2
-dad100b64679b43501647a37e886a148	40 Years of Destruction Europe Tour 2023	2023-10-27	427a371fadd4cce654dd30c27a36acb0	0	40.30	2
-2d2f874ab54161fb8158d43487e77eb6	Swords into Flesh Europe Tour 2023	2023-11-07	0b186d7eb0143e60ced4af3380f5faa8	0	27.50	2
-7e8a1347517055c0af14a3df27f42a4d	Breakdown4Tolerance Vol.1 Festival	2023-09-30	28b01417bfa80ac2a9d3521137485589	0	25.00	2
-e59ace10fad0af976f723748e6fd2ea8	Summer in the City 2023	2023-06-30	f9b213d4a497239d3969131d12cb900d	0	0.00	2
-d691b12bf758d4895b52dd338feb3a10	The young meatal attack	2024-03-02	e2b11d2fc694a779d25220b9e5cb88ad	0	12.00	2
-2cd4ca525a2d7af5ffa5f6286998ceb0	Rumble of thunder	2023-06-27	5ef87fb605db6ba57e23c29fed883ac7	0	38.85	2
-7d126fe510b243454713c0ac4cd66011	Grabbenacht Festival 2023	2023-06-09	7adc966f52e671b15ea54075581c862b	1	45.00	2
-2200574eb6396407ec9fc642c91f0e5a	European Miserere 2023	2023-07-03	d6a89e194d2558258305d49f06856e57	0	15.00	2
-0962c746a7d30ba0f037b21fb8e32858	A Goat Vomit Summer	2023-07-25	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	23.20	2
-b4bc434cadf0eb32a339ac495a2268e8	40 Years of the Apocalypse Anniversary Tour 2023	2023-09-26	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	32.90	2
-331460836901954849fb420c890f1c44	Horrible Death Tour 2023	2023-09-29	93a57b9586b3285867e6b87031559aea	0	13.00	2
-3048f2df2a1969708f48957002d0ea46	Latin American Massacre	2023-10-20	620f9da22d73cc8d5680539a4c87402b	0	9.60	2
-b8a9f22cb877ce0189a3ce04e105f0c1	European Fall 2023 Tour	2023-11-19	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	37.30	2
-fa64fb0e05a9c0e32010d73760dfa53f	Rockfield Open Air 2023	2023-08-11	55ff4adc7d421cf9e05b68d25ee22341	2	0.00	2
-89b8688929aebb711cffaa22561b1395	Summer in the City 2018	2018-07-08	f9b213d4a497239d3969131d12cb900d	0	0.00	2
-b5b0b9a19e53b658857004f145d6a94f	Evil Obsession 2023	2023-12-28	828d35ecd5412f7bc1ba369d5d657f9f	0	48.50	2
-85500121e0087db5354d72b484d1a90e	Motörblast Play Motörhead - 2023	2023-12-27	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0	18.60	2
-ee46f6424a052ac12d2c76309c260a36	50 Jahre Geisler of Hell Festival	2024-01-12	a247cd14d4d2259d6f2bc87dcb3fdfb6	0	28.70	2
-04fdcbd453ccdcfc343ffc7ab6b27a8d	Dread Reaver Europe 2024	2024-01-20	828d35ecd5412f7bc1ba369d5d657f9f	0	39.50	2
-98bbd03f950cbc96d6639a4b7b43e76a	Death and Gore over Frankfurt	2023-10-28	d7925427b71cf5c69dea1361e790154e	0	9.00	2
-379d64538f810914012edc9981039183	Eskalation im Oberhaus 2024	2024-02-03	f0a8e858b19385f9c627d8b752c81a6c	0	22.00	2
-55feb5f143059bd9a7a647ba7daab977	Motörblast Play Motörhead - 2018	2018-12-27	c6e9ff60da2342ba2a0ce4d9b6fc6ff1	0	16.40	2
-6a1b89e9076bdcb811ab7b4b6b5fbb23	Paganische Nacht - 2023	2023-11-24	46103b15f2a58bf3c7d03c4d9a954779	0	29.00	2
-68884e33784d424fef2065652b743ee7	Hell over Aschaffenburg - 2023	2023-11-25	46103b15f2a58bf3c7d03c4d9a954779	0	35.00	2
-97a06553981fd4531de6d5542136b854	30. Wave-Gotik-Treffen	2023-05-26	4a887b8a68acf9b04d9d027bddedb06b	3	170.00	2
-0e4288f287e446bf417ba4e0664a1c26	The Path of Death 10	2023-10-14	620f9da22d73cc8d5680539a4c87402b	0	39.00	2
-477a7e7627b4482929c215de7d3c4a76	Metal Embrace Festival XV	2023-09-08	741ae9098af4e50aecf13b0ef08ecc47	1	48.50	2
-4454869140a41f593eb7d8575d0f97c8	Metal im M8 - 12.2023	2023-12-09	620f9da22d73cc8d5680539a4c87402b	0	8.00	2
-180e57969fd1e8948ebdf21ff1b57d3d	15 Jahre live im GMZ Georg-Buch-Haus Wiesbaden	2014-10-04	5a90e8cdd17fb102f309e2bbd460e289	0	9.00	2
-d3582717412a80f08b23f8add23a1f35	Hell over Aschaffenburg - 2019	2019-11-30	858d53d9bd193393481e4e8b24d10bba	0	30.00	2
-91b0a2f2ba6b8909cc412bf37e35f779	Bands am Montag - 12.2023	2023-12-18	14b82c93c42422209e5b5aad5b7b772e	0	0.0	2
-e396e5afb7cf4c68b9adce7af6adad8c	Death Feast Open Air 2023	2023-08-24	0643057438c69f0c17bf84c9495d2b7e	2	85.50	2
-b0f45689c096147b963b998eccdbc19e	Hutkonzert - ATG - 19.10.2023	2023-10-19	8bb89006a86a427f89e49efe7f1635c1	0	10.0	2
-8640cd270510da320a9dd71429b95531	NOAF XI	2015-08-28	bb1bac023b4f02a5507f1047970d1aca	1	15.0	2
-7e834ee3aea78e49afb45728dbb63de2	On Stage - 16.09.2023	2023-09-16	8bb89006a86a427f89e49efe7f1635c1	0	14	2
-3aa0df8e70b789a940e8a4df74c1c1de	Ton Steine Scherben - 2015	2015-10-01	427a371fadd4cce654dd30c27a36acb0	0	25	2
-a1ba44498f1b706e9ec67d6c50842b42	Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger	2019-11-15	620f9da22d73cc8d5680539a4c87402b	0	9	2
-9c553520982c65b603e9d741eaa56b09	57. Wernigeröder Rathausfest	2023-06-16	e1d73a013c55de0ebff0e36b7c07ee77	1	0	2
-bc9dd8d4890a5523a876931328350747	Dortmund Deathfest 2023	2023-08-04	581032b233cfa02398169948de14c2dd	1	79	2
-bd1c4e61080082f4ce21cea49e37712b	Morbide Klänge III	2024-05-24	620f9da22d73cc8d5680539a4c87402b	0	15.0	2
-69a41d5dad2039585f9bc6016b1c002a	Open Stage - 23.05.2024	2024-05-23	620f9da22d73cc8d5680539a4c87402b	0	15.0	2
-c51b848ef0fde1cc943bb57bbfad7a11	Grabbenacht Festival 2024	2024-05-31	7adc966f52e671b15ea54075581c862b	1	49.0	2
+3fd69863958a8c69582d9f5bd6c82681	Südpfalz Metalfest	2020-09-25	6dde0719f779b373e62a7283e717d384	0	30.00	2
+6ee6f878dcf139f61d9fae6aef8aa367	Tribute Bathory mit	2024-03-23	17648f3308a5acb119d9aee1b5eafceb	0	15	2
+da4794bdc2159737a4c338392a856359	Guido's Super Sweet 16 (30. jubilee)	2018-04-27	17648f3308a5acb119d9aee1b5eafceb	0	9.00	2
+8b0e6056132f11cfb7968cf303ff0154	Guido's sassy 17 (30th edition)	2019-04-26	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2
+cc02ce2d003fd86ba60f8688e6c40b97	Halloween Party 2019	2019-10-31	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2
+f8bb8ae77ca110cf00ebb5af1d495203	Heavy metal gegen Mikroplastik	2019-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2
+3b51208982f00d5380552fc26238893a	KILMINISTER - A Tribute to MOTÖRHEAD	2023-05-06	17648f3308a5acb119d9aee1b5eafceb	0	30.00	2
+dc9da3de687b2f6b15b8e0660dabbdbb	On Stage - 22.10.2022	2022-10-22	17648f3308a5acb119d9aee1b5eafceb	0	14	2
+e6af11cd729e7b81d4f40453fff9c7f2	Halloween mit Hängerbänd und Hellbent on Rocking	2023-10-31	17648f3308a5acb119d9aee1b5eafceb	0	30.00	2
+1e4eac648958cf2bfe14673996ed2c7e	On Stage - 09.03.2024	2024-03-09	17648f3308a5acb119d9aee1b5eafceb	0	14.0	2
+759144a13dee6936c81d0fce2eaaba06	Jomsviking European Tour 2016	2016-11-17	76f9a958c2ebbd2f42456523d749fb5e	0	40.40	2
+6c7cfe3af936c1590949350fc7d912d3	Fintroll + Metsatöll + Suotana Tour 2024	2024-04-22	eca8fc96e027328005753be360587de2	0	34.00	2
+9952e1e08fb8f493c66f5cf386ba7e06	Night on the Living Thrash Tour 2023	2023-11-09	eca8fc96e027328005753be360587de2	0	39.50	2
+91f86c2abd4b3c5f884c3947c424f70a	Cannibal Corpse, European Summer Tour 2019	2019-06-30	eca8fc96e027328005753be360587de2	0	30.00	2
+d4dafcc2060475c01e6b4f6f3cb5c488	"Still Cyco Punk" World Wide Tour 2018	2018-11-04	eca8fc96e027328005753be360587de2	0	34.00	2
+de64d3821b97e63cf8800dda1e32ee53	Metal Embrace Festival XII	2018-09-07	05be609ce9831967baa4f12664dc4d73	1	25.00	2
+9f07b2ac339c32524557ba186f68b2ef	Metal Embrace Festival XIV	2022-09-09	05be609ce9831967baa4f12664dc4d73	1	30.00	2
+1a2f8d593b063eccd9b1dc3431e01081	Metal Embrace Festival XIII	2019-09-06	05be609ce9831967baa4f12664dc4d73	1	25.0	2
+7dc88a28ee5d7dbd7a1011fd098cd6ab	Way of Darkness 2019	2019-10-04	dd6f8f3663df773b485d8281c2ccd323	1	62.00	2
+0601414fd50328355d256db5037bc430	Celebrating the music of Jimi Hendrix	2024-05-01	f3a90318abb3e16166d96055fd6f9096	0	24.20	2
+8b3c931e31a2c5dbb3155dab7dade775	Shades of Sorrow European Tour 2024	2024-05-04	f3a90318abb3e16166d96055fd6f9096	0	27.30	2
+bf65ac5101f339e8c8d756e99c49a829	Angelus Apatrida - Tour 2022	2022-07-28	f3a90318abb3e16166d96055fd6f9096	0	16.50	2
+2dac37a155782e0b3d86fc00d42b53d0	Hate, Keep of Kalessin	2024-05-02	f3a90318abb3e16166d96055fd6f9096	0	25.30	2
+cbe2729e13ce90825f88f2fc3a0bce55	Slamming Annihilation European Tour 2018	2018-05-21	f3a90318abb3e16166d96055fd6f9096	0	18.00	2
+08f8c67c20c4ba43e8ba6fa771039c94	Debauchery's Balgeroth	2018-11-03	f3a90318abb3e16166d96055fd6f9096	0	18.00	2
+11a728ed9e3a6aac1b46277a7302b15f	Hell over Europe II	2018-11-24	f3a90318abb3e16166d96055fd6f9096	0	24.00	2
+1b76db5ef5f13c3451dcc06344fae248	Warfield - Café Central	2022-02-05	f3a90318abb3e16166d96055fd6f9096	0	0.00	2
+d3bda1e9de8bc6d585f37b739264d649	Crisix, Insanity Alert	2021-09-16	f3a90318abb3e16166d96055fd6f9096	0	19.70	2
+a01b8b09fc0dea9192cb02b077bfae9f	Pagan Metal Festival	2019-11-03	f3a90318abb3e16166d96055fd6f9096	0	26.30	2
+74b2dd70f761e31a1e0860fe18f8cb55	Ektomorf - The legion of fury tour 2019	2019-04-25	f3a90318abb3e16166d96055fd6f9096	0	26.40	2
+3b23d8e33c40737f5ca4b3a0fbb54542	Eis und Nacht Tour 2020	2020-01-24	f3a90318abb3e16166d96055fd6f9096	0	24.10	2
+74480c2ba717722022d58038ab1bcd44	SARCOFAGO TRIBUTE (Fabio Jhasko)	2021-11-25	f3a90318abb3e16166d96055fd6f9096	0	20	2
+5e6a61fa17bf86a738024508581f11d4	HateSphere, sign of death	2023-06-03	f3a90318abb3e16166d96055fd6f9096	0	18.70	2
+45e481facaabaefb537716312cbb9f67	Morbidfest	2022-04-19	f3a90318abb3e16166d96055fd6f9096	0	33.00	2
+1845ce3f5f191d7265d512beb6be1708	Oblivion European Tour 2023	2023-08-10	f3a90318abb3e16166d96055fd6f9096	0	30.00	2
+84565434746de9ae0cd3baf57fcfd87d	Heidelberg Deathfest Warm-Up-Show 2024	2024-02-24	f3a90318abb3e16166d96055fd6f9096	0	30.70	2
+87d1f3bfe03274952aa29304eb82d9d9	The Path of Death 7	2018-10-20	a91bcaf7db7d174ee2966d9c293fd575	0	15.00	2
+bd4a5e87854fd4d729983f3ac9bc7268	The Path of Death 6	2017-10-14	a91bcaf7db7d174ee2966d9c293fd575	0	14.00	2
+24756eb800986d0cb679e4c78d8a06c2	Darkness approaching	2019-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	30.00	2
+e70608c5455336dfc61d221e145f51cd	Rock-N-Pop Youngsters 2019	2019-03-15	a91bcaf7db7d174ee2966d9c293fd575	0	0.00	2
+2bc0eb6a40bd1e2409b2722039152679	1. Mainzer Rock & Metal Fastnachts-Party	2019-03-02	a91bcaf7db7d174ee2966d9c293fd575	0	5.00	2
+f2da218ba072addd567741ba722037e4	The Path of Death 9	2021-11-13	a91bcaf7db7d174ee2966d9c293fd575	0	25.00	2
+b17a925acc0a591c2be6f84376007717	The Path of Death 8	2019-10-26	a91bcaf7db7d174ee2966d9c293fd575	0	14.00	2
+3d3cf571367952ee016599bba2ef18cb	Doom over Mainz	2019-09-21	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2
+c61c9363d160c5f94193056388d9ced9	Light to the blind, Slaughterra, All its Grace	2019-03-29	a91bcaf7db7d174ee2966d9c293fd575	0	10	2
+d7010a272554c22fa8d53efc81046bce	Death Over Mainz 2023	2023-04-21	a91bcaf7db7d174ee2966d9c293fd575	0	30.00	2
+5165e8c183dbda4c319239e9f631b6f9	The Blackest Path	2022-10-08	a91bcaf7db7d174ee2966d9c293fd575	0	30.00	2
+06ed605b83d95d5a8488293416ceb999	Horresque & Guests	2022-05-13	a91bcaf7db7d174ee2966d9c293fd575	0	10.00	2
+cb4c2743c35bb374ab32d475ce8cfafe	Morbide Klänge II	2023-05-12	a91bcaf7db7d174ee2966d9c293fd575	0	15	2
+f88c607c316a2a53973d71db053a3ce6	Death Metal night - 10.2023	2023-11-04	a91bcaf7db7d174ee2966d9c293fd575	0	30.00	2
+fbae6c1da1deba5dd51f5d07007ec5ab	Warfield / Purify / Sober Truth	2018-02-17	fc9917fb6f46c0eb12f1e429a33ba66b	0	10	2
+eeba68f0a1003dce9bd66066b82dc1b6	Heidelberg Deathfest III	2018-03-24	c72b4173a6a7131bf31a711212305fd3	0	35.00	2
+f6fecea2db8afd44e1ad77f699d38fe9	Heidelberg Deathfest IV	2019-03-23	c72b4173a6a7131bf31a711212305fd3	0	40.00	2
+568359348ea05d7114e3d796d7df55f2	Heidelberg Deathfest VI	2023-03-18	c72b4173a6a7131bf31a711212305fd3	0	55.21	2
+d3c946cf8862b847404204ab7d0cfc39	Campaing for musical destruction	2023-03-03	c72b4173a6a7131bf31a711212305fd3	0	34.00	2
+dc741cac8e46d127f4ce2524e5dbefa0	Heidelberg Deathfest V	2022-03-19	c72b4173a6a7131bf31a711212305fd3	0	42.00	2
+a4ef4e4104ed8bdd818771ca2ea34127	Völkerball in Mainz	2018-07-27	1b90e6739989e49dd0c81f338b61c134	0	0.00	2
+2917a0b7da3498cad2a82a57e509346e	Downfall of Mankind Tour 2019	2019-05-07	5208c9de2f1b498a350984d55bcbc314	0	18.0	2
+2ac99a5ffc2764063bc246f9fa174a71	Grill' Em All 2017	2017-09-23	3a98149817a5aafba14c1b822db056fa	0	0.00	2
+fe36a187902de9cf1aa5f42477fa1318	Grill' Em All 2022	2022-07-02	3a98149817a5aafba14c1b822db056fa	0	0.00	2
+fb57c18df776961bb734a1fa3db6a6d1	Taunus Metal Festival XIV	2024-04-05	990c04bd6b40c3ca7352a838e2208dac	0	30.00	2
+9946f5f348ac677113592c05b1b3905b	Taunus Metal Festival XI	2019-04-12	990c04bd6b40c3ca7352a838e2208dac	1	25.00	2
+486bf23406dec9844b97f966f4636c9b	In Flames	2017-03-24	f7f2bc012754bd5d77de32e5c2674553	0	57.45	2
+c0f93075617b7dd9db214f46876fb39d	Knife, Exorcised Gods, World of Tomorrow, When Plages Collide	2018-09-15	6e763e01d71c71e3b53502c35bfbb98c	0	7.60	2
+e669a39d1453acd6aefc84913a985f51	Matapaloz Festival 2017	2017-06-16	0dbca791a775eab280cc7766794627cb	1	170.99	2
+3e55fe6e09f2f7eaacd4052a76bcfb01	Download Germany	2022-06-24	0dbca791a775eab280cc7766794627cb	0	139.00	2
+89733d277fcf6ee00cb571b2e1d72019	Grabbenacht Festival 2018	2018-06-01	010c9e9e86100e63919a6051b399d662	1	23.00	2
+b0bc16cc4e9fefb213434d718724ec3a	Grabbenacht Festival 2019	2019-05-30	010c9e9e86100e63919a6051b399d662	1	28.00	2
+078ac0cacb2c674f16940ebd9befedd9	Grabbenacht Festival 2024	2024-05-31	010c9e9e86100e63919a6051b399d662	1	49.0	2
+791a234c3e78612495c07d7d49defc4c	Profanation over Europe 2024	2024-03-20	588671317bf1864e5a95445ec51aac65	0	29.20	2
+79b4deb2eac122cc633196f32cf65670	Where Owls know my name EU|UK Tour 2019	2019-09-22	588671317bf1864e5a95445ec51aac65	0	24.70	2
+5fd9b4c8df6e69c50106703b7d050a3d	The modern art of setting ablaze tour	2018-12-08	588671317bf1864e5a95445ec51aac65	0	23.20	2
+cb80a6a84ec46f085ea6b2ff30a88d80	Molotov	2016-07-25	588671317bf1864e5a95445ec51aac65	0	24.50	2
+921e9baf14e4134100c7b7a475b1bb06	EMP Persistence Tour 2017	2017-01-24	588671317bf1864e5a95445ec51aac65	0	32.30	2
+07da0c8ead421197cc73463cf5a5eefc	Death is just the beginning	2018-10-18	588671317bf1864e5a95445ec51aac65	0	32.10	2
+133416b949a72009242c85d5af911b93	Kreator, Sepultura, Soilwork, Aborted	2017-02-17	588671317bf1864e5a95445ec51aac65	0	42.00	2
+20b32a6bbc813658d242a65c08bc8140	The Popestar Tour 2017	2017-04-09	588671317bf1864e5a95445ec51aac65	0	33.50	2
+50e128ce6587bfcaedf317f6deb69695	Before we go Farewell Tour 2016	2016-02-11	588671317bf1864e5a95445ec51aac65	0	17.45	2
+c9dc004fc3d039ad7fb49456e5902b01	Conan	2017-03-08	588671317bf1864e5a95445ec51aac65	0	18.00	2
+1e144cd25de2ab5d9153d38c674c1f4b	MTV's Headbangers Ball Tour 2018	2018-12-11	588671317bf1864e5a95445ec51aac65	0	39.80	1
+f015a601161f02a451557258793a96a1	Skindred, Zebrahead	2016-12-09	588671317bf1864e5a95445ec51aac65	0	25.70	2
+3e98ecfa6a4c765c5522f897a4a8de23	Ministry	2018-08-06	588671317bf1864e5a95445ec51aac65	0	35.80	2
+e5847f38992d20bb78aafd080c5226d4	Dia de los muertos Roadshow 2016	2016-11-11	588671317bf1864e5a95445ec51aac65	0	14.70	2
+2b6e496456bb2be5444c941692fa5d17	Will to power tour 2018	2018-02-06	588671317bf1864e5a95445ec51aac65	0	36.70	2
+603ef2d9ef2057c8719d0715a7de32d1	EMP Persistence Tour 2018	2018-01-23	588671317bf1864e5a95445ec51aac65	0	33.40	2
+6e18512149a51931a4faa1f51d69a61f	Dia de los muertos Roadshow 2018	2018-11-02	588671317bf1864e5a95445ec51aac65	0	14.5	2
+21913ca002c17ce3cf8a0331b2dad1c8	Winter Hostilities 2019-Tour	2019-12-04	588671317bf1864e5a95445ec51aac65	0	23.70	2
+e6273b4e07720dbd6ed7870371b86d24	World needs mosh (Wiesbaden)	2021-11-19	588671317bf1864e5a95445ec51aac65	0	14.90	2
+cb14876022caa93cf2a4a934fad74fe9	Descend into Madness Tour 2020	2020-03-11	588671317bf1864e5a95445ec51aac65	0	19.20	1
+c4c0e84be1600267ea2bd626c25dc626	The Gidim European Tour 2020	2020-03-05	588671317bf1864e5a95445ec51aac65	0	25.90	2
+ec29ea3adb2b584841d5d185e5f9135b	European Tour Summer 2019	2019-08-13	588671317bf1864e5a95445ec51aac65	0	23.70	2
+9b4752b144d294fc6799532a413fd54e	Aversions Crown | Psycroptic	2019-02-21	588671317bf1864e5a95445ec51aac65	0	23.70	2
+d988ef331f5b477753be3bae8b18412f	MTV's Headbangers Ball Tour 2019	2019-12-14	588671317bf1864e5a95445ec51aac65	0	40.75	2
+0add3cab2a932f085109a462423c3250	Dust Bolt	2019-03-07	588671317bf1864e5a95445ec51aac65	0	19.30	2
+52bb7665f1523ba2bb7481ee085ce6ec	To Drink from the Night Itself, Europe 2019	2019-12-15	588671317bf1864e5a95445ec51aac65	0	38.50	2
+cb091aafa00685c4b29954ca13e93bad	EMP Persistence Tour 2019	2019-01-24	588671317bf1864e5a95445ec51aac65	0	33.60	2
+b04e875801af3b7b787cde914be2aaed	Deserted Fear / Carnation / Hierophant	2019-03-22	588671317bf1864e5a95445ec51aac65	0	19.30	2
+e1e5ca54159d43c9400d33fdff6ac193	Amorphis & Soilwork	2019-02-13	588671317bf1864e5a95445ec51aac65	0	36.90	2
+aac480b69f1fe6472ffe7880c8ead350	The Inmost Light Tatoo 2019	2019-02-01	588671317bf1864e5a95445ec51aac65	0	10.0	2
+5379b1daf8079521f6c7de205e37f878	Netherheaven Europe 2023	2023-01-19	588671317bf1864e5a95445ec51aac65	0	30.50	2
+7b5a790fbc109d0dadb7418b17bf24e8	Post Covid European Summer Madness 2022	2022-07-19	588671317bf1864e5a95445ec51aac65	0	26.00	2
+8be553b6dfad10eac5fed512ef6c2c95	Europe 2022	2022-10-30	588671317bf1864e5a95445ec51aac65	0	36.00	2
+e692c8859fbcd0611cde731120ba09ad	Necro Sapiens Tour 2022	2022-05-05	588671317bf1864e5a95445ec51aac65	0	19.65	2
+eb5b5cec91e306a1428f52f89ef1c2ab	Doomsday Album Release Tour	2022-04-28	588671317bf1864e5a95445ec51aac65	0	23.80	2
+9295494c6983f977a609c9db84ce25e6	Sepultura - Quadra Tour Europe 2022	2022-11-21	588671317bf1864e5a95445ec51aac65	0	37.80	2
+6c6621659485878b572ac37db7d14947	Dia de los muertos Roadshow 2015	2015-11-27	588671317bf1864e5a95445ec51aac65	0	12.25	2
+1bbb8052b10792e8a86d64245d543d7a	Activate Europe 2022	2022-10-09	588671317bf1864e5a95445ec51aac65	0	23	2
+22be8d2b712105db37cc765fae61323e	"Morbid Devastation"-Tour	2023-11-17	588671317bf1864e5a95445ec51aac65	0	30.00	2
+90710b6a9bf6fbbdea99a274ca058668	40 Years of Destruction Europe Tour 2023	2023-10-27	588671317bf1864e5a95445ec51aac65	0	40.30	2
+88ad18798356c6caa8fe161432d88920	Ton Steine Scherben - 2015	2015-10-01	588671317bf1864e5a95445ec51aac65	0	25	2
+40512bf59a621ffaaea463f137f395ec	Crossplane & Hängerbänd	2021-08-06	99b522e44d05813118dcf562022b4a2a	0	18.60	2
+3479db140a88fa19295f4346b1d84380	15 Years New Evil Music, Festival	2019-10-12	49d6cee27482319877690f7d0409abbd	0	44.0	2
+65302b172b9b95b0f8f692caef2e19e8	X-Mass in Hell Festival West Edition 2018	2018-12-15	49d6cee27482319877690f7d0409abbd	0	39	2
+f4e988e1e599ea5ff2d9519e59511757	Sons of Rebellion Tour 2019	2019-11-01	49d6cee27482319877690f7d0409abbd	0	26.40	2
+e6513a2614231773cfe00d0bb6178806	Prayer Of Annihilation Tour 2019	2019-10-24	49d6cee27482319877690f7d0409abbd	0	23.10	2
+aeead547d2a5b453d09a3efdf052c4cf	Easter Mosh	2023-04-12	49d6cee27482319877690f7d0409abbd	0	28.60	2
+6fa3e357c27d47966023568346d51a09	Metallergrillen 2017	2017-09-01	3264a9d4fedca758f18391ecca28f0e5	1	33.0	2
+91e2010dfd20c93ee84ffd12694b0f24	A Tribute to ACDC 2020	2020-03-07	539960fca282c1966cfa15e15aca1d84	0	15.00	1
+f64440cda54890f13a4506f88aa21cd2	Rockharz Open Air 2019	2019-07-03	ed2c8a76cc01eeb645011e8154737a49	2	112.75	2
+87ba4cfe4768f0efa1a69dacb770810c	Rockfield Open Air 2017	2017-08-18	d5a4559236ce011e72312e02aafc05d0	2	0.00	2
+208af572d4212c8b20492f11ca9b8b54	Rockfield Open Air 2019	2019-08-09	d5a4559236ce011e72312e02aafc05d0	2	0.00	2
+0704b2bfdcfaed5225554f023a7fbf48	Rockfield Open Air 2022	2022-08-13	d5a4559236ce011e72312e02aafc05d0	2	0.00	2
+169be8981eff6a53b1bcae79e2f06a05	Rockfield Open Air 2023	2023-08-11	d5a4559236ce011e72312e02aafc05d0	2	0.00	2
+8a48b001d26cf3023ac469d68bfba185	NOAF XIII	2017-08-25	6c33b0a7db1a4982d74edfe98239cec5	1	38.00	2
+9bbe76536451d9ad44018b24d51c58aa	Rockbahnhof 2019	2019-05-18	6c33b0a7db1a4982d74edfe98239cec5	0	0	2
+1edc35fdd229698b0eeaaa43e7a9c7c5	NOAF XII	2016-08-26	6c33b0a7db1a4982d74edfe98239cec5	1	35.00	2
+b3622323dbe3bef2319de978869871ad	NOAF XIV	2018-08-24	6c33b0a7db1a4982d74edfe98239cec5	1	42.00	2
+cfd1317abaf4002e4a091746008541cc	NOAF XV	2019-08-23	6c33b0a7db1a4982d74edfe98239cec5	1	42.0	2
+3e8d7d577a332fc33e2f332ad7311e1e	Worldwired Tour 2019	2019-08-25	f17fc1362e3637ae8ede170a2a5d6bea	0	98.65	2
+be5ea4556ea2b3db3607b8e2887c9dd3	Metal Club Odinwald meets Ultimate Ruination Tour	2019-04-27	29935ed69008b59e8758afcf7eeb7d7b	0	9.00	2
+90445b62432a3d8e1f7b3640029e6fed	Worldwired Tour 2018	2018-02-16	840b0d06d6be5d714e2228a4be26cbcc	0	115.15	2
+87c20c746bae110cc55c3d32414037df	Friendship & Love Metal Fest	2020-02-15	406b32caecad16e87606fa84a77f4e35	0	3.00	2
+c4968fa5ec8f129c7fd49ffa5cb64d6e	Jubiläumswoche 25 Jahre Hexenhaus	2021-07-31	d61cb6460de2df9d1d64dc35cb293f6a	0	41.90	2
+a3c7a40013e778dc1ce7d4ae7cdcfa6d	Super Sweet 16 (Edition 36)	2024-04-20	6c55ed753e5b2355307bf2b494f2384a	0	0	2
+75560c8161a6cccdfbd7a8b59332b792	Alexander the Great in Exil	2021-09-11	6c55ed753e5b2355307bf2b494f2384a	0	11	2
+d283cb5c455d03f1f4f0ff7f82c93af6	50 Jahre Doktor Holzbein	2022-04-23	6c55ed753e5b2355307bf2b494f2384a	0	0	2
+ec83b315e34cecd0b3e8323e22ee38bf	Bands am Montag - 12.2023	2023-12-18	6c55ed753e5b2355307bf2b494f2384a	0	0.0	2
+8287859246dae330eef7b3a2a8c71390	Warfield/Torment of Souls/Redgrin	2021-10-02	44ab9f5977e8956f9dd15003efc8743b	0	10.00	2
+943f6abbf24d69a145fbac5cc30c1a5c	World needs mosh (Bonn)	2021-11-21	eb83e6da9292e995b44f789c42bb7e65	0	14.90	2
+220352d001b221b28a0dff0fbd20f77c	Slaughterra - Darmstadt	2022-03-05	6ddb911ae1e79899c2d90067b761d6b4	0	15	2
+e87aa14aa70c2745548e891915c77ab4	Dark Zodiak + Mortal Peril	2021-11-27	6ddb911ae1e79899c2d90067b761d6b4	0	15	2
+94154f6cf17963a299f6902ae9c7f3d5	Braincrusher in Hell 2020	2022-05-20	ca7fb13a9cd0887dfabbb573c070fb2e	1	70.40	2
+a17fea2a7b6cf4685417132ff574fd0a	Wacken Open Air 2022	2022-08-03	481c1aef68fb3531c92c85ccf1e8643d	3	238.00	2
+ef925858ea6d5d91b5ca4b3440fa1ad1	Death Feast Open Air 2022	2022-08-25	6a21939c14c8f6030de787b05d66c3ef	2	66.50	2
+e184d243eb553fcba592ae848963c1e8	Death Feast Open Air 2023	2023-08-24	6a21939c14c8f6030de787b05d66c3ef	2	85.50	2
+10c5ac379805443742025d6cf619891e	Infernum meets Porkcore Festevil 2022	2022-09-02	4806febaa9c494fdd030ee4163e33c8c	1	67.35	2
+ebaeb9fa7d6d4de00d7573942a9f9e78	Brutality Unleashed Tour 2022	2022-09-05	0280c9c3b98763f5a8d2ce7e97ce1b05	0	30.00	2
+a420ecf82bd099f63cf26c8cbc4cdf05	Horrible Death Tour 2023	2023-09-29	0280c9c3b98763f5a8d2ce7e97ce1b05	0	13.00	2
+7459412d1907ec1a87e7a5246b27cd00	Wild Boar Wars III	2021-08-28	83b0fe992121ae7d39f6bcc58a48160c	0	30.00	2
+e2a3e66f68255ed0b2a09a64a8ae55fd	Randy Hansen live in Frankfurt	2016-04-26	83b0fe992121ae7d39f6bcc58a48160c	0	22.00	2
+e6adc3e990efe83510bc9e7a483bec1a	Vikings and Lionhearts Tour 2022	2022-09-28	50eb9f93583f844e0684af399dc7fc3c	0	74.70	2
+b66fc7effb62197b91e1dacbd7b60f0f	Servant of the Road World Tour	2022-11-29	50eb9f93583f844e0684af399dc7fc3c	0	86.20	2
+a565f20390f97f9d86df144e14fe83af	We Are Not Your Kind World Tour	2020-01-29	50eb9f93583f844e0684af399dc7fc3c	0	80.40	2
+e58b815b0e0ab96b035629ec796eb579	Berserker World Tour 2019	2019-12-03	400c46fc5f22decc791a97c27363df40	0	53.95	2
+1f711336d1c518a68db9e2b4dd631e81	Back to the Roots Tour - 05.2024	2024-05-17	09ddc8804dd5908fef3c8c0c474ad238	0	23.20	2
+b098c76b1d5ba70577a0c0ba30d2170a	Fleshcrawl + Fleshsphere + Torment of Souls	2024-05-18	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2
+5e38483d273e5a8b6f777f8017bedf62	BLUTFEST 2022	2022-10-01	09ddc8804dd5908fef3c8c0c474ad238	0	23.2	2
+85935a51fb2aec086917a4eeeaef066b	Gorecrusher European Tour 2022	2022-11-19	09ddc8804dd5908fef3c8c0c474ad238	0	25.2	2
+69882c9d3cc383cd271732b068979a98	A Goat Vomit Summer	2023-07-25	09ddc8804dd5908fef3c8c0c474ad238	0	23.20	2
+39603f44a0fea370f2f6ced327e9b38b	40 Years of the Apocalypse Anniversary Tour 2023	2023-09-26	09ddc8804dd5908fef3c8c0c474ad238	0	32.90	2
+f7995b1a1bf9683848dd37ab294cfa3f	European Fall 2023 Tour	2023-11-19	09ddc8804dd5908fef3c8c0c474ad238	0	37.30	2
+26c07de9d3c6e80d7fdaefec9a7dcdc5	50 Jahre Geisler of Hell Festival	2024-01-12	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2
+57c286b274d23dc513ddfd16dd21281e	Laud as Fuck Fest	2022-11-04	9f629f2265000ff7abf380b363b2de49	0	21.69	2
+edccf96997e63c09109beba94633a44c	REVEL IN FLESH support: TORMENT OF SOULS	2022-11-18	9f629f2265000ff7abf380b363b2de49	0	18.02	2
+bc1f2650c6129b22a2cc63f2a90b5597	Black Thunder Tour	2022-11-24	69e2a1bbdd4b334d3da05ae012836b18	0	36.85	2
+183863a44c8750e908c83bd2d1c194f8	Slice Me Nice 2022	2022-12-03	69bdcf616a03acef49e3697d73adcbb3	0	37.22	2
+dc19b6ddc47a55bc9401384b0ff66260	29. Wave-Gotik-Treffen	2022-06-05	efeaa516107a31ce2d1217e055b767f7	1	130.00	2
+55446132347a3c2e38997d77b7641eff	28. Wave-Gotik-Treffen	2019-06-08	efeaa516107a31ce2d1217e055b767f7	1	130.00	2
+33314b620ad609dc87d035654068d01e	30. Wave-Gotik-Treffen	2023-05-26	efeaa516107a31ce2d1217e055b767f7	3	170.00	2
+57a334acb665ebc52057791d107149f4	57. Wernigeröder Rathausfest	2023-06-16	a7f15733dd688dee75571597f8636ba7	1	0	2
+86615675838b48d2003175dd7665fba3	Rumble of thunder	2023-06-27	779076573cef469faf694cd40d92f40a	0	38.85	2
+99e73f7baf95258d1a2f27df6c67294f	Thrash Metal Fest - 05.2024	2024-05-16	f3a90318abb3e16166d96055fd6f9096	0	30.0	2
+f56f7353a648997c6f5bc4a952cd1bd2	EMP Persistence Tour 2016	2016-01-22	588671317bf1864e5a95445ec51aac65	0	31.20	2
+08a5c6dec5d631fe995935fd38f389be	"The Tide of Death and fractured Dreams" European Tour 2024	2024-05-15	588671317bf1864e5a95445ec51aac65	0	36.0	2
+8ad5ac467b3776d28a12742decf00657	Rockfield Open Air 2018	2018-08-17	d5a4559236ce011e72312e02aafc05d0	2	0.00	2
+75fea12b82439420d1f400a4fcf3386b	Völkerball	2016-05-05	15f10194f67b967b0f0b5a22561a7c95	0	23.50	2
+70ba638a78552630591ba5c7ff92b93a	Sepultura - Quadra Summer Tour - Europe 2022	2022-07-05	968e5509ddd33538eec4fff752bda4ff	0	37.31	2
+69d2999875a1e6d7c09bbf157d18a27e	Summer in the City 2023	2023-06-30	692fc1deabc4b9afa9387af15c02b19a	0	0.00	2
+42a2eedac863bd01b14540a71331ec65	Summer in the City 2018	2018-07-08	692fc1deabc4b9afa9387af15c02b19a	0	0.00	2
+c724b600052083fae4765a6a7702ee5f	In Flammen Open Air 2023	2023-07-13	cb6036cdf8009fc4b41eb0e56eab553d	2	86.90	2
+b39ff9f6960957839c401d45abdc3cae	Boarstream Open Air 2023	2023-07-21	cf1c12d42f59db3667fc162556aab169	1	66.60	2
+6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	85683aa688e302e1de7ec78dc4440dff	1	79	2
+4ba1c22d76444426b678b142977aa084	Breakdown4Tolerance Vol.1 Festival	2023-09-30	10effefa9cc583f38ff0518dcaa72ef5	0	25.00	2
+db92681077141614e2ee9a01df968334	Death and Gore over Frankfurt	2023-10-28	fc36c84b02e473bec246e5d2cfc513ef	0	9.00	2
+f5cd4263f2cbb5e459306b35cef72e9d	European Miserere 2023	2023-07-03	5948b7ac21c1697473de19197df1f172	0	15.00	2
+8de89ad5eef951fd87bd3e013c63a6c4	Slaugther Feast 2023	2023-11-10	6032938ceb573d952fdae1a40ef39837	1	29.00	2
+d1b30328ab686d050b6c107154d6aef8	Paganische Nacht - 2023	2023-11-24	b13f71a1a5f7e89c2603d5241c2aca25	0	29.00	2
+4e22c7f7fe57d94f85bf89a469627ba1	Hell over Aschaffenburg - 2023	2023-11-25	b13f71a1a5f7e89c2603d5241c2aca25	0	35.00	2
+9d0ac9b8cb657a5f09f81d6bea3e1798	Slice Me Nice 2023	2023-12-02	817974aa11f84c9ebc640d3de92737f5	0	33.91	2
+efdb143af86d5a0af148b7847e721e55	15 Jahre live im GMZ Georg-Buch-Haus Wiesbaden	2014-10-04	738af31c1a528baa30e7df31384e550b	0	9.00	2
+e26bcb0f8a28cd2229ce77a95d0baf9e	Eskalation im Oberhaus 2024	2024-02-03	b00bae5a5f8ff8830d486747e78d7d8d	0	22.00	2
+dcad795c824cf4d6337fc9f745e5645f	The young meatal attack	2024-03-02	9ca0396f7fce5729940fcef7383728b3	0	12.00	2
+e4ee5ac5d137718d0eeb4d310b97d837	Noche de los Muertos - 2017	2017-10-31	f0f0e638999829b846be6e20b5591898	0	15	2
+ce017dda4d3b82cf8e75f648a7b9b390	Open air Hamm 43.	2013-06-14	7590124802ade834dbe9e7c0d2c1a897	1	22.0	1
+000869859299617fd93133d3f65fd85b	Open air Hamm 45.	2015-06-12	7590124802ade834dbe9e7c0d2c1a897	1	22.0	1
+16a83f971efce095272378a2a594e49f	Open air Hamm 47.	2017-07-07	7590124802ade834dbe9e7c0d2c1a897	1	25	2
+0a7d68cf2a103e1c99f7e6d04f1940da	Necromanteum EU/UK Tour 2024	2024-03-30	051fa36efd99a2ae24d56b198e7b1992	0	43.55	2
+2d5e1a99b20d1be28ef40573c37eb0a0	Thrash Attack - 06.04.2024	2024-04-06	5515ceaeca4b8b62ee5275de54ea77ad	0	16.52	2
+2c6ed5b74b30541da64fdbbda4a8bbe3	Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show	2024-04-12	cccce7f0011bc27dee7c60945cd5f962	0	22.0	2
+71de5246c2f4ac4766041831e93f001a	New live rituals a COVID proof celebration of audial darkness	2021-07-23	e248bb7c1164a44fa358593e28769a23	0	23.20	2
+57e44259dc61f23bef42517695d645f1	Ravaging Europe 2023	2023-03-29	e248bb7c1164a44fa358593e28769a23	0	28.70	2
+e723d4328c7df53576419235b92f4a13	Heretic Hordes I	2024-05-03	e248bb7c1164a44fa358593e28769a23	0	35.00	2
+3fe511194113f53322ccac8a75e6b4ab	Gutcity Deathfest 2024	2024-05-11	2dd00779b7dd00b6cbbc574779ba1f40	0	30.60	2
+332be9c531b1ec341c13e5a676962820	Rock for Hille Benefiz	2018-10-27	6dde0719f779b373e62a7283e717d384	0	25.00	2
+79880b3852adb21098807cc10effe071	Hutkonzert - ATG - 19.10.2023	2023-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2
+48843160dd4fc4814525fa0f06641f19	On Stage - 16.09.2023	2023-09-16	17648f3308a5acb119d9aee1b5eafceb	0	14	2
+83bd23b786ae4d9b16f52ed2661611e9	Motörblast Play Motörhead - 2023	2023-12-27	eca8fc96e027328005753be360587de2	0	18.60	2
+d84c3f96813116b09480c0572fa45636	Motörblast Play Motörhead - 2018	2018-12-27	eca8fc96e027328005753be360587de2	0	16.40	2
+b4435108ce3cef02600464daf3cb5f7f	Metal Embrace Festival XV	2023-09-08	05be609ce9831967baa4f12664dc4d73	1	48.50	2
+de9415f38659fd6225ddf8734a7b0ff7	Swords into Flesh Europe Tour 2023	2023-11-07	f3a90318abb3e16166d96055fd6f9096	0	27.50	2
+be31669251922949ee5efe5447a119d1	Latin American Massacre	2023-10-20	a91bcaf7db7d174ee2966d9c293fd575	0	9.60	2
+cac02becf783662df9a61439ed515d75	The Path of Death 10	2023-10-14	a91bcaf7db7d174ee2966d9c293fd575	0	39.00	2
+f0c7879002501eddcb68564fe19b77fc	Metal im M8 - 12.2023	2023-12-09	a91bcaf7db7d174ee2966d9c293fd575	0	8.00	2
+c4e2844bff82087c924ad104bdfb6580	Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger	2019-11-15	a91bcaf7db7d174ee2966d9c293fd575	0	9	2
+cf1c6716920400a1d8ade1584c726f0c	Morbide Klänge III	2024-05-24	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2
+c0e1ed6923fbe4194174ad87f11179cd	Open Stage - 23.05.2024	2024-05-23	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2
+a1127140db632705cffe06456b478fa8	Evil Obsession 2023	2023-12-28	c72b4173a6a7131bf31a711212305fd3	0	48.50	2
+c4133d7e05b0f42aedd762785de80b70	Dread Reaver Europe 2024	2024-01-20	c72b4173a6a7131bf31a711212305fd3	0	39.50	2
+586a67dc71b225f23047ff369fce7451	Hell over Aschaffenburg - 2019	2019-11-30	b10506e85b6bf48eace09359fb36d5e0	0	30.00	2
+95e6dc1125e477e58c9f5bdb1bdd53ac	Grabbenacht Festival 2023	2023-06-09	010c9e9e86100e63919a6051b399d662	1	45.00	2
+20a697b57317f75ad33eb50f166d6b00	NOAF XI	2015-08-28	6c33b0a7db1a4982d74edfe98239cec5	1	15.0	2
 \.
 
 
@@ -5293,197 +5293,197 @@ c51b848ef0fde1cc943bb57bbfad7a11	Grabbenacht Festival 2024	2024-05-31	7adc966f52
 --
 
 COPY music.generes (id_genere, genere) FROM stdin;
-17b8dff9566f6c98062ad5811c762f44	Death Metal
-a29864963573d7bb061691ff823b97dd	Thrash Metal
-a68d5b72c2f98613f511337a59312f78	Black Metal
-04ae76937270105919847d05aee582b4	Heavy Metal
-7fa69773873856d74f68a6824ca4b691	Brutal Death Metal
-01864d382accf1cdb077e42032b16340	Melodic Death Metal
-d5a9c37bc91d6d5d55a3c2e38c3bf97d	Groove Metal
-7a3808eef413b514776a7202fd2cb94f	Metalcore
-10a17b42501166d3bf8fbdff7e1d52b6	Grindcore
-885ba57d521cd859bacf6f76fb37ef7c	Doom Metal
-dcd00c11302e3b16333943340d6b4a6b	Hard Rock
-caac3244eefed8cffee878acae427e28	Deathcore
-585f02a68092351a078fc43a21a56564	Speed Metal
-4fb2ada7c5440a256ed0e03c967fce74	Power Metal
-2336f976c6d510d2a269a746a7756232	Hardcore Punk
-1c800aa97116d9afd83204d65d50199a	Hardcore
-ea9565886c02dbdc4892412537e607d7	Sludge Metal
-2e607ef3a19cf3de029e2c5882896d33	Crossover
-2df929d9b6150c082888b66e8129ee3f	Technical Death Metal
-bb273189d856ee630d92fbc0274178bb	Alternative Metal
-02d3190ce0f08f32be33da6cc8ec8df8	Nu Metal
-4cfbb125e9878528bab91d12421134d8	Rock
-eaa57a9b4248ce3968e718895e1c2f04	Metal
-ff7aa8ca226e1b753b0a71d7f0f2e174	Alternative Rock
-924ae2289369a9c1d279d1d59088be64	Slamming Brutal Death Metal
-8c42e2739ed83a54e5b2781b504c92de	Folk Metal
-f0095594f17b3793be8291117582f96b	Post-Hardcore
-0cf6ece7453aa814e08cb7c33bd39846	Gothic Metal
-f41da0c65a8fa3690e6a6877e7112afb	Progressive Metal
-deb8040131c3f6a3caf6a616b34ac482	Goregrind
-60e1fa5bfa060b5fff1db1ca1bae4f99	Post-Metal
-7349da19c2ad6654280ecf64ce42b837	Oi!
-ef5131009b7ced0b35ea49c8c7690cef	Punk Rock
-34d8a5e79a59df217c6882ee766c850a	Industrial Metal
-5bf88dc6f6501943cc5bc4c42c71b36b	Punk
-9c093ec7867ba1df61e27a5943168b90	Gothic Rock
-e8376ca6a0ac30b2ad0d64de6061adab	Viking Metal
-d5d0458ada103152d94ff3828bf33909	Progressive Rock
-36e61931478cf781e59da3b5ae2ee64e	Melodic Heavy Metal
-2a78330cc0de19f12ae9c7de65b9d5d5	Psychedelic Rock
-1396a3913454b8016ddf671d02e861b1	Stoner Rock
-97a6395e2906e8f41d27e53a40aebae4	Symphonic Death Metal
-de62af4f3af4adf9e8c8791071ddafe3	Symphonic Black Metal
-6add228b14f132e14ae9da754ef070c5	Rock'n'Roll
-239401e2c0d502df7c9009439bdb5bd3	Post-Black Metal
-6de7f9aa9c912bf8c81a9ce2bfc062bd	Heavy Hardcore
-2bd0f5e2048d09734470145332ecdd24	Epic Doom Metal
-1d67aeafcd3b898e05a75da0fdc01365	Crust Metal
-ed8e37bad13d76c6dbeb58152440b41e	Ambient
-65d1fb3d4d28880c964b985cf335e04c	Stoner Metal
-bbc90d6701da0aa2bf7f6f2acb79e18c	Blues Rock
-1868ffbe3756a1c3f58300f45aa5e1d3	Blackened Death Metal
-8dae638cc517185f1e6f065fcd5e8af3	Melodic Hardcore
-a279b219de7726798fc2497d48bc0402	Southern Metal
-b86219c2df5a0d889f490f88ff22e228	Avant-garde Black Metal
-72616c6de7633d9ac97165fc7887fa3a	Rap Rock
-781f547374aef3a99c113ad5a9c12981	Pornogrind
-4c4f4d32429ac8424cb110b4117036e4	Beatdown
-0138eefa704205fd48d98528ddcdd5bc	Melodic Thrash Metal
-02c4d46b0568d199466ef1baa339adc8	Pop Punk
-c1bfb800f95ae493952b6db9eb4f0209	Space Rock
-1302a3937910e1487d44cec8f9a09660	Rap Metal
-1eef6db16bfc0aaf8904df1503895979	Dark Rock
-c08ed51a7772c1f8352ad69071187515	Post-Grunge
-e7faf05839e2f549fb3455df7327942b	Ska Punk
-2e9dfd2e07792b56179212f5b8f473e6	Funk Rock
-8a055a3739ca4b38b9c5a188d6295830	Melodic Power Metal
-262770cfc76233c4f0d7a1e43a36cbf7	Melodic Black Metal
-f82c0cf1d80eca5ea2884bbc7bd04269	Medieval Rock
-ba60b529061c0af9afe655b44957e41b	Extreme Gothic Metal
-fc8e55855e2f474c28507e4db7ba5f13	Mathcore
-d3fcef9d7f88d2a12ea460c604731cd5	German Punk
-ad49b27a742fb199ab722bce67e9c7b2	Stoner Doom
-4428b837e98e3cc023fc5cd583b28b20	Atmospheric Sludge Metal
-5cbdaf6af370a627c84c43743e99e016	Modern Metal
-bfd67ea5a2f5557126b299e33a435ab3	Comedy Rap
-dfda7d5357bc0afc43a89e8ac992216f	Tribute to Rammstein
-a379c6c3bf4b1a401ce748b34729389a	Viking Black Metal
-7ac5b6239ee196614c19db6965c67b31	Post-Rock
-f79873ac4ff0e556619b15d82f6da52c	Post-Punk
-b6a0263862e208f05258353f86fa3318	Epic Power Metal
-fd00614e73cb66fd71ab13c970a074d8	Progressive Death Metal
-cb6ef856481bc776bba38fbf15b8b3fb	Pagan Black Metal
-f224a37b854811cb14412ceeca43a6ad	Shoegaze
-268a3b877b5f3694d5d1964c654ca91c	Irish Folk Punk
-7886613ffb324e4e0065f25868545a63	Melodic Groove Metal
-763a34aaa76475a926827873753d534f	Ambient Post-Black Metal
-17095255b1df76ab27dd48f29b215a5f	Tribute to Rage against the Machine
-d31813e8ef36490c57d4977e637efbd4	Street Punk
-d93cf30d3eb53125668057b982b433a3	Technical Deathcore
-0849fb9eb585f2c20b427a99f1231e40	Medieval Metal
-887f0b9675f70bc312e17c93f248b5aa	Electronic Metal
-7a09fdabda255b02b2283e724071944b	Black'n'Roll
-9ba0204bc48d4b8721344dd83b832afe	Tribute to Motörhead
-e6218d584a501be9b1c36ac5ed13f2db	Beatdown Hardcore
-94876c8f843fa0641ed7bdf6562bdbcf	Tribute to Jimi Hendrix
-273112316e7fab5a848516666e3a57d1	Folk
-8472603ee3d6dea8e274608e9cbebb6b	Occult Rock
-65805a3772889203be8908bb44d964b3	Stoner
-57a1aaebe3e5e271aca272988c802651	Horror Punk
-b45e0862060b7535e176f48d3e0b89f3	Electronic Body Music
-6fa3bbbff822349fee0eaf8cd78c0623	Rapcore
-ff3a5da5aa221f7e16361efcccf4cbaa	Alternativ Grunge
-ad6296818a1cb902ac5d1a3950e79dbe	Comedy Rock
-4895247ad195629fecd388b047a739b4	Industrial Rock
-320094e3f180ee372243f1161e9adadc	Pop(p)core
-5b412998332f677ddcc911605985ee3b	Tribute to ACDC
-b7628553175256a081199e493d97bd3b	Fast Rock'n'Roll
-93cce11930403f5b3ce8938a2bde5efa	Pagan Metal
-4b3bb0b44a6aa876b9e125a2c2a5d6a2	Extreme Metal
-fad6ee4f3b0aded7d0974703e35ae032	Trancecore
-2894c332092204f7389275e1359f8e9b	Progressive Thrash Metal
-fbe238aca6c496dcd05fb8d6d98f275b	Symphonic Melodic Death Metal
-fa20a7164233ec73db640970dae420cf	Symphonic Power Metal
-cbfeef2f0e2cd992e0ea65924a0f28a1	Avant-garde Metal
-e22aa8f4c79b6c4bbeb6bcc7f4e1eb26	Slam Metal
-8bbab0ae4d00ad9ffee6cddaf9338584	Hip Hop
-4144b216bf706803a5f17d7d0a9cf4a3	Goth'n'Roll
-6fb9bf02fc5d663c1de8c117382bed0b	Agressive Rock
-bca74411b74f01449c61b29131bc545e	Proto Metal
-f633e7b30932bbf60ed87e8ebc26839d	Tribute to Bathory
-b7d08853c905c8cd1467f7bdf0dc176f	Tribute to Black Sabbath
-2d4b3247824e58c3c9af547cce7c2c8f	Reggae Rock
-eb182befdeccf17696b666b32eb5a313	Blackened Thrash Metal
-1e612d6c48bc9652afeb616536fced51	Metal Covers
-c3ee1962dffaa352386a05e845ab9d0d	Hard Pop
-a178914dea39e23c117e164b05b43995	Drone
-c5405146cd45f9d9b4f02406c35315a8	Atmospheric Post-Hardcore
-64ec11b17b6f822930f9deb757fa59e8	Mariachi Punk
-3770d5a677c09a444a026dc7434bff36	Progressive Metalcore
-ecbff10e148109728d5ebce3341bb85e	Death'n'Roll
-836ea59914cc7a8e81ee0dd63f7c21c1	Melodic Metalcore
-ad38eede5e5edecd3903f1701acecf8e	Epic Metal
-303d6389f4089fe9a87559515b84156d	Symphonic Metal
-8de5a5b30fc3e013e9b52811fe6f3356	Epic Heavy Metal
-0d1830fc8ac21dfabd6f33ab01578c0b	Thrashing Deathgrind
-efe010f3a24895472e65b173e01b969d	Experimental Metal
-9713131159f9810e6f5ae73d82633adb	Atmospheric Black Metal
-564807fb144a93a857bfda85ab34068d	Melodic Gothic Metal
-a46700f6342a2525a9fba12d974d786e	Neue Deutsche Härte
-9d78e15bf91aef0090e0a37bab153d98	Dark Metal
-2da00ba473acb055e8652437024c6fd4	Latin Metal
-504724f4d7623c2a03384bd0f213e524	New Wave of British Heavy Metal
-f22794f69ce5910cb4be68ff9026570d	Various
-74d754b83e2656bcc0cb58033a03e6e4	Technical Brutal Death Metal
-f008a5f1cb81bcfa397f7c1987f2bf55	Slamming Deathcore
-b1ba0a25e72cac8ac1f43019f45edcc9	Brutal Deathcore
-bb9a7990e74371142d6f4f02353a0db0	Hunnu Rock
-7b327f171695316c16ddca1843a81531	Djent
-5515abb95e50f2f39c3072b4fef777e0	Death-Gind
-30a1a8d73498d142609138c37ac3b9f3	Electro Punk
-61bb65b2791647f828d25a985a2e60fa	Viking Nordic Folk
-156968bdeb9fd240ae047867022d703b	Medieval Folk Metal
-e3bae98a1c48ce980083c79f6416c0f6	Crust Punk
-d34d0c161bbb04228af45f99d2b407a6	Dark Country
-353d5e79c4f0f22dc9fd189fb293b18c	Irish Folk
-0ae61bd0474e04c9f1195d4baa0213a0	Pop
-9a284efda4d46636bd9d5298dfea1335	Jazz
-da832711951e70811ef7533835637961	Reggae
-276dd0e596bbc541942c8cd9cc2004e0	Atmospheric Folk Metal
-8b7bdc272dd85d5058f8fbaa14e66002	Crust
-82f71c08ea9ddc4fa9dfb06236a45ba1	Brutal Technical Death Metal
-6e8e259537338c1ffacf0df56249227a	Slam
-a14c7f19780155d998b8c0d48c4f2f61	Technical Grindcore
-89089c3efdb2f18179df6d476e5759de	Melodic Viking Metal
-aca2a3c07f76ae685ae818b312e025c5	Blues
-39d9d9f9143880553c5e2da25c87f33d	Calypso
-59716c97497eb9694541f7c3d37b1a4d	Country
-ead7038498db3f93ac79d28407a6d47c	Vaudeville
-cd841371c5cd35c94bb823be9f53cf2f	Skiffle
-0cb6959de39db97ee5fad81faa008d8f	Ska
-a48199bd07eec68b1214594af75d7eb3	Folkrock
-08cbc2781f56d15c2c374824c7428a8c	Plitrock
-0077c87e06d736b19d6b3978f5e5e6e2	Protopunk
-5fa721b23d1df57306a710b77d7897d6	Punk'n'Roll
-84caaa55a818fdacc56b1a78e3059e3b	Heavy Rock
-86990837f323dde52a011a1f2d1eca0d	Technical Brutal Deathcore
-819de896b7c481c2b870bcf4ca7965fc	Slamdown
-c7d1df50d4cb1e00b5b5b3a34a493b90	Atmospheric Post-Black Metal
-51a0accd339e27727689fc781c4df015	Blackened Speed Metal
-2d1930ea91c39cb44ce654c634bd5113	Tribute to Bolt Thrower
-c56931e6d30371f655de27ecbf6c50f0	Tribute to Danzig
-9a9f894a69bab7649b304cb577a96566	Tribute to Misfits
-5f05cefd0f6a07508d21a1d2be16d9c7	Electronic
-d5750853c14498dc264065bcf7e05a29	Tribute to Megadeth
-07b91b89a1fd5e90b9035bf112a3e6e5	Blackened Folk Metal
-f829960b3a62def55e90a3054491ead7	Middle Eastern Doom Metal
-d4fe504b565a2bcbec1bb4c56445e857	Funeral Doom Metal
-178c690e12310890294b6fefeb0c2442	Tribute to Slayer
-6154b23b25e0bc2b8e4caa53c85531e5	Porno Gore Grind
-59fa15acc0c5773f6b64ad427b62c14b	Slamming Hardcore Death
+8bb92c3b9b1b949524aac3b578a052b6	Deathcore
+a88070859e86a8fb44267f7c6d91d381	Speed Metal
+be2f0af59429129793d751e4316ec81c	Power Metal
+f3dcdca4cd0c83a5e855c5434ce98673	Hardcore Punk
+fe81a4f28e6bd176efc8184d58544e66	Hardcore
+5446a9fcc158ea011aeb9892ba2dfb15	Sludge Metal
+c7fb67368c25c29b9c10ca91b2d97488	Crossover
+0c5544f60e058b8cbf571044aaa6115f	Technical Death Metal
+917d78ef1f9ba5451bcd9735606e9215	Alternative Metal
+8f8351209253e5c5d8ff147b02d3b117	Nu Metal
+9a1f30943126974075dbd4d13c8018ac	Rock
+86094b61cb9f63b77f982ceae03e95f0	Metal
+d9df3b71eebfa8e6aaf5c72ee758a14d	Alternative Rock
+594dec72ea580a8565277a387893e992	Slamming Brutal Death Metal
+f54c3ccedc098d37a4e7f7a455f5731e	Folk Metal
+5c63347e836e5543344d9e366e3efff8	Post-Hardcore
+73d0749820562452b33d4e0f4891efcd	Gothic Metal
+bd1340d19723308d52dcf7c3a6b1ea87	Progressive Metal
+ae85ec0052dafef13ff2f2cbcb540b53	Goregrind
+8a743590316d1519ab5ecc8d142415a2	Post-Metal
+a2e63ee01401aaeca78be023dfbb8c59	Oi!
+c875de527ea22b45018e7468fb0ef4a5	Punk Rock
+abcd9ee1861e1b9a2a5d4d187cf3708e	Industrial Metal
+f72e9105795af04cd4da64414d9968ad	Punk
+7382b86831977a414e676d2b29c73788	Gothic Rock
+5739305712ce3c5e565bc2da4cd389f4	Viking Metal
+19e9429d9a22a95b78047320098cbf5b	Progressive Rock
+4396490d79c407ec3313bc29ede9f7c8	Melodic Heavy Metal
+4607ea6bfb05f395d12f6959cf48aaca	Psychedelic Rock
+88ff69ec6aa54fb228d85b92f3b12945	Stoner Rock
+93cf908c24c1663d03d67facc359acc2	Symphonic Death Metal
+5148c20f58db929fe77e3cb0611dc1c4	Symphonic Black Metal
+3e29d9d93ad04d5bc71d4cdc5a8ad820	Rock'n'Roll
+a94bc9e378c8007c95406059d09bb4f3	Post-Black Metal
+eacaec4715e2e6194f0b148b2c4edd02	Heavy Hardcore
+1545b040d61dc2d236ca4dea7e2cff46	Epic Doom Metal
+ecf31cb1a268dfd8be55cb3dff9ad09d	Crust Metal
+fff66a4d00c8ed7bb7814ff29d0faca2	Ambient
+4690ec139849f88f1c10347d0cc7d1b5	Stoner Metal
+80a26219c468afbb3a762d5e3cb56f39	Blues Rock
+afb45735b54991094a6734f53c375faf	Blackened Death Metal
+e9b9ca12c93fad258ac0360aba14c7bc	Melodic Hardcore
+53ed714383288793db977e8f7326eb61	Southern Metal
+e66156cc95b698d8f4d04ec6dfbb5ab7	Avant-garde Black Metal
+3545b02c56a2568e2bff21a5c410374a	Rap Rock
+2634ef92ca50d68809edba7cb6052bd2	Pornogrind
+f47e2dc1975f8d3fb8639e4dd2fff7c0	Beatdown
+a9fa565c9ff23612cb5b522c340b09d1	Melodic Thrash Metal
+9de74271aea8fca48a4b30e94e71a6b2	Pop Punk
+bcfac7bf0f09d47c614d62c4a88a2771	Space Rock
+db4560bb40a4c4309950c9bc94a5880c	Rap Metal
+8591e5f94f6bc6bbce534233d5a429b8	Dark Rock
+2633fb17d46136a100ff0e04babcf90b	Post-Grunge
+dbcd911ed4e19311c6fdd54423bac8ff	Ska Punk
+aa437deed9ab735d4bd2e5721270fe1a	Funk Rock
+710a89d5cb9f3ceb3e6934254a8696e4	Melodic Power Metal
+8dbf2602d350002b61aeb50d7b1f5823	Melodic Black Metal
+f5950ade448acc14014ac65eff80d13e	Medieval Rock
+d9394bc9b31837f373476bdde3cb4555	Extreme Gothic Metal
+4863b843abbe1696e3656c13aa67af90	Mathcore
+52a9361c8d305f2a227161a44bcfd37e	German Punk
+2fe3f1db170aa816123f28e9875167ab	Stoner Doom
+c69d790bf21dedfe84a9fb4719e93bd8	Atmospheric Sludge Metal
+488d66856880e32fb94d0e791471e015	Modern Metal
+c06a06a848c3e27a6fc8e7203ec2b746	Comedy Rap
+73c823a8a18bd3e6e0de48741791df2e	Tribute to Rammstein
+c70fac279516f5b04a129d64eff982e8	Viking Black Metal
+f28bf03afc0802c0bc6eb584b4003e89	Post-Rock
+9d26ef0f0b7d75ea30b8cdaad29f3c08	Post-Punk
+d8cb73495a9e354d9c21b2a91383df69	Epic Power Metal
+6fa675606729b1ccf2c9f118afab1a78	Progressive Death Metal
+3a9ee0dca39438793417d3cda903c50f	Pagan Black Metal
+3834ca66ed31bf867405bae4cffe4462	Shoegaze
+1d1fe01580e2014b5b4d05532937b08d	Irish Folk Punk
+6af1540af240e4518095bf9c350e6592	Melodic Groove Metal
+8987193624cb1569dbea7ccbdef6da9d	Ambient Post-Black Metal
+f5ccf3e5aaff8573d851e3db037f78c4	Tribute to Rage against the Machine
+4bc6884ff3b54bf84c2970cf8cb57a35	Street Punk
+70accb11df7fea2ee734e5849044f3c8	Technical Deathcore
+100694588d8a8f56e87fe60639138889	Medieval Metal
+3e8f76b0649ca67ad8e74983a81967dd	Electronic Metal
+b9d93d1a014743df713103a89d6dfab5	Black'n'Roll
+1351b0fdf73876875879089319d8ac18	Tribute to Motörhead
+6bbdbb8ffb00d3c84d0e41be08b52d74	Beatdown Hardcore
+48cd76244ec92de22070746c3e51903c	Tribute to Jimi Hendrix
+ea678a9205735898d39982a6854e4be0	Folk
+db187442033cf1a7b36b4f4864cb3e2d	Occult Rock
+5d8ac336bc2495c7cc4da26ee697f6db	Stoner
+74395b327e2c89e506e5fb24cdf28d86	Horror Punk
+7711321c6e440423ac48fa14fe13662d	Electronic Body Music
+f7947636b65c4e40dd72ac4977fba81e	Rapcore
+716c8362b9535c67f7a3d8bba41e495c	Alternativ Grunge
+582ac46d71d166a2ea996507406eb2ef	Industrial Rock
+3b4b6f12576b1161eb56ef870c91cfd2	Tribute to ACDC
+e51d880916bc83c61e116bd2c9007d08	Fast Rock'n'Roll
+e31bcdc3311e00fe13a85ee759b65391	Pagan Metal
+0f9047d3e34cffa3f65d1c63ed09c7aa	Extreme Metal
+01c97e93bae9f24e53f18b9ab33a09bf	Trancecore
+3d656f422f1599e545bddbd4a00b0ad1	Progressive Thrash Metal
+70298a157c0bf97858f6190eae969607	Symphonic Melodic Death Metal
+d967887a45ca999480ae3aec9fd17530	Symphonic Power Metal
+595fe5f4c408660a17d44e1801c232f2	Avant-garde Metal
+3593526a5f465ed766bafb4fb45748a2	Death Metal
+9e7315413ae31a070ccae5c580dd1b19	Thrash Metal
+2db87892408abd4d82eb39b78c50c27b	Black Metal
+d725d2ec3a5cfa9f6384d9870df72400	Heavy Metal
+7b4b7e3375c9f7424a57a2d9d7bccde5	Brutal Death Metal
+b54875674f7d2d5be9737b0d4c021a21	Melodic Death Metal
+0a8a13bf87abe8696fbae4efe2b7f874	Groove Metal
+d30be26d66f0448359f54d923aab2bb9	Metalcore
+d25334037d936d3257f794a10bb3030f	Grindcore
+0c7fde545c06c2bc7383c0430c95fb78	Doom Metal
+2af415a2174b122c80e901297f2d114e	Hard Rock
+091194d34dc129972848b1a6507d3db5	Comedy Rock
+7a62d4197e468e9dc15c90c04a00c9d8	Pop(p)core
+5c3ed018832788fa9d1111b57da7fba6	Dark Metal
+880318f1ad9a84c6c58e46899781dca3	Latin Metal
+73c5e4259f031aa3b934d3dfe4128433	New Wave of British Heavy Metal
+16875aa2b5eed3e388dcceaa36f56214	Various
+6072e357ce0ffc85924d07f3f59fde6d	Technical Brutal Death Metal
+8de7ee0c42a9acb04ac0ba7e466ef5fc	Slamming Deathcore
+9e9cce9be25a7f0972590e519d967b9c	Brutal Deathcore
+c364e34b3108a2a1051940f5f6d389dd	Hunnu Rock
+8a1cece259499b3705bc5b42ddcd9169	Djent
+d0ff6355a52e022c45ae8d7951520142	Death-Gind
+e845a7698a158850fada750bf0ce091f	Electro Punk
+853553f865f9bf21df0911e6ce54c7d0	Viking Nordic Folk
+bc401be0ed7c2f7ce03dfab7faa76466	Medieval Folk Metal
+3b8f2fd29146bee84451b55c0d80e880	Crust Punk
+75bab3d672e799f6790e8b068d6461e1	Dark Country
+637fec0bdd87d25870885872fb1c4474	Irish Folk
+b21afc54fb48d153c19101658f4a2a48	Pop
+2b21d9d8f81c6e564c84ef0bfa94aa5c	Jazz
+c2b17b8cb332d071d4ac81167b2a6219	Reggae
+2f8566ec213384ffa50ef40b2125b657	Atmospheric Folk Metal
+ba08853dd62a1b1d7cbf6ca8a1b4a14b	Crust
+6dff21106c4ac0fd7d0251575f4348ab	Brutal Technical Death Metal
+27a7e9871142d8ed01ed795f9906c2fe	Slam
+03677e82c7b8cd3989c8a6cb4e2426fa	Technical Grindcore
+9826e03298104619700dc6e7b69ba1b0	Melodic Viking Metal
+3a61b71b271203a633e10c5b3fa9f258	Blues
+95f292773550fc8d39aaa8ddc9f3cfac	Calypso
+e909c2d7067ea37437cf97fe11d91bd0	Country
+a3e345c35eed0ed54daf356c68904785	Vaudeville
+498059d42123bacbded45916a8636d8c	Skiffle
+a4ce5a98a8950c04a3d34a2e2cb8c89f	Ska
+6a1f771fc024994f9c170ab5dc6c5bb0	Folkrock
+525f9a6e460f7ea2c6f932a2dc42ef67	Plitrock
+7bd49e2e64f65e2ee987be9709a176bd	Protopunk
+2da31ada27f1ba5acc3403440650870a	Punk'n'Roll
+ead88b8beaa93bbd5041a88383609ac6	Heavy Rock
+371d339c866b69b5ac58127389069fe5	Technical Brutal Deathcore
+81946bb5619fab717be3cc147b88dec0	Slamdown
+558a32df12c25cc4ffbef306adb35511	Atmospheric Post-Black Metal
+c47182e94615627f857515b0a2bc6ee3	Blackened Speed Metal
+4246bdb500b31cb6f2786206dacf8589	Tribute to Bolt Thrower
+f89557d3db6e6413df4955c8d247e89c	Tribute to Danzig
+c5e0ef077394352c5f1fef29365e5841	Tribute to Misfits
+16518154fcc12cb9c715478443414867	Electronic
+6b240b0fbb47884b8ecca1d1b7574b24	Tribute to Megadeth
+1daa2df0fcb1df14e6f600785631b964	Blackened Folk Metal
+f155b26f32e07effd2474272637c4b22	Middle Eastern Doom Metal
+22bbb483dcba75fc2df016dc284d293b	Funeral Doom Metal
+1a37b66179fd5fac40dc3c09b0da2f12	Tribute to Slayer
+b13bb1f32f0106bf78a65fd98b522515	Porno Gore Grind
+8e47a4c0304670944a03089849f42e07	Slamming Hardcore Death
+196c7e704b6f026b852b24771bf71ddd	Slam Metal
+f4e72bc32f2c636059d5f3ba44323921	Hip Hop
+eb8416f378010a87c0bb7b3dcf803c65	Goth'n'Roll
+873cdb7bb058e91ccdbd703bf2c85268	Agressive Rock
+4c0bd4b8244a1199bf0ff9a9e7ea9f97	Proto Metal
+e7d141392548a9459e0e6e7584c1c80f	Tribute to Bathory
+024837b88bb23cb8a1f0bba69f809c93	Tribute to Black Sabbath
+329f0752061992d0b466b8a2a8760c34	Reggae Rock
+0a96c0f13cf38b7e26172c335ce7933c	Blackened Thrash Metal
+83689c87f9463b158622ef712a5e8751	Metal Covers
+b80e8e613789267c95b6b1ef44e48423	Hard Pop
+030e39a1278a18828389b194b93211aa	Drone
+2e8dbdc23b3287569d32c2bf5fe26e06	Atmospheric Post-Hardcore
+b5c548a4d670c490bbc7e20e74417003	Mariachi Punk
+39bb71ab4328d2d97bd4710252ca0e16	Progressive Metalcore
+c8ae0bc02385186afd062503fa77a1bc	Death'n'Roll
+e1d8dfba59d6e8fe67883a5ff3fdabe4	Melodic Metalcore
+4ac132d03b25a67f35c159e952b9951e	Epic Metal
+c4ba898ee9eeb44ad4c2647e8ebe930a	Symphonic Metal
+9d90cd61df8dbf35d395a0e225e3639c	Epic Heavy Metal
+972855f17f9fffa2f73ced39e72c706e	Thrashing Deathgrind
+fbe6bca8488a519965b8d63d5d7270c5	Experimental Metal
+0bb2ac8dea4da36597a8d9dc88f0ed64	Atmospheric Black Metal
+c960a78b4d3e0ce6a4a67f9094ffb446	Melodic Gothic Metal
+a8feea8bc8e568f5829eeec3fba8fc29	Neue Deutsche Härte
 \.
 
 
@@ -5647,7 +5647,7 @@ ALTER TABLE ONLY geo.countries_continents
 --
 
 ALTER TABLE ONLY music.bands_countries
-    ADD CONSTRAINT bands_countries_id_band_fkey FOREIGN KEY (id_band) REFERENCES music.bands(id_band);
+    ADD CONSTRAINT bands_countries_id_band_fkey FOREIGN KEY (id_band) REFERENCES music.bands(id_band) ON UPDATE CASCADE;
 
 
 --
@@ -5663,7 +5663,7 @@ ALTER TABLE ONLY music.bands_countries
 --
 
 ALTER TABLE ONLY music.bands_events
-    ADD CONSTRAINT bands_events_id_band_fkey FOREIGN KEY (id_band) REFERENCES music.bands(id_band);
+    ADD CONSTRAINT bands_events_id_band_fkey FOREIGN KEY (id_band) REFERENCES music.bands(id_band) ON UPDATE CASCADE;
 
 
 --
@@ -5671,7 +5671,7 @@ ALTER TABLE ONLY music.bands_events
 --
 
 ALTER TABLE ONLY music.bands_events
-    ADD CONSTRAINT bands_events_id_event_fkey FOREIGN KEY (id_event) REFERENCES music.events(id_event);
+    ADD CONSTRAINT bands_events_id_event_fkey FOREIGN KEY (id_event) REFERENCES music.events(id_event) ON UPDATE CASCADE;
 
 
 --
@@ -5679,7 +5679,7 @@ ALTER TABLE ONLY music.bands_events
 --
 
 ALTER TABLE ONLY music.bands_generes
-    ADD CONSTRAINT bands_generes_id_band_fkey FOREIGN KEY (id_band) REFERENCES music.bands(id_band);
+    ADD CONSTRAINT bands_generes_id_band_fkey FOREIGN KEY (id_band) REFERENCES music.bands(id_band) ON UPDATE CASCADE;
 
 
 --
@@ -5687,7 +5687,7 @@ ALTER TABLE ONLY music.bands_generes
 --
 
 ALTER TABLE ONLY music.bands_generes
-    ADD CONSTRAINT bands_generes_id_genere_fkey FOREIGN KEY (id_genere) REFERENCES music.generes(id_genere);
+    ADD CONSTRAINT bands_generes_id_genere_fkey FOREIGN KEY (id_genere) REFERENCES music.generes(id_genere) ON UPDATE CASCADE;
 
 
 --
@@ -5695,7 +5695,7 @@ ALTER TABLE ONLY music.bands_generes
 --
 
 ALTER TABLE ONLY music.events
-    ADD CONSTRAINT events_id_place_fkey FOREIGN KEY (id_place) REFERENCES geo.places(id_place);
+    ADD CONSTRAINT events_id_place_fkey FOREIGN KEY (id_place) REFERENCES geo.places(id_place) ON UPDATE CASCADE;
 
 
 --
