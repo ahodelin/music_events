@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"> 
+		<title>
+			Musical Events
+		</title>
+		<style>
+			body {
+				background-color: white;
+				font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			}
+
+			table {
+				font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+				border-collapse: collapse;
+			}
+
+			td{
+				border: 1px solid #ddd;
+				padding: 5px;
+			}
+
+			tr:nth-child(even){background-color: #f2f2f2;}
+
+			tr:hover {background-color: #ddd;}
+
+			th {
+				background-color: #33FFD4;
+				border: 1px solid #ddd;
+				padding: 5px;	
+			}
+
+			img {
+				height:24px
+			}
+		</style>
+	</head>
+	<body>
+		  <p id = "p_bands">
+				<table>
+					<tr>
+						<th>Bands</th>
+						<th>Contries</th>
+						<th>Genres</th>
+						<th>Events</th>
+					</tr>
+					<tr>
+						<td>
+							<button onclick="showAllBands()">All Bands</button>
+						</td>
+						<td>
+							<button id="allContries" onClick = "showAllCountries()">All Countries</button>
+						</td>
+						<td>
+							<button id="allGeneres" onClick = "showAllGeneres()">All Genres</button>
+						</td>
+						<td>
+							<button id="allEvents" onClick = "showAllEvents()">All Events</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<select id="selectBandId" name = "selectBandName" onChange = "showBand()"></select>
+						</td>
+						<td>
+							<select id="selectCountryId" name = "selectCountryName" onChange = "showBandByCountry()"></select>
+						</td>
+						<td>
+							<select id="selectGenereId" name = "selectGenereName" onChange = "showBandByGenere()"></select>
+						</td>
+						<td>
+							<select id="selectEventId" name = "selectEventName" onChange = "showBandByEvent()"></select>
+						</td>
+					</tr>
+				</table>				 			  			  
+		  </p>
+		  <p id = "allInfo"></p>
+		  <p id="bands_info"></p>
+		  <p id="generes_events"></p>		  
+		  		   
+		  <script src="js/jsonBands.js"></script> 
+		  <script src="js/jsonGeneres.js"></script> 
+		  <script src="js/jsonCountries.js"></script>  
+		  <script src="js/jsonEvents.js"></script>
+		  <script src="js/jsonBandsGeneres.js"></script> 
+		  <script src="js/jsonBandsCountries.js"></script>  
+		  <script src="js/jsonBandsEvents.js"></script> 
+		  <script src="js/functions_to_load_data.js"></script>
+		  <script src="js/make_forms.js"></script>
+		  <script src="js/function_to_clear_data.js"></script>
+		  <script src="js/functions_to_show_all_entities.js"></script>
+		  <script src="js/function_to_show_band.js"></script>
+		  <script src="js/functions_to_show_bands_by_entities.js"></script>
+		  <script src="js/function_show_bands_on_tables.js"></script>  
+		  <script src="js/functions_to_show_entities_of_band.js"></script>
+	</body>
+</html>
