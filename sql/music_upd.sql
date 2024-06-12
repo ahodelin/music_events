@@ -1,7 +1,7 @@
 /*
 insert into geo.countries 
   values 
-    (md5(''), '', '');
+    ('TCC', 'Test Country', 'tc');
    
 insert into geo.countries_continents
   values (md5(''), md5(''));
@@ -15,8 +15,8 @@ select music.insert_event('Mahlstrom Open Air 2024', '2024.06.13', 'Wiesbaden (S
 
 -- Bands on events
 select music.insert_bands_on_events('Asagraum', 'Mahlstrom Open Air 2024'); --
-select music.insert_bands_on_events('Mighty Dragonlords of the Promised Land', 'Mahlstrom Open Air 2024');
-select music.insert_bands_on_events('Blood Fire Death', 'Mahlstrom Open Air 2024'); --
+--select music.insert_bands_on_events('Mighty Dragonlords of the Promised Land', 'Mahlstrom Open Air 2024');
+--select music.insert_bands_on_events('Blood Fire Death', 'Mahlstrom Open Air 2024'); --
 select music.insert_bands_on_events('EÏS', 'Mahlstrom Open Air 2024');
 select music.insert_bands_on_events('Gernotshagen', 'Mahlstrom Open Air 2024');
 select music.insert_bands_on_events('Ignis Fatuu', 'Mahlstrom Open Air 2024');
@@ -37,7 +37,7 @@ select music.insert_bands_on_events('Waldgeflüster', 'Mahlstrom Open Air 2024')
 -- Bands from countries
 select music.insert_bands_on_countries('Gernotshagen', 'DEU');
 select music.insert_bands_on_countries('Black Messiah', 'DEU');
-select music.insert_bands_on_countries('Mighty Dragonlords of the Promised Land', 'DEU');
+--select music.insert_bands_on_countries('Mighty Dragonlords of the Promised Land', 'DEU');
 select music.insert_bands_on_countries('EÏS', 'DEU');
 select music.insert_bands_on_countries('Ignis Fatuu', 'DEU');
 select music.insert_bands_on_countries('Mourning Wood', 'FIN');
@@ -58,7 +58,7 @@ select music.insert_bands_to_genres('Gernotshagen', 'Folk Metal');
 select music.insert_bands_to_genres('Black Messiah', 'Symphonic Black Metal');
 select music.insert_bands_to_genres('Black Messiah', 'Folk Metal');
 select music.insert_bands_to_genres('Black Messiah', 'Viking Metal');
-select music.insert_bands_to_genres('Mighty Dragonlords of the Promised Land', 'Power Metal');
+--select music.insert_bands_to_genres('Mighty Dragonlords of the Promised Land', 'Power Metal');
 select music.insert_bands_to_genres('EÏS', 'Black Metal');
 select music.insert_bands_to_genres('Ignis Fatuu', 'Mediaval Rock');
 select music.insert_bands_to_genres('Mourning Wood', 'Heavy Metal');

@@ -3,5 +3,5 @@ config_var
 
 while IFS=";" read -r band genre
 do
-  psql -U $dbuser -w -d $db -c "select music.insert_bands_to_generes('$band', '$genre');"
+  psql -U $dbuser -w -d $db -c "select music.insert_bands_to_genres('$band', '$genre');"
 done < bands_play_genres.csv

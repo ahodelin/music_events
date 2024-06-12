@@ -69,7 +69,7 @@ begin
   
     insert into music.bands_countries
     values(md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), countr);
-    return 'Band - County added'; 
+    return 'Band - Country added'; 
    
   end if;
 	  
