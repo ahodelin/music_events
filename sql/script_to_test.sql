@@ -22,3 +22,17 @@ select * from music.events where "event" like 'Tes%';
 select * from music.generes g where genere like 'Tes%';
 select * from geo.countries c where id_country = 'TCC';
 select * from geo.places p where place = 'Test Place';
+
+
+
+update music.bands 
+set likes = 'm'
+where band in ('Countless Skies', 'Vansind');
+
+update music.events 
+set date_event = '2024-06-14'
+where "event" = 'Mahlstrom Open Air 2024';
+
+update music.events 
+set price = 78.99
+where "event" = 'Mahlstrom Open Air 2024';

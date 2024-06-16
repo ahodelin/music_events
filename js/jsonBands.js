@@ -757,7 +757,7 @@ var bandsInfo = {
  {"id_band":"270fb708bd03433e554e0d7345630c8e","band":"The Laws Kill Destroy (Fábio Jhasko's Sarcófago tribute)","country":"Brazil","flag":"br","likes":"y","generes":3,"events":1},
  {"id_band":"218ac7d899a995dc53cabe52da9ed678","band":"The Monolith Project","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
  {"id_band":"364be07c2428493479a07dbefdacc11f","band":"The Ominous Circle","country":"Portugal","flag":"pt","likes":"y","generes":2,"events":1},
- {"id_band":"3f460e130f37e8974fbcdc4d0056b468","band":"Theotoxin","country":"Australia","flag":"au","likes":"y","generes":2,"events":1},
+ {"id_band":"3f460e130f37e8974fbcdc4d0056b468","band":"Theotoxin","country":"Austria","flag":"at","likes":"y","generes":2,"events":1},
  {"id_band":"56bf60ca682b8f68e8843ad8a55c6b17","band":"The Phobos Ensemble","country":"Austria","flag":"at","likes":"m","generes":3,"events":1},
  {"id_band":"8ee257802fc6a4d44679ddee10bf24a9","band":"The Privateer","country":"Germany","flag":"de","likes":"m","generes":2,"events":1},
  {"id_band":"94a62730604a985647986b509818efee","band":"The Prophecy 23","country":"Germany","flag":"de","likes":"y","generes":1,"events":1},

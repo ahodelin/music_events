@@ -757,7 +757,7 @@ var bandsCountriesInfo = {
  {"id_band":"270fb708bd03433e554e0d7345630c8e","id_country":"BRA                             "},
  {"id_band":"218ac7d899a995dc53cabe52da9ed678","id_country":"DEU                             "},
  {"id_band":"364be07c2428493479a07dbefdacc11f","id_country":"PRT                             "},
- {"id_band":"3f460e130f37e8974fbcdc4d0056b468","id_country":"AUS                             "},
+ {"id_band":"3f460e130f37e8974fbcdc4d0056b468","id_country":"AUT                             "},
  {"id_band":"56bf60ca682b8f68e8843ad8a55c6b17","id_country":"AUT                             "},
  {"id_band":"8ee257802fc6a4d44679ddee10bf24a9","id_country":"DEU                             "},
  {"id_band":"94a62730604a985647986b509818efee","id_country":"DEU                             "},
