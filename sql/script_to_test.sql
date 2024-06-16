@@ -23,7 +23,8 @@ select * from music.generes g where genere like 'Tes%';
 select * from geo.countries c where id_country = 'TCC';
 select * from geo.places p where place = 'Test Place';
 
-
+select music.insert_bands_on_countries('Theotoxin', 'AUT');
+delete from music.bands_countries where id_band = md5(lower('Theotoxin')); 
 
 update music.bands 
 set likes = 'm'
