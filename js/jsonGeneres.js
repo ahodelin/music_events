@@ -1,6 +1,6 @@
 var generesInfo = {
   "generes":[
- {"id_genere":"3593526a5f465ed766bafb4fb45748a2","genere":"Death Metal","bands":190},
+ {"id_genere":"3593526a5f465ed766bafb4fb45748a2","genere":"Death Metal","bands":191},
  {"id_genere":"9e7315413ae31a070ccae5c580dd1b19","genere":"Thrash Metal","bands":114},
  {"id_genere":"2db87892408abd4d82eb39b78c50c27b","genere":"Black Metal","bands":94},
  {"id_genere":"7b4b7e3375c9f7424a57a2d9d7bccde5","genere":"Brutal Death Metal","bands":73},
