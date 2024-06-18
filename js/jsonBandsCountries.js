@@ -653,6 +653,7 @@ var bandsCountriesInfo = {
  {"id_band":"7d3618373e07c4ce8896006919bbb531","id_country":"DEU                             "},
  {"id_band":"93025091752efa184fd034f285573afe","id_country":"CHE                             "},
  {"id_band":"460bf623f241651a7527a63d32569dc0","id_country":"GBR                             "},
+ {"id_band":"304d29d27816ec4f69c7b1ba5836c57a","id_country":"USA                             "},
  {"id_band":"8c4e8003f8d708dc3b6d486d74d9a585","id_country":"GBR                             "},
  {"id_band":"ef75c0b43ae9ba972900e83c5ccf5cac","id_country":"FIN                             "},
  {"id_band":"bf5c782ca6b0130372ac41ebd703463e","id_country":"DEU                             "},
