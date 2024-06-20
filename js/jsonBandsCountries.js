@@ -51,6 +51,7 @@ var bandsCountriesInfo = {
  {"id_band":"45d62f43d6f59291905d097790f74ade","id_country":"DEU                             "},
  {"id_band":"9c81c8c060b39e7437b2d913f036776b","id_country":"DEU                             "},
  {"id_band":"c1e8b6d7a1c20870d5955bcdc04363e4","id_country":"MEX                             "},
+ {"id_band":"37e2e92ced5d525b3e79e389935cd669","id_country":"150                             "},
  {"id_band":"ec788cc8478763d79a18160a99dbb618","id_country":"DEU                             "},
  {"id_band":"221fa1624ee1e31376cb112dd2487953","id_country":"GBR                             "},
  {"id_band":"430a03604913a64c33f460ec6f854c36","id_country":"AUT                             "},
