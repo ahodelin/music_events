@@ -221,4 +221,5 @@ var eventsInfo = {
  {"id_event":"078ac0cacb2c674f16940ebd9befedd9","year":2024,"date":"31.05.2024","event":"Grabbenacht Festival 2024","place":"Schriesheim","bands":17},
  {"id_event":"1fef5be89b79c6e282d1af946a3bd662","year":2024,"date":"14.06.2024","event":"Mahlstrom Open Air 2024","place":"Holzappel","bands":17},
  {"id_event":"b8f41d89b2d67b4b86379d236b2492aa","year":2024,"date":"17.06.2024","event":"Europe Summer 2024","place":"Wiesbaden (Schlachthof)","bands":2},
+ {"id_event":"f8aec5c8465f9b8649a99873c0a44443","year":2024,"date":"19.06.2024","event":"Asinhell Live 2024","place":"Frankfurt am Main (Zoom)","bands":2},
 ]};

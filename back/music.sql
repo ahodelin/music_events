@@ -550,6 +550,7 @@ IRN                             	Iran	ir
 ARE                             	United Arab Emirates	ae
 CZE                             	Czechia	cz
 001                             	International	un
+LTU                             	Lithuania	lt
 150                             	Europe	eu
 EGY                             	Egypt	eg
 ZAF                             	South Africa	za
@@ -640,6 +641,7 @@ PAN	019
 CAN	019
 CUB	019
 USA	019
+LTU	150
 FRO	150
 FIN	150
 ISL	150
@@ -682,6 +684,7 @@ MLT	150
 
 COPY geo.places (id_place, place) FROM stdin;
 b77734e4928596fac1db05cab7b39710	Holzappel
+62a758afc72d2e3f7933fa4b917944c8	Frankfurt am Main (Zoom)
 6dde0719f779b373e62a7283e717d384	Landau (Gloria Kulturpalast)
 17648f3308a5acb119d9aee1b5eafceb	Mainz (Alexander the Great)
 76f9a958c2ebbd2f42456523d749fb5e	Offenbach (Stadthalle)
@@ -766,10 +769,12 @@ COPY music.bands (id_band, band, likes, active, note) FROM stdin;
 9777f12d27d48261acb756ca56ceea96	EÏS	y	t	\N
 e21ad7a2093c42e374fee6ec3b31efd3	Vansind	m	t	\N
 304d29d27816ec4f69c7b1ba5836c57a	Sanguisugabogg	y	t	\N
+37e2e92ced5d525b3e79e389935cd669	Asinhell	y	t	\N
 370cde851ed429f1269f243dd714cce2	1000Mods	y	t	\N
 dfb7069bfc6e0064a6c667626eca07b4	Aborted	y	t	\N
 58bbd6135961e3d837bacceb3338f082	Mourning Wood	y	t	\N
 0ab7d3a541204a9cab0d2d569c5b173f	Waldgeflüster	y	t	\N
+a7eda23a9421a074fe5ec966810018d7	Revel in Flesh	y	f	\N
 eaacb8ee01500f18e370303be3d5c591	Dead Eyed Sleeper (Legacy)	y	t	\N
 8e1cfd3bf5a7f326107f82f8f28649be	Thjodrörir	y	t	\N
 454cce609b348a95fb627e5c02dddd1b	Bio-Cancer	y	t	\N
@@ -1139,7 +1144,6 @@ aa5808895fd2fca01d080618f08dca51	Reactory	y	t	\N
 6ffa656be5ff3db085578f54a05d4ddb	Refuge	y	t	\N
 891b302f7508f0772a8fdb71ccbf9868	Relics of Humanity	y	t	\N
 dddbd203ace7db250884ded880ea7be4	Revelation Steel	m	t	\N
-a7eda23a9421a074fe5ec966810018d7	Revel in Flesh	y	t	\N
 ddae1d7419331078626bc217b23ea8c7	Rezet	y	t	\N
 c82a107cd7673a4368b7252aa57810fc	Rings of Saturn	y	t	\N
 1cc93e4af82b1b7e08bace9a92d1f762	Risk it	y	t	\N
@@ -1632,6 +1636,7 @@ aaaad3022279d4afdb86ad02d5bde96b	Toter Fisch	y	t	\N
 COPY music.bands_countries (id_band, id_country) FROM stdin;
 4545c676e400facbb87cbc7736d90e85	DEU                             
 304d29d27816ec4f69c7b1ba5836c57a	USA                             
+37e2e92ced5d525b3e79e389935cd669	150                             
 312793778e3248b6577e3882a77f68f3	DEU                             
 dd3e531c469005b17115dbf611b01c88	DEU                             
 dd15d5adf6349f5ca53e7a2641d41ab7	DEU                             
@@ -3061,6 +3066,7 @@ ad51cbe70d798b5aec08caf64ce66094	5e6a61fa17bf86a738024508581f11d4
 4900e24b2d0a0c5e06cf3db8b0638800	208af572d4212c8b20492f11ca9b8b54
 dddfdb5f2d7991d93f0f97dce1ef0f45	208af572d4212c8b20492f11ca9b8b54
 818ce28daba77cbd2c4235548400ffb2	208af572d4212c8b20492f11ca9b8b54
+37e2e92ced5d525b3e79e389935cd669	f8aec5c8465f9b8649a99873c0a44443
 fcc491ba532309d8942df543beaec67e	208af572d4212c8b20492f11ca9b8b54
 3123e3df482127074cdd5f830072c898	208af572d4212c8b20492f11ca9b8b54
 bca8f048f2c5ff787950eb1ba088c70e	0704b2bfdcfaed5225554f023a7fbf48
@@ -3301,6 +3307,7 @@ ef3c0bf190876fd31d5132848e99df61	b0bc16cc4e9fefb213434d718724ec3a
 6cec93398cd662d79163b10a7b921a1b	b0bc16cc4e9fefb213434d718724ec3a
 773b5037f85efc8cc0ff3fe0bddf2eb8	b0bc16cc4e9fefb213434d718724ec3a
 50d48c9002eb08e248225c1d91732bbc	1fef5be89b79c6e282d1af946a3bd662
+e7a227585002db9fee2f0ed56ee5a59f	f8aec5c8465f9b8649a99873c0a44443
 1f56e4b8b8a0da3b8ec5b32970e4b0d8	b0bc16cc4e9fefb213434d718724ec3a
 d1ba47339d5eb2254dd3f2cc9f7e444f	b0bc16cc4e9fefb213434d718724ec3a
 2460cdf9598c810ac857d6ee9a84935a	b0bc16cc4e9fefb213434d718724ec3a
@@ -3732,6 +3739,7 @@ f159fc50b5af54fecf21d5ea6ec37bad	fb57c18df776961bb734a1fa3db6a6d1
 COPY music.bands_generes (id_band, id_genere) FROM stdin;
 4545c676e400facbb87cbc7736d90e85	5148c20f58db929fe77e3cb0611dc1c4
 304d29d27816ec4f69c7b1ba5836c57a	3593526a5f465ed766bafb4fb45748a2
+37e2e92ced5d525b3e79e389935cd669	3593526a5f465ed766bafb4fb45748a2
 4545c676e400facbb87cbc7736d90e85	f54c3ccedc098d37a4e7f7a455f5731e
 4545c676e400facbb87cbc7736d90e85	5739305712ce3c5e565bc2da4cd389f4
 9777f12d27d48261acb756ca56ceea96	2db87892408abd4d82eb39b78c50c27b
@@ -5341,6 +5349,7 @@ e723d4328c7df53576419235b92f4a13	Heretic Hordes I	2024-05-03	e248bb7c1164a44fa35
 3fe511194113f53322ccac8a75e6b4ab	Gutcity Deathfest 2024	2024-05-11	2dd00779b7dd00b6cbbc574779ba1f40	0	30.60	2
 1fef5be89b79c6e282d1af946a3bd662	Mahlstrom Open Air 2024	2024-06-14	b77734e4928596fac1db05cab7b39710	1	78.99	2
 b8f41d89b2d67b4b86379d236b2492aa	Europe Summer 2024	2024-06-17	588671317bf1864e5a95445ec51aac65	0	29.30	2
+f8aec5c8465f9b8649a99873c0a44443	Asinhell Live 2024	2024-06-19	62a758afc72d2e3f7933fa4b917944c8	0	33.45	2
 332be9c531b1ec341c13e5a676962820	Rock for Hille Benefiz	2018-10-27	6dde0719f779b373e62a7283e717d384	0	25.00	2
 79880b3852adb21098807cc10effe071	Hutkonzert - ATG - 19.10.2023	2023-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2
 48843160dd4fc4814525fa0f06641f19	On Stage - 16.09.2023	2023-09-16	17648f3308a5acb119d9aee1b5eafceb	0	14	2
