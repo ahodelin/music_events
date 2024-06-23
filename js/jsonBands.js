@@ -434,7 +434,7 @@ var bandsInfo = {
  {"id_band":"fcf66a6d6cfbcb1d4a101213b8500445","band":"Kadavar","country":"Germany","flag":"de","likes":"m","generes":4,"events":1},
  {"id_band":"2f6fc683428eb5f8b22cc5021dc9d40d","band":"Kadaverficker","country":"Germany","flag":"de","likes":"y","generes":3,"events":2},
  {"id_band":"d5ec808c760249f11fbcde2bf4977cc6","band":"Kambrium","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
- {"id_band":"c5068f914571c27e04cd66a4ec5c1631","band":"Kampfar","country":"Norway","flag":"no","likes":"m","generes":1,"events":2},
+ {"id_band":"c5068f914571c27e04cd66a4ec5c1631","band":"Kampfar","country":"Norway","flag":"no","likes":"y","generes":1,"events":2},
  {"id_band":"29891bf2e4eff9763aef15dc862c373f","band":"Kanine","country":"France","flag":"fr","likes":"y","generes":1,"events":3},
  {"id_band":"2587d892c1261be043d443d06bd5b220","band":"Kanonenfieber","country":"Germany","flag":"de","likes":"y","generes":2,"events":1},
  {"id_band":"5637bae1665ae86050cb41fb1cdcc3ee","band":"Kataklysm","country":"Canada","flag":"ca","likes":"y","generes":1,"events":3},

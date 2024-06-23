@@ -1333,7 +1333,6 @@ e4f74be13850fc65559a3ed855bf35a8	Typhus	m	t	\N
 278af3c810bb9de0f355ce115b5a2f54	Fusion Bomb	y	t	\N
 5c61f833c2fb87caab0a48e4c51fa629	Mork	y	t	\N
 2859f0ed0630ecc1589b6868fd1dde41	Gaerea	y	t	\N
-c5068f914571c27e04cd66a4ec5c1631	Kampfar	m	t	\N
 fc239fd89fd7c9edbf2bf27d1d894bc0	Implore	y	t	\N
 24701da4bd9d3ae0e64d263b72ad20e8	Mythraeum	y	t	\N
 031d6cc33621c51283322daf69e799f5	The Risen Dread	y	t	\N
@@ -1635,6 +1634,7 @@ f041991eb3263fd3e5d919026e772f57	Hour of Penance	y	t	\N
 01ffa9ce7c50b906e4f5b6a2516ba94b	These Days & Those Days	y	t	\N
 d104b6ae44b0ac6649723bac21761d41	Napoli Violenta	y	t	\N
 aaaad3022279d4afdb86ad02d5bde96b	Toter Fisch	y	t	\N
+c5068f914571c27e04cd66a4ec5c1631	Kampfar	y	t	\N
 \.
 
 
