@@ -770,26 +770,32 @@ COPY music.bands (id_band, band, likes, active, note) FROM stdin;
 e21ad7a2093c42e374fee6ec3b31efd3	Vansind	m	t	\N
 304d29d27816ec4f69c7b1ba5836c57a	Sanguisugabogg	y	t	\N
 37e2e92ced5d525b3e79e389935cd669	Asinhell	y	t	\N
+f3cb86dd6b6caf33a8a05571e195e7dc	Anaal Nathrakh	n	t	\N
 370cde851ed429f1269f243dd714cce2	1000Mods	y	t	\N
 dfb7069bfc6e0064a6c667626eca07b4	Aborted	y	t	\N
 58bbd6135961e3d837bacceb3338f082	Mourning Wood	y	t	\N
 0ab7d3a541204a9cab0d2d569c5b173f	Waldgeflüster	y	t	\N
 a7eda23a9421a074fe5ec966810018d7	Revel in Flesh	y	f	\N
+20aba645df0b3292c63f0f08b993966e	Anheim	y	t	\N
 eaacb8ee01500f18e370303be3d5c591	Dead Eyed Sleeper (Legacy)	y	t	\N
 8e1cfd3bf5a7f326107f82f8f28649be	Thjodrörir	y	t	\N
 454cce609b348a95fb627e5c02dddd1b	Bio-Cancer	y	t	\N
+5e13fedbc93d74e8d42eadee1def2ae6	Der Weg einer Freiheit	y	t	\N
 1b62f034014b1d242c84c6fe7e6470f0	Horisont	m	t	\N
 b02ba5a5e65487122c2c1c67351c3ea0	Horresque	y	t	\N
 ea3b6b67824411a4cfaa5c8789282f48	Humator	y	t	\N
 2e6df049342acfb3012ac702ed93feb4	Baumbart	y	t	\N
 a8fcba36c9e48e9e17ba381a34444dd0	As the Sun falls	y	t	\N
+c08567e9006dc768bdb72bb7b14e53a1	Desaster	y	t	\N
 024e91d84c3426913db8367f4df2ceb3	Poltergeist	m	t	\N
 773b5037f85efc8cc0ff3fe0bddf2eb8	Porn the Gore	y	t	\N
 46ea4c445a9ff8e288258e3ec9cd1cf0	Power Trip	y	t	\N
 4545c676e400facbb87cbc7736d90e85	Black Messiah	y	t	\N
+d86431a5bbb40ae41cad636c2ddbf746	Drudensang	y	t	\N
 5f07809ecfce3af23ed5550c6adf0d78	Unleashed	m	t	\N
 baceebebc179d3cdb726f5cbfaa81dfe	Ur	y	t	\N
 50d48c9002eb08e248225c1d91732bbc	Horn	y	t	\N
+f517a9dc937888bed2f3fbeb38648372	KHNVM	y	t	\N
 8b3f40e0243e2307a1818d3f456df153	Crypta	y	t	\N
 8b0cfde05d166f42a11a01814ef7fa86	Lost Society	n	t	\N
 c0118be307a26886822e1194e8ae246d	Venom	y	t	\N
@@ -798,11 +804,14 @@ e9e0664816c35d64f26fc1382708617b	Striker	n	t	\N
 f29f7213d1c86c493ca7b4045e5255a9	Auðn	y	t	\N
 65f889eb579641f6e5f58b5a48f3ec12	Ill Niño	m	t	\N
 9d5c1f0c1b4d20a534fe35e4e699fb7b	Countless Skies	m	t	\N
+db572afa3dcc982995b5528acb350299	Kvaen	y	t	\N
 7a43dd4c2bb9bea14a95ff3acd4dfb18	Creeping Death	y	t	\N
 c8bc4f15477ea3131abb1a3f0649fac2	Dropdead	y	t	\N
 fb3a67e400fde856689076418034cdf2	Haggard	y	t	\N
+3705bfe1d1b3b5630618b164716ae700	Muggeseggel	y	t	\N
 d0e551d6887e0657952b3c5beb7fed74	Gutrectomy	y	t	\N
 3f460e130f37e8974fbcdc4d0056b468	Theotoxin	y	t	\N
+ce8e1e23e9672f5bf43894879f89c17a	Thormesis	m	t	\N
 f8b3eaefc682f8476cc28caf71cb2c73	Los Mezcaleros	n	t	\N
 312793778e3248b6577e3882a77f68f3	Abrogation	y	t	\N
 dd3e531c469005b17115dbf611b01c88	Acranius	y	t	\N
@@ -1637,6 +1646,7 @@ COPY music.bands_countries (id_band, id_country) FROM stdin;
 4545c676e400facbb87cbc7736d90e85	DEU                             
 304d29d27816ec4f69c7b1ba5836c57a	USA                             
 37e2e92ced5d525b3e79e389935cd669	150                             
+f3cb86dd6b6caf33a8a05571e195e7dc	GBR                             
 312793778e3248b6577e3882a77f68f3	DEU                             
 dd3e531c469005b17115dbf611b01c88	DEU                             
 dd15d5adf6349f5ca53e7a2641d41ab7	DEU                             
@@ -1659,6 +1669,7 @@ e2be3c3c22484d1872c7b225339c0962	DEU
 bca8f048f2c5ff787950eb1ba088c70e	DEU                             
 e093d52bb2d4ff4973e72f6eb577714b	DEU                             
 9777f12d27d48261acb756ca56ceea96	DEU                             
+20aba645df0b3292c63f0f08b993966e	DEU                             
 c9dc004fc3d039ad7fb49456e5902b01	GBR                             
 67cc86339b2654a35fcc57da8fc9d33d	CAN                             
 6916ed9292a811c895e259c542af0e8a	DEU                             
@@ -1682,6 +1693,7 @@ aa5e46574bdc6034f4d49540c0c2d1ad	POL
 eaacb8ee01500f18e370303be3d5c591	DEU                             
 22ef651048289b302401afe2044c5c01	DEU                             
 58bbd6135961e3d837bacceb3338f082	FIN                             
+5e13fedbc93d74e8d42eadee1def2ae6	DEU                             
 f986b00063e79f7c061f40e6cfbbd039	GBR                             
 cbefc03cdd1940f37a7033620f8ff69f	GBR                             
 2eb42b9c31ac030455e5a4a79bccf603	GBR                             
@@ -1710,6 +1722,7 @@ abc73489d8f0d1586a2568211bdeb32f	DEU
 458da4fc3da734a6853e26af3944bf75	ITA                             
 26ad58455460d75558a595528825b672	DEU                             
 8e1cfd3bf5a7f326107f82f8f28649be	DEU                             
+c08567e9006dc768bdb72bb7b14e53a1	DEU                             
 0f9fb8452cc5754f83e084693d406721	SWE                             
 0959583c7f421c0bb8adb20e8faeeea1	FIN                             
 2f623623ce7eeb08c30868be121b268a	SWE                             
@@ -1732,6 +1745,7 @@ a0cdbd2af8f1ddbb2748a2eaddce55da	SWE
 90669320cd8e4a09bf655310bffdb9ba	DEU                             
 20de83abafcb071d854ca5fd57dec0e8	HUN                             
 2e6df049342acfb3012ac702ed93feb4	DEU                             
+d86431a5bbb40ae41cad636c2ddbf746	DEU                             
 370cde851ed429f1269f243dd714cce2	GRC                             
 786d3481362b8dee6370dfb9b6df38a2	ITA                             
 dab701a389943f0d407c6e583abef934	PRT                             
@@ -1752,6 +1766,7 @@ cfe122252751e124bfae54a7323bf02d	DEU
 3e28a735f3fc31a9c8c30b47872634bf	SWE                             
 02fd1596536ea89e779d37ded52ac353	DEU                             
 9d5c1f0c1b4d20a534fe35e4e699fb7b	GBR                             
+f517a9dc937888bed2f3fbeb38648372	001                             
 dfb7069bfc6e0064a6c667626eca07b4	BEL                             
 9436650a453053e775897ef5733e88fe	CHE                             
 cf6a93131b0349f37afeb9319b802136	BEL                             
@@ -1773,6 +1788,7 @@ dddfdb5f2d7991d93f0f97dce1ef0f45	DEU
 e6793169497d66ac959a7beb35d6d497	NLD                             
 0ab01e57304a70cf4f7f037bd8afbe49	FRA                             
 fb3a67e400fde856689076418034cdf2	DEU                             
+db572afa3dcc982995b5528acb350299	SWE                             
 71144850f4fb4cc55fc0ee6935badddf	SWE                             
 eed35187b83d0f2e0042cf221905163c	NLD                             
 b615ea28d44d2e863a911ed76386b52a	NLD                             
@@ -1817,6 +1833,7 @@ eb39fa9323a6b3cbc8533cd3dadb9f76	DEU
 768207c883fd6447d67f3d5bc09211bd	USA                             
 61725742f52de502605eadeac19b837b	DEU                             
 2fb81ca1d0a935be4cb49028268baa3f	DEU                             
+3705bfe1d1b3b5630618b164716ae700	DEU                             
 4190210961bce8bf2ac072c878ee7902	AUS                             
 2f090f093a2868dccca81a791bc4941f	AUS                             
 8981b4a0834d2d59e1d0dceb6022caae	AUT                             
@@ -1847,6 +1864,7 @@ cd80c766840b7011fbf48355c0142431	CHE
 7b675f4c76aed34cf2d5943d83198142	AUS                             
 93025091752efa184fd034f285573afe	CHE                             
 aaaad3022279d4afdb86ad02d5bde96b	FRA                             
+ce8e1e23e9672f5bf43894879f89c17a	DEU                             
 0cd2b45507cc7c4ead2aaa71c59af730	DEU                             
 34ef35a77324b889aab18380ad34b51a	FIN                             
 869bb972f8bef83979774fa123c56a4e	NLD                             
@@ -3388,6 +3406,7 @@ faec47e96bfb066b7c4b8c502dc3f649	94154f6cf17963a299f6902ae9c7f3d5
 4e9dfdbd352f73b74e5e51b12b20923e	94154f6cf17963a299f6902ae9c7f3d5
 88059eaa73469bb47bd41c5c3cdd1b50	94154f6cf17963a299f6902ae9c7f3d5
 9d5c1f0c1b4d20a534fe35e4e699fb7b	1fef5be89b79c6e282d1af946a3bd662
+f3cb86dd6b6caf33a8a05571e195e7dc	ddf663d64f6daaeb9c8eb11fe3396ffb
 56e8538c55d35a1c23286442b4bccd26	94154f6cf17963a299f6902ae9c7f3d5
 375974f4fad5caae6175c121e38174d0	94154f6cf17963a299f6902ae9c7f3d5
 8734f7ff367f59fc11ad736e63e818f9	94154f6cf17963a299f6902ae9c7f3d5
@@ -3464,6 +3483,7 @@ b6eba7850fd20fa8dce81167f1a6edca	b39ff9f6960957839c401d45abdc3cae
 852c0b6d5b315c823cdf0382ca78e47f	90710b6a9bf6fbbdea99a274ca058668
 a0d3b444bd04cd165b4e076c9fc18bee	90710b6a9bf6fbbdea99a274ca058668
 fb3a67e400fde856689076418034cdf2	1fef5be89b79c6e282d1af946a3bd662
+20aba645df0b3292c63f0f08b993966e	ddf663d64f6daaeb9c8eb11fe3396ffb
 c846d80d826291f2a6a0d7a57e540307	90710b6a9bf6fbbdea99a274ca058668
 f2856ad30734c5f838185cc08f71b1e4	de9415f38659fd6225ddf8734a7b0ff7
 8aeadeeff3e1a3e1c8a6a69d9312c530	de9415f38659fd6225ddf8734a7b0ff7
@@ -3692,6 +3712,7 @@ f041991eb3263fd3e5d919026e772f57	078ac0cacb2c674f16940ebd9befedd9
 01ffa9ce7c50b906e4f5b6a2516ba94b	078ac0cacb2c674f16940ebd9befedd9
 d104b6ae44b0ac6649723bac21761d41	078ac0cacb2c674f16940ebd9befedd9
 3f460e130f37e8974fbcdc4d0056b468	1fef5be89b79c6e282d1af946a3bd662
+31e2d1e0b364475375cb17ad76aa71f2	ddf663d64f6daaeb9c8eb11fe3396ffb
 707270d99f92250a07347773736df5cc	6ee6f878dcf139f61d9fae6aef8aa367
 dfb7069bfc6e0064a6c667626eca07b4	0a7d68cf2a103e1c99f7e6d04f1940da
 398af626887ad21cd66aeb272b8337be	2c6ed5b74b30541da64fdbbda4a8bbe3
@@ -3708,10 +3729,22 @@ dfb7069bfc6e0064a6c667626eca07b4	11a728ed9e3a6aac1b46277a7302b15f
 5958cd5ce011ea83c06cb921b1c85bb3	eeba68f0a1003dce9bd66066b82dc1b6
 048d40092f9bd3c450e4bdeeff69e8c3	eeba68f0a1003dce9bd66066b82dc1b6
 aaaad3022279d4afdb86ad02d5bde96b	1fef5be89b79c6e282d1af946a3bd662
+5e13fedbc93d74e8d42eadee1def2ae6	ddf663d64f6daaeb9c8eb11fe3396ffb
 e21ad7a2093c42e374fee6ec3b31efd3	1fef5be89b79c6e282d1af946a3bd662
+c08567e9006dc768bdb72bb7b14e53a1	ddf663d64f6daaeb9c8eb11fe3396ffb
 0ab7d3a541204a9cab0d2d569c5b173f	1fef5be89b79c6e282d1af946a3bd662
+d86431a5bbb40ae41cad636c2ddbf746	ddf663d64f6daaeb9c8eb11fe3396ffb
 454cce609b348a95fb627e5c02dddd1b	1fef5be89b79c6e282d1af946a3bd662
+c5f4e658dfe7b7af3376f06d7cd18a2a	ddf663d64f6daaeb9c8eb11fe3396ffb
 a8fcba36c9e48e9e17ba381a34444dd0	1fef5be89b79c6e282d1af946a3bd662
+b6eba7850fd20fa8dce81167f1a6edca	ddf663d64f6daaeb9c8eb11fe3396ffb
+c5068f914571c27e04cd66a4ec5c1631	ddf663d64f6daaeb9c8eb11fe3396ffb
+f517a9dc937888bed2f3fbeb38648372	ddf663d64f6daaeb9c8eb11fe3396ffb
+db572afa3dcc982995b5528acb350299	ddf663d64f6daaeb9c8eb11fe3396ffb
+cd0bc2c8738b2fef2d78d197223b17d5	ddf663d64f6daaeb9c8eb11fe3396ffb
+3705bfe1d1b3b5630618b164716ae700	ddf663d64f6daaeb9c8eb11fe3396ffb
+3f460e130f37e8974fbcdc4d0056b468	ddf663d64f6daaeb9c8eb11fe3396ffb
+ce8e1e23e9672f5bf43894879f89c17a	ddf663d64f6daaeb9c8eb11fe3396ffb
 fc46b0aa6469133caf668f87435bfd9f	3fe511194113f53322ccac8a75e6b4ab
 8872fbd923476b7cf96913260ec59e66	3fe511194113f53322ccac8a75e6b4ab
 f8b3eaefc682f8476cc28caf71cb2c73	e4ee5ac5d137718d0eeb4d310b97d837
@@ -3740,33 +3773,47 @@ COPY music.bands_generes (id_band, id_genere) FROM stdin;
 4545c676e400facbb87cbc7736d90e85	5148c20f58db929fe77e3cb0611dc1c4
 304d29d27816ec4f69c7b1ba5836c57a	3593526a5f465ed766bafb4fb45748a2
 37e2e92ced5d525b3e79e389935cd669	3593526a5f465ed766bafb4fb45748a2
+f3cb86dd6b6caf33a8a05571e195e7dc	d25334037d936d3257f794a10bb3030f
 4545c676e400facbb87cbc7736d90e85	f54c3ccedc098d37a4e7f7a455f5731e
+20aba645df0b3292c63f0f08b993966e	8dbf2602d350002b61aeb50d7b1f5823
 4545c676e400facbb87cbc7736d90e85	5739305712ce3c5e565bc2da4cd389f4
+5e13fedbc93d74e8d42eadee1def2ae6	2db87892408abd4d82eb39b78c50c27b
 9777f12d27d48261acb756ca56ceea96	2db87892408abd4d82eb39b78c50c27b
+c08567e9006dc768bdb72bb7b14e53a1	9e7315413ae31a070ccae5c580dd1b19
 dfb7069bfc6e0064a6c667626eca07b4	3593526a5f465ed766bafb4fb45748a2
 58bbd6135961e3d837bacceb3338f082	d725d2ec3a5cfa9f6384d9870df72400
+c08567e9006dc768bdb72bb7b14e53a1	2db87892408abd4d82eb39b78c50c27b
 8e1cfd3bf5a7f326107f82f8f28649be	e31bcdc3311e00fe13a85ee759b65391
+d86431a5bbb40ae41cad636c2ddbf746	2db87892408abd4d82eb39b78c50c27b
 2e6df049342acfb3012ac702ed93feb4	f54c3ccedc098d37a4e7f7a455f5731e
+f517a9dc937888bed2f3fbeb38648372	3593526a5f465ed766bafb4fb45748a2
 ad759a3d4f679008ffdfb07cdbda2bb0	3593526a5f465ed766bafb4fb45748a2
 844de407cd83ea1716f1ff57ea029285	3593526a5f465ed766bafb4fb45748a2
 9d5c1f0c1b4d20a534fe35e4e699fb7b	b54875674f7d2d5be9737b0d4c021a21
+db572afa3dcc982995b5528acb350299	2db87892408abd4d82eb39b78c50c27b
 4a27a1ef21d32d1b30d55f092af0d5a7	3593526a5f465ed766bafb4fb45748a2
 dd15d5adf6349f5ca53e7a2641d41ab7	9e7315413ae31a070ccae5c580dd1b19
 fb3a67e400fde856689076418034cdf2	6fa675606729b1ccf2c9f118afab1a78
+db572afa3dcc982995b5528acb350299	5739305712ce3c5e565bc2da4cd389f4
 eb999c99126a456f9db3c5d3b449fa7f	b54875674f7d2d5be9737b0d4c021a21
 eb999c99126a456f9db3c5d3b449fa7f	d30be26d66f0448359f54d923aab2bb9
 33f03dd57f667d41ac77c6baec352a81	917d78ef1f9ba5451bcd9735606e9215
 fb3a67e400fde856689076418034cdf2	fae1e7176fb2384eaf7a2438c3055593
+db572afa3dcc982995b5528acb350299	e31bcdc3311e00fe13a85ee759b65391
 7f3e5839689216583047809a7f6bd0ff	0c7fde545c06c2bc7383c0430c95fb78
 fd401865b6db200e5eb8a1ac1b1fbab1	86094b61cb9f63b77f982ceae03e95f0
 fd401865b6db200e5eb8a1ac1b1fbab1	3e29d9d93ad04d5bc71d4cdc5a8ad820
 fb3a67e400fde856689076418034cdf2	c7f5b70ac03ff1120e353c6faed8ea39
+3705bfe1d1b3b5630618b164716ae700	3593526a5f465ed766bafb4fb45748a2
 bc5daaf162914ff1200789d069256d36	16875aa2b5eed3e388dcceaa36f56214
 fb3a67e400fde856689076418034cdf2	c4ba898ee9eeb44ad4c2647e8ebe930a
+3705bfe1d1b3b5630618b164716ae700	d25334037d936d3257f794a10bb3030f
 c445544f1de39b071a4fca8bb33c2772	d25334037d936d3257f794a10bb3030f
 29891bf2e4eff9763aef15dc862c373f	8de7ee0c42a9acb04ac0ba7e466ef5fc
 3f460e130f37e8974fbcdc4d0056b468	3593526a5f465ed766bafb4fb45748a2
+ce8e1e23e9672f5bf43894879f89c17a	e31bcdc3311e00fe13a85ee759b65391
 3f460e130f37e8974fbcdc4d0056b468	2db87892408abd4d82eb39b78c50c27b
+ce8e1e23e9672f5bf43894879f89c17a	2db87892408abd4d82eb39b78c50c27b
 aaaad3022279d4afdb86ad02d5bde96b	b54875674f7d2d5be9737b0d4c021a21
 7f950b15aa65a26e8500cfffd7f89de0	3593526a5f465ed766bafb4fb45748a2
 7f950b15aa65a26e8500cfffd7f89de0	9e7315413ae31a070ccae5c580dd1b19
@@ -5350,6 +5397,7 @@ e723d4328c7df53576419235b92f4a13	Heretic Hordes I	2024-05-03	e248bb7c1164a44fa35
 1fef5be89b79c6e282d1af946a3bd662	Mahlstrom Open Air 2024	2024-06-14	b77734e4928596fac1db05cab7b39710	1	78.99	2
 b8f41d89b2d67b4b86379d236b2492aa	Europe Summer 2024	2024-06-17	588671317bf1864e5a95445ec51aac65	0	29.30	2
 f8aec5c8465f9b8649a99873c0a44443	Asinhell Live 2024	2024-06-19	62a758afc72d2e3f7933fa4b917944c8	0	33.45	2
+ddf663d64f6daaeb9c8eb11fe3396ffb	Boarstream Open Air 2024	2024-06-21	cf1c12d42f59db3667fc162556aab169	1	75.00	2
 332be9c531b1ec341c13e5a676962820	Rock for Hille Benefiz	2018-10-27	6dde0719f779b373e62a7283e717d384	0	25.00	2
 79880b3852adb21098807cc10effe071	Hutkonzert - ATG - 19.10.2023	2023-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2
 48843160dd4fc4814525fa0f06641f19	On Stage - 16.09.2023	2023-09-16	17648f3308a5acb119d9aee1b5eafceb	0	14	2

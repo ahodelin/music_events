@@ -1,9 +1,9 @@
 E;Boarstream Open Air 2024;2024.06.21;Buchenbach;1;75.00;2
 B;Anaal Nathrakh;GBR;Grindcore
 B;Anheim;DEU;Melodic Black Metal
-B;Convictive;DEU;Black Metal
+B;Convictive
 B;Der Weg einer Freiheit;DEU;Black Metal
-B;Desaster;DEU;Thrash Metal
+B;Desaster;DEU;Thrash Metal|Black Metal
 B;Drudensang;DEU;Black Metal
 B;Hierophant
 B;Home Reared Meat

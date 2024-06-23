@@ -1,9 +1,9 @@
 var countriesInfo = {
   "countries":[
- {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":376},
+ {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":382},
  {"id_country":"USA                             ","country":"United States of America","flag":"us","bands":97},
- {"id_country":"SWE                             ","country":"Sweden","flag":"se","bands":39},
- {"id_country":"GBR                             ","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","bands":38},
+ {"id_country":"SWE                             ","country":"Sweden","flag":"se","bands":40},
+ {"id_country":"GBR                             ","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","bands":39},
  {"id_country":"NLD                             ","country":"Netherlands","flag":"nl","bands":28},
  {"id_country":"FRA                             ","country":"France","flag":"fr","bands":24},
  {"id_country":"FIN                             ","country":"Finland","flag":"fi","bands":22},
@@ -33,6 +33,7 @@ var countriesInfo = {
  {"id_country":"HRV                             ","country":"Croatia","flag":"hr","bands":2},
  {"id_country":"HUN                             ","country":"Hungary","flag":"hu","bands":2},
  {"id_country":"IND                             ","country":"India","flag":"in","bands":2},
+ {"id_country":"001                             ","country":"International","flag":"un","bands":2},
  {"id_country":"RUS                             ","country":"Russian Federation","flag":"ru","bands":2},
  {"id_country":"SRB                             ","country":"Serbia","flag":"rs","bands":2},
  {"id_country":"UKR                             ","country":"Ukraine","flag":"ua","bands":2},
@@ -43,7 +44,6 @@ var countriesInfo = {
  {"id_country":"EST                             ","country":"Estonia","flag":"ee","bands":1},
  {"id_country":"FRO                             ","country":"Faroe Islands","flag":"fo","bands":1},
  {"id_country":"IDN                             ","country":"Indonesia","flag":"id","bands":1},
- {"id_country":"001                             ","country":"International","flag":"un","bands":1},
  {"id_country":"IRN                             ","country":"Iran","flag":"ir","bands":1},
  {"id_country":"IRL                             ","country":"Ireland","flag":"ie","bands":1},
  {"id_country":"JAM                             ","country":"Jamaica","flag":"jm","bands":1},
