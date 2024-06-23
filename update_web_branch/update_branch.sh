@@ -1,3 +1,4 @@
+cd ..
 git checkout main -- js/*
 git add js/*
 d=`date`
