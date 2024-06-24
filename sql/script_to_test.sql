@@ -23,6 +23,4 @@ select * from music.generes g where genere like 'Tes%';
 select * from geo.countries c where id_country = 'TCC';
 select * from geo.places p where place = 'Test Place';
 
-update music.bands 
-set likes = 'y' where band = 'Kampfar';
 
