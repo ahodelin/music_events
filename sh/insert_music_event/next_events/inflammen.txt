@@ -16,11 +16,11 @@ B;Ciemra;BLR;Black Metal
 B;Ratos de Porão;BRA;Hardcore Punk|Thrash Metal|Crossover
 B;Severoth;UKR;Ambient Black Metal|Atmospheric Black Metal
 B;Rebaellium;BRA;Death Metal
-B;Remina;DEU;Atmospheric Gothic Metal|Doom Metal
+B;Mezzrow;SWE;Thrash Metal
 B;Sear Bliss;HUN;Atmospheric Black Metal
 B;Alfahanne;NOR;Melodic Black Metal|Rock
 B;Ondfødt;FIN;Black Metal
-B;Iron Walrus;DEU;Doom Metal|Sludge Metal
+B;Assi Assassin;DEU;Thrash Metal
 B;Escarnium;BRA;Death Metal
 B;Manos;DEU;Death Metal|Punk|Grindcore
 B;Kilatus;MYS;Black Metal
@@ -35,3 +35,6 @@ B;Brutal Sphincter
 B;Escuela Grind
 B;Teratoma;DEU;Death Metal
 B;Chemicide;CRI;Thrash Metal
+B;Ultima Necat;ITA;Melodic Death Metal|Alternative Metal
+B;Total Hate;DEU;Black Metal
+B;Iron Walrus;DEU;Doom Metal|Sludge Metal
