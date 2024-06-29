@@ -24,3 +24,8 @@ select * from geo.countries c where id_country = 'TCC';
 select * from geo.places p where place = 'Test Place';
 
 
+DROP FUNCTION music.insert_bands_to_genres_new(varchar, varchar);
+
+
+select music.insert_bands_to_genres_new('Test Band', 'Test Genre');
+

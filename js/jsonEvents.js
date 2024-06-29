@@ -224,4 +224,5 @@ var eventsInfo = {
  {"id_event":"f8aec5c8465f9b8649a99873c0a44443","year":2024,"date":"19.06.2024","event":"Asinhell Live 2024","place":"Frankfurt am Main (Zoom)","bands":2},
  {"id_event":"ddf663d64f6daaeb9c8eb11fe3396ffb","year":2024,"date":"21.06.2024","event":"Boarstream Open Air 2024","place":"Buchenbach","bands":15},
  {"id_event":"a685e40a5c47edcf3a7c9c9f38155fc8","year":2024,"date":"27.06.2024","event":"Throw them in the Van European Summer Tour 2024","place":"Weinheim (Café Central)","bands":2},
+ {"id_event":"b3d8150933aa73cc2b3ba1fc39b1651c","year":2024,"date":"28.06.2024","event":"Vader - 40 Years of the Apocalypse Tour 2024","place":"Mannheim (MS Connexion Complex)","bands":3},
 ]};

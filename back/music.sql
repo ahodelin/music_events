@@ -69,7 +69,7 @@ begin
   
     insert into music.bands_countries
     values(md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), countr);
-    return 'Band - Country added'; 
+    return concat(ban, ' - ', countr, ' inserted'); 
    
   end if;
 	  
@@ -121,7 +121,7 @@ begin
       insert into music.bands_events
       values (md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), md5(lower(regexp_replace(eve, '\s|\W', '', 'g'))));
      
-      return 'Band - Event inserted';  
+      return concat(ban, ' - ', eve, ' inserted');  
     end if;
   end if;
 end;
@@ -168,7 +168,7 @@ begin
   
     insert into music.bands_generes
     values(md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), md5(lower(regexp_replace(gene, '\s|\W', '', 'g'))));
-    return 'Band - Genere added';
+    return concat(ban, ' - ', gene, ' inserted');
     
   end if;  
 end;
@@ -204,7 +204,7 @@ begin
   
   	insert into music.events
     values (md5(lower(regexp_replace(eve, '\s|\W', '', 'g'))), eve, dat, md5(lower(regexp_replace(plac, '\s|\W', '', 'g'))), dur, pri, per);
-    return 'Added event';  
+    return concat(eve, ' inserted');  
   else return 'Event alredy exist';
     
   end if;end;
@@ -3742,6 +3742,9 @@ c08567e9006dc768bdb72bb7b14e53a1	ddf663d64f6daaeb9c8eb11fe3396ffb
 d86431a5bbb40ae41cad636c2ddbf746	ddf663d64f6daaeb9c8eb11fe3396ffb
 454cce609b348a95fb627e5c02dddd1b	1fef5be89b79c6e282d1af946a3bd662
 c5f4e658dfe7b7af3376f06d7cd18a2a	ddf663d64f6daaeb9c8eb11fe3396ffb
+2db1850a4fe292bd2706ffd78dbe44b9	b3d8150933aa73cc2b3ba1fc39b1651c
+454cce609b348a95fb627e5c02dddd1b	b3d8150933aa73cc2b3ba1fc39b1651c
+43ff5aadca6d8a60dd3da21716358c7d	b3d8150933aa73cc2b3ba1fc39b1651c
 a8fcba36c9e48e9e17ba381a34444dd0	1fef5be89b79c6e282d1af946a3bd662
 b6eba7850fd20fa8dce81167f1a6edca	ddf663d64f6daaeb9c8eb11fe3396ffb
 c5068f914571c27e04cd66a4ec5c1631	ddf663d64f6daaeb9c8eb11fe3396ffb
@@ -5409,6 +5412,7 @@ f8aec5c8465f9b8649a99873c0a44443	Asinhell Live 2024	2024-06-19	62a758afc72d2e3f7
 ddf663d64f6daaeb9c8eb11fe3396ffb	Boarstream Open Air 2024	2024-06-21	cf1c12d42f59db3667fc162556aab169	1	75.00	2
 a685e40a5c47edcf3a7c9c9f38155fc8	Throw them in the Van European Summer Tour 2024	2024-06-27	f3a90318abb3e16166d96055fd6f9096	0	34	2
 332be9c531b1ec341c13e5a676962820	Rock for Hille Benefiz	2018-10-27	6dde0719f779b373e62a7283e717d384	0	25.00	2
+b3d8150933aa73cc2b3ba1fc39b1651c	Vader - 40 Years of the Apocalypse Tour 2024	2024-06-28	49d6cee27482319877690f7d0409abbd	0	28.60	2
 79880b3852adb21098807cc10effe071	Hutkonzert - ATG - 19.10.2023	2023-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2
 48843160dd4fc4814525fa0f06641f19	On Stage - 16.09.2023	2023-09-16	17648f3308a5acb119d9aee1b5eafceb	0	14	2
 83bd23b786ae4d9b16f52ed2661611e9	Motörblast Play Motörhead - 2023	2023-12-27	eca8fc96e027328005753be360587de2	0	18.60	2
