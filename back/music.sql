@@ -491,6 +491,36 @@ CREATE VIEW music.v_generes AS
 
 
 --
+-- Name: v_lovely_generes; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_lovely_generes AS
+ SELECT g.genere,
+    count(b.likes) AS bands
+   FROM ((music.bands b
+     JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
+     JOIN music.generes g ON ((bg.id_genere = g.id_genere)))
+  WHERE (b.likes = 'y'::bpchar)
+  GROUP BY g.genere
+  ORDER BY (count(b.likes)) DESC;
+
+
+--
+-- Name: v_no_lovely_generes; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_no_lovely_generes AS
+ SELECT g.genere,
+    count(b.likes) AS bands
+   FROM ((music.bands b
+     JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
+     JOIN music.generes g ON ((bg.id_genere = g.id_genere)))
+  WHERE (b.likes = 'n'::bpchar)
+  GROUP BY g.genere
+  ORDER BY (count(b.likes)) DESC;
+
+
+--
 -- Name: v_places_events; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -772,6 +802,7 @@ e21ad7a2093c42e374fee6ec3b31efd3	Vansind	m	t	\N
 37e2e92ced5d525b3e79e389935cd669	Asinhell	y	t	\N
 f3cb86dd6b6caf33a8a05571e195e7dc	Anaal Nathrakh	n	t	\N
 3cb5ffaba5b396de828bc06683b5e058	Dying Fetus	y	t	\N
+a35033c250bd9c577f20f2b253be0021	The Exploited	y	t	\N
 370cde851ed429f1269f243dd714cce2	1000Mods	y	t	\N
 dfb7069bfc6e0064a6c667626eca07b4	Aborted	y	t	\N
 58bbd6135961e3d837bacceb3338f082	Mourning Wood	y	t	\N
@@ -779,6 +810,7 @@ dfb7069bfc6e0064a6c667626eca07b4	Aborted	y	t	\N
 a7eda23a9421a074fe5ec966810018d7	Revel in Flesh	y	f	\N
 20aba645df0b3292c63f0f08b993966e	Anheim	y	t	\N
 31897528a567059ed581f119a0e1e516	Fragments of Unbecoming	y	t	\N
+41f062d8603a9705974083360fb69892	Hot Action Waxing	y	t	\N
 eaacb8ee01500f18e370303be3d5c591	Dead Eyed Sleeper (Legacy)	y	t	\N
 8e1cfd3bf5a7f326107f82f8f28649be	Thjodrörir	y	t	\N
 454cce609b348a95fb627e5c02dddd1b	Bio-Cancer	y	t	\N
@@ -1650,6 +1682,7 @@ COPY music.bands_countries (id_band, id_country) FROM stdin;
 37e2e92ced5d525b3e79e389935cd669	150                             
 f3cb86dd6b6caf33a8a05571e195e7dc	GBR                             
 3cb5ffaba5b396de828bc06683b5e058	USA                             
+a35033c250bd9c577f20f2b253be0021	GBR                             
 312793778e3248b6577e3882a77f68f3	DEU                             
 dd3e531c469005b17115dbf611b01c88	DEU                             
 dd15d5adf6349f5ca53e7a2641d41ab7	DEU                             
@@ -1674,6 +1707,7 @@ e093d52bb2d4ff4973e72f6eb577714b	DEU
 9777f12d27d48261acb756ca56ceea96	DEU                             
 20aba645df0b3292c63f0f08b993966e	DEU                             
 31897528a567059ed581f119a0e1e516	DEU                             
+41f062d8603a9705974083360fb69892	DEU                             
 c9dc004fc3d039ad7fb49456e5902b01	GBR                             
 67cc86339b2654a35fcc57da8fc9d33d	CAN                             
 6916ed9292a811c895e259c542af0e8a	DEU                             
@@ -3736,10 +3770,13 @@ dfb7069bfc6e0064a6c667626eca07b4	11a728ed9e3a6aac1b46277a7302b15f
 048d40092f9bd3c450e4bdeeff69e8c3	eeba68f0a1003dce9bd66066b82dc1b6
 aaaad3022279d4afdb86ad02d5bde96b	1fef5be89b79c6e282d1af946a3bd662
 5e13fedbc93d74e8d42eadee1def2ae6	ddf663d64f6daaeb9c8eb11fe3396ffb
+a7111b594249d6a038281deb74ef0d04	f4ab1c6777711952be2adceed22d7fc5
 e21ad7a2093c42e374fee6ec3b31efd3	1fef5be89b79c6e282d1af946a3bd662
 c08567e9006dc768bdb72bb7b14e53a1	ddf663d64f6daaeb9c8eb11fe3396ffb
+a35033c250bd9c577f20f2b253be0021	f4ab1c6777711952be2adceed22d7fc5
 0ab7d3a541204a9cab0d2d569c5b173f	1fef5be89b79c6e282d1af946a3bd662
 d86431a5bbb40ae41cad636c2ddbf746	ddf663d64f6daaeb9c8eb11fe3396ffb
+41f062d8603a9705974083360fb69892	f4ab1c6777711952be2adceed22d7fc5
 454cce609b348a95fb627e5c02dddd1b	1fef5be89b79c6e282d1af946a3bd662
 c5f4e658dfe7b7af3376f06d7cd18a2a	ddf663d64f6daaeb9c8eb11fe3396ffb
 2db1850a4fe292bd2706ffd78dbe44b9	b3d8150933aa73cc2b3ba1fc39b1651c
@@ -3784,17 +3821,22 @@ COPY music.bands_generes (id_band, id_genere) FROM stdin;
 37e2e92ced5d525b3e79e389935cd669	3593526a5f465ed766bafb4fb45748a2
 f3cb86dd6b6caf33a8a05571e195e7dc	d25334037d936d3257f794a10bb3030f
 3cb5ffaba5b396de828bc06683b5e058	7b4b7e3375c9f7424a57a2d9d7bccde5
+a35033c250bd9c577f20f2b253be0021	0c454d6b55ed1860a5b4329cea3a6cb0
 4545c676e400facbb87cbc7736d90e85	f54c3ccedc098d37a4e7f7a455f5731e
 20aba645df0b3292c63f0f08b993966e	8dbf2602d350002b61aeb50d7b1f5823
 3cb5ffaba5b396de828bc06683b5e058	d25334037d936d3257f794a10bb3030f
+a35033c250bd9c577f20f2b253be0021	c7fb67368c25c29b9c10ca91b2d97488
 4545c676e400facbb87cbc7736d90e85	5739305712ce3c5e565bc2da4cd389f4
 5e13fedbc93d74e8d42eadee1def2ae6	2db87892408abd4d82eb39b78c50c27b
 31897528a567059ed581f119a0e1e516	b54875674f7d2d5be9737b0d4c021a21
+a35033c250bd9c577f20f2b253be0021	4bc6884ff3b54bf84c2970cf8cb57a35
 9777f12d27d48261acb756ca56ceea96	2db87892408abd4d82eb39b78c50c27b
 c08567e9006dc768bdb72bb7b14e53a1	9e7315413ae31a070ccae5c580dd1b19
+a35033c250bd9c577f20f2b253be0021	a2e63ee01401aaeca78be023dfbb8c59
 dfb7069bfc6e0064a6c667626eca07b4	3593526a5f465ed766bafb4fb45748a2
 58bbd6135961e3d837bacceb3338f082	d725d2ec3a5cfa9f6384d9870df72400
 c08567e9006dc768bdb72bb7b14e53a1	2db87892408abd4d82eb39b78c50c27b
+41f062d8603a9705974083360fb69892	c875de527ea22b45018e7468fb0ef4a5
 8e1cfd3bf5a7f326107f82f8f28649be	e31bcdc3311e00fe13a85ee759b65391
 d86431a5bbb40ae41cad636c2ddbf746	2db87892408abd4d82eb39b78c50c27b
 2e6df049342acfb3012ac702ed93feb4	f54c3ccedc098d37a4e7f7a455f5731e
@@ -5411,6 +5453,7 @@ b8f41d89b2d67b4b86379d236b2492aa	Europe Summer 2024	2024-06-17	588671317bf1864e5
 f8aec5c8465f9b8649a99873c0a44443	Asinhell Live 2024	2024-06-19	62a758afc72d2e3f7933fa4b917944c8	0	33.45	2
 ddf663d64f6daaeb9c8eb11fe3396ffb	Boarstream Open Air 2024	2024-06-21	cf1c12d42f59db3667fc162556aab169	1	75.00	2
 a685e40a5c47edcf3a7c9c9f38155fc8	Throw them in the Van European Summer Tour 2024	2024-06-27	f3a90318abb3e16166d96055fd6f9096	0	34	2
+f4ab1c6777711952be2adceed22d7fc5	The Exloited - Das Bett - 2024	2024-06-29	83b0fe992121ae7d39f6bcc58a48160c	0	0	2
 332be9c531b1ec341c13e5a676962820	Rock for Hille Benefiz	2018-10-27	6dde0719f779b373e62a7283e717d384	0	25.00	2
 b3d8150933aa73cc2b3ba1fc39b1651c	Vader - 40 Years of the Apocalypse Tour 2024	2024-06-28	49d6cee27482319877690f7d0409abbd	0	28.60	2
 79880b3852adb21098807cc10effe071	Hutkonzert - ATG - 19.10.2023	2023-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2
@@ -5605,6 +5648,7 @@ f155b26f32e07effd2474272637c4b22	Middle Eastern Doom Metal
 b13bb1f32f0106bf78a65fd98b522515	Porno Gore Grind
 8e47a4c0304670944a03089849f42e07	Slamming Hardcore Death
 fae1e7176fb2384eaf7a2438c3055593	Classical Metal
+0c454d6b55ed1860a5b4329cea3a6cb0	Harcore Punk
 c7f5b70ac03ff1120e353c6faed8ea39	Orchestral Metal
 196c7e704b6f026b852b24771bf71ddd	Slam Metal
 f4e72bc32f2c636059d5f3ba44323921	Hip Hop

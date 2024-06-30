@@ -29,3 +29,14 @@ DROP FUNCTION music.insert_bands_to_genres_new(varchar, varchar);
 
 select music.insert_bands_to_genres_new('Test Band', 'Test Genre');
 
+create view music.v_no_lovely_generes
+as
+select g.genere, count(b.likes) bands
+from music.bands b 
+join music.bands_generes bg 
+  on b.id_band = bg.id_band 
+join music.generes g 
+  on bg.id_genere = g.id_genere 
+where b.likes = 'n'
+group by g.genere 
+order by bands desc;
