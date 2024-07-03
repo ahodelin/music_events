@@ -12,18 +12,18 @@ function showBandByCountry(){
         bandsTable(bandsByCountry);                     
 }
 
-// show band by genere
-function showBandByGenere(){
+// show band by genre
+function showBandByGenre(){
         allVoid();
                         
-        var id_g = selectDrpDwnGenere.value;
+        var id_g = selectDrpDwnGenre.value;
                         
         if(id_g == "void") return;
-        var bandsByGenere = [];
-        for(bg of objBandsGeneres.bands_generes)
-        	if(bg['id_genere'] == id_g)
-                	bandsByGenere.push(bg['id_band']);
-        bandsTable(bandsByGenere);                      
+        var bandsByGenre = [];
+        for(bg of objBandsGenres.bands_genres)
+        	if(bg['id_genre'] == id_g)
+                	bandsByGenre.push(bg['id_band']);
+        bandsTable(bandsByGenre);                      
 }
 
 // show band by event

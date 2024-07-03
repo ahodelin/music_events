@@ -4,14 +4,14 @@ function bandsTable(bandId){
     var thBand = document.createElement('th');
     var thFlag = document.createElement('th');
     var thCountry = document.createElement('th');
-    var thGenere = document.createElement('th');
+    var thGenre = document.createElement('th');
     var thEvent = document.createElement('th');
     var thLike = document.createElement('th');
 
     thBand.appendChild(document.createTextNode('Band'));
     thFlag.appendChild(document.createTextNode('Flag'));
     thCountry.appendChild(document.createTextNode('Country'));
-    thGenere.appendChild(document.createTextNode('Genres'));
+    thGenre.appendChild(document.createTextNode('Genres'));
     thEvent.appendChild(document.createTextNode('Events'));
     thLike.appendChild(document.createTextNode('Like'));
 
@@ -20,7 +20,7 @@ function bandsTable(bandId){
     trh.appendChild(thBand);
     trh.appendChild(thFlag);
     trh.appendChild(thCountry);
-    trh.appendChild(thGenere);
+    trh.appendChild(thGenre);
     trh.appendChild(thEvent);
     trh.appendChild(thLike);
 
@@ -37,7 +37,7 @@ function bandsTable(bandId){
             var tdBand = document.createElement('td');
             var tdFlag = document.createElement('td');
             var tdCountry = document.createElement('td');
-            var tdGenere = document.createElement('td');
+            var tdGenre = document.createElement('td');
             var tdEvent = document.createElement('td');
             var tdLike = document.createElement('td');
 
@@ -49,14 +49,14 @@ function bandsTable(bandId){
             tdBand.appendChild(document.createTextNode(objBands.bands[i].band));
             tdFlag.appendChild(bFlag);
             tdCountry.appendChild(document.createTextNode(objBands.bands[i].country));
-            tdGenere.appendChild(document.createTextNode(objBands.bands[i].generes));
+            tdGenre.appendChild(document.createTextNode(objBands.bands[i].genres));
             tdEvent.appendChild(document.createTextNode(objBands.bands[i].events));
             tdLike.appendChild(bLike);
             
             tr.appendChild(tdBand);
             tr.appendChild(tdFlag);
             tr.appendChild(tdCountry);
-            tr.appendChild(tdGenere);
+            tr.appendChild(tdGenre);
             tr.appendChild(tdEvent);
             tr.appendChild(tdLike);
             

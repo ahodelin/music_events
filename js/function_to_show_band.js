@@ -9,12 +9,12 @@ function showBand(){
          var bandsByBands = [id_b];
          bandsTable(bandsByBands);
                         
-         var generesOfThisBand = [];
+         var genresOfThisBand = [];
          var eventsOfThisBand = [];
                         
-         for(bg of objBandsGeneres.bands_generes)
+         for(bg of objBandsGenres.bands_genres)
                 if(bg['id_band'] == id_b)
-                        generesOfThisBand.push(bg['id_genere']);
+                        genresOfThisBand.push(bg['id_genre']);
                                         
         for(be of objBandsEvents.bands_events)
         	if(be['id_band'] == id_b)
@@ -24,25 +24,25 @@ function showBand(){
                                 
         var trh = document.createElement('tr');
                                 
-        var thGenere = document.createElement('th');
+        var thGenre = document.createElement('th');
         var thEvent = document.createElement('th');
                                 
-        thGenere.appendChild(document.createTextNode('Generes'));
+        thGenre.appendChild(document.createTextNode('Genres'));
         thEvent.appendChild(document.createTextNode('Events'));                         
                                 
-        trh.appendChild(thGenere);
+        trh.appendChild(thGenre);
         trh.appendChild(thEvent);
                                 
         var tr = document.createElement('tr');
 
-        var tdGenere = showGenereOfBand(generesOfThisBand);
+        var tdGenre = showGenreOfBand(genresOfThisBand);
         var tdEvent = showEventOfBand(eventsOfThisBand);
                                 
-        tr.appendChild(tdGenere);
+        tr.appendChild(tdGenre);
         tr.appendChild(tdEvent);
                                                 
         tb.appendChild(trh);
         tb.appendChild(tr);
                                 
-	document.getElementById('generes_events').appendChild(tb);                                      
+	document.getElementById('genres_events').appendChild(tb);                                      
 }
