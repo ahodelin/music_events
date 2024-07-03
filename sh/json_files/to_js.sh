@@ -5,7 +5,7 @@ mv ../../js/json*.js ../../old/
 
 bash bandsCountries.sh
 bash bandsEvents.sh
-bash bandsGeneres.sh
+bash bandsGenres.sh
 bash bands.sh
 bash countries.sh
 bash events.sh

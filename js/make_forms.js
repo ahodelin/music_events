@@ -1,8 +1,8 @@
 var objBands = loadBands();
-var objGeneres = loadGeneres();
+var objGenres = loadGenres();
 var objCountries = loadCountries();
 var objEvents = loadEvents(); 
-var objBandsGeneres = loadBandsGeneres();
+var objBandsGenres = loadBandsGenres();
 var objBandsCountries = loadBandsCountries();
 var objBandsEvents = loadBandsEvents();
                           
@@ -13,7 +13,7 @@ document.getElementById('allInfo').innerHTML = '<b>Viewed Bands: </b>' + allBand
 	'<br> <b> Events: </b>' + allEvents;            
                           
 var selectDrpDwnBand = document.getElementById('selectBandId');
-var selectDrpDwnGenere = document.getElementById('selectGenereId');
+var selectDrpDwnGenre = document.getElementById('selectGenreId');
 var selectDrpDwnCountry = document.getElementById('selectCountryId');
 var selectDrpDwnEvent = document.getElementById('selectEventId');
                           
@@ -24,11 +24,11 @@ for(b of objBands.bands){
 		b['band'] + '</option>';
 }
                           
-selectDrpDwnGenere.innerHTML = '<option value = "void" selected>Select Genre</option>';
-for(g of objGeneres.generes){
-	selectDrpDwnGenere.innerHTML = selectDrpDwnGenere.innerHTML + 
-        	'<option value = "' + g['id_genere'] + '">' +
-                g['genere'] + '</option>';
+selectDrpDwnGenre.innerHTML = '<option value = "void" selected>Select Genre</option>';
+for(g of objGenres.genres){
+	selectDrpDwnGenre.innerHTML = selectDrpDwnGenre.innerHTML + 
+        	'<option value = "' + g['id_genre'] + '">' +
+                g['genre'] + '</option>';
 }
                           
 selectDrpDwnCountry.innerHTML = '<option value = "void" selected>Select Country</option>';

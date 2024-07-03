@@ -54,35 +54,35 @@ function showAllCountries(){
 	document.getElementById('bands_info').appendChild(tb);
 }
 
-// show all generes
-function showAllGeneres(){
+// show all genres
+function showAllGenres(){
 	allVoid();
                  
         var tb = document.createElement('table');                               
                                 
-        var thGenere = document.createElement('th');
+        var thGenre = document.createElement('th');
         var thBand = document.createElement('th');
                                                         
-        thGenere.appendChild(document.createTextNode('Genre'));
+        thGenre.appendChild(document.createTextNode('Genre'));
         thBand.appendChild(document.createTextNode('Bands'));
 
         var trh = document.createElement('tr');                         
                                 
-        trh.appendChild(thGenere);
+        trh.appendChild(thGenre);
         trh.appendChild(thBand);
                                 
         tb.appendChild(trh);
 
-        for(ag of objGeneres.generes){  
+        for(ag of objGenres.genres){  
         	var tr = document.createElement('tr');
                                         
-                var tdGenere = document.createElement('td');
+                var tdGenre = document.createElement('td');
                 var tdBand = document.createElement('td');
                                           
-                tdGenere.appendChild(document.createTextNode(ag['genere']));
+                tdGenre.appendChild(document.createTextNode(ag['genre']));
                 tdBand.appendChild(document.createTextNode(ag['bands']));                                       
                                          
-                tr.appendChild(tdGenere);
+                tr.appendChild(tdGenre);
                 tr.appendChild(tdBand);                                         
                                           
                 tb.appendChild(tr);

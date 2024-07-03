@@ -3,9 +3,9 @@ function loadCountries(){
   return(countriesInfo);
 }
 
-// generes
-function loadGeneres(){
-  return(generesInfo);
+// genres
+function loadGenres(){
+  return(genresInfo);
 }
 
 // bands
@@ -28,7 +28,7 @@ function loadBandsEvents(){
   return(bandsEventsInfo);
 }
 
-// bands generes
-function loadBandsGeneres(){
-   return(bandsGeneresInfo);
+// bands genres
+function loadBandsGenres(){
+   return(bandsGenresInfo);
 }

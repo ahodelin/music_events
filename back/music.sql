@@ -132,29 +132,29 @@ $$;
 -- Name: insert_bands_to_genres(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
 --
 
-CREATE FUNCTION music.insert_bands_to_genres(ban character varying, gene character varying) RETURNS text
+CREATE FUNCTION music.insert_bands_to_genres(ban character varying, gen character varying) RETURNS text
     LANGUAGE plpgsql
     AS $$ 
 declare 
   i_band varchar;
-  i_gene varchar;
+  i_gen varchar;
 begin 
 	
-  select id_genere, id_band into i_gene, i_band
-  from music.bands_generes bg 
-  where id_band = md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))) and id_genere = md5(lower(regexp_replace(gene, '\s|\W', '', 'g'))) for update;
+  select id_genre, id_band into i_gen, i_band
+  from music.bands_genres bg 
+  where id_band = md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))) and id_genre = md5(lower(regexp_replace(gen, '\s|\W', '', 'g'))) for update;
   
   if found then
-    return 'This combination of band and genere exist';
+    return concat('This combination ', ban, ' - ', gen, ' exist');
   else
   
-    select id_genere into i_gene 
-    from music.generes g
-    where genere = gene for update;
+    select id_genre into i_gen 
+    from music.genres g
+    where genre = gen for update;
  
     if not found then    
-      insert into music.generes
-  	  values (md5(lower(regexp_replace(gene, '\s|\W', '', 'g'))), gene);
+      insert into music.genres
+  	  values (md5(lower(regexp_replace(gen, '\s|\W', '', 'g'))), gen);
     end if;
 	
     select id_band into i_band
@@ -166,9 +166,9 @@ begin
   	  values (md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), ban, 'y');
     end if;
   
-    insert into music.bands_generes
-    values(md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), md5(lower(regexp_replace(gene, '\s|\W', '', 'g'))));
-    return concat(ban, ' - ', gene, ' inserted');
+    insert into music.bands_genres
+    values(md5(lower(regexp_replace(ban, '\s|\W', '', 'g'))), md5(lower(regexp_replace(gen, '\s|\W', '', 'g'))));
+    return concat(ban, ' - ', gen, ' inserted');
     
   end if;  
 end;
@@ -291,12 +291,12 @@ CREATE TABLE music.bands_events (
 
 
 --
--- Name: bands_generes; Type: TABLE; Schema: music; Owner: -
+-- Name: bands_genres; Type: TABLE; Schema: music; Owner: -
 --
 
-CREATE TABLE music.bands_generes (
+CREATE TABLE music.bands_genres (
     id_band character(32) NOT NULL,
-    id_genere character(32) NOT NULL
+    id_genre character(32) NOT NULL
 );
 
 
@@ -316,12 +316,12 @@ CREATE TABLE music.events (
 
 
 --
--- Name: generes; Type: TABLE; Schema: music; Owner: -
+-- Name: genres; Type: TABLE; Schema: music; Owner: -
 --
 
-CREATE TABLE music.generes (
-    id_genere character(32) NOT NULL,
-    genere character varying(100) NOT NULL
+CREATE TABLE music.genres (
+    id_genre character(32) NOT NULL,
+    genre character varying(100) NOT NULL
 );
 
 
@@ -334,7 +334,7 @@ CREATE MATERIALIZED VIEW music.mv_musical_info AS
     b.likes,
     c.country,
     c.flag,
-    g.genere,
+    g.genre AS genere,
     e.event,
     e.date_event,
     p.place,
@@ -343,8 +343,8 @@ CREATE MATERIALIZED VIEW music.mv_musical_info AS
    FROM (((((((music.bands b
      JOIN music.bands_countries bc ON ((b.id_band = bc.id_band)))
      JOIN geo.countries c ON ((c.id_country = bc.id_country)))
-     JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
-     JOIN music.generes g ON ((g.id_genere = bg.id_genere)))
+     JOIN music.bands_genres bg ON ((b.id_band = bg.id_band)))
+     JOIN music.genres g ON ((g.id_genre = bg.id_genre)))
      JOIN music.bands_events be ON ((be.id_band = b.id_band)))
      JOIN music.events e ON ((e.id_event = be.id_event)))
      JOIN geo.places p ON ((p.id_place = e.id_place)))
@@ -365,12 +365,12 @@ CREATE VIEW music.v_bands AS
     c.country,
     c.flag,
     b.likes,
-    count(DISTINCT bg.id_genere) AS generes,
+    count(DISTINCT bg.id_genre) AS genres,
     count(DISTINCT be.id_event) AS events
    FROM ((((music.bands b
      JOIN music.bands_countries bc ON ((b.id_band = bc.id_band)))
      JOIN geo.countries c ON ((c.id_country = bc.id_country)))
-     JOIN music.bands_generes bg ON ((bg.id_band = b.id_band)))
+     JOIN music.bands_genres bg ON ((bg.id_band = b.id_band)))
      JOIN music.bands_events be ON ((be.id_band = b.id_band)))
   GROUP BY b.id_band, b.band, c.country, c.flag, b.likes
   ORDER BY b.band;
@@ -397,11 +397,11 @@ CREATE VIEW music.v_bands_events AS
 CREATE VIEW music.v_bands_generes AS
  SELECT b.id_band,
     b.band,
-    g.genere
+    g.genre AS genere
    FROM ((music.bands b
-     JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
-     JOIN music.generes g ON ((bg.id_genere = g.id_genere)))
-  ORDER BY b.band, g.genere;
+     JOIN music.bands_genres bg ON ((b.id_band = bg.id_band)))
+     JOIN music.genres g ON ((bg.id_genre = g.id_genre)))
+  ORDER BY b.band, g.genre;
 
 
 --
@@ -475,49 +475,19 @@ CREATE VIEW music.v_events_years AS
 
 
 --
--- Name: v_generes; Type: VIEW; Schema: music; Owner: -
+-- Name: v_genres; Type: VIEW; Schema: music; Owner: -
 --
 
-CREATE VIEW music.v_generes AS
- SELECT g.id_genere,
-    g.genere,
+CREATE VIEW music.v_genres AS
+ SELECT g.id_genre,
+    g.genre,
     count(bg.id_band) AS bands
-   FROM ((music.generes g
-     JOIN music.bands_generes bg ON ((g.id_genere = bg.id_genere)))
+   FROM ((music.genres g
+     JOIN music.bands_genres bg ON ((g.id_genre = bg.id_genre)))
      JOIN music.bands b ON ((b.id_band = bg.id_band)))
   WHERE (b.likes = 'y'::bpchar)
-  GROUP BY g.genere, g.id_genere
-  ORDER BY (count(bg.id_band)) DESC, g.genere;
-
-
---
--- Name: v_lovely_generes; Type: VIEW; Schema: music; Owner: -
---
-
-CREATE VIEW music.v_lovely_generes AS
- SELECT g.genere,
-    count(b.likes) AS bands
-   FROM ((music.bands b
-     JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
-     JOIN music.generes g ON ((bg.id_genere = g.id_genere)))
-  WHERE (b.likes = 'y'::bpchar)
-  GROUP BY g.genere
-  ORDER BY (count(b.likes)) DESC;
-
-
---
--- Name: v_no_lovely_generes; Type: VIEW; Schema: music; Owner: -
---
-
-CREATE VIEW music.v_no_lovely_generes AS
- SELECT g.genere,
-    count(b.likes) AS bands
-   FROM ((music.bands b
-     JOIN music.bands_generes bg ON ((b.id_band = bg.id_band)))
-     JOIN music.generes g ON ((bg.id_genere = g.id_genere)))
-  WHERE (b.likes = 'n'::bpchar)
-  GROUP BY g.genere
-  ORDER BY (count(b.likes)) DESC;
+  GROUP BY g.genre, g.id_genre
+  ORDER BY (count(bg.id_band)) DESC, g.genre;
 
 
 --
@@ -551,9 +521,9 @@ UNION
     count(*) AS quantity
    FROM geo.places
 UNION
- SELECT 'generes'::text AS entities,
+ SELECT 'genres'::text AS entities,
     count(*) AS quantity
-   FROM music.generes;
+   FROM music.genres;
 
 
 --
@@ -3812,10 +3782,10 @@ f159fc50b5af54fecf21d5ea6ec37bad	fb57c18df776961bb734a1fa3db6a6d1
 
 
 --
--- Data for Name: bands_generes; Type: TABLE DATA; Schema: music; Owner: -
+-- Data for Name: bands_genres; Type: TABLE DATA; Schema: music; Owner: -
 --
 
-COPY music.bands_generes (id_band, id_genere) FROM stdin;
+COPY music.bands_genres (id_band, id_genre) FROM stdin;
 4545c676e400facbb87cbc7736d90e85	5148c20f58db929fe77e3cb0611dc1c4
 304d29d27816ec4f69c7b1ba5836c57a	3593526a5f465ed766bafb4fb45748a2
 37e2e92ced5d525b3e79e389935cd669	3593526a5f465ed766bafb4fb45748a2
@@ -5477,10 +5447,10 @@ c4133d7e05b0f42aedd762785de80b70	Dread Reaver Europe 2024	2024-01-20	c72b4173a6a
 
 
 --
--- Data for Name: generes; Type: TABLE DATA; Schema: music; Owner: -
+-- Data for Name: genres; Type: TABLE DATA; Schema: music; Owner: -
 --
 
-COPY music.generes (id_genere, genere) FROM stdin;
+COPY music.genres (id_genre, genre) FROM stdin;
 8bb92c3b9b1b949524aac3b578a052b6	Deathcore
 a88070859e86a8fb44267f7c6d91d381	Speed Metal
 be2f0af59429129793d751e4316ec81c	Power Metal
@@ -5759,11 +5729,11 @@ ALTER TABLE ONLY music.bands_events
 
 
 --
--- Name: bands_generes bands_generes_pkey; Type: CONSTRAINT; Schema: music; Owner: -
+-- Name: bands_genres bands_generes_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
-ALTER TABLE ONLY music.bands_generes
-    ADD CONSTRAINT bands_generes_pkey PRIMARY KEY (id_band, id_genere);
+ALTER TABLE ONLY music.bands_genres
+    ADD CONSTRAINT bands_generes_pkey PRIMARY KEY (id_band, id_genre);
 
 
 --
@@ -5783,19 +5753,19 @@ ALTER TABLE ONLY music.events
 
 
 --
--- Name: generes generes_genere_key; Type: CONSTRAINT; Schema: music; Owner: -
+-- Name: genres generes_genere_key; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
-ALTER TABLE ONLY music.generes
-    ADD CONSTRAINT generes_genere_key UNIQUE (genere);
+ALTER TABLE ONLY music.genres
+    ADD CONSTRAINT generes_genere_key UNIQUE (genre);
 
 
 --
--- Name: generes generes_pkey; Type: CONSTRAINT; Schema: music; Owner: -
+-- Name: genres generes_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
-ALTER TABLE ONLY music.generes
-    ADD CONSTRAINT generes_pkey PRIMARY KEY (id_genere);
+ALTER TABLE ONLY music.genres
+    ADD CONSTRAINT generes_pkey PRIMARY KEY (id_genre);
 
 
 --
@@ -5866,19 +5836,19 @@ ALTER TABLE ONLY music.bands_events
 
 
 --
--- Name: bands_generes bands_generes_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
+-- Name: bands_genres bands_generes_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
-ALTER TABLE ONLY music.bands_generes
+ALTER TABLE ONLY music.bands_genres
     ADD CONSTRAINT bands_generes_id_band_fkey FOREIGN KEY (id_band) REFERENCES music.bands(id_band) ON UPDATE CASCADE;
 
 
 --
--- Name: bands_generes bands_generes_id_genere_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
+-- Name: bands_genres bands_generes_id_genere_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
-ALTER TABLE ONLY music.bands_generes
-    ADD CONSTRAINT bands_generes_id_genere_fkey FOREIGN KEY (id_genere) REFERENCES music.generes(id_genere) ON UPDATE CASCADE;
+ALTER TABLE ONLY music.bands_genres
+    ADD CONSTRAINT bands_generes_id_genere_fkey FOREIGN KEY (id_genre) REFERENCES music.genres(id_genre) ON UPDATE CASCADE;
 
 
 --

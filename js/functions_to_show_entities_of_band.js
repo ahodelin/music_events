@@ -1,12 +1,12 @@
-function showGenereOfBand(generesOfBand){
-	tdGeneres = document.createElement('td');
-	for(gob of generesOfBand)
-		for(g of objGeneres.generes)
-        		if(g['id_genere'] == gob){
-                		tdGeneres.appendChild(document.createTextNode(g['genere']));
-                        	tdGeneres.appendChild(document.createElement('br'));
+function showGenreOfBand(genresOfBand){
+	tdGenres = document.createElement('td');
+	for(gob of genresOfBand)
+		for(g of objGenres.genres)
+        		if(g['id_genre'] == gob){
+                		tdGenres.appendChild(document.createTextNode(g['genre']));
+                        	tdGenres.appendChild(document.createElement('br'));
                	 	}
-	return tdGeneres;
+	return tdGenres;
 }
                                 
 function showEventOfBand(eventsOfBand){
