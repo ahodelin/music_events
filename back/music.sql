@@ -776,7 +776,7 @@ f3cb86dd6b6caf33a8a05571e195e7dc	Anaal Nathrakh	n	t	\N
 a35033c250bd9c577f20f2b253be0021	The Exploited	y	t	\N
 cfd7b6bdd92dbe51d1bdb8cb3b98cd58	Uada	y	t	\N
 76aebba2f63483b6184f06f0a2602643	Rebaellium	y	t	\N
-f7a13e18c9c1e371b748facfef98a9a5	Vulture	y	t	\N
+f7a13e18c9c1e371b748facfef98a9a5	Vulture	n	t	\N
 370cde851ed429f1269f243dd714cce2	1000Mods	y	t	\N
 dfb7069bfc6e0064a6c667626eca07b4	Aborted	y	t	\N
 58bbd6135961e3d837bacceb3338f082	Mourning Wood	y	t	\N

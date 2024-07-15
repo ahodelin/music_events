@@ -869,7 +869,7 @@ var bandsInfo = {
  {"id_band":"03201e85fc6aa56d2cb9374e84bf52ca","band":"Vomit the Soul","country":"Italy","flag":"it","likes":"y","genres":2,"events":2},
  {"id_band":"1de3f08835ab9d572e79ac0fca13c5c2","band":"Vor die Hunde","country":"Germany","flag":"de","likes":"y","genres":3,"events":1},
  {"id_band":"5c19e1e0521f7b789a37a21c5cd5737b","band":"Vortex","country":"Netherlands","flag":"nl","likes":"n","genres":1,"events":1},
- {"id_band":"f7a13e18c9c1e371b748facfef98a9a5","band":"Vulture","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
+ {"id_band":"f7a13e18c9c1e371b748facfef98a9a5","band":"Vulture","country":"Germany","flag":"de","likes":"n","genres":2,"events":1},
  {"id_band":"3771036a0740658b11cf5eb73d9263b3","band":"Vulvectomy","country":"Italy","flag":"it","likes":"y","genres":2,"events":1},
  {"id_band":"bff322dbe273a1e2d1fe37f81acccbe4","band":"Vulvodynia","country":"South Africa","flag":"za","likes":"y","genres":2,"events":1},
  {"id_band":"0ab7d3a541204a9cab0d2d569c5b173f","band":"Waldgeflüster","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},

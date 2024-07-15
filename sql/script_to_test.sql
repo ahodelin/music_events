@@ -64,5 +64,5 @@ UNION
    FROM music.genres;
    
   
- insert into geo.countries values
-      ('MYS', 'Malaysia', 'my');
+ update music.bands 
+ set likes = 'n' where band in ('Vulture');
