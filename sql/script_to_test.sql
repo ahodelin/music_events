@@ -65,4 +65,4 @@ UNION
    
   
  update music.bands 
- set likes = 'n' where band in ('Vulture');
+ set likes = 'm' where band in ('Endonomos');
