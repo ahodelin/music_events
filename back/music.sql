@@ -801,9 +801,9 @@ ea3b6b67824411a4cfaa5c8789282f48	Humator	y	t	\N
 2e6df049342acfb3012ac702ed93feb4	Baumbart	y	t	\N
 a8fcba36c9e48e9e17ba381a34444dd0	As the Sun falls	y	t	\N
 c08567e9006dc768bdb72bb7b14e53a1	Desaster	y	t	\N
-b99927de4e0ed554b381b920c01e0481	Carnivore A.D.	y	t	\N
 8717871a38810cc883cce02ea54a7017	Alfahanne	y	t	\N
 14b33fbc65adcc1655f82c82d232f6e7	Bloody Vengeance	y	t	\N
+b99927de4e0ed554b381b920c01e0481	Carnivore A.D.	m	t	\N
 024e91d84c3426913db8367f4df2ceb3	Poltergeist	m	t	\N
 773b5037f85efc8cc0ff3fe0bddf2eb8	Porn the Gore	y	t	\N
 46ea4c445a9ff8e288258e3ec9cd1cf0	Power Trip	y	t	\N
@@ -828,9 +828,9 @@ f29f7213d1c86c493ca7b4045e5255a9	Auðn	y	t	\N
 65f889eb579641f6e5f58b5a48f3ec12	Ill Niño	m	t	\N
 9d5c1f0c1b4d20a534fe35e4e699fb7b	Countless Skies	m	t	\N
 db572afa3dcc982995b5528acb350299	Kvaen	y	t	\N
-2a67e4bd1ef39d36123c84cad0b3f974	Sabbat	y	t	\N
 b12986f0a962c34c6669d59f40b1e9eb	Escarnium	y	t	\N
 e8ead85c87ecdab1738db48a10cae6da	Ultima Necat	y	t	\N
+2a67e4bd1ef39d36123c84cad0b3f974	Sabbat	m	t	\N
 7a43dd4c2bb9bea14a95ff3acd4dfb18	Creeping Death	y	t	\N
 c8bc4f15477ea3131abb1a3f0649fac2	Dropdead	y	t	\N
 fb3a67e400fde856689076418034cdf2	Haggard	y	t	\N
