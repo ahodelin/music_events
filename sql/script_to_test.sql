@@ -62,3 +62,7 @@ UNION
  SELECT 'genres'::text AS entities,
     count(*) AS quantity
    FROM music.genres;
+   
+  
+ insert into geo.countries values
+      ('MYS', 'Malaysia', 'my');

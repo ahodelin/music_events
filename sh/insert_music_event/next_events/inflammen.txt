@@ -1,40 +1,39 @@
-E;In Flammen Open Air 2024;2;...;2
-B;Impaled Nazarene;FIN;Black Metal
-B;Napalm Death
-B;Benediction
-B;Krisiun
-B;Uada;USA;Melodic Black Metal
-B;Desaster
-B;Jungle Rot;USA;Death Metal
-B;Gruesome;USA;Death Metal
-B;Carnivore A.D.;USA;Speed Metal|Thrash Metal|Crossover
-B;Pentagram Chile;CHL;Thrash Metal|Death Metal
-B;Shape of Despair;FIN;Atmostpheric Doom Metal|Funeral Doom Metal
+E;In Flammen Open Air 2024;2024.07.11;Turgau/Entenfang;2;86.9;2
+-B;Impaled Nazarene;FIN;Black Metal
+-B;Napalm Death
+-B;Benediction
+-B;Krisiun
+-B;Uada;USA;Melodic Black Metal
+-B;Desaster
+-B;Jungle Rot;USA;Death Metal
+-B;Gruesome;USA;Death Metal
+-B;Carnivore A.D.;USA;Speed Metal|Thrash Metal|Crossover
+-B;Pentagram Chile;CHL;Thrash Metal|Death Metal
+-B;Shape of Despair;FIN;Atmostpheric Doom Metal|Funeral Doom Metal
 B;Sabbat;JPN;Black Metal|Thrash Metal
-B;Deserted Fear
-B;Ciemra;BLR;Black Metal
-B;Ratos de Porão;BRA;Hardcore Punk|Thrash Metal|Crossover
-B;Severoth;UKR;Ambient Black Metal|Atmospheric Black Metal
-B;Rebaellium;BRA;Death Metal
-B;Mezzrow;SWE;Thrash Metal
-B;Sear Bliss;HUN;Atmospheric Black Metal
-B;Alfahanne;NOR;Melodic Black Metal|Rock
-B;Ondfødt;FIN;Black Metal
-B;Assi Assassin;DEU;Thrash Metal
-B;Escarnium;BRA;Death Metal
-B;Manos;DEU;Death Metal|Punk|Grindcore
+-B;Deserted Fear
+-B;Ciemra;BLR;Black Metal
+-B;Ratos de Porão;BRA;Hardcore Punk|Thrash Metal|Crossover
+-B;Severoth;UKR;Ambient Black Metal|Atmospheric Black Metal
+-B;Rebaellium;BRA;Death Metal
+-B;Mezzrow;SWE;Thrash Metal
+-B;Sear Bliss;HUN;Atmospheric Black Metal
+-B;Alfahanne;NOR;Melodic Black Metal|Rock
+-B;Ondfødt;FIN;Black Metal
+-B;Assi Assassin;DEU;Thrash Metal
+-B;Escarnium;BRA;Death Metal
+-B;Manos;DEU;Death Metal|Punk|Grindcore
 B;Kilatus;MYS;Black Metal
-B;Death Cult 69;DEU;Doom Metal
-B;Firtan
-B;Endonomos;AUT;Doom Metal|Death Metal
-B;Vulture;DEU;Speed Metal|Thrash Metal
-B;Verwoed;NLD;Black Metal
-B;Deathless Void;NLD;Death Metal|Black Metal
-B;Bloody Vengeance;DEU;Thrash Metal|Death Metal|Black Metal
-B;Brutal Sphincter
-B;Escuela Grind
-B;Teratoma;DEU;Death Metal
-B;Chemicide;CRI;Thrash Metal
-B;Ultima Necat;ITA;Melodic Death Metal|Alternative Metal
-B;Total Hate;DEU;Black Metal
-B;Iron Walrus;DEU;Doom Metal|Sludge Metal
+-B;Firtan
+-B;Endonomos;AUT;Doom Metal|Death Metal
+-B;Vulture;DEU;Speed Metal|Thrash Metal
+-B;Verwoed;NLD;Black Metal
+-B;Mýdral;DEU;Black Metal
+-B;Bloody Vengeance;DEU;Thrash Metal|Death Metal|Black Metal
+-B;Brutal Sphincter
+-B;Escuela Grind
+-B;Teratoma;DEU;Death Metal
+-B;Chemicide;CRI;Thrash Metal
+-B;Ultima Necat;DEU;Black Metal
+-B;Total Hate;DEU;Black Metal
+-B;Iron Walrus;DEU;Doom Metal|Sludge Metal
