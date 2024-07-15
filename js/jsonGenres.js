@@ -1,6 +1,6 @@
 var genresInfo = {
   "genres":[
- {"id_genre":"3593526a5f465ed766bafb4fb45748a2","genre":"Death Metal","bands":203},
+ {"id_genre":"3593526a5f465ed766bafb4fb45748a2","genre":"Death Metal","bands":202},
  {"id_genre":"9e7315413ae31a070ccae5c580dd1b19","genre":"Thrash Metal","bands":121},
  {"id_genre":"2db87892408abd4d82eb39b78c50c27b","genre":"Black Metal","bands":106},
  {"id_genre":"7b4b7e3375c9f7424a57a2d9d7bccde5","genre":"Brutal Death Metal","bands":74},
@@ -9,7 +9,7 @@ var genresInfo = {
  {"id_genre":"8bb92c3b9b1b949524aac3b578a052b6","genre":"Deathcore","bands":35},
  {"id_genre":"0a8a13bf87abe8696fbae4efe2b7f874","genre":"Groove Metal","bands":29},
  {"id_genre":"d30be26d66f0448359f54d923aab2bb9","genre":"Metalcore","bands":26},
- {"id_genre":"0c7fde545c06c2bc7383c0430c95fb78","genre":"Doom Metal","bands":23},
+ {"id_genre":"0c7fde545c06c2bc7383c0430c95fb78","genre":"Doom Metal","bands":22},
  {"id_genre":"d725d2ec3a5cfa9f6384d9870df72400","genre":"Heavy Metal","bands":21},
  {"id_genre":"0c5544f60e058b8cbf571044aaa6115f","genre":"Technical Death Metal","bands":21},
  {"id_genre":"ae85ec0052dafef13ff2f2cbcb540b53","genre":"Goregrind","bands":17},

@@ -1668,7 +1668,7 @@ d104b6ae44b0ac6649723bac21761d41	Napoli Violenta	y	t	\N
 aaaad3022279d4afdb86ad02d5bde96b	Toter Fisch	y	t	\N
 c5068f914571c27e04cd66a4ec5c1631	Kampfar	y	t	\N
 fdcfaa5f48035ad96752731731ae941a	Severoth	y	t	\N
-ca4038e41aaa675d65dc3f2ea92556e9	Endonomos	y	t	\N
+ca4038e41aaa675d65dc3f2ea92556e9	Endonomos	m	t	\N
 \.
 
 

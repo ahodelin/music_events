@@ -272,7 +272,7 @@ var bandsInfo = {
  {"id_band":"8351282db025fc2222fc61ec8dd1df23","band":"Empyreal","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
  {"id_band":"cfe122252751e124bfae54a7323bf02d","band":"Endlevel","country":"Germany","flag":"de","likes":"y","genres":2,"events":3},
  {"id_band":"7f3e5839689216583047809a7f6bd0ff","band":"End of Green","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
- {"id_band":"ca4038e41aaa675d65dc3f2ea92556e9","band":"Endonomos","country":"Austria","flag":"at","likes":"y","genres":2,"events":1},
+ {"id_band":"ca4038e41aaa675d65dc3f2ea92556e9","band":"Endonomos","country":"Austria","flag":"at","likes":"m","genres":2,"events":1},
  {"id_band":"e7a227585002db9fee2f0ed56ee5a59f","band":"Endseeker","country":"Germany","flag":"de","likes":"y","genres":1,"events":3},
  {"id_band":"491801c872c67db465fda0f8f180569d","band":"Enforcer","country":"Sweden","flag":"se","likes":"n","genres":2,"events":2},
  {"id_band":"647dadd75e050b230269e43a4fe351e2","band":"Enisum","country":"Italy","flag":"it","likes":"y","genres":2,"events":1},
