@@ -56,7 +56,7 @@ var bandsInfo = {
  {"id_band":"c1e8b6d7a1c20870d5955bcdc04363e4","band":"Ash Nazg Búrz","country":"Mexico","flag":"mx","likes":"y","genres":1,"events":2},
  {"id_band":"37e2e92ced5d525b3e79e389935cd669","band":"Asinhell","country":"Europe","flag":"eu","likes":"y","genres":1,"events":1},
  {"id_band":"ec788cc8478763d79a18160a99dbb618","band":"Asinis","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
- {"id_band":"221fa1624ee1e31376cb112dd2487953","band":"Asomvel","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","likes":"y","genres":1,"events":1},
+ {"id_band":"221fa1624ee1e31376cb112dd2487953","band":"Asomvel","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","likes":"y","genres":1,"events":2},
  {"id_band":"430a03604913a64c33f460ec6f854c36","band":"Asphagor","country":"Austria","flag":"at","likes":"y","genres":1,"events":1},
  {"id_band":"5958cd5ce011ea83c06cb921b1c85bb3","band":"Asphyx","country":"Netherlands","flag":"nl","likes":"y","genres":2,"events":3},
  {"id_band":"14aedd89f13973e35f9ba63149a07768","band":"Assi Assassin","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
