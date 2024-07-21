@@ -875,7 +875,7 @@ var bandsInfo = {
  {"id_band":"0ab7d3a541204a9cab0d2d569c5b173f","band":"Waldgeflüster","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
  {"id_band":"863e7a3d6d4a74739bca7dd81db5d51f","band":"Walls of Jericho","country":"United States of America","flag":"us","likes":"y","genres":1,"events":2},
  {"id_band":"ce14eb923a380597f2aff8b65a742048","band":"Warbringer","country":"United States of America","flag":"us","likes":"y","genres":1,"events":2},
- {"id_band":"a7111b594249d6a038281deb74ef0d04","band":"Warfield","country":"Germany","flag":"de","likes":"y","genres":1,"events":9},
+ {"id_band":"a7111b594249d6a038281deb74ef0d04","band":"Warfield","country":"Germany","flag":"de","likes":"y","genres":1,"events":10},
  {"id_band":"02670bc3f496ce7b1393712f58033f6c","band":"Warkings","country":"Europe","flag":"eu","likes":"m","genres":1,"events":1},
  {"id_band":"43ff5aadca6d8a60dd3da21716358c7d","band":"Warside","country":"France","flag":"fr","likes":"y","genres":1,"events":2},
  {"id_band":"8fdc3e13751b8f525f259d27f2531e87","band":"WeedWizard","country":"Germany","flag":"de","likes":"y","genres":3,"events":1},
