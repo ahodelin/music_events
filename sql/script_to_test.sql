@@ -63,6 +63,8 @@ UNION
     count(*) AS quantity
    FROM music.genres;
    
-  
- update music.bands 
- set likes = 'm' where band in ('Endonomos');
+ select * from geo.countries c where id_country not in (select id_country from geo.countries_continents cc);
+ 
+insert into geo.countries_continents values ('MYS', '142'); 
+ 
+ 
