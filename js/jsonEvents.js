@@ -227,4 +227,5 @@ var eventsInfo = {
  {"id_event":"b3d8150933aa73cc2b3ba1fc39b1651c","year":2024,"date":"28.06.2024","event":"Vader - 40 Years of the Apocalypse Tour 2024","place":"Mannheim (MS Connexion Complex)","bands":3},
  {"id_event":"f4ab1c6777711952be2adceed22d7fc5","year":2024,"date":"29.06.2024","event":"The Exloited - Das Bett - 2024","place":"Frankfurt am Main (Das Bett)","bands":3},
  {"id_event":"9fe5ff8e93ce19ca4b27d5267ad7bfb3","year":2024,"date":"11.07.2024","event":"In Flammen Open Air 2024","place":"Turgau/Entenfang","bands":38},
+ {"id_event":"0782efb77cc659375c5166c8c1a742da","year":2024,"date":"18.07.2024","event":"Asomwel, Warfield","place":"Weinheim (Café Central)","bands":2},
 ]};
