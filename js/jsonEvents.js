@@ -228,4 +228,5 @@ var eventsInfo = {
  {"id_event":"f4ab1c6777711952be2adceed22d7fc5","year":2024,"date":"29.06.2024","event":"The Exloited - Das Bett - 2024","place":"Frankfurt am Main (Das Bett)","bands":3},
  {"id_event":"9fe5ff8e93ce19ca4b27d5267ad7bfb3","year":2024,"date":"11.07.2024","event":"In Flammen Open Air 2024","place":"Turgau/Entenfang","bands":38},
  {"id_event":"f7787eb77e709474505db860a00edd2d","year":2024,"date":"18.07.2024","event":"Asomvel, Warfield","place":"Weinheim (Café Central)","bands":2},
+ {"id_event":"31702e4b76bb69f9630a227d403c4ca0","year":2024,"date":"26.07.2024","event":"Hellripper + Cloak + Sarcator","place":"Tilburg (013 Poppodium)","bands":3},
 ]};
