@@ -795,6 +795,7 @@ var bandsCountriesInfo = {
  {"id_band":"5b5fc236828ee2239072fd8826553b0a","id_country":"DEU                             "},
  {"id_band":"cc31970696ef00b4c6e28dba4252e45d","id_country":"DEU                             "},
  {"id_band":"270fb708bd03433e554e0d7345630c8e","id_country":"BRA                             "},
+ {"id_band":"3cc1eb35683942bb5f7e30b187438c5e","id_country":"DEU                             "},
  {"id_band":"218ac7d899a995dc53cabe52da9ed678","id_country":"DEU                             "},
  {"id_band":"364be07c2428493479a07dbefdacc11f","id_country":"PRT                             "},
  {"id_band":"3f460e130f37e8974fbcdc4d0056b468","id_country":"AUT                             "},

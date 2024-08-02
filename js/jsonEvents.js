@@ -230,4 +230,5 @@ var eventsInfo = {
  {"id_event":"f7787eb77e709474505db860a00edd2d","year":2024,"date":"18.07.2024","event":"Asomvel, Warfield","place":"Weinheim (Café Central)","bands":2},
  {"id_event":"31702e4b76bb69f9630a227d403c4ca0","year":2024,"date":"26.07.2024","event":"Hellripper + Cloak + Sarcator","place":"Tilburg (013 Poppodium)","bands":3},
  {"id_event":"abe69e5488f1be295baa8bbf1995c657","year":2024,"date":"29.07.2024","event":"Deicide - European Tour 2024","place":"Mannheim (7er Club)","bands":2},
+ {"id_event":"d7ccbad7113b66534340d82290a38cfb","year":2024,"date":"01.08.2024","event":"Hutkonzert - ATG - 01.08.2024","place":"Mainz (Alexander the Great)","bands":1},
 ]};
