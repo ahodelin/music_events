@@ -795,6 +795,7 @@ var bandsInfo = {
  {"id_band":"5b5fc236828ee2239072fd8826553b0a","band":"The Jailbreakers","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
  {"id_band":"cc31970696ef00b4c6e28dba4252e45d","band":"The Killer Apes","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
  {"id_band":"270fb708bd03433e554e0d7345630c8e","band":"The Laws Kill Destroy (Fábio Jhasko's Sarcófago tribute)","country":"Brazil","flag":"br","likes":"y","genres":3,"events":1},
+ {"id_band":"3cc1eb35683942bb5f7e30b187438c5e","band":"The Mayflower Aspect","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
  {"id_band":"218ac7d899a995dc53cabe52da9ed678","band":"The Monolith Project","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
  {"id_band":"364be07c2428493479a07dbefdacc11f","band":"The Ominous Circle","country":"Portugal","flag":"pt","likes":"y","genres":2,"events":1},
  {"id_band":"3f460e130f37e8974fbcdc4d0056b468","band":"Theotoxin","country":"Austria","flag":"at","likes":"y","genres":2,"events":2},
