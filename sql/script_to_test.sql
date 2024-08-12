@@ -64,6 +64,7 @@ UNION
    FROM music.genres;
    
  select * from geo.countries c where id_country not in (select id_country from geo.countries_continents cc);
+
  
  
  
