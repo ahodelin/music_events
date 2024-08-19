@@ -1,0 +1,4 @@
+E;Kreator + Havok + Crisix;2024.08.17;Lindau (Club Vaudeville);0;50.55;2
+B;Kreator
+B;Havok
+B;Crisix
