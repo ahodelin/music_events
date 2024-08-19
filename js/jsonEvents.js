@@ -232,4 +232,5 @@ var eventsInfo = {
  {"id_event":"abe69e5488f1be295baa8bbf1995c657","year":2024,"date":"29.07.2024","event":"Deicide - European Tour 2024","place":"Mannheim (7er Club)","bands":2},
  {"id_event":"d7ccbad7113b66534340d82290a38cfb","year":2024,"date":"01.08.2024","event":"Hutkonzert - ATG - 01.08.2024","place":"Mainz (Alexander the Great)","bands":1},
  {"id_event":"d5bd359a19abc00f202bb19255675651","year":2024,"date":"08.08.2024","event":"Party San Open Air 2024","place":"Schlotheim","bands":42},
+ {"id_event":"a20ba10650527a8e646bd528e4f2428e","year":2024,"date":"17.08.2024","event":"Kreator + Havok + Crisix","place":"Lindau (Club Vaudeville)","bands":3},
 ]};
