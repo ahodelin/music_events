@@ -1,0 +1,10 @@
+E;Tattoo Titans in Hamburg 2024;2024.08.31;Hamburg (Messe Halle Schnelsen);1;110.0;2
+B;Rise of Kronos
+B;Baest
+B;Endseeker
+B;Humanity's last Breath;SWE;Progressive Death Metal|Deathcore|Djent|Technical Death Metal
+B;Through the Void;BEL;Nu-Metalcore
+B;Distant
+B;Creeping Flesh;SWE;Death Metal
+B;Born of Osiris;USA;Progressive Metalcore|Djent|Deathcore
+
