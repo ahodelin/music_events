@@ -234,4 +234,5 @@ var eventsInfo = {
  {"id_event":"d5bd359a19abc00f202bb19255675651","year":2024,"date":"08.08.2024","event":"Party San Open Air 2024","place":"Schlotheim","bands":42},
  {"id_event":"a20ba10650527a8e646bd528e4f2428e","year":2024,"date":"17.08.2024","event":"Kreator + Havok + Crisix","place":"Lindau (Club Vaudeville)","bands":3},
  {"id_event":"2c5cad7b6d76825edcfbd5d077e7a5ee","year":2024,"date":"22.08.2024","event":"Death Feast Open Air 2024","place":"Andernach","bands":31},
+ {"id_event":"0c957cfb81bbe34f0d4893934ec11729","year":2024,"date":"29.08.2024","event":"Hutkonzert - ATG - 29.08.2024","place":"Mainz (Alexander the Great)","bands":2},
 ]};
