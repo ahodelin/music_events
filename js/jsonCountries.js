@@ -1,6 +1,6 @@
 var countriesInfo = {
   "countries":[
- {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":399},
+ {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":400},
  {"id_country":"USA                             ","country":"United States of America","flag":"us","bands":111},
  {"id_country":"SWE                             ","country":"Sweden","flag":"se","bands":44},
  {"id_country":"GBR                             ","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","bands":41},
