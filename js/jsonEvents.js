@@ -235,4 +235,6 @@ var eventsInfo = {
  {"id_event":"a20ba10650527a8e646bd528e4f2428e","year":2024,"date":"17.08.2024","event":"Kreator + Havok + Crisix","place":"Lindau (Club Vaudeville)","bands":3},
  {"id_event":"2c5cad7b6d76825edcfbd5d077e7a5ee","year":2024,"date":"22.08.2024","event":"Death Feast Open Air 2024","place":"Andernach","bands":31},
  {"id_event":"0c957cfb81bbe34f0d4893934ec11729","year":2024,"date":"29.08.2024","event":"Hutkonzert - ATG - 29.08.2024","place":"Mainz (Alexander the Great)","bands":2},
+ {"id_event":"01e90040938d8415a8b98f0d80fceb06","year":2024,"date":"31.08.2024","event":"Tattoo Titans in Hamburg 2024","place":"Hamburg (Messe Halle Schnelsen)","bands":8},
+ {"id_event":"05ffebda2d583b6081ffaa8dd7ba0788","year":2024,"date":"06.09.2024","event":"Metal Embrace Festival XVI","place":"Barleben","bands":16},
 ]};
