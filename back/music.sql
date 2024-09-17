@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.8 (Ubuntu 15.8-1.pgdg22.04+1)
--- Dumped by pg_dump version 15.8 (Ubuntu 15.8-1.pgdg22.04+1)
+-- Dumped from database version 16.4
+-- Dumped by pg_dump version 16.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -409,11 +409,11 @@ CREATE VIEW music.v_bands_generes AS
 --
 
 CREATE VIEW music.v_bands_likes AS
- SELECT bands.likes,
-    count(bands.id_band) AS bands
+ SELECT likes,
+    count(id_band) AS bands
    FROM music.bands
-  GROUP BY bands.likes
-  ORDER BY (count(bands.id_band)) DESC;
+  GROUP BY likes
+  ORDER BY (count(id_band)) DESC;
 
 
 --
@@ -423,12 +423,12 @@ CREATE VIEW music.v_bands_likes AS
 CREATE VIEW music.v_bands_to_tex AS
  SELECT
         CASE
-            WHEN ((vb.band)::text ~* '\&'::text) THEN (regexp_replace((vb.band)::text, '\&'::text, '\\&'::text))::character varying
-            WHEN ((vb.band)::text ~* 'ð'::text) THEN (regexp_replace((vb.band)::text, 'ð'::text, '\\dh '::text))::character varying
-            ELSE vb.band
+            WHEN ((band)::text ~* '\&'::text) THEN (regexp_replace((band)::text, '\&'::text, '\\&'::text))::character varying
+            WHEN ((band)::text ~* 'ð'::text) THEN (regexp_replace((band)::text, 'ð'::text, '\\dh '::text))::character varying
+            ELSE band
         END AS "Gruppe",
-    ((' & \includegraphics[width=1cm]{../4x3/'::text || (vb.flag)::text) || '} & '::text) AS "Land",
-    ((('\includegraphics[width=1cm]{'::text || '../likes/'::text) || (vb.likes)::text) || '} \\ \hline'::text) AS "Farbe"
+    ((' & \includegraphics[width=1cm]{../4x3/'::text || (flag)::text) || '} & '::text) AS "Land",
+    ((('\includegraphics[width=1cm]{'::text || '../likes/'::text) || (likes)::text) || '} \\ \hline'::text) AS "Farbe"
    FROM music.v_bands vb;
 
 
@@ -467,11 +467,11 @@ SELECT
 --
 
 CREATE VIEW music.v_events_years AS
- SELECT date_part('year'::text, events.date_event) AS years,
-    count(events.id_event) AS events
+ SELECT date_part('year'::text, date_event) AS years,
+    count(id_event) AS events
    FROM music.events
-  GROUP BY (date_part('year'::text, events.date_event))
-  ORDER BY (date_part('year'::text, events.date_event));
+  GROUP BY (date_part('year'::text, date_event))
+  ORDER BY (date_part('year'::text, date_event));
 
 
 --
@@ -763,6 +763,7 @@ f0f0e638999829b846be6e20b5591898	Mainz (Zitadelle - Die Kulturei)
 cccce7f0011bc27dee7c60945cd5f962	Mainz (Kulturclub schon schön)
 e248bb7c1164a44fa358593e28769a23	Mannheim (7er Club)
 2dd00779b7dd00b6cbbc574779ba1f40	Mühltal (Steinbruch Theater)
+c792b3f05ce40f0ff54fcf79573c89b4	Darmstadt (Radrennbahn)
 \.
 
 
@@ -1742,6 +1743,12 @@ f0f2e6b4ae39fe3ef81d807f641f54a9	Ultha	y	t	\N
 841981e178ed25ef0f86f34ce0fb2904	Distaste	y	t	\N
 fe4398ac7504e937c2ff97039aa66311	Putrid Defecation	y	t	\N
 49d387abd142d76f4b38136257f56201	Frostshock	y	t	\N
+0fa4e99a2451478f3870e930d263cfd4	Blakylle	y	t	\N
+6c718d616702ff78522951d768552d6a	The Monolith Deathcult	y	t	\N
+9efb345179e21314a38093da366e1f09	Morbus Dei	y	t	\N
+b7f3ddec78883ff5a0af0d223f491db8	Scumtomy	y	t	\N
+3472e72b1f52a7fda0d4340e563ea6c0	Pestifer	y	t	\N
+f816407dd0b81a5baedb7695302855d9	Intrepid	y	t	\N
 \.
 
 
@@ -2718,6 +2725,12 @@ b12986f0a962c34c6669d59f40b1e9eb	BRA
 f0f2e6b4ae39fe3ef81d807f641f54a9	DEU                             
 a54196a4ae23c424c6c01a508f4c9dfb	DEU                             
 e3c1fd64db1923585a22632681c95d35	SWE                             
+0fa4e99a2451478f3870e930d263cfd4	DEU                             
+6c718d616702ff78522951d768552d6a	NLD                             
+9efb345179e21314a38093da366e1f09	DEU                             
+b7f3ddec78883ff5a0af0d223f491db8	DEU                             
+3472e72b1f52a7fda0d4340e563ea6c0	BEL                             
+f816407dd0b81a5baedb7695302855d9	EST                             
 \.
 
 
@@ -4124,6 +4137,15 @@ fd1a5654154eed3c0a0820ab54fb90a7	0a7d68cf2a103e1c99f7e6d04f1940da
 fc935f341286c735b575bd50196c904b	fb57c18df776961bb734a1fa3db6a6d1
 f159fc50b5af54fecf21d5ea6ec37bad	fb57c18df776961bb734a1fa3db6a6d1
 265dbcbd2bce07dfa721ed3daaa30912	fb57c18df776961bb734a1fa3db6a6d1
+0cd2b45507cc7c4ead2aaa71c59af730	c6b227c4855621d0654142f2a3cad0ee
+0fa4e99a2451478f3870e930d263cfd4	c6b227c4855621d0654142f2a3cad0ee
+6c718d616702ff78522951d768552d6a	c6b227c4855621d0654142f2a3cad0ee
+9efb345179e21314a38093da366e1f09	c6b227c4855621d0654142f2a3cad0ee
+b7f3ddec78883ff5a0af0d223f491db8	c6b227c4855621d0654142f2a3cad0ee
+118c9af69a42383387e8ce6ab22867d7	099346085ef9364171db5f639475194e
+5e8df9b073e86a3272282977d2c9dc85	099346085ef9364171db5f639475194e
+3472e72b1f52a7fda0d4340e563ea6c0	099346085ef9364171db5f639475194e
+f816407dd0b81a5baedb7695302855d9	099346085ef9364171db5f639475194e
 \.
 
 
@@ -5709,6 +5731,14 @@ bf5c782ca6b0130372ac41ebd703463e	b13bb1f32f0106bf78a65fd98b522515
 01ffa9ce7c50b906e4f5b6a2516ba94b	8e47a4c0304670944a03089849f42e07
 6caa2c6d69ebdc30a3c4580979c3e630	2db87892408abd4d82eb39b78c50c27b
 3ec4a598041aa926d5f075e3d69dfc0a	d25334037d936d3257f794a10bb3030f
+0fa4e99a2451478f3870e930d263cfd4	3a9ee0dca39438793417d3cda903c50f
+6c718d616702ff78522951d768552d6a	7b4b7e3375c9f7424a57a2d9d7bccde5
+6c718d616702ff78522951d768552d6a	93cf908c24c1663d03d67facc359acc2
+6c718d616702ff78522951d768552d6a	b80e9df4d9b290518ee42ad01df931f9
+9efb345179e21314a38093da366e1f09	2db87892408abd4d82eb39b78c50c27b
+b7f3ddec78883ff5a0af0d223f491db8	7b4b7e3375c9f7424a57a2d9d7bccde5
+3472e72b1f52a7fda0d4340e563ea6c0	0c5544f60e058b8cbf571044aaa6115f
+f816407dd0b81a5baedb7695302855d9	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -5957,6 +5987,8 @@ c4133d7e05b0f42aedd762785de80b70	Dread Reaver Europe 2024	2024-01-20	c72b4173a6a
 586a67dc71b225f23047ff369fce7451	Hell over Aschaffenburg - 2019	2019-11-30	b10506e85b6bf48eace09359fb36d5e0	0	30.00	2
 95e6dc1125e477e58c9f5bdb1bdd53ac	Grabbenacht Festival 2023	2023-06-09	010c9e9e86100e63919a6051b399d662	1	45.00	2
 20a697b57317f75ad33eb50f166d6b00	NOAF XI	2015-08-28	6c33b0a7db1a4982d74edfe98239cec5	1	15.0	2
+c6b227c4855621d0654142f2a3cad0ee	Hessian Underground Brutality 2024	2024-09-14	c792b3f05ce40f0ff54fcf79573c89b4	0	15.0	2
+099346085ef9364171db5f639475194e	Underworld Europe Tour 2024	2024-09-15	49d6cee27482319877690f7d0409abbd	0	34.0	2
 \.
 
 
@@ -6169,6 +6201,7 @@ fbe6bca8488a519965b8d63d5d7270c5	Experimental Metal
 0bb2ac8dea4da36597a8d9dc88f0ed64	Atmospheric Black Metal
 c960a78b4d3e0ce6a4a67f9094ffb446	Melodic Gothic Metal
 a8feea8bc8e568f5829eeec3fba8fc29	Neue Deutsche Härte
+b80e9df4d9b290518ee42ad01df931f9	Metal with Electronic influences
 \.
 
 

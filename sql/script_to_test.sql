@@ -60,3 +60,6 @@ UNION
     count(*) AS quantity
    FROM music.genres;
    
+  
+  
+select version();
