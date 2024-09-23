@@ -604,6 +604,7 @@ LUX                             	Luxembourg	lu
 CHE                             	Switzerland	ch
 AUS                             	Australia	au
 NZL                             	New Zealand	nz
+SVK                             	Slovakia	sk
 \.
 
 
@@ -677,6 +678,7 @@ GBR	150
 IRL	150
 HRV	150
 MLT	150
+SVK	150
 \.
 
 
@@ -1749,6 +1751,7 @@ fe4398ac7504e937c2ff97039aa66311	Putrid Defecation	y	t	\N
 b7f3ddec78883ff5a0af0d223f491db8	Scumtomy	y	t	\N
 3472e72b1f52a7fda0d4340e563ea6c0	Pestifer	y	t	\N
 f816407dd0b81a5baedb7695302855d9	Intrepid	y	t	\N
+e2b16c5f5bad24525b8c700c5c3b3653	Persecutor	y	t	\N
 \.
 
 
@@ -2731,6 +2734,7 @@ e3c1fd64db1923585a22632681c95d35	SWE
 b7f3ddec78883ff5a0af0d223f491db8	DEU                             
 3472e72b1f52a7fda0d4340e563ea6c0	BEL                             
 f816407dd0b81a5baedb7695302855d9	EST                             
+e2b16c5f5bad24525b8c700c5c3b3653	DNK                             
 \.
 
 
@@ -4146,6 +4150,9 @@ b7f3ddec78883ff5a0af0d223f491db8	c6b227c4855621d0654142f2a3cad0ee
 5e8df9b073e86a3272282977d2c9dc85	099346085ef9364171db5f639475194e
 3472e72b1f52a7fda0d4340e563ea6c0	099346085ef9364171db5f639475194e
 f816407dd0b81a5baedb7695302855d9	099346085ef9364171db5f639475194e
+de1e0ed5433f5e95c8f48e18e1c75ff6	5d7e58efe4f97f6abc7174574843abbc
+78a7bdfe7277f187e84b52dea7b75b0b	5d7e58efe4f97f6abc7174574843abbc
+e2b16c5f5bad24525b8c700c5c3b3653	5d7e58efe4f97f6abc7174574843abbc
 \.
 
 
@@ -5739,6 +5746,8 @@ bf5c782ca6b0130372ac41ebd703463e	b13bb1f32f0106bf78a65fd98b522515
 b7f3ddec78883ff5a0af0d223f491db8	7b4b7e3375c9f7424a57a2d9d7bccde5
 3472e72b1f52a7fda0d4340e563ea6c0	0c5544f60e058b8cbf571044aaa6115f
 f816407dd0b81a5baedb7695302855d9	3593526a5f465ed766bafb4fb45748a2
+e2b16c5f5bad24525b8c700c5c3b3653	d30be26d66f0448359f54d923aab2bb9
+e2b16c5f5bad24525b8c700c5c3b3653	9e7315413ae31a070ccae5c580dd1b19
 \.
 
 
@@ -5989,6 +5998,7 @@ c4133d7e05b0f42aedd762785de80b70	Dread Reaver Europe 2024	2024-01-20	c72b4173a6a
 20a697b57317f75ad33eb50f166d6b00	NOAF XI	2015-08-28	6c33b0a7db1a4982d74edfe98239cec5	1	15.0	2
 c6b227c4855621d0654142f2a3cad0ee	Hessian Underground Brutality 2024	2024-09-14	c792b3f05ce40f0ff54fcf79573c89b4	0	15.0	2
 099346085ef9364171db5f639475194e	Underworld Europe Tour 2024	2024-09-15	49d6cee27482319877690f7d0409abbd	0	34.0	2
+5d7e58efe4f97f6abc7174574843abbc	In Chambers of Europe 2024	2024-09-20	f3a90318abb3e16166d96055fd6f9096	0	26.0	2
 \.
 
 

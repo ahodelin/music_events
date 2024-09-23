@@ -662,6 +662,7 @@ var bandsCountriesInfo = {
  {"id_band":"1e71013b49bbd3b2aaa276623203453f","id_country":"DEU                             "},
  {"id_band":"85ed977a5fcd1ce0c970827078fdb7dd","id_country":"CHL                             "},
  {"id_band":"7b91dc9ecdfa3ea7d347588a63537bb9","id_country":"AUT                             "},
+ {"id_band":"e2b16c5f5bad24525b8c700c5c3b3653","id_country":"DNK                             "},
  {"id_band":"3472e72b1f52a7fda0d4340e563ea6c0","id_country":"BEL                             "},
  {"id_band":"a8ace0f003d8249d012c27fe27b258b5","id_country":"NLD                             "},
  {"id_band":"baeb191b42ec09353b389f951d19b357","id_country":"DEU                             "},

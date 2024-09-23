@@ -239,4 +239,5 @@ var eventsInfo = {
  {"id_event":"05ffebda2d583b6081ffaa8dd7ba0788","year":2024,"date":"06.09.2024","event":"Metal Embrace Festival XVI","place":"Barleben","bands":16},
  {"id_event":"c6b227c4855621d0654142f2a3cad0ee","year":2024,"date":"14.09.2024","event":"Hessian Underground Brutality 2024","place":"Darmstadt (Radrennbahn)","bands":5},
  {"id_event":"099346085ef9364171db5f639475194e","year":2024,"date":"15.09.2024","event":"Underworld Europe Tour 2024","place":"Mannheim (MS Connexion Complex)","bands":4},
+ {"id_event":"5d7e58efe4f97f6abc7174574843abbc","year":2024,"date":"20.09.2024","event":"In Chambers of Europe 2024","place":"Weinheim (Café Central)","bands":3},
 ]};

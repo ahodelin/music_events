@@ -10,7 +10,7 @@ var countriesInfo = {
  {"id_country":"ITA                             ","country":"Italy","flag":"it","bands":23},
  {"id_country":"BEL                             ","country":"Belgium","flag":"be","bands":22},
  {"id_country":"AUT                             ","country":"Austria","flag":"at","bands":21},
- {"id_country":"DNK                             ","country":"Denmark","flag":"dk","bands":19},
+ {"id_country":"DNK                             ","country":"Denmark","flag":"dk","bands":20},
  {"id_country":"NOR                             ","country":"Norway","flag":"no","bands":17},
  {"id_country":"CHE                             ","country":"Switzerland","flag":"ch","bands":16},
  {"id_country":"CZE                             ","country":"Czechia","flag":"cz","bands":12},

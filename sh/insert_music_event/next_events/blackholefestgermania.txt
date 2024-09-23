@@ -1,0 +1,17 @@
+E;Black Hole Fest Germania II;2024.10.04;Balver Höhle;1;...;2
+B;Mephorash
+B;Belphegor
+B;Darkned Nocturn Slaugthercult
+B;Carpathian Forest;NOR;Black Metal
+B;Whisky Ritual;ITL;Black ''n'' Roll
+B;Endezzma;NOR;Black Metal
+B;Totenwache;DEU;Black Metal
+B;Lunar Spells;GRC;Raw Black Metal
+B;Svarttjern;NOR;Black Metal
+B;Valosta Varjoon;DEU;Black Metal
+B;Tsjuder;NOR;Black Metal
+B;Noctem;ESP;Black Metal|Death Metal
+B;Order of Nosferat;001;Black Metal|Dungeon Synth
+B;Autumn Nostalgie;SVK;Post-Black Metal|Ambient
+B;Dødsfall;NOR;Black Metal
+B;Czort;POL;Black Metal
