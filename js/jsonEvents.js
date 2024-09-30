@@ -180,7 +180,7 @@ var eventsInfo = {
  {"id_event":"90710b6a9bf6fbbdea99a274ca058668","year":2023,"date":"27.10.2023","event":"40 Years of Destruction Europe Tour 2023","place":"Wiesbaden (Schlachthof)","bands":4},
  {"id_event":"db92681077141614e2ee9a01df968334","year":2023,"date":"28.10.2023","event":"Death and Gore over Frankfurt","place":"Frankfurt am Main (Schöppche-Keller)","bands":2},
  {"id_event":"e6af11cd729e7b81d4f40453fff9c7f2","year":2023,"date":"31.10.2023","event":"Halloween mit Hängerbänd und Hellbent on Rocking","place":"Mainz (Alexander the Great)","bands":2},
- {"id_event":"f88c607c316a2a53973d71db053a3ce6","year":2023,"date":"04.11.2023","event":"Death Metal night - 10.2023","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+ {"id_event":"ff9a901a93946ada59ef15661fd395e1","year":2023,"date":"04.11.2023","event":"Death Metal night - 11.2023","place":"Mainz (M8 im Haus der Jugend)","bands":3},
  {"id_event":"de9415f38659fd6225ddf8734a7b0ff7","year":2023,"date":"07.11.2023","event":"Swords into Flesh Europe Tour 2023","place":"Weinheim (Café Central)","bands":4},
  {"id_event":"9952e1e08fb8f493c66f5cf386ba7e06","year":2023,"date":"09.11.2023","event":"Night on the Living Thrash Tour 2023","place":"Aschaffenburg (Colos-Saal)","bands":3},
  {"id_event":"8de89ad5eef951fd87bd3e013c63a6c4","year":2023,"date":"10.11.2023","event":"Slaugther Feast 2023","place":"Bechtheim (Gasthaus Bechtheimer Hof)","bands":14},
@@ -240,4 +240,6 @@ var eventsInfo = {
  {"id_event":"c6b227c4855621d0654142f2a3cad0ee","year":2024,"date":"14.09.2024","event":"Hessian Underground Brutality 2024","place":"Darmstadt (Radrennbahn)","bands":5},
  {"id_event":"099346085ef9364171db5f639475194e","year":2024,"date":"15.09.2024","event":"Underworld Europe Tour 2024","place":"Mannheim (MS Connexion Complex)","bands":4},
  {"id_event":"5d7e58efe4f97f6abc7174574843abbc","year":2024,"date":"20.09.2024","event":"In Chambers of Europe 2024","place":"Weinheim (Café Central)","bands":3},
+ {"id_event":"99467125829a5b728cfe913f88f19db8","year":2024,"date":"28.09.2024","event":"20 Years New Evil Music Festival","place":"Heidelberg (halle 02)","bands":9},
+ {"id_event":"8e625852da508feb3e973eedd98b3a6e","year":2024,"date":"29.09.2024","event":"A Heaven you may create. European Tour 2024 - Part 1","place":"Weinheim (Café Central)","bands":3},
 ]};
