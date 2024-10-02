@@ -242,4 +242,5 @@ var eventsInfo = {
  {"id_event":"5d7e58efe4f97f6abc7174574843abbc","year":2024,"date":"20.09.2024","event":"In Chambers of Europe 2024","place":"Weinheim (Café Central)","bands":3},
  {"id_event":"99467125829a5b728cfe913f88f19db8","year":2024,"date":"28.09.2024","event":"20 Years New Evil Music Festival","place":"Heidelberg (halle 02)","bands":9},
  {"id_event":"8e625852da508feb3e973eedd98b3a6e","year":2024,"date":"29.09.2024","event":"A Heaven you may create. European Tour 2024 - Part 1","place":"Weinheim (Café Central)","bands":3},
+ {"id_event":"94c9c5cc90aa696fcef2944a63f182e9","year":2024,"date":"01.10.2024","event":"European Tour 2024","place":"Heidelberg (halle 02)","bands":4},
 ]};
