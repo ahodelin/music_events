@@ -604,7 +604,7 @@ var bandsInfo = {
  {"id_band":"c82b23ed65bb8e8229c54e9e94ba1479","band":"Mr. Irish Bastard","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
  {"id_band":"3705bfe1d1b3b5630618b164716ae700","band":"Muggeseggel","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
  {"id_band":"496a6164d8bf65daf6ebd4616c95b4b7","band":"Munich Fiends","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
- {"id_band":"0182742917720e1b2cf59ff671738253","band":"Municipal Waste","country":"United States of America","flag":"us","likes":"m","genres":2,"events":3},
+ {"id_band":"0182742917720e1b2cf59ff671738253","band":"Municipal Waste","country":"United States of America","flag":"us","likes":"y","genres":2,"events":3},
  {"id_band":"7b52c8c4a26e381408ee64ff6b98e231","band":"Múr","country":"Iceland","flag":"is","likes":"y","genres":1,"events":1},
  {"id_band":"1bebc288d8fce192365168e890c956c8","band":"Mýdral","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
  {"id_band":"4f58423d9f925c8e8bd73409926730e8","band":"Mystifier","country":"Brazil","flag":"br","likes":"y","genres":2,"events":1},

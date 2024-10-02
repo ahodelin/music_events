@@ -62,4 +62,4 @@ UNION
    
   
 update music.bands 
-set likes = 'm' where band like 'Chapel of %';
+set likes = 'y' where band like 'Municipal Was%';

@@ -1207,7 +1207,6 @@ cb80a6a84ec46f085ea6b2ff30a88d80	Molotov	y	t	\N
 c52d5020aad50e03d48581ffb34cd1c3	Motörblast	y	t	\N
 dcdcd2f22b1d5f85fa5dd68fa89e3756	Motorowl	y	t	\N
 c82b23ed65bb8e8229c54e9e94ba1479	Mr. Irish Bastard	y	t	\N
-0182742917720e1b2cf59ff671738253	Municipal Waste	m	t	\N
 91abd5e520ec0a40ce4360bfd7c5d573	Nailed to Obscurity	y	t	\N
 e6624ef1aeab84f521056a142b5b2d12	Napalm Death	y	t	\N
 3ddbf46000c2fbd44759f3b4672b64db	Nasty	m	t	\N
@@ -1761,6 +1760,7 @@ c256d34ab1f0bd3928525d18ddabe18e	The Vision Bleak	n	t	\N
 0035ac847bf9e371750cacbc98ad827b	Hexvessel	n	t	\N
 e093d52bb2d4ff4973e72f6eb577714b	Chapel of Disease	m	t	\N
 f0cd1b3734f01a46d31c5644e3216382	Immolation	y	t	\N
+0182742917720e1b2cf59ff671738253	Municipal Waste	y	t	\N
 \.
 
 
