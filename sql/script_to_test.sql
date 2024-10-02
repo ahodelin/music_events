@@ -61,4 +61,5 @@ UNION
    FROM music.genres;
    
   
-
+update music.bands 
+set likes = 'm' where band like 'Chapel of %';

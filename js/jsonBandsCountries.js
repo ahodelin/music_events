@@ -445,6 +445,7 @@ var bandsCountriesInfo = {
  {"id_band":"de1e0ed5433f5e95c8f48e18e1c75ff6","id_country":"DNK                             "},
  {"id_band":"65f889eb579641f6e5f58b5a48f3ec12","id_country":"USA                             "},
  {"id_band":"0d949e45a18d81db3491a7b451e99560","id_country":"DEU                             "},
+ {"id_band":"f0cd1b3734f01a46d31c5644e3216382","id_country":"USA                             "},
  {"id_band":"56e8538c55d35a1c23286442b4bccd26","id_country":"FIN                             "},
  {"id_band":"c526681b295049215e5f1c2066639f4a","id_country":"FRO                             "},
  {"id_band":"3cb077e20dabc945228ea58813672973","id_country":"DEU                             "},
