@@ -661,7 +661,7 @@ var bandsInfo = {
  {"id_band":"a753c3945400cd54c7ffd35fc07fe031","band":"Orca","country":"Philippines","flag":"ph","likes":"y","genres":1,"events":1},
  {"id_band":"1dc7d7d977193974deaa993eb373e714","band":"Orcus Patera","country":"Germany","flag":"de","likes":"y","genres":1,"events":2},
  {"id_band":"5ab944fac5f6a0d98dc248a879ec70ff","band":"Orden Ogan","country":"Germany","flag":"de","likes":"y","genres":1,"events":2},
- {"id_band":"6435684be93c4a59a315999d3a3227f5","band":"Order of Nosferat","country":"International","flag":"un","likes":"y","genres":2,"events":1},
+ {"id_band":"6435684be93c4a59a315999d3a3227f5","band":"Order of Nosferat","country":"Europe","flag":"eu","likes":"y","genres":2,"events":1},
  {"id_band":"f44f1e343975f5157f3faf9184bc7ade","band":"Organectomy","country":"New Zealand","flag":"nz","likes":"y","genres":2,"events":2},
  {"id_band":"9722f54adb556b548bb9ecce61a4d167","band":"Orobas","country":"Denmark","flag":"dk","likes":"y","genres":1,"events":1},
  {"id_band":"f929c32e1184b9c0efdd60eb947bf06b","band":"Orphaned Land","country":"Israel","flag":"il","likes":"y","genres":4,"events":1},

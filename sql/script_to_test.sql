@@ -104,5 +104,3 @@ join music.events e
   on e.id_event = be.id_event 
 where e."event" like 'Black Ho%';
 
-update music.bands set likes = 'm' where band in ('Whisky Ritual', 'Autumn Nostalgie');
-
