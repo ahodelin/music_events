@@ -661,7 +661,7 @@ var bandsCountriesInfo = {
  {"id_band":"a753c3945400cd54c7ffd35fc07fe031","id_country":"PHL                             "},
  {"id_band":"1dc7d7d977193974deaa993eb373e714","id_country":"DEU                             "},
  {"id_band":"5ab944fac5f6a0d98dc248a879ec70ff","id_country":"DEU                             "},
- {"id_band":"6435684be93c4a59a315999d3a3227f5","id_country":"001                             "},
+ {"id_band":"6435684be93c4a59a315999d3a3227f5","id_country":"150                             "},
  {"id_band":"f44f1e343975f5157f3faf9184bc7ade","id_country":"NZL                             "},
  {"id_band":"9722f54adb556b548bb9ecce61a4d167","id_country":"DNK                             "},
  {"id_band":"f929c32e1184b9c0efdd60eb947bf06b","id_country":"ISR                             "},
