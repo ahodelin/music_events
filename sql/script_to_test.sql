@@ -61,5 +61,48 @@ UNION
    FROM music.genres;
    
   
-update music.bands 
-set likes = 'y' where band like 'Municipal Was%';
+
+
+select genre, case 
+	when band_like isnull then 0
+	else band_like
+end
+band_like, 
+case 
+	when band_no_like isnull then 0
+	else band_no_like
+end
+band_no_like, case 
+	when band_like is null and band_no_like notnull then 0 - band_no_like
+	when band_like notnull and band_no_like is null then band_like - 0
+	when band_like is null and band_no_like is null then 0
+	else band_like - band_no_like
+end
+delta_like from music.genres g 
+left join
+(select bg.id_genre, count(yb.likes) as band_like from music.bands_genres bg
+join music.bands yb
+  on yb.id_band = bg.id_band 
+where yb.likes = 'y'
+group by bg.id_genre) as b_like
+  on b_like.id_genre = g.id_genre
+left join 
+(select bg.id_genre, count(nb.likes) as band_no_like from music.bands_genres bg
+join music.bands nb
+  on nb.id_band = bg.id_band
+where nb.likes = 'n' or nb.likes = 'm'
+group by bg.id_genre) as b_no_like
+  on b_no_like.id_genre = g.id_genre 
+order by delta_like desc;
+
+
+
+select band, "event" from music.bands b 
+join music.bands_events be 
+  on be.id_band = b.id_band 
+join music.events e
+  on e.id_event = be.id_event 
+where e."event" like 'Black Ho%';
+
+update music.bands set likes = 'm' where band in ('Whisky Ritual', 'Autumn Nostalgie');
+
