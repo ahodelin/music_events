@@ -97,10 +97,4 @@ order by delta_like desc;
 
 
 
-select band, "event" from music.bands b 
-join music.bands_events be 
-  on be.id_band = b.id_band 
-join music.events e
-  on e.id_event = be.id_event 
-where e."event" like 'Black Ho%';
 
