@@ -98,3 +98,7 @@ order by delta_like desc;
 
 
 
+select * from music.bands b where band like 'Call of the%';
+
+update music.bands 
+set likes = 'n' where id_band = '05acc535cbe432a56e2c9cfb170ee635';
