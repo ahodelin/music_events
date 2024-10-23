@@ -245,4 +245,6 @@ var eventsInfo = {
  {"id_event":"94c9c5cc90aa696fcef2944a63f182e9","year":2024,"date":"01.10.2024","event":"European Tour 2024","place":"Heidelberg (halle 02)","bands":4},
  {"id_event":"a601420442e567507a31586d3508e901","year":2024,"date":"04.10.2024","event":"Black Hole Fest Germania II","place":"Balver Höhle","bands":14},
  {"id_event":"e2cc1ec7e3f092bf9acff95c49b4601f","year":2024,"date":"07.10.2024","event":"Apocalyptica Plays Metallica Vol. 2 Tour 2024","place":"Wiesbaden (Schlachthof)","bands":2},
+ {"id_event":"f91e581750aef0db0551fafb15367bd9","year":2024,"date":"09.10.2024","event":"Rising from the North Tour 2024","place":"Luxemburg (Rockhal)","bands":3},
+ {"id_event":"0b050e993c77bc785f1a5ee9dd0c0cca","year":2024,"date":"12.10.2024","event":"Milking the Goatmachine + Craving + Call of the Void","place":"Marburg (Kulturzentrum KFZ)","bands":3},
 ]};

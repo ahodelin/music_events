@@ -767,6 +767,8 @@ e248bb7c1164a44fa358593e28769a23	Mannheim (7er Club)
 2dd00779b7dd00b6cbbc574779ba1f40	Mühltal (Steinbruch Theater)
 c792b3f05ce40f0ff54fcf79573c89b4	Darmstadt (Radrennbahn)
 4dac5916befa9f4e29989cd5f717beb4	Balver Höhle
+c8f566954fe846be7d35f707901d7bf5	Luxemburg (Rockhal)
+9891ba35bb7474ae750bdbf62a4eee4f	Marburg (Kulturzentrum KFZ)
 \.
 
 
@@ -1287,7 +1289,6 @@ d76db99cdd16bd0e53d5e07bcf6225c8	Siberian Meat Grinder	y	t	\N
 f34c903e17cfeea18e499d4627eeb3ec	Slipknot	y	t	\N
 03fec47975e0e1e2d0bc723af47281de	Sober Truth	m	t	\N
 118b96dde2f8773b011dfb27e51b2f95	Sodom	y	t	\N
-7df470ec0292985d8f0e37aa6c2b38d5	Soilwork	y	t	\N
 75241d56d63a68adcd51d828eb76ca80	Solstafir	n	t	\N
 381b834c6bf7b25b9b627c9eeb81dd8a	Soulburn	y	t	\N
 cabcfb35912d17067131f7d2634ac270	Soulfly	y	t	\N
@@ -1776,6 +1777,9 @@ baf938346589a5e047e2aa1afcc3d353	Whisky Ritual	m	t	\N
 e340c1008146e56c9d6c7ad7aa5b8146	Autumn Nostalgie	m	t	\N
 034c15ae2143eea36eec7292010568a1	Apocalyptica	y	t	\N
 50437ed6fdec844c3d86bb6ac8a4a333	The Raven Age	m	t	\N
+7df470ec0292985d8f0e37aa6c2b38d5	Soilwork	m	t	\N
+bb7dcf6e8a0c1005d2be54f005e9ff8f	Craving	m	t	\N
+05acc535cbe432a56e2c9cfb170ee635	Call of the Void	n	t	\N
 \.
 
 
@@ -2781,6 +2785,8 @@ baf938346589a5e047e2aa1afcc3d353	ITA
 6435684be93c4a59a315999d3a3227f5	150                             
 034c15ae2143eea36eec7292010568a1	FIN                             
 50437ed6fdec844c3d86bb6ac8a4a333	GBR                             
+bb7dcf6e8a0c1005d2be54f005e9ff8f	DEU                             
+05acc535cbe432a56e2c9cfb170ee635	DEU                             
 \.
 
 
@@ -4231,6 +4237,12 @@ a6c37758f53101378a209921511369de	a601420442e567507a31586d3508e901
 fa19083b735be2506761886f90534ba7	a601420442e567507a31586d3508e901
 034c15ae2143eea36eec7292010568a1	e2cc1ec7e3f092bf9acff95c49b4601f
 50437ed6fdec844c3d86bb6ac8a4a333	e2cc1ec7e3f092bf9acff95c49b4601f
+b66781a52770d78b260f15d125d1380b	f91e581750aef0db0551fafb15367bd9
+486bf23406dec9844b97f966f4636c9b	f91e581750aef0db0551fafb15367bd9
+7df470ec0292985d8f0e37aa6c2b38d5	f91e581750aef0db0551fafb15367bd9
+cd0bc2c8738b2fef2d78d197223b17d5	0b050e993c77bc785f1a5ee9dd0c0cca
+bb7dcf6e8a0c1005d2be54f005e9ff8f	0b050e993c77bc785f1a5ee9dd0c0cca
+05acc535cbe432a56e2c9cfb170ee635	0b050e993c77bc785f1a5ee9dd0c0cca
 \.
 
 
@@ -5860,6 +5872,8 @@ baf938346589a5e047e2aa1afcc3d353	b9d93d1a014743df713103a89d6dfab5
 034c15ae2143eea36eec7292010568a1	0403a39b82e1ef52bb4dfd3682a42c73
 50437ed6fdec844c3d86bb6ac8a4a333	6af1540af240e4518095bf9c350e6592
 50437ed6fdec844c3d86bb6ac8a4a333	d30be26d66f0448359f54d923aab2bb9
+bb7dcf6e8a0c1005d2be54f005e9ff8f	b54875674f7d2d5be9737b0d4c021a21
+05acc535cbe432a56e2c9cfb170ee635	b54875674f7d2d5be9737b0d4c021a21
 \.
 
 
@@ -6116,6 +6130,8 @@ ebaeb9fa7d6d4de00d7573942a9f9e78	Brutality Unleashed Tour 2022	2022-09-05	0280c9
 94c9c5cc90aa696fcef2944a63f182e9	European Tour 2024	2024-10-01	c72b4173a6a7131bf31a711212305fd3	0	48.95	2
 a601420442e567507a31586d3508e901	Black Hole Fest Germania II	2024-10-04	4dac5916befa9f4e29989cd5f717beb4	1	148.12	2
 e2cc1ec7e3f092bf9acff95c49b4601f	Apocalyptica Plays Metallica Vol. 2 Tour 2024	2024-10-07	588671317bf1864e5a95445ec51aac65	0	55.40	2
+f91e581750aef0db0551fafb15367bd9	Rising from the North Tour 2024	2024-10-09	c8f566954fe846be7d35f707901d7bf5	0	69.0	1
+0b050e993c77bc785f1a5ee9dd0c0cca	Milking the Goatmachine + Craving + Call of the Void	2024-10-12	9891ba35bb7474ae750bdbf62a4eee4f	0	25.73	1
 \.
 
 
