@@ -96,9 +96,6 @@ group by bg.id_genre) as b_no_like
 order by delta_like desc;
 
 
+select * from music.bands b where band like 'Rise of %';
 
 
-select * from music.bands b where band like 'Call of the%';
-
-update music.bands 
-set likes = 'n' where id_band = '05acc535cbe432a56e2c9cfb170ee635';
