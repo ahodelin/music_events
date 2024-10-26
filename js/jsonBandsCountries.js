@@ -738,7 +738,7 @@ var bandsCountriesInfo = {
  {"id_band":"b86f86db61493cc2d757a5cefc5ef425","id_country":"DEU                             "},
  {"id_band":"c82a107cd7673a4368b7252aa57810fc","id_country":"USA                             "},
  {"id_band":"1a5235c012c18789e81960333a76cd7a","id_country":"CAN                             "},
- {"id_band":"268e1d80ad914af7d2e0f6d78eea6f98","id_country":"DEU                             "},
+ {"id_band":"7a78e9ce32da3202ac0ca91ec4247086","id_country":"DEU                             "},
  {"id_band":"1cc93e4af82b1b7e08bace9a92d1f762","id_country":"DEU                             "},
  {"id_band":"fb80cd69a40a73fb3b9f22cf58fd4776","id_country":"SRB                             "},
  {"id_band":"6d779916de27702814e4874dcf4f9e3a","id_country":"USA                             "},
