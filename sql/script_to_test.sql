@@ -96,6 +96,4 @@ group by bg.id_genre) as b_no_like
 order by delta_like desc;
 
 
-select * from music.bands b where band like 'Rise of %';
-
 

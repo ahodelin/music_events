@@ -643,7 +643,7 @@ var bandsInfo = {
  {"id_band":"18e21eae8f909cbb44b5982b44bbf02f","band":"Ninkharsag","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","likes":"y","genres":1,"events":1},
  {"id_band":"07f467f03da5f904144b0ad3bc00a26d","band":"NIOR","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
  {"id_band":"e29470b6da77fb63e9b381fa58022c84","band":"No Brainer","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
- {"id_band":"0a3a1f7ca8d6cf9b2313f69db9e97eb8","band":"Nocte Obducta","country":"Germany","flag":"de","likes":"m","genres":1,"events":2},
+ {"id_band":"0a3a1f7ca8d6cf9b2313f69db9e97eb8","band":"Nocte Obducta","country":"Germany","flag":"de","likes":"y","genres":1,"events":2},
  {"id_band":"2d1ba9aa05ea4d94a0acb6b8dde29d6b","band":"Nocturnal Graves","country":"Australia","flag":"au","likes":"y","genres":1,"events":1},
  {"id_band":"04c8327cc71521b265f2dc7cbe996e13","band":"No Face no Case","country":"Czechia","flag":"cz","likes":"m","genres":1,"events":1},
  {"id_band":"44a468f083ac27ea7b6847fdaf515207","band":"Non est Deus","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
