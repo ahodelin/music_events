@@ -1700,7 +1700,6 @@ b9fd9676338e36e6493489ec5dc041fe	Rats of Gomorrah (Divide)	y	t	Change name from 
 61a6502cfdff1a1668892f52c7a00669	Arkuum	y	t	\N
 d69462bef6601bb8d6e3ffda067399d9	Gernotshagen	y	t	\N
 04728a6272117e0dc4ec29b0f7202ad8	Soul Grinder	y	t	\N
-268e1d80ad914af7d2e0f6d78eea6f98	Rise of Kronos (Surface)	y	t	Change name from Surface to Rise of Kronos
 0ada417f5b4361074360211e63449f34	Slamentation	y	t	\N
 53c25598fe4f1f71a1c596bd4997245c	Blue Collar Punks	y	t	\N
 8518eafd8feec0d8c056d396122a175a	Knife1	m	t	They play Hardcore
@@ -1781,6 +1780,8 @@ e340c1008146e56c9d6c7ad7aa5b8146	Autumn Nostalgie	m	t	\N
 bb7dcf6e8a0c1005d2be54f005e9ff8f	Craving	m	t	\N
 05acc535cbe432a56e2c9cfb170ee635	Call of the Void	n	t	\N
 7a78e9ce32da3202ac0ca91ec4247086	Rise of Kronos	y	t	Change name from Surface to Rise of Kronos
+ba404ce5a29ba15a792583bbaa7969c6	Los Males del Mundo	y	t	\N
+d8cddac7db3dedd7d96b81a31dc519b3	Necrowretch	y	t	\N
 \.
 
 
@@ -2788,6 +2789,8 @@ baf938346589a5e047e2aa1afcc3d353	ITA
 bb7dcf6e8a0c1005d2be54f005e9ff8f	DEU                             
 05acc535cbe432a56e2c9cfb170ee635	DEU                             
 7a78e9ce32da3202ac0ca91ec4247086	DEU                             
+ba404ce5a29ba15a792583bbaa7969c6	ARG                             
+d8cddac7db3dedd7d96b81a31dc519b3	FRA                             
 \.
 
 
@@ -4246,6 +4249,12 @@ bb7dcf6e8a0c1005d2be54f005e9ff8f	0b050e993c77bc785f1a5ee9dd0c0cca
 7a78e9ce32da3202ac0ca91ec4247086	01e90040938d8415a8b98f0d80fceb06
 cd0bc2c8738b2fef2d78d197223b17d5	aa32f037a3d1ff9264faa5c3f0f65079
 7a78e9ce32da3202ac0ca91ec4247086	aa32f037a3d1ff9264faa5c3f0f65079
+35bde21520f1490f0333133a9ae5b4fc	0b3f22fe9047dc47a984a062c17d5777
+abca417a801cd10e57e54a3cb6c7444b	0b3f22fe9047dc47a984a062c17d5777
+8f7939c28270f3187210641e96a98ba7	0b3f22fe9047dc47a984a062c17d5777
+ba404ce5a29ba15a792583bbaa7969c6	0b3f22fe9047dc47a984a062c17d5777
+0a3a1f7ca8d6cf9b2313f69db9e97eb8	0b3f22fe9047dc47a984a062c17d5777
+d8cddac7db3dedd7d96b81a31dc519b3	0b3f22fe9047dc47a984a062c17d5777
 \.
 
 
@@ -5877,6 +5886,9 @@ bb7dcf6e8a0c1005d2be54f005e9ff8f	b54875674f7d2d5be9737b0d4c021a21
 05acc535cbe432a56e2c9cfb170ee635	b54875674f7d2d5be9737b0d4c021a21
 7a78e9ce32da3202ac0ca91ec4247086	3593526a5f465ed766bafb4fb45748a2
 7a78e9ce32da3202ac0ca91ec4247086	9e7315413ae31a070ccae5c580dd1b19
+ba404ce5a29ba15a792583bbaa7969c6	2db87892408abd4d82eb39b78c50c27b
+d8cddac7db3dedd7d96b81a31dc519b3	3593526a5f465ed766bafb4fb45748a2
+d8cddac7db3dedd7d96b81a31dc519b3	2db87892408abd4d82eb39b78c50c27b
 \.
 
 
@@ -6136,6 +6148,7 @@ e2cc1ec7e3f092bf9acff95c49b4601f	Apocalyptica Plays Metallica Vol. 2 Tour 2024	2
 f91e581750aef0db0551fafb15367bd9	Rising from the North Tour 2024	2024-10-09	c8f566954fe846be7d35f707901d7bf5	0	69.0	1
 0b050e993c77bc785f1a5ee9dd0c0cca	Milking the Goatmachine + Craving + Call of the Void	2024-10-12	9891ba35bb7474ae750bdbf62a4eee4f	0	25.73	1
 aa32f037a3d1ff9264faa5c3f0f65079	Feed the Goat Tour 2024	2024-10-25	b9a697f7f6fe15cad76add1dd64b688f	0	20.0	2
+0b3f22fe9047dc47a984a062c17d5777	The Blackest Path II	2024-10-26	a91bcaf7db7d174ee2966d9c293fd575	0	35.0	2
 \.
 
 
