@@ -1,8 +1,8 @@
 var genresInfo = {
   "genres":[
- {"id_genre":"3593526a5f465ed766bafb4fb45748a2","genre":"Death Metal","bands":222},
+ {"id_genre":"3593526a5f465ed766bafb4fb45748a2","genre":"Death Metal","bands":223},
  {"id_genre":"9e7315413ae31a070ccae5c580dd1b19","genre":"Thrash Metal","bands":128},
- {"id_genre":"2db87892408abd4d82eb39b78c50c27b","genre":"Black Metal","bands":124},
+ {"id_genre":"2db87892408abd4d82eb39b78c50c27b","genre":"Black Metal","bands":126},
  {"id_genre":"7b4b7e3375c9f7424a57a2d9d7bccde5","genre":"Brutal Death Metal","bands":93},
  {"id_genre":"b54875674f7d2d5be9737b0d4c021a21","genre":"Melodic Death Metal","bands":50},
  {"id_genre":"d25334037d936d3257f794a10bb3030f","genre":"Grindcore","bands":48},
@@ -59,6 +59,7 @@ var genresInfo = {
  {"id_genre":"3e29d9d93ad04d5bc71d4cdc5a8ad820","genre":"Rock'n'Roll","bands":3},
  {"id_genre":"53ed714383288793db977e8f7326eb61","genre":"Southern Metal","bands":3},
  {"id_genre":"93cf908c24c1663d03d67facc359acc2","genre":"Symphonic Death Metal","bands":3},
+ {"id_genre":"e66156cc95b698d8f4d04ec6dfbb5ab7","genre":"Avant-garde Black Metal","bands":2},
  {"id_genre":"b9d93d1a014743df713103a89d6dfab5","genre":"Black'n'Roll","bands":2},
  {"id_genre":"3a61b71b271203a633e10c5b3fa9f258","genre":"Blues","bands":2},
  {"id_genre":"9d90cd61df8dbf35d395a0e225e3639c","genre":"Epic Heavy Metal","bands":2},
@@ -79,7 +80,6 @@ var genresInfo = {
  {"id_genre":"558a32df12c25cc4ffbef306adb35511","genre":"Atmospheric Post-Black Metal","bands":1},
  {"id_genre":"2e8dbdc23b3287569d32c2bf5fe26e06","genre":"Atmospheric Post-Hardcore","bands":1},
  {"id_genre":"2d6b9e1989416f7c6e9600897f410bdf","genre":"Atmostpheric Doom Metal","bands":1},
- {"id_genre":"e66156cc95b698d8f4d04ec6dfbb5ab7","genre":"Avant-garde Black Metal","bands":1},
  {"id_genre":"76536e0dcee9328df87ca18835071948","genre":"Blackend Thrash Metal","bands":1},
  {"id_genre":"1daa2df0fcb1df14e6f600785631b964","genre":"Blackened Folk Metal","bands":1},
  {"id_genre":"c47182e94615627f857515b0a2bc6ee3","genre":"Blackened Speed Metal","bands":1},

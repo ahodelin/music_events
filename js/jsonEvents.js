@@ -248,4 +248,5 @@ var eventsInfo = {
  {"id_event":"f91e581750aef0db0551fafb15367bd9","year":2024,"date":"09.10.2024","event":"Rising from the North Tour 2024","place":"Luxemburg (Rockhal)","bands":3},
  {"id_event":"0b050e993c77bc785f1a5ee9dd0c0cca","year":2024,"date":"12.10.2024","event":"Milking the Goatmachine + Craving + Call of the Void","place":"Marburg (Kulturzentrum KFZ)","bands":3},
  {"id_event":"aa32f037a3d1ff9264faa5c3f0f65079","year":2024,"date":"25.10.2024","event":"Feed the Goat Tour 2024","place":"Kassel (Goldgrube)","bands":2},
+ {"id_event":"0b3f22fe9047dc47a984a062c17d5777","year":2024,"date":"26.10.2024","event":"The Blackest Path II","place":"Mainz (M8 im Haus der Jugend)","bands":6},
 ]};
