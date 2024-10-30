@@ -97,3 +97,6 @@ order by delta_like desc;
 
 
 
+update music.bands 
+set likes = 'm' where band like 'Scar of %';
+

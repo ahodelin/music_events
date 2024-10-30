@@ -1,6 +1,6 @@
 var countriesInfo = {
   "countries":[
- {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":420},
+ {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":422},
  {"id_country":"USA                             ","country":"United States of America","flag":"us","bands":113},
  {"id_country":"SWE                             ","country":"Sweden","flag":"se","bands":48},
  {"id_country":"GBR                             ","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","bands":44},
@@ -15,9 +15,9 @@ var countriesInfo = {
  {"id_country":"CHE                             ","country":"Switzerland","flag":"ch","bands":17},
  {"id_country":"CZE                             ","country":"Czechia","flag":"cz","bands":12},
  {"id_country":"AUS                             ","country":"Australia","flag":"au","bands":11},
+ {"id_country":"GRC                             ","country":"Greece","flag":"gr","bands":11},
  {"id_country":"BRA                             ","country":"Brazil","flag":"br","bands":10},
  {"id_country":"POL                             ","country":"Poland","flag":"pl","bands":10},
- {"id_country":"GRC                             ","country":"Greece","flag":"gr","bands":9},
  {"id_country":"PRT                             ","country":"Portugal","flag":"pt","bands":9},
  {"id_country":"CAN                             ","country":"Canada","flag":"ca","bands":8},
  {"id_country":"ESP                             ","country":"Spain","flag":"es","bands":8},

@@ -249,4 +249,5 @@ var eventsInfo = {
  {"id_event":"0b050e993c77bc785f1a5ee9dd0c0cca","year":2024,"date":"12.10.2024","event":"Milking the Goatmachine + Craving + Call of the Void","place":"Marburg (Kulturzentrum KFZ)","bands":3},
  {"id_event":"aa32f037a3d1ff9264faa5c3f0f65079","year":2024,"date":"25.10.2024","event":"Feed the Goat Tour 2024","place":"Kassel (Goldgrube)","bands":2},
  {"id_event":"0b3f22fe9047dc47a984a062c17d5777","year":2024,"date":"26.10.2024","event":"The Blackest Path II","place":"Mainz (M8 im Haus der Jugend)","bands":6},
+ {"id_event":"f311f7681e474c2937481923ae6a0445","year":2024,"date":"29.10.2024","event":"Modern primitive Tour 2024","place":"Heidelberg (halle 02)","bands":4},
 ]};
