@@ -921,14 +921,11 @@ eef1b009f602bb255fa81c0a7721373d	Disavowed	y	t	\N
 f8b3eaefc682f8476cc28caf71cb2c73	Los Mezcaleros	n	t	\N
 312793778e3248b6577e3882a77f68f3	Abrogation	y	t	\N
 dd3e531c469005b17115dbf611b01c88	Acranius	y	t	\N
-dd15d5adf6349f5ca53e7a2641d41ab7	ADDICT	y	t	\N
 4a27a1ef21d32d1b30d55f092af0d5a7	Aeon of Disease	y	t	\N
-ef297890615f388057b6a2c0a2cbc7ab	Agnostic Front	y	t	\N
 398af626887ad21cd66aeb272b8337be	Agrypnie	y	t	\N
 786d3481362b8dee6370dfb9b6df38a2	Airborn	m	t	\N
 eb999c99126a456f9db3c5d3b449fa7f	All its Grace	y	t	\N
 0f9fb8452cc5754f83e084693d406721	Amon Amarth	y	t	\N
-0959583c7f421c0bb8adb20e8faeeea1	Amorphis	y	t	\N
 dab701a389943f0d407c6e583abef934	Analepsy	y	t	\N
 8ac49bad86eacffcea299416cd92c3b7	Angelus Apatrida	y	t	\N
 b7f0e9013f8bfb209f4f6b2258b6c9c8	Anthrax	y	t	\N
@@ -942,7 +939,6 @@ b66781a52770d78b260f15d125d1380b	Arch Enemy	y	t	\N
 221fa1624ee1e31376cb112dd2487953	Asomvel	y	t	\N
 5958cd5ce011ea83c06cb921b1c85bb3	Asphyx	y	t	\N
 4a9cd04fd04ab718420ee464645ccb8b	Atomwinter	m	t	\N
-739260d8cb379c357340977fe962d37a	At the Gates	y	t	\N
 8765cfbf81024c3bd45924fee9159982	Audrey Horne	m	t	\N
 824f75181a2bbd69fb2698377ea8a952	Außerwelt	y	t	\N
 4190210961bce8bf2ac072c878ee7902	Aversions Crown	y	t	\N
@@ -982,6 +978,8 @@ ad759a3d4f679008ffdfb07cdbda2bb0	Baleful Abyss (Zombieslut)	y	t	\N
 844de407cd83ea1716f1ff57ea029285	Behemoth	y	t	\N
 df24a5dd8a37d3d203952bb787069ea2	Benediction	y	t	\N
 048d40092f9bd3c450e4bdeeff69e8c3	Benighted	y	t	\N
+ef297890615f388057b6a2c0a2cbc7ab	Agnostic Front	m	t	\N
+0959583c7f421c0bb8adb20e8faeeea1	Amorphis	m	t	\N
 c5d3d165539ddf2020f82c17a61f783d	Betrayal	y	t	\N
 33b39f2721f79a6bb6bb5e1b2834b0bd	Betraying the Martyrs	m	t	\N
 d2d67d63c28a15822569c5033f26b133	Bitchfork	y	t	\N
@@ -998,7 +996,6 @@ fecc75d978ad94aaa4e17b3ff9ded487	Bloodred Hourglass	y	t	\N
 ee36fdf153967a0b99d3340aadeb4720	Bloodspot	y	t	\N
 13291409351c97f8c187790ece4f5a97	Bobby Sixkiller and the Renegades	y	t	\N
 647a73dd79f06cdf74e1fa7524700161	Böhse Onkelz	m	t	\N
-be2c012d60e32fbf456cd8184a51973d	Bokassa	y	t	\N
 cbefc03cdd1940f37a7033620f8ff69f	Booze & Glory	m	t	\N
 b145159df60e1549d1ba922fc8a92448	Born from Pain	m	t	\N
 d9c849266ee3ac1463262df200b3aab8	Bösedeath	y	t	\N
@@ -1037,7 +1034,6 @@ de3e4c12f56a35dc1ee6866b1ddd9d53	Darkall Slaves	y	t	\N
 ac61757d33fc8563eb2409ed08e21974	Dark Zodiak	y	t	\N
 93299af7c9e3c63c7b3d9bb2242c9d6b	Dawn of Disease	y	t	\N
 afb6e0f1e02be39880596a490c900775	Dead Congregation	y	t	\N
-11a5f9f425fd6da2d010808e5bf759ab	Cradle of Filth	y	t	\N
 bc5daaf162914ff1200789d069256d36	Gwar	m	t	\N
 a6c27c0fb9ef87788c1345041e840f95	Begging for Incest	y	t	\N
 98e8599d1486fadca0bf7aa171400dd8	Colours of Autumn	y	t	\N
@@ -1082,6 +1078,8 @@ bd9059497b4af2bb913a8522747af2de	Emerald	n	t	\N
 b9ffbdbbe63789cc6fa9ee2548a1b2ed	Eminenz	y	t	\N
 cfe122252751e124bfae54a7323bf02d	Endlevel	y	t	\N
 7f3e5839689216583047809a7f6bd0ff	End of Green	y	t	\N
+be2c012d60e32fbf456cd8184a51973d	Bokassa	m	t	\N
+11a5f9f425fd6da2d010808e5bf759ab	Cradle of Filth	m	t	\N
 491801c872c67db465fda0f8f180569d	Enforcer	n	t	\N
 647dadd75e050b230269e43a4fe351e2	Enisum	y	t	\N
 05ee6afed8d828d4e7ed35b0483527f7	Enterprise Earth	y	t	\N
@@ -1786,6 +1784,8 @@ d8cddac7db3dedd7d96b81a31dc519b3	Necrowretch	y	t	\N
 3e8f57ef55b9d3a8417963f343db1de2	Equilibrium	y	t	\N
 7176be85b1a9e340db4a91d9f17c87b3	Oceans	y	t	\N
 cc31f5f7ca2d13e95595d2d979d10223	Scar of the Sun	m	t	\N
+dd15d5adf6349f5ca53e7a2641d41ab7	ADDICT	m	t	\N
+739260d8cb379c357340977fe962d37a	At the Gates	m	t	\N
 \.
 
 
