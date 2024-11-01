@@ -96,7 +96,5 @@ group by bg.id_genre) as b_no_like
 order by delta_like desc;
 
 
-
-update music.bands 
-set likes = 'm' where band like 'Cradle of%';
+select b.band from music.bands b where id_band not in (select vb.id_band from music.v_bands vb)
 

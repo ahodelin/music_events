@@ -80,7 +80,7 @@ var eventsInfo = {
  {"id_event":"1a2f8d593b063eccd9b1dc3431e01081","year":2019,"date":"06.09.2019","event":"Metal Embrace Festival XIII","place":"Barleben","bands":15},
  {"id_event":"3d3cf571367952ee016599bba2ef18cb","year":2019,"date":"21.09.2019","event":"Doom over Mainz","place":"Mainz (M8 im Haus der Jugend)","bands":4},
  {"id_event":"79b4deb2eac122cc633196f32cf65670","year":2019,"date":"22.09.2019","event":"Where Owls know my name EU|UK Tour 2019","place":"Wiesbaden (Schlachthof)","bands":4},
- {"id_event":"7dc88a28ee5d7dbd7a1011fd098cd6ab","year":2019,"date":"04.10.2019","event":"Way of Darkness 2019","place":"Lichtenfels (Stadhalle)","bands":21},
+ {"id_event":"7dc88a28ee5d7dbd7a1011fd098cd6ab","year":2019,"date":"04.10.2019","event":"Way of Darkness 2019","place":"Lichtenfels (Stadthalle)","bands":21},
  {"id_event":"3479db140a88fa19295f4346b1d84380","year":2019,"date":"12.10.2019","event":"15 Years New Evil Music, Festival","place":"Mannheim (MS Connexion Complex)","bands":15},
  {"id_event":"f8bb8ae77ca110cf00ebb5af1d495203","year":2019,"date":"19.10.2019","event":"Heavy metal gegen Mikroplastik","place":"Mainz (Alexander the Great)","bands":2},
  {"id_event":"e6513a2614231773cfe00d0bb6178806","year":2019,"date":"24.10.2019","event":"Prayer Of Annihilation Tour 2019","place":"Mannheim (MS Connexion Complex)","bands":4},
@@ -250,4 +250,5 @@ var eventsInfo = {
  {"id_event":"aa32f037a3d1ff9264faa5c3f0f65079","year":2024,"date":"25.10.2024","event":"Feed the Goat Tour 2024","place":"Kassel (Goldgrube)","bands":2},
  {"id_event":"0b3f22fe9047dc47a984a062c17d5777","year":2024,"date":"26.10.2024","event":"The Blackest Path II","place":"Mainz (M8 im Haus der Jugend)","bands":6},
  {"id_event":"f311f7681e474c2937481923ae6a0445","year":2024,"date":"29.10.2024","event":"Modern primitive Tour 2024","place":"Heidelberg (halle 02)","bands":4},
+ {"id_event":"701771f4cfec0fee38bf370d6af6f8cc","year":2024,"date":"31.10.2024","event":"40 Years Farewell Tour","place":"Offenbach (Stadthalle)","bands":4},
 ]};
