@@ -4,7 +4,7 @@ var genresInfo = {
  {"id_genre":"9e7315413ae31a070ccae5c580dd1b19","genre":"Thrash Metal","bands":127},
  {"id_genre":"2db87892408abd4d82eb39b78c50c27b","genre":"Black Metal","bands":126},
  {"id_genre":"7b4b7e3375c9f7424a57a2d9d7bccde5","genre":"Brutal Death Metal","bands":93},
- {"id_genre":"b54875674f7d2d5be9737b0d4c021a21","genre":"Melodic Death Metal","bands":49},
+ {"id_genre":"b54875674f7d2d5be9737b0d4c021a21","genre":"Melodic Death Metal","bands":50},
  {"id_genre":"d25334037d936d3257f794a10bb3030f","genre":"Grindcore","bands":48},
  {"id_genre":"8bb92c3b9b1b949524aac3b578a052b6","genre":"Deathcore","bands":42},
  {"id_genre":"d30be26d66f0448359f54d923aab2bb9","genre":"Metalcore","bands":30},
