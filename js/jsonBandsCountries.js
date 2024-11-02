@@ -769,6 +769,7 @@ var bandsCountriesInfo = {
  {"id_band":"6949c5ed6eda8cf7a40adb2981d4671d","id_country":"DEU                             "},
  {"id_band":"33b3bfc86d7a57e42aa30e7d1c2517be","id_country":"DEU                             "},
  {"id_band":"cc31f5f7ca2d13e95595d2d979d10223","id_country":"GRC                             "},
+ {"id_band":"708abbdc2eb4b62e6732c4c2a60c625a","id_country":"DEU                             "},
  {"id_band":"67cd9b4b7b33511f30e85e21b2d3b204","id_country":"AUT                             "},
  {"id_band":"182a1e726ac1c8ae851194cea6df0393","id_country":"BEL                             "},
  {"id_band":"4bffc4178bd669b13ba0d91ea0522899","id_country":"DEU                             "},

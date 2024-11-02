@@ -96,5 +96,9 @@ group by bg.id_genre) as b_no_like
 order by delta_like desc;
 
 
-select b.band from music.bands b where id_band not in (select vb.id_band from music.v_bands vb)
+select b.band from music.bands b where id_band not in (select vb.id_band from music.v_bands vb);
+
+select e."event" from music.events e where e.id_event not in (select ve.id_event from music.v_events ve);
+
+
 
