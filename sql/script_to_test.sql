@@ -101,5 +101,5 @@ select b.band from music.bands b where id_band not in (select vb.id_band from mu
 select e."event" from music.events e where e.id_event not in (select ve.id_event from music.v_events ve);
 
 
-
+select * from music.v_events ve where place like '%M8%';
 
