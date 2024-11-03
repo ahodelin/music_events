@@ -252,4 +252,5 @@ var eventsInfo = {
  {"id_event":"f311f7681e474c2937481923ae6a0445","year":2024,"date":"29.10.2024","event":"Modern primitive Tour 2024","place":"Heidelberg (halle 02)","bands":4},
  {"id_event":"701771f4cfec0fee38bf370d6af6f8cc","year":2024,"date":"31.10.2024","event":"40 Years Farewell Tour","place":"Offenbach (Stadthalle)","bands":4},
  {"id_event":"ec1c30e91a0ca3f4d0a786488e6ad70f","year":2024,"date":"01.11.2024","event":"Unleash the Gr*n Tour 2024","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
+ {"id_event":"43a5261d50cad6c92b073e23d789dc68","year":2024,"date":"02.11.2024","event":"Last Blast - 02.11.24","place":"Mainz (M8 im Haus der Jugend)","bands":3},
 ]};
