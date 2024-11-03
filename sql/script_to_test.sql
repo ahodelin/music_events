@@ -102,3 +102,4 @@ select e."event" from music.events e where e.id_event not in (select ve.id_event
 
 
 
+
