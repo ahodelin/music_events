@@ -1,6 +1,7 @@
 var bandsCountriesInfo = {
   "bands_countries":[
  {"id_band":"370cde851ed429f1269f243dd714cce2","id_country":"GRC                             "},
+ {"id_band":"d148b29cbc0092dc206f9217a1b3da73","id_country":"USA                             "},
  {"id_band":"9a876908f511193b53ce983ab276bd73","id_country":"GBR                             "},
  {"id_band":"1fe0175f73e5b381213057da98b8f5fb","id_country":"DEU                             "},
  {"id_band":"f68a3eafcc0bb036ee8fde7fc91cde13","id_country":"NOR                             "},
@@ -303,6 +304,7 @@ var bandsCountriesInfo = {
  {"id_band":"7f3e5839689216583047809a7f6bd0ff","id_country":"DEU                             "},
  {"id_band":"ca4038e41aaa675d65dc3f2ea92556e9","id_country":"AUT                             "},
  {"id_band":"e7a227585002db9fee2f0ed56ee5a59f","id_country":"DEU                             "},
+ {"id_band":"a70a003448c0c2d2a6d4974f60914d40","id_country":"USA                             "},
  {"id_band":"491801c872c67db465fda0f8f180569d","id_country":"SWE                             "},
  {"id_band":"647dadd75e050b230269e43a4fe351e2","id_country":"ITA                             "},
  {"id_band":"05ee6afed8d828d4e7ed35b0483527f7","id_country":"USA                             "},
@@ -358,6 +360,7 @@ var bandsCountriesInfo = {
  {"id_band":"278af3c810bb9de0f355ce115b5a2f54","id_country":"LUX                             "},
  {"id_band":"2859f0ed0630ecc1589b6868fd1dde41","id_country":"PRT                             "},
  {"id_band":"61e5d7cb15bd519ceddcf7ba9a22cbc6","id_country":"DEU                             "},
+ {"id_band":"ffd6243282cdf77599e2abaf5d1a36e5","id_country":"USA                             "},
  {"id_band":"d69462bef6601bb8d6e3ffda067399d9","id_country":"DEU                             "},
  {"id_band":"71144850f4fb4cc55fc0ee6935badddf","id_country":"SWE                             "},
  {"id_band":"eed35187b83d0f2e0042cf221905163c","id_country":"NLD                             "},
