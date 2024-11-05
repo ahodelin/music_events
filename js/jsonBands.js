@@ -1,6 +1,7 @@
 var bandsInfo = {
   "bands":[
  {"id_band":"370cde851ed429f1269f243dd714cce2","band":"1000Mods","country":"Greece","flag":"gr","likes":"y","genres":3,"events":1},
+ {"id_band":"d148b29cbc0092dc206f9217a1b3da73","band":"200 Stab Wounds","country":"United States of America","flag":"us","likes":"y","genres":1,"events":1},
  {"id_band":"9a876908f511193b53ce983ab276bd73","band":".357 Homicide","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","likes":"y","genres":2,"events":1},
  {"id_band":"1fe0175f73e5b381213057da98b8f5fb","band":"5 Stabbed 4 Corpses","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
  {"id_band":"f68a3eafcc0bb036ee8fde7fc91cde13","band":"Abbath","country":"Norway","flag":"no","likes":"y","genres":1,"events":2},
@@ -303,6 +304,7 @@ var bandsInfo = {
  {"id_band":"7f3e5839689216583047809a7f6bd0ff","band":"End of Green","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
  {"id_band":"ca4038e41aaa675d65dc3f2ea92556e9","band":"Endonomos","country":"Austria","flag":"at","likes":"m","genres":2,"events":1},
  {"id_band":"e7a227585002db9fee2f0ed56ee5a59f","band":"Endseeker","country":"Germany","flag":"de","likes":"y","genres":1,"events":4},
+ {"id_band":"a70a003448c0c2d2a6d4974f60914d40","band":"Enforced","country":"United States of America","flag":"us","likes":"y","genres":2,"events":1},
  {"id_band":"491801c872c67db465fda0f8f180569d","band":"Enforcer","country":"Sweden","flag":"se","likes":"n","genres":2,"events":2},
  {"id_band":"647dadd75e050b230269e43a4fe351e2","band":"Enisum","country":"Italy","flag":"it","likes":"y","genres":2,"events":1},
  {"id_band":"05ee6afed8d828d4e7ed35b0483527f7","band":"Enterprise Earth","country":"United States of America","flag":"us","likes":"y","genres":2,"events":1},
@@ -358,6 +360,7 @@ var bandsInfo = {
  {"id_band":"278af3c810bb9de0f355ce115b5a2f54","band":"Fusion Bomb","country":"Luxembourg","flag":"lu","likes":"y","genres":1,"events":2},
  {"id_band":"2859f0ed0630ecc1589b6868fd1dde41","band":"Gaerea","country":"Portugal","flag":"pt","likes":"y","genres":1,"events":1},
  {"id_band":"61e5d7cb15bd519ceddcf7ba9a22cbc6","band":"Gasbrand","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
+ {"id_band":"ffd6243282cdf77599e2abaf5d1a36e5","band":"Gatecreeper","country":"United States of America","flag":"us","likes":"y","genres":1,"events":1},
  {"id_band":"d69462bef6601bb8d6e3ffda067399d9","band":"Gernotshagen","country":"Germany","flag":"de","likes":"y","genres":2,"events":2},
  {"id_band":"71144850f4fb4cc55fc0ee6935badddf","band":"Ghost","country":"Sweden","flag":"se","likes":"y","genres":2,"events":2},
  {"id_band":"eed35187b83d0f2e0042cf221905163c","band":"Gingerpig","country":"Netherlands","flag":"nl","likes":"m","genres":1,"events":1},
