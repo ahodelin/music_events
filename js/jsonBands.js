@@ -965,7 +965,7 @@ var bandsInfo = {
  {"id_band":"dd0e61ab23e212d958112dd06ad0bfd2","band":"Victorius","country":"Germany","flag":"de","likes":"n","genres":1,"events":1},
  {"id_band":"d1fded22db9fc8872e86fff12d511207","band":"V.I.D.A","country":"Argentina","flag":"ar","likes":"y","genres":3,"events":1},
  {"id_band":"cd3faaaf1bebf8d009aa59f887d17ef2","band":"VILE","country":"United States of America","flag":"us","likes":"y","genres":2,"events":1},
- {"id_band":"134a3bbedd12bc313d57aa4cc781ddf9","band":"Violent Vortex","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
+ {"id_band":"134a3bbedd12bc313d57aa4cc781ddf9","band":"Violent Vortex","country":"Germany","flag":"de","likes":"n","genres":1,"events":1},
  {"id_band":"933c8182650ca4ae087544beff5bb52d","band":"Viscera","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","likes":"y","genres":1,"events":1},
  {"id_band":"45816111a5b644493b68cfedfb1a0cc0","band":"Viscera Trail","country":"Israel","flag":"il","likes":"y","genres":2,"events":1},
  {"id_band":"5a534330e31944ed43cb6d35f4ad23c7","band":"Visdom","country":"Germany","flag":"de","likes":"m","genres":2,"events":1},

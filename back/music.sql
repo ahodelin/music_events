@@ -1795,7 +1795,7 @@ a70a003448c0c2d2a6d4974f60914d40	Enforced	y	t	\N
 dba661bb8c2cd8edac359b22d3f9ddf3	Roots of Unrest	y	t	\N
 b5067ff7f533848af0c9d1f3e6c5b204	Authorist	n	t	\N
 553adf4c48f103e61a3ee7a94e7ea17b	Axit	y	t	\N
-134a3bbedd12bc313d57aa4cc781ddf9	Violent Vortex	y	t	\N
+134a3bbedd12bc313d57aa4cc781ddf9	Violent Vortex	n	t	\N
 \.
 
 
