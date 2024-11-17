@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.4 (Ubuntu 16.4-1.pgdg24.04+2)
--- Dumped by pg_dump version 16.4 (Ubuntu 16.4-1.pgdg24.04+2)
+-- Dumped from database version 16.5 (Ubuntu 16.5-1.pgdg24.04+1)
+-- Dumped by pg_dump version 16.5 (Ubuntu 16.5-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -771,6 +771,7 @@ c8f566954fe846be7d35f707901d7bf5	Luxemburg (Rockhal)
 b9a697f7f6fe15cad76add1dd64b688f	Kassel (Goldgrube)
 a04166db1f1c6d75ab79b04756750bf5	Lichtenfels (Stadthalle)
 fa5218c9167a20e6b9f6bf2a139433ce	Flörsheim (Moshpit)
+d90ac22c4f2291b68cb07746d0472dbf	Karlsruhe (AKK)
 \.
 
 
@@ -1793,6 +1794,8 @@ a70a003448c0c2d2a6d4974f60914d40	Enforced	y	t	\N
 68f05e1c702a4218b7eb968ff9489744	Guerrilla Fist	y	t	\N
 dba661bb8c2cd8edac359b22d3f9ddf3	Roots of Unrest	y	t	\N
 b5067ff7f533848af0c9d1f3e6c5b204	Authorist	n	t	\N
+553adf4c48f103e61a3ee7a94e7ea17b	Axit	y	t	\N
+134a3bbedd12bc313d57aa4cc781ddf9	Violent Vortex	y	t	\N
 \.
 
 
@@ -2815,6 +2818,8 @@ a70a003448c0c2d2a6d4974f60914d40	USA
 68f05e1c702a4218b7eb968ff9489744	DEU                             
 b5067ff7f533848af0c9d1f3e6c5b204	DEU                             
 dba661bb8c2cd8edac359b22d3f9ddf3	DEU                             
+553adf4c48f103e61a3ee7a94e7ea17b	DEU                             
+134a3bbedd12bc313d57aa4cc781ddf9	DEU                             
 \.
 
 
@@ -4301,6 +4306,9 @@ b12daab6c83b1a45aa32cd9c2bc78360	9317da510080ab43b1cf8e89f890554b
 68f05e1c702a4218b7eb968ff9489744	9317da510080ab43b1cf8e89f890554b
 b5067ff7f533848af0c9d1f3e6c5b204	9317da510080ab43b1cf8e89f890554b
 dba661bb8c2cd8edac359b22d3f9ddf3	9317da510080ab43b1cf8e89f890554b
+7a78e9ce32da3202ac0ca91ec4247086	7bf774533c7117c4e139f1cb58cbedbe
+553adf4c48f103e61a3ee7a94e7ea17b	7bf774533c7117c4e139f1cb58cbedbe
+134a3bbedd12bc313d57aa4cc781ddf9	7bf774533c7117c4e139f1cb58cbedbe
 \.
 
 
@@ -5954,6 +5962,8 @@ a70a003448c0c2d2a6d4974f60914d40	c7fb67368c25c29b9c10ca91b2d97488
 68f05e1c702a4218b7eb968ff9489744	0a8a13bf87abe8696fbae4efe2b7f874
 b5067ff7f533848af0c9d1f3e6c5b204	d30be26d66f0448359f54d923aab2bb9
 dba661bb8c2cd8edac359b22d3f9ddf3	3593526a5f465ed766bafb4fb45748a2
+553adf4c48f103e61a3ee7a94e7ea17b	3593526a5f465ed766bafb4fb45748a2
+134a3bbedd12bc313d57aa4cc781ddf9	9e7315413ae31a070ccae5c580dd1b19
 \.
 
 
@@ -6219,6 +6229,7 @@ ec1c30e91a0ca3f4d0a786488e6ad70f	Unleash the Gr*n Tour 2024	2024-11-01	09ddc8804
 43a5261d50cad6c92b073e23d789dc68	Last Blast - 02.11.24	2024-11-02	a91bcaf7db7d174ee2966d9c293fd575	0	9.0	2
 98fbe07eebe68a529f12602e94d37b62	Dark Superstition European Tour 2024	2024-11-04	588671317bf1864e5a95445ec51aac65	0	31.50	2
 9317da510080ab43b1cf8e89f890554b	Burning Burrito Fest Vol.8 - The Burn is Real	2024-11-09	fa5218c9167a20e6b9f6bf2a139433ce	0	22.0	2
+7bf774533c7117c4e139f1cb58cbedbe	The Imperium Tour	2024-11-16	d90ac22c4f2291b68cb07746d0472dbf	0	0.0	2
 \.
 
 
