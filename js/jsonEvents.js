@@ -255,4 +255,5 @@ var eventsInfo = {
  {"id_event":"43a5261d50cad6c92b073e23d789dc68","year":2024,"date":"02.11.2024","event":"Last Blast - 02.11.24","place":"Mainz (M8 im Haus der Jugend)","bands":3},
  {"id_event":"98fbe07eebe68a529f12602e94d37b62","year":2024,"date":"04.11.2024","event":"Dark Superstition European Tour 2024","place":"Wiesbaden (Schlachthof)","bands":3},
  {"id_event":"9317da510080ab43b1cf8e89f890554b","year":2024,"date":"09.11.2024","event":"Burning Burrito Fest Vol.8 - The Burn is Real","place":"Flörsheim (Moshpit)","bands":6},
+ {"id_event":"7bf774533c7117c4e139f1cb58cbedbe","year":2024,"date":"16.11.2024","event":"The Imperium Tour","place":"Karlsruhe (AKK)","bands":3},
 ]};
