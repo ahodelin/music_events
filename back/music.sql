@@ -2,12 +2,13 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.5 (Ubuntu 16.5-1.pgdg24.04+1)
--- Dumped by pg_dump version 16.5 (Ubuntu 16.5-1.pgdg24.04+1)
+-- Dumped from database version 17.1 (Ubuntu 17.1-1.pgdg24.04+1)
+-- Dumped by pg_dump version 17.1 (Ubuntu 17.1-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -1269,7 +1270,6 @@ ef75c0b43ae9ba972900e83c5ccf5cac	Satan's Fall	n	t	\N
 d1ba47339d5eb2254dd3f2cc9f7e444f	Scrvmp	y	t	\N
 7cb94a8039f617f505df305a1dc2cc61	Seii Taishogun	y	t	\N
 a9afdc809b94392fb1c2e873dbb02781	Sensles	m	t	\N
-576fea4a0c5425ba382fff5f593a33f1	Sepultura	y	t	\N
 55696bac6cdd14d47cbe7940665e21d3	Serrabulho	y	t	\N
 f79485ffe5db7e276e1e625b0be0dbec	Shoot the Girl first	n	t	\N
 eb4558fa99c7f8d548cbcb32a14d469c	Shores of Null	y	t	\N
@@ -1363,7 +1363,6 @@ a2a607567311cb7a5a609146b977f4a9	Wolfheart	y	t	\N
 b00114f9fc38b48cc42a4972d7e07df6	Zebrahead	m	t	\N
 a2761eea97ee9fe09464d5e70da6dd06	Zodiac	y	t	\N
 9d514e6b301cfe7bdc270212d5565eaf	Zombi	m	t	\N
-852c0b6d5b315c823cdf0382ca78e47f	Crisix	y	t	\N
 a2c31c455e3d0ea3f3bdbea294fe186b	Redgrin	y	t	\N
 ffd2da11d45ed35a039951a8b462e7fb	Torment of Souls	y	t	\N
 16c88f2a44ab7ecdccef28154f3a0109	Skelethal	y	t	\N
@@ -1796,6 +1795,8 @@ dba661bb8c2cd8edac359b22d3f9ddf3	Roots of Unrest	y	t	\N
 b5067ff7f533848af0c9d1f3e6c5b204	Authorist	n	t	\N
 553adf4c48f103e61a3ee7a94e7ea17b	Axit	y	t	\N
 134a3bbedd12bc313d57aa4cc781ddf9	Violent Vortex	n	t	\N
+576fea4a0c5425ba382fff5f593a33f1	Sepultura	y	f	\N
+852c0b6d5b315c823cdf0382ca78e47f	Crisix	y	f	\N
 \.
 
 
