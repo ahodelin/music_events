@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.1 (Ubuntu 17.1-1.pgdg24.04+1)
--- Dumped by pg_dump version 17.1 (Ubuntu 17.1-1.pgdg24.04+1)
+-- Dumped from database version 17.2 (Ubuntu 17.2-1.pgdg24.04+1)
+-- Dumped by pg_dump version 17.2 (Ubuntu 17.2-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -4310,6 +4310,9 @@ dba661bb8c2cd8edac359b22d3f9ddf3	9317da510080ab43b1cf8e89f890554b
 7a78e9ce32da3202ac0ca91ec4247086	7bf774533c7117c4e139f1cb58cbedbe
 553adf4c48f103e61a3ee7a94e7ea17b	7bf774533c7117c4e139f1cb58cbedbe
 134a3bbedd12bc313d57aa4cc781ddf9	7bf774533c7117c4e139f1cb58cbedbe
+f2856ad30734c5f838185cc08f71b1e4	5a1a238b946013e16ff5db077b9f5ae6
+10627ac0e35cfed4a0ca5b97a06b9d9f	5a1a238b946013e16ff5db077b9f5ae6
+048d40092f9bd3c450e4bdeeff69e8c3	5a1a238b946013e16ff5db077b9f5ae6
 \.
 
 
@@ -6231,6 +6234,7 @@ ec1c30e91a0ca3f4d0a786488e6ad70f	Unleash the Gr*n Tour 2024	2024-11-01	09ddc8804
 98fbe07eebe68a529f12602e94d37b62	Dark Superstition European Tour 2024	2024-11-04	588671317bf1864e5a95445ec51aac65	0	31.50	2
 9317da510080ab43b1cf8e89f890554b	Burning Burrito Fest Vol.8 - The Burn is Real	2024-11-09	fa5218c9167a20e6b9f6bf2a139433ce	0	22.0	2
 7bf774533c7117c4e139f1cb58cbedbe	The Imperium Tour	2024-11-16	d90ac22c4f2291b68cb07746d0472dbf	0	0.0	2
+5a1a238b946013e16ff5db077b9f5ae6	Beast agaist Beast European Tour 2024	2024-11-22	09ddc8804dd5908fef3c8c0c474ad238	0	30.9	2
 \.
 
 
