@@ -1797,6 +1797,9 @@ b5067ff7f533848af0c9d1f3e6c5b204	Authorist	n	t	\N
 134a3bbedd12bc313d57aa4cc781ddf9	Violent Vortex	n	t	\N
 576fea4a0c5425ba382fff5f593a33f1	Sepultura	y	f	\N
 852c0b6d5b315c823cdf0382ca78e47f	Crisix	y	f	\N
+ab9ca8ecf42a92840c674cde665fbdd3	Sunczar	y	t	\N
+d4192d77ea0e14c40efe4dc9f08fdfb8	Denomination	y	t	\N
+5fac4291bc9c25864604c4a6be9e0b4a	New World Depression	y	t	\N
 \.
 
 
@@ -2821,6 +2824,9 @@ b5067ff7f533848af0c9d1f3e6c5b204	DEU
 dba661bb8c2cd8edac359b22d3f9ddf3	DEU                             
 553adf4c48f103e61a3ee7a94e7ea17b	DEU                             
 134a3bbedd12bc313d57aa4cc781ddf9	DEU                             
+ab9ca8ecf42a92840c674cde665fbdd3	DEU                             
+d4192d77ea0e14c40efe4dc9f08fdfb8	DEU                             
+5fac4291bc9c25864604c4a6be9e0b4a	DEU                             
 \.
 
 
@@ -4313,6 +4319,12 @@ dba661bb8c2cd8edac359b22d3f9ddf3	9317da510080ab43b1cf8e89f890554b
 f2856ad30734c5f838185cc08f71b1e4	5a1a238b946013e16ff5db077b9f5ae6
 10627ac0e35cfed4a0ca5b97a06b9d9f	5a1a238b946013e16ff5db077b9f5ae6
 048d40092f9bd3c450e4bdeeff69e8c3	5a1a238b946013e16ff5db077b9f5ae6
+5958cd5ce011ea83c06cb921b1c85bb3	f9b4f5ba6cb5f7721ce1e55d68a918b8
+ab9ca8ecf42a92840c674cde665fbdd3	f9b4f5ba6cb5f7721ce1e55d68a918b8
+cd0bc2c8738b2fef2d78d197223b17d5	f9b4f5ba6cb5f7721ce1e55d68a918b8
+d4192d77ea0e14c40efe4dc9f08fdfb8	f9b4f5ba6cb5f7721ce1e55d68a918b8
+d0b02893ceb72d11a3471fe18d7089fd	f9b4f5ba6cb5f7721ce1e55d68a918b8
+5fac4291bc9c25864604c4a6be9e0b4a	f9b4f5ba6cb5f7721ce1e55d68a918b8
 \.
 
 
@@ -5968,6 +5980,10 @@ b5067ff7f533848af0c9d1f3e6c5b204	d30be26d66f0448359f54d923aab2bb9
 dba661bb8c2cd8edac359b22d3f9ddf3	3593526a5f465ed766bafb4fb45748a2
 553adf4c48f103e61a3ee7a94e7ea17b	3593526a5f465ed766bafb4fb45748a2
 134a3bbedd12bc313d57aa4cc781ddf9	9e7315413ae31a070ccae5c580dd1b19
+ab9ca8ecf42a92840c674cde665fbdd3	4690ec139849f88f1c10347d0cc7d1b5
+d4192d77ea0e14c40efe4dc9f08fdfb8	3593526a5f465ed766bafb4fb45748a2
+5fac4291bc9c25864604c4a6be9e0b4a	3593526a5f465ed766bafb4fb45748a2
+5fac4291bc9c25864604c4a6be9e0b4a	c8ae0bc02385186afd062503fa77a1bc
 \.
 
 
@@ -6235,6 +6251,7 @@ ec1c30e91a0ca3f4d0a786488e6ad70f	Unleash the Gr*n Tour 2024	2024-11-01	09ddc8804
 9317da510080ab43b1cf8e89f890554b	Burning Burrito Fest Vol.8 - The Burn is Real	2024-11-09	fa5218c9167a20e6b9f6bf2a139433ce	0	22.0	2
 7bf774533c7117c4e139f1cb58cbedbe	The Imperium Tour	2024-11-16	d90ac22c4f2291b68cb07746d0472dbf	0	0.0	2
 5a1a238b946013e16ff5db077b9f5ae6	Beast agaist Beast European Tour 2024	2024-11-22	09ddc8804dd5908fef3c8c0c474ad238	0	30.9	2
+f9b4f5ba6cb5f7721ce1e55d68a918b8	Hell over Aschaffenburg - 2024	2024-11-23	b13f71a1a5f7e89c2603d5241c2aca25	0	32.5	2
 \.
 
 

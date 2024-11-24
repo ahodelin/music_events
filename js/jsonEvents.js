@@ -257,4 +257,5 @@ var eventsInfo = {
  {"id_event":"9317da510080ab43b1cf8e89f890554b","year":2024,"date":"09.11.2024","event":"Burning Burrito Fest Vol.8 - The Burn is Real","place":"Flörsheim (Moshpit)","bands":6},
  {"id_event":"7bf774533c7117c4e139f1cb58cbedbe","year":2024,"date":"16.11.2024","event":"The Imperium Tour","place":"Karlsruhe (AKK)","bands":3},
  {"id_event":"5a1a238b946013e16ff5db077b9f5ae6","year":2024,"date":"22.11.2024","event":"Beast agaist Beast European Tour 2024","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
+ {"id_event":"f9b4f5ba6cb5f7721ce1e55d68a918b8","year":2024,"date":"23.11.2024","event":"Hell over Aschaffenburg - 2024","place":"Weibersbrunn (Mehrzweckhalle)","bands":6},
 ]};
