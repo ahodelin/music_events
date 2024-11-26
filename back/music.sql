@@ -1800,6 +1800,9 @@ b5067ff7f533848af0c9d1f3e6c5b204	Authorist	n	t	\N
 ab9ca8ecf42a92840c674cde665fbdd3	Sunczar	y	t	\N
 d4192d77ea0e14c40efe4dc9f08fdfb8	Denomination	y	t	\N
 5fac4291bc9c25864604c4a6be9e0b4a	New World Depression	y	t	\N
+ecd06281e276d8cc9a8b1b26d8c93f08	Chelsea Grin	y	t	\N
+bf6cf2159f795fc867355ee94bca0dd5	Despised Icon	y	t	\N
+3b0713ede16f6289afd699359dff90d4	Vitriol	y	t	\N
 \.
 
 
@@ -2827,6 +2830,9 @@ dba661bb8c2cd8edac359b22d3f9ddf3	DEU
 ab9ca8ecf42a92840c674cde665fbdd3	DEU                             
 d4192d77ea0e14c40efe4dc9f08fdfb8	DEU                             
 5fac4291bc9c25864604c4a6be9e0b4a	DEU                             
+ecd06281e276d8cc9a8b1b26d8c93f08	USA                             
+bf6cf2159f795fc867355ee94bca0dd5	CAN                             
+3b0713ede16f6289afd699359dff90d4	USA                             
 \.
 
 
@@ -4325,6 +4331,10 @@ cd0bc2c8738b2fef2d78d197223b17d5	f9b4f5ba6cb5f7721ce1e55d68a918b8
 d4192d77ea0e14c40efe4dc9f08fdfb8	f9b4f5ba6cb5f7721ce1e55d68a918b8
 d0b02893ceb72d11a3471fe18d7089fd	f9b4f5ba6cb5f7721ce1e55d68a918b8
 5fac4291bc9c25864604c4a6be9e0b4a	f9b4f5ba6cb5f7721ce1e55d68a918b8
+3cb5ffaba5b396de828bc06683b5e058	95fea685e14cf598f5a22e82371ebaac
+ecd06281e276d8cc9a8b1b26d8c93f08	95fea685e14cf598f5a22e82371ebaac
+bf6cf2159f795fc867355ee94bca0dd5	95fea685e14cf598f5a22e82371ebaac
+3b0713ede16f6289afd699359dff90d4	95fea685e14cf598f5a22e82371ebaac
 \.
 
 
@@ -5984,6 +5994,9 @@ ab9ca8ecf42a92840c674cde665fbdd3	4690ec139849f88f1c10347d0cc7d1b5
 d4192d77ea0e14c40efe4dc9f08fdfb8	3593526a5f465ed766bafb4fb45748a2
 5fac4291bc9c25864604c4a6be9e0b4a	3593526a5f465ed766bafb4fb45748a2
 5fac4291bc9c25864604c4a6be9e0b4a	c8ae0bc02385186afd062503fa77a1bc
+ecd06281e276d8cc9a8b1b26d8c93f08	8bb92c3b9b1b949524aac3b578a052b6
+bf6cf2159f795fc867355ee94bca0dd5	8bb92c3b9b1b949524aac3b578a052b6
+3b0713ede16f6289afd699359dff90d4	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -6252,6 +6265,7 @@ ec1c30e91a0ca3f4d0a786488e6ad70f	Unleash the Gr*n Tour 2024	2024-11-01	09ddc8804
 7bf774533c7117c4e139f1cb58cbedbe	The Imperium Tour	2024-11-16	d90ac22c4f2291b68cb07746d0472dbf	0	0.0	2
 5a1a238b946013e16ff5db077b9f5ae6	Beast agaist Beast European Tour 2024	2024-11-22	09ddc8804dd5908fef3c8c0c474ad238	0	30.9	2
 f9b4f5ba6cb5f7721ce1e55d68a918b8	Hell over Aschaffenburg - 2024	2024-11-23	b13f71a1a5f7e89c2603d5241c2aca25	0	32.5	2
+95fea685e14cf598f5a22e82371ebaac	European Tour Fall 2024	2024-11-25	051fa36efd99a2ae24d56b198e7b1992	0	40.70	2
 \.
 
 
