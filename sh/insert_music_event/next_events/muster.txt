@@ -1,0 +1,5 @@
+# yyyy.mm.dd: 4 digits for the year, two digits for mounth and two digits for days
+# n: Number
+# l: Letter
+E;Name of event;yyyy.mm.dd;Name of Place;Number of days (n);Price (nn.nn);Persons (n)
+B;Name of band;Acronym of Country(lll);Genre 1|...|Genre X

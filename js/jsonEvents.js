@@ -259,4 +259,6 @@ var eventsInfo = {
  {"id_event":"5a1a238b946013e16ff5db077b9f5ae6","year":2024,"date":"22.11.2024","event":"Beast agaist Beast European Tour 2024","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
  {"id_event":"f9b4f5ba6cb5f7721ce1e55d68a918b8","year":2024,"date":"23.11.2024","event":"Hell over Aschaffenburg - 2024","place":"Weibersbrunn (Mehrzweckhalle)","bands":6},
  {"id_event":"95fea685e14cf598f5a22e82371ebaac","year":2024,"date":"25.11.2024","event":"European Tour Fall 2024","place":"Karlsruhe (Alter Schlachthof - Substage)","bands":4},
+ {"id_event":"9cfee73dcb4ebeba48366c0fd1d4fe3a","year":2024,"date":"20.12.2024","event":"Metal Mainz III","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+ {"id_event":"d595ca8e35e1587abeb7e90d43f4faff","year":2024,"date":"21.12.2024","event":"Mariner und Wolfbird Twins - ATG Mainz","place":"Mainz (Alexander the Great)","bands":2},
 ]};

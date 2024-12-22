@@ -1655,7 +1655,6 @@ db732a1a9861777294f7dc54eeca2b3e	Mindreaper	y	t	\N
 1ace9926ad3a6dab09d16602fd2fcccc	Infected Chaos	y	t	\N
 05256decaa2ee2337533d95c7de3db9d	Maniacs Brainacts	y	t	\N
 c664656f67e963f4c0f651195f818ce0	Isn't	y	t	\N
-032d53a86540806303b4c81586308e58	Wotolom	y	t	\N
 df800795b697445f2b7dc0096d75f4df	Lack of Senses	m	t	\N
 810f28b77fa6c866fbcceb6c8aa7bac4	Disrooted	m	t	\N
 7fcdd5f715be5fce835b68b9e63e1733	Guardians Gate	m	t	\N
@@ -1803,6 +1802,10 @@ d4192d77ea0e14c40efe4dc9f08fdfb8	Denomination	y	t	\N
 ecd06281e276d8cc9a8b1b26d8c93f08	Chelsea Grin	y	t	\N
 bf6cf2159f795fc867355ee94bca0dd5	Despised Icon	y	t	\N
 3b0713ede16f6289afd699359dff90d4	Vitriol	y	t	\N
+46148baa7f5229428d9b0950be68e6d7	Sworn Allegiance	y	t	\N
+a909b944804141354049983d9c6cc236	Mariner	y	t	\N
+16e54a9ce3fcedbadd0cdc18832266fd	Wolfbird Twins	y	t	\N
+032d53a86540806303b4c81586308e58	Wotolom	y	f	\N
 \.
 
 
@@ -2833,6 +2836,9 @@ d4192d77ea0e14c40efe4dc9f08fdfb8	DEU
 ecd06281e276d8cc9a8b1b26d8c93f08	USA                             
 bf6cf2159f795fc867355ee94bca0dd5	CAN                             
 3b0713ede16f6289afd699359dff90d4	USA                             
+46148baa7f5229428d9b0950be68e6d7	DEU                             
+a909b944804141354049983d9c6cc236	DEU                             
+16e54a9ce3fcedbadd0cdc18832266fd	DEU                             
 \.
 
 
@@ -4335,6 +4341,11 @@ d0b02893ceb72d11a3471fe18d7089fd	f9b4f5ba6cb5f7721ce1e55d68a918b8
 ecd06281e276d8cc9a8b1b26d8c93f08	95fea685e14cf598f5a22e82371ebaac
 bf6cf2159f795fc867355ee94bca0dd5	95fea685e14cf598f5a22e82371ebaac
 3b0713ede16f6289afd699359dff90d4	95fea685e14cf598f5a22e82371ebaac
+087c643d95880c5a89fc13f3246bebae	9cfee73dcb4ebeba48366c0fd1d4fe3a
+032d53a86540806303b4c81586308e58	9cfee73dcb4ebeba48366c0fd1d4fe3a
+46148baa7f5229428d9b0950be68e6d7	9cfee73dcb4ebeba48366c0fd1d4fe3a
+a909b944804141354049983d9c6cc236	d595ca8e35e1587abeb7e90d43f4faff
+16e54a9ce3fcedbadd0cdc18832266fd	d595ca8e35e1587abeb7e90d43f4faff
 \.
 
 
@@ -5997,6 +6008,12 @@ d4192d77ea0e14c40efe4dc9f08fdfb8	3593526a5f465ed766bafb4fb45748a2
 ecd06281e276d8cc9a8b1b26d8c93f08	8bb92c3b9b1b949524aac3b578a052b6
 bf6cf2159f795fc867355ee94bca0dd5	8bb92c3b9b1b949524aac3b578a052b6
 3b0713ede16f6289afd699359dff90d4	3593526a5f465ed766bafb4fb45748a2
+46148baa7f5229428d9b0950be68e6d7	0a96c0f13cf38b7e26172c335ce7933c
+a909b944804141354049983d9c6cc236	88ff69ec6aa54fb228d85b92f3b12945
+a909b944804141354049983d9c6cc236	b81acdb05aef5596bb72fe68d03cfaa2
+16e54a9ce3fcedbadd0cdc18832266fd	19ceec79dad9529ea3d0ea15b5781312
+16e54a9ce3fcedbadd0cdc18832266fd	2cfb794ae8db38d488dbd27f0f3a8b14
+16e54a9ce3fcedbadd0cdc18832266fd	88ff69ec6aa54fb228d85b92f3b12945
 \.
 
 
@@ -6266,6 +6283,8 @@ ec1c30e91a0ca3f4d0a786488e6ad70f	Unleash the Gr*n Tour 2024	2024-11-01	09ddc8804
 5a1a238b946013e16ff5db077b9f5ae6	Beast agaist Beast European Tour 2024	2024-11-22	09ddc8804dd5908fef3c8c0c474ad238	0	30.9	2
 f9b4f5ba6cb5f7721ce1e55d68a918b8	Hell over Aschaffenburg - 2024	2024-11-23	b13f71a1a5f7e89c2603d5241c2aca25	0	32.5	2
 95fea685e14cf598f5a22e82371ebaac	European Tour Fall 2024	2024-11-25	051fa36efd99a2ae24d56b198e7b1992	0	40.70	2
+9cfee73dcb4ebeba48366c0fd1d4fe3a	Metal Mainz III	2024-12-20	a91bcaf7db7d174ee2966d9c293fd575	0	11.0	2
+d595ca8e35e1587abeb7e90d43f4faff	Mariner und Wolfbird Twins - ATG Mainz	2024-12-21	17648f3308a5acb119d9aee1b5eafceb	0	12.0	2
 \.
 
 
@@ -6490,6 +6509,9 @@ bcfc9877823bc82005f8062436e3d81e	Symphonic Heavy Metal
 0403a39b82e1ef52bb4dfd3682a42c73	Symphonic Rock
 5fefa04e0919aa751cff36fe3a94f833	Atmospheric Death Metal
 fedf6851863c5847bc0bf5de7c3c758e	Epic Folk Metal
+b81acdb05aef5596bb72fe68d03cfaa2	Psychadelic Rock
+19ceec79dad9529ea3d0ea15b5781312	Sludge Rock
+2cfb794ae8db38d488dbd27f0f3a8b14	Doom Rock
 \.
 
 

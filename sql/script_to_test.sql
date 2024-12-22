@@ -100,3 +100,11 @@ select b.band from music.bands b where id_band not in (select vb.id_band from mu
 
 select e."event" from music.events e where e.id_event not in (select ve.id_event from music.v_events ve);
 
+select e.date_event, e."event" 
+from music.events e
+where (date_part('month', e.date_event) = '12' and date_part('day', e.date_event) = '15') or 
+(date_part('month', e.date_event) = '11' and date_part('day', e.date_event) = '25')
+order by date_part('month', e.date_event); 
+
+
+
