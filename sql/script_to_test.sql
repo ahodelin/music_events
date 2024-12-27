@@ -108,3 +108,14 @@ order by date_part('month', e.date_event);
 
 
 
+select * from music.events e where id_place = '17648f3308a5acb119d9aee1b5eafceb';
+
+select md5(lower(regexp_replace('Live on stage', '\s|\W', '', 'g'))), 'Live on stage';
+
+update music.events
+set id_event = md5(lower(regexp_replace('Hutkonzert - 19.10.2023', '\s|\W', '', 'g'))), "event" = 'Hutkonzert - 19.10.2023'
+where id_event = '79880b3852adb21098807cc10effe071';
+
+
+
+
