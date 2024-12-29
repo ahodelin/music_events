@@ -773,6 +773,7 @@ b9a697f7f6fe15cad76add1dd64b688f	Kassel (Goldgrube)
 a04166db1f1c6d75ab79b04756750bf5	Lichtenfels (Stadthalle)
 fa5218c9167a20e6b9f6bf2a139433ce	Flörsheim (Moshpit)
 d90ac22c4f2291b68cb07746d0472dbf	Karlsruhe (AKK)
+d41d8cd98f00b204e9800998ecf8427e	
 \.
 
 
@@ -1806,6 +1807,8 @@ bf6cf2159f795fc867355ee94bca0dd5	Despised Icon	y	t	\N
 a909b944804141354049983d9c6cc236	Mariner	y	t	\N
 16e54a9ce3fcedbadd0cdc18832266fd	Wolfbird Twins	y	t	\N
 032d53a86540806303b4c81586308e58	Wotolom	y	f	\N
+d96d8ea6a2c90ed0902b5cc1bc0bd95c	DJ Serkan	y	t	\N
+b08bdd1d40a38ab9848ff817294332ca	Texas Cornflake Massacre	y	t	\N
 \.
 
 
@@ -2839,6 +2842,8 @@ bf6cf2159f795fc867355ee94bca0dd5	CAN
 46148baa7f5229428d9b0950be68e6d7	DEU                             
 a909b944804141354049983d9c6cc236	DEU                             
 16e54a9ce3fcedbadd0cdc18832266fd	DEU                             
+d96d8ea6a2c90ed0902b5cc1bc0bd95c	DEU                             
+b08bdd1d40a38ab9848ff817294332ca	DEU                             
 \.
 
 
@@ -4346,6 +4351,9 @@ a909b944804141354049983d9c6cc236	ca3f4984b3956024054e62665febcc6a
 92e1aca33d97fa75c1e81a9db61454bb	fa92cfeec372b54d5551e5fb9aaa55af
 087c643d95880c5a89fc13f3246bebae	f6fbabd4858c55fea0dce0d32db9dcf5
 08e2440159e71c7020394db19541aabc	f6fbabd4858c55fea0dce0d32db9dcf5
+d96d8ea6a2c90ed0902b5cc1bc0bd95c	ca5f18706516d234e9451661a60dfc42
+e039d55ed63a723001867bc4eb842c00	c65ee59c92bf87259bb6081ac1066701
+b08bdd1d40a38ab9848ff817294332ca	c65ee59c92bf87259bb6081ac1066701
 \.
 
 
@@ -6014,6 +6022,9 @@ a909b944804141354049983d9c6cc236	b81acdb05aef5596bb72fe68d03cfaa2
 16e54a9ce3fcedbadd0cdc18832266fd	19ceec79dad9529ea3d0ea15b5781312
 16e54a9ce3fcedbadd0cdc18832266fd	2cfb794ae8db38d488dbd27f0f3a8b14
 16e54a9ce3fcedbadd0cdc18832266fd	88ff69ec6aa54fb228d85b92f3b12945
+d96d8ea6a2c90ed0902b5cc1bc0bd95c	521d246ddd7b5cb1e7903ec65686b45a
+b08bdd1d40a38ab9848ff817294332ca	b54875674f7d2d5be9737b0d4c021a21
+b08bdd1d40a38ab9848ff817294332ca	488d66856880e32fb94d0e791471e015
 \.
 
 
@@ -6285,6 +6296,8 @@ f9b4f5ba6cb5f7721ce1e55d68a918b8	Hell over Aschaffenburg - 2024	2024-11-23	b13f7
 48b3e4e082a150ee45ac1229b6c556bc	Live on Stage - 23.03.2024	2024-03-23	17648f3308a5acb119d9aee1b5eafceb	0	15	2
 a53dce25b80bd1caf2f1aa7ea602ed63	Live on Stage - 16.09.2023	2023-09-16	17648f3308a5acb119d9aee1b5eafceb	0	14	2
 ca3f4984b3956024054e62665febcc6a	Live on Stage - 21.12.2024	2024-12-21	17648f3308a5acb119d9aee1b5eafceb	0	12.0	2
+ca5f18706516d234e9451661a60dfc42	Motörhead Tribute Night - ATG Mainz	2024-12-27	17648f3308a5acb119d9aee1b5eafceb	0	3.0	2
+c65ee59c92bf87259bb6081ac1066701	Rocken im Winter Festival 2024	2024-12-28	2dd00779b7dd00b6cbbc574779ba1f40	0	23.20	2
 \.
 
 
@@ -6512,6 +6525,7 @@ fedf6851863c5847bc0bf5de7c3c758e	Epic Folk Metal
 b81acdb05aef5596bb72fe68d03cfaa2	Psychadelic Rock
 19ceec79dad9529ea3d0ea15b5781312	Sludge Rock
 2cfb794ae8db38d488dbd27f0f3a8b14	Doom Rock
+521d246ddd7b5cb1e7903ec65686b45a	Rock DJ
 \.
 
 

@@ -117,5 +117,8 @@ set id_event = md5(lower(regexp_replace('Hutkonzert - 19.10.2023', '\s|\W', '', 
 where id_event = '79880b3852adb21098807cc10effe071';
 
 
+update music.events 
+set id_place = '' where id_event = '';
+
 
 
