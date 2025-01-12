@@ -54,7 +54,7 @@ var bandsInfo = {
  {"id_band":"5214513d882cf478e028201a0d9031c0","band":"Arctic Winter","country":"Germany","flag":"de","likes":"y","genres":1,"events":2},
  {"id_band":"08e2440159e71c7020394db19541aabc","band":"Are we used to it","country":"Germany","flag":"de","likes":"y","genres":3,"events":1},
  {"id_band":"95a1f9b6006151e00b1a4cda721f469d","band":"Arkona","country":"Poland","flag":"pl","likes":"y","genres":1,"events":1},
- {"id_band":"61a6502cfdff1a1668892f52c7a00669","band":"Arkuum","country":"Germany","flag":"de","likes":"y","genres":1,"events":2},
+ {"id_band":"61a6502cfdff1a1668892f52c7a00669","band":"Arkuum","country":"Germany","flag":"de","likes":"y","genres":1,"events":3},
  {"id_band":"35bde21520f1490f0333133a9ae5b4fc","band":"Arroganz","country":"Germany","flag":"de","likes":"y","genres":2,"events":3},
  {"id_band":"36233ed8c181dfacc945ad598fb4f1a1","band":"Artillery","country":"Denmark","flag":"dk","likes":"n","genres":1,"events":1},
  {"id_band":"8e38937886f365bb96aa1c189c63c5ea","band":"Asagraum","country":"Netherlands","flag":"nl","likes":"y","genres":1,"events":2},
