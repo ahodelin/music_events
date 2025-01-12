@@ -418,6 +418,7 @@ var bandsCountriesInfo = {
  {"id_band":"eef7d6da9ba6d0bed2078a5f253f4cfc","id_country":"DNK                             "},
  {"id_band":"123131d2d4bd15a0db8f07090a383157","id_country":"DEU                             "},
  {"id_band":"78bbff6bf39602a577c9d8a117116330","id_country":"USA                             "},
+ {"id_band":"b06edc3ce52eb05a5a45ae58a7bb7adc","id_country":"DEU                             "},
  {"id_band":"6db22194a183d7da810dcc29ea360c17","id_country":"DEU                             "},
  {"id_band":"2054decb2290dbaab1c813fd86cc5f8b","id_country":"ITA                             "},
  {"id_band":"e9648f919ee5adda834287bbdf6210fd","id_country":"DEU                             "},

@@ -116,9 +116,11 @@ update music.events
 set id_event = md5(lower(regexp_replace('Hutkonzert - 19.10.2023', '\s|\W', '', 'g'))), "event" = 'Hutkonzert - 19.10.2023'
 where id_event = '79880b3852adb21098807cc10effe071';
 
+select * from music.bands b where band like '%DJ%';
 
-update music.events 
-set id_place = '' where id_event = '';
+
+update music.bands 
+set likes = 'm' where id_band = 'd96d8ea6a2c90ed0902b5cc1bc0bd95c';
 
 
 

@@ -263,4 +263,5 @@ var eventsInfo = {
  {"id_event":"ca3f4984b3956024054e62665febcc6a","year":2024,"date":"21.12.2024","event":"Live on Stage - 21.12.2024","place":"Mainz (Alexander the Great)","bands":2},
  {"id_event":"ca5f18706516d234e9451661a60dfc42","year":2024,"date":"27.12.2024","event":"Motörhead Tribute Night - ATG Mainz","place":"Mainz (Alexander the Great)","bands":1},
  {"id_event":"c65ee59c92bf87259bb6081ac1066701","year":2024,"date":"28.12.2024","event":"Rocken im Winter Festival 2024","place":"Mühltal (Steinbruch Theater)","bands":2},
+ {"id_event":"2b23c45d7b18dfccde35439462716807","year":2025,"date":"11.01.2025","event":"Hier ist kein Licht Tour","place":"Mainz (M8 im Haus der Jugend)","bands":3},
 ]};
