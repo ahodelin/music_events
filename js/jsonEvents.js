@@ -264,4 +264,5 @@ var eventsInfo = {
  {"id_event":"ca5f18706516d234e9451661a60dfc42","year":2024,"date":"27.12.2024","event":"Motörhead Tribute Night - ATG Mainz","place":"Mainz (Alexander the Great)","bands":1},
  {"id_event":"c65ee59c92bf87259bb6081ac1066701","year":2024,"date":"28.12.2024","event":"Rocken im Winter Festival 2024","place":"Mühltal (Steinbruch Theater)","bands":2},
  {"id_event":"2b23c45d7b18dfccde35439462716807","year":2025,"date":"11.01.2025","event":"Hier ist kein Licht Tour","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+ {"id_event":"27eb08ae0128e38418359de5030cba15","year":2025,"date":"17.01.2025","event":"Asagraum & Helleruin","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
 ]};

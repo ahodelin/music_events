@@ -4,7 +4,7 @@ var countriesInfo = {
  {"id_country":"USA                             ","country":"United States of America","flag":"us","bands":120},
  {"id_country":"SWE                             ","country":"Sweden","flag":"se","bands":48},
  {"id_country":"GBR                             ","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","bands":44},
- {"id_country":"NLD                             ","country":"Netherlands","flag":"nl","bands":33},
+ {"id_country":"NLD                             ","country":"Netherlands","flag":"nl","bands":35},
  {"id_country":"FRA                             ","country":"France","flag":"fr","bands":29},
  {"id_country":"FIN                             ","country":"Finland","flag":"fi","bands":27},
  {"id_country":"ITA                             ","country":"Italy","flag":"it","bands":24},
