@@ -265,4 +265,6 @@ var eventsInfo = {
  {"id_event":"c65ee59c92bf87259bb6081ac1066701","year":2024,"date":"28.12.2024","event":"Rocken im Winter Festival 2024","place":"Mühltal (Steinbruch Theater)","bands":2},
  {"id_event":"2b23c45d7b18dfccde35439462716807","year":2025,"date":"11.01.2025","event":"Hier ist kein Licht Tour","place":"Mainz (M8 im Haus der Jugend)","bands":3},
  {"id_event":"27eb08ae0128e38418359de5030cba15","year":2025,"date":"17.01.2025","event":"Asagraum & Helleruin","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
+ {"id_event":"33fc414b35e2153721f8e19b5b2aa1eb","year":2025,"date":"18.01.2025","event":"Die letzte Open Stage im ATG","place":"Mainz (Alexander the Great)","bands":4},
+ {"id_event":"dc3e783425dbba6bb13a0b09e3d8a473","year":2025,"date":"19.01.2025","event":"Pagan Metal Matinee","place":"Weinheim (Café Central)","bands":3},
 ]};
