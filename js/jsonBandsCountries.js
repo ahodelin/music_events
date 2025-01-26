@@ -812,6 +812,7 @@ var bandsCountriesInfo = {
  {"id_band":"5885f60f8c705921cf7411507b8cadc0","id_country":"NLD                             "},
  {"id_band":"fdcfaa5f48035ad96752731731ae941a","id_country":"UKR                             "},
  {"id_band":"113ab4d243afc4114902d317ad41bb39","id_country":"FRA                             "},
+ {"id_band":"cdd21eba97ee010129f5d1e7a80494cb","id_country":"USA                             "},
  {"id_band":"9d36a42a36b62b3f665c7fa07f07563b","id_country":"JAM                             "},
  {"id_band":"05bea3ed3fcd45441c9c6af3a2d9952d","id_country":"DEU                             "},
  {"id_band":"80d331992feb02627ae8b30687c7bb78","id_country":"CZE                             "},

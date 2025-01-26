@@ -1439,7 +1439,6 @@ fc239fd89fd7c9edbf2bf27d1d894bc0	Implore	y	t	\N
 a8ace0f003d8249d012c27fe27b258b5	Pestilence	y	t	\N
 255661921f4ad57d02b1de9062eb6421	Onslaught	y	t	\N
 5d53b2be2fe7e27daa27b94724c3b6de	Blood Incantation	y	t	\N
-57126705faf40e4b5227c8a0302d13b2	Cattle Decapitation	y	t	\N
 51cb62b41cd9deaaa2dd98c773a09ebb	Misanthropic	y	t	\N
 cba8cb3c568de75a884eaacde9434443	Leng Tch'e	y	t	\N
 19cbbb1b1e68c42f3415fb1654b2d390	Bloodtruth	y	t	\N
@@ -1818,6 +1817,8 @@ d1b8bfadad3a69dbd746217a500a4db5	Battle Tales	y	t	\N
 28a6ebe1e170483c1695fca36880db98	Mystaken	y	t	\N
 ce34dc9b3e210fd7a61d94df77bd8398	Evgeniy-Projekt	y	t	\N
 57006f73c326669c8d52c47a3a9e2696	Greñas	m	t	\N
+cdd21eba97ee010129f5d1e7a80494cb	Shadow of Intent	y	t	\N
+57126705faf40e4b5227c8a0302d13b2	Cattle Decapitation	n	t	\N
 \.
 
 
@@ -2862,6 +2863,7 @@ d1b8bfadad3a69dbd746217a500a4db5	CHE
 57006f73c326669c8d52c47a3a9e2696	DEU                             
 28a6ebe1e170483c1695fca36880db98	DEU                             
 ce34dc9b3e210fd7a61d94df77bd8398	150                             
+cdd21eba97ee010129f5d1e7a80494cb	USA                             
 \.
 
 
@@ -4385,6 +4387,10 @@ d1b8bfadad3a69dbd746217a500a4db5	dc3e783425dbba6bb13a0b09e3d8a473
 57006f73c326669c8d52c47a3a9e2696	33fc414b35e2153721f8e19b5b2aa1eb
 28a6ebe1e170483c1695fca36880db98	33fc414b35e2153721f8e19b5b2aa1eb
 ce34dc9b3e210fd7a61d94df77bd8398	33fc414b35e2153721f8e19b5b2aa1eb
+57126705faf40e4b5227c8a0302d13b2	50870ec5cfc0a18f40002a123c288af6
+cdd21eba97ee010129f5d1e7a80494cb	50870ec5cfc0a18f40002a123c288af6
+df99cee44099ff57acbf7932670614dd	50870ec5cfc0a18f40002a123c288af6
+bff322dbe273a1e2d1fe37f81acccbe4	50870ec5cfc0a18f40002a123c288af6
 \.
 
 
@@ -6068,6 +6074,8 @@ d1b8bfadad3a69dbd746217a500a4db5	f54c3ccedc098d37a4e7f7a455f5731e
 28a6ebe1e170483c1695fca36880db98	8f8351209253e5c5d8ff147b02d3b117
 28a6ebe1e170483c1695fca36880db98	db4560bb40a4c4309950c9bc94a5880c
 ce34dc9b3e210fd7a61d94df77bd8398	9e7315413ae31a070ccae5c580dd1b19
+cdd21eba97ee010129f5d1e7a80494cb	5e57b61f8223fb8b54685a6a063ad3cc
+cdd21eba97ee010129f5d1e7a80494cb	283a2e526241b2c01f4928afda6a2e0a
 \.
 
 
@@ -6345,6 +6353,7 @@ c65ee59c92bf87259bb6081ac1066701	Rocken im Winter Festival 2024	2024-12-28	2dd00
 27eb08ae0128e38418359de5030cba15	Asagraum & Helleruin	2025-01-17	09ddc8804dd5908fef3c8c0c474ad238	0	28.50	2
 dc3e783425dbba6bb13a0b09e3d8a473	Pagan Metal Matinee	2025-01-19	f3a90318abb3e16166d96055fd6f9096	0	16.5	2
 33fc414b35e2153721f8e19b5b2aa1eb	Die letzte Open Stage im ATG	2025-01-18	17648f3308a5acb119d9aee1b5eafceb	0	0.0	2
+50870ec5cfc0a18f40002a123c288af6	The Terrasitic Reconquest Tour 2025	2025-01-26	588671317bf1864e5a95445ec51aac65	0	42.0	2
 \.
 
 
@@ -6574,6 +6583,8 @@ b81acdb05aef5596bb72fe68d03cfaa2	Psychadelic Rock
 2cfb794ae8db38d488dbd27f0f3a8b14	Doom Rock
 521d246ddd7b5cb1e7903ec65686b45a	Rock DJ
 02a506ada599434029efcb78921153af	Garagerock
+5e57b61f8223fb8b54685a6a063ad3cc	Symphonic Deathcore
+283a2e526241b2c01f4928afda6a2e0a	Melodic Deathcore
 \.
 
 

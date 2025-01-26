@@ -267,4 +267,5 @@ var eventsInfo = {
  {"id_event":"27eb08ae0128e38418359de5030cba15","year":2025,"date":"17.01.2025","event":"Asagraum & Helleruin","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":3},
  {"id_event":"33fc414b35e2153721f8e19b5b2aa1eb","year":2025,"date":"18.01.2025","event":"Die letzte Open Stage im ATG","place":"Mainz (Alexander the Great)","bands":4},
  {"id_event":"dc3e783425dbba6bb13a0b09e3d8a473","year":2025,"date":"19.01.2025","event":"Pagan Metal Matinee","place":"Weinheim (Café Central)","bands":3},
+ {"id_event":"50870ec5cfc0a18f40002a123c288af6","year":2025,"date":"26.01.2025","event":"The Terrasitic Reconquest Tour 2025","place":"Wiesbaden (Schlachthof)","bands":4},
 ]};
