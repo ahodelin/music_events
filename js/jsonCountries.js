@@ -1,13 +1,13 @@
 var countriesInfo = {
   "countries":[
- {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":440},
+ {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":447},
  {"id_country":"USA                             ","country":"United States of America","flag":"us","bands":121},
  {"id_country":"SWE                             ","country":"Sweden","flag":"se","bands":48},
  {"id_country":"GBR                             ","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","bands":44},
- {"id_country":"NLD                             ","country":"Netherlands","flag":"nl","bands":35},
+ {"id_country":"NLD                             ","country":"Netherlands","flag":"nl","bands":36},
  {"id_country":"FRA                             ","country":"France","flag":"fr","bands":29},
  {"id_country":"FIN                             ","country":"Finland","flag":"fi","bands":27},
- {"id_country":"ITA                             ","country":"Italy","flag":"it","bands":24},
+ {"id_country":"ITA                             ","country":"Italy","flag":"it","bands":25},
  {"id_country":"BEL                             ","country":"Belgium","flag":"be","bands":22},
  {"id_country":"AUT                             ","country":"Austria","flag":"at","bands":21},
  {"id_country":"NOR                             ","country":"Norway","flag":"no","bands":21},
