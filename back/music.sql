@@ -1842,8 +1842,8 @@ af8b7f5474d507a8e583c66ef1eed5a5	Unrast	y	t	\N
 bf250243f776c4cc4a9c4a1f81f7e42f	Malnourished	y	t	\N
 bc30e7b15744d2140e28e5b335605de5	Impaler	y	t	\N
 8b174e2c4b00b9e0699967e812e97397	Dementia	y	t	\N
-a68fbbd4507539f9f2579ad2e7f94902	Sharpened.lives	y	t	\N
-2e572c8c809cfbabbe270b6ce7ce88dd	Failed Star	y	t	\N
+a68fbbd4507539f9f2579ad2e7f94902	Sharpened.lives	n	t	\N
+2e572c8c809cfbabbe270b6ce7ce88dd	Failed Star	m	t	\N
 \.
 
 
