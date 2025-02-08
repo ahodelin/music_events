@@ -269,4 +269,5 @@ var eventsInfo = {
  {"id_event":"dc3e783425dbba6bb13a0b09e3d8a473","year":2025,"date":"19.01.2025","event":"Pagan Metal Matinee","place":"Weinheim (Café Central)","bands":3},
  {"id_event":"50870ec5cfc0a18f40002a123c288af6","year":2025,"date":"26.01.2025","event":"The Terrasitic Reconquest Tour 2025","place":"Wiesbaden (Schlachthof)","bands":4},
  {"id_event":"f869730b71701b478d8d44e485d96b96","year":2025,"date":"31.01.2025","event":"Exhume the Metal Festival VIII","place":"Ostfildern (Zentrum Zinsholz)","bands":12},
+ {"id_event":"87e221b0a60c5938389dcc7d10b93bdb","year":2025,"date":"07.02.2025","event":"Contest 2025","place":"Mainz (Caveau)","bands":3},
 ]};
