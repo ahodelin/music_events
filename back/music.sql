@@ -528,6 +528,18 @@ UNION
 
 
 --
+-- Name: v_events_by_months; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_events_by_months AS
+ SELECT count(id_event) AS "Events",
+    (date_trunc('month'::text, (date_event)::timestamp with time zone))::date AS "Monat"
+   FROM music.events
+  GROUP BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date)
+  ORDER BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date);
+
+
+--
 -- Data for Name: continents; Type: TABLE DATA; Schema: geo; Owner: -
 --
 
@@ -775,6 +787,7 @@ fa5218c9167a20e6b9f6bf2a139433ce	Flörsheim (Moshpit)
 d90ac22c4f2291b68cb07746d0472dbf	Karlsruhe (AKK)
 d41d8cd98f00b204e9800998ecf8427e	
 4e1c34ddafa9b33187fb34b43ceb2010	Ostfildern (Zentrum Zinsholz)
+9c26f60f17bb584dff3b85695fd2b284	Mainz (Caveau)
 \.
 
 
@@ -1829,6 +1842,8 @@ af8b7f5474d507a8e583c66ef1eed5a5	Unrast	y	t	\N
 bf250243f776c4cc4a9c4a1f81f7e42f	Malnourished	y	t	\N
 bc30e7b15744d2140e28e5b335605de5	Impaler	y	t	\N
 8b174e2c4b00b9e0699967e812e97397	Dementia	y	t	\N
+a68fbbd4507539f9f2579ad2e7f94902	Sharpened.lives	y	t	\N
+2e572c8c809cfbabbe270b6ce7ce88dd	Failed Star	y	t	\N
 \.
 
 
@@ -2883,6 +2898,8 @@ af8b7f5474d507a8e583c66ef1eed5a5	DEU
 bf250243f776c4cc4a9c4a1f81f7e42f	DEU                             
 bc30e7b15744d2140e28e5b335605de5	DEU                             
 8b174e2c4b00b9e0699967e812e97397	DEU                             
+a68fbbd4507539f9f2579ad2e7f94902	DEU                             
+2e572c8c809cfbabbe270b6ce7ce88dd	DEU                             
 \.
 
 
@@ -4422,6 +4439,9 @@ bf250243f776c4cc4a9c4a1f81f7e42f	f869730b71701b478d8d44e485d96b96
 bc30e7b15744d2140e28e5b335605de5	f869730b71701b478d8d44e485d96b96
 8b174e2c4b00b9e0699967e812e97397	f869730b71701b478d8d44e485d96b96
 8872fbd923476b7cf96913260ec59e66	f869730b71701b478d8d44e485d96b96
+df800795b697445f2b7dc0096d75f4df	87e221b0a60c5938389dcc7d10b93bdb
+a68fbbd4507539f9f2579ad2e7f94902	87e221b0a60c5938389dcc7d10b93bdb
+2e572c8c809cfbabbe270b6ce7ce88dd	87e221b0a60c5938389dcc7d10b93bdb
 \.
 
 
@@ -6121,6 +6141,10 @@ af8b7f5474d507a8e583c66ef1eed5a5	fe81a4f28e6bd176efc8184d58544e66
 bf250243f776c4cc4a9c4a1f81f7e42f	3593526a5f465ed766bafb4fb45748a2
 bc30e7b15744d2140e28e5b335605de5	3593526a5f465ed766bafb4fb45748a2
 8b174e2c4b00b9e0699967e812e97397	102289ea390e6d00463584fe50b1d87b
+a68fbbd4507539f9f2579ad2e7f94902	c7fb67368c25c29b9c10ca91b2d97488
+a68fbbd4507539f9f2579ad2e7f94902	f72e9105795af04cd4da64414d9968ad
+a68fbbd4507539f9f2579ad2e7f94902	fe81a4f28e6bd176efc8184d58544e66
+2e572c8c809cfbabbe270b6ce7ce88dd	e1d8dfba59d6e8fe67883a5ff3fdabe4
 \.
 
 
@@ -6400,6 +6424,7 @@ dc3e783425dbba6bb13a0b09e3d8a473	Pagan Metal Matinee	2025-01-19	f3a90318abb3e161
 33fc414b35e2153721f8e19b5b2aa1eb	Die letzte Open Stage im ATG	2025-01-18	17648f3308a5acb119d9aee1b5eafceb	0	0.0	2
 50870ec5cfc0a18f40002a123c288af6	The Terrasitic Reconquest Tour 2025	2025-01-26	588671317bf1864e5a95445ec51aac65	0	42.0	2
 f869730b71701b478d8d44e485d96b96	Exhume the Metal Festival VIII	2025-01-31	4e1c34ddafa9b33187fb34b43ceb2010	1	30.0	2
+87e221b0a60c5938389dcc7d10b93bdb	Contest 2025	2025-02-07	9c26f60f17bb584dff3b85695fd2b284	0	5.0	2
 \.
 
 

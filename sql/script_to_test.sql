@@ -107,18 +107,10 @@ where (date_part('month', e.date_event) = '12' and date_part('day', e.date_event
 order by date_part('month', e.date_event); 
 
 
-
-select * from music.events e where id_place = '17648f3308a5acb119d9aee1b5eafceb';
-
-select md5(lower(regexp_replace('Live on stage', '\s|\W', '', 'g'))), 'Live on stage';
-
-update music.events
-set id_event = md5(lower(regexp_replace('Hutkonzert - 19.10.2023', '\s|\W', '', 'g'))), "event" = 'Hutkonzert - 19.10.2023'
-where id_event = '79880b3852adb21098807cc10effe071';
-
-select * from music.bands b where band like 'Arku%';
-select * from music.events e where "event" like 'Hier ist kein%';
-
-select * from music.bands_events be where id_event = '2b23c45d7b18dfccde35439462716807';
-
-
+create or replace view v_events_by_months as
+select 
+  count(id_event) "Events", 
+  date_trunc('month', date_event)::date "Monat" 
+from music.events
+group by date_trunc('month', date_event)::date
+order by "Monat";

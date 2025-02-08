@@ -34,6 +34,6 @@ select music.insert_bands_to_genres('Fragments of unbecoming', 'Melodic Death Me
 
 ------------------------------------------------------------------------------------
  
-
+q
 
 
