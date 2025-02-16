@@ -28,7 +28,7 @@ var eventsInfo = {
  {"id_event":"e4ee5ac5d137718d0eeb4d310b97d837","year":2017,"date":"31.10.2017","event":"Noche de los Muertos - 2017","place":"Mainz (Zitadelle - Die Kulturei)","bands":1},
  {"id_event":"603ef2d9ef2057c8719d0715a7de32d1","year":2018,"date":"23.01.2018","event":"EMP Persistence Tour 2018","place":"Wiesbaden (Schlachthof)","bands":7},
  {"id_event":"2b6e496456bb2be5444c941692fa5d17","year":2018,"date":"06.02.2018","event":"Will to power tour 2018","place":"Wiesbaden (Schlachthof)","bands":4},
- {"id_event":"90445b62432a3d8e1f7b3640029e6fed","year":2018,"date":"16.02.2018","event":"Worldwired Tour 2018","place":"Mannheim (SAP Arena)","bands":1},
+ {"id_event":"90445b62432a3d8e1f7b3640029e6fed","year":2018,"date":"16.02.2018","event":"Worldwired Tour 2018","place":"Mannheim (SAP Arena)","bands":2},
  {"id_event":"fbae6c1da1deba5dd51f5d07007ec5ab","year":2018,"date":"17.02.2018","event":"Warfield / Purify / Sober Truth","place":"Worms (Schwarzer Bär)","bands":3},
  {"id_event":"eeba68f0a1003dce9bd66066b82dc1b6","year":2018,"date":"24.03.2018","event":"Heidelberg Deathfest III","place":"Heidelberg (halle 02)","bands":12},
  {"id_event":"da4794bdc2159737a4c338392a856359","year":2018,"date":"27.04.2018","event":"Guido's Super Sweet 16 (30. jubilee)","place":"Mainz (Alexander the Great)","bands":2},

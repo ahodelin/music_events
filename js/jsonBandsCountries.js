@@ -544,6 +544,7 @@ var bandsCountriesInfo = {
  {"id_band":"8aeadeeff3e1a3e1c8a6a69d9312c530","id_country":"BRA                             "},
  {"id_band":"8af17e883671377a23e5b8262de11af4","id_country":"HRV                             "},
  {"id_band":"db572afa3dcc982995b5528acb350299","id_country":"SWE                             "},
+ {"id_band":"804d27f4798081681e71b2381697e58c","id_country":"NOR                             "},
  {"id_band":"df800795b697445f2b7dc0096d75f4df","id_country":"DEU                             "},
  {"id_band":"08b84204877dce2a08abce50d9aeceed","id_country":"DEU                             "},
  {"id_band":"f4b526ea92d3389d318a36e51480b4c8","id_country":"DEU                             "},

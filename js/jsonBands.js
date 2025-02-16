@@ -544,6 +544,7 @@ var bandsInfo = {
  {"id_band":"8aeadeeff3e1a3e1c8a6a69d9312c530","band":"Krisiun","country":"Brazil","flag":"br","likes":"y","genres":1,"events":3},
  {"id_band":"8af17e883671377a23e5b8262de11af4","band":"Kryn","country":"Croatia","flag":"hr","likes":"m","genres":1,"events":1},
  {"id_band":"db572afa3dcc982995b5528acb350299","band":"Kvaen","country":"Sweden","flag":"se","likes":"y","genres":3,"events":1},
+ {"id_band":"804d27f4798081681e71b2381697e58c","band":"Kvelertak","country":"Norway","flag":"no","likes":"m","genres":2,"events":1},
  {"id_band":"df800795b697445f2b7dc0096d75f4df","band":"Lack of Senses","country":"Germany","flag":"de","likes":"m","genres":2,"events":2},
  {"id_band":"08b84204877dce2a08abce50d9aeceed","band":"Lacrimas Profundere","country":"Germany","flag":"de","likes":"m","genres":2,"events":2},
  {"id_band":"f4b526ea92d3389d318a36e51480b4c8","band":"LAWMÄNNER","country":"Germany","flag":"de","likes":"n","genres":1,"events":1},
