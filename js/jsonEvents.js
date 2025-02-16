@@ -161,7 +161,7 @@ var eventsInfo = {
  {"id_event":"57a334acb665ebc52057791d107149f4","year":2023,"date":"16.06.2023","event":"57. Wernigeröder Rathausfest","place":"Wernigerode","bands":2},
  {"id_event":"86615675838b48d2003175dd7665fba3","year":2023,"date":"27.06.2023","event":"Rumble of thunder","place":"Frankfurt am Main (Batschkapp)","bands":2},
  {"id_event":"69d2999875a1e6d7c09bbf157d18a27e","year":2023,"date":"30.06.2023","event":"Summer in the City 2023","place":"Mainz (Volkspark)","bands":1},
- {"id_event":"f5cd4263f2cbb5e459306b35cef72e9d","year":2023,"date":"03.07.2023","event":"European Miserere 2023","place":"Frankfurt am Main (ELFER Club)","bands":3},
+ {"id_event":"f5cd4263f2cbb5e459306b35cef72e9d","year":2023,"date":"03.07.2023","event":"European Miserere 2023","place":"Frankfurt am Main (Elfer Club)","bands":3},
  {"id_event":"c724b600052083fae4765a6a7702ee5f","year":2023,"date":"13.07.2023","event":"In Flammen Open Air 2023","place":"Turgau/Entenfang","bands":34},
  {"id_event":"b39ff9f6960957839c401d45abdc3cae","year":2023,"date":"21.07.2023","event":"Boarstream Open Air 2023","place":"Buchenbach","bands":15},
  {"id_event":"69882c9d3cc383cd271732b068979a98","year":2023,"date":"25.07.2023","event":"A Goat Vomit Summer","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":2},
@@ -270,4 +270,5 @@ var eventsInfo = {
  {"id_event":"50870ec5cfc0a18f40002a123c288af6","year":2025,"date":"26.01.2025","event":"The Terrasitic Reconquest Tour 2025","place":"Wiesbaden (Schlachthof)","bands":4},
  {"id_event":"f869730b71701b478d8d44e485d96b96","year":2025,"date":"31.01.2025","event":"Exhume the Metal Festival VIII","place":"Ostfildern (Zentrum Zinsholz)","bands":12},
  {"id_event":"87e221b0a60c5938389dcc7d10b93bdb","year":2025,"date":"07.02.2025","event":"Contest 2025","place":"Mainz (Caveau)","bands":3},
+ {"id_event":"011099caab06f3d2db53743ae5957c7a","year":2025,"date":"15.02.2025","event":"Texas Cornflake Massacre + Magefa + Gefrierbrand + Crossbreaker","place":"Frankfurt am Main (Elfer Club)","bands":4},
 ]};

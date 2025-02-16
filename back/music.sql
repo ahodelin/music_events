@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.2 (Ubuntu 17.2-1.pgdg24.04+1)
--- Dumped by pg_dump version 17.2 (Ubuntu 17.2-1.pgdg24.04+1)
+-- Dumped from database version 17.3 (Ubuntu 17.3-1.pgdg24.04+1)
+-- Dumped by pg_dump version 17.3 (Ubuntu 17.3-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -464,6 +464,18 @@ SELECT
 
 
 --
+-- Name: v_events_price; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_events_price AS
+ SELECT (date_part('year'::text, date_event))::character varying AS years,
+    sum((price * (persons)::numeric)) AS price
+   FROM music.events e
+  GROUP BY (date_part('year'::text, date_event))
+  ORDER BY (date_part('year'::text, date_event));
+
+
+--
 -- Name: v_events_years; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -537,6 +549,22 @@ CREATE VIEW public.v_events_by_months AS
    FROM music.events
   GROUP BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date)
   ORDER BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date);
+
+
+--
+-- Name: v_last_event; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_last_event AS
+ SELECT event AS "Event",
+    date AS "Datum",
+    place AS "Ort",
+    bands AS "Bands",
+    days AS "Tage"
+   FROM music.v_events v
+  GROUP BY event, date, place, bands, days
+ HAVING (to_date(date, 'DD.MM.YYYY'::text) = ( SELECT max(to_date(v_events.date, 'DD.MM.YYYY'::text)) AS max
+           FROM music.v_events));
 
 
 --
@@ -763,7 +791,6 @@ cf1c12d42f59db3667fc162556aab169	Buchenbach
 85683aa688e302e1de7ec78dc4440dff	Dotmund (JunkYard)
 10effefa9cc583f38ff0518dcaa72ef5	Weilburg-Kubach (Bürgerhalle)
 fc36c84b02e473bec246e5d2cfc513ef	Frankfurt am Main (Schöppche-Keller)
-5948b7ac21c1697473de19197df1f172	Frankfurt am Main (ELFER Club)
 6032938ceb573d952fdae1a40ef39837	Bechtheim (Gasthaus Bechtheimer Hof)
 b13f71a1a5f7e89c2603d5241c2aca25	Weibersbrunn (Mehrzweckhalle)
 817974aa11f84c9ebc640d3de92737f5	Hofheim (Jazzkeller)
@@ -788,6 +815,7 @@ d90ac22c4f2291b68cb07746d0472dbf	Karlsruhe (AKK)
 d41d8cd98f00b204e9800998ecf8427e	
 4e1c34ddafa9b33187fb34b43ceb2010	Ostfildern (Zentrum Zinsholz)
 9c26f60f17bb584dff3b85695fd2b284	Mainz (Caveau)
+5948b7ac21c1697473de19197df1f172	Frankfurt am Main (Elfer Club)
 \.
 
 
@@ -1844,6 +1872,8 @@ bc30e7b15744d2140e28e5b335605de5	Impaler	y	t	\N
 8b174e2c4b00b9e0699967e812e97397	Dementia	y	t	\N
 a68fbbd4507539f9f2579ad2e7f94902	Sharpened.lives	n	t	\N
 2e572c8c809cfbabbe270b6ce7ce88dd	Failed Star	m	t	\N
+bfaffe308a2e8368acb49b51814f2bfe	Crossbreaker	y	t	\N
+6261b9de274cf2da37125d96ad21f1df	Gefrierbrand	y	t	\N
 \.
 
 
@@ -2900,6 +2930,8 @@ bc30e7b15744d2140e28e5b335605de5	DEU
 8b174e2c4b00b9e0699967e812e97397	DEU                             
 a68fbbd4507539f9f2579ad2e7f94902	DEU                             
 2e572c8c809cfbabbe270b6ce7ce88dd	DEU                             
+bfaffe308a2e8368acb49b51814f2bfe	DEU                             
+6261b9de274cf2da37125d96ad21f1df	DEU                             
 \.
 
 
@@ -4442,6 +4474,10 @@ bc30e7b15744d2140e28e5b335605de5	f869730b71701b478d8d44e485d96b96
 df800795b697445f2b7dc0096d75f4df	87e221b0a60c5938389dcc7d10b93bdb
 a68fbbd4507539f9f2579ad2e7f94902	87e221b0a60c5938389dcc7d10b93bdb
 2e572c8c809cfbabbe270b6ce7ce88dd	87e221b0a60c5938389dcc7d10b93bdb
+bfaffe308a2e8368acb49b51814f2bfe	011099caab06f3d2db53743ae5957c7a
+42085fca2ddb606f4284e718074d5561	011099caab06f3d2db53743ae5957c7a
+6261b9de274cf2da37125d96ad21f1df	011099caab06f3d2db53743ae5957c7a
+b08bdd1d40a38ab9848ff817294332ca	011099caab06f3d2db53743ae5957c7a
 \.
 
 
@@ -6145,6 +6181,10 @@ a68fbbd4507539f9f2579ad2e7f94902	c7fb67368c25c29b9c10ca91b2d97488
 a68fbbd4507539f9f2579ad2e7f94902	f72e9105795af04cd4da64414d9968ad
 a68fbbd4507539f9f2579ad2e7f94902	fe81a4f28e6bd176efc8184d58544e66
 2e572c8c809cfbabbe270b6ce7ce88dd	e1d8dfba59d6e8fe67883a5ff3fdabe4
+bfaffe308a2e8368acb49b51814f2bfe	2db87892408abd4d82eb39b78c50c27b
+bfaffe308a2e8368acb49b51814f2bfe	9e7315413ae31a070ccae5c580dd1b19
+6261b9de274cf2da37125d96ad21f1df	3593526a5f465ed766bafb4fb45748a2
+6261b9de274cf2da37125d96ad21f1df	b3412a542c856d851d554e29aa16d4b6
 \.
 
 
@@ -6342,8 +6382,6 @@ efdb143af86d5a0af148b7847e721e55	15 Jahre live im GMZ Georg-Buch-Haus Wiesbaden	
 e26bcb0f8a28cd2229ce77a95d0baf9e	Eskalation im Oberhaus 2024	2024-02-03	b00bae5a5f8ff8830d486747e78d7d8d	0	22.00	2
 dcad795c824cf4d6337fc9f745e5645f	The young meatal attack	2024-03-02	9ca0396f7fce5729940fcef7383728b3	0	12.00	2
 e4ee5ac5d137718d0eeb4d310b97d837	Noche de los Muertos - 2017	2017-10-31	f0f0e638999829b846be6e20b5591898	0	15	2
-ce017dda4d3b82cf8e75f648a7b9b390	Open air Hamm 43.	2013-06-14	7590124802ade834dbe9e7c0d2c1a897	1	22.0	1
-000869859299617fd93133d3f65fd85b	Open air Hamm 45.	2015-06-12	7590124802ade834dbe9e7c0d2c1a897	1	22.0	1
 16a83f971efce095272378a2a594e49f	Open air Hamm 47.	2017-07-07	7590124802ade834dbe9e7c0d2c1a897	1	25	2
 0a7d68cf2a103e1c99f7e6d04f1940da	Necromanteum EU/UK Tour 2024	2024-03-30	051fa36efd99a2ae24d56b198e7b1992	0	43.55	2
 2d5e1a99b20d1be28ef40573c37eb0a0	Thrash Attack - 06.04.2024	2024-04-06	5515ceaeca4b8b62ee5275de54ea77ad	0	16.52	2
@@ -6380,6 +6418,8 @@ f0c7879002501eddcb68564fe19b77fc	Metal im M8 - 12.2023	2023-12-09	a91bcaf7db7d17
 dabaf9fe7459d022af9bf8afc729631a	Hutkonzert - 01.08.2024	2024-08-01	17648f3308a5acb119d9aee1b5eafceb	0	7.5	2
 fa92cfeec372b54d5551e5fb9aaa55af	Hutkonzert - 29.08.2024	2024-08-29	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2
 f6fbabd4858c55fea0dce0d32db9dcf5	Hutkonzert - 19.10.2023	2023-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2
+ce017dda4d3b82cf8e75f648a7b9b390	Open air Hamm 43.	2013-06-14	7590124802ade834dbe9e7c0d2c1a897	1	22.0	2
+000869859299617fd93133d3f65fd85b	Open air Hamm 45.	2015-06-12	7590124802ade834dbe9e7c0d2c1a897	1	22.0	2
 c4e2844bff82087c924ad104bdfb6580	Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger	2019-11-15	a91bcaf7db7d174ee2966d9c293fd575	0	9	2
 cf1c6716920400a1d8ade1584c726f0c	Morbide Klänge III	2024-05-24	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2
 a1127140db632705cffe06456b478fa8	Evil Obsession 2023	2023-12-28	c72b4173a6a7131bf31a711212305fd3	0	48.50	2
@@ -6425,6 +6465,7 @@ dc3e783425dbba6bb13a0b09e3d8a473	Pagan Metal Matinee	2025-01-19	f3a90318abb3e161
 50870ec5cfc0a18f40002a123c288af6	The Terrasitic Reconquest Tour 2025	2025-01-26	588671317bf1864e5a95445ec51aac65	0	42.0	2
 f869730b71701b478d8d44e485d96b96	Exhume the Metal Festival VIII	2025-01-31	4e1c34ddafa9b33187fb34b43ceb2010	1	30.0	2
 87e221b0a60c5938389dcc7d10b93bdb	Contest 2025	2025-02-07	9c26f60f17bb584dff3b85695fd2b284	0	5.0	2
+011099caab06f3d2db53743ae5957c7a	Texas Cornflake Massacre + Magefa + Gefrierbrand + Crossbreaker	2025-02-15	5948b7ac21c1697473de19197df1f172	0	16.0	2
 \.
 
 
@@ -6657,6 +6698,7 @@ b81acdb05aef5596bb72fe68d03cfaa2	Psychadelic Rock
 5e57b61f8223fb8b54685a6a063ad3cc	Symphonic Deathcore
 283a2e526241b2c01f4928afda6a2e0a	Melodic Deathcore
 102289ea390e6d00463584fe50b1d87b	Progressive Melodic Death Metal
+b3412a542c856d851d554e29aa16d4b6	Thras Metal
 \.
 
 

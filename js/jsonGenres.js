@@ -1,8 +1,8 @@
 var genresInfo = {
   "genres":[
- {"id_genre":"3593526a5f465ed766bafb4fb45748a2","genre":"Death Metal","bands":236},
- {"id_genre":"9e7315413ae31a070ccae5c580dd1b19","genre":"Thrash Metal","bands":131},
- {"id_genre":"2db87892408abd4d82eb39b78c50c27b","genre":"Black Metal","bands":130},
+ {"id_genre":"3593526a5f465ed766bafb4fb45748a2","genre":"Death Metal","bands":237},
+ {"id_genre":"9e7315413ae31a070ccae5c580dd1b19","genre":"Thrash Metal","bands":132},
+ {"id_genre":"2db87892408abd4d82eb39b78c50c27b","genre":"Black Metal","bands":131},
  {"id_genre":"7b4b7e3375c9f7424a57a2d9d7bccde5","genre":"Brutal Death Metal","bands":94},
  {"id_genre":"b54875674f7d2d5be9737b0d4c021a21","genre":"Melodic Death Metal","bands":50},
  {"id_genre":"d25334037d936d3257f794a10bb3030f","genre":"Grindcore","bands":48},
@@ -172,6 +172,7 @@ var genresInfo = {
  {"id_genre":"6072e357ce0ffc85924d07f3f59fde6d","genre":"Technical Brutal Death Metal","bands":1},
  {"id_genre":"42b75d86a3de2519bbc8c2264fc424af","genre":"Technical Thrash Metal","bands":1},
  {"id_genre":"972855f17f9fffa2f73ced39e72c706e","genre":"Thrashing Deathgrind","bands":1},
+ {"id_genre":"b3412a542c856d851d554e29aa16d4b6","genre":"Thras Metal","bands":1},
  {"id_genre":"3b4b6f12576b1161eb56ef870c91cfd2","genre":"Tribute to ACDC","bands":1},
  {"id_genre":"e7d141392548a9459e0e6e7584c1c80f","genre":"Tribute to Bathory","bands":1},
  {"id_genre":"024837b88bb23cb8a1f0bba69f809c93","genre":"Tribute to Black Sabbath","bands":1},
