@@ -44,3 +44,9 @@ B;Drudensang
 B;Napalm Death
 B;The Spirit
 B;Hellbutcher;;
+B;Crypt Sermon;USA;Epic Doom Metal
+B;Theotoxin
+B;Night in Gales;DEU;Melodic Death Metal
+B;Servant
+B;Suffocation
+B;Bloodbath
