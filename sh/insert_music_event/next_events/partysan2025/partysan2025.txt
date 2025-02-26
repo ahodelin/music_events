@@ -24,7 +24,7 @@ B;Skeletal Remains;USA;Death Metal
 B;Dödsrit;SWE;Black Metal|Crust
 B;Imperial Triumphant;USA;Avant-garde Death Metal|Thechnical Black Metal|Death Metal
 B;Party Cannon
-B;Friisk
+B;Friisk;DEU;Atmospheric Black Metal
 B;Defleshed
 B;Blockheads;FRA;Death Metal|Grindcore
 B;Kvaen
@@ -32,8 +32,7 @@ B;Nightbearer;DEU;Death Metal
 B;The Vision Bleak;DEU;Gothic Metal
 B;Extermination Dismembrent
 B;Naxen
-B;Dool;;
-B;Perchta
+B;Dool;NLD;Progressive Rock|Doom
 B;I am Morbid
 B;Analepsy
 B;... and Oceans;FIN;Symphonic Black Metal|Industrial Metal|Electronic Metal
@@ -43,10 +42,13 @@ B;Gutslit
 B;Drudensang
 B;Napalm Death
 B;The Spirit
-B;Hellbutcher;;
+B;Hellbutcher;SWE;Black Metal
 B;Crypt Sermon;USA;Epic Doom Metal
 B;Theotoxin
 B;Night in Gales;DEU;Melodic Death Metal
 B;Servant
 B;Suffocation
 B;Bloodbath
+B;Macbeth
+B;Scalpture;DEU;Death Metal
+B;Outlaw;001;Black Metal
