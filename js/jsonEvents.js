@@ -271,4 +271,5 @@ var eventsInfo = {
  {"id_event":"f869730b71701b478d8d44e485d96b96","year":2025,"date":"31.01.2025","event":"Exhume the Metal Festival VIII","place":"Ostfildern (Zentrum Zinsholz)","bands":12},
  {"id_event":"87e221b0a60c5938389dcc7d10b93bdb","year":2025,"date":"07.02.2025","event":"Contest 2025","place":"Mainz (Caveau)","bands":3},
  {"id_event":"011099caab06f3d2db53743ae5957c7a","year":2025,"date":"15.02.2025","event":"Texas Cornflake Massacre + Magefa + Gefrierbrand + Crossbreaker","place":"Frankfurt am Main (Elfer Club)","bands":4},
+ {"id_event":"aa8eed75496c33d578cfad09e49bc803","year":2025,"date":"27.02.2025","event":"Krøterverg til Europa 2024","place":"Wiesbaden (Schlachthof)","bands":3},
 ]};

@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.3 (Ubuntu 17.3-1.pgdg24.04+1)
--- Dumped by pg_dump version 17.3 (Ubuntu 17.3-1.pgdg24.04+1)
+-- Dumped from database version 17.4 (Ubuntu 17.4-1.pgdg24.04+2)
+-- Dumped by pg_dump version 17.4 (Ubuntu 17.4-1.pgdg24.04+2)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -334,8 +334,7 @@ CREATE MATERIALIZED VIEW music.mv_musical_info AS
  SELECT b.band,
     b.likes,
     c.country,
-    c.flag,
-    g.genre AS genere,
+    g.genre,
     e.event,
     e.date_event,
     p.place,
@@ -351,6 +350,22 @@ CREATE MATERIALIZED VIEW music.mv_musical_info AS
      JOIN geo.places p ON ((p.id_place = e.id_place)))
   ORDER BY b.band
   WITH NO DATA;
+
+
+--
+-- Name: next_events_with_tickets; Type: TABLE; Schema: music; Owner: -
+--
+
+CREATE TABLE music.next_events_with_tickets (
+    id_event character(32) NOT NULL,
+    event character varying(255) NOT NULL,
+    date_event date NOT NULL,
+    id_place character(32) NOT NULL,
+    duration smallint DEFAULT 0,
+    price numeric DEFAULT 30.00,
+    persons smallint DEFAULT 1,
+    CONSTRAINT next_events_with_tickets_date_event_check CHECK ((date_event > now()))
+);
 
 
 --
@@ -1874,7 +1889,8 @@ a68fbbd4507539f9f2579ad2e7f94902	Sharpened.lives	n	t	\N
 2e572c8c809cfbabbe270b6ce7ce88dd	Failed Star	m	t	\N
 bfaffe308a2e8368acb49b51814f2bfe	Crossbreaker	y	t	\N
 6261b9de274cf2da37125d96ad21f1df	Gefrierbrand	y	t	\N
-804d27f4798081681e71b2381697e58c	Kvelertak	m	t	\N
+2918f3b4f699f80bcafb2607065451e1	Urne	y	t	\N
+804d27f4798081681e71b2381697e58c	Kvelertak	n	t	\N
 \.
 
 
@@ -2934,6 +2950,7 @@ a68fbbd4507539f9f2579ad2e7f94902	DEU
 bfaffe308a2e8368acb49b51814f2bfe	DEU                             
 6261b9de274cf2da37125d96ad21f1df	DEU                             
 804d27f4798081681e71b2381697e58c	NOR                             
+2918f3b4f699f80bcafb2607065451e1	GBR                             
 \.
 
 
@@ -4481,6 +4498,9 @@ bfaffe308a2e8368acb49b51814f2bfe	011099caab06f3d2db53743ae5957c7a
 6261b9de274cf2da37125d96ad21f1df	011099caab06f3d2db53743ae5957c7a
 b08bdd1d40a38ab9848ff817294332ca	011099caab06f3d2db53743ae5957c7a
 804d27f4798081681e71b2381697e58c	90445b62432a3d8e1f7b3640029e6fed
+bf2c8729bf5c149067d8e978ea3dcd32	aa8eed75496c33d578cfad09e49bc803
+804d27f4798081681e71b2381697e58c	aa8eed75496c33d578cfad09e49bc803
+2918f3b4f699f80bcafb2607065451e1	aa8eed75496c33d578cfad09e49bc803
 \.
 
 
@@ -6190,6 +6210,9 @@ bfaffe308a2e8368acb49b51814f2bfe	9e7315413ae31a070ccae5c580dd1b19
 6261b9de274cf2da37125d96ad21f1df	b3412a542c856d851d554e29aa16d4b6
 804d27f4798081681e71b2381697e58c	2db87892408abd4d82eb39b78c50c27b
 804d27f4798081681e71b2381697e58c	f3dcdca4cd0c83a5e855c5434ce98673
+2918f3b4f699f80bcafb2607065451e1	4690ec139849f88f1c10347d0cc7d1b5
+2918f3b4f699f80bcafb2607065451e1	5446a9fcc158ea011aeb9892ba2dfb15
+2918f3b4f699f80bcafb2607065451e1	d30be26d66f0448359f54d923aab2bb9
 \.
 
 
@@ -6458,6 +6481,7 @@ ec1c30e91a0ca3f4d0a786488e6ad70f	Unleash the Gr*n Tour 2024	2024-11-01	09ddc8804
 f9b4f5ba6cb5f7721ce1e55d68a918b8	Hell over Aschaffenburg - 2024	2024-11-23	b13f71a1a5f7e89c2603d5241c2aca25	0	32.5	2
 95fea685e14cf598f5a22e82371ebaac	European Tour Fall 2024	2024-11-25	051fa36efd99a2ae24d56b198e7b1992	0	40.70	2
 9cfee73dcb4ebeba48366c0fd1d4fe3a	Metal Mainz III	2024-12-20	a91bcaf7db7d174ee2966d9c293fd575	0	11.0	2
+aa8eed75496c33d578cfad09e49bc803	Krøterverg til Europa 2024	2025-02-27	588671317bf1864e5a95445ec51aac65	0	42.1	2
 48b3e4e082a150ee45ac1229b6c556bc	Live on Stage - 23.03.2024	2024-03-23	17648f3308a5acb119d9aee1b5eafceb	0	15	2
 a53dce25b80bd1caf2f1aa7ea602ed63	Live on Stage - 16.09.2023	2023-09-16	17648f3308a5acb119d9aee1b5eafceb	0	14	2
 ca3f4984b3956024054e62665febcc6a	Live on Stage - 21.12.2024	2024-12-21	17648f3308a5acb119d9aee1b5eafceb	0	12.0	2
@@ -6708,6 +6732,24 @@ b3412a542c856d851d554e29aa16d4b6	Thras Metal
 
 
 --
+-- Data for Name: next_events_with_tickets; Type: TABLE DATA; Schema: music; Owner: -
+--
+
+COPY music.next_events_with_tickets (id_event, event, date_event, id_place, duration, price, persons) FROM stdin;
+72281605945dfd768083800bc06c5946	Heidelberg Deathfest VIII	2025-03-15	c72b4173a6a7131bf31a711212305fd3	0	63.0	2
+c56598c23355f774b43e42e55fe94cb8	Pinch Black + Greh + Roots of Unrest	2025-03-22	0280c9c3b98763f5a8d2ce7e97ce1b05	0	16.0	2
+02bf8e0e12d25be045c3c12355af1664	"With the old Breed" - Album Release-Show	2025-03-28	09ddc8804dd5908fef3c8c0c474ad238	0	20.80	2
+872789acfd93b013e7120139be311a9b	Circle Pitournium Tour 2025	2025-04-21	f3a90318abb3e16166d96055fd6f9096	0	28.5	2
+45741da54cd02bf8b9c209acbf2ff2ae	Veins of Fire Tour 2025	2025-05-01	588671317bf1864e5a95445ec51aac65	0	29.35	2
+7320993a151875af6faf0e958b1d77db	Grabbenacht Festival 2025	2025-05-01	010c9e9e86100e63919a6051b399d662	1	59.0	2
+74b195b8a5febdcaca93bb4d7a20b0ce	Slashing Europe	2025-04-24	67bac16ced3de0e99516cf21505718a1	0	25.0	2
+28630f95cb7c87f6ba4f40bd5094ae7f	Infernal Bloodshed over Europe	2025-06-25	83b0fe992121ae7d39f6bcc58a48160c	0	39.75	2
+ce5649089736affc844695973913e736	Boarstresm Open Air 2025	2025-07-18	cf1c12d42f59db3667fc162556aab169	1	75.0	2
+d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-15	f3a90318abb3e16166d96055fd6f9096	0	33.4	2
+\.
+
+
+--
 -- Name: continents continents_continent_key; Type: CONSTRAINT; Schema: geo; Owner: -
 --
 
@@ -6825,6 +6867,14 @@ ALTER TABLE ONLY music.genres
 
 ALTER TABLE ONLY music.genres
     ADD CONSTRAINT generes_pkey PRIMARY KEY (id_genre);
+
+
+--
+-- Name: next_events_with_tickets next_events_with_tickets_pkey; Type: CONSTRAINT; Schema: music; Owner: -
+--
+
+ALTER TABLE ONLY music.next_events_with_tickets
+    ADD CONSTRAINT next_events_with_tickets_pkey PRIMARY KEY (id_event);
 
 
 --
