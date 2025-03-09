@@ -272,4 +272,6 @@ var eventsInfo = {
  {"id_event":"87e221b0a60c5938389dcc7d10b93bdb","year":2025,"date":"07.02.2025","event":"Contest 2025","place":"Mainz (Caveau)","bands":3},
  {"id_event":"011099caab06f3d2db53743ae5957c7a","year":2025,"date":"15.02.2025","event":"Texas Cornflake Massacre + Magefa + Gefrierbrand + Crossbreaker","place":"Frankfurt am Main (Elfer Club)","bands":4},
  {"id_event":"aa8eed75496c33d578cfad09e49bc803","year":2025,"date":"27.02.2025","event":"Krøterverg til Europa 2024","place":"Wiesbaden (Schlachthof)","bands":3},
+ {"id_event":"85da33004945be2270c841e38d7d7be4","year":2025,"date":"07.03.2025","event":"The Ides of March","place":"Mainz (M8 im Haus der Jugend)","bands":3},
+ {"id_event":"792b6818a251bf73eba4fa85d61ede60","year":2025,"date":"08.03.2025","event":"XIV Dark Centuries + Blood Fire Death + Apostasie + Kryss","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
 ]};
