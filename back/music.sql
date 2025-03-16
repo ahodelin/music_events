@@ -1561,7 +1561,6 @@ bcf744fa5f256d6c3051dd86943524f6	Horns of Domination	y	t	\N
 a76c5f98a56fc03100d6a7936980c563	Comaniac	y	t	\N
 66cc7344291ae2a297bf2aa93d886e22	Cryptosis	y	t	\N
 34ca5622469ad1951a3c4dc5603cea0f	Fatal Fire	n	t	\N
-be632fd63d0f90906194973ede449873	Dispised Icon	y	t	\N
 933c8182650ca4ae087544beff5bb52d	Viscera	y	t	\N
 e3de2cf8ac892a0d8616eefc4a4f59bd	Oceano	y	t	\N
 623c5a1c99aceaf0b07ae233d1888e0a	Distant	y	t	\N
