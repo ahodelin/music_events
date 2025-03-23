@@ -398,6 +398,7 @@ var bandsCountriesInfo = {
  {"id_band":"abe78132c8e446430297d08bd1ecdab0","id_country":"FIN                             "},
  {"id_band":"ed9b92eb1706415c42f88dc91284da8a","id_country":"ITA                             "},
  {"id_band":"7b3ab6743cf8f7ea8491211e3336e41d","id_country":"ESP                             "},
+ {"id_band":"cfe9861e2a347cc7b50506ea46fdaf4f","id_country":"DEU                             "},
  {"id_band":"57006f73c326669c8d52c47a3a9e2696","id_country":"DEU                             "},
  {"id_band":"89b5ac8fb4c102c174adf2fed752a970","id_country":"DEU                             "},
  {"id_band":"7022f6b60d9642d91eebba98185cd9ba","id_country":"DEU                             "},
