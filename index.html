@@ -1,84 +1,192 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8"> 
-		<title>
-			Musical Events
-		</title>
-		<style>
-			body {
-				background-color: white;
-				font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-			}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musical Events</title>
+    <style>
+        /* Estilos generales */
+        body {
+            background-color: #f9f9f9;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
 
-			table {
-				font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-				border-collapse: collapse;
-			}
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
 
-			td{
-				border: 1px solid #ddd;
-				padding: 5px;
-			}
+        /* Estilos para la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-			tr:nth-child(even){background-color: #f2f2f2;}
+        td, th {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
 
-			tr:hover {background-color: #ddd;}
+        th {
+            background-color: #33FFD4;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
 
-			th {
-				background-color: #33FFD4;
-				border: 1px solid #ddd;
-				padding: 5px;	
-			}
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
 
-			img {
-				height:24px
-			}
-		</style>
-	</head>
-	<body>
-		  <p id = "p_bands">
-				<table>
-					<tr>
-						<th>Bands</th>
-						<th>Contries</th>
-						<th>Genres</th>
-						<th>Events</th>
-					</tr>
-					<tr>
-						<td>
-							<button onclick="showAllBands()">All Bands</button>
-						</td>
-						<td>
-							<button id="allContries" onClick = "showAllCountries()">All Countries</button>
-						</td>
-						<td>
-							<button id="allGenres" onClick = "showAllGenres()">All Genres</button>
-						</td>
-						<td>
-							<button id="allEvents" onClick = "showAllEvents()">All Events</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<select id="selectBandId" name = "selectBandName" onChange = "showBand()"></select>
-						</td>
-						<td>
-							<select id="selectCountryId" name = "selectCountryName" onChange = "showBandByCountry()"></select>
-						</td>
-						<td>
-							<select id="selectGenreId" name = "selectGenreName" onChange = "showBandByGenre()"></select>
-						</td>
-						<td>
-							<select id="selectEventId" name = "selectEventName" onChange = "showBandByEvent()"></select>
-						</td>
-					</tr>
-				</table>				 			  			  
-		  </p>
-		  <p id = "allInfo"></p>
-		  <p id="bands_info"></p>
-		  <p id="genres_events"></p>		  
-		  		   
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+	img {
+               height:24px
+            }
+
+
+        /* Estilos para botones */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #33FFD4;
+            color: #333;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2ae6b8;
+        }
+
+        /* Estilos para selects */
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        select:hover {
+            border-color: #33FFD4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            th {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Musical Events</h1>
+        </header>
+
+        <main>
+            <section aria-labelledby="bands-heading">
+                <h2 id="bands-heading">Bands Information</h2>
+                <table role="grid">
+                    <thead>
+                        <tr>
+                            <th scope="col">Bands</th>
+                            <th scope="col">Countries</th>
+                            <th scope="col">Genres</th>
+                            <th scope="col">Events</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><button class="button" onclick="showAllBands()">All Bands</button></td>
+                            <td><button class="button" id="allCountries" onclick="showAllCountries()">All Countries</button></td>
+                            <td><button class="button" id="allGenres" onclick="showAllGenres()">All Genres</button></td>
+                            <td><button class="button" id="allEvents" onclick="showAllEvents()">All Events</button></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Bands">
+                                <select id="selectBandId" name="selectBandName" onchange="showBand()">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </td>
+                            <td data-label="Countries">
+                                <select id="selectCountryId" name="selectCountryName" onchange="showBandByCountry()">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </td>
+                            <td data-label="Genres">
+                                <select id="selectGenreId" name="selectGenreName" onchange="showBandByGenre()">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </td>
+                            <td data-label="Events">
+                                <select id="selectEventId" name="selectEventName" onchange="showBandByEvent()">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section aria-labelledby="info-heading">
+                <h2 id="info-heading">Detailed Information</h2>
+                <p id="allInfo"></p>
+                <p id="bands_info"></p>
+                <p id="genres_events"></p>
+            </section>
+        </main>
+    </div>
+		   
 		  <script src="js/jsonBands.js"></script> 
 		  <script src="js/jsonGenres.js"></script> 
 		  <script src="js/jsonCountries.js"></script>  
