@@ -1900,8 +1900,8 @@ ec41b630150c89b30041d46b03f1da42	Slaughterday	y	t	\N
 cb3a240c27ebf12e17f9efe44fa4a7a8	Fuming Mouth	y	t	\N
 cfe9861e2a347cc7b50506ea46fdaf4f	Greh	y	t	\N
 926811886f475151c52dd365c90a7efc	Traitor	y	t	\N
-afe4451c0c33641e67241bfe39f339ff	High Striker	y	t	\N
 e27728342f660d53bd12ab14e5005903	Disstorture	y	t	\N
+afe4451c0c33641e67241bfe39f339ff	High Striker	m	t	\N
 \.
 
 

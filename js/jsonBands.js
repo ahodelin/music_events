@@ -451,7 +451,7 @@ var bandsInfo = {
  {"id_band":"5e8df9b073e86a3272282977d2c9dc85","band":"Hideous Divinity","country":"Italy","flag":"it","likes":"y","genres":2,"events":2},
  {"id_band":"c5f4e658dfe7b7af3376f06d7cd18a2a","band":"Hierophant","country":"Italy","flag":"it","likes":"y","genres":2,"events":3},
  {"id_band":"dcab0d84960cda81718e38ee47688a75","band":"High Fighter","country":"Germany","flag":"de","likes":"m","genres":2,"events":1},
- {"id_band":"afe4451c0c33641e67241bfe39f339ff","band":"High Striker","country":"Germany","flag":"de","likes":"y","genres":1,"events":1},
+ {"id_band":"afe4451c0c33641e67241bfe39f339ff","band":"High Striker","country":"Germany","flag":"de","likes":"m","genres":1,"events":1},
  {"id_band":"3aa1c6d08d286053722d17291dc3f116","band":"Hills have Eyes","country":"Portugal","flag":"pt","likes":"m","genres":1,"events":1},
  {"id_band":"818ce28daba77cbd2c4235548400ffb2","band":"Hollowed","country":"Germany","flag":"de","likes":"y","genres":2,"events":1},
  {"id_band":"6d25c7ad58121b3effe2c464b851c27a","band":"Hollow World","country":"Australia","flag":"au","likes":"m","genres":1,"events":1},
