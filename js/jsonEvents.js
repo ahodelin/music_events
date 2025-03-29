@@ -276,4 +276,5 @@ var eventsInfo = {
  {"id_event":"c6a597721969cadfa790ad9ad3ed0864","year":2025,"date":"14.03.2025","event":"All its Grace + Desdemonia + Failed Star","place":"Mainz (M8 im Haus der Jugend)","bands":3},
  {"id_event":"72281605945dfd768083800bc06c5946","year":2025,"date":"15.03.2025","event":"Heidelberg Deathfest VIII","place":"Heidelberg (halle 02)","bands":11},
  {"id_event":"3aef806ce4cb250c0043ec647bcf564f","year":2025,"date":"22.03.2025","event":"Pinch Black + Greh","place":"Frankfurt am Main (Ponyhof Club)","bands":2},
+ {"id_event":"d869f28f4e7a04e5f9254884229d8321","year":2025,"date":"28.03.2025","event":"WARFIELD 'With The Old Breed' Album-Release-Show","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
 ]};
