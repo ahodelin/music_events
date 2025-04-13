@@ -1,11 +1,11 @@
 var countriesInfo = {
   "countries":[
- {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":459},
+ {"id_country":"DEU                             ","country":"Germany","flag":"de","bands":462},
  {"id_country":"USA                             ","country":"United States of America","flag":"us","bands":122},
  {"id_country":"SWE                             ","country":"Sweden","flag":"se","bands":49},
  {"id_country":"GBR                             ","country":"United Kingdom of Great Britain and Northern Ireland","flag":"gb","bands":45},
  {"id_country":"NLD                             ","country":"Netherlands","flag":"nl","bands":36},
- {"id_country":"FRA                             ","country":"France","flag":"fr","bands":29},
+ {"id_country":"FRA                             ","country":"France","flag":"fr","bands":30},
  {"id_country":"FIN                             ","country":"Finland","flag":"fi","bands":27},
  {"id_country":"ITA                             ","country":"Italy","flag":"it","bands":25},
  {"id_country":"BEL                             ","country":"Belgium","flag":"be","bands":22},
