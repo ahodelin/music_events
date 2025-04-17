@@ -278,4 +278,5 @@ var eventsInfo = {
  {"id_event":"3aef806ce4cb250c0043ec647bcf564f","year":2025,"date":"22.03.2025","event":"Pinch Black + Greh","place":"Frankfurt am Main (Ponyhof Club)","bands":2},
  {"id_event":"d869f28f4e7a04e5f9254884229d8321","year":2025,"date":"28.03.2025","event":"WARFIELD 'With The Old Breed' Album-Release-Show","place":"Mörlenbach (LIVE MUSIC HALL Weiher)","bands":4},
  {"id_event":"0d833b14e1535c06601ef6a143deec65","year":2025,"date":"12.04.2025","event":"Pälzer Hell Version 6.66","place":"Schneckenhausen (Festhalle)","bands":8},
+ {"id_event":"a8a45074ca24548875765e3388541cb5","year":2025,"date":"16.04.2025","event":"The Unholy Trinity Tour 2025","place":"Wiesbaden (Schlachthof)","bands":3},
 ]};
