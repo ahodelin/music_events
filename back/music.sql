@@ -231,7 +231,7 @@ CREATE TABLE geo.continents (
 --
 
 CREATE TABLE geo.countries (
-    id_country character(32) NOT NULL,
+    id_country character varying(4) NOT NULL,
     country character varying(100) NOT NULL,
     flag character(2)
 );
@@ -242,7 +242,7 @@ CREATE TABLE geo.countries (
 --
 
 CREATE TABLE geo.countries_continents (
-    id_country character varying NOT NULL,
+    id_country character varying(4) NOT NULL,
     id_continent character varying NOT NULL
 );
 
@@ -277,7 +277,7 @@ CREATE TABLE music.bands (
 
 CREATE TABLE music.bands_countries (
     id_band character(32) NOT NULL,
-    id_country character(32) NOT NULL
+    id_country character varying(4) NOT NULL
 );
 
 
@@ -343,7 +343,7 @@ CREATE MATERIALIZED VIEW music.mv_musical_info AS
     (e.price * (e.persons)::numeric) AS price
    FROM (((((((music.bands b
      JOIN music.bands_countries bc ON ((b.id_band = bc.id_band)))
-     JOIN geo.countries c ON ((c.id_country = bc.id_country)))
+     JOIN geo.countries c ON (((c.id_country)::text = (bc.id_country)::text)))
      JOIN music.bands_genres bg ON ((b.id_band = bg.id_band)))
      JOIN music.genres g ON ((g.id_genre = bg.id_genre)))
      JOIN music.bands_events be ON ((be.id_band = b.id_band)))
@@ -386,7 +386,7 @@ CREATE VIEW music.v_bands AS
     count(DISTINCT be.id_event) AS events
    FROM ((((music.bands b
      JOIN music.bands_countries bc ON ((b.id_band = bc.id_band)))
-     JOIN geo.countries c ON ((c.id_country = bc.id_country)))
+     JOIN geo.countries c ON (((c.id_country)::text = (bc.id_country)::text)))
      JOIN music.bands_genres bg ON ((bg.id_band = b.id_band)))
      JOIN music.bands_events be ON ((be.id_band = b.id_band)))
   GROUP BY b.id_band, b.band, c.country, c.flag, b.likes
@@ -459,7 +459,7 @@ CREATE VIEW music.v_countries AS
     c.flag,
     count(DISTINCT bc.id_band) AS bands
    FROM (geo.countries c
-     JOIN music.bands_countries bc ON ((c.id_country = bc.id_country)))
+     JOIN music.bands_countries bc ON (((c.id_country)::text = (bc.id_country)::text)))
   GROUP BY c.country, c.flag, c.id_country
   ORDER BY (count(DISTINCT bc.id_band)) DESC, c.country;
 
@@ -556,6 +556,17 @@ UNION
 
 
 --
+-- Name: test_country; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.test_country (
+    id_country character(32),
+    country character varying(100),
+    flag character(2)
+);
+
+
+--
 -- Name: v_events_by_months; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -601,67 +612,67 @@ COPY geo.continents (id_continent, continent) FROM stdin;
 --
 
 COPY geo.countries (id_country, country, flag) FROM stdin;
-NLD                             	Netherlands	nl
-RUS                             	Russian Federation	ru
-IRN                             	Iran	ir
-ARE                             	United Arab Emirates	ae
-CZE                             	Czechia	cz
-001                             	International	un
-LTU                             	Lithuania	lt
-MYS                             	Malaysia	my
-150                             	Europe	eu
-EGY                             	Egypt	eg
-ZAF                             	South Africa	za
-CUB                             	Cuba	cu
-JAM                             	Jamaica	jm
-CRI                             	Costa Rica	cr
-MEX                             	Mexico	mx
-PAN                             	Panama	pa
-ARG                             	Argentina	ar
-BRA                             	Brazil	br
-CHL                             	Chile	cl
-COL                             	Colombia	co
-CAN                             	Canada	ca
-USA                             	United States of America	us
-CHN                             	China	cn
-JPN                             	Japan	jp
-MNG                             	Mongolia	mn
-IDN                             	Indonesia	id
-PHL                             	Philippines	ph
-IND                             	India	in
-ISR                             	Israel	il
-TUR                             	Türkiye	tr
-BLR                             	Belarus	by
-HUN                             	Hungary	hu
-POL                             	Poland	pl
-ROU                             	Romania	ro
-UKR                             	Ukraine	ua
-DNK                             	Denmark	dk
-EST                             	Estonia	ee
-FRO                             	Faroe Islands	fo
-FIN                             	Finland	fi
-ISL                             	Iceland	is
-IRL                             	Ireland	ie
-NOR                             	Norway	no
-SWE                             	Sweden	se
-GBR                             	United Kingdom of Great Britain and Northern Ireland	gb
-HRV                             	Croatia	hr
-GRC                             	Greece	gr
-ITA                             	Italy	it
-MLT                             	Malta	mt
-PRT                             	Portugal	pt
-SRB                             	Serbia	rs
-SVN                             	Slovenia	si
-ESP                             	Spain	es
-AUT                             	Austria	at
-BEL                             	Belgium	be
-FRA                             	France	fr
-DEU                             	Germany	de
-LUX                             	Luxembourg	lu
-CHE                             	Switzerland	ch
-AUS                             	Australia	au
-NZL                             	New Zealand	nz
-SVK                             	Slovakia	sk
+NLD	Netherlands	nl
+RUS	Russian Federation	ru
+IRN	Iran	ir
+ARE	United Arab Emirates	ae
+CZE	Czechia	cz
+001	International	un
+LTU	Lithuania	lt
+MYS	Malaysia	my
+150	Europe	eu
+EGY	Egypt	eg
+ZAF	South Africa	za
+CUB	Cuba	cu
+JAM	Jamaica	jm
+CRI	Costa Rica	cr
+MEX	Mexico	mx
+PAN	Panama	pa
+ARG	Argentina	ar
+BRA	Brazil	br
+CHL	Chile	cl
+COL	Colombia	co
+CAN	Canada	ca
+USA	United States of America	us
+CHN	China	cn
+JPN	Japan	jp
+MNG	Mongolia	mn
+IDN	Indonesia	id
+PHL	Philippines	ph
+IND	India	in
+ISR	Israel	il
+TUR	Türkiye	tr
+BLR	Belarus	by
+HUN	Hungary	hu
+POL	Poland	pl
+ROU	Romania	ro
+UKR	Ukraine	ua
+DNK	Denmark	dk
+EST	Estonia	ee
+FRO	Faroe Islands	fo
+FIN	Finland	fi
+ISL	Iceland	is
+IRL	Ireland	ie
+NOR	Norway	no
+SWE	Sweden	se
+HRV	Croatia	hr
+GBR	United Kingdom of Great Britain and Northern Ireland	gb
+GRC	Greece	gr
+ITA	Italy	it
+MLT	Malta	mt
+PRT	Portugal	pt
+SRB	Serbia	rs
+SVN	Slovenia	si
+ESP	Spain	es
+AUT	Austria	at
+BEL	Belgium	be
+FRA	France	fr
+DEU	Germany	de
+LUX	Luxembourg	lu
+CHE	Switzerland	ch
+AUS	Australia	au
+NZL	New Zealand	nz
+SVK	Slovakia	sk
 \.
 
 
@@ -1917,1074 +1928,1074 @@ d39aa6fda7dc81d19cd21adbf8bd3479	Satyricon	y	t	\N
 --
 
 COPY music.bands_countries (id_band, id_country) FROM stdin;
-4545c676e400facbb87cbc7736d90e85	DEU                             
-304d29d27816ec4f69c7b1ba5836c57a	USA                             
-37e2e92ced5d525b3e79e389935cd669	150                             
-3cb5ffaba5b396de828bc06683b5e058	USA                             
-a35033c250bd9c577f20f2b253be0021	GBR                             
-cfd7b6bdd92dbe51d1bdb8cb3b98cd58	USA                             
-6dffdacffe80aad339051ef4fbbf3f29	DEU                             
-7d067ef3bf74d1659b8fa9df3de1a047	USA                             
-3cc1eb35683942bb5f7e30b187438c5e	DEU                             
-35f3e8a1461c3ce965993e4eafccfa43	AUS                             
-568afb74bcc1ce84f8562a4fbfdc31ba	USA                             
-9a876908f511193b53ce983ab276bd73	GBR                             
-3ec4a598041aa926d5f075e3d69dfc0a	HUN                             
-6949c5ed6eda8cf7a40adb2981d4671d	DEU                             
-6e610e4ff7101f3a1837544e9fb5d0bf	SWE                             
-312793778e3248b6577e3882a77f68f3	DEU                             
-dd3e531c469005b17115dbf611b01c88	DEU                             
-dd15d5adf6349f5ca53e7a2641d41ab7	DEU                             
-4a27a1ef21d32d1b30d55f092af0d5a7	DEU                             
-398af626887ad21cd66aeb272b8337be	DEU                             
-eb999c99126a456f9db3c5d3b449fa7f	DEU                             
-0da2e7fa0ba90f4ae031b0d232b8a57a	CUB                             
-71b6971b6323b97f298af11ed5455e55	HUN                             
-36233ed8c181dfacc945ad598fb4f1a1	DNK                             
-221fa1624ee1e31376cb112dd2487953	GBR                             
-5958cd5ce011ea83c06cb921b1c85bb3	NLD                             
-844de407cd83ea1716f1ff57ea029285	POL                             
-df24a5dd8a37d3d203952bb787069ea2	GBR                             
-048d40092f9bd3c450e4bdeeff69e8c3	FRA                             
-33b39f2721f79a6bb6bb5e1b2834b0bd	FRA                             
-b145159df60e1549d1ba922fc8a92448	NLD                             
-16a56d0941a310c3dc4f967041574300	CAN                             
-e2be3c3c22484d1872c7b225339c0962	DEU                             
-1fbd4bcce346fd2b2ffb41f6e767ea84	NLD                             
-bca8f048f2c5ff787950eb1ba088c70e	DEU                             
-e093d52bb2d4ff4973e72f6eb577714b	DEU                             
-9777f12d27d48261acb756ca56ceea96	DEU                             
-20aba645df0b3292c63f0f08b993966e	DEU                             
-31897528a567059ed581f119a0e1e516	DEU                             
-41f062d8603a9705974083360fb69892	DEU                             
-ad7de486b34143f00a56127a95787e78	USA                             
-ca4038e41aaa675d65dc3f2ea92556e9	AUT                             
-16ff0968c682d98cb29b42c793066f29	SWE                             
-d2556a1452bc878401a6cde5cb89264d	SWE                             
-bccaee4d143d381c8c617dd98b9ee463	USA                             
-1680c4ab3ce61ab3e1514fba8b99e3c5	MEX                             
-03aa4e5b2b49a82eb798d33afe9e8523	AUT                             
-649df53f8249bdb0aa26e52d6ee517bb	BEL                             
-c9dc004fc3d039ad7fb49456e5902b01	GBR                             
-67cc86339b2654a35fcc57da8fc9d33d	CAN                             
-6916ed9292a811c895e259c542af0e8a	DEU                             
-fd401865b6db200e5eb8a1ac1b1fbab1	DEU                             
-218d618a041c057d0e05799670e7e2c8	DEU                             
-a4bcd57d5cda816e4ffd1f83031a36ca	CAN                             
-ec5c65bfe530446b696f04e51aa19201	DEU                             
-14af57131cbbf57afb206c8707fdab6c	FRA                             
-a45ff5de3a96b103a192f1f133d0b0cf	DEU                             
-de3e4c12f56a35dc1ee6866b1ddd9d53	FRA                             
-88726e1a911181e20cf8be52e1027f26	DEU                             
-9b7d722b58370498cd39104b2d971978	DEU                             
-ac61757d33fc8563eb2409ed08e21974	DEU                             
-93299af7c9e3c63c7b3d9bb2242c9d6b	DEU                             
-11a5f9f425fd6da2d010808e5bf759ab	GBR                             
-bc5daaf162914ff1200789d069256d36	USA                             
-98e8599d1486fadca0bf7aa171400dd8	DEU                             
-66857d7c2810238438483356343ff26e	NLD                             
-aa5e46574bdc6034f4d49540c0c2d1ad	POL                             
-13d81f0ed06478714344fd0f1a6a81bb	DEU                             
-eaacb8ee01500f18e370303be3d5c591	DEU                             
-22ef651048289b302401afe2044c5c01	DEU                             
-58bbd6135961e3d837bacceb3338f082	FIN                             
-5e13fedbc93d74e8d42eadee1def2ae6	DEU                             
-0bc231190faa69e7545dfa084f2bed56	USA                             
-f7a13e18c9c1e371b748facfef98a9a5	DEU                             
-7359d3b2ff69eb4127c60756cc77faa9	NLD                             
-e389ffc844004b963c3b832faeea873d	FRA                             
-31b9bbcd5d3cb8e18af8f6ea59aea836	BEL                             
-fe4398ac7504e937c2ff97039aa66311	FIN                             
-fb8b0c4fbbd2bc0ab10fcf67a9f1d1ff	SWE                             
-f986b00063e79f7c061f40e6cfbbd039	GBR                             
-cbefc03cdd1940f37a7033620f8ff69f	GBR                             
-2eb42b9c31ac030455e5a4a79bccf603	GBR                             
-08f8c67c20c4ba43e8ba6fa771039c94	DEU                             
-b4c5b422ab8969880d9f0f0e9124f0d7	DEU                             
-01a9f3fdd96daef6bc85160bd21d35dc	DEU                             
-2187711aeaa2944a707c9eabaa2df72a	DEU                             
-6a4e8bab29666632262eb20c336e85e2	DEU                             
-53199d92b173437f0207a916e8bcc23a	CUB                             
-53a5da370321dac39033a5fe6af13e77	DEU                             
-b0cc1a3a1aee13a213ee73e3d4a2ce70	FRA                             
-c2ab38206dce633f15d66048ad744f03	DEU                             
-630500eabc48c986552cb01798a31746	DEU                             
-e5ea2ac2170d4f9c2bdbd74ab46523f7	NLD                             
-ceffa7550e5d24a8c808d3516b5d6432	DEU                             
-81200f74b5d831e3e206a66fe4158370	DEU                             
-5e6ff2b64b4c0163ab83ab371abe910b	DEU                             
-262a49b104426ba0d1559f8785931b9d	DEU                             
-0add3cab2a932f085109a462423c3250	DEU                             
-20a75b90511c108e3512189ccb72b0ac	GBR                             
-7d6ede8454373d4ca5565436cbfeb5c0	DEU                             
-aa98c9e445775e7c945661e91cf7e7aa	DEU                             
-4e9b4bdef9478154fc3ac7f5ebfb6418	USA                             
-198445c0bbe110ff65ac5ef88f026aff	DEU                             
-abc73489d8f0d1586a2568211bdeb32f	DEU                             
-458da4fc3da734a6853e26af3944bf75	ITA                             
-26ad58455460d75558a595528825b672	DEU                             
-8e1cfd3bf5a7f326107f82f8f28649be	DEU                             
-c08567e9006dc768bdb72bb7b14e53a1	DEU                             
-b99927de4e0ed554b381b920c01e0481	USA                             
-6caa2c6d69ebdc30a3c4580979c3e630	NLD                             
-ca7f6314915171b302f62946dcd9a369	USA                             
-2e3163bc98304958ccafbb2810210714	TUR                             
-5da7161758c4b9241330afb2e1503bbc	ITA                             
-d0a0817c2cd33b0734f70fcf3240eb41	USA                             
-0f9fb8452cc5754f83e084693d406721	SWE                             
-0959583c7f421c0bb8adb20e8faeeea1	FIN                             
-2f623623ce7eeb08c30868be121b268a	SWE                             
-b66781a52770d78b260f15d125d1380b	SWE                             
-739260d8cb379c357340977fe962d37a	SWE                             
-8765cfbf81024c3bd45924fee9159982	NOR                             
-28bc0abd0cf390a4472b1f60bd0cfe4a	FIN                             
-298a577c621a7a1c365465f694e0bd13	SWE                             
-fecc75d978ad94aaa4e17b3ff9ded487	FIN                             
-333ca835f34af241fe46af8e7a037e17	NOR                             
-be2c012d60e32fbf456cd8184a51973d	NOR                             
-a0cdbd2af8f1ddbb2748a2eaddce55da	SWE                             
-3b6d90f85e8dadcb3c02922e730e4a9d	SWE                             
-3a7e46261a591b3e65d1e7d0b2439b20	NOR                             
-9a6c0d8ea613c5b002ff958275318b08	FIN                             
-3577f7160794aa4ba4d79d0381aefdb1	POL                             
-02677b661c84417492e1c1cb0b0563b2	SWE                             
-9d1ecaf46d6433f9dd224111440cfa3b	NOR                             
-92ad5e8d66bac570a0611f2f1b3e43cc	NOR                             
-90669320cd8e4a09bf655310bffdb9ba	DEU                             
-20de83abafcb071d854ca5fd57dec0e8	HUN                             
-2e6df049342acfb3012ac702ed93feb4	DEU                             
-d86431a5bbb40ae41cad636c2ddbf746	DEU                             
-85ed977a5fcd1ce0c970827078fdb7dd	CHL                             
-1bebc288d8fce192365168e890c956c8	DEU                             
-4ccc28be05a98375d9496dc2eba7006a	001                             
-ccc9b8a517c7065d907e283040e6bc91	DNK                             
-1ae6e4c42571b2d7275b5922ce3d5f39	ESP                             
-f6f1f5df964a4620e88527d4e4ff84fc	DEU                             
-370cde851ed429f1269f243dd714cce2	GRC                             
-786d3481362b8dee6370dfb9b6df38a2	ITA                             
-dab701a389943f0d407c6e583abef934	PRT                             
-8ac49bad86eacffcea299416cd92c3b7	ESP                             
-50737756bd539f702d8e6e75cf388a31	ESP                             
-d2d67d63c28a15822569c5033f26b133	AUT                             
-afb6e0f1e02be39880596a490c900775	GRC                             
-9ff04a674682ece6ee93ca851db56387	AUT                             
-4900e24b2d0a0c5e06cf3db8b0638800	DEU                             
-b9ffbdbbe63789cc6fa9ee2548a1b2ed	DEU                             
-cfe122252751e124bfae54a7323bf02d	DEU                             
-7f3e5839689216583047809a7f6bd0ff	DEU                             
-491801c872c67db465fda0f8f180569d	SWE                             
-647dadd75e050b230269e43a4fe351e2	ITA                             
-5fa07e5db79f9a1dccb28d65d6337aa6	NLD                             
-0feeee5d5e0738c1929bf064b184409b	CZE                             
-38734dcdff827db1dc3215e23b4e0890	DEU                             
-3e28a735f3fc31a9c8c30b47872634bf	SWE                             
-02fd1596536ea89e779d37ded52ac353	DEU                             
-9d5c1f0c1b4d20a534fe35e4e699fb7b	GBR                             
-f517a9dc937888bed2f3fbeb38648372	001                             
-f114176afa9d9d44e8ef8ce2b586469d	FIN                             
-14b33fbc65adcc1655f82c82d232f6e7	DEU                             
-33b8199a303b059dfe3a3f9ace77c972	USA                             
-f2576a80ee7893b24dd33a8af3911eac	FRA                             
-d0932e0499b24d42233616e053d088ea	PRT                             
-d0dc5a2eab283511301b75090afe11ab	DEU                             
-dfb7069bfc6e0064a6c667626eca07b4	BEL                             
-9436650a453053e775897ef5733e88fe	CHE                             
-cf6a93131b0349f37afeb9319b802136	BEL                             
-5629d465ed80efff6e25b8775b98c2d1	CHE                             
-16fe483d0681e0c86177a33e22452e13	CHE                             
-4db3435be88015c70683b4368d9b313b	LUX                             
-bd9059497b4af2bb913a8522747af2de	CHE                             
-25f5d73866a52be9d0e2e059955dfd56	BEL                             
-272a23811844499845c6e33712c8ba6c	USA                             
-8cd1cca18fb995d268006113a3d6e4bf	BLR                             
-2b068ea64f42b2ccd841bb3127ab20af	DEU                             
-979b5de4a280c434213dd8559cf51bc0	DEU                             
-45d592ef3a8dc14dccc087e734582e82	DEU                             
-71a520b6d0673d926d02651b269cf92c	DEU                             
-22aaaebe901de8370917dcc53f53dbf6	DEU                             
-6e064a31dc53ab956403ec3654c81f1f	DEU                             
-dddfdb5f2d7991d93f0f97dce1ef0f45	DEU                             
-56b07537df0c44402f5f87a8dcb8402c	SWE                             
-e6793169497d66ac959a7beb35d6d497	NLD                             
-0ab01e57304a70cf4f7f037bd8afbe49	FRA                             
-fb3a67e400fde856689076418034cdf2	DEU                             
-db572afa3dcc982995b5528acb350299	SWE                             
-2a67e4bd1ef39d36123c84cad0b3f974	JPN                             
-b9a0ad15427ab09cfd7b85dadf2c4487	DEU                             
-513fc59781f0030dc6e7a7528a45b35b	USA                             
-20db933d4ddd11d5eff99a441e081550	CHN                             
-6e2f236ffef50c45058f6127b30ecece	DEU                             
-3f7e7508d7af00ea2447bfffbbac2178	DEU                             
-71144850f4fb4cc55fc0ee6935badddf	SWE                             
-eed35187b83d0f2e0042cf221905163c	NLD                             
-b615ea28d44d2e863a911ed76386b52a	NLD                             
-bda66e37bf0bfbca66f8c78c5c8032b8	DEU                             
-2799b4abf06a5ec5e262d81949e2d18c	DEU                             
-a20050efc491a9784b5cced21116ba68	DEU                             
-05fcf330d8fafb0a1f17ce30ff60b924	SWE                             
-386a023bd38fab85cb531824bfe9a879	SWE                             
-abe78132c8e446430297d08bd1ecdab0	FIN                             
-7b3ab6743cf8f7ea8491211e3336e41d	ESP                             
-bd4ca3a838ce3972af46b6e2d85985f2	DEU                             
-6caa47f7b3472053b152f84ce72c182c	USA                             
-a05a13286752cb6fc14f39f51cedd9ce	AUS                             
-781c745a0d6b02cdecadf2e44d445d1a	DEU                             
-71ac59780209b4c074690c44a3bba3b7	DEU                             
-82f43cc1bda0b09efff9b356af97c7ab	DEU                             
-d908b6b9019639bced6d1e31463eea85	DEU                             
-1437c187d64f0ac45b6b077a989d5648	GBR                             
-4be3e31b7598745d0e96c098bbf7a1d7	USA                             
-d1e0bdb2b2227bdd5e47850eec61f9ea	USA                             
-123131d2d4bd15a0db8f07090a383157	DEU                             
-78bbff6bf39602a577c9d8a117116330	USA                             
-2054decb2290dbaab1c813fd86cc5f8b	ITA                             
-6adc39f4242fd1ca59f184e033514209	DEU                             
-281eb11c857bbe8b6ad06dc1458e2751	UKR                             
-dfa61d19b62369a37743b38215836df9	GBR                             
-efe9ed664a375d10f96359977213d620	DEU                             
-30a100fe6a043e64ed36abb039bc9130	DEU                             
-c5f4e658dfe7b7af3376f06d7cd18a2a	ITA                             
-dcab0d84960cda81718e38ee47688a75	DEU                             
-3aa1c6d08d286053722d17291dc3f116	PRT                             
-818ce28daba77cbd2c4235548400ffb2	DEU                             
-6d25c7ad58121b3effe2c464b851c27a	AUS                             
-8791e43a8287ccbc21f61be21e90ce43	AUT                             
-5c59b6aa317b306a1312a67fe69bf512	GRC                             
-cd004b87e2adfb72b28752a6ef6cd639	DEU                             
-1b62f034014b1d242c84c6fe7e6470f0	SWE                             
-b02ba5a5e65487122c2c1c67351c3ea0	DEU                             
-ea3b6b67824411a4cfaa5c8789282f48	DEU                             
-f2a863a08c3e22cc942264ac4bc606e3	SWE                             
-eb39fa9323a6b3cbc8533cd3dadb9f76	DEU                             
-768207c883fd6447d67f3d5bc09211bd	USA                             
-61725742f52de502605eadeac19b837b	DEU                             
-2fb81ca1d0a935be4cb49028268baa3f	DEU                             
-3705bfe1d1b3b5630618b164716ae700	DEU                             
-801c01707f48bfa8875d4a2ac613920d	BLR                             
-d42e907e9c61d30d23ce9728d97aa862	CRI                             
-3757709518b67fddd9ae5a368d219334	USA                             
-a7eb281bcaab3446ece1381b190d34e0	ISL                             
-14bbaec7f5e0eba98d90cd8353c2e79f	USA                             
-1175d5b2a935b9f4daf6b39e5e74138c	DEU                             
-4190210961bce8bf2ac072c878ee7902	AUS                             
-2f090f093a2868dccca81a791bc4941f	AUS                             
-8981b4a0834d2d59e1d0dceb6022caae	AUT                             
-a7e071b3de48cec1dd24de6cbe6c7bf1	USA                             
-f3ac75dfbf1ce980d70dc3dea1bf4636	DNK                             
-de1e0ed5433f5e95c8f48e18e1c75ff6	DNK                             
-e20976feda6d915a74c751cbf488a241	DEU                             
-b3d0eb96687420dc4e5b10602ac42690	GBR                             
-e4f13074d445d798488cb00fa0c5fbd4	DEU                             
-5dd5b236a364c53feb6db53d1a6a5ab9	DEU                             
-486bf23406dec9844b97f966f4636c9b	SWE                             
-1fd7fc9c73539bee88e1ec137b5f9ad2	GBR                             
-ef3c0bf190876fd31d5132848e99df61	FRA                             
-2569a68a03a04a2cd73197d2cc546ff2	AUT                             
-05c87189f6c230c90bb1693567233100	DEU                             
-77bfe8d21f1ecc592062f91c9253d8ab	NOR                             
-018b60f1dc74563ca02f0a14ee272e4d	DEU                             
-40fcfb323cd116cf8199485c35012098	FRA                             
-d68956b2b5557e8f1be27a4632045c1e	USA                             
-ba9bfb4d7c1652a200d1d432f83c5fd1	SWE                             
-4dde2c290e3ee11bd3bd1ecd27d7039a	UKR                             
-34fd3085dc67c39bf1692938cf3dbdd9	NLD                             
-fcf66a6d6cfbcb1d4a101213b8500445	DEU                             
-d5ec808c760249f11fbcde2bf4977cc6	DEU                             
-5637bae1665ae86050cb41fb1cdcc3ee	CAN                             
-2d1ba9aa05ea4d94a0acb6b8dde29d6b	AUS                             
-cd80c766840b7011fbf48355c0142431	CHE                             
-7b675f4c76aed34cf2d5943d83198142	AUS                             
-93025091752efa184fd034f285573afe	CHE                             
-aaaad3022279d4afdb86ad02d5bde96b	FRA                             
-ce8e1e23e9672f5bf43894879f89c17a	DEU                             
-50bac8fb5d0c55efd23de4c216e440f1	BRA                             
-e8ead85c87ecdab1738db48a10cae6da	DEU                             
-7e0e2fabeced85b4b8bbbca59858d33d	BRA                             
-eef1b009f602bb255fa81c0a7721373d	NLD                             
-49d387abd142d76f4b38136257f56201	DEU                             
-0cd2b45507cc7c4ead2aaa71c59af730	DEU                             
-34ef35a77324b889aab18380ad34b51a	FIN                             
-869bb972f8bef83979774fa123c56a4e	NLD                             
-472e67129f0c7add77c7c907dac3351f	BEL                             
-23f5e1973b5a048ffaaa0bd0183b5f87	DEU                             
-08b84204877dce2a08abce50d9aeceed	DEU                             
-309263122a445662099a3dabce2a4f17	NLD                             
-c833c98be699cd7828a5106a37d12c2e	DEU                             
-40a259aebdbb405d2dc1d25b05f04989	DEU                             
-563fcbf5f44e03e0eeb9c8d6e4c8e127	FRA                             
-f1022ae1bc6b46d51889e0bb5ea8b64f	FIN                             
-ed783268eca01bff52c0f135643a9ef7	DEU                             
-f49f851c639e639b295b45f0e00c4b4c	DEU                             
-9b55ad92062221ec1bc80f950f667a6b	DEU                             
-f6708813faedbf607111d83fdce91828	USA                             
-f3b8f1a2417bdc483f4e2306ac6004b2	SWE                             
-bf2c8729bf5c149067d8e978ea3dcd32	DEU                             
-72b73895941b319645450521aad394e8	SWE                             
-436f76ddf806e8c3cbdc9494867d0f79	DEU                             
-4e7054dff89623f323332052d0c7ff6e	NOR                             
-5cc06303f490f3c34a464dfdc1bfb120	DEU                             
-cbf6de82cf77ca17d17d293d6d29a2b2	DEU                             
-3c2234a7ce973bc1700e0c743d6a819c	USA                             
-7cbd455ff5af40e28a1eb97849f00723	USA                             
-3d4fe2107d6302760654b4217cf32f17	MEX                             
-d0dae91314459033160dc47a79aa165e	DEU                             
-5878f5f2b1ca134da32312175d640134	DEU                             
-4669569c9a870431c4896de37675a784	GBR                             
-9d36a42a36b62b3f665c7fa07f07563b	JAM                             
-e21ad7a2093c42e374fee6ec3b31efd3	DNK                             
-fdcfaa5f48035ad96752731731ae941a	UKR                             
-b531de2f903d979f6a002d5a94b136aa	DEU                             
-54ca3eeff0994926cb7944cca0797474	DNK                             
-841981e178ed25ef0f86f34ce0fb2904	AUT                             
-40eefb87bb24ed4efc3fc5eeeb7e5003	GBR                             
-cd0bc2c8738b2fef2d78d197223b17d5	DEU                             
-2c5705766131b389fa1d88088f1bb8a8	DEU                             
-3e98ecfa6a4c765c5522f897a4a8de23	USA                             
-db472eaf615920784c2b83fc90e8dcc5	USA                             
-6772cdb774a6ce03a928d187def5453f	USA                             
-f655d84d670525246ee7d57995f71c10	DNK                             
-cb80a6a84ec46f085ea6b2ff30a88d80	MEX                             
-6a13b854e05f5ba6d2a0d873546fc32d	DEU                             
-24af2861df3c72c8f1b947333bd215fc	DEU                             
-7bc374006774a2eda5288fea8f1872e3	DEU                             
-846a0115f0214c93a5a126f0f9697228	PRT                             
-0964b5218635a1c51ff24543ee242514	DEU                             
-c52d5020aad50e03d48581ffb34cd1c3	DEU                             
-dcdcd2f22b1d5f85fa5dd68fa89e3756	DEU                             
-c82b23ed65bb8e8229c54e9e94ba1479	DEU                             
-0182742917720e1b2cf59ff671738253	USA                             
-91abd5e520ec0a40ce4360bfd7c5d573	DEU                             
-e6624ef1aeab84f521056a142b5b2d12	GBR                             
-3ddbf46000c2fbd44759f3b4672b64db	BEL                             
-38b2886223461f15d65ff861921932b5	DEU                             
-dfca36a68db327258a2b0d5e3abe86af	DEU                             
-07d82d98170ab334bc66554bafa673cf	BRA                             
-42f6dd3a6e21d6df71db509662d19ca4	SWE                             
-118c9af69a42383387e8ce6ab22867d7	USA                             
-07f467f03da5f904144b0ad3bc00a26d	DEU                             
-e29470b6da77fb63e9b381fa58022c84	DEU                             
-0a3a1f7ca8d6cf9b2313f69db9e97eb8	DEU                             
-3fae5bf538a263e96ff12986bf06b13f	FRA                             
-34a9067cace79f5ea8a6e137b7a1a5c8	DEU                             
-a9ef9373c9051dc4a3e2f2118537bb2d	DEU                             
-009f51181eb8c6bb5bb792af9a2fdd07	FIN                             
-e63a014f1310b8c7cbe5e2b0fd66f638	CHE                             
-55b6aa6562faa9381e43ea82a4991079	SWE                             
-1dc7d7d977193974deaa993eb373e714	DEU                             
-5ab944fac5f6a0d98dc248a879ec70ff	DEU                             
-0a0f6b88354de7afe84b8a07dfadcc26	USA                             
-240e556541427d81f4ed1eda86f33ad3	NOR                             
-d162c87d4d4b2a8f6dda58d4fba5987f	USA                             
-21077194453dcf49c2105fda6bb89c79	GBR                             
-5bd15db3f3bb125cf3222745f4fe383f	GBR                             
-1e71013b49bbd3b2aaa276623203453f	DEU                             
-2e4e6a5f485b2c7e22f9974633c2b900	DEU                             
-541fa0085b17ef712791151ca285f1a7	DEU                             
-f2ba1f213e72388912791eb68adc3401	FRA                             
-210e99a095e594f2547e1bb8a9ac6fa7	RUS                             
-6cec93398cd662d79163b10a7b921a1b	DEU                             
-6ca47c71d99f608d4773b95f9b859142	USA                             
-024e91d84c3426913db8367f4df2ceb3	CHE                             
-773b5037f85efc8cc0ff3fe0bddf2eb8	ROU                             
-46ea4c445a9ff8e288258e3ec9cd1cf0	USA                             
-c41b9ec75e920b610e8907e066074b30	AUT                             
-a91887f44d8d9fdcaa401d1c719630d7	DEU                             
-4f5b2e20e9b7e5cc3f53256583033752	NLD                             
-1f56e4b8b8a0da3b8ec5b32970e4b0d8	DEU                             
-0d01b12a6783b4e60d2e09e16431f00a	DEU                             
-9c81c8c060b39e7437b2d913f036776b	DEU                             
-0ab7d3a541204a9cab0d2d569c5b173f	DEU                             
-76aebba2f63483b6184f06f0a2602643	BRA                             
-96406d44fcf110be6a4b63fa6d26de3b	DEU                             
-efb83e3ae12d8d95a5d01b6d762baa98	BEL                             
-d7a97c2ff91f7aa07fa9e2f8265ceab6	FRA                             
-9d919b88be43eb3a9056a54e57894f84	GBR                             
-ef297890615f388057b6a2c0a2cbc7ab	USA                             
-b7f0e9013f8bfb209f4f6b2258b6c9c8	USA                             
-c827a8c6d72ff66b08f9e2ab64e21c01	USA                             
-a985c9764e0e6d738ff20f2328a0644b	USA                             
-573f13e31f1be6dea396ad9b08701c47	USA                             
-748ac622dcfda98f59c3c99593226a75	USA                             
-f00bbb7747929fafa9d1afd071dba78e	USA                             
-9a8d3efa0c3389083df65f4383b155fb	USA                             
-ac8eab98e370e2a8711bad327f5f7c55	USA                             
-717ec52870493e8460d6aeddd9b7def8	USA                             
-71f4e9782d5f2a5381f5cdf7c5a35d89	USA                             
-05ee6afed8d828d4e7ed35b0483527f7	USA                             
-9639834b69063b336bb744a537f80772	USA                             
-fcc491ba532309d8942df543beaec67e	DEU                             
-662d17c67dcabc738b8620d3076f7e46	USA                             
-c349bc9795ba303aa49e44f64301290e	DEU                             
-aa5808895fd2fca01d080618f08dca51	DEU                             
-66597873e0974fb365454a5087291094	NLD                             
-6ffa656be5ff3db085578f54a05d4ddb	DEU                             
-891b302f7508f0772a8fdb71ccbf9868	BLR                             
-dddbd203ace7db250884ded880ea7be4	DEU                             
-a7eda23a9421a074fe5ec966810018d7	DEU                             
-ddae1d7419331078626bc217b23ea8c7	DEU                             
-c82a107cd7673a4368b7252aa57810fc	USA                             
-1cc93e4af82b1b7e08bace9a92d1f762	DEU                             
-fb80cd69a40a73fb3b9f22cf58fd4776	SRB                             
-6d779916de27702814e4874dcf4f9e3a	USA                             
-63a9f0ea7bb98050796b649e85481845	CZE                             
-7d3618373e07c4ce8896006919bbb531	DEU                             
-460bf623f241651a7527a63d32569dc0	GBR                             
-ef75c0b43ae9ba972900e83c5ccf5cac	FIN                             
-182a1e726ac1c8ae851194cea6df0393	BEL                             
-0d8ef82742e1d5de19b5feb5ecb3aed3	GBR                             
-90802bdf218986ffc70f8a086e1df172	DEU                             
-d1ba47339d5eb2254dd3f2cc9f7e444f	DEU                             
-7cb94a8039f617f505df305a1dc2cc61	AUT                             
-a9afdc809b94392fb1c2e873dbb02781	DEU                             
-576fea4a0c5425ba382fff5f593a33f1	BRA                             
-55696bac6cdd14d47cbe7940665e21d3	PRT                             
-34e927c45cf3ccebb09b006b00f4e02d	USA                             
-f8b3eaefc682f8476cc28caf71cb2c73	DEU                             
-3c6444d9a22c3287b8c483117188b3f4	DEU                             
-35bde21520f1490f0333133a9ae5b4fc	DEU                             
-4a9cd04fd04ab718420ee464645ccb8b	DEU                             
-824f75181a2bbd69fb2698377ea8a952	DEU                             
-d92ee81a401d93bb2a7eba395e181c04	DEU                             
-ad759a3d4f679008ffdfb07cdbda2bb0	DEU                             
-3480c10b83b05850ec18b6372e235139	DEU                             
-c5d3d165539ddf2020f82c17a61f783d	DEU                             
-b1d18f9e5399464bbe5dea0cca8fe064	DEU                             
-7c7e63c9501a790a3134392e39c3012e	DEU                             
-e3e9ccd75f789b9689913b30cb528be0	DEU                             
-d02f33b44582e346050cefadce93eb95	DEU                             
-707270d99f92250a07347773736df5cc	DEU                             
-ee36fdf153967a0b99d3340aadeb4720	DEU                             
-13291409351c97f8c187790ece4f5a97	DEU                             
-647a73dd79f06cdf74e1fa7524700161	DEU                             
-d9c849266ee3ac1463262df200b3aab8	DEU                             
-8b22cf31089892b4c57361d261bd63f7	DEU                             
-ab1d9c0bfcc2843b8ea371f48ed884bb	DEU                             
-ea3f5f97f06167f4819498b4dd56508e	GBR                             
-a99dca5593185c498b63a5eed917bd4f	GBR                             
-a6c27c0fb9ef87788c1345041e840f95	DEU                             
-f79485ffe5db7e276e1e625b0be0dbec	FRA                             
-eb4558fa99c7f8d548cbcb32a14d469c	ITA                             
-d76db99cdd16bd0e53d5e07bcf6225c8	RUS                             
-4c576d921b99dad80e4bcf9b068c2377	USA                             
-13c8bd3a0d92bd186fc5162eded4431d	USA                             
-50026a2dff40e4194e184b756a7ed319	DEU                             
-92edfbaa71b7361a3081991627b0e583	USA                             
-062c44f03dce5bf39f81d0bf953926fc	DEU                             
-79cbf009784a729575e50a3ef4a3b1cc	CAN                             
-6f60a61fcc05cb4d42c81ade04392cfc	DEU                             
-073f87af06b8d8bc561bb3f74e5f714f	LUX                             
-f34c903e17cfeea18e499d4627eeb3ec	USA                             
-03fec47975e0e1e2d0bc723af47281de	DEU                             
-118b96dde2f8773b011dfb27e51b2f95	DEU                             
-7df470ec0292985d8f0e37aa6c2b38d5	SWE                             
-75241d56d63a68adcd51d828eb76ca80	ISL                             
-381b834c6bf7b25b9b627c9eeb81dd8a	NLD                             
-cabcfb35912d17067131f7d2634ac270	USA                             
-60a105e79a86c8197cec9f973576874b	CZE                             
-e6cbb2e0653a61e35d26df2bcb6bc4c7	FIN                             
-e039d55ed63a723001867bc4eb842c00	DEU                             
-010fb41a1a7714387391d5ea1ecdfaf7	DEU                             
-3123e3df482127074cdd5f830072c898	DEU                             
-849c829d658baaeff512d766b0db3cce	DEU                             
-3b8d2a5ff1b16509377ce52a92255ffe	USA                             
-2460cdf9598c810ac857d6ee9a84935a	DEU                             
-50d48c9002eb08e248225c1d91732bbc	DEU                             
-8cb8e8679062b574afcb78a983b75a9f	SWE                             
-0aff394c56096d998916d2673d7ea0b6	MYS                             
-974cd6e62ff1a4101db277d936b41058	DNK                             
-cdd65383f4d356e459018c3b295d678b	DNK                             
-99557f46ccef290d9d93c546f64fb7d6	DEU                             
-454cce609b348a95fb627e5c02dddd1b	GRC                             
-246e0913685e96004354b87cbab4ea78	HUN                             
-4e9a84da92180e801263860bfbea79d6	SWE                             
-5e8df9b073e86a3272282977d2c9dc85	ITA                             
-44a468f083ac27ea7b6847fdaf515207	DEU                             
-33f03dd57f667d41ac77c6baec352a81	DEU                             
-a8fcba36c9e48e9e17ba381a34444dd0	CHE                             
-8717871a38810cc883cce02ea54a7017	NOR                             
-4a0ea81570ab9440e8899b9f5fb3a61a	DEU                             
-c38529decc4815a9932f940af2a16d37	BEL                             
-f0ae03df4fd08abd1f844fea2f4bbfb0	DEU                             
-3f460e130f37e8974fbcdc4d0056b468	AUT                             
-7bc230f440d5d70d2c573341342d9c81	FIN                             
-6a826993d87c8fc0014c43edd8622b6c	DEU                             
-d7e0c43c16a9f8385b49d23cd1178598	LTU                             
-c61b8639de558fcc2ee0b1d11e120df9	SWE                             
-14aedd89f13973e35f9ba63149a07768	DEU                             
-359dda2e361814c0c8b7b358e654691d	USA                             
-749b17536e08489cb3b2437715e89001	NLD                             
-65f24dbd08671d51fda7de723afc41d9	DEU                             
-01bcfac216d2a08cd25930234e59f1a1	GRC                             
-c63b6261b8bb8145bc0fd094b9732c24	USA                             
-5ef02a06b43b002e3bc195b3613b7022	DEU                             
-5934340f46d5ab773394d7a8ac9e86d5	DEU                             
-1c4af233da7b64071abf94d79c41a361	DEU                             
-b36eb6a54154f7301f004e1e61c87ce8	CUB                             
-bbbb086d59122dbb940740d6bac65976	USA                             
-26c2bb18f3a9a0c6d1392dae296cfea7	DEU                             
-6af2c726b2d705f08d05a7ee9509916e	NLD                             
-3a232003be172b49eb64e4d3e9af1434	USA                             
-e3c8afbeb0ec4736db977d18e7e37020	USA                             
-f32badb09f6aacb398d3cd690d90a668	USA                             
-99761fad57f035550a1ca48e47f35157	DEU                             
-87bd9baf0b0d760d1f0ca9a8e9526161	DEU                             
-f975b4517b002a52839c42e86b34dc96	DEU                             
-5b5fc236828ee2239072fd8826553b0a	DEU                             
-218ac7d899a995dc53cabe52da9ed678	DEU                             
-364be07c2428493479a07dbefdacc11f	PRT                             
-56bf60ca682b8f68e8843ad8a55c6b17	AUT                             
-8ee257802fc6a4d44679ddee10bf24a9	DEU                             
-94a62730604a985647986b509818efee	DEU                             
-09c00610ca567a64c82da81cc92cb846	ISL                             
-bc834c26e0c9279cd3139746ab2881f1	CHL                             
-64a25557d4bf0102cd8f60206c460595	DEU                             
-445a222489d55b5768ec2f17b1c3ea34	DEU                             
-fd0a7850818a9a642a125b588d83e537	COL                             
-93aa5f758ad31ae4b8ac40044ba6c110	DEU                             
-99bdf8d95da8972f6979bead2f2e2090	FIN                             
-123f90461d74091a96637955d14a1401	USA                             
-60eb61670a5385e3150cd87f915b0967	DEU                             
-b454fdfc910ad8f6b7509072cf0b4031	SWE                             
-06c5c89047bfd6012e6fb3c2bd3cb24b	USA                             
-156c19a6d9137e04b94500642d1cb8c2	DEU                             
-827bf758c7ce2ac0f857379e9e933f77	DEU                             
-e2afc3f96b4a23d451c171c5fc852d0f	ISL                             
-cd3296ec8f7773892de22dfade4f1b04	DEU                             
-05bea3ed3fcd45441c9c6af3a2d9952d	DEU                             
-5f07809ecfce3af23ed5550c6adf0d78	SWE                             
-baceebebc179d3cdb726f5cbfaa81dfe	DEU                             
-2db1850a4fe292bd2706ffd78dbe44b9	POL                             
-a30c1309e683fcf26c104b49227d2220	DEU                             
-246d570b4e453d4cb6e370070c902755	USA                             
-dd0e61ab23e212d958112dd06ad0bfd2	DEU                             
-5a534330e31944ed43cb6d35f4ad23c7	DEU                             
-96aa953534221db484e6ec75b64fcc4d	GBR                             
-75fea12b82439420d1f400a4fcf3386b	DEU                             
-951af0076709a6da6872f9cdf41c852b	SWE                             
-5c19e1e0521f7b789a37a21c5cd5737b	NLD                             
-863e7a3d6d4a74739bca7dd81db5d51f	USA                             
-ce14eb923a380597f2aff8b65a742048	USA                             
-a7111b594249d6a038281deb74ef0d04	DEU                             
-02670bc3f496ce7b1393712f58033f6c	150                             
-70492d5f3af58ace303d1c5dfc210088	BEL                             
-26211992c1edc0ab3a6b6506cac8bb52	USA                             
-384e94f762d3a408cd913c14b19ac5e0	DEU                             
-3b544a6f1963395bd3ae0aeebdf1edd8	FIN                             
-511ac85b55c0c400422462064d6c77ed	USA                             
-f9ff0bcbb45bdf8a67395fa0ab3737b5	DEU                             
-39ce458f2caa87bc7b759cd8cb16e62f	DEU                             
-00a0d9697a08c1e5d4ba28d95da73292	SVN                             
-d8d3a01ba7e5d44394b6f0a8533f4647	DEU                             
-a2a607567311cb7a5a609146b977f4a9	FIN                             
-913df019fed1f80dc49b38f02d8bae41	DEU                             
-3cd94848f6ccb600295135e86f1b46a7	CHE                             
-b00114f9fc38b48cc42a4972d7e07df6	USA                             
-a2761eea97ee9fe09464d5e70da6dd06	DEU                             
-9d514e6b301cfe7bdc270212d5565eaf	USA                             
-852c0b6d5b315c823cdf0382ca78e47f	ESP                             
-a2c31c455e3d0ea3f3bdbea294fe186b	DEU                             
-ffd2da11d45ed35a039951a8b462e7fb	DEU                             
-16c88f2a44ab7ecdccef28154f3a0109	FRA                             
-191bab5800bd381ecf16485f91e85bc3	DEU                             
-876eed60be80010455ff50a62ccf1256	DEU                             
-f4e4ef312f9006d0ae6ca30c8a6a32ff	DEU                             
-c311f3f7c84d1524104b369499bd582f	DEU                             
-1629fa6d4b8adb36b0e4a245b234b826	001                             
-270fb708bd03433e554e0d7345630c8e	BRA                             
-9d1e68b7debd0c8dc86d5d6500884ab4	DEU                             
-8987e9c300bc2fc5e5cf795616275539	DEU                             
-ba5e6ab17c7e5769b11f98bfe8b692d0	SWE                             
-eb0a191797624dd3a48fa681d3061212	CZE                             
-13de0a41f18c0d71f5f6efff6080440f	NLD                             
-5885f60f8c705921cf7411507b8cadc0	NLD                             
-f31ba1d770aac9bc0dcee3fc15c60a46	DEU                             
-0ae3b7f3ca9e9ddca932de0f0df00f8a	FRA                             
-0e609404e53b251f786b41b7be93cc19	POL                             
-b1006928600959429230393369fe43b6	AUT                             
-478aedea838b8b4a0936b129a4c6e853	USA                             
-f2856ad30734c5f838185cc08f71b1e4	DNK                             
-410044b393ebe6a519fde1bdb26d95e8	DEU                             
-abca417a801cd10e57e54a3cb6c7444b	DEU                             
-867872f29491a6473dae8075c740993e	AUT                             
-c937fc1b6be0464ec9d17389913871e4	DEU                             
-e9648f919ee5adda834287bbdf6210fd	DEU                             
-1f86700588aed0390dd27c383b7fc963	DEU                             
-faec47e96bfb066b7c4b8c502dc3f649	DEU                             
-16cf4474c5334c1d9194d003c9fb75c1	FRA                             
-8e38937886f365bb96aa1c189c63c5ea	NLD                             
-8ed55fda3382add32869157c5b41ed47	BEL                             
-4e9dfdbd352f73b74e5e51b12b20923e	GBR                             
-88059eaa73469bb47bd41c5c3cdd1b50	SWE                             
-56e8538c55d35a1c23286442b4bccd26	FIN                             
-375974f4fad5caae6175c121e38174d0	DEU                             
-f4b526ea92d3389d318a36e51480b4c8	DEU                             
-3929665297ca814b966cb254980262cb	DEU                             
-fbc2b3cebe54dd00b53967c5cf4b9192	DEU                             
-644f6462ec9801cdc932e5c8698ee7f9	DEU                             
-dbf1b3eb1f030affb41473a8fa69bc0c	DEU                             
-ca3fecb0d12232d1dd99d0b0d83c39ec	AUT                             
-b3626b52d8b98e9aebebaa91ea2a2c91	DEU                             
-347fb42f546e982de2a1027a2544bfd0	SWE                             
-97724184152a2620b76e2f93902ed679	DEU                             
-4bffc4178bd669b13ba0d91ea0522899	DEU                             
-b084dc5276d0211fae267a279e2959f0	DEU                             
-f66935eb80766ec0c3acee20d40db157	DEU                             
-cd1c06e4da41121b7362540fbe8cd62c	DEU                             
-9459200394693a7140196f07e6e717fd	SWE                             
-4e74055927fd771c2084c92ca2ae56a7	DEU                             
-a753c3945400cd54c7ffd35fc07fe031	PHL                             
-8af17e883671377a23e5b8262de11af4	HRV                             
-d1fded22db9fc8872e86fff12d511207	ARG                             
-c526681b295049215e5f1c2066639f4a	FRO                             
-3969716fc4acd0ec0c39c8a745e9459a	AUS                             
-b7b99e418cff42d14dbf2d63ecee12a8	PRT                             
-96b4b857b15ae915ce3aa5e406c99cb4	CHE                             
-8b5a84ba35fa73f74df6f2d5a788e109	IND                             
-57f622908a4d6c381241a1293d894c88	NOR                             
-48438b67b2ac4e5dc9df6f3723fd4ccd	CHL                             
-56a5afe00fae48b02301860599898e63	MEX                             
-3e8d4b3893a9ebbbd86e648c90cbbe63	IDN                             
-c46e8abb68aae0bcdc68021a46f71a65	PAN                             
-e4f74be13850fc65559a3ed855bf35a8	GRC                             
-7b52c8c4a26e381408ee64ff6b98e231	ISL                             
-278af3c810bb9de0f355ce115b5a2f54	LUX                             
-5c61f833c2fb87caab0a48e4c51fa629	NOR                             
-2859f0ed0630ecc1589b6868fd1dde41	PRT                             
-c5068f914571c27e04cd66a4ec5c1631	NOR                             
-8b3f40e0243e2307a1818d3f456df153	BRA                             
-8b0cfde05d166f42a11a01814ef7fa86	FIN                             
-c0118be307a26886822e1194e8ae246d	GBR                             
-a66394e41d764b4c5646446a8ba2028b	PRT                             
-e9e0664816c35d64f26fc1382708617b	CAN                             
-f29f7213d1c86c493ca7b4045e5255a9	ISL                             
-65f889eb579641f6e5f58b5a48f3ec12	USA                             
-fc239fd89fd7c9edbf2bf27d1d894bc0	DEU                             
-24701da4bd9d3ae0e64d263b72ad20e8	USA                             
-031d6cc33621c51283322daf69e799f5	IRL                             
-a8ace0f003d8249d012c27fe27b258b5	NLD                             
-255661921f4ad57d02b1de9062eb6421	GBR                             
-5d53b2be2fe7e27daa27b94724c3b6de	USA                             
-57126705faf40e4b5227c8a0302d13b2	USA                             
-51cb62b41cd9deaaa2dd98c773a09ebb	DEU                             
-cba8cb3c568de75a884eaacde9434443	BEL                             
-19cbbb1b1e68c42f3415fb1654b2d390	ITA                             
-f44f1e343975f5157f3faf9184bc7ade	NZL                             
-1e986acf38de5f05edc2c42f4a49d37e	IND                             
-10627ac0e35cfed4a0ca5b97a06b9d9f	BEL                             
-b834eadeaf680f6ffcb13068245a1fed	USA                             
-1ec58ca10ed8a67b1c7de3d353a2885b	CRI                             
-8f523603c24072fb8ccb547503ee4c0f	TUR                             
-43a4893e6200f462bb9fe406e68e71c0	CZE                             
-9c31bcca97bb68ec33c5a3ead4786f3e	MLT                             
-c445544f1de39b071a4fca8bb33c2772	GBR                             
-29891bf2e4eff9763aef15dc862c373f	FRA                             
-c8fbeead5c59de4e8f07ab39e7874213	DEU                             
-8fa1a366d4f2e520bc9354658c4709f1	FRA                             
-812f48abd93f276576541ec5b79d48a2	BEL                             
-d29c61c11e6b7fb7df6d5135e5786ee1	CZE                             
-7013a75091bf79f04f07eecc248f8ee6	DEU                             
-58e42b779d54e174aad9a9fb79e7ebbc	ESP                             
-67493f858802a478bfe539c8e30a7e44	FIN                             
-f7910d943cc815a4a0081668ac2119b2	GBR                             
-955a5cfd6e05ed30eec7c79d2371ebcf	NLD                             
-03201e85fc6aa56d2cb9374e84bf52ca	ITA                             
-e7a227585002db9fee2f0ed56ee5a59f	DEU                             
-bc111d75a59fe7191a159fd4ee927981	ESP                             
-017e06f9b9bccafa230a81b60ea34c46	MLT                             
-22c2fc8a3a81503d40d4e532ac0e22ab	DEU                             
-482818d4eb4ca4c709dcce4cc2ab413d	DEU                             
-ec788cc8478763d79a18160a99dbb618	DEU                             
-d2f62cd276ef7cab5dcf9218d68f5bcf	LUX                             
-e71bd61e28ae2a584cb17ed776075b55	DEU                             
-49a41ffa9c91f7353ec37cda90966866	DEU                             
-1c13f340d154b44e41c996ec08d76749	DEU                             
-d5b95b21ce47502980eebfcf8d2913e0	DEU                             
-0b6bcec891d17cd7858525799c65da27	DEU                             
-3cb077e20dabc945228ea58813672973	DEU                             
-8734f7ff367f59fc11ad736e63e818f9	DEU                             
-98aa80527e97026656ec54cdd0f94dff	DEU                             
-430a03604913a64c33f460ec6f854c36	AUT                             
-319480a02920dc261209240eed190360	DEU                             
-4ca1c3ed413577a259e29dfa053f99db	DEU                             
-2eed213e6871d0e43cc061b109b1abd4	DEU                             
-fdedcd75d695d1c0eb790a5ee3ba90b5	DEU                             
-ed9b92eb1706415c42f88dc91284da8a	ITA                             
-fb1afbea5c0c2e23396ef429d0e42c52	DEU                             
-316a289ef71c950545271754abf583f1	DEU                             
-33b3bfc86d7a57e42aa30e7d1c2517be	DEU                             
-8351282db025fc2222fc61ec8dd1df23	DEU                             
-60eb202340e8035af9e96707f85730e5	DEU                             
-d2f79e6a931cd5b5acd5f3489dece82a	DEU                             
-3189b8c5e007c634d7e28ef93be2b774	DEU                             
-a89af36e042b5aa91d6efea0cc283c02	USA                             
-eb2743e9025319c014c9011acf1a1679	SWE                             
-c27297705354ef77feb349e949d2e19e	DEU                             
-3258eb5f24b395695f56eee13b690da6	DNK                             
-8f7939c28270f3187210641e96a98ba7	DEU                             
-bcf744fa5f256d6c3051dd86943524f6	DEU                             
-3ba296bfb94ad521be221cf9140f8e10	DEU                             
-18e21eae8f909cbb44b5982b44bbf02f	GBR                             
-3438d9050b2bf1e6dc0179818298bd41	BEL                             
-384712ec65183407ac811fff2f4c4798	CHE                             
-a76c5f98a56fc03100d6a7936980c563	CHE                             
-66cc7344291ae2a297bf2aa93d886e22	NLD                             
-34ca5622469ad1951a3c4dc5603cea0f	DEU                             
-933c8182650ca4ae087544beff5bb52d	GBR                             
-e3de2cf8ac892a0d8616eefc4a4f59bd	USA                             
-623c5a1c99aceaf0b07ae233d1888e0a	NLD                             
-c091e33f684c206b73b25417f6640b71	USA                             
-bcc770bb6652b1b08643d98fd7167f5c	ITA                             
-73cb08d143f893e645292dd04967f526	DEU                             
-eb3a9fb71b84790e50acd81cc1aa4862	MNG                             
-13909e3013727a91ee750bfd8660d7bc	DNK                             
-74e8b6c4be8a0f5dd843e2d1d7385a36	USA                             
-2dde74b7ec594b9bd78da66f1c5cafdc	GBR                             
-5324a886a2667283dbfe7f7974ff6fc0	DEU                             
-28c5f9ffd175dcd53aa3e9da9b00dde7	DEU                             
-b798aa74946ce75baee5806352e96272	DEU                             
-6315887dd67ff4f91d51e956b06a3878	ITA                             
-df99cee44099ff57acbf7932670614dd	USA                             
-6b141e284f88f656b776148cde8e019c	USA                             
-b84cdd396f01275b63bdaf7f61ed5a43	USA                             
-7a43dd4c2bb9bea14a95ff3acd4dfb18	USA                             
-c8bc4f15477ea3131abb1a3f0649fac2	USA                             
-9133f1146bbdd783f34025bf90a8e148	USA                             
-9d74605e4b1d19d83992a991230e89ef	DEU                             
-ca54e4f7704e7b8374d0968143813fe6	DEU                             
-c245b4779defd5c69ffebbfdd239dd1b	DEU                             
-6b157916b43b09df5a22f658ccb92b64	DEU                             
-67cd9b4b7b33511f30e85e21b2d3b204	AUT                             
-5c29c2e513aadfe372fd0af7553b5a6c	AUS                             
-e4b1d8cc71fd9c1fbc40fdc1a1a5d5b3	FRA                             
-b12daab6c83b1a45aa32cd9c2bc78360	DEU                             
-9722f54adb556b548bb9ecce61a4d167	DNK                             
-04d53bc45dc1343f266585b52dbe09b0	DEU                             
-0c31e51349871cfb59cfbfaaed82eb18	DEU                             
-41dabe0c59a3233e3691f3c893eb789e	DEU                             
-113ab4d243afc4114902d317ad41bb39	FRA                             
-cc70416ca37c5b31e7609fcc68ca009e	ITA                             
-7b91dc9ecdfa3ea7d347588a63537bb9	AUT                             
-55c63b0540793d537ed29f5c41eb9c3e	DEU                             
-43bd0d50fe7d58d8fce10c6d4232ca1e	DEU                             
-cf38e7d92bb08c96c50ddc723b624f9d	SWE                             
-5f449b146ce14c780eee323dfc5391e8	ITA                             
-eef7d6da9ba6d0bed2078a5f253f4cfc	DNK                             
-ad51cbe70d798b5aec08caf64ce66094	DEU                             
-45e410efd11014464dd36fb707a5a9e1	ARE                             
-8fdc3e13751b8f525f259d27f2531e87	DEU                             
-05e76572fb3d16ca990a91681758bbee	DEU                             
-cfc61472d8abd7c54b81924119983ed9	NLD                             
-1fe0175f73e5b381213057da98b8f5fb	DEU                             
-d44be0e711c2711876734b330500e5b9	CHE                             
-c295bb30bf534e960a6acf7435f0e46a	DEU                             
-ab3ca496cbc01a5a9ed650c4d0e26168	DEU                             
-538eaaef4d029c255ad8416c01ab5719	DEU                             
-1de3f08835ab9d572e79ac0fca13c5c2	DEU                             
-4c02510c3f16e13edc27eff1ef2e452c	HRV                             
-3c8ce0379b610d36c3723b198b982197	POL                             
-7eeea2463ae5da9990cab53c014864fa	USA                             
-b1c7516fef4a901df12871838f934cf6	USA                             
-087c643d95880c5a89fc13f3246bebae	DEU                             
-be553803806b8634990c2eb7351ed489	AUS                             
-8bdd6b50b8ecca33e04837fde8ffe51e	DNK                             
-18b751c8288c0fabe7b986963016884f	SWE                             
-30b8affc1afeb50c76ad57d7eda1f08f	DEU                             
-a8a43e21de5b4d83a6a7374112871079	DEU                             
-9614cbc86659974da853dee20280b8c4	SRB                             
-bc2f39d437ff13dff05f5cfda14327cc	USA                             
-39530e3fe26ee7c557392d479cc9c93f	USA                             
-537e5aa87fcfb168be5c953d224015ff	ITA                             
-80d331992feb02627ae8b30687c7bb78	CZE                             
-f6eb4364ba53708b24a4141962feb82e	DEU                             
-2cd225725d4811d813a5ea1b701db0db	CZE                             
-2f6fc683428eb5f8b22cc5021dc9d40d	DEU                             
-2d5a306f74749cc6cbe9b6cd47e73162	DNK                             
-dba84ece8f49717c47ab72acc3ed2965	SWE                             
-559314721edf178fa138534f7a1611b9	ESP                             
-d192d350b6eace21e325ecf9b0f1ebd1	SWE                             
-d6a020f7b50fb4512fd3c843af752809	ITA                             
-73f4b98d80efb8888a2b32073417e21e	USA                             
-711a7acac82d7522230e3c7d0efc3f89	ITA                             
-1506aeeb8c3a699b1e3c87db03156428	USA                             
-4f58423d9f925c8e8bd73409926730e8	BRA                             
-96390e27bc7e2980e044791420612545	USA                             
-d2c2b83008dce38013577ef83a101a1b	SWE                             
-c1e8b6d7a1c20870d5955bcdc04363e4	MEX                             
-480a0efd668e568595d42ac78340fe2a	FRA                             
-d25956f771b58b6b00f338a41ca05396	SWE                             
-95a1f9b6006151e00b1a4cda721f469d	POL                             
-5159ae414608a804598452b279491c5c	AUT                             
-9bdbe50a5be5b9c92dccf2d1ef05eefd	DEU                             
-8c4e8003f8d708dc3b6d486d74d9a585	GBR                             
-b6eba7850fd20fa8dce81167f1a6edca	DEU                             
-5f27f488f7c8b9e4b81f59c6d776e25c	GBR                             
-1a5235c012c18789e81960333a76cd7a	CAN                             
-7f950b15aa65a26e8500cfffd7f89de0	SWE                             
-77f94851e582202f940198a26728e71f	DEU                             
-baeb191b42ec09353b389f951d19b357	DEU                             
-c21fe390daecee9e70b8f4b091ae316f	NLD                             
-8aeadeeff3e1a3e1c8a6a69d9312c530	BRA                             
-a4e0f3b7db0875f65bb3f55ab0aab7c6	SWE                             
-37b43a655dec0e3504142003fce04a07	USA                             
-781734c0e9c01b14adc3a78a4c262d83	USA                             
-89b5ac8fb4c102c174adf2fed752a970	DEU                             
-cc31970696ef00b4c6e28dba4252e45d	DEU                             
-92e1aca33d97fa75c1e81a9db61454bb	DEU                             
-0ba2f4073dd8eff1f91650af5dc67db4	USA                             
-bd555d95b1ccba75afca868636b1b931	USA                             
-a93376e58f4c73737cf5ed7d88c2169c	POL                             
-cd3faaaf1bebf8d009aa59f887d17ef2	USA                             
-33538745a71fe2d30689cac96737e8f7	DEU                             
-586ac67e6180a1f16a4d3b81e33eaa94	CZE                             
-ca1720fd6350760c43139622c4753557	CZE                             
-645b264cb978b22bb2d2c70433723ec0	NOR                             
-45816111a5b644493b68cfedfb1a0cc0	ISR                             
-5bb416e14ac19276a4b450d343e4e981	DEU                             
-d0e551d6887e0657952b3c5beb7fed74	DEU                             
-06c1680c65972c4332be73e726de9e74	FRA                             
-4671068076f66fb346c4f62cbfb7f9fe	ITA                             
-10407de3db48761373a403b8ddf09782	AUT                             
-77ac561c759a27b7d660d7cf0534a9c3	DEU                             
-3771036a0740658b11cf5eb73d9263b3	ITA                             
-6b37fe4703bd962004cdccda304cc18e	FIN                             
-371d905385644b0ecb176fd73184239c	GBR                             
-d871ebaec65bbfa0b6b97aefae5d9150	GBR                             
-28bb3f229ca1eeb05ef939248f7709ce	GBR                             
-861613f5a80abdf5a15ea283daa64be3	DEU                             
-080d2dc6fa136fc49fc65eee1b556b46	USA                             
-2df9857b999e21569c3fcce516f0f20e	USA                             
-d5a5e9d2edeb2b2c685364461f1dfd46	DEU                             
-1fcf2f2315b251ebe462da320491ea9f	DEU                             
-7022f6b60d9642d91eebba98185cd9ba	DEU                             
-4522c5141f18b2a408fc8c1b00827bc3	DEU                             
-5ec194adf19442544d8a94f4696f17dc	GRC                             
-31e2d1e0b364475375cb17ad76aa71f2	DEU                             
-dff880ae9847f6fa8ed628ed4ee5741b	DEU                             
-521c8a16cf07590faee5cf30bcfb98b6	ISR                             
-a77c14ecd429dd5dedf3dc5ea8d44b99	MLT                             
-b8d794c48196d514010ce2c2269b4102	DEU                             
-a0abb504e661e34f5d269f113d39ea96	DEU                             
-b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	GBR                             
-69a6a78ace079846a8f0d3f89beada2c	FRA                             
-43ff5aadca6d8a60dd3da21716358c7d	FRA                             
-95800513c555e1e95a430e312ddff817	CZE                             
-42085fca2ddb606f4284e718074d5561	DEU                             
-e2226498712065ccfca00ecb57b8ed2f	DEU                             
-db732a1a9861777294f7dc54eeca2b3e	DEU                             
-1ace9926ad3a6dab09d16602fd2fcccc	AUT                             
-05256decaa2ee2337533d95c7de3db9d	DEU                             
-c664656f67e963f4c0f651195f818ce0	150                             
-032d53a86540806303b4c81586308e58	DEU                             
-df800795b697445f2b7dc0096d75f4df	DEU                             
-810f28b77fa6c866fbcceb6c8aa7bac4	DEU                             
-7fcdd5f715be5fce835b68b9e63e1733	DEU                             
-5214513d882cf478e028201a0d9031c0	DEU                             
-0e4f0487408be5baf091b74ba765dce7	DEU                             
-8cd7fa96a5143f7105ca92de7ff0bac7	EGY                             
-bdbafc49aa8c3e75e9bd1e0ee24411b4	DEU                             
-5863c78fb68ef1812a572e8f08a4e521	FIN                             
-a822d5d4cdcb5d1b340a54798ac410b7	DEU                             
-08e2440159e71c7020394db19541aabc	DEU                             
-c8fd07f040a8f2dc85f5b2d3804ea3db	DEU                             
-866208c5b4a74b32974bffb0f90311ca	DEU                             
-fd3ab918dab082b1af1df5f9dbc0041f	CHL                             
-cb0785d67b1ea8952fae42efd82864a7	CHL                             
-a0d3b444bd04cd165b4e076c9fc18bee	DEU                             
-c846d80d826291f2a6a0d7a57e540307	USA                             
-d0b02893ceb72d11a3471fe18d7089fd	DEU                             
-6db22194a183d7da810dcc29ea360c17	DEU                             
-ab5428d229c61532af41ec2ca258bf30	DEU                             
-78a7bdfe7277f187e84b52dea7b75b0b	DNK                             
-f36fba9e93f6402ba551291e34242338	BEL                             
-e6489b9cc39c95e53401cb601c4cae09	DEU                             
-4622209440a0ade57b18f21ae41963d9	DEU                             
-867e7f73257c5adf6a4696f252556431	DEU                             
-f999abbe163f001f55134273441f35c0	DEU                             
-9527fff55f2c38fa44281cd0e4d511ba	DEU                             
-04c8327cc71521b265f2dc7cbe996e13	CZE                             
-f8b01df5282702329fcd1cae8877bb5f	FIN                             
-658a9bbd0e85d854a9e140672a46ce3a	DEU                             
-0925467e1cc53074a440dae7ae67e3e9	USA                             
-c18bdeb4f181c22f04555ea453111da1	DEU                             
-4338a835aa6e3198deba95c25dd9e3de	DEU                             
-6829c770c1de2fd9bd88fe91f1d42f56	DEU                             
-b14521c0461b445a7ac2425e922c72df	USA                             
-31da4ab7750e057e56224eff51bce705	NLD                             
-6fa204dccaff0ec60f96db5fb5e69b33	NOR                             
-2587d892c1261be043d443d06bd5b220	DEU                             
-b9fd9676338e36e6493489ec5dc041fe	DEU                             
-61a6502cfdff1a1668892f52c7a00669	DEU                             
-d69462bef6601bb8d6e3ffda067399d9	DEU                             
-04728a6272117e0dc4ec29b0f7202ad8	DEU                             
-0ada417f5b4361074360211e63449f34	150                             
-53c25598fe4f1f71a1c596bd4997245c	DEU                             
-8518eafd8feec0d8c056d396122a175a	DEU                             
-4bcbcb65040e0347a1ffb5858836c49c	DEU                             
-0d949e45a18d81db3491a7b451e99560	DEU                             
-5c3278fb76fa2676984396d33ba90613	DEU                             
-dda8e0792843816587427399f34bd726	DEU                             
-f1a37824dfc280b208e714bd80d5a294	DEU                             
-786a755c895da064ccd4f9e8eb7e484e	DEU                             
-f68a3eafcc0bb036ee8fde7fc91cde13	NOR                             
-78f5c568100eb61401870fa0fa4fd7cb	USA                             
-ab42c2d958e2571ce5403391e9910c40	DEU                             
-b86f86db61493cc2d757a5cefc5ef425	DEU                             
-98dd2a77f081989a185cb652662eea41	DEU                             
-c1a08f1ea753843e2b4f5f3d2cb41b7b	BEL                             
-807dbc2d5a3525045a4b7d882e3768ee	DEU                             
-45d62f43d6f59291905d097790f74ade	DEU                             
-2df0462e6f564f34f68866045b2a8a44	DEU                             
-6ee6a213cb02554a63b1867143572e70	DEU                             
-496a6164d8bf65daf6ebd4616c95b4b7	DEU                             
-15ba70625527d7bb48962e6ba1a465f7	DEU                             
-a571d94b6ed1fa1e0cfff9c04bbeb94d	ISR                             
-e37e9fd6bde7509157f864942572c267	GRC                             
-5e62fc773369f140db419401204200e8	DEU                             
-9592b3ad4d7f96bc644c7d6f34c06576	USA                             
-fd1a5654154eed3c0a0820ab54fb90a7	GBR                             
-2045b9a6609f6d5bca3374fd370e54ff	DEU                             
-78b532c25e4a99287940b1706359d455	DEU                             
-fc935f341286c735b575bd50196c904b	ITA                             
-f159fc50b5af54fecf21d5ea6ec37bad	BEL                             
-265dbcbd2bce07dfa721ed3daaa30912	NLD                             
-ec4f407118924fdc6af3335c8d2961d9	DEU                             
-11a7f956c37bf0459e9c80b16cc72107	DEU                             
-41e744bdf3114b14f5873dfb46921dc4	DEU                             
-e37015150c8944d90e306f19eaa98de8	DEU                             
-ed795c86ba21438108f11843f7214c95	FIN                             
-dbc940d02a217c923c52d3989be9b391	EST                             
-8845da022807c76120b5b6f50c218d9a	FIN                             
-f520f53edf44d466fb64269d5a67b69a	NOR                             
-61e5d7cb15bd519ceddcf7ba9a22cbc6	DEU                             
-9563a6fd049d7c1859196f614b04b959	POL                             
-90fb95c00db3fde6b86e6accf2178fa7	GBR                             
-b80aecda9ce9783dab49037eec5e4388	IRN                             
-b81dd41873676af0f9533d413774fa8d	BEL                             
-094655515b3991e73686f45e4fe352fe	DNK                             
-fbe95242f85d4bbe067ddc781191afb5	DNK                             
-fc46b0aa6469133caf668f87435bfd9f	USA                             
-8872fbd923476b7cf96913260ec59e66	DEU                             
-db1440c4bae3edf98e3dab7caf2e7fed	USA                             
-bff322dbe273a1e2d1fe37f81acccbe4	ZAF                             
-36b208182f04f44c80937e980c3c28fd	AUS                             
-a1af2abbd036f0499296239b29b40a5f	DEU                             
-89d60b9528242c8c53ecbfde131eba21	DEU                             
-e8d17786fed9fa5ddaf13881496106e4	150                             
-0371892b7f65ffb9c1544ee35c6330ad	CHE                             
-bf5c782ca6b0130372ac41ebd703463e	DEU                             
-f041991eb3263fd3e5d919026e772f57	ITA                             
-70409bc559ef6c8aabcf16941a29788b	BEL                             
-0ecef959ca1f43d538966f7eb9a7e2ec	DEU                             
-169c9d1bfabf9dec8f84e1f874d5e788	DEU                             
-01ffa9ce7c50b906e4f5b6a2516ba94b	CHE                             
-d104b6ae44b0ac6649723bac21761d41	ITA                             
-b12986f0a962c34c6669d59f40b1e9eb	BRA                             
-f0f2e6b4ae39fe3ef81d807f641f54a9	DEU                             
-a54196a4ae23c424c6c01a508f4c9dfb	DEU                             
-e3c1fd64db1923585a22632681c95d35	SWE                             
-0fa4e99a2451478f3870e930d263cfd4	DEU                             
-6c718d616702ff78522951d768552d6a	NLD                             
-9efb345179e21314a38093da366e1f09	DEU                             
-b7f3ddec78883ff5a0af0d223f491db8	DEU                             
-3472e72b1f52a7fda0d4340e563ea6c0	BEL                             
-f816407dd0b81a5baedb7695302855d9	EST                             
-e2b16c5f5bad24525b8c700c5c3b3653	DNK                             
-b0353ada659e3848bd59dec631e71f9e	DEU                             
-c256d34ab1f0bd3928525d18ddabe18e	DEU                             
-0035ac847bf9e371750cacbc98ad827b	FIN                             
-49bb0f64fae1bd9abf59989d5a5adfaf	DEU                             
-de2290e4c7bfa39e594c2dcd6e4c09d6	DEU                             
-f929c32e1184b9c0efdd60eb947bf06b	ISR                             
-25f02579d261655a79a54a1fc5c4baf5	FRA                             
-10dbb54312b010f3aeb9fde389fe6cf5	CHE                             
-f0cd1b3734f01a46d31c5644e3216382	USA                             
-2ef1ea5e4114637a2dc94110d4c3fc7a	NOR                             
-09fcf410c0bb418d24457d323a5c812a	DEU                             
-bd6d4ce8e8bd1f6494db102db5a06091	GRC                             
-f68e5e7b745ade835ef3029794b4b0b2	NOR                             
-d4f9c39bf51444ae90cc8947534f20e4	DEU                             
-55edd327aec958934232e98d828fb56a	NOR                             
-e340c1008146e56c9d6c7ad7aa5b8146	SVK                             
-a6c37758f53101378a209921511369de	NOR                             
-5b05784f3a259c7ebc2fffc1cf0c37b7	POL                             
-baf938346589a5e047e2aa1afcc3d353	ITA                             
-6435684be93c4a59a315999d3a3227f5	150                             
-034c15ae2143eea36eec7292010568a1	FIN                             
-50437ed6fdec844c3d86bb6ac8a4a333	GBR                             
-bb7dcf6e8a0c1005d2be54f005e9ff8f	DEU                             
-05acc535cbe432a56e2c9cfb170ee635	DEU                             
-7a78e9ce32da3202ac0ca91ec4247086	DEU                             
-ba404ce5a29ba15a792583bbaa7969c6	ARG                             
-d8cddac7db3dedd7d96b81a31dc519b3	FRA                             
-63dab0854b1002d4692bbdec90ddaecc	GRC                             
-3e8f57ef55b9d3a8417963f343db1de2	DEU                             
-7176be85b1a9e340db4a91d9f17c87b3	DEU                             
-cc31f5f7ca2d13e95595d2d979d10223	GRC                             
-ea6fff7f9d00d218338531ab8fe4e98c	USA                             
-00a616d5caaf94d82a47275101e3fa22	USA                             
-f3cb86dd6b6caf33a8a05571e195e7dc	GBR                             
-708abbdc2eb4b62e6732c4c2a60c625a	DEU                             
-ffd6243282cdf77599e2abaf5d1a36e5	USA                             
-d148b29cbc0092dc206f9217a1b3da73	USA                             
-a70a003448c0c2d2a6d4974f60914d40	USA                             
-68f05e1c702a4218b7eb968ff9489744	DEU                             
-b5067ff7f533848af0c9d1f3e6c5b204	DEU                             
-dba661bb8c2cd8edac359b22d3f9ddf3	DEU                             
-553adf4c48f103e61a3ee7a94e7ea17b	DEU                             
-134a3bbedd12bc313d57aa4cc781ddf9	DEU                             
-ab9ca8ecf42a92840c674cde665fbdd3	DEU                             
-d4192d77ea0e14c40efe4dc9f08fdfb8	DEU                             
-5fac4291bc9c25864604c4a6be9e0b4a	DEU                             
-ecd06281e276d8cc9a8b1b26d8c93f08	USA                             
-bf6cf2159f795fc867355ee94bca0dd5	CAN                             
-3b0713ede16f6289afd699359dff90d4	USA                             
-46148baa7f5229428d9b0950be68e6d7	DEU                             
-a909b944804141354049983d9c6cc236	DEU                             
-16e54a9ce3fcedbadd0cdc18832266fd	DEU                             
-b08bdd1d40a38ab9848ff817294332ca	DEU                             
-b06edc3ce52eb05a5a45ae58a7bb7adc	DEU                             
-9a83f3f2774bee96b8f2c8595fc174d7	NLD                             
-4124cc9a170709b345d3f68fd563ac33	NLD                             
-a1e60d2ccea21edbaf84a12181d1e966	CHE                             
-94edec5dc10d059f05d513ce4a001c22	DEU                             
-d1b8bfadad3a69dbd746217a500a4db5	CHE                             
-57006f73c326669c8d52c47a3a9e2696	DEU                             
-28a6ebe1e170483c1695fca36880db98	DEU                             
-ce34dc9b3e210fd7a61d94df77bd8398	150                             
-cdd21eba97ee010129f5d1e7a80494cb	USA                             
-ec29a7f3c6a4588ef5067ea12a19e4e1	NLD                             
-23dad719c8a972b4f19a65c79a8550fe	DEU                             
-dac6032bdce48b416fa3cd1d93dc83b8	ITA                             
-73cff3ab45ec02453b639abccb5bd730	DEU                             
-442ea4b6f50b4ae7dfde9350b3b6f664	DEU                             
-af8b7f5474d507a8e583c66ef1eed5a5	DEU                             
-bf250243f776c4cc4a9c4a1f81f7e42f	DEU                             
-bc30e7b15744d2140e28e5b335605de5	DEU                             
-8b174e2c4b00b9e0699967e812e97397	DEU                             
-a68fbbd4507539f9f2579ad2e7f94902	DEU                             
-2e572c8c809cfbabbe270b6ce7ce88dd	DEU                             
-bfaffe308a2e8368acb49b51814f2bfe	DEU                             
-6261b9de274cf2da37125d96ad21f1df	DEU                             
-804d27f4798081681e71b2381697e58c	NOR                             
-2918f3b4f699f80bcafb2607065451e1	GBR                             
-b760518e994aa7db99d91f1b6aa52679	DEU                             
-0fe3db5cf9cff35143d6610797f91f7c	DEU                             
-2304c368fd55bc45cb12f1589197e80d	DEU                             
-6c3eceee73efa7af0d2f9f62daf63456	DEU                             
-6a2367b68131111c0a9a53cd70c2efed	SWE                             
-f2727091b6fe5656e68aa63d936c5dfd	CAN                             
-ec41b630150c89b30041d46b03f1da42	DEU                             
-cb3a240c27ebf12e17f9efe44fa4a7a8	USA                             
-cfe9861e2a347cc7b50506ea46fdaf4f	DEU                             
-926811886f475151c52dd365c90a7efc	DEU                             
-afe4451c0c33641e67241bfe39f339ff	DEU                             
-e27728342f660d53bd12ab14e5005903	DEU                             
-3e6141409efd871b4a87deacfbf31c28	DEU                             
-e84900ed85812327945c9e72f173f8cc	DEU                             
-c3ce3cf87341cea762a1fb5d26d7d361	DEU                             
-11ac50031c60fb29e5e1ee475be05412	FRA                             
-bd9b8bf7d35d3bd278b5c300bc011d86	GRC                             
-d39aa6fda7dc81d19cd21adbf8bd3479	NOR                             
+58bbd6135961e3d837bacceb3338f082	FIN
+5e13fedbc93d74e8d42eadee1def2ae6	DEU
+0bc231190faa69e7545dfa084f2bed56	USA
+f7a13e18c9c1e371b748facfef98a9a5	DEU
+7359d3b2ff69eb4127c60756cc77faa9	NLD
+e389ffc844004b963c3b832faeea873d	FRA
+31b9bbcd5d3cb8e18af8f6ea59aea836	BEL
+fe4398ac7504e937c2ff97039aa66311	FIN
+fb8b0c4fbbd2bc0ab10fcf67a9f1d1ff	SWE
+f986b00063e79f7c061f40e6cfbbd039	GBR
+cbefc03cdd1940f37a7033620f8ff69f	GBR
+2eb42b9c31ac030455e5a4a79bccf603	GBR
+08f8c67c20c4ba43e8ba6fa771039c94	DEU
+b4c5b422ab8969880d9f0f0e9124f0d7	DEU
+01a9f3fdd96daef6bc85160bd21d35dc	DEU
+2187711aeaa2944a707c9eabaa2df72a	DEU
+6a4e8bab29666632262eb20c336e85e2	DEU
+53199d92b173437f0207a916e8bcc23a	CUB
+53a5da370321dac39033a5fe6af13e77	DEU
+b0cc1a3a1aee13a213ee73e3d4a2ce70	FRA
+c2ab38206dce633f15d66048ad744f03	DEU
+630500eabc48c986552cb01798a31746	DEU
+e5ea2ac2170d4f9c2bdbd74ab46523f7	NLD
+ceffa7550e5d24a8c808d3516b5d6432	DEU
+81200f74b5d831e3e206a66fe4158370	DEU
+5e6ff2b64b4c0163ab83ab371abe910b	DEU
+262a49b104426ba0d1559f8785931b9d	DEU
+0add3cab2a932f085109a462423c3250	DEU
+20a75b90511c108e3512189ccb72b0ac	GBR
+7d6ede8454373d4ca5565436cbfeb5c0	DEU
+aa98c9e445775e7c945661e91cf7e7aa	DEU
+4e9b4bdef9478154fc3ac7f5ebfb6418	USA
+198445c0bbe110ff65ac5ef88f026aff	DEU
+abc73489d8f0d1586a2568211bdeb32f	DEU
+458da4fc3da734a6853e26af3944bf75	ITA
+26ad58455460d75558a595528825b672	DEU
+8e1cfd3bf5a7f326107f82f8f28649be	DEU
+c08567e9006dc768bdb72bb7b14e53a1	DEU
+b99927de4e0ed554b381b920c01e0481	USA
+6caa2c6d69ebdc30a3c4580979c3e630	NLD
+ca7f6314915171b302f62946dcd9a369	USA
+2e3163bc98304958ccafbb2810210714	TUR
+5da7161758c4b9241330afb2e1503bbc	ITA
+d0a0817c2cd33b0734f70fcf3240eb41	USA
+0f9fb8452cc5754f83e084693d406721	SWE
+0959583c7f421c0bb8adb20e8faeeea1	FIN
+2f623623ce7eeb08c30868be121b268a	SWE
+b66781a52770d78b260f15d125d1380b	SWE
+739260d8cb379c357340977fe962d37a	SWE
+8765cfbf81024c3bd45924fee9159982	NOR
+28bc0abd0cf390a4472b1f60bd0cfe4a	FIN
+298a577c621a7a1c365465f694e0bd13	SWE
+fecc75d978ad94aaa4e17b3ff9ded487	FIN
+333ca835f34af241fe46af8e7a037e17	NOR
+be2c012d60e32fbf456cd8184a51973d	NOR
+a0cdbd2af8f1ddbb2748a2eaddce55da	SWE
+3b6d90f85e8dadcb3c02922e730e4a9d	SWE
+3a7e46261a591b3e65d1e7d0b2439b20	NOR
+9a6c0d8ea613c5b002ff958275318b08	FIN
+3577f7160794aa4ba4d79d0381aefdb1	POL
+02677b661c84417492e1c1cb0b0563b2	SWE
+9d1ecaf46d6433f9dd224111440cfa3b	NOR
+92ad5e8d66bac570a0611f2f1b3e43cc	NOR
+90669320cd8e4a09bf655310bffdb9ba	DEU
+20de83abafcb071d854ca5fd57dec0e8	HUN
+2e6df049342acfb3012ac702ed93feb4	DEU
+d86431a5bbb40ae41cad636c2ddbf746	DEU
+85ed977a5fcd1ce0c970827078fdb7dd	CHL
+1bebc288d8fce192365168e890c956c8	DEU
+4ccc28be05a98375d9496dc2eba7006a	001
+ccc9b8a517c7065d907e283040e6bc91	DNK
+1ae6e4c42571b2d7275b5922ce3d5f39	ESP
+f6f1f5df964a4620e88527d4e4ff84fc	DEU
+370cde851ed429f1269f243dd714cce2	GRC
+786d3481362b8dee6370dfb9b6df38a2	ITA
+dab701a389943f0d407c6e583abef934	PRT
+8ac49bad86eacffcea299416cd92c3b7	ESP
+50737756bd539f702d8e6e75cf388a31	ESP
+d2d67d63c28a15822569c5033f26b133	AUT
+afb6e0f1e02be39880596a490c900775	GRC
+9ff04a674682ece6ee93ca851db56387	AUT
+4900e24b2d0a0c5e06cf3db8b0638800	DEU
+b9ffbdbbe63789cc6fa9ee2548a1b2ed	DEU
+cfe122252751e124bfae54a7323bf02d	DEU
+7f3e5839689216583047809a7f6bd0ff	DEU
+491801c872c67db465fda0f8f180569d	SWE
+647dadd75e050b230269e43a4fe351e2	ITA
+5fa07e5db79f9a1dccb28d65d6337aa6	NLD
+0feeee5d5e0738c1929bf064b184409b	CZE
+38734dcdff827db1dc3215e23b4e0890	DEU
+3e28a735f3fc31a9c8c30b47872634bf	SWE
+02fd1596536ea89e779d37ded52ac353	DEU
+9d5c1f0c1b4d20a534fe35e4e699fb7b	GBR
+f517a9dc937888bed2f3fbeb38648372	001
+f114176afa9d9d44e8ef8ce2b586469d	FIN
+14b33fbc65adcc1655f82c82d232f6e7	DEU
+33b8199a303b059dfe3a3f9ace77c972	USA
+f2576a80ee7893b24dd33a8af3911eac	FRA
+d0932e0499b24d42233616e053d088ea	PRT
+d0dc5a2eab283511301b75090afe11ab	DEU
+dfb7069bfc6e0064a6c667626eca07b4	BEL
+9436650a453053e775897ef5733e88fe	CHE
+cf6a93131b0349f37afeb9319b802136	BEL
+5629d465ed80efff6e25b8775b98c2d1	CHE
+16fe483d0681e0c86177a33e22452e13	CHE
+4db3435be88015c70683b4368d9b313b	LUX
+bd9059497b4af2bb913a8522747af2de	CHE
+25f5d73866a52be9d0e2e059955dfd56	BEL
+272a23811844499845c6e33712c8ba6c	USA
+8cd1cca18fb995d268006113a3d6e4bf	BLR
+2b068ea64f42b2ccd841bb3127ab20af	DEU
+979b5de4a280c434213dd8559cf51bc0	DEU
+45d592ef3a8dc14dccc087e734582e82	DEU
+71a520b6d0673d926d02651b269cf92c	DEU
+22aaaebe901de8370917dcc53f53dbf6	DEU
+6e064a31dc53ab956403ec3654c81f1f	DEU
+dddfdb5f2d7991d93f0f97dce1ef0f45	DEU
+56b07537df0c44402f5f87a8dcb8402c	SWE
+e6793169497d66ac959a7beb35d6d497	NLD
+0ab01e57304a70cf4f7f037bd8afbe49	FRA
+fb3a67e400fde856689076418034cdf2	DEU
+db572afa3dcc982995b5528acb350299	SWE
+2a67e4bd1ef39d36123c84cad0b3f974	JPN
+b9a0ad15427ab09cfd7b85dadf2c4487	DEU
+513fc59781f0030dc6e7a7528a45b35b	USA
+20db933d4ddd11d5eff99a441e081550	CHN
+6e2f236ffef50c45058f6127b30ecece	DEU
+3f7e7508d7af00ea2447bfffbbac2178	DEU
+71144850f4fb4cc55fc0ee6935badddf	SWE
+eed35187b83d0f2e0042cf221905163c	NLD
+b615ea28d44d2e863a911ed76386b52a	NLD
+bda66e37bf0bfbca66f8c78c5c8032b8	DEU
+2799b4abf06a5ec5e262d81949e2d18c	DEU
+a20050efc491a9784b5cced21116ba68	DEU
+05fcf330d8fafb0a1f17ce30ff60b924	SWE
+386a023bd38fab85cb531824bfe9a879	SWE
+abe78132c8e446430297d08bd1ecdab0	FIN
+7b3ab6743cf8f7ea8491211e3336e41d	ESP
+bd4ca3a838ce3972af46b6e2d85985f2	DEU
+6caa47f7b3472053b152f84ce72c182c	USA
+a05a13286752cb6fc14f39f51cedd9ce	AUS
+781c745a0d6b02cdecadf2e44d445d1a	DEU
+71ac59780209b4c074690c44a3bba3b7	DEU
+82f43cc1bda0b09efff9b356af97c7ab	DEU
+d908b6b9019639bced6d1e31463eea85	DEU
+1437c187d64f0ac45b6b077a989d5648	GBR
+4be3e31b7598745d0e96c098bbf7a1d7	USA
+d1e0bdb2b2227bdd5e47850eec61f9ea	USA
+123131d2d4bd15a0db8f07090a383157	DEU
+78bbff6bf39602a577c9d8a117116330	USA
+2054decb2290dbaab1c813fd86cc5f8b	ITA
+6adc39f4242fd1ca59f184e033514209	DEU
+281eb11c857bbe8b6ad06dc1458e2751	UKR
+dfa61d19b62369a37743b38215836df9	GBR
+efe9ed664a375d10f96359977213d620	DEU
+30a100fe6a043e64ed36abb039bc9130	DEU
+c5f4e658dfe7b7af3376f06d7cd18a2a	ITA
+dcab0d84960cda81718e38ee47688a75	DEU
+3aa1c6d08d286053722d17291dc3f116	PRT
+818ce28daba77cbd2c4235548400ffb2	DEU
+6d25c7ad58121b3effe2c464b851c27a	AUS
+8791e43a8287ccbc21f61be21e90ce43	AUT
+5c59b6aa317b306a1312a67fe69bf512	GRC
+cd004b87e2adfb72b28752a6ef6cd639	DEU
+1b62f034014b1d242c84c6fe7e6470f0	SWE
+b02ba5a5e65487122c2c1c67351c3ea0	DEU
+ea3b6b67824411a4cfaa5c8789282f48	DEU
+f2a863a08c3e22cc942264ac4bc606e3	SWE
+eb39fa9323a6b3cbc8533cd3dadb9f76	DEU
+768207c883fd6447d67f3d5bc09211bd	USA
+61725742f52de502605eadeac19b837b	DEU
+2fb81ca1d0a935be4cb49028268baa3f	DEU
+3705bfe1d1b3b5630618b164716ae700	DEU
+801c01707f48bfa8875d4a2ac613920d	BLR
+d42e907e9c61d30d23ce9728d97aa862	CRI
+3757709518b67fddd9ae5a368d219334	USA
+a7eb281bcaab3446ece1381b190d34e0	ISL
+14bbaec7f5e0eba98d90cd8353c2e79f	USA
+1175d5b2a935b9f4daf6b39e5e74138c	DEU
+4190210961bce8bf2ac072c878ee7902	AUS
+2f090f093a2868dccca81a791bc4941f	AUS
+8981b4a0834d2d59e1d0dceb6022caae	AUT
+a7e071b3de48cec1dd24de6cbe6c7bf1	USA
+f3ac75dfbf1ce980d70dc3dea1bf4636	DNK
+de1e0ed5433f5e95c8f48e18e1c75ff6	DNK
+e20976feda6d915a74c751cbf488a241	DEU
+b3d0eb96687420dc4e5b10602ac42690	GBR
+e4f13074d445d798488cb00fa0c5fbd4	DEU
+5dd5b236a364c53feb6db53d1a6a5ab9	DEU
+486bf23406dec9844b97f966f4636c9b	SWE
+1fd7fc9c73539bee88e1ec137b5f9ad2	GBR
+ef3c0bf190876fd31d5132848e99df61	FRA
+2569a68a03a04a2cd73197d2cc546ff2	AUT
+05c87189f6c230c90bb1693567233100	DEU
+77bfe8d21f1ecc592062f91c9253d8ab	NOR
+018b60f1dc74563ca02f0a14ee272e4d	DEU
+40fcfb323cd116cf8199485c35012098	FRA
+d68956b2b5557e8f1be27a4632045c1e	USA
+ba9bfb4d7c1652a200d1d432f83c5fd1	SWE
+4dde2c290e3ee11bd3bd1ecd27d7039a	UKR
+34fd3085dc67c39bf1692938cf3dbdd9	NLD
+fcf66a6d6cfbcb1d4a101213b8500445	DEU
+d5ec808c760249f11fbcde2bf4977cc6	DEU
+5637bae1665ae86050cb41fb1cdcc3ee	CAN
+2d1ba9aa05ea4d94a0acb6b8dde29d6b	AUS
+cd80c766840b7011fbf48355c0142431	CHE
+7b675f4c76aed34cf2d5943d83198142	AUS
+93025091752efa184fd034f285573afe	CHE
+aaaad3022279d4afdb86ad02d5bde96b	FRA
+ce8e1e23e9672f5bf43894879f89c17a	DEU
+50bac8fb5d0c55efd23de4c216e440f1	BRA
+e8ead85c87ecdab1738db48a10cae6da	DEU
+7e0e2fabeced85b4b8bbbca59858d33d	BRA
+eef1b009f602bb255fa81c0a7721373d	NLD
+49d387abd142d76f4b38136257f56201	DEU
+0cd2b45507cc7c4ead2aaa71c59af730	DEU
+34ef35a77324b889aab18380ad34b51a	FIN
+869bb972f8bef83979774fa123c56a4e	NLD
+472e67129f0c7add77c7c907dac3351f	BEL
+23f5e1973b5a048ffaaa0bd0183b5f87	DEU
+08b84204877dce2a08abce50d9aeceed	DEU
+309263122a445662099a3dabce2a4f17	NLD
+c833c98be699cd7828a5106a37d12c2e	DEU
+40a259aebdbb405d2dc1d25b05f04989	DEU
+563fcbf5f44e03e0eeb9c8d6e4c8e127	FRA
+f1022ae1bc6b46d51889e0bb5ea8b64f	FIN
+ed783268eca01bff52c0f135643a9ef7	DEU
+f49f851c639e639b295b45f0e00c4b4c	DEU
+9b55ad92062221ec1bc80f950f667a6b	DEU
+f6708813faedbf607111d83fdce91828	USA
+f3b8f1a2417bdc483f4e2306ac6004b2	SWE
+bf2c8729bf5c149067d8e978ea3dcd32	DEU
+72b73895941b319645450521aad394e8	SWE
+436f76ddf806e8c3cbdc9494867d0f79	DEU
+4e7054dff89623f323332052d0c7ff6e	NOR
+5cc06303f490f3c34a464dfdc1bfb120	DEU
+cbf6de82cf77ca17d17d293d6d29a2b2	DEU
+3c2234a7ce973bc1700e0c743d6a819c	USA
+7cbd455ff5af40e28a1eb97849f00723	USA
+3d4fe2107d6302760654b4217cf32f17	MEX
+d0dae91314459033160dc47a79aa165e	DEU
+5878f5f2b1ca134da32312175d640134	DEU
+4669569c9a870431c4896de37675a784	GBR
+9d36a42a36b62b3f665c7fa07f07563b	JAM
+e21ad7a2093c42e374fee6ec3b31efd3	DNK
+fdcfaa5f48035ad96752731731ae941a	UKR
+b531de2f903d979f6a002d5a94b136aa	DEU
+54ca3eeff0994926cb7944cca0797474	DNK
+841981e178ed25ef0f86f34ce0fb2904	AUT
+40eefb87bb24ed4efc3fc5eeeb7e5003	GBR
+cd0bc2c8738b2fef2d78d197223b17d5	DEU
+2c5705766131b389fa1d88088f1bb8a8	DEU
+3e98ecfa6a4c765c5522f897a4a8de23	USA
+db472eaf615920784c2b83fc90e8dcc5	USA
+6772cdb774a6ce03a928d187def5453f	USA
+f655d84d670525246ee7d57995f71c10	DNK
+cb80a6a84ec46f085ea6b2ff30a88d80	MEX
+6a13b854e05f5ba6d2a0d873546fc32d	DEU
+24af2861df3c72c8f1b947333bd215fc	DEU
+7bc374006774a2eda5288fea8f1872e3	DEU
+846a0115f0214c93a5a126f0f9697228	PRT
+0964b5218635a1c51ff24543ee242514	DEU
+c52d5020aad50e03d48581ffb34cd1c3	DEU
+dcdcd2f22b1d5f85fa5dd68fa89e3756	DEU
+c82b23ed65bb8e8229c54e9e94ba1479	DEU
+0182742917720e1b2cf59ff671738253	USA
+91abd5e520ec0a40ce4360bfd7c5d573	DEU
+e6624ef1aeab84f521056a142b5b2d12	GBR
+3ddbf46000c2fbd44759f3b4672b64db	BEL
+38b2886223461f15d65ff861921932b5	DEU
+dfca36a68db327258a2b0d5e3abe86af	DEU
+07d82d98170ab334bc66554bafa673cf	BRA
+42f6dd3a6e21d6df71db509662d19ca4	SWE
+118c9af69a42383387e8ce6ab22867d7	USA
+07f467f03da5f904144b0ad3bc00a26d	DEU
+e29470b6da77fb63e9b381fa58022c84	DEU
+0a3a1f7ca8d6cf9b2313f69db9e97eb8	DEU
+3fae5bf538a263e96ff12986bf06b13f	FRA
+34a9067cace79f5ea8a6e137b7a1a5c8	DEU
+a9ef9373c9051dc4a3e2f2118537bb2d	DEU
+009f51181eb8c6bb5bb792af9a2fdd07	FIN
+e63a014f1310b8c7cbe5e2b0fd66f638	CHE
+55b6aa6562faa9381e43ea82a4991079	SWE
+1dc7d7d977193974deaa993eb373e714	DEU
+5ab944fac5f6a0d98dc248a879ec70ff	DEU
+0a0f6b88354de7afe84b8a07dfadcc26	USA
+240e556541427d81f4ed1eda86f33ad3	NOR
+d162c87d4d4b2a8f6dda58d4fba5987f	USA
+21077194453dcf49c2105fda6bb89c79	GBR
+5bd15db3f3bb125cf3222745f4fe383f	GBR
+1e71013b49bbd3b2aaa276623203453f	DEU
+2e4e6a5f485b2c7e22f9974633c2b900	DEU
+541fa0085b17ef712791151ca285f1a7	DEU
+f2ba1f213e72388912791eb68adc3401	FRA
+210e99a095e594f2547e1bb8a9ac6fa7	RUS
+6cec93398cd662d79163b10a7b921a1b	DEU
+6ca47c71d99f608d4773b95f9b859142	USA
+024e91d84c3426913db8367f4df2ceb3	CHE
+773b5037f85efc8cc0ff3fe0bddf2eb8	ROU
+46ea4c445a9ff8e288258e3ec9cd1cf0	USA
+c41b9ec75e920b610e8907e066074b30	AUT
+a91887f44d8d9fdcaa401d1c719630d7	DEU
+4f5b2e20e9b7e5cc3f53256583033752	NLD
+1f56e4b8b8a0da3b8ec5b32970e4b0d8	DEU
+0d01b12a6783b4e60d2e09e16431f00a	DEU
+9c81c8c060b39e7437b2d913f036776b	DEU
+0ab7d3a541204a9cab0d2d569c5b173f	DEU
+76aebba2f63483b6184f06f0a2602643	BRA
+96406d44fcf110be6a4b63fa6d26de3b	DEU
+efb83e3ae12d8d95a5d01b6d762baa98	BEL
+d7a97c2ff91f7aa07fa9e2f8265ceab6	FRA
+9d919b88be43eb3a9056a54e57894f84	GBR
+ef297890615f388057b6a2c0a2cbc7ab	USA
+b7f0e9013f8bfb209f4f6b2258b6c9c8	USA
+c827a8c6d72ff66b08f9e2ab64e21c01	USA
+a985c9764e0e6d738ff20f2328a0644b	USA
+573f13e31f1be6dea396ad9b08701c47	USA
+748ac622dcfda98f59c3c99593226a75	USA
+f00bbb7747929fafa9d1afd071dba78e	USA
+9a8d3efa0c3389083df65f4383b155fb	USA
+ac8eab98e370e2a8711bad327f5f7c55	USA
+717ec52870493e8460d6aeddd9b7def8	USA
+71f4e9782d5f2a5381f5cdf7c5a35d89	USA
+05ee6afed8d828d4e7ed35b0483527f7	USA
+9639834b69063b336bb744a537f80772	USA
+fcc491ba532309d8942df543beaec67e	DEU
+662d17c67dcabc738b8620d3076f7e46	USA
+c349bc9795ba303aa49e44f64301290e	DEU
+aa5808895fd2fca01d080618f08dca51	DEU
+66597873e0974fb365454a5087291094	NLD
+6ffa656be5ff3db085578f54a05d4ddb	DEU
+891b302f7508f0772a8fdb71ccbf9868	BLR
+dddbd203ace7db250884ded880ea7be4	DEU
+a7eda23a9421a074fe5ec966810018d7	DEU
+ddae1d7419331078626bc217b23ea8c7	DEU
+c82a107cd7673a4368b7252aa57810fc	USA
+1cc93e4af82b1b7e08bace9a92d1f762	DEU
+fb80cd69a40a73fb3b9f22cf58fd4776	SRB
+6d779916de27702814e4874dcf4f9e3a	USA
+63a9f0ea7bb98050796b649e85481845	CZE
+7d3618373e07c4ce8896006919bbb531	DEU
+460bf623f241651a7527a63d32569dc0	GBR
+ef75c0b43ae9ba972900e83c5ccf5cac	FIN
+182a1e726ac1c8ae851194cea6df0393	BEL
+0d8ef82742e1d5de19b5feb5ecb3aed3	GBR
+90802bdf218986ffc70f8a086e1df172	DEU
+d1ba47339d5eb2254dd3f2cc9f7e444f	DEU
+7cb94a8039f617f505df305a1dc2cc61	AUT
+a9afdc809b94392fb1c2e873dbb02781	DEU
+576fea4a0c5425ba382fff5f593a33f1	BRA
+55696bac6cdd14d47cbe7940665e21d3	PRT
+34e927c45cf3ccebb09b006b00f4e02d	USA
+f8b3eaefc682f8476cc28caf71cb2c73	DEU
+3c6444d9a22c3287b8c483117188b3f4	DEU
+35bde21520f1490f0333133a9ae5b4fc	DEU
+4a9cd04fd04ab718420ee464645ccb8b	DEU
+824f75181a2bbd69fb2698377ea8a952	DEU
+d92ee81a401d93bb2a7eba395e181c04	DEU
+ad759a3d4f679008ffdfb07cdbda2bb0	DEU
+3480c10b83b05850ec18b6372e235139	DEU
+c5d3d165539ddf2020f82c17a61f783d	DEU
+b1d18f9e5399464bbe5dea0cca8fe064	DEU
+7c7e63c9501a790a3134392e39c3012e	DEU
+e3e9ccd75f789b9689913b30cb528be0	DEU
+d02f33b44582e346050cefadce93eb95	DEU
+707270d99f92250a07347773736df5cc	DEU
+ee36fdf153967a0b99d3340aadeb4720	DEU
+13291409351c97f8c187790ece4f5a97	DEU
+647a73dd79f06cdf74e1fa7524700161	DEU
+d9c849266ee3ac1463262df200b3aab8	DEU
+8b22cf31089892b4c57361d261bd63f7	DEU
+ab1d9c0bfcc2843b8ea371f48ed884bb	DEU
+ea3f5f97f06167f4819498b4dd56508e	GBR
+a99dca5593185c498b63a5eed917bd4f	GBR
+a6c27c0fb9ef87788c1345041e840f95	DEU
+f79485ffe5db7e276e1e625b0be0dbec	FRA
+eb4558fa99c7f8d548cbcb32a14d469c	ITA
+d76db99cdd16bd0e53d5e07bcf6225c8	RUS
+4c576d921b99dad80e4bcf9b068c2377	USA
+13c8bd3a0d92bd186fc5162eded4431d	USA
+50026a2dff40e4194e184b756a7ed319	DEU
+92edfbaa71b7361a3081991627b0e583	USA
+062c44f03dce5bf39f81d0bf953926fc	DEU
+79cbf009784a729575e50a3ef4a3b1cc	CAN
+6f60a61fcc05cb4d42c81ade04392cfc	DEU
+073f87af06b8d8bc561bb3f74e5f714f	LUX
+f34c903e17cfeea18e499d4627eeb3ec	USA
+03fec47975e0e1e2d0bc723af47281de	DEU
+118b96dde2f8773b011dfb27e51b2f95	DEU
+7df470ec0292985d8f0e37aa6c2b38d5	SWE
+75241d56d63a68adcd51d828eb76ca80	ISL
+381b834c6bf7b25b9b627c9eeb81dd8a	NLD
+cabcfb35912d17067131f7d2634ac270	USA
+60a105e79a86c8197cec9f973576874b	CZE
+e6cbb2e0653a61e35d26df2bcb6bc4c7	FIN
+e039d55ed63a723001867bc4eb842c00	DEU
+010fb41a1a7714387391d5ea1ecdfaf7	DEU
+3123e3df482127074cdd5f830072c898	DEU
+849c829d658baaeff512d766b0db3cce	DEU
+3b8d2a5ff1b16509377ce52a92255ffe	USA
+2460cdf9598c810ac857d6ee9a84935a	DEU
+50d48c9002eb08e248225c1d91732bbc	DEU
+8cb8e8679062b574afcb78a983b75a9f	SWE
+0aff394c56096d998916d2673d7ea0b6	MYS
+974cd6e62ff1a4101db277d936b41058	DNK
+cdd65383f4d356e459018c3b295d678b	DNK
+99557f46ccef290d9d93c546f64fb7d6	DEU
+454cce609b348a95fb627e5c02dddd1b	GRC
+246e0913685e96004354b87cbab4ea78	HUN
+4e9a84da92180e801263860bfbea79d6	SWE
+5e8df9b073e86a3272282977d2c9dc85	ITA
+44a468f083ac27ea7b6847fdaf515207	DEU
+33f03dd57f667d41ac77c6baec352a81	DEU
+a8fcba36c9e48e9e17ba381a34444dd0	CHE
+8717871a38810cc883cce02ea54a7017	NOR
+4a0ea81570ab9440e8899b9f5fb3a61a	DEU
+c38529decc4815a9932f940af2a16d37	BEL
+f0ae03df4fd08abd1f844fea2f4bbfb0	DEU
+3f460e130f37e8974fbcdc4d0056b468	AUT
+7bc230f440d5d70d2c573341342d9c81	FIN
+6a826993d87c8fc0014c43edd8622b6c	DEU
+d7e0c43c16a9f8385b49d23cd1178598	LTU
+c61b8639de558fcc2ee0b1d11e120df9	SWE
+14aedd89f13973e35f9ba63149a07768	DEU
+359dda2e361814c0c8b7b358e654691d	USA
+749b17536e08489cb3b2437715e89001	NLD
+65f24dbd08671d51fda7de723afc41d9	DEU
+01bcfac216d2a08cd25930234e59f1a1	GRC
+c63b6261b8bb8145bc0fd094b9732c24	USA
+5ef02a06b43b002e3bc195b3613b7022	DEU
+5934340f46d5ab773394d7a8ac9e86d5	DEU
+1c4af233da7b64071abf94d79c41a361	DEU
+b36eb6a54154f7301f004e1e61c87ce8	CUB
+bbbb086d59122dbb940740d6bac65976	USA
+26c2bb18f3a9a0c6d1392dae296cfea7	DEU
+6af2c726b2d705f08d05a7ee9509916e	NLD
+3a232003be172b49eb64e4d3e9af1434	USA
+e3c8afbeb0ec4736db977d18e7e37020	USA
+f32badb09f6aacb398d3cd690d90a668	USA
+99761fad57f035550a1ca48e47f35157	DEU
+87bd9baf0b0d760d1f0ca9a8e9526161	DEU
+f975b4517b002a52839c42e86b34dc96	DEU
+5b5fc236828ee2239072fd8826553b0a	DEU
+218ac7d899a995dc53cabe52da9ed678	DEU
+364be07c2428493479a07dbefdacc11f	PRT
+56bf60ca682b8f68e8843ad8a55c6b17	AUT
+8ee257802fc6a4d44679ddee10bf24a9	DEU
+94a62730604a985647986b509818efee	DEU
+09c00610ca567a64c82da81cc92cb846	ISL
+bc834c26e0c9279cd3139746ab2881f1	CHL
+64a25557d4bf0102cd8f60206c460595	DEU
+445a222489d55b5768ec2f17b1c3ea34	DEU
+fd0a7850818a9a642a125b588d83e537	COL
+93aa5f758ad31ae4b8ac40044ba6c110	DEU
+99bdf8d95da8972f6979bead2f2e2090	FIN
+123f90461d74091a96637955d14a1401	USA
+60eb61670a5385e3150cd87f915b0967	DEU
+b454fdfc910ad8f6b7509072cf0b4031	SWE
+06c5c89047bfd6012e6fb3c2bd3cb24b	USA
+156c19a6d9137e04b94500642d1cb8c2	DEU
+827bf758c7ce2ac0f857379e9e933f77	DEU
+e2afc3f96b4a23d451c171c5fc852d0f	ISL
+cd3296ec8f7773892de22dfade4f1b04	DEU
+05bea3ed3fcd45441c9c6af3a2d9952d	DEU
+5f07809ecfce3af23ed5550c6adf0d78	SWE
+baceebebc179d3cdb726f5cbfaa81dfe	DEU
+2db1850a4fe292bd2706ffd78dbe44b9	POL
+a30c1309e683fcf26c104b49227d2220	DEU
+246d570b4e453d4cb6e370070c902755	USA
+dd0e61ab23e212d958112dd06ad0bfd2	DEU
+5a534330e31944ed43cb6d35f4ad23c7	DEU
+96aa953534221db484e6ec75b64fcc4d	GBR
+75fea12b82439420d1f400a4fcf3386b	DEU
+951af0076709a6da6872f9cdf41c852b	SWE
+5c19e1e0521f7b789a37a21c5cd5737b	NLD
+863e7a3d6d4a74739bca7dd81db5d51f	USA
+ce14eb923a380597f2aff8b65a742048	USA
+a7111b594249d6a038281deb74ef0d04	DEU
+02670bc3f496ce7b1393712f58033f6c	150
+70492d5f3af58ace303d1c5dfc210088	BEL
+26211992c1edc0ab3a6b6506cac8bb52	USA
+384e94f762d3a408cd913c14b19ac5e0	DEU
+3b544a6f1963395bd3ae0aeebdf1edd8	FIN
+511ac85b55c0c400422462064d6c77ed	USA
+f9ff0bcbb45bdf8a67395fa0ab3737b5	DEU
+39ce458f2caa87bc7b759cd8cb16e62f	DEU
+00a0d9697a08c1e5d4ba28d95da73292	SVN
+d8d3a01ba7e5d44394b6f0a8533f4647	DEU
+a2a607567311cb7a5a609146b977f4a9	FIN
+913df019fed1f80dc49b38f02d8bae41	DEU
+3cd94848f6ccb600295135e86f1b46a7	CHE
+b00114f9fc38b48cc42a4972d7e07df6	USA
+a2761eea97ee9fe09464d5e70da6dd06	DEU
+9d514e6b301cfe7bdc270212d5565eaf	USA
+852c0b6d5b315c823cdf0382ca78e47f	ESP
+a2c31c455e3d0ea3f3bdbea294fe186b	DEU
+ffd2da11d45ed35a039951a8b462e7fb	DEU
+16c88f2a44ab7ecdccef28154f3a0109	FRA
+191bab5800bd381ecf16485f91e85bc3	DEU
+876eed60be80010455ff50a62ccf1256	DEU
+f4e4ef312f9006d0ae6ca30c8a6a32ff	DEU
+c311f3f7c84d1524104b369499bd582f	DEU
+1629fa6d4b8adb36b0e4a245b234b826	001
+270fb708bd03433e554e0d7345630c8e	BRA
+9d1e68b7debd0c8dc86d5d6500884ab4	DEU
+8987e9c300bc2fc5e5cf795616275539	DEU
+ba5e6ab17c7e5769b11f98bfe8b692d0	SWE
+eb0a191797624dd3a48fa681d3061212	CZE
+13de0a41f18c0d71f5f6efff6080440f	NLD
+5885f60f8c705921cf7411507b8cadc0	NLD
+f31ba1d770aac9bc0dcee3fc15c60a46	DEU
+0ae3b7f3ca9e9ddca932de0f0df00f8a	FRA
+0e609404e53b251f786b41b7be93cc19	POL
+b1006928600959429230393369fe43b6	AUT
+478aedea838b8b4a0936b129a4c6e853	USA
+f2856ad30734c5f838185cc08f71b1e4	DNK
+410044b393ebe6a519fde1bdb26d95e8	DEU
+abca417a801cd10e57e54a3cb6c7444b	DEU
+867872f29491a6473dae8075c740993e	AUT
+c937fc1b6be0464ec9d17389913871e4	DEU
+e9648f919ee5adda834287bbdf6210fd	DEU
+1f86700588aed0390dd27c383b7fc963	DEU
+faec47e96bfb066b7c4b8c502dc3f649	DEU
+16cf4474c5334c1d9194d003c9fb75c1	FRA
+8e38937886f365bb96aa1c189c63c5ea	NLD
+8ed55fda3382add32869157c5b41ed47	BEL
+4e9dfdbd352f73b74e5e51b12b20923e	GBR
+88059eaa73469bb47bd41c5c3cdd1b50	SWE
+56e8538c55d35a1c23286442b4bccd26	FIN
+375974f4fad5caae6175c121e38174d0	DEU
+f4b526ea92d3389d318a36e51480b4c8	DEU
+3929665297ca814b966cb254980262cb	DEU
+fbc2b3cebe54dd00b53967c5cf4b9192	DEU
+644f6462ec9801cdc932e5c8698ee7f9	DEU
+dbf1b3eb1f030affb41473a8fa69bc0c	DEU
+ca3fecb0d12232d1dd99d0b0d83c39ec	AUT
+b3626b52d8b98e9aebebaa91ea2a2c91	DEU
+347fb42f546e982de2a1027a2544bfd0	SWE
+97724184152a2620b76e2f93902ed679	DEU
+4bffc4178bd669b13ba0d91ea0522899	DEU
+b084dc5276d0211fae267a279e2959f0	DEU
+f66935eb80766ec0c3acee20d40db157	DEU
+cd1c06e4da41121b7362540fbe8cd62c	DEU
+9459200394693a7140196f07e6e717fd	SWE
+4e74055927fd771c2084c92ca2ae56a7	DEU
+a753c3945400cd54c7ffd35fc07fe031	PHL
+8af17e883671377a23e5b8262de11af4	HRV
+d1fded22db9fc8872e86fff12d511207	ARG
+c526681b295049215e5f1c2066639f4a	FRO
+3969716fc4acd0ec0c39c8a745e9459a	AUS
+b7b99e418cff42d14dbf2d63ecee12a8	PRT
+96b4b857b15ae915ce3aa5e406c99cb4	CHE
+8b5a84ba35fa73f74df6f2d5a788e109	IND
+57f622908a4d6c381241a1293d894c88	NOR
+48438b67b2ac4e5dc9df6f3723fd4ccd	CHL
+56a5afe00fae48b02301860599898e63	MEX
+3e8d4b3893a9ebbbd86e648c90cbbe63	IDN
+c46e8abb68aae0bcdc68021a46f71a65	PAN
+e4f74be13850fc65559a3ed855bf35a8	GRC
+7b52c8c4a26e381408ee64ff6b98e231	ISL
+278af3c810bb9de0f355ce115b5a2f54	LUX
+5c61f833c2fb87caab0a48e4c51fa629	NOR
+2859f0ed0630ecc1589b6868fd1dde41	PRT
+c5068f914571c27e04cd66a4ec5c1631	NOR
+8b3f40e0243e2307a1818d3f456df153	BRA
+8b0cfde05d166f42a11a01814ef7fa86	FIN
+c0118be307a26886822e1194e8ae246d	GBR
+a66394e41d764b4c5646446a8ba2028b	PRT
+e9e0664816c35d64f26fc1382708617b	CAN
+f29f7213d1c86c493ca7b4045e5255a9	ISL
+65f889eb579641f6e5f58b5a48f3ec12	USA
+fc239fd89fd7c9edbf2bf27d1d894bc0	DEU
+24701da4bd9d3ae0e64d263b72ad20e8	USA
+031d6cc33621c51283322daf69e799f5	IRL
+a8ace0f003d8249d012c27fe27b258b5	NLD
+255661921f4ad57d02b1de9062eb6421	GBR
+5d53b2be2fe7e27daa27b94724c3b6de	USA
+57126705faf40e4b5227c8a0302d13b2	USA
+cba8cb3c568de75a884eaacde9434443	BEL
+19cbbb1b1e68c42f3415fb1654b2d390	ITA
+f44f1e343975f5157f3faf9184bc7ade	NZL
+1e986acf38de5f05edc2c42f4a49d37e	IND
+10627ac0e35cfed4a0ca5b97a06b9d9f	BEL
+b834eadeaf680f6ffcb13068245a1fed	USA
+1ec58ca10ed8a67b1c7de3d353a2885b	CRI
+8f523603c24072fb8ccb547503ee4c0f	TUR
+43a4893e6200f462bb9fe406e68e71c0	CZE
+9c31bcca97bb68ec33c5a3ead4786f3e	MLT
+c445544f1de39b071a4fca8bb33c2772	GBR
+29891bf2e4eff9763aef15dc862c373f	FRA
+c8fbeead5c59de4e8f07ab39e7874213	DEU
+8fa1a366d4f2e520bc9354658c4709f1	FRA
+812f48abd93f276576541ec5b79d48a2	BEL
+d29c61c11e6b7fb7df6d5135e5786ee1	CZE
+7013a75091bf79f04f07eecc248f8ee6	DEU
+58e42b779d54e174aad9a9fb79e7ebbc	ESP
+51cb62b41cd9deaaa2dd98c773a09ebb	DEU
+67493f858802a478bfe539c8e30a7e44	FIN
+f7910d943cc815a4a0081668ac2119b2	GBR
+955a5cfd6e05ed30eec7c79d2371ebcf	NLD
+03201e85fc6aa56d2cb9374e84bf52ca	ITA
+e7a227585002db9fee2f0ed56ee5a59f	DEU
+bc111d75a59fe7191a159fd4ee927981	ESP
+017e06f9b9bccafa230a81b60ea34c46	MLT
+22c2fc8a3a81503d40d4e532ac0e22ab	DEU
+482818d4eb4ca4c709dcce4cc2ab413d	DEU
+ec788cc8478763d79a18160a99dbb618	DEU
+d2f62cd276ef7cab5dcf9218d68f5bcf	LUX
+e71bd61e28ae2a584cb17ed776075b55	DEU
+49a41ffa9c91f7353ec37cda90966866	DEU
+1c13f340d154b44e41c996ec08d76749	DEU
+d5b95b21ce47502980eebfcf8d2913e0	DEU
+0b6bcec891d17cd7858525799c65da27	DEU
+3cb077e20dabc945228ea58813672973	DEU
+8734f7ff367f59fc11ad736e63e818f9	DEU
+98aa80527e97026656ec54cdd0f94dff	DEU
+430a03604913a64c33f460ec6f854c36	AUT
+319480a02920dc261209240eed190360	DEU
+4ca1c3ed413577a259e29dfa053f99db	DEU
+2eed213e6871d0e43cc061b109b1abd4	DEU
+fdedcd75d695d1c0eb790a5ee3ba90b5	DEU
+ed9b92eb1706415c42f88dc91284da8a	ITA
+fb1afbea5c0c2e23396ef429d0e42c52	DEU
+316a289ef71c950545271754abf583f1	DEU
+33b3bfc86d7a57e42aa30e7d1c2517be	DEU
+8351282db025fc2222fc61ec8dd1df23	DEU
+60eb202340e8035af9e96707f85730e5	DEU
+d2f79e6a931cd5b5acd5f3489dece82a	DEU
+3189b8c5e007c634d7e28ef93be2b774	DEU
+a89af36e042b5aa91d6efea0cc283c02	USA
+eb2743e9025319c014c9011acf1a1679	SWE
+c27297705354ef77feb349e949d2e19e	DEU
+3258eb5f24b395695f56eee13b690da6	DNK
+8f7939c28270f3187210641e96a98ba7	DEU
+bcf744fa5f256d6c3051dd86943524f6	DEU
+3ba296bfb94ad521be221cf9140f8e10	DEU
+18e21eae8f909cbb44b5982b44bbf02f	GBR
+3438d9050b2bf1e6dc0179818298bd41	BEL
+384712ec65183407ac811fff2f4c4798	CHE
+a76c5f98a56fc03100d6a7936980c563	CHE
+66cc7344291ae2a297bf2aa93d886e22	NLD
+34ca5622469ad1951a3c4dc5603cea0f	DEU
+933c8182650ca4ae087544beff5bb52d	GBR
+e3de2cf8ac892a0d8616eefc4a4f59bd	USA
+623c5a1c99aceaf0b07ae233d1888e0a	NLD
+c091e33f684c206b73b25417f6640b71	USA
+bcc770bb6652b1b08643d98fd7167f5c	ITA
+73cb08d143f893e645292dd04967f526	DEU
+4a27a1ef21d32d1b30d55f092af0d5a7	DEU
+eb3a9fb71b84790e50acd81cc1aa4862	MNG
+13909e3013727a91ee750bfd8660d7bc	DNK
+74e8b6c4be8a0f5dd843e2d1d7385a36	USA
+2dde74b7ec594b9bd78da66f1c5cafdc	GBR
+5324a886a2667283dbfe7f7974ff6fc0	DEU
+28c5f9ffd175dcd53aa3e9da9b00dde7	DEU
+b798aa74946ce75baee5806352e96272	DEU
+6315887dd67ff4f91d51e956b06a3878	ITA
+df99cee44099ff57acbf7932670614dd	USA
+6b141e284f88f656b776148cde8e019c	USA
+b84cdd396f01275b63bdaf7f61ed5a43	USA
+7a43dd4c2bb9bea14a95ff3acd4dfb18	USA
+c8bc4f15477ea3131abb1a3f0649fac2	USA
+9133f1146bbdd783f34025bf90a8e148	USA
+9d74605e4b1d19d83992a991230e89ef	DEU
+ca54e4f7704e7b8374d0968143813fe6	DEU
+c245b4779defd5c69ffebbfdd239dd1b	DEU
+6b157916b43b09df5a22f658ccb92b64	DEU
+67cd9b4b7b33511f30e85e21b2d3b204	AUT
+5c29c2e513aadfe372fd0af7553b5a6c	AUS
+e4b1d8cc71fd9c1fbc40fdc1a1a5d5b3	FRA
+b12daab6c83b1a45aa32cd9c2bc78360	DEU
+9722f54adb556b548bb9ecce61a4d167	DNK
+04d53bc45dc1343f266585b52dbe09b0	DEU
+0c31e51349871cfb59cfbfaaed82eb18	DEU
+41dabe0c59a3233e3691f3c893eb789e	DEU
+113ab4d243afc4114902d317ad41bb39	FRA
+cc70416ca37c5b31e7609fcc68ca009e	ITA
+7b91dc9ecdfa3ea7d347588a63537bb9	AUT
+55c63b0540793d537ed29f5c41eb9c3e	DEU
+43bd0d50fe7d58d8fce10c6d4232ca1e	DEU
+cf38e7d92bb08c96c50ddc723b624f9d	SWE
+5f449b146ce14c780eee323dfc5391e8	ITA
+eef7d6da9ba6d0bed2078a5f253f4cfc	DNK
+ad51cbe70d798b5aec08caf64ce66094	DEU
+45e410efd11014464dd36fb707a5a9e1	ARE
+8fdc3e13751b8f525f259d27f2531e87	DEU
+05e76572fb3d16ca990a91681758bbee	DEU
+cfc61472d8abd7c54b81924119983ed9	NLD
+1fe0175f73e5b381213057da98b8f5fb	DEU
+d44be0e711c2711876734b330500e5b9	CHE
+c295bb30bf534e960a6acf7435f0e46a	DEU
+ab3ca496cbc01a5a9ed650c4d0e26168	DEU
+538eaaef4d029c255ad8416c01ab5719	DEU
+1de3f08835ab9d572e79ac0fca13c5c2	DEU
+4c02510c3f16e13edc27eff1ef2e452c	HRV
+3c8ce0379b610d36c3723b198b982197	POL
+7eeea2463ae5da9990cab53c014864fa	USA
+b1c7516fef4a901df12871838f934cf6	USA
+087c643d95880c5a89fc13f3246bebae	DEU
+be553803806b8634990c2eb7351ed489	AUS
+8bdd6b50b8ecca33e04837fde8ffe51e	DNK
+18b751c8288c0fabe7b986963016884f	SWE
+30b8affc1afeb50c76ad57d7eda1f08f	DEU
+a8a43e21de5b4d83a6a7374112871079	DEU
+9614cbc86659974da853dee20280b8c4	SRB
+bc2f39d437ff13dff05f5cfda14327cc	USA
+39530e3fe26ee7c557392d479cc9c93f	USA
+537e5aa87fcfb168be5c953d224015ff	ITA
+80d331992feb02627ae8b30687c7bb78	CZE
+f6eb4364ba53708b24a4141962feb82e	DEU
+2cd225725d4811d813a5ea1b701db0db	CZE
+2f6fc683428eb5f8b22cc5021dc9d40d	DEU
+2d5a306f74749cc6cbe9b6cd47e73162	DNK
+dba84ece8f49717c47ab72acc3ed2965	SWE
+559314721edf178fa138534f7a1611b9	ESP
+d192d350b6eace21e325ecf9b0f1ebd1	SWE
+d6a020f7b50fb4512fd3c843af752809	ITA
+73f4b98d80efb8888a2b32073417e21e	USA
+711a7acac82d7522230e3c7d0efc3f89	ITA
+1506aeeb8c3a699b1e3c87db03156428	USA
+4f58423d9f925c8e8bd73409926730e8	BRA
+96390e27bc7e2980e044791420612545	USA
+d2c2b83008dce38013577ef83a101a1b	SWE
+c1e8b6d7a1c20870d5955bcdc04363e4	MEX
+480a0efd668e568595d42ac78340fe2a	FRA
+d25956f771b58b6b00f338a41ca05396	SWE
+95a1f9b6006151e00b1a4cda721f469d	POL
+5159ae414608a804598452b279491c5c	AUT
+9bdbe50a5be5b9c92dccf2d1ef05eefd	DEU
+8c4e8003f8d708dc3b6d486d74d9a585	GBR
+b6eba7850fd20fa8dce81167f1a6edca	DEU
+5f27f488f7c8b9e4b81f59c6d776e25c	GBR
+1a5235c012c18789e81960333a76cd7a	CAN
+7f950b15aa65a26e8500cfffd7f89de0	SWE
+77f94851e582202f940198a26728e71f	DEU
+baeb191b42ec09353b389f951d19b357	DEU
+c21fe390daecee9e70b8f4b091ae316f	NLD
+8aeadeeff3e1a3e1c8a6a69d9312c530	BRA
+a4e0f3b7db0875f65bb3f55ab0aab7c6	SWE
+37b43a655dec0e3504142003fce04a07	USA
+781734c0e9c01b14adc3a78a4c262d83	USA
+89b5ac8fb4c102c174adf2fed752a970	DEU
+cc31970696ef00b4c6e28dba4252e45d	DEU
+92e1aca33d97fa75c1e81a9db61454bb	DEU
+0ba2f4073dd8eff1f91650af5dc67db4	USA
+bd555d95b1ccba75afca868636b1b931	USA
+a93376e58f4c73737cf5ed7d88c2169c	POL
+cd3faaaf1bebf8d009aa59f887d17ef2	USA
+33538745a71fe2d30689cac96737e8f7	DEU
+586ac67e6180a1f16a4d3b81e33eaa94	CZE
+ca1720fd6350760c43139622c4753557	CZE
+645b264cb978b22bb2d2c70433723ec0	NOR
+45816111a5b644493b68cfedfb1a0cc0	ISR
+5bb416e14ac19276a4b450d343e4e981	DEU
+d0e551d6887e0657952b3c5beb7fed74	DEU
+06c1680c65972c4332be73e726de9e74	FRA
+4671068076f66fb346c4f62cbfb7f9fe	ITA
+10407de3db48761373a403b8ddf09782	AUT
+77ac561c759a27b7d660d7cf0534a9c3	DEU
+3771036a0740658b11cf5eb73d9263b3	ITA
+6b37fe4703bd962004cdccda304cc18e	FIN
+371d905385644b0ecb176fd73184239c	GBR
+d871ebaec65bbfa0b6b97aefae5d9150	GBR
+28bb3f229ca1eeb05ef939248f7709ce	GBR
+861613f5a80abdf5a15ea283daa64be3	DEU
+080d2dc6fa136fc49fc65eee1b556b46	USA
+2df9857b999e21569c3fcce516f0f20e	USA
+d5a5e9d2edeb2b2c685364461f1dfd46	DEU
+1fcf2f2315b251ebe462da320491ea9f	DEU
+7022f6b60d9642d91eebba98185cd9ba	DEU
+4522c5141f18b2a408fc8c1b00827bc3	DEU
+5ec194adf19442544d8a94f4696f17dc	GRC
+31e2d1e0b364475375cb17ad76aa71f2	DEU
+dff880ae9847f6fa8ed628ed4ee5741b	DEU
+521c8a16cf07590faee5cf30bcfb98b6	ISR
+a77c14ecd429dd5dedf3dc5ea8d44b99	MLT
+b8d794c48196d514010ce2c2269b4102	DEU
+a0abb504e661e34f5d269f113d39ea96	DEU
+b9cb3bb4bbbe4cd2afa9c78fe66ad1e9	GBR
+69a6a78ace079846a8f0d3f89beada2c	FRA
+43ff5aadca6d8a60dd3da21716358c7d	FRA
+95800513c555e1e95a430e312ddff817	CZE
+42085fca2ddb606f4284e718074d5561	DEU
+e2226498712065ccfca00ecb57b8ed2f	DEU
+db732a1a9861777294f7dc54eeca2b3e	DEU
+1ace9926ad3a6dab09d16602fd2fcccc	AUT
+05256decaa2ee2337533d95c7de3db9d	DEU
+c664656f67e963f4c0f651195f818ce0	150
+032d53a86540806303b4c81586308e58	DEU
+df800795b697445f2b7dc0096d75f4df	DEU
+810f28b77fa6c866fbcceb6c8aa7bac4	DEU
+7fcdd5f715be5fce835b68b9e63e1733	DEU
+5214513d882cf478e028201a0d9031c0	DEU
+0e4f0487408be5baf091b74ba765dce7	DEU
+8cd7fa96a5143f7105ca92de7ff0bac7	EGY
+bdbafc49aa8c3e75e9bd1e0ee24411b4	DEU
+5863c78fb68ef1812a572e8f08a4e521	FIN
+a822d5d4cdcb5d1b340a54798ac410b7	DEU
+08e2440159e71c7020394db19541aabc	DEU
+c8fd07f040a8f2dc85f5b2d3804ea3db	DEU
+866208c5b4a74b32974bffb0f90311ca	DEU
+fd3ab918dab082b1af1df5f9dbc0041f	CHL
+cb0785d67b1ea8952fae42efd82864a7	CHL
+a0d3b444bd04cd165b4e076c9fc18bee	DEU
+c846d80d826291f2a6a0d7a57e540307	USA
+d0b02893ceb72d11a3471fe18d7089fd	DEU
+6db22194a183d7da810dcc29ea360c17	DEU
+ab5428d229c61532af41ec2ca258bf30	DEU
+78a7bdfe7277f187e84b52dea7b75b0b	DNK
+f36fba9e93f6402ba551291e34242338	BEL
+e6489b9cc39c95e53401cb601c4cae09	DEU
+4622209440a0ade57b18f21ae41963d9	DEU
+867e7f73257c5adf6a4696f252556431	DEU
+f999abbe163f001f55134273441f35c0	DEU
+9527fff55f2c38fa44281cd0e4d511ba	DEU
+04c8327cc71521b265f2dc7cbe996e13	CZE
+f8b01df5282702329fcd1cae8877bb5f	FIN
+658a9bbd0e85d854a9e140672a46ce3a	DEU
+0925467e1cc53074a440dae7ae67e3e9	USA
+c18bdeb4f181c22f04555ea453111da1	DEU
+4338a835aa6e3198deba95c25dd9e3de	DEU
+6829c770c1de2fd9bd88fe91f1d42f56	DEU
+b14521c0461b445a7ac2425e922c72df	USA
+31da4ab7750e057e56224eff51bce705	NLD
+6fa204dccaff0ec60f96db5fb5e69b33	NOR
+2587d892c1261be043d443d06bd5b220	DEU
+b9fd9676338e36e6493489ec5dc041fe	DEU
+61a6502cfdff1a1668892f52c7a00669	DEU
+d69462bef6601bb8d6e3ffda067399d9	DEU
+04728a6272117e0dc4ec29b0f7202ad8	DEU
+0ada417f5b4361074360211e63449f34	150
+53c25598fe4f1f71a1c596bd4997245c	DEU
+8518eafd8feec0d8c056d396122a175a	DEU
+4bcbcb65040e0347a1ffb5858836c49c	DEU
+0d949e45a18d81db3491a7b451e99560	DEU
+5c3278fb76fa2676984396d33ba90613	DEU
+dda8e0792843816587427399f34bd726	DEU
+f1a37824dfc280b208e714bd80d5a294	DEU
+786a755c895da064ccd4f9e8eb7e484e	DEU
+f68a3eafcc0bb036ee8fde7fc91cde13	NOR
+78f5c568100eb61401870fa0fa4fd7cb	USA
+ab42c2d958e2571ce5403391e9910c40	DEU
+b86f86db61493cc2d757a5cefc5ef425	DEU
+98dd2a77f081989a185cb652662eea41	DEU
+c1a08f1ea753843e2b4f5f3d2cb41b7b	BEL
+807dbc2d5a3525045a4b7d882e3768ee	DEU
+45d62f43d6f59291905d097790f74ade	DEU
+2df0462e6f564f34f68866045b2a8a44	DEU
+6ee6a213cb02554a63b1867143572e70	DEU
+496a6164d8bf65daf6ebd4616c95b4b7	DEU
+15ba70625527d7bb48962e6ba1a465f7	DEU
+a571d94b6ed1fa1e0cfff9c04bbeb94d	ISR
+e37e9fd6bde7509157f864942572c267	GRC
+5e62fc773369f140db419401204200e8	DEU
+9592b3ad4d7f96bc644c7d6f34c06576	USA
+fd1a5654154eed3c0a0820ab54fb90a7	GBR
+2045b9a6609f6d5bca3374fd370e54ff	DEU
+78b532c25e4a99287940b1706359d455	DEU
+fc935f341286c735b575bd50196c904b	ITA
+f159fc50b5af54fecf21d5ea6ec37bad	BEL
+265dbcbd2bce07dfa721ed3daaa30912	NLD
+ec4f407118924fdc6af3335c8d2961d9	DEU
+11a7f956c37bf0459e9c80b16cc72107	DEU
+41e744bdf3114b14f5873dfb46921dc4	DEU
+e37015150c8944d90e306f19eaa98de8	DEU
+ed795c86ba21438108f11843f7214c95	FIN
+dbc940d02a217c923c52d3989be9b391	EST
+8845da022807c76120b5b6f50c218d9a	FIN
+f520f53edf44d466fb64269d5a67b69a	NOR
+61e5d7cb15bd519ceddcf7ba9a22cbc6	DEU
+9563a6fd049d7c1859196f614b04b959	POL
+90fb95c00db3fde6b86e6accf2178fa7	GBR
+b80aecda9ce9783dab49037eec5e4388	IRN
+b81dd41873676af0f9533d413774fa8d	BEL
+094655515b3991e73686f45e4fe352fe	DNK
+fbe95242f85d4bbe067ddc781191afb5	DNK
+fc46b0aa6469133caf668f87435bfd9f	USA
+8872fbd923476b7cf96913260ec59e66	DEU
+db1440c4bae3edf98e3dab7caf2e7fed	USA
+bff322dbe273a1e2d1fe37f81acccbe4	ZAF
+36b208182f04f44c80937e980c3c28fd	AUS
+a1af2abbd036f0499296239b29b40a5f	DEU
+89d60b9528242c8c53ecbfde131eba21	DEU
+e8d17786fed9fa5ddaf13881496106e4	150
+0371892b7f65ffb9c1544ee35c6330ad	CHE
+bf5c782ca6b0130372ac41ebd703463e	DEU
+f041991eb3263fd3e5d919026e772f57	ITA
+70409bc559ef6c8aabcf16941a29788b	BEL
+0ecef959ca1f43d538966f7eb9a7e2ec	DEU
+169c9d1bfabf9dec8f84e1f874d5e788	DEU
+01ffa9ce7c50b906e4f5b6a2516ba94b	CHE
+d104b6ae44b0ac6649723bac21761d41	ITA
+b12986f0a962c34c6669d59f40b1e9eb	BRA
+f0f2e6b4ae39fe3ef81d807f641f54a9	DEU
+a54196a4ae23c424c6c01a508f4c9dfb	DEU
+e3c1fd64db1923585a22632681c95d35	SWE
+0fa4e99a2451478f3870e930d263cfd4	DEU
+6c718d616702ff78522951d768552d6a	NLD
+9efb345179e21314a38093da366e1f09	DEU
+b7f3ddec78883ff5a0af0d223f491db8	DEU
+3472e72b1f52a7fda0d4340e563ea6c0	BEL
+f816407dd0b81a5baedb7695302855d9	EST
+b0353ada659e3848bd59dec631e71f9e	DEU
+c256d34ab1f0bd3928525d18ddabe18e	DEU
+0035ac847bf9e371750cacbc98ad827b	FIN
+49bb0f64fae1bd9abf59989d5a5adfaf	DEU
+de2290e4c7bfa39e594c2dcd6e4c09d6	DEU
+f929c32e1184b9c0efdd60eb947bf06b	ISR
+25f02579d261655a79a54a1fc5c4baf5	FRA
+10dbb54312b010f3aeb9fde389fe6cf5	CHE
+f0cd1b3734f01a46d31c5644e3216382	USA
+2ef1ea5e4114637a2dc94110d4c3fc7a	NOR
+09fcf410c0bb418d24457d323a5c812a	DEU
+bd6d4ce8e8bd1f6494db102db5a06091	GRC
+f68e5e7b745ade835ef3029794b4b0b2	NOR
+d4f9c39bf51444ae90cc8947534f20e4	DEU
+55edd327aec958934232e98d828fb56a	NOR
+e340c1008146e56c9d6c7ad7aa5b8146	SVK
+a6c37758f53101378a209921511369de	NOR
+5b05784f3a259c7ebc2fffc1cf0c37b7	POL
+e2b16c5f5bad24525b8c700c5c3b3653	DNK
+baf938346589a5e047e2aa1afcc3d353	ITA
+6435684be93c4a59a315999d3a3227f5	150
+034c15ae2143eea36eec7292010568a1	FIN
+50437ed6fdec844c3d86bb6ac8a4a333	GBR
+bb7dcf6e8a0c1005d2be54f005e9ff8f	DEU
+05acc535cbe432a56e2c9cfb170ee635	DEU
+7a78e9ce32da3202ac0ca91ec4247086	DEU
+ba404ce5a29ba15a792583bbaa7969c6	ARG
+d8cddac7db3dedd7d96b81a31dc519b3	FRA
+63dab0854b1002d4692bbdec90ddaecc	GRC
+3e8f57ef55b9d3a8417963f343db1de2	DEU
+7176be85b1a9e340db4a91d9f17c87b3	DEU
+cc31f5f7ca2d13e95595d2d979d10223	GRC
+ea6fff7f9d00d218338531ab8fe4e98c	USA
+00a616d5caaf94d82a47275101e3fa22	USA
+23dad719c8a972b4f19a65c79a8550fe	DEU
+4545c676e400facbb87cbc7736d90e85	DEU
+304d29d27816ec4f69c7b1ba5836c57a	USA
+37e2e92ced5d525b3e79e389935cd669	150
+3cb5ffaba5b396de828bc06683b5e058	USA
+a35033c250bd9c577f20f2b253be0021	GBR
+cfd7b6bdd92dbe51d1bdb8cb3b98cd58	USA
+6dffdacffe80aad339051ef4fbbf3f29	DEU
+7d067ef3bf74d1659b8fa9df3de1a047	USA
+3cc1eb35683942bb5f7e30b187438c5e	DEU
+35f3e8a1461c3ce965993e4eafccfa43	AUS
+568afb74bcc1ce84f8562a4fbfdc31ba	USA
+9a876908f511193b53ce983ab276bd73	GBR
+3ec4a598041aa926d5f075e3d69dfc0a	HUN
+6949c5ed6eda8cf7a40adb2981d4671d	DEU
+6e610e4ff7101f3a1837544e9fb5d0bf	SWE
+312793778e3248b6577e3882a77f68f3	DEU
+dd3e531c469005b17115dbf611b01c88	DEU
+dd15d5adf6349f5ca53e7a2641d41ab7	DEU
+398af626887ad21cd66aeb272b8337be	DEU
+eb999c99126a456f9db3c5d3b449fa7f	DEU
+0da2e7fa0ba90f4ae031b0d232b8a57a	CUB
+71b6971b6323b97f298af11ed5455e55	HUN
+36233ed8c181dfacc945ad598fb4f1a1	DNK
+221fa1624ee1e31376cb112dd2487953	GBR
+5958cd5ce011ea83c06cb921b1c85bb3	NLD
+844de407cd83ea1716f1ff57ea029285	POL
+df24a5dd8a37d3d203952bb787069ea2	GBR
+048d40092f9bd3c450e4bdeeff69e8c3	FRA
+33b39f2721f79a6bb6bb5e1b2834b0bd	FRA
+b145159df60e1549d1ba922fc8a92448	NLD
+16a56d0941a310c3dc4f967041574300	CAN
+e2be3c3c22484d1872c7b225339c0962	DEU
+1fbd4bcce346fd2b2ffb41f6e767ea84	NLD
+bca8f048f2c5ff787950eb1ba088c70e	DEU
+e093d52bb2d4ff4973e72f6eb577714b	DEU
+9777f12d27d48261acb756ca56ceea96	DEU
+20aba645df0b3292c63f0f08b993966e	DEU
+31897528a567059ed581f119a0e1e516	DEU
+41f062d8603a9705974083360fb69892	DEU
+ad7de486b34143f00a56127a95787e78	USA
+ca4038e41aaa675d65dc3f2ea92556e9	AUT
+16ff0968c682d98cb29b42c793066f29	SWE
+d2556a1452bc878401a6cde5cb89264d	SWE
+bccaee4d143d381c8c617dd98b9ee463	USA
+1680c4ab3ce61ab3e1514fba8b99e3c5	MEX
+03aa4e5b2b49a82eb798d33afe9e8523	AUT
+649df53f8249bdb0aa26e52d6ee517bb	BEL
+c9dc004fc3d039ad7fb49456e5902b01	GBR
+67cc86339b2654a35fcc57da8fc9d33d	CAN
+6916ed9292a811c895e259c542af0e8a	DEU
+fd401865b6db200e5eb8a1ac1b1fbab1	DEU
+218d618a041c057d0e05799670e7e2c8	DEU
+a4bcd57d5cda816e4ffd1f83031a36ca	CAN
+ec5c65bfe530446b696f04e51aa19201	DEU
+14af57131cbbf57afb206c8707fdab6c	FRA
+a45ff5de3a96b103a192f1f133d0b0cf	DEU
+de3e4c12f56a35dc1ee6866b1ddd9d53	FRA
+88726e1a911181e20cf8be52e1027f26	DEU
+9b7d722b58370498cd39104b2d971978	DEU
+ac61757d33fc8563eb2409ed08e21974	DEU
+93299af7c9e3c63c7b3d9bb2242c9d6b	DEU
+11a5f9f425fd6da2d010808e5bf759ab	GBR
+bc5daaf162914ff1200789d069256d36	USA
+98e8599d1486fadca0bf7aa171400dd8	DEU
+66857d7c2810238438483356343ff26e	NLD
+aa5e46574bdc6034f4d49540c0c2d1ad	POL
+13d81f0ed06478714344fd0f1a6a81bb	DEU
+eaacb8ee01500f18e370303be3d5c591	DEU
+22ef651048289b302401afe2044c5c01	DEU
+f3cb86dd6b6caf33a8a05571e195e7dc	GBR
+708abbdc2eb4b62e6732c4c2a60c625a	DEU
+ffd6243282cdf77599e2abaf5d1a36e5	USA
+d148b29cbc0092dc206f9217a1b3da73	USA
+a70a003448c0c2d2a6d4974f60914d40	USA
+68f05e1c702a4218b7eb968ff9489744	DEU
+b5067ff7f533848af0c9d1f3e6c5b204	DEU
+dba661bb8c2cd8edac359b22d3f9ddf3	DEU
+553adf4c48f103e61a3ee7a94e7ea17b	DEU
+134a3bbedd12bc313d57aa4cc781ddf9	DEU
+ab9ca8ecf42a92840c674cde665fbdd3	DEU
+d4192d77ea0e14c40efe4dc9f08fdfb8	DEU
+5fac4291bc9c25864604c4a6be9e0b4a	DEU
+ecd06281e276d8cc9a8b1b26d8c93f08	USA
+bf6cf2159f795fc867355ee94bca0dd5	CAN
+3b0713ede16f6289afd699359dff90d4	USA
+46148baa7f5229428d9b0950be68e6d7	DEU
+a909b944804141354049983d9c6cc236	DEU
+16e54a9ce3fcedbadd0cdc18832266fd	DEU
+b08bdd1d40a38ab9848ff817294332ca	DEU
+b06edc3ce52eb05a5a45ae58a7bb7adc	DEU
+9a83f3f2774bee96b8f2c8595fc174d7	NLD
+4124cc9a170709b345d3f68fd563ac33	NLD
+a1e60d2ccea21edbaf84a12181d1e966	CHE
+94edec5dc10d059f05d513ce4a001c22	DEU
+d1b8bfadad3a69dbd746217a500a4db5	CHE
+57006f73c326669c8d52c47a3a9e2696	DEU
+28a6ebe1e170483c1695fca36880db98	DEU
+ce34dc9b3e210fd7a61d94df77bd8398	150
+cdd21eba97ee010129f5d1e7a80494cb	USA
+ec29a7f3c6a4588ef5067ea12a19e4e1	NLD
+dac6032bdce48b416fa3cd1d93dc83b8	ITA
+73cff3ab45ec02453b639abccb5bd730	DEU
+442ea4b6f50b4ae7dfde9350b3b6f664	DEU
+af8b7f5474d507a8e583c66ef1eed5a5	DEU
+bf250243f776c4cc4a9c4a1f81f7e42f	DEU
+bc30e7b15744d2140e28e5b335605de5	DEU
+8b174e2c4b00b9e0699967e812e97397	DEU
+a68fbbd4507539f9f2579ad2e7f94902	DEU
+2e572c8c809cfbabbe270b6ce7ce88dd	DEU
+bfaffe308a2e8368acb49b51814f2bfe	DEU
+6261b9de274cf2da37125d96ad21f1df	DEU
+804d27f4798081681e71b2381697e58c	NOR
+2918f3b4f699f80bcafb2607065451e1	GBR
+b760518e994aa7db99d91f1b6aa52679	DEU
+0fe3db5cf9cff35143d6610797f91f7c	DEU
+2304c368fd55bc45cb12f1589197e80d	DEU
+6c3eceee73efa7af0d2f9f62daf63456	DEU
+6a2367b68131111c0a9a53cd70c2efed	SWE
+f2727091b6fe5656e68aa63d936c5dfd	CAN
+ec41b630150c89b30041d46b03f1da42	DEU
+cb3a240c27ebf12e17f9efe44fa4a7a8	USA
+cfe9861e2a347cc7b50506ea46fdaf4f	DEU
+926811886f475151c52dd365c90a7efc	DEU
+afe4451c0c33641e67241bfe39f339ff	DEU
+e27728342f660d53bd12ab14e5005903	DEU
+3e6141409efd871b4a87deacfbf31c28	DEU
+e84900ed85812327945c9e72f173f8cc	DEU
+c3ce3cf87341cea762a1fb5d26d7d361	DEU
+11ac50031c60fb29e5e1ee475be05412	FRA
+bd9b8bf7d35d3bd278b5c300bc011d86	GRC
+d39aa6fda7dc81d19cd21adbf8bd3479	NOR
 \.
 
 
@@ -6848,6 +6859,75 @@ c56598c23355f774b43e42e55fe94cb8	Pinch Black + Greh + Roots of Unrest	2025-03-22
 28630f95cb7c87f6ba4f40bd5094ae7f	Infernal Bloodshed over Europe	2025-06-25	83b0fe992121ae7d39f6bcc58a48160c	0	39.75	2
 ce5649089736affc844695973913e736	Boarstresm Open Air 2025	2025-07-18	cf1c12d42f59db3667fc162556aab169	1	75.0	2
 d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-15	f3a90318abb3e16166d96055fd6f9096	0	33.4	2
+\.
+
+
+--
+-- Data for Name: test_country; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.test_country (id_country, country, flag) FROM stdin;
+NLD                             	Netherlands	nl
+RUS                             	Russian Federation	ru
+IRN                             	Iran	ir
+ARE                             	United Arab Emirates	ae
+CZE                             	Czechia	cz
+001                             	International	un
+LTU                             	Lithuania	lt
+MYS                             	Malaysia	my
+150                             	Europe	eu
+EGY                             	Egypt	eg
+ZAF                             	South Africa	za
+CUB                             	Cuba	cu
+JAM                             	Jamaica	jm
+CRI                             	Costa Rica	cr
+MEX                             	Mexico	mx
+PAN                             	Panama	pa
+ARG                             	Argentina	ar
+BRA                             	Brazil	br
+CHL                             	Chile	cl
+COL                             	Colombia	co
+CAN                             	Canada	ca
+USA                             	United States of America	us
+CHN                             	China	cn
+JPN                             	Japan	jp
+MNG                             	Mongolia	mn
+IDN                             	Indonesia	id
+PHL                             	Philippines	ph
+IND                             	India	in
+ISR                             	Israel	il
+TUR                             	Türkiye	tr
+BLR                             	Belarus	by
+HUN                             	Hungary	hu
+POL                             	Poland	pl
+ROU                             	Romania	ro
+UKR                             	Ukraine	ua
+DNK                             	Denmark	dk
+EST                             	Estonia	ee
+FRO                             	Faroe Islands	fo
+FIN                             	Finland	fi
+ISL                             	Iceland	is
+IRL                             	Ireland	ie
+NOR                             	Norway	no
+SWE                             	Sweden	se
+HRV                             	Croatia	hr
+GBR                             	United Kingdom of Great Britain and Northern Ireland	gb
+GRC                             	Greece	gr
+ITA                             	Italy	it
+MLT                             	Malta	mt
+PRT                             	Portugal	pt
+SRB                             	Serbia	rs
+SVN                             	Slovenia	si
+ESP                             	Spain	es
+AUT                             	Austria	at
+BEL                             	Belgium	be
+FRA                             	France	fr
+DEU                             	Germany	de
+LUX                             	Luxembourg	lu
+CHE                             	Switzerland	ch
+AUS                             	Australia	au
+NZL                             	New Zealand	nz
+SVK                             	Slovakia	sk
 \.
 
 
