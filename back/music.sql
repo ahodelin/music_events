@@ -370,6 +370,39 @@ CREATE TABLE music.next_events_with_tickets (
 
 
 --
+-- Name: v_band_full_details; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_band_full_details AS
+ SELECT id_band,
+    band,
+    likes,
+    active,
+    note AS band_note,
+    ( SELECT array_agg(g.genre ORDER BY g.genre) AS array_agg
+           FROM (music.bands_genres bg
+             JOIN music.genres g ON ((bg.id_genre = g.id_genre)))
+          WHERE (bg.id_band = b.id_band)) AS genres,
+    ( SELECT jsonb_agg(jsonb_build_object('country', c.country, 'flag', c.flag) ORDER BY c.country) AS jsonb_agg
+           FROM (music.bands_countries bc
+             JOIN geo.countries c ON (((bc.id_country)::text = (c.id_country)::text)))
+          WHERE (bc.id_band = b.id_band)) AS countries,
+    ( SELECT array_agg(DISTINCT ct.continent ORDER BY ct.continent) AS array_agg
+           FROM (((music.bands_countries bc
+             JOIN geo.countries c ON (((bc.id_country)::text = (c.id_country)::text)))
+             JOIN geo.countries_continents cc ON (((c.id_country)::text = (cc.id_country)::text)))
+             JOIN geo.continents ct ON (((cc.id_continent)::text = (ct.id_continent)::text)))
+          WHERE (bc.id_band = b.id_band)) AS continents,
+    ( SELECT jsonb_agg(jsonb_build_object('event', e.event, 'place', p.place, 'date', e.date_event) ORDER BY e.date_event) AS jsonb_agg
+           FROM ((music.bands_events be
+             JOIN music.events e ON ((be.id_event = e.id_event)))
+             JOIN geo.places p ON ((e.id_place = p.id_place)))
+          WHERE (be.id_band = b.id_band)) AS events_attended
+   FROM music.bands b
+  ORDER BY band;
+
+
+--
 -- Name: v_bands; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -450,6 +483,117 @@ CREATE VIEW music.v_bands_to_tex AS
 
 
 --
+-- Name: v_chart_events_per_month; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_chart_events_per_month AS
+ SELECT (EXTRACT(month FROM date_event))::integer AS month,
+    to_char((date_event)::timestamp with time zone, 'TMMonth'::text) AS month_name,
+    count(*) AS event_count
+   FROM music.events
+  GROUP BY ((EXTRACT(month FROM date_event))::integer), (to_char((date_event)::timestamp with time zone, 'TMMonth'::text))
+  ORDER BY ((EXTRACT(month FROM date_event))::integer);
+
+
+--
+-- Name: v_chart_events_per_year; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_chart_events_per_year AS
+ SELECT (EXTRACT(year FROM date_event))::integer AS year,
+    count(*) AS event_count
+   FROM music.events
+  GROUP BY ((EXTRACT(year FROM date_event))::integer)
+  ORDER BY ((EXTRACT(year FROM date_event))::integer);
+
+
+--
+-- Name: v_chart_likes_distribution; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_chart_likes_distribution AS
+ SELECT likes,
+        CASE likes
+            WHEN 'y'::bpchar THEN 'Ja'::text
+            WHEN 'm'::bpchar THEN 'Neutral'::text
+            WHEN 'n'::bpchar THEN 'Nein'::text
+            ELSE 'Desconocido'::text
+        END AS preference,
+    count(*) AS band_count
+   FROM music.bands
+  GROUP BY likes,
+        CASE likes
+            WHEN 'y'::bpchar THEN 'Ja'::text
+            WHEN 'm'::bpchar THEN 'Neutral'::text
+            WHEN 'n'::bpchar THEN 'Nein'::text
+            ELSE 'Desconocido'::text
+        END
+  ORDER BY
+        CASE likes
+            WHEN 'y'::bpchar THEN 1
+            WHEN 'm'::bpchar THEN 2
+            WHEN 'n'::bpchar THEN 3
+            ELSE 4
+        END;
+
+
+--
+-- Name: v_chart_spending_per_year; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_chart_spending_per_year AS
+ SELECT (EXTRACT(year FROM date_event))::integer AS year,
+    sum((price * (persons)::numeric)) AS total_spent
+   FROM music.events
+  WHERE ((price IS NOT NULL) AND (persons IS NOT NULL))
+  GROUP BY ((EXTRACT(year FROM date_event))::integer)
+  ORDER BY ((EXTRACT(year FROM date_event))::integer);
+
+
+--
+-- Name: v_chart_top_bands; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_chart_top_bands AS
+ SELECT b.band,
+    count(be.id_event) AS event_count
+   FROM (music.bands_events be
+     JOIN music.bands b ON ((be.id_band = b.id_band)))
+  GROUP BY b.band
+  ORDER BY (count(be.id_event)) DESC
+ LIMIT 5;
+
+
+--
+-- Name: v_chart_top_genres; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_chart_top_genres AS
+ SELECT g.genre,
+    count(DISTINCT be.id_band) AS band_count
+   FROM ((music.bands_events be
+     JOIN music.bands_genres bg ON ((be.id_band = bg.id_band)))
+     JOIN music.genres g ON ((bg.id_genre = g.id_genre)))
+  GROUP BY g.genre
+  ORDER BY (count(DISTINCT be.id_band)) DESC
+ LIMIT 5;
+
+
+--
+-- Name: v_chart_top_places; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_chart_top_places AS
+ SELECT p.place,
+    count(e.id_event) AS visit_count
+   FROM (music.events e
+     JOIN geo.places p ON ((e.id_place = p.id_place)))
+  GROUP BY p.place
+  ORDER BY (count(e.id_event)) DESC
+ LIMIT 5;
+
+
+--
 -- Name: v_countries; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -462,6 +606,30 @@ CREATE VIEW music.v_countries AS
      JOIN music.bands_countries bc ON (((c.id_country)::text = (bc.id_country)::text)))
   GROUP BY c.country, c.flag, c.id_country
   ORDER BY (count(DISTINCT bc.id_band)) DESC, c.country;
+
+
+--
+-- Name: v_event_details; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_event_details AS
+ SELECT e.id_event,
+    e.event,
+    e.date_event,
+    EXTRACT(year FROM e.date_event) AS event_year,
+    EXTRACT(month FROM e.date_event) AS event_month,
+    p.place,
+    (e.duration + (1)::smallint) AS duration,
+    e.price,
+    e.persons,
+    (e.price * (e.persons)::numeric) AS total_cost_household,
+    e.note AS event_note,
+    ( SELECT count(be.id_band) AS count
+           FROM music.bands_events be
+          WHERE (be.id_event = e.id_event)) AS band_count
+   FROM (music.events e
+     JOIN geo.places p ON ((e.id_place = p.id_place)))
+  ORDER BY e.date_event;
 
 
 --
@@ -553,6 +721,20 @@ UNION
  SELECT 'genres'::text AS entities,
     count(*) AS quantity
    FROM music.genres;
+
+
+--
+-- Name: v_summary_stats; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_summary_stats AS
+ SELECT ( SELECT count(DISTINCT events.id_event) AS count
+           FROM music.events) AS total_events,
+    ( SELECT count(DISTINCT bands_events.id_band) AS count
+           FROM music.bands_events) AS total_bands_seen,
+    ( SELECT sum((events.price * (events.persons)::numeric)) AS sum
+           FROM music.events
+          WHERE ((events.price IS NOT NULL) AND (events.persons IS NOT NULL))) AS total_money_spent;
 
 
 --
@@ -1920,6 +2102,7 @@ c3ce3cf87341cea762a1fb5d26d7d361	Gomorrha	y	t	\N
 11ac50031c60fb29e5e1ee475be05412	Mercyless	y	t	\N
 bd9b8bf7d35d3bd278b5c300bc011d86	Rotting Christ	y	t	\N
 d39aa6fda7dc81d19cd21adbf8bd3479	Satyricon	y	t	\N
+a3ea16d9f663f0e88a9e8b5da3becb18	Osiah	y	t	\N
 \.
 
 
@@ -2996,6 +3179,7 @@ c3ce3cf87341cea762a1fb5d26d7d361	DEU
 11ac50031c60fb29e5e1ee475be05412	FRA
 bd9b8bf7d35d3bd278b5c300bc011d86	GRC
 d39aa6fda7dc81d19cd21adbf8bd3479	NOR
+a3ea16d9f663f0e88a9e8b5da3becb18	GBR
 \.
 
 
@@ -4583,6 +4767,10 @@ c3ce3cf87341cea762a1fb5d26d7d361	0d833b14e1535c06601ef6a143deec65
 844de407cd83ea1716f1ff57ea029285	a8a45074ca24548875765e3388541cb5
 bd9b8bf7d35d3bd278b5c300bc011d86	a8a45074ca24548875765e3388541cb5
 d39aa6fda7dc81d19cd21adbf8bd3479	a8a45074ca24548875765e3388541cb5
+ec5c65bfe530446b696f04e51aa19201	872789acfd93b013e7120139be311a9b
+dd3e531c469005b17115dbf611b01c88	872789acfd93b013e7120139be311a9b
+9d74605e4b1d19d83992a991230e89ef	872789acfd93b013e7120139be311a9b
+a3ea16d9f663f0e88a9e8b5da3becb18	872789acfd93b013e7120139be311a9b
 \.
 
 
@@ -6318,6 +6506,7 @@ c3ce3cf87341cea762a1fb5d26d7d361	b3412a542c856d851d554e29aa16d4b6
 bd9b8bf7d35d3bd278b5c300bc011d86	8dbf2602d350002b61aeb50d7b1f5823
 bd9b8bf7d35d3bd278b5c300bc011d86	73d0749820562452b33d4e0f4891efcd
 d39aa6fda7dc81d19cd21adbf8bd3479	2db87892408abd4d82eb39b78c50c27b
+a3ea16d9f663f0e88a9e8b5da3becb18	70accb11df7fea2ee734e5849044f3c8
 \.
 
 
@@ -6607,8 +6796,9 @@ ae82bb9482568660cddc425beb03eff5	The Art of Destruction	2025-03-12	de64de56f43ca
 c6a597721969cadfa790ad9ad3ed0864	All its Grace + Desdemonia + Failed Star	2025-03-14	a91bcaf7db7d174ee2966d9c293fd575	0	14.0	2	\N
 3aef806ce4cb250c0043ec647bcf564f	Pinch Black + Greh	2025-03-22	0280c9c3b98763f5a8d2ce7e97ce1b05	0	16.32	2	\N
 d869f28f4e7a04e5f9254884229d8321	WARFIELD "With The Old Breed" Album-Release-Show	2025-03-28	09ddc8804dd5908fef3c8c0c474ad238	0	20.8	2	\N
-0d833b14e1535c06601ef6a143deec65	Pälzer Hell Version 6.66	2025-04-12	b5c6ef76dd3784cc976d507c890973c3	0	40.0	2	\N
 a8a45074ca24548875765e3388541cb5	The Unholy Trinity Tour 2025	2025-04-16	588671317bf1864e5a95445ec51aac65	0	66.6	2	\N
+0d833b14e1535c06601ef6a143deec65	Pälzer Hell Version 6.66	2025-04-12	b5c6ef76dd3784cc976d507c890973c3	0	40.0	2	\N
+872789acfd93b013e7120139be311a9b	Circle Pitournium Tour 2025	2025-04-21	f3a90318abb3e16166d96055fd6f9096	0	28.50	2	\N
 \.
 
 

@@ -1,0 +1,231 @@
+/* --- Estilo Metalero --- */
+
+body {
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif; /* Fuente sans-serif robusta */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #111; /* Fondo muy oscuro */
+    color: #ccc; /* Texto principal gris claro */
+}
+
+header {
+    background-color: #000; /* Negro sólido */
+    color: #eee; /* Texto casi blanco */
+    padding: 1.5rem 0;
+    text-align: center;
+    border-bottom: 3px solid #444; /* Borde inferior gris oscuro */
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    color: #fff; /* Blanco para el título principal */
+    text-transform: uppercase; /* Mayúsculas */
+    letter-spacing: 2px; /* Espaciado entre letras */
+    /* Opcional: Sombra sutil para dar profundidad */
+    text-shadow: 1px 1px 3px rgba(200, 200, 200, 0.2);
+}
+
+#summary p {
+    display: inline-block;
+    margin: 0 15px;
+    color: #aaa; /* Gris medio para el resumen */
+}
+#summary span {
+    color: #eee; /* Resaltar los números */
+    font-weight: bold;
+}
+
+main {
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 25px;
+    background-color: #222; /* Fondo principal ligeramente más claro */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra más pronunciada */
+    border: 1px solid #444; /* Borde sutil */
+}
+
+section {
+    margin-bottom: 2.5rem;
+}
+
+h2 {
+    color: #e0e0e0; /* Título de sección claro */
+    border-bottom: 2px solid #555; /* Borde inferior más visible */
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h3 { /* Para títulos de tarjetas */
+    color: #d9534f; /* Rojo oscuro/desaturado para títulos */
+    margin-top: 0;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #444; /* Línea divisoria oscura */
+    margin: 2.5rem 0;
+}
+
+/* Formularios */
+form {
+    margin-bottom: 1.5rem;
+}
+
+form select,
+form input[type="text"],
+form input[type="number"] {
+    padding: 10px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    background-color: #333; /* Fondo oscuro para inputs */
+    color: #ccc; /* Texto claro */
+    border: 1px solid #555; /* Borde gris oscuro */
+    border-radius: 4px;
+}
+form select:focus,
+form input[type="text"]:focus,
+form input[type="number"]:focus {
+    outline: none;
+    border-color: #d9534f; /* Resaltar borde en rojo al enfocar */
+    box-shadow: 0 0 5px rgba(217, 83, 79, 0.5);
+}
+
+form button {
+    padding: 10px 18px;
+    background-color: #d9534f; /* Botón principal rojo */
+    color: #fff;
+    border: 1px solid #b94441; /* Borde ligeramente más oscuro */
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+form button[type="reset"] {
+    background-color: #555; /* Botón de limpiar gris oscuro */
+    border-color: #444;
+}
+
+form button:hover {
+    background-color: #c9302c; /* Rojo más oscuro al pasar el ratón */
+    border-color: #ac2925;
+}
+form button[type="reset"]:hover {
+    background-color: #444;
+    border-color: #333;
+}
+
+
+/* Resultados */
+#band-results .band-card,
+#event-results .event-card {
+    border: 1px solid #444; /* Borde oscuro */
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #2a2a2a; /* Fondo ligeramente distinto */
+    border-radius: 0px; /* Bordes rectos, más "duros" */
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.4); /* Sombra interior sutil */
+}
+
+.band-card p, .event-card p {
+    margin: 8px 0;
+    color: #bbb; /* Texto de párrafo un poco más oscuro */
+}
+
+.band-card strong, .event-card strong {
+    color: #ddd; /* Etiquetas en negrita más claras */
+}
+
+/* Indicador de Likes (mantiene colores pero asegura visibilidad) */
+.like-indicator {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-left: 8px;
+    vertical-align: middle;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil para definición */
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+.like-y { background-color: #28a745; } /* Verde */
+.like-m { background-color: #ffc107; } /* Amarillo */
+.like-n { background-color: #dc3545; } /* Rojo */
+
+/* Banderas */
+.flag-icon {
+    width: 20px;
+    height: auto;
+    vertical-align: middle;
+    margin-left: 5px;
+    border: 1px solid #555; /* Borde oscuro para banderas */
+    filter: saturate(80%); /* Opcional: desaturar ligeramente */
+}
+
+/* css/style.css */
+
+/* ... (otros estilos sin cambios) ... */
+
+/* Contenedores de gráficos */
+/*.chart-container {
+    width: 90%;
+    max-width: 600px;
+    /* *** NUEVO: Establecer una altura fija para los contenedores de gráficos *** *
+    height: 350px; /* Ajusta este valor según necesites (p. ej., 300px, 400px) *
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #555;
+    border-radius: 0;
+    background: #1e1e1e;
+    /* Añadir position relative es buena práctica para canvas responsive *
+    position: relative;
+}*/
+
+/* En css/style.css */
+
+.chart-container {
+    width: 90%;
+    max-width: 600px;
+    height: 350px; /* Altura fija que establecimos */
+    margin: 30px auto;
+    /* *** AUMENTAR EL PADDING *** */
+    /* Prueba con un valor mayor, por ejemplo 30px o 35px */
+    padding: 30px; /* Antes era 20px o 25px */
+    /* ************************** */
+    border: 1px solid #555;
+    border-radius: 0;
+    background: #1e1e1e;
+    position: relative; /* Importante para el tamaño del canvas */
+}
+
+.chart-container h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #ccc;
+    text-transform: uppercase;
+    font-size: 1em;
+}
+
+/* ... (resto de estilos sin cambios) ... */
+/* Ajustes para Chart.js (asegurar que las etiquetas sean visibles) */
+canvas {
+    /* Chart.js normalmente maneja bien los colores, pero puedes forzar aquí si es necesario */
+    /* color: #ccc !important; */ /* ¡Evitar !important si es posible! */
+}
+
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: #000; /* Footer negro */
+    color: #777; /* Texto gris oscuro */
+    font-size: 0.9em;
+    border-top: 1px solid #333;
+}

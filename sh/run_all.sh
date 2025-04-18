@@ -1,9 +1,9 @@
 echo "Database dumping..."
 bash dump_music_events.sh
 
-echo "Extraction & Transformation - JSON..."
-cd json_files
-bash to_js.sh
+#echo "Extraction & Transformation - JSON..."
+#cd json_files
+bash export_music_data.sh
 
 echo "Extraction & Transformation - PDF..."
 cd ../../tex_pdf
