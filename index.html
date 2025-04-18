@@ -1,206 +1,126 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="de"> <!-- Cambiado a alemán -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musical Events</title>
-    <style>
-        /* Estilos generales */
-        body {
-            background-color: #f9f9f9;
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* Contenedor principal */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        /* Estilos para la tabla */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        td, th {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #33FFD4;
-            color: #333;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f8f8f8;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-	img {
-               height:24px
-            }
-
-
-        /* Estilos para botones */
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #33FFD4;
-            color: #333;
-            text-align: center;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: #2ae6b8;
-        }
-
-        /* Estilos para selects */
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        select:hover {
-            border-color: #33FFD4;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-
-            th {
-                display: none;
-            }
-
-            tr {
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-            }
-
-            td {
-                border: none;
-                position: relative;
-                padding-left: 50%;
-            }
-
-            td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 10px;
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                font-weight: bold;
-            }
-
-        }
-    </style>
+    <!-- Título en alemán -->
+    <title>Meine Musikveranstaltungen</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Musical Events</h1>
-        </header>
+    <header>
+        <!-- Título principal en alemán -->
+        <h1>Musikalische Zusammenfassung des Haushalts</h1>
+        <div id="summary">
+             <!-- Etiquetas del resumen en alemán -->
+            <p>Besuchte Veranstaltungen: <span id="total-events">Lädt...</span></p>
+            <p>Gesehene Bands: <span id="total-bands">Lädt...</span></p>
+            <p>Gesamtausgaben: <span id="total-spent">Lädt...</span> €</p> <!-- Símbolo € al final -->
+        </div>
+    </header>
 
-        <main>
-            <section aria-labelledby="bands-heading">
-                <h2 id="bands-heading">Bands Information</h2>
-                <table role="grid">
-                    <thead>
-                        <tr>
-                            <th scope="col">Bands</th>
-                            <th scope="col">Countries</th>
-                            <th scope="col">Genres</th>
-                            <th scope="col">Events</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><button class="button" onclick="showAllBands()">All Bands</button></td>
-                            <td><button class="button" id="allCountries" onclick="showAllCountries()">All Countries</button></td>
-                            <td><button class="button" id="allGenres" onclick="showAllGenres()">All Genres</button></td>
-                            <td><button class="button" id="allEvents" onclick="showAllEvents()">All Events</button></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Bands">
-                                <select id="selectBandId" name="selectBandName" onchange="showBand()">
-                                    <!-- Options will be populated by JavaScript -->
-                                </select>
-                            </td>
-                            <td data-label="Countries">
-                                <select id="selectCountryId" name="selectCountryName" onchange="showBandByCountry()">
-                                    <!-- Options will be populated by JavaScript -->
-                                </select>
-                            </td>
-                            <td data-label="Genres">
-                                <select id="selectGenreId" name="selectGenreName" onchange="showBandByGenre()">
-                                    <!-- Options will be populated by JavaScript -->
-                                </select>
-                            </td>
-                            <td data-label="Events">
-                                <select id="selectEventId" name="selectEventName" onchange="showBandByEvent()">
-                                    <!-- Options will be populated by JavaScript -->
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+    <main>
+        <section id="search-bands">
+             <!-- Título de sección en alemán -->
+            <h2>Bands suchen</h2>
+            <form id="band-search-form">
+                <select id="band-name-select">
+                     <!-- Opciones por defecto en alemán -->
+                    <option value="">-- Alle Bands --</option>
+                </select>
+                <select id="genre-select">
+                    <option value="">-- Alle Genres --</option>
+                </select>
+                <select id="country-select">
+                    <option value="">-- Alle Länder/Regionen --</option>
+                </select>
+                <select id="continent-select">
+                    <option value="">-- Alle Kontinente --</option>
+                </select>
+                <select id="event-select-band">
+                    <option value="">-- Alle Veranstaltungen --</option>
+                </select>
+                 <select id="place-select-band">
+                    <option value="">-- Alle Orte --</option>
+                </select>
+                 <!-- Texto de botones en alemán -->
+                <button type="submit">Band suchen</button>
+                <button type="reset" id="reset-band-search">Filter löschen</button>
+            </form>
+            <div id="band-results"></div>
+        </section>
 
-            <section aria-labelledby="info-heading">
-                <h2 id="info-heading">Detailed Information</h2>
-                <p id="allInfo"></p>
-                <p id="bands_info"></p>
-                <p id="genres_events"></p>
-            </section>
-        </main>
-    </div>
-		   
-		  <script src="js/jsonBands.js"></script> 
-		  <script src="js/jsonGenres.js"></script> 
-		  <script src="js/jsonCountries.js"></script>  
-		  <script src="js/jsonEvents.js"></script>
-		  <script src="js/jsonBandsGenres.js"></script> 
-		  <script src="js/jsonBandsCountries.js"></script>  
-		  <script src="js/jsonBandsEvents.js"></script> 
-		  <script src="js/functions_to_load_data.js"></script>
-		  <script src="js/make_forms.js"></script>
-		  <script src="js/function_to_clear_data.js"></script>
-		  <script src="js/functions_to_show_all_entities.js"></script>
-		  <script src="js/function_to_show_band.js"></script>
-		  <script src="js/functions_to_show_bands_by_entities.js"></script>
-		  <script src="js/function_show_bands_on_tables.js"></script>  
-		  <script src="js/functions_to_show_entities_of_band.js"></script>
-	</body>
+        <hr>
+
+        <section id="search-events">
+             <!-- Título de sección en alemán -->
+            <h2>Veranstaltungen suchen</h2>
+            <form id="event-search-form">
+                <select id="event-name-select">
+                    <option value="">-- Alle Veranstaltungen --</option>
+                </select>
+                <!-- Placeholder en alemán -->
+                <input type="number" id="year-search" placeholder="Jahr (JJJJ)...">
+                <select id="place-select-event">
+                    <option value="">-- Alle Orte --</option>
+                </select>
+                <button type="submit">Veranstaltung suchen</button>
+                <button type="reset" id="reset-event-search">Filter löschen</button>
+            </form>
+            <div id="event-results"></div>
+        </section>
+
+        <hr>
+
+        <section id="charts">
+             <!-- Títulos de gráficos en alemán -->
+             <h2>Diagramme</h2>
+             <div class="chart-container">
+                 <h3>Veranstaltungen pro Jahr</h3>
+                 <canvas id="events-year-chart"></canvas>
+             </div>
+             <!-- Gráfico de meses eliminado -->
+              <div class="chart-container">
+                 <h3>Top 5 Häufigste Orte</h3>
+                 <canvas id="top-places-chart"></canvas>
+             </div>
+             <div class="chart-container">
+                 <h3>Top 5 Meistgesehene Bands</h3>
+                 <canvas id="top-bands-chart"></canvas>
+             </div>
+             <div class="chart-container">
+                 <h3>Top 5 Beliebteste Genres</h3>
+                 <canvas id="top-genres-chart"></canvas>
+             </div>
+             <div class="chart-container">
+                 <h3>Ausgaben pro Jahr</h3>
+                 <canvas id="spending-year-chart"></canvas>
+             </div>
+              <div class="chart-container">
+                 <h3>Band-Präferenzen</h3>
+                 <canvas id="likes-chart"></canvas>
+             </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Texto de pie de página en alemán -->
+        <p>Daten zuletzt aktualisiert beim Ausführen des Exportskripts.</p>
+    </footer>
+
+    <!-- Scripts de datos (el script de meses ya no está) -->
+    <script src="data_js/summary_data.js"></script>
+    <script src="data_js/bands_data.js"></script>
+    <script src="data_js/events_data.js"></script>
+    <script src="data_js/chart_events_year_data.js"></script>
+    <!-- Eliminado: <script src="data_js/chart_events_month_data.js"></script> -->
+    <script src="data_js/chart_top_places_data.js"></script>
+    <script src="data_js/chart_top_bands_data.js"></script>
+    <script src="data_js/chart_top_genres_data.js"></script>
+    <script src="data_js/chart_spending_year_data.js"></script>
+    <script src="data_js/chart_likes_data.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+</body>
 </html>
