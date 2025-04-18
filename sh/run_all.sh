@@ -6,7 +6,7 @@ bash dump_music_events.sh
 bash export_music_data.sh
 
 echo "Extraction & Transformation - PDF..."
-cd ../../tex_pdf
+cd ../tex_pdf
 bash to_pdf.sh
 
 echo "Update git repository ..."
