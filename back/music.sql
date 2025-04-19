@@ -393,7 +393,7 @@ CREATE VIEW music.v_band_full_details AS
              JOIN geo.countries_continents cc ON (((c.id_country)::text = (cc.id_country)::text)))
              JOIN geo.continents ct ON (((cc.id_continent)::text = (ct.id_continent)::text)))
           WHERE (bc.id_band = b.id_band)) AS continents,
-    ( SELECT jsonb_agg(jsonb_build_object('event', e.event, 'place', p.place, 'date', e.date_event) ORDER BY e.date_event) AS jsonb_agg
+    ( SELECT jsonb_agg(jsonb_build_object('event', e.event, 'place', p.place, 'date', to_char((e.date_event)::timestamp with time zone, 'DD.MM.YYYY'::text)) ORDER BY e.date_event) AS jsonb_agg
            FROM ((music.bands_events be
              JOIN music.events e ON ((be.id_event = e.id_event)))
              JOIN geo.places p ON ((e.id_place = p.id_place)))
@@ -615,7 +615,7 @@ CREATE VIEW music.v_countries AS
 CREATE VIEW music.v_event_details AS
  SELECT e.id_event,
     e.event,
-    e.date_event,
+    to_char((e.date_event)::timestamp with time zone, 'DD.MM.YYYY'::text) AS date_event,
     EXTRACT(year FROM e.date_event) AS event_year,
     EXTRACT(month FROM e.date_event) AS event_month,
     p.place,
