@@ -441,26 +441,16 @@ CREATE VIEW music.v_bands_events AS
 
 
 --
--- Name: v_bands_generes; Type: VIEW; Schema: music; Owner: -
---
-
-CREATE VIEW music.v_bands_generes AS
- SELECT b.id_band,
-    b.band,
-    g.genre AS genere
-   FROM ((music.bands b
-     JOIN music.bands_genres bg ON ((b.id_band = bg.id_band)))
-     JOIN music.genres g ON ((bg.id_genre = g.id_genre)))
-  ORDER BY b.band, g.genre;
-
-
---
 -- Name: v_bands_likes; Type: VIEW; Schema: music; Owner: -
 --
 
 CREATE VIEW music.v_bands_likes AS
- SELECT likes,
-    count(id_band) AS bands
+ SELECT count(id_band) AS bands,
+        CASE
+            WHEN (likes = 'y'::bpchar) THEN 'Ja'::text
+            WHEN (likes = 'm'::bpchar) THEN 'Jein'::text
+            ELSE 'Nein'::text
+        END AS likes
    FROM music.bands
   GROUP BY likes
   ORDER BY (count(id_band)) DESC;
@@ -648,6 +638,18 @@ SELECT
 
 
 --
+-- Name: v_events_by_months; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_events_by_months AS
+ SELECT count(id_event) AS "Events",
+    (date_trunc('month'::text, (date_event)::timestamp with time zone))::date AS "Monat"
+   FROM music.events
+  GROUP BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date)
+  ORDER BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date);
+
+
+--
 -- Name: v_events_price; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -688,6 +690,22 @@ CREATE VIEW music.v_genres AS
 
 
 --
+-- Name: v_last_event; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_last_event AS
+ SELECT event AS "Event",
+    date AS "Datum",
+    place AS "Ort",
+    bands AS "Bands",
+    days AS "Tage"
+   FROM music.v_events v
+  WHERE (to_date(date, 'DD.MM.YYYY'::text) < (now())::date)
+  ORDER BY (to_date(date, 'DD.MM.YYYY'::text)) DESC
+ LIMIT 1;
+
+
+--
 -- Name: v_places_events; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -702,25 +720,24 @@ CREATE VIEW music.v_places_events AS
 
 
 --
--- Name: v_quantities; Type: VIEW; Schema: music; Owner: -
+-- Name: v_resume; Type: VIEW; Schema: music; Owner: -
 --
 
-CREATE VIEW music.v_quantities AS
- SELECT 'bands'::text AS entities,
-    count(*) AS quantity
+CREATE VIEW music.v_resume AS
+ SELECT ('Bands: '::text || count(bands.id_band)) AS resume
    FROM music.bands
 UNION
- SELECT 'events'::text AS entities,
-    count(*) AS quantity
+ SELECT ('Events: '::text || count(events.id_event)) AS resume
    FROM music.events
 UNION
- SELECT 'places'::text AS entities,
-    count(*) AS quantity
+ SELECT ('Places: '::text || count(places.id_place)) AS resume
    FROM geo.places
 UNION
- SELECT 'genres'::text AS entities,
-    count(*) AS quantity
-   FROM music.genres;
+ SELECT ('Genres: '::text || count(genres.id_genre)) AS resume
+   FROM music.genres
+UNION
+ SELECT (('Investiert in Tickets: ~'::text || sum(((e.persons)::numeric * e.price))) || ' €'::text) AS resume
+   FROM music.events e;
 
 
 --
@@ -758,22 +775,6 @@ CREATE VIEW public.v_events_by_months AS
    FROM music.events
   GROUP BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date)
   ORDER BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date);
-
-
---
--- Name: v_last_event; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.v_last_event AS
- SELECT event AS "Event",
-    date AS "Datum",
-    place AS "Ort",
-    bands AS "Bands",
-    days AS "Tage"
-   FROM music.v_events v
-  GROUP BY event, date, place, bands, days
- HAVING (to_date(date, 'DD.MM.YYYY'::text) = ( SELECT max(to_date(v_events.date, 'DD.MM.YYYY'::text)) AS max
-           FROM music.v_events));
 
 
 --
@@ -1026,6 +1027,8 @@ d90ac22c4f2291b68cb07746d0472dbf	Karlsruhe (AKK)
 5948b7ac21c1697473de19197df1f172	Frankfurt am Main (Elfer Club)
 de64de56f43ca599fc450a9e0dc4ff25	Mainz (Capitol)
 b5c6ef76dd3784cc976d507c890973c3	Schneckenhausen (Festhalle)
+70e3be15841015765ac6faf4000cba1b	Tilburg (Little Devil)
+5153224699fbab6022955f5aac79e68f	Bochum (RuhrCongress Bochum)
 \.
 
 
@@ -2106,6 +2109,11 @@ a3ea16d9f663f0e88a9e8b5da3becb18	Osiah	y	t	\N
 6e4b1ae43b750c6b72b52d0b7e7e7cf8	Carnal Tomb	y	t	\N
 07db432236189fe6057ed228bf54069b	Scalpture	y	t	\N
 b37f157dbf4d80c21a0df31df0363b59	Acrid Death	y	t	\N
+c1d55c7054d1b34cfbe7af0a270a7a7e	Venom Inc	y	t	\N
+190be8d96f6374f8ba7741cbb6aabb5f	Ater	y	t	\N
+eb9b39ef26ba6b330afbf8dcbdefca80	The Zenith Passage	y	t	\N
+2c00ee6d9d215941479ae88aa0959078	Neckbreakker	y	t	\N
+5336bee0f63256968523561582dafe9a	Galge	y	t	\N
 \.
 
 
@@ -3186,6 +3194,10 @@ a3ea16d9f663f0e88a9e8b5da3becb18	GBR
 6e4b1ae43b750c6b72b52d0b7e7e7cf8	DEU
 07db432236189fe6057ed228bf54069b	DEU
 b37f157dbf4d80c21a0df31df0363b59	DEU
+190be8d96f6374f8ba7741cbb6aabb5f	CHL
+eb9b39ef26ba6b330afbf8dcbdefca80	USA
+2c00ee6d9d215941479ae88aa0959078	DNK
+5336bee0f63256968523561582dafe9a	DNK
 \.
 
 
@@ -4780,6 +4792,19 @@ a3ea16d9f663f0e88a9e8b5da3becb18	872789acfd93b013e7120139be311a9b
 6e4b1ae43b750c6b72b52d0b7e7e7cf8	39e647252a3660f128e1db434425a6b5
 07db432236189fe6057ed228bf54069b	39e647252a3660f128e1db434425a6b5
 b37f157dbf4d80c21a0df31df0363b59	39e647252a3660f128e1db434425a6b5
+c1d55c7054d1b34cfbe7af0a270a7a7e	6fdd99079a021b528ade2eeb7bccf557
+8aeadeeff3e1a3e1c8a6a69d9312c530	6fdd99079a021b528ade2eeb7bccf557
+0e609404e53b251f786b41b7be93cc19	6fdd99079a021b528ade2eeb7bccf557
+190be8d96f6374f8ba7741cbb6aabb5f	6fdd99079a021b528ade2eeb7bccf557
+dfb7069bfc6e0064a6c667626eca07b4	ba4f16ee383be93dc3910799dddf825f
+8b3f40e0243e2307a1818d3f456df153	ba4f16ee383be93dc3910799dddf825f
+f44f1e343975f5157f3faf9184bc7ade	ba4f16ee383be93dc3910799dddf825f
+eb9b39ef26ba6b330afbf8dcbdefca80	ba4f16ee383be93dc3910799dddf825f
+2c00ee6d9d215941479ae88aa0959078	14fe51ec33ca22dc325984acbdbf993b
+5336bee0f63256968523561582dafe9a	14fe51ec33ca22dc325984acbdbf993b
+2db1850a4fe292bd2706ffd78dbe44b9	d500fda7a1f356d4e44f27a37a95aab0
+7a78e9ce32da3202ac0ca91ec4247086	d500fda7a1f356d4e44f27a37a95aab0
+69a6a78ace079846a8f0d3f89beada2c	d500fda7a1f356d4e44f27a37a95aab0
 \.
 
 
@@ -6519,6 +6544,14 @@ a3ea16d9f663f0e88a9e8b5da3becb18	70accb11df7fea2ee734e5849044f3c8
 6e4b1ae43b750c6b72b52d0b7e7e7cf8	3593526a5f465ed766bafb4fb45748a2
 07db432236189fe6057ed228bf54069b	3593526a5f465ed766bafb4fb45748a2
 b37f157dbf4d80c21a0df31df0363b59	3593526a5f465ed766bafb4fb45748a2
+c1d55c7054d1b34cfbe7af0a270a7a7e	d725d2ec3a5cfa9f6384d9870df72400
+190be8d96f6374f8ba7741cbb6aabb5f	d724f45ecf63d17dcd6d076a1c1a6902
+190be8d96f6374f8ba7741cbb6aabb5f	3593526a5f465ed766bafb4fb45748a2
+190be8d96f6374f8ba7741cbb6aabb5f	2db87892408abd4d82eb39b78c50c27b
+eb9b39ef26ba6b330afbf8dcbdefca80	0c5544f60e058b8cbf571044aaa6115f
+2c00ee6d9d215941479ae88aa0959078	3593526a5f465ed766bafb4fb45748a2
+2c00ee6d9d215941479ae88aa0959078	0a8a13bf87abe8696fbae4efe2b7f874
+5336bee0f63256968523561582dafe9a	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -6812,6 +6845,10 @@ a8a45074ca24548875765e3388541cb5	The Unholy Trinity Tour 2025	2025-04-16	5886713
 0d833b14e1535c06601ef6a143deec65	Pälzer Hell Version 6.66	2025-04-12	b5c6ef76dd3784cc976d507c890973c3	0	40.0	2	\N
 872789acfd93b013e7120139be311a9b	Circle Pitournium Tour 2025	2025-04-21	f3a90318abb3e16166d96055fd6f9096	0	28.50	2	\N
 39e647252a3660f128e1db434425a6b5	Landkrieg Tour 2025	2025-04-19	0280c9c3b98763f5a8d2ce7e97ce1b05	0	19.47	2	\N
+6fdd99079a021b528ade2eeb7bccf557	Beyond the Black Tour 2025	2025-04-23	f3a90318abb3e16166d96055fd6f9096	0	38.40	2	\N
+ba4f16ee383be93dc3910799dddf825f	Slashing Europe Tour 2025	2025-04-24	67bac16ced3de0e99516cf21505718a1	0	28.3	2	\N
+14fe51ec33ca22dc325984acbdbf993b	Within the Viscera - Tour 2025	2025-04-25	70e3be15841015765ac6faf4000cba1b	0	20.3	2	\N
+d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-26	5153224699fbab6022955f5aac79e68f	0	28.0	2	\N
 \.
 
 
@@ -7044,6 +7081,7 @@ b81acdb05aef5596bb72fe68d03cfaa2	Psychadelic Rock
 283a2e526241b2c01f4928afda6a2e0a	Melodic Deathcore
 102289ea390e6d00463584fe50b1d87b	Progressive Melodic Death Metal
 b3412a542c856d851d554e29aa16d4b6	Thras Metal
+d724f45ecf63d17dcd6d076a1c1a6902	Extrem Metal
 \.
 
 

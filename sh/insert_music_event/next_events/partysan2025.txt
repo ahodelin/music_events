@@ -52,3 +52,7 @@ B;Bloodbath
 B;Macbeth
 B;Scalpture;DEU;Death Metal
 B;Outlaw;001;Black Metal
+B;Ass Cobra;DEU;Tribute to Turbo Negro
+B;Harakiri for the Sky
+B;Heretic Warfare;DEU;Death Metal|Thrash Metal
+B;White Ward;UKR;Experimental Metal|Post-Black Metal

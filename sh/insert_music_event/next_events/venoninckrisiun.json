@@ -1,0 +1,39 @@
+{
+  "event": {
+    "name": "Beyond the Black Tour 2025", 
+    "date": "2025-04-23",
+    "placeName": "Weinheim (Café Central)",
+    "persons": 2,
+    "price": 38.40,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Venom Inc",
+      "isNew": true,
+      "likes": "m",
+      "active": true,
+      "countryIds": ["GBR"],
+      "genres": ["Heavy Metal"],
+      "note": null
+    },
+    {
+      "name": "Krisiun",
+      "isNew": false
+    },
+    {
+      "name": "Hate",
+      "isNew": false
+    },
+    {
+      "name": "Ater", 
+      "isNew": true,
+      "likes": "y",                 
+      "active": true,
+      "countryIds": ["CHL"],
+      "genres": ["Extrem Metal", "Death Metal"], 
+      "note": null
+    }
+  ]
+}
