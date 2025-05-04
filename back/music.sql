@@ -32,6 +32,97 @@ CREATE SCHEMA music;
 
 
 --
+-- Name: fn_get_or_insert_place(character varying); Type: FUNCTION; Schema: geo; Owner: -
+--
+
+CREATE FUNCTION geo.fn_get_or_insert_place(p_place_name character varying) RETURNS character varying
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_id_place VARCHAR;
+    v_clean_name VARCHAR := p_place_name; -- Usar el nombre original para la columna 'place'
+BEGIN
+    v_id_place := music.fn_generate_md5_id(p_place_name);
+
+    INSERT INTO geo.places (id_place, place)
+    VALUES (v_id_place, v_clean_name)
+    ON CONFLICT (id_place) DO NOTHING;
+
+    RETURN v_id_place;
+END;
+$$;
+
+
+--
+-- Name: fn_generate_md5_id(text); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.fn_generate_md5_id(input_text text) RETURNS character varying
+    LANGUAGE plpgsql IMMUTABLE
+    AS $$
+DECLARE
+    cleaned_text TEXT;
+BEGIN
+    cleaned_text := regexp_replace(lower(input_text), '\W|\s', '', 'g');
+    RETURN md5(cleaned_text);
+END;
+$$;
+
+
+--
+-- Name: fn_get_or_insert_band(character varying, character varying, boolean, character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.fn_get_or_insert_band(p_band_name character varying, p_likes character varying, p_active boolean, p_note character varying) RETURNS character varying
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_id_band VARCHAR;
+    -- Usar la nota para generar el ID si se proporciona, para diferenciar bandas homónimas
+    v_name_for_hash VARCHAR := p_band_name || COALESCE('_' || p_note, '');
+BEGIN
+    v_id_band := music.fn_generate_md5_id(v_name_for_hash);
+
+    INSERT INTO music.bands (id_band, band, likes, active, note)
+    VALUES (v_id_band, p_band_name, p_likes, p_active, p_note)
+    ON CONFLICT (id_band) DO UPDATE
+    SET -- Decide qué hacer en caso de conflicto. ¿Actualizar? ¿Ignorar?
+        -- Por ejemplo, podríamos querer actualizar 'likes', 'active', 'note' si la banda ya existe.
+        likes = EXCLUDED.likes,
+        active = EXCLUDED.active,
+        note = EXCLUDED.note;
+        -- O simplemente DO NOTHING si no se deben modificar bandas existentes a través de este proceso.
+        -- ON CONFLICT (id_band) DO NOTHING;
+
+
+    RETURN v_id_band;
+END;
+$$;
+
+
+--
+-- Name: fn_get_or_insert_genre(character varying); Type: FUNCTION; Schema: music; Owner: -
+--
+
+CREATE FUNCTION music.fn_get_or_insert_genre(p_genre_name character varying) RETURNS character varying
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_id_genre VARCHAR;
+    v_clean_name VARCHAR := p_genre_name;
+BEGIN
+    v_id_genre := music.fn_generate_md5_id(p_genre_name);
+
+    INSERT INTO music.genres (id_genre, genre)
+    VALUES (v_id_genre, v_clean_name)
+    ON CONFLICT (id_genre) DO NOTHING;
+
+    RETURN v_id_genre;
+END;
+$$;
+
+
+--
 -- Name: insert_bands_on_countries(character varying, character varying); Type: FUNCTION; Schema: music; Owner: -
 --
 
@@ -209,6 +300,160 @@ begin
   else return 'Event alredy exist';
     
   end if;end;
+$$;
+
+
+--
+-- Name: sp_insert_event_data(jsonb); Type: PROCEDURE; Schema: music; Owner: -
+--
+
+CREATE PROCEDURE music.sp_insert_event_data(IN event_data jsonb)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_event_name VARCHAR;
+    v_event_date DATE;
+    v_place_name VARCHAR;
+    v_persons INT;
+    v_price DECIMAL;
+    v_duration INT;
+    v_event_note VARCHAR;
+    v_id_place VARCHAR;
+    v_id_event VARCHAR;
+    v_event_name_for_hash VARCHAR;
+
+    band_record JSONB;
+    v_band_name VARCHAR;
+    v_is_new BOOLEAN;
+    v_likes VARCHAR;
+    v_active BOOLEAN;
+    v_band_note VARCHAR;
+    v_id_band VARCHAR;
+
+    country_id_text TEXT;
+    v_id_country VARCHAR;
+
+    genre_name_text TEXT;
+    v_id_genre VARCHAR;
+
+BEGIN
+    -- Extraer datos del evento del JSON
+    v_event_name := event_data->'event'->>'name';
+    v_event_date := (event_data->'event'->>'date')::DATE;
+    v_place_name := event_data->'event'->>'placeName';
+    v_persons    := (event_data->'event'->>'persons')::INT;
+    v_price      := (event_data->'event'->>'price')::DECIMAL;
+    v_duration   := (event_data->'event'->>'duration')::INT;
+    v_event_note := event_data->'event'->>'note';
+
+    -- Validar datos básicos (ejemplo simple)
+    IF v_event_name IS NULL OR v_event_date IS NULL OR v_place_name IS NULL THEN
+        RAISE EXCEPTION 'Datos del evento incompletos: nombre, fecha y lugar son requeridos.';
+    END IF;
+
+    -- 1. Obtener o insertar el lugar y obtener su ID
+    v_id_place := geo.fn_get_or_insert_place(v_place_name);
+
+    -- 2. Generar ID del evento e insertar el evento
+    v_event_name_for_hash := v_event_name; -- Asumimos que el nombre del evento es suficiente para el hash
+    v_id_event := music.fn_generate_md5_id(v_event_name_for_hash);
+
+    INSERT INTO music.events (id_event, event, date_event, id_place, duration, price, persons, note)
+    VALUES (v_id_event, v_event_name, v_event_date, v_id_place, v_duration, v_price, v_persons, v_event_note)
+    ON CONFLICT (id_event) DO NOTHING; -- O manejar el conflicto si un evento con ese ID ya existe
+
+    -- Si el ON CONFLICT hizo que no se insertara, podríamos querer detenernos o continuar
+    -- Se puede verificar con GET DIAGNOSTICS row_count = ROW_COUNT; if row_count = 0 then ...
+
+    -- 3. Procesar las bandas
+    FOR band_record IN SELECT * FROM jsonb_array_elements(event_data->'bands')
+    LOOP
+        v_band_name := band_record->>'name';
+        v_is_new    := (band_record->>'isNew')::BOOLEAN;
+        v_id_band   := NULL; -- Resetear para cada banda
+
+        IF v_band_name IS NULL THEN
+            RAISE WARNING 'Registro de banda sin nombre ignorado en el evento %', v_event_name;
+            CONTINUE;
+        END IF;
+
+        -- Definir el nombre a usar para el hash (considerando la nota si existe)
+        v_band_note := band_record->>'note'; -- Puede ser NULL
+        DECLARE
+           v_name_for_hash VARCHAR := v_band_name || COALESCE('_' || v_band_note, '');
+        BEGIN
+           v_id_band := music.fn_generate_md5_id(v_name_for_hash);
+        END;
+
+
+        -- Si la banda es nueva, insertarla (o actualizarla)
+        IF v_is_new THEN
+            v_likes     := band_record->>'likes';
+            v_active    := (band_record->>'active')::BOOLEAN;
+            -- v_band_note ya está asignada
+
+            IF v_likes IS NULL OR v_active IS NULL THEN
+                 RAISE WARNING 'Datos incompletos para la nueva banda "%". Se usarán valores por defecto o se ignorará.', v_band_name;
+                 -- Podrías poner valores por defecto aquí o lanzar un error más fuerte
+                 v_likes := COALESCE(v_likes, 'm'); -- Default a neutral
+                 v_active := COALESCE(v_active, true); -- Default a activa
+            END IF;
+
+            -- Insertar o actualizar banda (la función maneja la lógica ON CONFLICT)
+            PERFORM music.fn_get_or_insert_band(v_band_name, v_likes, v_active, v_band_note);
+
+            -- Insertar Géneros asociados a la nueva banda
+            IF jsonb_typeof(band_record->'genres') = 'array' THEN
+                FOR genre_name_text IN SELECT * FROM jsonb_array_elements_text(band_record->'genres')
+                LOOP
+                    v_id_genre := music.fn_get_or_insert_genre(genre_name_text);
+                    -- Vincular banda y género
+                    INSERT INTO music.bands_genres (id_band, id_genre)
+                    VALUES (v_id_band, v_id_genre)
+                    ON CONFLICT (id_band, id_genre) DO NOTHING;
+                END LOOP;
+            END IF;
+
+             -- Insertar Países asociados a la nueva banda
+            IF jsonb_typeof(band_record->'countryIds') = 'array' THEN
+                FOR country_id_text IN SELECT * FROM jsonb_array_elements_text(band_record->'countryIds')
+                LOOP
+                    v_id_country := country_id_text; -- Asume que el ID proporcionado es válido
+
+                    -- Opcional: Verificar si el país existe antes de insertar el vínculo
+                    -- PERFORM 1 FROM geo.countries WHERE id_country = v_id_country;
+                    -- IF NOT FOUND THEN
+                    --     RAISE WARNING 'El país con ID % para la banda % no existe en geo.countries. El vínculo no se creará.', v_id_country, v_band_name;
+                    --     CONTINUE;
+                    -- END IF;
+
+                    -- Vincular banda y país
+                    INSERT INTO music.bands_countries (id_band, id_country)
+                    VALUES (v_id_band, v_id_country)
+                    ON CONFLICT (id_band, id_country) DO NOTHING;
+                END LOOP;
+            END IF;
+
+        -- ELSE -- La banda no es nueva, solo necesitamos su ID (ya calculado arriba)
+           -- No es necesario hacer nada más aquí para la banda en sí, ya que asumimos que existe
+           -- y ya calculamos su ID basado en nombre y posible nota.
+           -- Si fn_get_or_insert_band usara ON CONFLICT DO NOTHING, necesitaríamos un SELECT aquí
+           -- para asegurar que v_id_band tiene el valor correcto si la banda ya existía.
+           -- Pero como fn_get_or_insert_band devuelve el ID (existente o nuevo), ya lo tenemos.
+        END IF;
+
+        -- 4. Vincular Banda y Evento (independientemente de si era nueva o no)
+        IF v_id_band IS NOT NULL AND v_id_event IS NOT NULL THEN
+             INSERT INTO music.bands_events (id_band, id_event)
+             VALUES (v_id_band, v_id_event)
+             ON CONFLICT (id_band, id_event) DO NOTHING;
+        ELSE
+             RAISE WARNING 'No se pudo vincular la banda "%" al evento "%" por falta de IDs.', v_band_name, v_event_name;
+        END IF;
+
+    END LOOP; -- Fin del loop de bandas
+
+END;
 $$;
 
 
@@ -1029,6 +1274,7 @@ de64de56f43ca599fc450a9e0dc4ff25	Mainz (Capitol)
 b5c6ef76dd3784cc976d507c890973c3	Schneckenhausen (Festhalle)
 70e3be15841015765ac6faf4000cba1b	Tilburg (Little Devil)
 5153224699fbab6022955f5aac79e68f	Bochum (RuhrCongress Bochum)
+ab474bb83a3eb3ffa50e42d4a83127e0	Wiesbaden (Kulturpalast Wiesbaden)
 \.
 
 
@@ -2109,11 +2355,16 @@ a3ea16d9f663f0e88a9e8b5da3becb18	Osiah	y	t	\N
 6e4b1ae43b750c6b72b52d0b7e7e7cf8	Carnal Tomb	y	t	\N
 07db432236189fe6057ed228bf54069b	Scalpture	y	t	\N
 b37f157dbf4d80c21a0df31df0363b59	Acrid Death	y	t	\N
-c1d55c7054d1b34cfbe7af0a270a7a7e	Venom Inc	y	t	\N
 190be8d96f6374f8ba7741cbb6aabb5f	Ater	y	t	\N
 eb9b39ef26ba6b330afbf8dcbdefca80	The Zenith Passage	y	t	\N
 2c00ee6d9d215941479ae88aa0959078	Neckbreakker	y	t	\N
 5336bee0f63256968523561582dafe9a	Galge	y	t	\N
+c1d55c7054d1b34cfbe7af0a270a7a7e	Venom Inc	m	t	\N
+47503b8b6981de92072df0b2d268d989	Fall of Serenity	y	t	\N
+c003d8f984043c0ebcf639c313bc64cd	Messticator	y	t	\N
+d6fa1cbba3b41d789ab0bc67bb924c42	Third Wave	m	t	\N
+61edfff4f85f27db59faa5ece9982feb	Joyride	m	t	\N
+5515cbc2b012e448be74482074453087	Blutsäge des Todes	y	t	\N
 \.
 
 
@@ -3198,6 +3449,11 @@ b37f157dbf4d80c21a0df31df0363b59	DEU
 eb9b39ef26ba6b330afbf8dcbdefca80	USA
 2c00ee6d9d215941479ae88aa0959078	DNK
 5336bee0f63256968523561582dafe9a	DNK
+47503b8b6981de92072df0b2d268d989	DEU
+c003d8f984043c0ebcf639c313bc64cd	DEU
+d6fa1cbba3b41d789ab0bc67bb924c42	DEU
+61edfff4f85f27db59faa5ece9982feb	DEU
+5515cbc2b012e448be74482074453087	DEU
 \.
 
 
@@ -4805,6 +5061,15 @@ eb9b39ef26ba6b330afbf8dcbdefca80	ba4f16ee383be93dc3910799dddf825f
 2db1850a4fe292bd2706ffd78dbe44b9	d500fda7a1f356d4e44f27a37a95aab0
 7a78e9ce32da3202ac0ca91ec4247086	d500fda7a1f356d4e44f27a37a95aab0
 69a6a78ace079846a8f0d3f89beada2c	d500fda7a1f356d4e44f27a37a95aab0
+47503b8b6981de92072df0b2d268d989	45741da54cd02bf8b9c209acbf2ff2ae
+53a5da370321dac39033a5fe6af13e77	45741da54cd02bf8b9c209acbf2ff2ae
+db572afa3dcc982995b5528acb350299	45741da54cd02bf8b9c209acbf2ff2ae
+c003d8f984043c0ebcf639c313bc64cd	45741da54cd02bf8b9c209acbf2ff2ae
+d6fa1cbba3b41d789ab0bc67bb924c42	856a9c4ee67dd6bc538f83f783d19997
+ee36fdf153967a0b99d3340aadeb4720	856a9c4ee67dd6bc538f83f783d19997
+61edfff4f85f27db59faa5ece9982feb	856a9c4ee67dd6bc538f83f783d19997
+5515cbc2b012e448be74482074453087	9be905c75a23a8d26b4bd718fc72511a
+087c643d95880c5a89fc13f3246bebae	9be905c75a23a8d26b4bd718fc72511a
 \.
 
 
@@ -6552,6 +6817,13 @@ eb9b39ef26ba6b330afbf8dcbdefca80	0c5544f60e058b8cbf571044aaa6115f
 2c00ee6d9d215941479ae88aa0959078	3593526a5f465ed766bafb4fb45748a2
 2c00ee6d9d215941479ae88aa0959078	0a8a13bf87abe8696fbae4efe2b7f874
 5336bee0f63256968523561582dafe9a	3593526a5f465ed766bafb4fb45748a2
+47503b8b6981de92072df0b2d268d989	b54875674f7d2d5be9737b0d4c021a21
+c003d8f984043c0ebcf639c313bc64cd	9e7315413ae31a070ccae5c580dd1b19
+c003d8f984043c0ebcf639c313bc64cd	3593526a5f465ed766bafb4fb45748a2
+d6fa1cbba3b41d789ab0bc67bb924c42	d30be26d66f0448359f54d923aab2bb9
+61edfff4f85f27db59faa5ece9982feb	d30be26d66f0448359f54d923aab2bb9
+5515cbc2b012e448be74482074453087	3593526a5f465ed766bafb4fb45748a2
+5515cbc2b012e448be74482074453087	d25334037d936d3257f794a10bb3030f
 \.
 
 
@@ -6849,6 +7121,9 @@ a8a45074ca24548875765e3388541cb5	The Unholy Trinity Tour 2025	2025-04-16	5886713
 ba4f16ee383be93dc3910799dddf825f	Slashing Europe Tour 2025	2025-04-24	67bac16ced3de0e99516cf21505718a1	0	28.3	2	\N
 14fe51ec33ca22dc325984acbdbf993b	Within the Viscera - Tour 2025	2025-04-25	70e3be15841015765ac6faf4000cba1b	0	20.3	2	\N
 d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-26	5153224699fbab6022955f5aac79e68f	0	28.0	2	\N
+45741da54cd02bf8b9c209acbf2ff2ae	Veins of Fire Tour 2025	2025-05-01	588671317bf1864e5a95445ec51aac65	0	29.35	2	\N
+856a9c4ee67dd6bc538f83f783d19997	Hymns for a Downfall	2025-05-02	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N
+9be905c75a23a8d26b4bd718fc72511a	Blutsäge des Todes und Witchkrieg	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N
 \.
 
 

@@ -1,0 +1,30 @@
+{
+  "event": {
+    "name": "Morbide Klänge V", 
+    "date": "2025-05-10",
+    "placeName": "Mainz (M8 im Haus der Jugend)",
+    "persons": 2,
+    "price": 20.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Dipygus",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Keitzer",
+      "isNew": false
+    },
+    {
+      "name": "Putridarium",
+      "isNew": false
+    }
+  ]
+}

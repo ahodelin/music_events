@@ -21,3 +21,4 @@ select * from geo.countries c where country = 'Test Country';
 select * from music.bands b where band = 'Test Band';
 select * from music.generes g where genere = 'Test Genre';
 select * from music.events e where "event" = 'Test Event';
+
