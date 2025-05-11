@@ -196,7 +196,7 @@ BEGIN
             IF jsonb_typeof(band_record->'countryIds') = 'array' THEN
                 FOR country_id_text IN SELECT * FROM jsonb_array_elements_text(band_record->'countryIds')
                 LOOP
-                    v_id_country := country_id_text; -- Asume que el ID proporcionado es válido
+                    v_id_country := UPPER(country_id_text); -- Asume que el ID proporcionado es válido
 
                     -- Opcional: Verificar si el país existe antes de insertar el vínculo
                     -- PERFORM 1 FROM geo.countries WHERE id_country = v_id_country;

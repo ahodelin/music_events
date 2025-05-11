@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.4 (Ubuntu 17.4-1.pgdg24.04+2)
--- Dumped by pg_dump version 17.4 (Ubuntu 17.4-1.pgdg24.04+2)
+-- Dumped from database version 17.5 (Ubuntu 17.5-1.pgdg24.04+1)
+-- Dumped by pg_dump version 17.5 (Ubuntu 17.5-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -418,7 +418,7 @@ BEGIN
             IF jsonb_typeof(band_record->'countryIds') = 'array' THEN
                 FOR country_id_text IN SELECT * FROM jsonb_array_elements_text(band_record->'countryIds')
                 LOOP
-                    v_id_country := country_id_text; -- Asume que el ID proporcionado es válido
+                    v_id_country := UPPER(country_id_text); -- Asume que el ID proporcionado es válido
 
                     -- Opcional: Verificar si el país existe antes de insertar el vínculo
                     -- PERFORM 1 FROM geo.countries WHERE id_country = v_id_country;
@@ -2365,6 +2365,7 @@ c003d8f984043c0ebcf639c313bc64cd	Messticator	y	t	\N
 d6fa1cbba3b41d789ab0bc67bb924c42	Third Wave	m	t	\N
 61edfff4f85f27db59faa5ece9982feb	Joyride	m	t	\N
 5515cbc2b012e448be74482074453087	Blutsäge des Todes	y	t	\N
+98a6b9a14569929690029b15d16080ba	Dipygus	y	t	\N
 \.
 
 
@@ -3454,6 +3455,7 @@ c003d8f984043c0ebcf639c313bc64cd	DEU
 d6fa1cbba3b41d789ab0bc67bb924c42	DEU
 61edfff4f85f27db59faa5ece9982feb	DEU
 5515cbc2b012e448be74482074453087	DEU
+98a6b9a14569929690029b15d16080ba	USA
 \.
 
 
@@ -5070,6 +5072,9 @@ ee36fdf153967a0b99d3340aadeb4720	856a9c4ee67dd6bc538f83f783d19997
 61edfff4f85f27db59faa5ece9982feb	856a9c4ee67dd6bc538f83f783d19997
 5515cbc2b012e448be74482074453087	9be905c75a23a8d26b4bd718fc72511a
 087c643d95880c5a89fc13f3246bebae	9be905c75a23a8d26b4bd718fc72511a
+98a6b9a14569929690029b15d16080ba	965b7e5dbed14563dd9ffce3a3e76dcb
+191bab5800bd381ecf16485f91e85bc3	965b7e5dbed14563dd9ffce3a3e76dcb
+89d60b9528242c8c53ecbfde131eba21	965b7e5dbed14563dd9ffce3a3e76dcb
 \.
 
 
@@ -6824,6 +6829,7 @@ d6fa1cbba3b41d789ab0bc67bb924c42	d30be26d66f0448359f54d923aab2bb9
 61edfff4f85f27db59faa5ece9982feb	d30be26d66f0448359f54d923aab2bb9
 5515cbc2b012e448be74482074453087	3593526a5f465ed766bafb4fb45748a2
 5515cbc2b012e448be74482074453087	d25334037d936d3257f794a10bb3030f
+98a6b9a14569929690029b15d16080ba	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -7124,6 +7130,7 @@ d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-26
 45741da54cd02bf8b9c209acbf2ff2ae	Veins of Fire Tour 2025	2025-05-01	588671317bf1864e5a95445ec51aac65	0	29.35	2	\N
 856a9c4ee67dd6bc538f83f783d19997	Hymns for a Downfall	2025-05-02	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N
 9be905c75a23a8d26b4bd718fc72511a	Blutsäge des Todes und Witchkrieg	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N
+965b7e5dbed14563dd9ffce3a3e76dcb	Morbide Klänge V	2025-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	20.0	2	\N
 \.
 
 
