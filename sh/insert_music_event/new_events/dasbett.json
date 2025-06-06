@@ -1,0 +1,29 @@
+{
+  "event": {
+    "name": "Infernal Bloodshed over Europe 2025", 
+    "date": "2025-05-03",
+    "placeName": "Frankfurt am Main (Das Bett)",
+    "persons": 2,
+    "price": 39.75,
+    "duration": 1,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Decapitated",
+      "isNew": false
+    },
+    {
+      "name": "Carnation",
+      "isNew": false
+    },
+    {
+      "name": "Warbringer",
+      "isNew": false
+    },
+    {
+      "name": "Cryptopsy",
+      "isNew": false
+    }
+  ]
+}
