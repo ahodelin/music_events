@@ -1,0 +1,88 @@
+{
+  "event": {
+    "name": "Damned Days 2025", 
+    "date": "2025-07-10",
+    "placeName": "Barleben",
+    "persons": 2,
+    "price": 0.0,
+    "duration": 2,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Cockrock Sadistic Petus Pennytration",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "In This Hell",
+      "isNew": true,
+      "likes": "n",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Industrial Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Odium",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Thrash Metal", "Power Metal"],
+      "note": null
+    },
+    {
+      "name": "Fatal Embrace",
+      "isNew": true,
+      "likes": "m",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Thrash Metal"],
+      "note": null
+    },
+    {
+      "name": "IADUL",
+      "isNew": true,
+      "likes": "m",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal", "Grindcore"],
+      "note": null
+    },
+    {
+      "name": "Trial of Death",
+      "isNew": true,
+      "likes": "m",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Disminded",
+      "isNew": true,
+      "likes": "n",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Thrash Metal", "Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Denomination",
+      "isNew": false
+    },
+    {
+      "name": "Rats of Gomorrah",
+      "isNew": false
+    },
+    {
+      "name": "Rise of Kronos",
+      "isNew": false
+    }
+  ]
+}
