@@ -1,0 +1,91 @@
+{
+  "event": {
+    "name": "Green Hell Festival 2025", 
+    "date": "2025-07-04",
+    "placeName": "Lindenberg",
+    "persons": 2,
+    "price": 42.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Miles2Fall",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Modern Metal"],
+      "note": null
+    },
+    {
+      "name": "Trial of Death",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Ground2A",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Hardcore Punk"],
+      "note": null
+    },
+    {
+      "name": "Suicide of Society",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Thrash Metal"],
+      "note": null
+    },
+    {
+      "name": "Killersick",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["HUN"],
+      "genres": ["Thras Metal"],
+      "note": null
+    },
+    {
+      "name": "Trial of Death",
+      "isNew": true,
+      "likes": "m",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "As the Sun falls",
+      "isNew": false
+    },
+    {
+      "name": "Krisiun",
+      "isNew": false
+    },
+    {
+      "name": "Dust Bolt",
+      "isNew": false
+    },
+    {
+      "name": "Steelpreacher",
+      "isNew": false
+    },
+    {
+      "name": "Milking the Goatmachine",
+      "isNew": false
+    },
+    {
+      "name": "Neckbreakker",
+      "isNew": false
+    }
+  ]
+}
