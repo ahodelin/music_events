@@ -1,0 +1,127 @@
+{
+  "event": {
+    "name": "", 
+    "date": "",
+    "placeName": "",
+    "persons": 2,
+    "price": ,
+    "duration": ,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "",
+      "isNew": false
+    },
+    {
+      "name": "",
+      "isNew": false
+    },
+    {
+      "name": "",
+      "isNew": false
+    },
+    {
+      "name": "",
+      "isNew": false
+    },
+    {
+      "name": "",
+      "isNew": false
+    },
+    {
+      "name": "",
+      "isNew": false
+    }
+  ]
+}

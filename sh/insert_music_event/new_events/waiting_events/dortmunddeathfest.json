@@ -1,0 +1,163 @@
+{
+  "event": {
+    "name": "Dortmund Deathfest 2025", 
+    "date": "2025-08-01",
+    "placeName": "Dortmund (JunkYard)",
+    "persons": 2,
+    "price": 108.90,
+    "duration": 1,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Brujeria",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Death Metal", "Groove Metal", "Grindcore"],
+      "note": null
+    },
+    {
+      "name": "Macabre",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Thrash Metal", "Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Undeath",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Malevolent Creation",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Defeated Sanity",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["001"],
+      "genres": ["Technical Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Mammoth Grinder",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Hardcore Punk", "Sludge Metal", "Death Metal", "Hardcore"],
+      "note": null
+    },
+    {
+      "name": "Deadsquad",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["IDN"],
+      "genres": ["Technical Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Celestial Sanctuary",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["GBR"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Omnivortex",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["FIN"],
+      "genres": ["Technical Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Caedere",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["NDL"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Dying Fetus",
+      "isNew": false
+    },
+    {
+      "name": "Decapitated",
+      "isNew": false
+    },
+    {
+      "name": "Illdisposed",
+      "isNew": false
+    },
+    {
+      "name": "Deseted Fear",
+      "isNew": false
+    },
+    {
+      "name": "Fulci",
+      "isNew": false
+    },
+    {
+      "name": "Extermination Dismemberment",
+      "isNew": false
+    },
+    {
+      "name": "Severe Torture",
+      "isNew": false
+    },
+    {
+      "name": "Acranius",
+      "isNew": false
+    },
+    {
+      "name": "Maceration",
+      "isNew": false
+    },
+    {
+      "name": "Cognitive",
+      "isNew": false
+    },
+    {
+      "name": "Gutslit",
+      "isNew": false
+    },
+    {
+      "name": "Teething",
+      "isNew": false
+    },
+    {
+      "name": "Warside",
+      "isNew": false
+    },
+    {
+      "name": "Begging for Incest",
+      "isNew": false
+    },
+    {
+      "name": "Plageborne",
+      "isNew": false
+    }
+  ]
+}
