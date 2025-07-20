@@ -39,7 +39,7 @@
     {
       "name": "Heimdalls Wacht",
       "isNew": true,
-      "likes": "y",
+      "likes": "m",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Pagan Black Metal"],
@@ -117,7 +117,8 @@
     },
     {
       "name": "Horn",
-      "isNew": false
+      "isNew": false,
+      "likes": "m"
     },
     {
       "name": "The Spirit",
