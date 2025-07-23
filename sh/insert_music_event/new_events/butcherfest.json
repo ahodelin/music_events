@@ -1,0 +1,66 @@
+{
+  "event": {
+    "name": "Butcher Fest IX", 
+    "date": "2025-07-25",
+    "placeName": "Troisdorf (Jugendkulturcafé e.V. Troisdorf)",
+    "persons": 2,
+    "price": 13,
+    "duration": 0 ,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Boiled",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "DeadSquad",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["IDN"],
+      "genres": ["Technical Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Stuhlgäng",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Brutal Death Metal", "Goregrind"],
+      "note": null
+    },
+    {
+      "name": "Zeugen eines Niedergangs",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal", "Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Grime Pack",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Stillbirth",
+      "isNew": false
+    },
+    {
+      "name": "Devine Defilement",
+      "isNew": false
+    }
+  ]
+}
