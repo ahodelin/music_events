@@ -1,0 +1,35 @@
+{
+  "event": {
+    "name": "Steel Rust and Disgust - European Tour 2025",
+    "date": "2025-07-27",
+    "placeName": "Weinheim (Café Central)",
+    "persons": 2,
+    "price": 32.30,
+    "duration": 0 ,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Yoth Iria",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["GRC"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Sarcator",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Blackened Thrash Metal"],
+      "note": null
+    },
+    {
+      "name": "Midnight",
+      "isNew": false
+    }
+  ]
+}
