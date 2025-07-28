@@ -712,7 +712,7 @@ CREATE VIEW music.v_bands_to_tex AS
             WHEN ((band)::text ~* 'ð'::text) THEN (regexp_replace((band)::text, 'ð'::text, '\\dh '::text))::character varying
             ELSE band
         END AS "Gruppe",
-    ((' & \includegraphics[width=1cm]{../4x3/'::text || (flag)::text) || '} & '::text) AS "Land",
+    ((' & \includegraphics[width=1cm]{../img/flags/'::text || (flag)::text) || '} & '::text) AS "Land",
     ((('\includegraphics[width=1cm]{'::text || '../likes/'::text) || (likes)::text) || '} \\ \hline'::text) AS "Farbe"
    FROM music.v_bands vb;
 
@@ -1317,7 +1317,6 @@ a7eda23a9421a074fe5ec966810018d7	Revel in Flesh	y	f	\N
 ad7de486b34143f00a56127a95787e78	Jungle Rot	y	t	\N
 8cb8e8679062b574afcb78a983b75a9f	Mezzrow	y	t	\N
 6caa2c6d69ebdc30a3c4580979c3e630	Verwoed	y	t	\N
-16ff0968c682d98cb29b42c793066f29	Sarcator	y	t	\N
 d2556a1452bc878401a6cde5cb89264d	Bastard Grave	y	t	\N
 efb83e3ae12d8d95a5d01b6d762baa98	Enthroned	y	t	\N
 bccaee4d143d381c8c617dd98b9ee463	Necrot	y	t	\N
@@ -1388,6 +1387,7 @@ c61b8639de558fcc2ee0b1d11e120df9	This Ending	y	t	\N
 8b0cfde05d166f42a11a01814ef7fa86	Lost Society	n	t	\N
 c0118be307a26886822e1194e8ae246d	Venom	y	t	\N
 a66394e41d764b4c5646446a8ba2028b	Moonspell	n	t	\N
+16ff0968c682d98cb29b42c793066f29	Sarcator	y	t	\N
 e9e0664816c35d64f26fc1382708617b	Striker	n	t	\N
 f29f7213d1c86c493ca7b4045e5255a9	Auðn	y	t	\N
 65f889eb579641f6e5f58b5a48f3ec12	Ill Niño	m	t	\N
@@ -2412,6 +2412,7 @@ eda6c94657b059cb43134ca43448c497	Boiled	y	t	\N
 52eb2cd819dbb066e9c747854677de42	Stuhlgäng	m	t	\N
 29d7fded0020f9daf1665c65b9034c37	Zeugen eines Niedergangs	y	t	\N
 daf3b9b921ce7b22ed08ea4e30821454	Grime Pack	y	t	\N
+1a1dfac16f1667a8cd21e4885ec3af72	Yoth Iria	y	t	\N
 \.
 
 
@@ -3542,6 +3543,7 @@ eda6c94657b059cb43134ca43448c497	DEU
 52eb2cd819dbb066e9c747854677de42	DEU
 29d7fded0020f9daf1665c65b9034c37	DEU
 daf3b9b921ce7b22ed08ea4e30821454	DEU
+1a1dfac16f1667a8cd21e4885ec3af72	GRC
 \.
 
 
@@ -5252,6 +5254,9 @@ eda6c94657b059cb43134ca43448c497	e4797c9ad639098b7e8146199220807f
 daf3b9b921ce7b22ed08ea4e30821454	e4797c9ad639098b7e8146199220807f
 e039d55ed63a723001867bc4eb842c00	e4797c9ad639098b7e8146199220807f
 a7eb281bcaab3446ece1381b190d34e0	e4797c9ad639098b7e8146199220807f
+1a1dfac16f1667a8cd21e4885ec3af72	876f7642806d01481e51632141b1f89c
+16ff0968c682d98cb29b42c793066f29	876f7642806d01481e51632141b1f89c
+1506aeeb8c3a699b1e3c87db03156428	876f7642806d01481e51632141b1f89c
 \.
 
 
@@ -7066,6 +7071,8 @@ eda6c94657b059cb43134ca43448c497	3593526a5f465ed766bafb4fb45748a2
 29d7fded0020f9daf1665c65b9034c37	3593526a5f465ed766bafb4fb45748a2
 29d7fded0020f9daf1665c65b9034c37	2db87892408abd4d82eb39b78c50c27b
 daf3b9b921ce7b22ed08ea4e30821454	0c5544f60e058b8cbf571044aaa6115f
+1a1dfac16f1667a8cd21e4885ec3af72	2db87892408abd4d82eb39b78c50c27b
+16ff0968c682d98cb29b42c793066f29	0a96c0f13cf38b7e26172c335ce7933c
 \.
 
 
@@ -7375,6 +7382,7 @@ ba90695c1c818d06413d702123cebc70	Infernal Bloodshed over Europe 2025	2025-06-03	
 4d8ee2ccf5245c3a3c2de724849e0687	Damned Days 2025	2025-07-11	05be609ce9831967baa4f12664dc4d73	1	0.0	2	\N
 6913ee1b0bbb41d6779f02caabda5021	Boarstream Open Air 2025	2025-07-18	cf1c12d42f59db3667fc162556aab169	1	75.0	2	\N
 e4797c9ad639098b7e8146199220807f	Butcher Fest IX	2025-07-25	bb70894bd8b00178cf29116a060ea1ca	0	13.0	2	\N
+876f7642806d01481e51632141b1f89c	Steel Rust and Disgust - European Tour 2025	2025-07-27	f3a90318abb3e16166d96055fd6f9096	0	32.30	2	\N
 \.
 
 

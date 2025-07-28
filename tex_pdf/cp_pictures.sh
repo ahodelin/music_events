@@ -1,2 +1,2 @@
-cp -r ../4x3 .
+cp -r ../img/flags .
 cp -r ../likes .
