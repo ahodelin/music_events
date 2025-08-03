@@ -29,12 +29,7 @@
     },
     {
       "name": "Brujeria",
-      "isNew": true,
-      "likes": "y",
-      "active": true,
-      "countryIds": ["USA"],
-      "genres": ["Death Metal", "Groove Metal", "Grindcore"],
-      "note": null
+      "isNew": false
     },
     {
       "name": "Hyperdontia",

@@ -12,7 +12,7 @@
     {
       "name": "Brujeria",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Death Metal", "Groove Metal", "Grindcore"],
@@ -21,7 +21,7 @@
     {
       "name": "Macabre",
       "isNew": true,
-      "likes": "",
+      "likes": "n",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Thrash Metal", "Death Metal"],
@@ -30,7 +30,7 @@
     {
       "name": "Undeath",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Death Metal"],
@@ -39,7 +39,7 @@
     {
       "name": "Malevolent Creation",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Death Metal"],
@@ -48,7 +48,7 @@
     {
       "name": "Defeated Sanity",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["001"],
       "genres": ["Technical Brutal Death Metal"],
@@ -57,45 +57,40 @@
     {
       "name": "Mammoth Grinder",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Hardcore Punk", "Sludge Metal", "Death Metal", "Hardcore"],
       "note": null
     },
     {
-      "name": "Deadsquad",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["IDN"],
-      "genres": ["Technical Brutal Death Metal"],
-      "note": null
+      "name": "DeadSquad",
+      "isNew": false
     },
     {
       "name": "Celestial Sanctuary",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["GBR"],
       "genres": ["Death Metal"],
       "note": null
     },
     {
-      "name": "Omnivortex",
+      "name": "Embedded",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
-      "countryIds": ["FIN"],
-      "genres": ["Technical Death Metal"],
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal", "Brutal Death Metal"],
       "note": null
     },
     {
       "name": "Caedere",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
-      "countryIds": ["NDL"],
+      "countryIds": ["NLD"],
       "genres": ["Death Metal"],
       "note": null
     },
@@ -112,7 +107,7 @@
       "isNew": false
     },
     {
-      "name": "Deseted Fear",
+      "name": "Deserted Fear",
       "isNew": false
     },
     {
@@ -144,10 +139,6 @@
       "isNew": false
     },
     {
-      "name": "Teething",
-      "isNew": false
-    },
-    {
       "name": "Warside",
       "isNew": false
     },
@@ -156,7 +147,7 @@
       "isNew": false
     },
     {
-      "name": "Plageborne",
+      "name": "Plagueborne",
       "isNew": false
     }
   ]
