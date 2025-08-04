@@ -1,0 +1,21 @@
+{
+  "event": {
+    "name": "Europe/UK Summer 2025", 
+    "date": "2025-08-04",
+    "placeName": "Wiesbaden (Schlachthof)",
+    "persons": 2,
+    "price": 23.85,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Undeath",
+      "isNew": false
+    },
+    {
+      "name": "Celestial Sanctuary",
+      "isNew": false
+    }
+  ]
+}
