@@ -12,7 +12,7 @@
     {
       "name": "Rotpit",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["150"],
       "genres": ["Death Metal"],
@@ -21,7 +21,7 @@
     {
       "name": "Karg",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["AUT"],
       "genres": ["Ambient Black Metal","Post Black Metal"],
@@ -34,7 +34,7 @@
     {
       "name": "Hyperdontia",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["001"],
       "genres": ["Death Metal"],
@@ -43,7 +43,7 @@
     {
       "name": "Chaos Invocation",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Black Metal"],
@@ -52,7 +52,7 @@
     {
       "name": "Dark Angel",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Thrash Metal"],
@@ -61,7 +61,7 @@
     {
       "name": "Pig Destroyer",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Grindcore"],
@@ -70,7 +70,7 @@
     {
       "name": "Triptykon",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["CHE"],
       "genres": ["Gothic Metal", "Doom Metal", "Black Metal"],
@@ -79,7 +79,7 @@
     {
       "name": "Wayfarer",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Atmospheric Black Metal", "Folk Metal"],
@@ -88,7 +88,7 @@
     {
       "name": "Skeletal Remains",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Death Metal"],
@@ -97,7 +97,7 @@
     {
       "name": "Dödsrit",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Black Metal", "Crust"],
@@ -106,7 +106,7 @@
     {
       "name": "Imperial Triumphant",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Avant-garde Death Metal", "Thechnical Black Metal", "Death Metal"],
@@ -115,7 +115,7 @@
     {
       "name": "Friisk",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Atmospheric Black Metal"],
@@ -124,7 +124,7 @@
     {
       "name": "Blockheads",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["FRA"],
       "genres": ["Death Metal", "Grindcore"],
@@ -133,7 +133,7 @@
     {
       "name": "Nightbearer",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Death Metal"],
@@ -142,7 +142,7 @@
     {
       "name": "The Vision Bleak",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Gothic Metal"],
@@ -151,7 +151,7 @@
     {
       "name": "Dool",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["NLD"],
       "genres": ["Progressive Rock", "Doom"],
@@ -160,7 +160,7 @@
     {
       "name": "... and Oceans",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["FIN"],
       "genres": ["Symphonic Black Metal", "Industrial Metal", "Electronic Metal"],
@@ -169,7 +169,7 @@
     {
       "name": "Gorgoroth",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["NOR"],
       "genres": ["Black Metal"],
@@ -178,7 +178,7 @@
     {
       "name": "Hellbutcher",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Black Metal"],
@@ -187,7 +187,7 @@
     {
       "name": "Crypt Sermon",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Epic Doom Metal"],
@@ -196,7 +196,7 @@
     {
       "name": "Night in Gales",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Melodic Death Metal"],
@@ -205,7 +205,7 @@
     {
       "name": "Outlaw",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["001"],
       "genres": ["Black Metal"],
@@ -214,7 +214,7 @@
     {
       "name": "Ass Cobra",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Tribute to Turbo Negro"],
@@ -223,19 +223,10 @@
     {
       "name": "Heretic Warfare",
       "isNew": true,
-      "likes": "y",
+      "likes": "",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Death Metal", "Thrash Metal"],
-      "note": null
-    },
-    {
-      "name": "White Ward",
-      "isNew": true,
-      "likes": "y",
-      "active": true,
-      "countryIds": ["UKR"],
-      "genres": ["Experimental Metal", "Post-Black Metal"],
       "note": null
     },
     {
