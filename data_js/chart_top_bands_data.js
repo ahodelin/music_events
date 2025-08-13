@@ -1,1 +1,1 @@
-const musicData_ChartTopBands = [{"band": "Purify", "event_count": 14}, {"band": "Warfield", "event_count": 12}, {"band": "Deserted Fear", "event_count": 11}, {"band": "Stillbirth", "event_count": 11}, {"band": "Milking the Goatmachine", "event_count": 10}];
+const musicData_ChartTopBands = [{"band": "Purify", "event_count": 14}, {"band": "Warfield", "event_count": 12}, {"band": "Rise of Kronos", "event_count": 11}, {"band": "Deserted Fear", "event_count": 11}, {"band": "Stillbirth", "event_count": 11}];
