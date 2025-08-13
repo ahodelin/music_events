@@ -1,0 +1,21 @@
+{
+  "event": {
+    "name": "In the other Side European Summer Tour 2025", 
+    "date": "2025-08-12",
+    "placeName": "Aschaffenburg (Colos-Saal)",
+    "persons": 2,
+    "price":35.0 ,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Crypta",
+      "isNew": false
+    },
+    {
+      "name": "Rise of Kronos",
+      "isNew": false
+    }
+  ]
+}
