@@ -2,8 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.5 (Ubuntu 17.5-1.pgdg24.04+1)
--- Dumped by pg_dump version 17.5 (Ubuntu 17.5-1.pgdg24.04+1)
+\restrict eGLXqhQAljGwhq7Fe1khtxRrfod5ZSCAHWVifBQFSafqc8fd6aSjMjitOzUlrfS
+
+-- Dumped from database version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
+-- Dumped by pg_dump version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1280,6 +1282,7 @@ ab474bb83a3eb3ffa50e42d4a83127e0	Wiesbaden (Kulturpalast Wiesbaden)
 78ca2ff75416369e990d7412de969084	Lindenberg
 bb70894bd8b00178cf29116a060ea1ca	Troisdorf (Jugendkulturcafé e.V. Troisdorf)
 9be6de3bc5073483dcbbcbc1b40af4d8	Dortmund (JunkYard)
+cbe111af36bc52e4f7eca7b90b00f859	Köln (Essigfabrik)
 \.
 
 
@@ -2441,6 +2444,7 @@ e9b10b2abc5003ae5c3ac47621a1f361	Hellbutcher	y	t	\N
 a08d29684311dbf96b16ff7db7e12a50	Outlaw	y	t	\N
 ec2d24df33c5dfce85e519db98951822	Heretic Warfare	y	t	\N
 d2f975c42cd9e1b0e97a9ae8f3ab64bc	Mass Worship	y	t	\N
+2913dfc3b7c631ed3520e00729f603cb	Light of Eternity	m	t	\N
 \.
 
 
@@ -3599,6 +3603,7 @@ e9b10b2abc5003ae5c3ac47621a1f361	SWE
 a08d29684311dbf96b16ff7db7e12a50	001
 ec2d24df33c5dfce85e519db98951822	DEU
 d2f975c42cd9e1b0e97a9ae8f3ab64bc	SWE
+2913dfc3b7c631ed3520e00729f603cb	GBR
 \.
 
 
@@ -5384,6 +5389,8 @@ e6624ef1aeab84f521056a142b5b2d12	3a3eff448d9ea1da199b2f0f0f0d3ce3
 4e74055927fd771c2084c92ca2ae56a7	3a3eff448d9ea1da199b2f0f0f0d3ce3
 8b3f40e0243e2307a1818d3f456df153	077973565f39e9fab2bb87e1660b6261
 7a78e9ce32da3202ac0ca91ec4247086	077973565f39e9fab2bb87e1660b6261
+2913dfc3b7c631ed3520e00729f603cb	c9de0ba86f9340234a0d1e7fc5d2464f
+3e98ecfa6a4c765c5522f897a4a8de23	c9de0ba86f9340234a0d1e7fc5d2464f
 \.
 
 
@@ -7245,6 +7252,7 @@ ec2d24df33c5dfce85e519db98951822	3593526a5f465ed766bafb4fb45748a2
 ec2d24df33c5dfce85e519db98951822	9e7315413ae31a070ccae5c580dd1b19
 d2f975c42cd9e1b0e97a9ae8f3ab64bc	3593526a5f465ed766bafb4fb45748a2
 d2f975c42cd9e1b0e97a9ae8f3ab64bc	ecf31cb1a268dfd8be55cb3dff9ad09d
+2913dfc3b7c631ed3520e00729f603cb	582ac46d71d166a2ea996507406eb2ef
 \.
 
 
@@ -7559,6 +7567,7 @@ b416282ede3488bc54fdbbef22651a42	Dortmund Deathfest 2025	2025-08-01	9be6de3bc507
 b39fbc8a057b87e9355e3e2846a93c7a	Europe/UK Summer 2025	2025-08-04	588671317bf1864e5a95445ec51aac65	0	23.85	2	\N
 3a3eff448d9ea1da199b2f0f0f0d3ce3	Party San Open Air 2025	2025-08-07	b27e07993299ee0b2ecd26dabd77eaf8	2	149.99	2	\N
 077973565f39e9fab2bb87e1660b6261	In the other Side European Summer Tour 2025	2025-08-12	eca8fc96e027328005753be360587de2	0	35.0	2	\N
+c9de0ba86f9340234a0d1e7fc5d2464f	Europe Summer 2025	2025-08-14	cbe111af36bc52e4f7eca7b90b00f859	0	47.75	2	\N
 \.
 
 
@@ -8115,4 +8124,6 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 --
 -- PostgreSQL database dump complete
 --
+
+\unrestrict eGLXqhQAljGwhq7Fe1khtxRrfod5ZSCAHWVifBQFSafqc8fd6aSjMjitOzUlrfS
 
