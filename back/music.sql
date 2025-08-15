@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict eGLXqhQAljGwhq7Fe1khtxRrfod5ZSCAHWVifBQFSafqc8fd6aSjMjitOzUlrfS
+\restrict Yct5Q8cKETfgTgAfjd1V06sO6PDMAzIaASj8gnOv7lM5FGWzoZZjp2hOJZuKysd
 
 -- Dumped from database version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
 -- Dumped by pg_dump version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
@@ -8125,5 +8125,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict eGLXqhQAljGwhq7Fe1khtxRrfod5ZSCAHWVifBQFSafqc8fd6aSjMjitOzUlrfS
+\unrestrict Yct5Q8cKETfgTgAfjd1V06sO6PDMAzIaASj8gnOv7lM5FGWzoZZjp2hOJZuKysd
 
