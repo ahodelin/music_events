@@ -19,21 +19,12 @@
       "note": null
     },
     {
-      "name": "Okkultist",
+      "name": "Menerra",
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": ["PRT"],
-      "genres": ["Death Metal"],
-      "note": null
-    },
-    {
-      "name": "Nightrage",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["GRC"],
-      "genres": ["Melodic Death Metal"],
+      "countryIds": ["DEU"],
+      "genres": ["Melodic Death Metal", "Black Metal"],
       "note": null
     },
     {
@@ -117,6 +108,10 @@
     {
       "name": "Ereb Altor",
       "isNew": false
+    },
+    {
+     "name": "Servant",
+     "isNew": false
     }
   ]
 }
