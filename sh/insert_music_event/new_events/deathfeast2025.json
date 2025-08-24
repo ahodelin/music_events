@@ -12,7 +12,7 @@
     {
       "name": "Gorgasm",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Brutal Death Metal"],
@@ -21,7 +21,7 @@
     {
       "name": "Cephalotripsy",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Slam Death Metal", "Brutal Death Metal"],
@@ -30,7 +30,7 @@
     {
       "name": "Brodequin",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Brutal Death Metal"],
@@ -39,7 +39,7 @@
     {
       "name": "Pyrexia",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Brutal Death Metal", "Death Metal", "Groove Metal"],
@@ -48,7 +48,7 @@
     {
       "name": "Visceral Disgorge",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Brutal Death Metal"],
@@ -57,7 +57,7 @@
     {
       "name": "Relics of Humanity",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["BLR"],
       "genres": ["Brutal Death Metal"],
@@ -66,7 +66,7 @@
     {
       "name": "To the Grave",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["AUS"],
       "genres": ["Deathcore"],
@@ -75,7 +75,7 @@
     {
       "name": "Viscral",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["IDN"],
       "genres": ["Brutal Death Metal"],
@@ -84,7 +84,7 @@
     {
       "name": "9 Dead",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Brutal Death Metal", "Deathcore"],
@@ -93,7 +93,7 @@
     {
       "name": "Golem of Gore",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["ITA"],
       "genres": ["Goregrind"],
@@ -102,7 +102,7 @@
     {
       "name": "Mincing Fury and Guttural Clamour of Queer Decay",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["CZE"],
       "genres": ["Goregrind", "Brutal Death Metal"],
@@ -111,7 +111,7 @@
     {
       "name": "Putrid Offal",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["FRA"],
       "genres": ["Death Metal", "Grindcore"],
@@ -120,7 +120,7 @@
     {
       "name": "Vermicular Incubation",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["001"],
       "genres": ["Brutal Death Metal", "Slam Death Metal"],
@@ -129,7 +129,7 @@
     {
       "name": "Sucking Leech",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Grindcore"],
@@ -138,7 +138,7 @@
     {
       "name": "Spineless Fuckers",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["CZE"],
       "genres": ["Grindcore"],
@@ -147,7 +147,7 @@
     {
       "name": "Fetor",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["POL"],
       "genres": ["Brutal Death Metal"],
@@ -156,7 +156,7 @@
     {
       "name": "Vaginal Penetration of an Amelus with a Musty Carrot",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["AUT"],
       "genres": ["Goregrind", "Brutal Death Metal"],
@@ -165,7 +165,7 @@
     {
       "name": "Devour the Fetus",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["FRA"],
       "genres": ["Goregrind", "Brutal Death Metal", "Slam Death Metal"],
@@ -174,7 +174,7 @@
     {
       "name": "Storm upon the Masses",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["BEL"],
       "genres": ["Brutal Death Metal"],
@@ -183,7 +183,7 @@
      {
       "name": "Cryogenical Excision",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["FRA"],
       "genres": ["Slam Death Metal", "Brutal Death Metal"],
@@ -192,7 +192,7 @@
      {
       "name": "Solar Eruption",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["FRA"],
       "genres": ["Technical Deathcore"],
@@ -201,7 +201,7 @@
      {
       "name": "Slowly Rotten",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Brutal Death Metal", "Grindcore"],
@@ -210,14 +210,14 @@
     {
       "name": "Dekathexis",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Death Metal", "Deathcore"],
       "note": null
     },
     {
-      "name": "Public_Grave",
+      "name": "Public Grave",
       "isNew": false
     },
     {
