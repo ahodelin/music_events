@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict hyK8p4FDucbs5fD2sXCMCBId5NiYUcVQPeuX6THJ2BmFackKIsP3WDTlu1LEPB9
+\restrict bblddwQui07bobf6hY5QXLXOq2VT95oqwFkcYekactZwMxwRo8bfeJMlGJ8jKa0
 
 -- Dumped from database version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
 -- Dumped by pg_dump version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
@@ -715,7 +715,33 @@ CREATE VIEW music.v_bands_to_tex AS
             ELSE band
         END AS "Gruppe",
     ((' & \includegraphics[width=1cm]{../img/flags/'::text || (flag)::text) || '} & '::text) AS "Land",
-    ((('\includegraphics[width=1cm]{'::text || '../likes/'::text) || (likes)::text) || '} \\ \hline'::text) AS "Farbe"
+    concat('\begin{tikzpicture} \fill[',
+        CASE
+            WHEN (likes = 'y'::bpchar) THEN 'green'::text
+            WHEN (likes ~~ 'm'::text) THEN 'yellow'::text
+            ELSE 'red'::text
+        END, '] (0,0) circle (0.5cm); \end{tikzpicture} \\ \hline') AS "Farbe"
+   FROM music.v_bands vb;
+
+
+--
+-- Name: v_bands_to_tex_2; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_bands_to_tex_2 AS
+ SELECT
+        CASE
+            WHEN ((band)::text ~* '\&'::text) THEN (regexp_replace((band)::text, '\&'::text, '\\&'::text))::character varying
+            WHEN ((band)::text ~* 'ð'::text) THEN (regexp_replace((band)::text, 'ð'::text, '\\dh '::text))::character varying
+            ELSE band
+        END AS "Gruppe",
+    ((' & \includegraphics[width=1cm]{../img/flags/'::text || (flag)::text) || '} & '::text) AS "Land",
+    concat('\begin{tikzpicture} \fill[',
+        CASE
+            WHEN (likes = 'y'::bpchar) THEN 'green'::text
+            WHEN (likes ~~ 'm'::text) THEN 'yellow'::text
+            ELSE 'red'::text
+        END, '] (0,0) circle (0.5cm); \end{tikzpicture} \\ \hline') AS "Farbe"
    FROM music.v_bands vb;
 
 
@@ -8235,5 +8261,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict hyK8p4FDucbs5fD2sXCMCBId5NiYUcVQPeuX6THJ2BmFackKIsP3WDTlu1LEPB9
+\unrestrict bblddwQui07bobf6hY5QXLXOq2VT95oqwFkcYekactZwMxwRo8bfeJMlGJ8jKa0
 
