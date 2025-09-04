@@ -1,0 +1,228 @@
+{
+  "event": {
+    "name": "Break Out Open Air 2025", 
+    "date": "2025-08-05",
+    "placeName": "Schleiz",
+    "persons": 2,
+    "price": ,
+    "duration": 1,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Ancient",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["NOR"],
+      "genres": ["Melodic Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Nail by Nail",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Rope Sect",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Post Punk", "Death Rock"],
+      "note": null
+    },
+    {
+      "name": "Argorok",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Melodic Death Metal", "Groove Metal"],
+      "note": null
+    },
+    {
+      "name": "Irem",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal", "Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Wrathcast",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["AUT"],
+      "genres": ["Melodic Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Asca",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Atmospheric Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Humilation",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["MYS"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Schammasch",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CHE"],
+      "genres": ["Black Metal", "Death Metal", "Avant-garde Metal"],
+      "note": null
+    },
+    {
+      "name": "Unheil",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Depressive Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Soul Demise",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Melodic Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Hamferð",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["FRO"],
+      "genres": ["Melodic Doom Metal", "Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Doublewide",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Stoner Metal", "Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Zeit",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal", "Doom Metal"],
+      "note": null
+    },
+    {
+      "name": "Vermocracy",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["AUT"],
+      "genres": ["Melodic Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Saprobiontic",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Morbid Enema",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Grindcore", "Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Archaic Thorn",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Pater Tenebraum",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["AUT"],
+      "genres": ["Melodic Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Dead Congregation",
+      "isNew": false
+    },
+    {
+      "name": "Hate",
+      "isNew": false
+    },
+    {
+      "name": "Moor",
+      "isNew": false
+    },
+    {
+      "name": "Terrible Sickness",
+      "isNew": false
+    },
+    {
+      "name": "Ellende",
+      "isNew": false
+    },
+    {
+      "name": "Spearhead",
+      "isNew": false
+    },
+    {
+      "name": "Heretoir",
+      "isNew": false
+    },
+    {
+      "name": "Gernotshagen",
+      "isNew": false
+    },
+    {
+      "name": "Unleashed",
+      "isNew": false
+    },
+    {
+      "name": "Afsky",
+      "isNew": false
+    },
+    {
+      "name": "Nornir",
+      "isNew": false
+    }
+  ]
+}
