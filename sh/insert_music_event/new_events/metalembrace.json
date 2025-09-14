@@ -5,14 +5,14 @@
     "placeName": "Barleben",
     "persons": 2,
     "price": 55.5,
-    "duration": ,
+    "duration": 1,
     "note": null
   },
   "bands": [
     {
       "name": "Sworn",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["NOR"],
       "genres": ["Melodic Black Metal"],
@@ -21,7 +21,7 @@
     {
       "name": "Menerra",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Melodic Death Metal", "Black Metal"],
@@ -30,7 +30,7 @@
     {
       "name": "Mandragora Titania",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Folk Metal"],
@@ -43,7 +43,7 @@
     {
       "name": "Istapp",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Melodic Black Metal"],
@@ -51,17 +51,12 @@
     },
     {
       "name": "Humiliation",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["MYS"],
-      "genres": ["Death Metal"],
-      "note": null
+      "isNew": false
     },
     {
       "name": "Grymheart",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["HUN"],
       "genres": ["Melodic Death Metal", "Folk Metal"],
@@ -70,7 +65,7 @@
     {
       "name": "Excaved",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Death Metal"],
@@ -79,7 +74,7 @@
     {
       "name": "Corpserot",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Death Metal"],
@@ -102,7 +97,7 @@
       "isNew": false
     },
     {
-      "name": "Blod Red Throne",
+      "name": "Blood Red Throne",
       "isNew": false
     },
     {
