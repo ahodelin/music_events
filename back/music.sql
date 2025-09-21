@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict ZubYL3ldD2xeZHZxnXuK12HaHbzkO1SyZ0FHDmGp4RhstXk7SS5LfHwJZyMfsnf
+\restrict QZAWFymGLrXNYPLXhWqCd5FpPoKTGzsPsnOiCF1K6IXOC36ggbY2a8vYrLOyK84
 
 -- Dumped from database version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
 -- Dumped by pg_dump version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
@@ -1310,6 +1310,7 @@ bb70894bd8b00178cf29116a060ea1ca	Troisdorf (Jugendkulturcafé e.V. Troisdorf)
 9be6de3bc5073483dcbbcbc1b40af4d8	Dortmund (JunkYard)
 cbe111af36bc52e4f7eca7b90b00f859	Köln (Essigfabrik)
 5047e616d4875f9deadaa881bdcb331f	Schleiz (Ferienland Crispendorf)
+e018b197f3176d2a85fdad95d9b1e8ba	Bad Kreuznach (AJK Kulturzentrum)
 \.
 
 
@@ -2519,6 +2520,8 @@ e6af73536397eaa8b808a9384d6ab3b0	Mandragora Titania	y	t	\N
 fb175d9bebcfd912ee598623c968175d	Grymheart	y	t	\N
 13fe60a4849ad63c84159884f9b49887	Excaved	y	t	\N
 ee3179b045c45a64728d5dfb692d8ac2	Corpserot	y	t	\N
+fdcd424f4f03fb3bd6e0a58368ce191a	Sic Zone	y	t	\N
+351cea61c679f5c87ea4721911926306	Lorraine	m	t	\N
 \.
 
 
@@ -3725,6 +3728,8 @@ e6af73536397eaa8b808a9384d6ab3b0	DEU
 fb175d9bebcfd912ee598623c968175d	HUN
 13fe60a4849ad63c84159884f9b49887	DEU
 ee3179b045c45a64728d5dfb692d8ac2	DEU
+fdcd424f4f03fb3bd6e0a58368ce191a	DEU
+351cea61c679f5c87ea4721911926306	DEU
 \.
 
 
@@ -5589,6 +5594,9 @@ c21fe390daecee9e70b8f4b091ae316f	daaa95ecaf12ed9872a1f2fee19068d6
 333ca835f34af241fe46af8e7a037e17	daaa95ecaf12ed9872a1f2fee19068d6
 3e28a735f3fc31a9c8c30b47872634bf	daaa95ecaf12ed9872a1f2fee19068d6
 41dabe0c59a3233e3691f3c893eb789e	daaa95ecaf12ed9872a1f2fee19068d6
+fdcd424f4f03fb3bd6e0a58368ce191a	89cb1695cd3dd558ca007bd73f47581e
+351cea61c679f5c87ea4721911926306	89cb1695cd3dd558ca007bd73f47581e
+92e1aca33d97fa75c1e81a9db61454bb	89cb1695cd3dd558ca007bd73f47581e
 \.
 
 
@@ -7522,6 +7530,10 @@ fb175d9bebcfd912ee598623c968175d	b54875674f7d2d5be9737b0d4c021a21
 fb175d9bebcfd912ee598623c968175d	f54c3ccedc098d37a4e7f7a455f5731e
 13fe60a4849ad63c84159884f9b49887	3593526a5f465ed766bafb4fb45748a2
 ee3179b045c45a64728d5dfb692d8ac2	3593526a5f465ed766bafb4fb45748a2
+fdcd424f4f03fb3bd6e0a58368ce191a	3593526a5f465ed766bafb4fb45748a2
+fdcd424f4f03fb3bd6e0a58368ce191a	9e7315413ae31a070ccae5c580dd1b19
+fdcd424f4f03fb3bd6e0a58368ce191a	0a8a13bf87abe8696fbae4efe2b7f874
+351cea61c679f5c87ea4721911926306	d30be26d66f0448359f54d923aab2bb9
 \.
 
 
@@ -7694,7 +7706,6 @@ bc1f2650c6129b22a2cc63f2a90b5597	Black Thunder Tour	2022-11-24	69e2a1bbdd4b334d3
 dc19b6ddc47a55bc9401384b0ff66260	29. Wave-Gotik-Treffen	2022-06-05	efeaa516107a31ce2d1217e055b767f7	1	130.00	2	\N
 55446132347a3c2e38997d77b7641eff	28. Wave-Gotik-Treffen	2019-06-08	efeaa516107a31ce2d1217e055b767f7	1	130.00	2	\N
 33314b620ad609dc87d035654068d01e	30. Wave-Gotik-Treffen	2023-05-26	efeaa516107a31ce2d1217e055b767f7	3	170.00	2	\N
-57a334acb665ebc52057791d107149f4	57. Wernigeröder Rathausfest	2023-06-16	a7f15733dd688dee75571597f8636ba7	1	0	2	\N
 86615675838b48d2003175dd7665fba3	Rumble of thunder	2023-06-27	779076573cef469faf694cd40d92f40a	0	38.85	2	\N
 99e73f7baf95258d1a2f27df6c67294f	Thrash Metal Fest - 05.2024	2024-05-16	f3a90318abb3e16166d96055fd6f9096	0	30.0	2	\N
 7459412d1907ec1a87e7a5246b27cd00	Wild Boar Wars III	2021-08-28	83b0fe992121ae7d39f6bcc58a48160c	1	30.00	2	\N
@@ -7824,6 +7835,7 @@ d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-26
 9be905c75a23a8d26b4bd718fc72511a	Blutsäge des Todes und Witchkrieg	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N
 965b7e5dbed14563dd9ffce3a3e76dcb	Morbide Klänge V	2025-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	20.0	2	\N
 7320993a151875af6faf0e958b1d77db	Grabbenacht Festival 2025	2025-05-30	010c9e9e86100e63919a6051b399d662	1	59.0	1	\N
+89cb1695cd3dd558ca007bd73f47581e	Mayhem in the Arches - 09.2025	2025-09-20	e018b197f3176d2a85fdad95d9b1e8ba	0	15.0	2	\N
 3690ae1230c2503d3ef6f4e74f439e72	M.I.S.E Open Air 2025	2025-06-19	41b20797850d51214c644327e1a3826f	2	106.0	2	\N
 9580f7346eefe8ceb1c81a9023f1d43a	Summers's here... 2025	2025-07-04	8edfaa1884ddd9e289e61aea465d6077	0	10.0	2	\N
 43c6971608bff5d18bba661e896e832c	Green Hell Festival 2025	2025-07-05	78ca2ff75416369e990d7412de969084	0	42.0	2	\N
@@ -7840,6 +7852,7 @@ c9de0ba86f9340234a0d1e7fc5d2464f	Europe Summer 2025	2025-08-14	cbe111af36bc52e4f
 ba90695c1c818d06413d702123cebc70	Infernal Bloodshed over Europe 2025	2025-06-03	83b0fe992121ae7d39f6bcc58a48160c	0	39.75	2	\N
 11ea4424d878e567abfa1ee13d33d9f5	Break Out Open Air 2025	2025-09-05	5047e616d4875f9deadaa881bdcb331f	1	128.0	2	\N
 daaa95ecaf12ed9872a1f2fee19068d6	Metal Embrace Festival XVII	2025-09-12	05be609ce9831967baa4f12664dc4d73	1	55.5	2	\N
+57a334acb665ebc52057791d107149f4	57. Wernigeröder Rathausfest	2023-06-16	a7f15733dd688dee75571597f8636ba7	0	0	2	\N
 \.
 
 
@@ -8399,5 +8412,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict ZubYL3ldD2xeZHZxnXuK12HaHbzkO1SyZ0FHDmGp4RhstXk7SS5LfHwJZyMfsnf
+\unrestrict QZAWFymGLrXNYPLXhWqCd5FpPoKTGzsPsnOiCF1K6IXOC36ggbY2a8vYrLOyK84
 
