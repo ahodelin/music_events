@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict QZAWFymGLrXNYPLXhWqCd5FpPoKTGzsPsnOiCF1K6IXOC36ggbY2a8vYrLOyK84
+\restrict xG6TrCigBBX9nQSSKojaD0hWHuzXKcavNzetHVOvNqjZwPaRE240EsGmoIf3hMa
 
--- Dumped from database version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
--- Dumped by pg_dump version 17.6 (Ubuntu 17.6-1.pgdg24.04+1)
+-- Dumped from database version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
+-- Dumped by pg_dump version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -560,7 +560,9 @@ CREATE TABLE music.events (
     duration smallint DEFAULT 0,
     price numeric DEFAULT 30.00,
     persons smallint DEFAULT 1,
-    note character varying
+    note character varying,
+    is_festival boolean DEFAULT false,
+    popular_name character varying
 );
 
 
@@ -598,22 +600,6 @@ CREATE MATERIALIZED VIEW music.mv_musical_info AS
      JOIN geo.places p ON ((p.id_place = e.id_place)))
   ORDER BY b.band
   WITH NO DATA;
-
-
---
--- Name: next_events_with_tickets; Type: TABLE; Schema: music; Owner: -
---
-
-CREATE TABLE music.next_events_with_tickets (
-    id_event character(32) NOT NULL,
-    event character varying(255) NOT NULL,
-    date_event date NOT NULL,
-    id_place character(32) NOT NULL,
-    duration smallint DEFAULT 0,
-    price numeric DEFAULT 30.00,
-    persons smallint DEFAULT 1,
-    CONSTRAINT next_events_with_tickets_date_event_check CHECK ((date_event > now()))
-);
 
 
 --
@@ -947,6 +933,18 @@ CREATE VIEW music.v_events_years AS
 
 
 --
+-- Name: v_festivals; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_festivals AS
+ SELECT event AS "Festivals",
+    to_char((date_event)::timestamp with time zone, 'dd.mm.yyyy'::text) AS "Datum"
+   FROM music.events e
+  WHERE is_festival
+  ORDER BY date_event;
+
+
+--
 -- Name: v_genres; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -1025,6 +1023,19 @@ CREATE VIEW music.v_summary_stats AS
     ( SELECT sum((events.price * (events.persons)::numeric)) AS sum
            FROM music.events
           WHERE ((events.price IS NOT NULL) AND (events.persons IS NOT NULL))) AS total_money_spent;
+
+
+--
+-- Name: v_visited_festivals; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_visited_festivals AS
+ SELECT popular_name AS "Festivals",
+    count(id_event) AS "Besuch"
+   FROM music.events e
+  WHERE is_festival
+  GROUP BY popular_name
+  ORDER BY (count(id_event)), popular_name DESC;
 
 
 --
@@ -2063,7 +2074,6 @@ c245b4779defd5c69ffebbfdd239dd1b	Deep Dirty	y	t	\N
 5c29c2e513aadfe372fd0af7553b5a6c	Mason	y	t	\N
 e4b1d8cc71fd9c1fbc40fdc1a1a5d5b3	Antagonism	y	t	\N
 b12daab6c83b1a45aa32cd9c2bc78360	Plagueborne	y	t	\N
-9722f54adb556b548bb9ecce61a4d167	Orobas	y	t	\N
 04d53bc45dc1343f266585b52dbe09b0	Kilminister	y	t	\N
 0c31e51349871cfb59cfbfaaed82eb18	Vomit Spell	y	t	\N
 41dabe0c59a3233e3691f3c893eb789e	Servant	y	t	\N
@@ -2522,6 +2532,10 @@ fb175d9bebcfd912ee598623c968175d	Grymheart	y	t	\N
 ee3179b045c45a64728d5dfb692d8ac2	Corpserot	y	t	\N
 fdcd424f4f03fb3bd6e0a58368ce191a	Sic Zone	y	t	\N
 351cea61c679f5c87ea4721911926306	Lorraine	m	t	\N
+9722f54adb556b548bb9ecce61a4d167	Orobas	y	t	\N
+9699fb1aee16ac0d8f1c81ee188bab0c	Hellforce	y	t	\N
+d70d57d99f1741cb9807f367eb36dfb9	Silence to the Fallen	y	t	\N
+4aecf3f7b2946fb510f5b185d8062888	Flærken	m	t	\N
 \.
 
 
@@ -3730,6 +3744,10 @@ fb175d9bebcfd912ee598623c968175d	HUN
 ee3179b045c45a64728d5dfb692d8ac2	DEU
 fdcd424f4f03fb3bd6e0a58368ce191a	DEU
 351cea61c679f5c87ea4721911926306	DEU
+9722f54adb556b548bb9ecce61a4d167	001
+9699fb1aee16ac0d8f1c81ee188bab0c	DEU
+d70d57d99f1741cb9807f367eb36dfb9	DEU
+4aecf3f7b2946fb510f5b185d8062888	DEU
 \.
 
 
@@ -5597,6 +5615,10 @@ c21fe390daecee9e70b8f4b091ae316f	daaa95ecaf12ed9872a1f2fee19068d6
 fdcd424f4f03fb3bd6e0a58368ce191a	89cb1695cd3dd558ca007bd73f47581e
 351cea61c679f5c87ea4721911926306	89cb1695cd3dd558ca007bd73f47581e
 92e1aca33d97fa75c1e81a9db61454bb	89cb1695cd3dd558ca007bd73f47581e
+9722f54adb556b548bb9ecce61a4d167	e800a85ef2816cf0606a97a268be0e51
+9699fb1aee16ac0d8f1c81ee188bab0c	e800a85ef2816cf0606a97a268be0e51
+d70d57d99f1741cb9807f367eb36dfb9	e800a85ef2816cf0606a97a268be0e51
+4aecf3f7b2946fb510f5b185d8062888	e800a85ef2816cf0606a97a268be0e51
 \.
 
 
@@ -7534,6 +7556,10 @@ fdcd424f4f03fb3bd6e0a58368ce191a	3593526a5f465ed766bafb4fb45748a2
 fdcd424f4f03fb3bd6e0a58368ce191a	9e7315413ae31a070ccae5c580dd1b19
 fdcd424f4f03fb3bd6e0a58368ce191a	0a8a13bf87abe8696fbae4efe2b7f874
 351cea61c679f5c87ea4721911926306	d30be26d66f0448359f54d923aab2bb9
+9699fb1aee16ac0d8f1c81ee188bab0c	3593526a5f465ed766bafb4fb45748a2
+9699fb1aee16ac0d8f1c81ee188bab0c	9e7315413ae31a070ccae5c580dd1b19
+d70d57d99f1741cb9807f367eb36dfb9	3593526a5f465ed766bafb4fb45748a2
+4aecf3f7b2946fb510f5b185d8062888	b54875674f7d2d5be9737b0d4c021a21
 \.
 
 
@@ -7541,318 +7567,319 @@ fdcd424f4f03fb3bd6e0a58368ce191a	0a8a13bf87abe8696fbae4efe2b7f874
 -- Data for Name: events; Type: TABLE DATA; Schema: music; Owner: -
 --
 
-COPY music.events (id_event, event, date_event, id_place, duration, price, persons, note) FROM stdin;
-da4794bdc2159737a4c338392a856359	Guido's Super Sweet 16 (30. jubilee)	2018-04-27	17648f3308a5acb119d9aee1b5eafceb	0	9.00	2	\N
-8b0e6056132f11cfb7968cf303ff0154	Guido's sassy 17 (30th edition)	2019-04-26	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2	\N
-cc02ce2d003fd86ba60f8688e6c40b97	Halloween Party 2019	2019-10-31	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2	\N
-f8bb8ae77ca110cf00ebb5af1d495203	Heavy metal gegen Mikroplastik	2019-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2	\N
-759144a13dee6936c81d0fce2eaaba06	Jomsviking European Tour 2016	2016-11-17	76f9a958c2ebbd2f42456523d749fb5e	0	40.40	2	\N
-6c7cfe3af936c1590949350fc7d912d3	Fintroll + Metsatöll + Suotana Tour 2024	2024-04-22	eca8fc96e027328005753be360587de2	0	34.00	2	\N
-9952e1e08fb8f493c66f5cf386ba7e06	Night on the Living Thrash Tour 2023	2023-11-09	eca8fc96e027328005753be360587de2	0	39.50	2	\N
-91f86c2abd4b3c5f884c3947c424f70a	Cannibal Corpse, European Summer Tour 2019	2019-06-30	eca8fc96e027328005753be360587de2	0	30.00	2	\N
-d4dafcc2060475c01e6b4f6f3cb5c488	"Still Cyco Punk" World Wide Tour 2018	2018-11-04	eca8fc96e027328005753be360587de2	0	34.00	2	\N
-de64d3821b97e63cf8800dda1e32ee53	Metal Embrace Festival XII	2018-09-07	05be609ce9831967baa4f12664dc4d73	1	25.00	2	\N
-1a2f8d593b063eccd9b1dc3431e01081	Metal Embrace Festival XIII	2019-09-06	05be609ce9831967baa4f12664dc4d73	1	25.0	2	\N
-0601414fd50328355d256db5037bc430	Celebrating the music of Jimi Hendrix	2024-05-01	f3a90318abb3e16166d96055fd6f9096	0	24.20	2	\N
-8b3c931e31a2c5dbb3155dab7dade775	Shades of Sorrow European Tour 2024	2024-05-04	f3a90318abb3e16166d96055fd6f9096	0	27.30	2	\N
-bf65ac5101f339e8c8d756e99c49a829	Angelus Apatrida - Tour 2022	2022-07-28	f3a90318abb3e16166d96055fd6f9096	0	16.50	2	\N
-2dac37a155782e0b3d86fc00d42b53d0	Hate, Keep of Kalessin	2024-05-02	f3a90318abb3e16166d96055fd6f9096	0	25.30	2	\N
-cbe2729e13ce90825f88f2fc3a0bce55	Slamming Annihilation European Tour 2018	2018-05-21	f3a90318abb3e16166d96055fd6f9096	0	18.00	2	\N
-08f8c67c20c4ba43e8ba6fa771039c94	Debauchery's Balgeroth	2018-11-03	f3a90318abb3e16166d96055fd6f9096	0	18.00	2	\N
-11a728ed9e3a6aac1b46277a7302b15f	Hell over Europe II	2018-11-24	f3a90318abb3e16166d96055fd6f9096	0	24.00	2	\N
-1b76db5ef5f13c3451dcc06344fae248	Warfield - Café Central	2022-02-05	f3a90318abb3e16166d96055fd6f9096	0	0.00	2	\N
-d3bda1e9de8bc6d585f37b739264d649	Crisix, Insanity Alert	2021-09-16	f3a90318abb3e16166d96055fd6f9096	0	19.70	2	\N
-a01b8b09fc0dea9192cb02b077bfae9f	Pagan Metal Festival	2019-11-03	f3a90318abb3e16166d96055fd6f9096	0	26.30	2	\N
-74b2dd70f761e31a1e0860fe18f8cb55	Ektomorf - The legion of fury tour 2019	2019-04-25	f3a90318abb3e16166d96055fd6f9096	0	26.40	2	\N
-3b23d8e33c40737f5ca4b3a0fbb54542	Eis und Nacht Tour 2020	2020-01-24	f3a90318abb3e16166d96055fd6f9096	0	24.10	2	\N
-74480c2ba717722022d58038ab1bcd44	SARCOFAGO TRIBUTE (Fabio Jhasko)	2021-11-25	f3a90318abb3e16166d96055fd6f9096	0	20	2	\N
-5e6a61fa17bf86a738024508581f11d4	HateSphere, sign of death	2023-06-03	f3a90318abb3e16166d96055fd6f9096	0	18.70	2	\N
-45e481facaabaefb537716312cbb9f67	Morbidfest	2022-04-19	f3a90318abb3e16166d96055fd6f9096	0	33.00	2	\N
-1845ce3f5f191d7265d512beb6be1708	Oblivion European Tour 2023	2023-08-10	f3a90318abb3e16166d96055fd6f9096	0	30.00	2	\N
-84565434746de9ae0cd3baf57fcfd87d	Heidelberg Deathfest Warm-Up-Show 2024	2024-02-24	f3a90318abb3e16166d96055fd6f9096	0	30.70	2	\N
-87d1f3bfe03274952aa29304eb82d9d9	The Path of Death 7	2018-10-20	a91bcaf7db7d174ee2966d9c293fd575	0	15.00	2	\N
-bd4a5e87854fd4d729983f3ac9bc7268	The Path of Death 6	2017-10-14	a91bcaf7db7d174ee2966d9c293fd575	0	14.00	2	\N
-e70608c5455336dfc61d221e145f51cd	Rock-N-Pop Youngsters 2019	2019-03-15	a91bcaf7db7d174ee2966d9c293fd575	0	0.00	2	\N
-2bc0eb6a40bd1e2409b2722039152679	1. Mainzer Rock & Metal Fastnachts-Party	2019-03-02	a91bcaf7db7d174ee2966d9c293fd575	0	5.00	2	\N
-f2da218ba072addd567741ba722037e4	The Path of Death 9	2021-11-13	a91bcaf7db7d174ee2966d9c293fd575	0	25.00	2	\N
-b17a925acc0a591c2be6f84376007717	The Path of Death 8	2019-10-26	a91bcaf7db7d174ee2966d9c293fd575	0	14.00	2	\N
-3d3cf571367952ee016599bba2ef18cb	Doom over Mainz	2019-09-21	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N
-c61c9363d160c5f94193056388d9ced9	Light to the blind, Slaughterra, All its Grace	2019-03-29	a91bcaf7db7d174ee2966d9c293fd575	0	10	2	\N
-5165e8c183dbda4c319239e9f631b6f9	The Blackest Path	2022-10-08	a91bcaf7db7d174ee2966d9c293fd575	0	30.00	2	\N
-06ed605b83d95d5a8488293416ceb999	Horresque & Guests	2022-05-13	a91bcaf7db7d174ee2966d9c293fd575	0	10.00	2	\N
-cb4c2743c35bb374ab32d475ce8cfafe	Morbide Klänge II	2023-05-12	a91bcaf7db7d174ee2966d9c293fd575	0	15	2	\N
-fbae6c1da1deba5dd51f5d07007ec5ab	Warfield / Purify / Sober Truth	2018-02-17	fc9917fb6f46c0eb12f1e429a33ba66b	0	10	2	\N
-eeba68f0a1003dce9bd66066b82dc1b6	Heidelberg Deathfest III	2018-03-24	c72b4173a6a7131bf31a711212305fd3	0	35.00	2	\N
-f6fecea2db8afd44e1ad77f699d38fe9	Heidelberg Deathfest IV	2019-03-23	c72b4173a6a7131bf31a711212305fd3	0	40.00	2	\N
-568359348ea05d7114e3d796d7df55f2	Heidelberg Deathfest VI	2023-03-18	c72b4173a6a7131bf31a711212305fd3	0	55.21	2	\N
-d3c946cf8862b847404204ab7d0cfc39	Campaing for musical destruction	2023-03-03	c72b4173a6a7131bf31a711212305fd3	0	34.00	2	\N
-dc741cac8e46d127f4ce2524e5dbefa0	Heidelberg Deathfest V	2022-03-19	c72b4173a6a7131bf31a711212305fd3	0	42.00	2	\N
-a4ef4e4104ed8bdd818771ca2ea34127	Völkerball in Mainz	2018-07-27	1b90e6739989e49dd0c81f338b61c134	0	0.00	2	\N
-3fd69863958a8c69582d9f5bd6c82681	Südpfalz Metalfest	2020-09-25	6dde0719f779b373e62a7283e717d384	0	13.00	2	\N
-24756eb800986d0cb679e4c78d8a06c2	Darkness approaching	2019-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	7.00	2	\N
-d7010a272554c22fa8d53efc81046bce	Death Over Mainz 2023	2023-04-21	a91bcaf7db7d174ee2966d9c293fd575	0	11.00	2	\N
-9f07b2ac339c32524557ba186f68b2ef	Metal Embrace Festival XIV	2022-09-09	05be609ce9831967baa4f12664dc4d73	1	37.50	2	\N
-ff9a901a93946ada59ef15661fd395e1	Death Metal night - 11.2023	2023-11-04	a91bcaf7db7d174ee2966d9c293fd575	0	9.80	2	\N
-7dc88a28ee5d7dbd7a1011fd098cd6ab	Way of Darkness 2019	2019-10-04	a04166db1f1c6d75ab79b04756750bf5	1	62.00	2	\N
-2917a0b7da3498cad2a82a57e509346e	Downfall of Mankind Tour 2019	2019-05-07	5208c9de2f1b498a350984d55bcbc314	0	18.0	2	\N
-1e33e72fc8ecaa5f931f8f9cda7a38ed	Live on Stage - 22.10.2022	2022-10-22	17648f3308a5acb119d9aee1b5eafceb	0	14	2	\N
-b66b04a94d60074d595fd3acfeb73973	Live on Stage - 09.03.2024	2024-03-09	17648f3308a5acb119d9aee1b5eafceb	0	14.0	2	\N
-2baafaeeb079bb06df7cc0531aa81ccb	Live on Stage - 06.05.2023	2023-05-06	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2	\N
-2ac99a5ffc2764063bc246f9fa174a71	Grill' Em All 2017	2017-09-23	3a98149817a5aafba14c1b822db056fa	0	0.00	2	\N
-fe36a187902de9cf1aa5f42477fa1318	Grill' Em All 2022	2022-07-02	3a98149817a5aafba14c1b822db056fa	0	0.00	2	\N
-fb57c18df776961bb734a1fa3db6a6d1	Taunus Metal Festival XIV	2024-04-05	990c04bd6b40c3ca7352a838e2208dac	0	30.00	2	\N
-9946f5f348ac677113592c05b1b3905b	Taunus Metal Festival XI	2019-04-12	990c04bd6b40c3ca7352a838e2208dac	1	25.00	2	\N
-486bf23406dec9844b97f966f4636c9b	In Flames	2017-03-24	f7f2bc012754bd5d77de32e5c2674553	0	57.45	2	\N
-c0f93075617b7dd9db214f46876fb39d	Knife, Exorcised Gods, World of Tomorrow, When Plages Collide	2018-09-15	6e763e01d71c71e3b53502c35bfbb98c	0	7.60	2	\N
-e669a39d1453acd6aefc84913a985f51	Matapaloz Festival 2017	2017-06-16	0dbca791a775eab280cc7766794627cb	1	170.99	2	\N
-3e55fe6e09f2f7eaacd4052a76bcfb01	Download Germany	2022-06-24	0dbca791a775eab280cc7766794627cb	0	139.00	2	\N
-89733d277fcf6ee00cb571b2e1d72019	Grabbenacht Festival 2018	2018-06-01	010c9e9e86100e63919a6051b399d662	1	23.00	2	\N
-b0bc16cc4e9fefb213434d718724ec3a	Grabbenacht Festival 2019	2019-05-30	010c9e9e86100e63919a6051b399d662	1	28.00	2	\N
-078ac0cacb2c674f16940ebd9befedd9	Grabbenacht Festival 2024	2024-05-31	010c9e9e86100e63919a6051b399d662	1	49.0	2	\N
-791a234c3e78612495c07d7d49defc4c	Profanation over Europe 2024	2024-03-20	588671317bf1864e5a95445ec51aac65	0	29.20	2	\N
-79b4deb2eac122cc633196f32cf65670	Where Owls know my name EU|UK Tour 2019	2019-09-22	588671317bf1864e5a95445ec51aac65	0	24.70	2	\N
-5fd9b4c8df6e69c50106703b7d050a3d	The modern art of setting ablaze tour	2018-12-08	588671317bf1864e5a95445ec51aac65	0	23.20	2	\N
-cb80a6a84ec46f085ea6b2ff30a88d80	Molotov	2016-07-25	588671317bf1864e5a95445ec51aac65	0	24.50	2	\N
-921e9baf14e4134100c7b7a475b1bb06	EMP Persistence Tour 2017	2017-01-24	588671317bf1864e5a95445ec51aac65	0	32.30	2	\N
-07da0c8ead421197cc73463cf5a5eefc	Death is just the beginning	2018-10-18	588671317bf1864e5a95445ec51aac65	0	32.10	2	\N
-133416b949a72009242c85d5af911b93	Kreator, Sepultura, Soilwork, Aborted	2017-02-17	588671317bf1864e5a95445ec51aac65	0	42.00	2	\N
-20b32a6bbc813658d242a65c08bc8140	The Popestar Tour 2017	2017-04-09	588671317bf1864e5a95445ec51aac65	0	33.50	2	\N
-50e128ce6587bfcaedf317f6deb69695	Before we go Farewell Tour 2016	2016-02-11	588671317bf1864e5a95445ec51aac65	0	17.45	2	\N
-c9dc004fc3d039ad7fb49456e5902b01	Conan	2017-03-08	588671317bf1864e5a95445ec51aac65	0	18.00	2	\N
-1e144cd25de2ab5d9153d38c674c1f4b	MTV's Headbangers Ball Tour 2018	2018-12-11	588671317bf1864e5a95445ec51aac65	0	39.80	1	\N
-f015a601161f02a451557258793a96a1	Skindred, Zebrahead	2016-12-09	588671317bf1864e5a95445ec51aac65	0	25.70	2	\N
-3e98ecfa6a4c765c5522f897a4a8de23	Ministry	2018-08-06	588671317bf1864e5a95445ec51aac65	0	35.80	2	\N
-e5847f38992d20bb78aafd080c5226d4	Dia de los muertos Roadshow 2016	2016-11-11	588671317bf1864e5a95445ec51aac65	0	14.70	2	\N
-2b6e496456bb2be5444c941692fa5d17	Will to power tour 2018	2018-02-06	588671317bf1864e5a95445ec51aac65	0	36.70	2	\N
-603ef2d9ef2057c8719d0715a7de32d1	EMP Persistence Tour 2018	2018-01-23	588671317bf1864e5a95445ec51aac65	0	33.40	2	\N
-6e18512149a51931a4faa1f51d69a61f	Dia de los muertos Roadshow 2018	2018-11-02	588671317bf1864e5a95445ec51aac65	0	14.5	2	\N
-21913ca002c17ce3cf8a0331b2dad1c8	Winter Hostilities 2019-Tour	2019-12-04	588671317bf1864e5a95445ec51aac65	0	23.70	2	\N
-e6273b4e07720dbd6ed7870371b86d24	World needs mosh (Wiesbaden)	2021-11-19	588671317bf1864e5a95445ec51aac65	0	14.90	2	\N
-cb14876022caa93cf2a4a934fad74fe9	Descend into Madness Tour 2020	2020-03-11	588671317bf1864e5a95445ec51aac65	0	19.20	1	\N
-c4c0e84be1600267ea2bd626c25dc626	The Gidim European Tour 2020	2020-03-05	588671317bf1864e5a95445ec51aac65	0	25.90	2	\N
-ec29ea3adb2b584841d5d185e5f9135b	European Tour Summer 2019	2019-08-13	588671317bf1864e5a95445ec51aac65	0	23.70	2	\N
-9b4752b144d294fc6799532a413fd54e	Aversions Crown | Psycroptic	2019-02-21	588671317bf1864e5a95445ec51aac65	0	23.70	2	\N
-d988ef331f5b477753be3bae8b18412f	MTV's Headbangers Ball Tour 2019	2019-12-14	588671317bf1864e5a95445ec51aac65	0	40.75	2	\N
-0add3cab2a932f085109a462423c3250	Dust Bolt	2019-03-07	588671317bf1864e5a95445ec51aac65	0	19.30	2	\N
-52bb7665f1523ba2bb7481ee085ce6ec	To Drink from the Night Itself, Europe 2019	2019-12-15	588671317bf1864e5a95445ec51aac65	0	38.50	2	\N
-cb091aafa00685c4b29954ca13e93bad	EMP Persistence Tour 2019	2019-01-24	588671317bf1864e5a95445ec51aac65	0	33.60	2	\N
-b04e875801af3b7b787cde914be2aaed	Deserted Fear / Carnation / Hierophant	2019-03-22	588671317bf1864e5a95445ec51aac65	0	19.30	2	\N
-e1e5ca54159d43c9400d33fdff6ac193	Amorphis & Soilwork	2019-02-13	588671317bf1864e5a95445ec51aac65	0	36.90	2	\N
-aac480b69f1fe6472ffe7880c8ead350	The Inmost Light Tatoo 2019	2019-02-01	588671317bf1864e5a95445ec51aac65	0	10.0	2	\N
-5379b1daf8079521f6c7de205e37f878	Netherheaven Europe 2023	2023-01-19	588671317bf1864e5a95445ec51aac65	0	30.50	2	\N
-7b5a790fbc109d0dadb7418b17bf24e8	Post Covid European Summer Madness 2022	2022-07-19	588671317bf1864e5a95445ec51aac65	0	26.00	2	\N
-8be553b6dfad10eac5fed512ef6c2c95	Europe 2022	2022-10-30	588671317bf1864e5a95445ec51aac65	0	36.00	2	\N
-e692c8859fbcd0611cde731120ba09ad	Necro Sapiens Tour 2022	2022-05-05	588671317bf1864e5a95445ec51aac65	0	19.65	2	\N
-eb5b5cec91e306a1428f52f89ef1c2ab	Doomsday Album Release Tour	2022-04-28	588671317bf1864e5a95445ec51aac65	0	23.80	2	\N
-9295494c6983f977a609c9db84ce25e6	Sepultura - Quadra Tour Europe 2022	2022-11-21	588671317bf1864e5a95445ec51aac65	0	37.80	2	\N
-6c6621659485878b572ac37db7d14947	Dia de los muertos Roadshow 2015	2015-11-27	588671317bf1864e5a95445ec51aac65	0	12.25	2	\N
-1bbb8052b10792e8a86d64245d543d7a	Activate Europe 2022	2022-10-09	588671317bf1864e5a95445ec51aac65	0	23	2	\N
-90710b6a9bf6fbbdea99a274ca058668	40 Years of Destruction Europe Tour 2023	2023-10-27	588671317bf1864e5a95445ec51aac65	0	40.30	2	\N
-88ad18798356c6caa8fe161432d88920	Ton Steine Scherben - 2015	2015-10-01	588671317bf1864e5a95445ec51aac65	0	25	2	\N
-40512bf59a621ffaaea463f137f395ec	Crossplane & Hängerbänd	2021-08-06	99b522e44d05813118dcf562022b4a2a	0	18.60	2	\N
-3479db140a88fa19295f4346b1d84380	15 Years New Evil Music, Festival	2019-10-12	49d6cee27482319877690f7d0409abbd	0	44.0	2	\N
-65302b172b9b95b0f8f692caef2e19e8	X-Mass in Hell Festival West Edition 2018	2018-12-15	49d6cee27482319877690f7d0409abbd	0	39	2	\N
-f4e988e1e599ea5ff2d9519e59511757	Sons of Rebellion Tour 2019	2019-11-01	49d6cee27482319877690f7d0409abbd	0	26.40	2	\N
-e6513a2614231773cfe00d0bb6178806	Prayer Of Annihilation Tour 2019	2019-10-24	49d6cee27482319877690f7d0409abbd	0	23.10	2	\N
-aeead547d2a5b453d09a3efdf052c4cf	Easter Mosh	2023-04-12	49d6cee27482319877690f7d0409abbd	0	28.60	2	\N
-6fa3e357c27d47966023568346d51a09	Metallergrillen 2017	2017-09-01	3264a9d4fedca758f18391ecca28f0e5	1	33.0	2	\N
-91e2010dfd20c93ee84ffd12694b0f24	A Tribute to ACDC 2020	2020-03-07	539960fca282c1966cfa15e15aca1d84	0	15.00	1	\N
-f64440cda54890f13a4506f88aa21cd2	Rockharz Open Air 2019	2019-07-03	ed2c8a76cc01eeb645011e8154737a49	2	112.75	2	\N
-87ba4cfe4768f0efa1a69dacb770810c	Rockfield Open Air 2017	2017-08-18	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N
-208af572d4212c8b20492f11ca9b8b54	Rockfield Open Air 2019	2019-08-09	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N
-0704b2bfdcfaed5225554f023a7fbf48	Rockfield Open Air 2022	2022-08-13	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N
-169be8981eff6a53b1bcae79e2f06a05	Rockfield Open Air 2023	2023-08-11	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N
-8a48b001d26cf3023ac469d68bfba185	NOAF XIII	2017-08-25	6c33b0a7db1a4982d74edfe98239cec5	1	38.00	2	\N
-9bbe76536451d9ad44018b24d51c58aa	Rockbahnhof 2019	2019-05-18	6c33b0a7db1a4982d74edfe98239cec5	0	0	2	\N
-1edc35fdd229698b0eeaaa43e7a9c7c5	NOAF XII	2016-08-26	6c33b0a7db1a4982d74edfe98239cec5	1	35.00	2	\N
-b3622323dbe3bef2319de978869871ad	NOAF XIV	2018-08-24	6c33b0a7db1a4982d74edfe98239cec5	1	42.00	2	\N
-cfd1317abaf4002e4a091746008541cc	NOAF XV	2019-08-23	6c33b0a7db1a4982d74edfe98239cec5	1	42.0	2	\N
-3e8d7d577a332fc33e2f332ad7311e1e	Worldwired Tour 2019	2019-08-25	f17fc1362e3637ae8ede170a2a5d6bea	0	98.65	2	\N
-be5ea4556ea2b3db3607b8e2887c9dd3	Metal Club Odinwald meets Ultimate Ruination Tour	2019-04-27	29935ed69008b59e8758afcf7eeb7d7b	0	9.00	2	\N
-90445b62432a3d8e1f7b3640029e6fed	Worldwired Tour 2018	2018-02-16	840b0d06d6be5d714e2228a4be26cbcc	0	115.15	2	\N
-87c20c746bae110cc55c3d32414037df	Friendship & Love Metal Fest	2020-02-15	406b32caecad16e87606fa84a77f4e35	0	3.00	2	\N
-c4968fa5ec8f129c7fd49ffa5cb64d6e	Jubiläumswoche 25 Jahre Hexenhaus	2021-07-31	d61cb6460de2df9d1d64dc35cb293f6a	0	41.90	2	\N
-a3c7a40013e778dc1ce7d4ae7cdcfa6d	Super Sweet 16 (Edition 36)	2024-04-20	6c55ed753e5b2355307bf2b494f2384a	0	0	2	\N
-75560c8161a6cccdfbd7a8b59332b792	Alexander the Great in Exil	2021-09-11	6c55ed753e5b2355307bf2b494f2384a	0	11	2	\N
-d283cb5c455d03f1f4f0ff7f82c93af6	50 Jahre Doktor Holzbein	2022-04-23	6c55ed753e5b2355307bf2b494f2384a	0	0	2	\N
-ec83b315e34cecd0b3e8323e22ee38bf	Bands am Montag - 12.2023	2023-12-18	6c55ed753e5b2355307bf2b494f2384a	0	0.0	2	\N
-8287859246dae330eef7b3a2a8c71390	Warfield/Torment of Souls/Redgrin	2021-10-02	44ab9f5977e8956f9dd15003efc8743b	0	10.00	2	\N
-943f6abbf24d69a145fbac5cc30c1a5c	World needs mosh (Bonn)	2021-11-21	eb83e6da9292e995b44f789c42bb7e65	0	14.90	2	\N
-220352d001b221b28a0dff0fbd20f77c	Slaughterra - Darmstadt	2022-03-05	6ddb911ae1e79899c2d90067b761d6b4	0	15	2	\N
-e87aa14aa70c2745548e891915c77ab4	Dark Zodiak + Mortal Peril	2021-11-27	6ddb911ae1e79899c2d90067b761d6b4	0	15	2	\N
-94154f6cf17963a299f6902ae9c7f3d5	Braincrusher in Hell 2020	2022-05-20	ca7fb13a9cd0887dfabbb573c070fb2e	1	70.40	2	\N
-a17fea2a7b6cf4685417132ff574fd0a	Wacken Open Air 2022	2022-08-03	481c1aef68fb3531c92c85ccf1e8643d	3	238.00	2	\N
-ef925858ea6d5d91b5ca4b3440fa1ad1	Death Feast Open Air 2022	2022-08-25	6a21939c14c8f6030de787b05d66c3ef	2	66.50	2	\N
-e184d243eb553fcba592ae848963c1e8	Death Feast Open Air 2023	2023-08-24	6a21939c14c8f6030de787b05d66c3ef	2	85.50	2	\N
-10c5ac379805443742025d6cf619891e	Infernum meets Porkcore Festevil 2022	2022-09-02	4806febaa9c494fdd030ee4163e33c8c	1	67.35	2	\N
-a420ecf82bd099f63cf26c8cbc4cdf05	Horrible Death Tour 2023	2023-09-29	0280c9c3b98763f5a8d2ce7e97ce1b05	0	13.00	2	\N
-e2a3e66f68255ed0b2a09a64a8ae55fd	Randy Hansen live in Frankfurt	2016-04-26	83b0fe992121ae7d39f6bcc58a48160c	0	22.00	2	\N
-e6adc3e990efe83510bc9e7a483bec1a	Vikings and Lionhearts Tour 2022	2022-09-28	50eb9f93583f844e0684af399dc7fc3c	0	74.70	2	\N
-b66fc7effb62197b91e1dacbd7b60f0f	Servant of the Road World Tour	2022-11-29	50eb9f93583f844e0684af399dc7fc3c	0	86.20	2	\N
-a565f20390f97f9d86df144e14fe83af	We Are Not Your Kind World Tour	2020-01-29	50eb9f93583f844e0684af399dc7fc3c	0	80.40	2	\N
-e58b815b0e0ab96b035629ec796eb579	Berserker World Tour 2019	2019-12-03	400c46fc5f22decc791a97c27363df40	0	53.95	2	\N
-1f711336d1c518a68db9e2b4dd631e81	Back to the Roots Tour - 05.2024	2024-05-17	09ddc8804dd5908fef3c8c0c474ad238	0	23.20	2	\N
-b098c76b1d5ba70577a0c0ba30d2170a	Fleshcrawl + Fleshsphere + Torment of Souls	2024-05-18	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2	\N
-5e38483d273e5a8b6f777f8017bedf62	BLUTFEST 2022	2022-10-01	09ddc8804dd5908fef3c8c0c474ad238	0	23.2	2	\N
-85935a51fb2aec086917a4eeeaef066b	Gorecrusher European Tour 2022	2022-11-19	09ddc8804dd5908fef3c8c0c474ad238	0	25.2	2	\N
-69882c9d3cc383cd271732b068979a98	A Goat Vomit Summer	2023-07-25	09ddc8804dd5908fef3c8c0c474ad238	0	23.20	2	\N
-39603f44a0fea370f2f6ced327e9b38b	40 Years of the Apocalypse Anniversary Tour 2023	2023-09-26	09ddc8804dd5908fef3c8c0c474ad238	0	32.90	2	\N
-f7995b1a1bf9683848dd37ab294cfa3f	European Fall 2023 Tour	2023-11-19	09ddc8804dd5908fef3c8c0c474ad238	0	37.30	2	\N
-26c07de9d3c6e80d7fdaefec9a7dcdc5	50 Jahre Geisler of Hell Festival	2024-01-12	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2	\N
-57c286b274d23dc513ddfd16dd21281e	Laud as Fuck Fest	2022-11-04	9f629f2265000ff7abf380b363b2de49	0	21.69	2	\N
-edccf96997e63c09109beba94633a44c	REVEL IN FLESH support: TORMENT OF SOULS	2022-11-18	9f629f2265000ff7abf380b363b2de49	0	18.02	2	\N
-bc1f2650c6129b22a2cc63f2a90b5597	Black Thunder Tour	2022-11-24	69e2a1bbdd4b334d3da05ae012836b18	0	36.85	2	\N
-183863a44c8750e908c83bd2d1c194f8	Slice Me Nice 2022	2022-12-03	69bdcf616a03acef49e3697d73adcbb3	0	37.22	2	\N
-dc19b6ddc47a55bc9401384b0ff66260	29. Wave-Gotik-Treffen	2022-06-05	efeaa516107a31ce2d1217e055b767f7	1	130.00	2	\N
-55446132347a3c2e38997d77b7641eff	28. Wave-Gotik-Treffen	2019-06-08	efeaa516107a31ce2d1217e055b767f7	1	130.00	2	\N
-33314b620ad609dc87d035654068d01e	30. Wave-Gotik-Treffen	2023-05-26	efeaa516107a31ce2d1217e055b767f7	3	170.00	2	\N
-86615675838b48d2003175dd7665fba3	Rumble of thunder	2023-06-27	779076573cef469faf694cd40d92f40a	0	38.85	2	\N
-99e73f7baf95258d1a2f27df6c67294f	Thrash Metal Fest - 05.2024	2024-05-16	f3a90318abb3e16166d96055fd6f9096	0	30.0	2	\N
-7459412d1907ec1a87e7a5246b27cd00	Wild Boar Wars III	2021-08-28	83b0fe992121ae7d39f6bcc58a48160c	1	30.00	2	\N
-f56f7353a648997c6f5bc4a952cd1bd2	EMP Persistence Tour 2016	2016-01-22	588671317bf1864e5a95445ec51aac65	0	31.20	2	\N
-08a5c6dec5d631fe995935fd38f389be	"The Tide of Death and fractured Dreams" European Tour 2024	2024-05-15	588671317bf1864e5a95445ec51aac65	0	36.0	2	\N
-8ad5ac467b3776d28a12742decf00657	Rockfield Open Air 2018	2018-08-17	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N
-75fea12b82439420d1f400a4fcf3386b	Völkerball	2016-05-05	15f10194f67b967b0f0b5a22561a7c95	0	23.50	2	\N
-70ba638a78552630591ba5c7ff92b93a	Sepultura - Quadra Summer Tour - Europe 2022	2022-07-05	968e5509ddd33538eec4fff752bda4ff	0	37.31	2	\N
-69d2999875a1e6d7c09bbf157d18a27e	Summer in the City 2023	2023-06-30	692fc1deabc4b9afa9387af15c02b19a	0	0.00	2	\N
-42a2eedac863bd01b14540a71331ec65	Summer in the City 2018	2018-07-08	692fc1deabc4b9afa9387af15c02b19a	0	0.00	2	\N
-c724b600052083fae4765a6a7702ee5f	In Flammen Open Air 2023	2023-07-13	cb6036cdf8009fc4b41eb0e56eab553d	2	86.90	2	\N
-b39ff9f6960957839c401d45abdc3cae	Boarstream Open Air 2023	2023-07-21	cf1c12d42f59db3667fc162556aab169	1	66.60	2	\N
-6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	85683aa688e302e1de7ec78dc4440dff	1	79	2	\N
-4ba1c22d76444426b678b142977aa084	Breakdown4Tolerance Vol.1 Festival	2023-09-30	10effefa9cc583f38ff0518dcaa72ef5	0	25.00	2	\N
-db92681077141614e2ee9a01df968334	Death and Gore over Frankfurt	2023-10-28	fc36c84b02e473bec246e5d2cfc513ef	0	9.00	2	\N
-f5cd4263f2cbb5e459306b35cef72e9d	European Miserere 2023	2023-07-03	5948b7ac21c1697473de19197df1f172	0	15.00	2	\N
-8de89ad5eef951fd87bd3e013c63a6c4	Slaugther Feast 2023	2023-11-10	6032938ceb573d952fdae1a40ef39837	1	29.00	2	\N
-d1b30328ab686d050b6c107154d6aef8	Paganische Nacht - 2023	2023-11-24	b13f71a1a5f7e89c2603d5241c2aca25	0	29.00	2	\N
-4e22c7f7fe57d94f85bf89a469627ba1	Hell over Aschaffenburg - 2023	2023-11-25	b13f71a1a5f7e89c2603d5241c2aca25	0	35.00	2	\N
-9d0ac9b8cb657a5f09f81d6bea3e1798	Slice Me Nice 2023	2023-12-02	817974aa11f84c9ebc640d3de92737f5	0	33.91	2	\N
-efdb143af86d5a0af148b7847e721e55	15 Jahre live im GMZ Georg-Buch-Haus Wiesbaden	2014-10-04	738af31c1a528baa30e7df31384e550b	0	9.00	2	\N
-e26bcb0f8a28cd2229ce77a95d0baf9e	Eskalation im Oberhaus 2024	2024-02-03	b00bae5a5f8ff8830d486747e78d7d8d	0	22.00	2	\N
-dcad795c824cf4d6337fc9f745e5645f	The young meatal attack	2024-03-02	9ca0396f7fce5729940fcef7383728b3	0	12.00	2	\N
-e4ee5ac5d137718d0eeb4d310b97d837	Noche de los Muertos - 2017	2017-10-31	f0f0e638999829b846be6e20b5591898	0	15	2	\N
-16a83f971efce095272378a2a594e49f	Open air Hamm 47.	2017-07-07	7590124802ade834dbe9e7c0d2c1a897	1	25	2	\N
-0a7d68cf2a103e1c99f7e6d04f1940da	Necromanteum EU/UK Tour 2024	2024-03-30	051fa36efd99a2ae24d56b198e7b1992	0	43.55	2	\N
-2d5e1a99b20d1be28ef40573c37eb0a0	Thrash Attack - 06.04.2024	2024-04-06	5515ceaeca4b8b62ee5275de54ea77ad	0	16.52	2	\N
-2c6ed5b74b30541da64fdbbda4a8bbe3	Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show	2024-04-12	cccce7f0011bc27dee7c60945cd5f962	0	22.0	2	\N
-71de5246c2f4ac4766041831e93f001a	New live rituals a COVID proof celebration of audial darkness	2021-07-23	e248bb7c1164a44fa358593e28769a23	0	23.20	2	\N
-57e44259dc61f23bef42517695d645f1	Ravaging Europe 2023	2023-03-29	e248bb7c1164a44fa358593e28769a23	0	28.70	2	\N
-e723d4328c7df53576419235b92f4a13	Heretic Hordes I	2024-05-03	e248bb7c1164a44fa358593e28769a23	0	35.00	2	\N
-3fe511194113f53322ccac8a75e6b4ab	Gutcity Deathfest 2024	2024-05-11	2dd00779b7dd00b6cbbc574779ba1f40	0	30.60	2	\N
-1fef5be89b79c6e282d1af946a3bd662	Mahlstrom Open Air 2024	2024-06-14	b77734e4928596fac1db05cab7b39710	1	78.99	2	\N
-b8f41d89b2d67b4b86379d236b2492aa	Europe Summer 2024	2024-06-17	588671317bf1864e5a95445ec51aac65	0	29.30	2	\N
-f8aec5c8465f9b8649a99873c0a44443	Asinhell Live 2024	2024-06-19	62a758afc72d2e3f7933fa4b917944c8	0	33.45	2	\N
-ddf663d64f6daaeb9c8eb11fe3396ffb	Boarstream Open Air 2024	2024-06-21	cf1c12d42f59db3667fc162556aab169	1	75.00	2	\N
-a685e40a5c47edcf3a7c9c9f38155fc8	Throw them in the Van European Summer Tour 2024	2024-06-27	f3a90318abb3e16166d96055fd6f9096	0	34	2	\N
-f4ab1c6777711952be2adceed22d7fc5	The Exloited - Das Bett - 2024	2024-06-29	83b0fe992121ae7d39f6bcc58a48160c	0	0	2	\N
-9fe5ff8e93ce19ca4b27d5267ad7bfb3	In Flammen Open Air 2024	2024-07-11	cb6036cdf8009fc4b41eb0e56eab553d	2	86.9	2	\N
-31702e4b76bb69f9630a227d403c4ca0	Hellripper + Cloak + Sarcator	2024-07-26	67bac16ced3de0e99516cf21505718a1	0	24.80	2	\N
-abe69e5488f1be295baa8bbf1995c657	Deicide - European Tour 2024	2024-07-29	e248bb7c1164a44fa358593e28769a23	0	34.20	2	\N
-d5bd359a19abc00f202bb19255675651	Party San Open Air 2024	2024-08-08	b27e07993299ee0b2ecd26dabd77eaf8	2	0.0	2	\N
-2c5cad7b6d76825edcfbd5d077e7a5ee	Death Feast Open Air 2024	2024-08-22	6a21939c14c8f6030de787b05d66c3ef	2	82.5	2	\N
-01e90040938d8415a8b98f0d80fceb06	Tattoo Titans in Hamburg 2024	2024-08-31	625d260d98326f7dfffd0dd49ebbfc8e	1	110.0	2	\N
-332be9c531b1ec341c13e5a676962820	Rock for Hille Benefiz	2018-10-27	6dde0719f779b373e62a7283e717d384	0	25.00	2	\N
-b3d8150933aa73cc2b3ba1fc39b1651c	Vader - 40 Years of the Apocalypse Tour 2024	2024-06-28	49d6cee27482319877690f7d0409abbd	0	28.60	2	\N
-f7787eb77e709474505db860a00edd2d	Asomvel, Warfield	2024-07-18	f3a90318abb3e16166d96055fd6f9096	0	0.0	2	\N
-a20ba10650527a8e646bd528e4f2428e	Kreator + Havok + Crisix	2024-08-17	968e5509ddd33538eec4fff752bda4ff	0	50.55	2	\N
-05ffebda2d583b6081ffaa8dd7ba0788	Metal Embrace Festival XVI	2024-09-06	05be609ce9831967baa4f12664dc4d73	1	55.5	2	\N
-c0e1ed6923fbe4194174ad87f11179cd	Open Stage - 23.05.2024	2024-05-23	17648f3308a5acb119d9aee1b5eafceb	0	15.0	2	\N
-83bd23b786ae4d9b16f52ed2661611e9	Motörblast Play Motörhead - 2023	2023-12-27	eca8fc96e027328005753be360587de2	0	18.60	2	\N
-d84c3f96813116b09480c0572fa45636	Motörblast Play Motörhead - 2018	2018-12-27	eca8fc96e027328005753be360587de2	0	16.40	2	\N
-b4435108ce3cef02600464daf3cb5f7f	Metal Embrace Festival XV	2023-09-08	05be609ce9831967baa4f12664dc4d73	1	48.50	2	\N
-de9415f38659fd6225ddf8734a7b0ff7	Swords into Flesh Europe Tour 2023	2023-11-07	f3a90318abb3e16166d96055fd6f9096	0	27.50	2	\N
-be31669251922949ee5efe5447a119d1	Latin American Massacre	2023-10-20	a91bcaf7db7d174ee2966d9c293fd575	0	9.60	2	\N
-cac02becf783662df9a61439ed515d75	The Path of Death 10	2023-10-14	a91bcaf7db7d174ee2966d9c293fd575	0	39.00	2	\N
-f0c7879002501eddcb68564fe19b77fc	Metal im M8 - 12.2023	2023-12-09	a91bcaf7db7d174ee2966d9c293fd575	0	8.00	2	\N
-dabaf9fe7459d022af9bf8afc729631a	Hutkonzert - 01.08.2024	2024-08-01	17648f3308a5acb119d9aee1b5eafceb	0	7.5	2	\N
-fa92cfeec372b54d5551e5fb9aaa55af	Hutkonzert - 29.08.2024	2024-08-29	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2	\N
-f6fbabd4858c55fea0dce0d32db9dcf5	Hutkonzert - 19.10.2023	2023-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2	\N
-ce017dda4d3b82cf8e75f648a7b9b390	Open air Hamm 43.	2013-06-14	7590124802ade834dbe9e7c0d2c1a897	1	22.0	2	\N
-000869859299617fd93133d3f65fd85b	Open air Hamm 45.	2015-06-12	7590124802ade834dbe9e7c0d2c1a897	1	22.0	2	\N
-c4e2844bff82087c924ad104bdfb6580	Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger	2019-11-15	a91bcaf7db7d174ee2966d9c293fd575	0	9	2	\N
-cf1c6716920400a1d8ade1584c726f0c	Morbide Klänge III	2024-05-24	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N
-a1127140db632705cffe06456b478fa8	Evil Obsession 2023	2023-12-28	c72b4173a6a7131bf31a711212305fd3	0	48.50	2	\N
-c4133d7e05b0f42aedd762785de80b70	Dread Reaver Europe 2024	2024-01-20	c72b4173a6a7131bf31a711212305fd3	0	39.50	2	\N
-586a67dc71b225f23047ff369fce7451	Hell over Aschaffenburg - 2019	2019-11-30	b10506e85b6bf48eace09359fb36d5e0	0	30.00	2	\N
-95e6dc1125e477e58c9f5bdb1bdd53ac	Grabbenacht Festival 2023	2023-06-09	010c9e9e86100e63919a6051b399d662	1	45.00	2	\N
-20a697b57317f75ad33eb50f166d6b00	NOAF XI	2015-08-28	6c33b0a7db1a4982d74edfe98239cec5	1	15.0	2	\N
-c6b227c4855621d0654142f2a3cad0ee	Hessian Underground Brutality 2024	2024-09-14	c792b3f05ce40f0ff54fcf79573c89b4	0	15.0	2	\N
-099346085ef9364171db5f639475194e	Underworld Europe Tour 2024	2024-09-15	49d6cee27482319877690f7d0409abbd	0	34.0	2	\N
-5d7e58efe4f97f6abc7174574843abbc	In Chambers of Europe 2024	2024-09-20	f3a90318abb3e16166d96055fd6f9096	0	26.0	2	\N
-99467125829a5b728cfe913f88f19db8	20 Years New Evil Music Festival	2024-09-28	c72b4173a6a7131bf31a711212305fd3	0	66.60	2	\N
-8e625852da508feb3e973eedd98b3a6e	A Heaven you may create. European Tour 2024 - Part 1	2024-09-29	f3a90318abb3e16166d96055fd6f9096	0	30.80	2	\N
-e6af11cd729e7b81d4f40453fff9c7f2	Halloween mit Hängerbänd und Hellbent on Rocking	2023-10-31	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2	\N
-ebaeb9fa7d6d4de00d7573942a9f9e78	Brutality Unleashed Tour 2022	2022-09-05	0280c9c3b98763f5a8d2ce7e97ce1b05	0	15.00	2	\N
-22be8d2b712105db37cc765fae61323e	"Morbid Devastation"-Tour	2023-11-17	588671317bf1864e5a95445ec51aac65	0	39.80	2	\N
-94c9c5cc90aa696fcef2944a63f182e9	European Tour 2024	2024-10-01	c72b4173a6a7131bf31a711212305fd3	0	48.95	2	\N
-a601420442e567507a31586d3508e901	Black Hole Fest Germania II	2024-10-04	4dac5916befa9f4e29989cd5f717beb4	1	148.12	2	\N
-e2cc1ec7e3f092bf9acff95c49b4601f	Apocalyptica Plays Metallica Vol. 2 Tour 2024	2024-10-07	588671317bf1864e5a95445ec51aac65	0	55.40	2	\N
-f91e581750aef0db0551fafb15367bd9	Rising from the North Tour 2024	2024-10-09	c8f566954fe846be7d35f707901d7bf5	0	69.0	1	\N
-0b050e993c77bc785f1a5ee9dd0c0cca	Milking the Goatmachine + Craving + Call of the Void	2024-10-12	9891ba35bb7474ae750bdbf62a4eee4f	0	25.73	1	\N
-aa32f037a3d1ff9264faa5c3f0f65079	Feed the Goat Tour 2024	2024-10-25	b9a697f7f6fe15cad76add1dd64b688f	0	20.0	2	\N
-0b3f22fe9047dc47a984a062c17d5777	The Blackest Path II	2024-10-26	a91bcaf7db7d174ee2966d9c293fd575	0	35.0	2	\N
-f311f7681e474c2937481923ae6a0445	Modern primitive Tour 2024	2024-10-29	c72b4173a6a7131bf31a711212305fd3	0	31.50	2	\N
-701771f4cfec0fee38bf370d6af6f8cc	40 Years Farewell Tour	2024-10-31	76f9a958c2ebbd2f42456523d749fb5e	0	58.45	2	\N
-ec1c30e91a0ca3f4d0a786488e6ad70f	Unleash the Gr*n Tour 2024	2024-11-01	09ddc8804dd5908fef3c8c0c474ad238	0	33.10	2	\N
-43a5261d50cad6c92b073e23d789dc68	Last Blast - 02.11.24	2024-11-02	a91bcaf7db7d174ee2966d9c293fd575	0	9.0	2	\N
-98fbe07eebe68a529f12602e94d37b62	Dark Superstition European Tour 2024	2024-11-04	588671317bf1864e5a95445ec51aac65	0	31.50	2	\N
-9317da510080ab43b1cf8e89f890554b	Burning Burrito Fest Vol.8 - The Burn is Real	2024-11-09	fa5218c9167a20e6b9f6bf2a139433ce	0	22.0	2	\N
-7bf774533c7117c4e139f1cb58cbedbe	The Imperium Tour	2024-11-16	d90ac22c4f2291b68cb07746d0472dbf	0	0.0	2	\N
-5a1a238b946013e16ff5db077b9f5ae6	Beast agaist Beast European Tour 2024	2024-11-22	09ddc8804dd5908fef3c8c0c474ad238	0	30.9	2	\N
-f9b4f5ba6cb5f7721ce1e55d68a918b8	Hell over Aschaffenburg - 2024	2024-11-23	b13f71a1a5f7e89c2603d5241c2aca25	0	32.5	2	\N
-95fea685e14cf598f5a22e82371ebaac	European Tour Fall 2024	2024-11-25	051fa36efd99a2ae24d56b198e7b1992	0	40.70	2	\N
-9cfee73dcb4ebeba48366c0fd1d4fe3a	Metal Mainz III	2024-12-20	a91bcaf7db7d174ee2966d9c293fd575	0	11.0	2	\N
-aa8eed75496c33d578cfad09e49bc803	Krøterverg til Europa 2024	2025-02-27	588671317bf1864e5a95445ec51aac65	0	42.1	2	\N
-48b3e4e082a150ee45ac1229b6c556bc	Live on Stage - 23.03.2024	2024-03-23	17648f3308a5acb119d9aee1b5eafceb	0	15	2	\N
-a53dce25b80bd1caf2f1aa7ea602ed63	Live on Stage - 16.09.2023	2023-09-16	17648f3308a5acb119d9aee1b5eafceb	0	14	2	\N
-ca3f4984b3956024054e62665febcc6a	Live on Stage - 21.12.2024	2024-12-21	17648f3308a5acb119d9aee1b5eafceb	0	12.0	2	\N
-85da33004945be2270c841e38d7d7be4	The Ides of March	2025-03-07	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N
-c65ee59c92bf87259bb6081ac1066701	Rocken im Winter Festival 2024	2024-12-28	2dd00779b7dd00b6cbbc574779ba1f40	0	23.20	2	\N
-2b23c45d7b18dfccde35439462716807	Hier ist kein Licht Tour	2025-01-11	a91bcaf7db7d174ee2966d9c293fd575	0	14.45	2	\N
-27eb08ae0128e38418359de5030cba15	Asagraum & Helleruin	2025-01-17	09ddc8804dd5908fef3c8c0c474ad238	0	28.50	2	\N
-dc3e783425dbba6bb13a0b09e3d8a473	Pagan Metal Matinee	2025-01-19	f3a90318abb3e16166d96055fd6f9096	0	16.5	2	\N
-33fc414b35e2153721f8e19b5b2aa1eb	Die letzte Open Stage im ATG	2025-01-18	17648f3308a5acb119d9aee1b5eafceb	0	0.0	2	\N
-50870ec5cfc0a18f40002a123c288af6	The Terrasitic Reconquest Tour 2025	2025-01-26	588671317bf1864e5a95445ec51aac65	0	42.0	2	\N
-f869730b71701b478d8d44e485d96b96	Exhume the Metal Festival VIII	2025-01-31	4e1c34ddafa9b33187fb34b43ceb2010	1	30.0	2	\N
-87e221b0a60c5938389dcc7d10b93bdb	Contest 2025	2025-02-07	9c26f60f17bb584dff3b85695fd2b284	0	5.0	2	\N
-011099caab06f3d2db53743ae5957c7a	Texas Cornflake Massacre + Magefa + Gefrierbrand + Crossbreaker	2025-02-15	5948b7ac21c1697473de19197df1f172	0	16.0	2	\N
-792b6818a251bf73eba4fa85d61ede60	XIV Dark Centuries + Blood Fire Death + Apostasie + Kryss	2025-03-08	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2	\N
-ca5f18706516d234e9451661a60dfc42	Motörhead Tribute Night - ATG Mainz	2024-12-27	17648f3308a5acb119d9aee1b5eafceb	0	3.0	2	DJ Serkan
-ae82bb9482568660cddc425beb03eff5	The Art of Destruction	2025-03-12	de64de56f43ca599fc450a9e0dc4ff25	0	14.3	2	Kinoabend - Destruction Film
-72281605945dfd768083800bc06c5946	Heidelberg Deathfest VIII	2025-03-15	c72b4173a6a7131bf31a711212305fd3	0	63.0	2	\N
-c6a597721969cadfa790ad9ad3ed0864	All its Grace + Desdemonia + Failed Star	2025-03-14	a91bcaf7db7d174ee2966d9c293fd575	0	14.0	2	\N
-3aef806ce4cb250c0043ec647bcf564f	Pinch Black + Greh	2025-03-22	0280c9c3b98763f5a8d2ce7e97ce1b05	0	16.32	2	\N
-d869f28f4e7a04e5f9254884229d8321	WARFIELD "With The Old Breed" Album-Release-Show	2025-03-28	09ddc8804dd5908fef3c8c0c474ad238	0	20.8	2	\N
-a8a45074ca24548875765e3388541cb5	The Unholy Trinity Tour 2025	2025-04-16	588671317bf1864e5a95445ec51aac65	0	66.6	2	\N
-0d833b14e1535c06601ef6a143deec65	Pälzer Hell Version 6.66	2025-04-12	b5c6ef76dd3784cc976d507c890973c3	0	40.0	2	\N
-872789acfd93b013e7120139be311a9b	Circle Pitournium Tour 2025	2025-04-21	f3a90318abb3e16166d96055fd6f9096	0	28.50	2	\N
-39e647252a3660f128e1db434425a6b5	Landkrieg Tour 2025	2025-04-19	0280c9c3b98763f5a8d2ce7e97ce1b05	0	19.47	2	\N
-6fdd99079a021b528ade2eeb7bccf557	Beyond the Black Tour 2025	2025-04-23	f3a90318abb3e16166d96055fd6f9096	0	38.40	2	\N
-ba4f16ee383be93dc3910799dddf825f	Slashing Europe Tour 2025	2025-04-24	67bac16ced3de0e99516cf21505718a1	0	28.3	2	\N
-14fe51ec33ca22dc325984acbdbf993b	Within the Viscera - Tour 2025	2025-04-25	70e3be15841015765ac6faf4000cba1b	0	20.3	2	\N
-d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-26	5153224699fbab6022955f5aac79e68f	0	28.0	2	\N
-45741da54cd02bf8b9c209acbf2ff2ae	Veins of Fire Tour 2025	2025-05-01	588671317bf1864e5a95445ec51aac65	0	29.35	2	\N
-856a9c4ee67dd6bc538f83f783d19997	Hymns for a Downfall	2025-05-02	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N
-9be905c75a23a8d26b4bd718fc72511a	Blutsäge des Todes und Witchkrieg	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N
-965b7e5dbed14563dd9ffce3a3e76dcb	Morbide Klänge V	2025-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	20.0	2	\N
-7320993a151875af6faf0e958b1d77db	Grabbenacht Festival 2025	2025-05-30	010c9e9e86100e63919a6051b399d662	1	59.0	1	\N
-89cb1695cd3dd558ca007bd73f47581e	Mayhem in the Arches - 09.2025	2025-09-20	e018b197f3176d2a85fdad95d9b1e8ba	0	15.0	2	\N
-3690ae1230c2503d3ef6f4e74f439e72	M.I.S.E Open Air 2025	2025-06-19	41b20797850d51214c644327e1a3826f	2	106.0	2	\N
-9580f7346eefe8ceb1c81a9023f1d43a	Summers's here... 2025	2025-07-04	8edfaa1884ddd9e289e61aea465d6077	0	10.0	2	\N
-43c6971608bff5d18bba661e896e832c	Green Hell Festival 2025	2025-07-05	78ca2ff75416369e990d7412de969084	0	42.0	2	\N
-4d8ee2ccf5245c3a3c2de724849e0687	Damned Days 2025	2025-07-11	05be609ce9831967baa4f12664dc4d73	1	0.0	2	\N
-6913ee1b0bbb41d6779f02caabda5021	Boarstream Open Air 2025	2025-07-18	cf1c12d42f59db3667fc162556aab169	1	75.0	2	\N
-e4797c9ad639098b7e8146199220807f	Butcher Fest IX	2025-07-25	bb70894bd8b00178cf29116a060ea1ca	0	13.0	2	\N
-876f7642806d01481e51632141b1f89c	Steel Rust and Disgust - European Tour 2025	2025-07-27	f3a90318abb3e16166d96055fd6f9096	0	32.30	2	\N
-b416282ede3488bc54fdbbef22651a42	Dortmund Deathfest 2025	2025-08-01	9be6de3bc5073483dcbbcbc1b40af4d8	1	108.90	2	\N
-b39fbc8a057b87e9355e3e2846a93c7a	Europe/UK Summer 2025	2025-08-04	588671317bf1864e5a95445ec51aac65	0	23.85	2	\N
-3a3eff448d9ea1da199b2f0f0f0d3ce3	Party San Open Air 2025	2025-08-07	b27e07993299ee0b2ecd26dabd77eaf8	2	149.99	2	\N
-077973565f39e9fab2bb87e1660b6261	In the other Side European Summer Tour 2025	2025-08-12	eca8fc96e027328005753be360587de2	0	35.0	2	\N
-c9de0ba86f9340234a0d1e7fc5d2464f	Europe Summer 2025	2025-08-14	cbe111af36bc52e4f7eca7b90b00f859	0	47.75	2	\N
-99da45a952123aae33e4d916a261bb51	Death Feast Open Air 2025	2025-08-21	6a21939c14c8f6030de787b05d66c3ef	2	97.90	2	\N
-ba90695c1c818d06413d702123cebc70	Infernal Bloodshed over Europe 2025	2025-06-03	83b0fe992121ae7d39f6bcc58a48160c	0	39.75	2	\N
-11ea4424d878e567abfa1ee13d33d9f5	Break Out Open Air 2025	2025-09-05	5047e616d4875f9deadaa881bdcb331f	1	128.0	2	\N
-daaa95ecaf12ed9872a1f2fee19068d6	Metal Embrace Festival XVII	2025-09-12	05be609ce9831967baa4f12664dc4d73	1	55.5	2	\N
-57a334acb665ebc52057791d107149f4	57. Wernigeröder Rathausfest	2023-06-16	a7f15733dd688dee75571597f8636ba7	0	0	2	\N
+COPY music.events (id_event, event, date_event, id_place, duration, price, persons, note, is_festival, popular_name) FROM stdin;
+da4794bdc2159737a4c338392a856359	Guido's Super Sweet 16 (30. jubilee)	2018-04-27	17648f3308a5acb119d9aee1b5eafceb	0	9.00	2	\N	f	\N
+8b0e6056132f11cfb7968cf303ff0154	Guido's sassy 17 (30th edition)	2019-04-26	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2	\N	f	\N
+cc02ce2d003fd86ba60f8688e6c40b97	Halloween Party 2019	2019-10-31	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2	\N	f	\N
+74480c2ba717722022d58038ab1bcd44	SARCOFAGO TRIBUTE (Fabio Jhasko)	2021-11-25	f3a90318abb3e16166d96055fd6f9096	0	20	2	\N	f	\N
+5e6a61fa17bf86a738024508581f11d4	HateSphere, sign of death	2023-06-03	f3a90318abb3e16166d96055fd6f9096	0	18.70	2	\N	f	\N
+45e481facaabaefb537716312cbb9f67	Morbidfest	2022-04-19	f3a90318abb3e16166d96055fd6f9096	0	33.00	2	\N	f	\N
+1845ce3f5f191d7265d512beb6be1708	Oblivion European Tour 2023	2023-08-10	f3a90318abb3e16166d96055fd6f9096	0	30.00	2	\N	f	\N
+84565434746de9ae0cd3baf57fcfd87d	Heidelberg Deathfest Warm-Up-Show 2024	2024-02-24	f3a90318abb3e16166d96055fd6f9096	0	30.70	2	\N	f	\N
+87d1f3bfe03274952aa29304eb82d9d9	The Path of Death 7	2018-10-20	a91bcaf7db7d174ee2966d9c293fd575	0	15.00	2	\N	f	\N
+bd4a5e87854fd4d729983f3ac9bc7268	The Path of Death 6	2017-10-14	a91bcaf7db7d174ee2966d9c293fd575	0	14.00	2	\N	f	\N
+e70608c5455336dfc61d221e145f51cd	Rock-N-Pop Youngsters 2019	2019-03-15	a91bcaf7db7d174ee2966d9c293fd575	0	0.00	2	\N	f	\N
+2bc0eb6a40bd1e2409b2722039152679	1. Mainzer Rock & Metal Fastnachts-Party	2019-03-02	a91bcaf7db7d174ee2966d9c293fd575	0	5.00	2	\N	f	\N
+f2da218ba072addd567741ba722037e4	The Path of Death 9	2021-11-13	a91bcaf7db7d174ee2966d9c293fd575	0	25.00	2	\N	f	\N
+b17a925acc0a591c2be6f84376007717	The Path of Death 8	2019-10-26	a91bcaf7db7d174ee2966d9c293fd575	0	14.00	2	\N	f	\N
+3d3cf571367952ee016599bba2ef18cb	Doom over Mainz	2019-09-21	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N	f	\N
+c61c9363d160c5f94193056388d9ced9	Light to the blind, Slaughterra, All its Grace	2019-03-29	a91bcaf7db7d174ee2966d9c293fd575	0	10	2	\N	f	\N
+5165e8c183dbda4c319239e9f631b6f9	The Blackest Path	2022-10-08	a91bcaf7db7d174ee2966d9c293fd575	0	30.00	2	\N	f	\N
+06ed605b83d95d5a8488293416ceb999	Horresque & Guests	2022-05-13	a91bcaf7db7d174ee2966d9c293fd575	0	10.00	2	\N	f	\N
+cb4c2743c35bb374ab32d475ce8cfafe	Morbide Klänge II	2023-05-12	a91bcaf7db7d174ee2966d9c293fd575	0	15	2	\N	f	\N
+fbae6c1da1deba5dd51f5d07007ec5ab	Warfield / Purify / Sober Truth	2018-02-17	fc9917fb6f46c0eb12f1e429a33ba66b	0	10	2	\N	f	\N
+eeba68f0a1003dce9bd66066b82dc1b6	Heidelberg Deathfest III	2018-03-24	c72b4173a6a7131bf31a711212305fd3	0	35.00	2	\N	f	\N
+f6fecea2db8afd44e1ad77f699d38fe9	Heidelberg Deathfest IV	2019-03-23	c72b4173a6a7131bf31a711212305fd3	0	40.00	2	\N	f	\N
+568359348ea05d7114e3d796d7df55f2	Heidelberg Deathfest VI	2023-03-18	c72b4173a6a7131bf31a711212305fd3	0	55.21	2	\N	f	\N
+d3c946cf8862b847404204ab7d0cfc39	Campaing for musical destruction	2023-03-03	c72b4173a6a7131bf31a711212305fd3	0	34.00	2	\N	f	\N
+dc741cac8e46d127f4ce2524e5dbefa0	Heidelberg Deathfest V	2022-03-19	c72b4173a6a7131bf31a711212305fd3	0	42.00	2	\N	f	\N
+a4ef4e4104ed8bdd818771ca2ea34127	Völkerball in Mainz	2018-07-27	1b90e6739989e49dd0c81f338b61c134	0	0.00	2	\N	f	\N
+3fd69863958a8c69582d9f5bd6c82681	Südpfalz Metalfest	2020-09-25	6dde0719f779b373e62a7283e717d384	0	13.00	2	\N	f	\N
+24756eb800986d0cb679e4c78d8a06c2	Darkness approaching	2019-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	7.00	2	\N	f	\N
+d7010a272554c22fa8d53efc81046bce	Death Over Mainz 2023	2023-04-21	a91bcaf7db7d174ee2966d9c293fd575	0	11.00	2	\N	f	\N
+ff9a901a93946ada59ef15661fd395e1	Death Metal night - 11.2023	2023-11-04	a91bcaf7db7d174ee2966d9c293fd575	0	9.80	2	\N	f	\N
+2917a0b7da3498cad2a82a57e509346e	Downfall of Mankind Tour 2019	2019-05-07	5208c9de2f1b498a350984d55bcbc314	0	18.0	2	\N	f	\N
+1e33e72fc8ecaa5f931f8f9cda7a38ed	Live on Stage - 22.10.2022	2022-10-22	17648f3308a5acb119d9aee1b5eafceb	0	14	2	\N	f	\N
+b66b04a94d60074d595fd3acfeb73973	Live on Stage - 09.03.2024	2024-03-09	17648f3308a5acb119d9aee1b5eafceb	0	14.0	2	\N	f	\N
+2baafaeeb079bb06df7cc0531aa81ccb	Live on Stage - 06.05.2023	2023-05-06	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2	\N	f	\N
+791a234c3e78612495c07d7d49defc4c	Profanation over Europe 2024	2024-03-20	588671317bf1864e5a95445ec51aac65	0	29.20	2	\N	f	\N
+79b4deb2eac122cc633196f32cf65670	Where Owls know my name EU|UK Tour 2019	2019-09-22	588671317bf1864e5a95445ec51aac65	0	24.70	2	\N	f	\N
+5fd9b4c8df6e69c50106703b7d050a3d	The modern art of setting ablaze tour	2018-12-08	588671317bf1864e5a95445ec51aac65	0	23.20	2	\N	f	\N
+cb80a6a84ec46f085ea6b2ff30a88d80	Molotov	2016-07-25	588671317bf1864e5a95445ec51aac65	0	24.50	2	\N	f	\N
+921e9baf14e4134100c7b7a475b1bb06	EMP Persistence Tour 2017	2017-01-24	588671317bf1864e5a95445ec51aac65	0	32.30	2	\N	f	\N
+07da0c8ead421197cc73463cf5a5eefc	Death is just the beginning	2018-10-18	588671317bf1864e5a95445ec51aac65	0	32.10	2	\N	f	\N
+133416b949a72009242c85d5af911b93	Kreator, Sepultura, Soilwork, Aborted	2017-02-17	588671317bf1864e5a95445ec51aac65	0	42.00	2	\N	f	\N
+20b32a6bbc813658d242a65c08bc8140	The Popestar Tour 2017	2017-04-09	588671317bf1864e5a95445ec51aac65	0	33.50	2	\N	f	\N
+50e128ce6587bfcaedf317f6deb69695	Before we go Farewell Tour 2016	2016-02-11	588671317bf1864e5a95445ec51aac65	0	17.45	2	\N	f	\N
+c9dc004fc3d039ad7fb49456e5902b01	Conan	2017-03-08	588671317bf1864e5a95445ec51aac65	0	18.00	2	\N	f	\N
+1e144cd25de2ab5d9153d38c674c1f4b	MTV's Headbangers Ball Tour 2018	2018-12-11	588671317bf1864e5a95445ec51aac65	0	39.80	1	\N	f	\N
+f015a601161f02a451557258793a96a1	Skindred, Zebrahead	2016-12-09	588671317bf1864e5a95445ec51aac65	0	25.70	2	\N	f	\N
+3e98ecfa6a4c765c5522f897a4a8de23	Ministry	2018-08-06	588671317bf1864e5a95445ec51aac65	0	35.80	2	\N	f	\N
+e5847f38992d20bb78aafd080c5226d4	Dia de los muertos Roadshow 2016	2016-11-11	588671317bf1864e5a95445ec51aac65	0	14.70	2	\N	f	\N
+2b6e496456bb2be5444c941692fa5d17	Will to power tour 2018	2018-02-06	588671317bf1864e5a95445ec51aac65	0	36.70	2	\N	f	\N
+de64d3821b97e63cf8800dda1e32ee53	Metal Embrace Festival XII	2018-09-07	05be609ce9831967baa4f12664dc4d73	1	25.00	2	\N	t	Metal Embrace Festival
+a17fea2a7b6cf4685417132ff574fd0a	Wacken Open Air 2022	2022-08-03	481c1aef68fb3531c92c85ccf1e8643d	3	238.00	2	\N	t	Wacken Open Air
+10c5ac379805443742025d6cf619891e	Infernum meets Porkcore Festevil 2022	2022-09-02	4806febaa9c494fdd030ee4163e33c8c	1	67.35	2	\N	t	Infernum meets Porkcore Festevil
+2ac99a5ffc2764063bc246f9fa174a71	Grill' Em All 2017	2017-09-23	3a98149817a5aafba14c1b822db056fa	0	0.00	2	\N	f	\N
+fe36a187902de9cf1aa5f42477fa1318	Grill' Em All 2022	2022-07-02	3a98149817a5aafba14c1b822db056fa	0	0.00	2	\N	f	\N
+486bf23406dec9844b97f966f4636c9b	In Flames	2017-03-24	f7f2bc012754bd5d77de32e5c2674553	0	57.45	2	\N	f	\N
+c0f93075617b7dd9db214f46876fb39d	Knife, Exorcised Gods, World of Tomorrow, When Plages Collide	2018-09-15	6e763e01d71c71e3b53502c35bfbb98c	0	7.60	2	\N	f	\N
+3e55fe6e09f2f7eaacd4052a76bcfb01	Download Germany	2022-06-24	0dbca791a775eab280cc7766794627cb	0	139.00	2	\N	f	\N
+603ef2d9ef2057c8719d0715a7de32d1	EMP Persistence Tour 2018	2018-01-23	588671317bf1864e5a95445ec51aac65	0	33.40	2	\N	f	\N
+6e18512149a51931a4faa1f51d69a61f	Dia de los muertos Roadshow 2018	2018-11-02	588671317bf1864e5a95445ec51aac65	0	14.5	2	\N	f	\N
+21913ca002c17ce3cf8a0331b2dad1c8	Winter Hostilities 2019-Tour	2019-12-04	588671317bf1864e5a95445ec51aac65	0	23.70	2	\N	f	\N
+e6273b4e07720dbd6ed7870371b86d24	World needs mosh (Wiesbaden)	2021-11-19	588671317bf1864e5a95445ec51aac65	0	14.90	2	\N	f	\N
+cb14876022caa93cf2a4a934fad74fe9	Descend into Madness Tour 2020	2020-03-11	588671317bf1864e5a95445ec51aac65	0	19.20	1	\N	f	\N
+c4c0e84be1600267ea2bd626c25dc626	The Gidim European Tour 2020	2020-03-05	588671317bf1864e5a95445ec51aac65	0	25.90	2	\N	f	\N
+ec29ea3adb2b584841d5d185e5f9135b	European Tour Summer 2019	2019-08-13	588671317bf1864e5a95445ec51aac65	0	23.70	2	\N	f	\N
+9b4752b144d294fc6799532a413fd54e	Aversions Crown | Psycroptic	2019-02-21	588671317bf1864e5a95445ec51aac65	0	23.70	2	\N	f	\N
+d988ef331f5b477753be3bae8b18412f	MTV's Headbangers Ball Tour 2019	2019-12-14	588671317bf1864e5a95445ec51aac65	0	40.75	2	\N	f	\N
+0add3cab2a932f085109a462423c3250	Dust Bolt	2019-03-07	588671317bf1864e5a95445ec51aac65	0	19.30	2	\N	f	\N
+52bb7665f1523ba2bb7481ee085ce6ec	To Drink from the Night Itself, Europe 2019	2019-12-15	588671317bf1864e5a95445ec51aac65	0	38.50	2	\N	f	\N
+cb091aafa00685c4b29954ca13e93bad	EMP Persistence Tour 2019	2019-01-24	588671317bf1864e5a95445ec51aac65	0	33.60	2	\N	f	\N
+b04e875801af3b7b787cde914be2aaed	Deserted Fear / Carnation / Hierophant	2019-03-22	588671317bf1864e5a95445ec51aac65	0	19.30	2	\N	f	\N
+e1e5ca54159d43c9400d33fdff6ac193	Amorphis & Soilwork	2019-02-13	588671317bf1864e5a95445ec51aac65	0	36.90	2	\N	f	\N
+aac480b69f1fe6472ffe7880c8ead350	The Inmost Light Tatoo 2019	2019-02-01	588671317bf1864e5a95445ec51aac65	0	10.0	2	\N	f	\N
+5379b1daf8079521f6c7de205e37f878	Netherheaven Europe 2023	2023-01-19	588671317bf1864e5a95445ec51aac65	0	30.50	2	\N	f	\N
+7b5a790fbc109d0dadb7418b17bf24e8	Post Covid European Summer Madness 2022	2022-07-19	588671317bf1864e5a95445ec51aac65	0	26.00	2	\N	f	\N
+8be553b6dfad10eac5fed512ef6c2c95	Europe 2022	2022-10-30	588671317bf1864e5a95445ec51aac65	0	36.00	2	\N	f	\N
+e692c8859fbcd0611cde731120ba09ad	Necro Sapiens Tour 2022	2022-05-05	588671317bf1864e5a95445ec51aac65	0	19.65	2	\N	f	\N
+eb5b5cec91e306a1428f52f89ef1c2ab	Doomsday Album Release Tour	2022-04-28	588671317bf1864e5a95445ec51aac65	0	23.80	2	\N	f	\N
+9295494c6983f977a609c9db84ce25e6	Sepultura - Quadra Tour Europe 2022	2022-11-21	588671317bf1864e5a95445ec51aac65	0	37.80	2	\N	f	\N
+6c6621659485878b572ac37db7d14947	Dia de los muertos Roadshow 2015	2015-11-27	588671317bf1864e5a95445ec51aac65	0	12.25	2	\N	f	\N
+1bbb8052b10792e8a86d64245d543d7a	Activate Europe 2022	2022-10-09	588671317bf1864e5a95445ec51aac65	0	23	2	\N	f	\N
+90710b6a9bf6fbbdea99a274ca058668	40 Years of Destruction Europe Tour 2023	2023-10-27	588671317bf1864e5a95445ec51aac65	0	40.30	2	\N	f	\N
+88ad18798356c6caa8fe161432d88920	Ton Steine Scherben - 2015	2015-10-01	588671317bf1864e5a95445ec51aac65	0	25	2	\N	f	\N
+40512bf59a621ffaaea463f137f395ec	Crossplane & Hängerbänd	2021-08-06	99b522e44d05813118dcf562022b4a2a	0	18.60	2	\N	f	\N
+3479db140a88fa19295f4346b1d84380	15 Years New Evil Music, Festival	2019-10-12	49d6cee27482319877690f7d0409abbd	0	44.0	2	\N	f	\N
+65302b172b9b95b0f8f692caef2e19e8	X-Mass in Hell Festival West Edition 2018	2018-12-15	49d6cee27482319877690f7d0409abbd	0	39	2	\N	f	\N
+f4e988e1e599ea5ff2d9519e59511757	Sons of Rebellion Tour 2019	2019-11-01	49d6cee27482319877690f7d0409abbd	0	26.40	2	\N	f	\N
+e6513a2614231773cfe00d0bb6178806	Prayer Of Annihilation Tour 2019	2019-10-24	49d6cee27482319877690f7d0409abbd	0	23.10	2	\N	f	\N
+aeead547d2a5b453d09a3efdf052c4cf	Easter Mosh	2023-04-12	49d6cee27482319877690f7d0409abbd	0	28.60	2	\N	f	\N
+a420ecf82bd099f63cf26c8cbc4cdf05	Horrible Death Tour 2023	2023-09-29	0280c9c3b98763f5a8d2ce7e97ce1b05	0	13.00	2	\N	f	\N
+e2a3e66f68255ed0b2a09a64a8ae55fd	Randy Hansen live in Frankfurt	2016-04-26	83b0fe992121ae7d39f6bcc58a48160c	0	22.00	2	\N	f	\N
+e6adc3e990efe83510bc9e7a483bec1a	Vikings and Lionhearts Tour 2022	2022-09-28	50eb9f93583f844e0684af399dc7fc3c	0	74.70	2	\N	f	\N
+b66fc7effb62197b91e1dacbd7b60f0f	Servant of the Road World Tour	2022-11-29	50eb9f93583f844e0684af399dc7fc3c	0	86.20	2	\N	f	\N
+a565f20390f97f9d86df144e14fe83af	We Are Not Your Kind World Tour	2020-01-29	50eb9f93583f844e0684af399dc7fc3c	0	80.40	2	\N	f	\N
+e58b815b0e0ab96b035629ec796eb579	Berserker World Tour 2019	2019-12-03	400c46fc5f22decc791a97c27363df40	0	53.95	2	\N	f	\N
+1f711336d1c518a68db9e2b4dd631e81	Back to the Roots Tour - 05.2024	2024-05-17	09ddc8804dd5908fef3c8c0c474ad238	0	23.20	2	\N	f	\N
+b098c76b1d5ba70577a0c0ba30d2170a	Fleshcrawl + Fleshsphere + Torment of Souls	2024-05-18	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2	\N	f	\N
+5e38483d273e5a8b6f777f8017bedf62	BLUTFEST 2022	2022-10-01	09ddc8804dd5908fef3c8c0c474ad238	0	23.2	2	\N	f	\N
+85935a51fb2aec086917a4eeeaef066b	Gorecrusher European Tour 2022	2022-11-19	09ddc8804dd5908fef3c8c0c474ad238	0	25.2	2	\N	f	\N
+69882c9d3cc383cd271732b068979a98	A Goat Vomit Summer	2023-07-25	09ddc8804dd5908fef3c8c0c474ad238	0	23.20	2	\N	f	\N
+ef925858ea6d5d91b5ca4b3440fa1ad1	Death Feast Open Air 2022	2022-08-25	6a21939c14c8f6030de787b05d66c3ef	2	66.50	2	\N	t	Death Feast Open Air
+e184d243eb553fcba592ae848963c1e8	Death Feast Open Air 2023	2023-08-24	6a21939c14c8f6030de787b05d66c3ef	2	85.50	2	\N	t	Death Feast Open Air
+89733d277fcf6ee00cb571b2e1d72019	Grabbenacht Festival 2018	2018-06-01	010c9e9e86100e63919a6051b399d662	1	23.00	2	\N	t	Grabbenacht Festival
+b0bc16cc4e9fefb213434d718724ec3a	Grabbenacht Festival 2019	2019-05-30	010c9e9e86100e63919a6051b399d662	1	28.00	2	\N	t	Grabbenacht Festival
+078ac0cacb2c674f16940ebd9befedd9	Grabbenacht Festival 2024	2024-05-31	010c9e9e86100e63919a6051b399d662	1	49.0	2	\N	t	Grabbenacht Festival
+91e2010dfd20c93ee84ffd12694b0f24	A Tribute to ACDC 2020	2020-03-07	539960fca282c1966cfa15e15aca1d84	0	15.00	1	\N	f	\N
+9bbe76536451d9ad44018b24d51c58aa	Rockbahnhof 2019	2019-05-18	6c33b0a7db1a4982d74edfe98239cec5	0	0	2	\N	f	\N
+3e8d7d577a332fc33e2f332ad7311e1e	Worldwired Tour 2019	2019-08-25	f17fc1362e3637ae8ede170a2a5d6bea	0	98.65	2	\N	f	\N
+be5ea4556ea2b3db3607b8e2887c9dd3	Metal Club Odinwald meets Ultimate Ruination Tour	2019-04-27	29935ed69008b59e8758afcf7eeb7d7b	0	9.00	2	\N	f	\N
+90445b62432a3d8e1f7b3640029e6fed	Worldwired Tour 2018	2018-02-16	840b0d06d6be5d714e2228a4be26cbcc	0	115.15	2	\N	f	\N
+87c20c746bae110cc55c3d32414037df	Friendship & Love Metal Fest	2020-02-15	406b32caecad16e87606fa84a77f4e35	0	3.00	2	\N	f	\N
+c4968fa5ec8f129c7fd49ffa5cb64d6e	Jubiläumswoche 25 Jahre Hexenhaus	2021-07-31	d61cb6460de2df9d1d64dc35cb293f6a	0	41.90	2	\N	f	\N
+a3c7a40013e778dc1ce7d4ae7cdcfa6d	Super Sweet 16 (Edition 36)	2024-04-20	6c55ed753e5b2355307bf2b494f2384a	0	0	2	\N	f	\N
+75560c8161a6cccdfbd7a8b59332b792	Alexander the Great in Exil	2021-09-11	6c55ed753e5b2355307bf2b494f2384a	0	11	2	\N	f	\N
+d283cb5c455d03f1f4f0ff7f82c93af6	50 Jahre Doktor Holzbein	2022-04-23	6c55ed753e5b2355307bf2b494f2384a	0	0	2	\N	f	\N
+ec83b315e34cecd0b3e8323e22ee38bf	Bands am Montag - 12.2023	2023-12-18	6c55ed753e5b2355307bf2b494f2384a	0	0.0	2	\N	f	\N
+8287859246dae330eef7b3a2a8c71390	Warfield/Torment of Souls/Redgrin	2021-10-02	44ab9f5977e8956f9dd15003efc8743b	0	10.00	2	\N	f	\N
+943f6abbf24d69a145fbac5cc30c1a5c	World needs mosh (Bonn)	2021-11-21	eb83e6da9292e995b44f789c42bb7e65	0	14.90	2	\N	f	\N
+220352d001b221b28a0dff0fbd20f77c	Slaughterra - Darmstadt	2022-03-05	6ddb911ae1e79899c2d90067b761d6b4	0	15	2	\N	f	\N
+e87aa14aa70c2745548e891915c77ab4	Dark Zodiak + Mortal Peril	2021-11-27	6ddb911ae1e79899c2d90067b761d6b4	0	15	2	\N	f	\N
+39603f44a0fea370f2f6ced327e9b38b	40 Years of the Apocalypse Anniversary Tour 2023	2023-09-26	09ddc8804dd5908fef3c8c0c474ad238	0	32.90	2	\N	f	\N
+f7995b1a1bf9683848dd37ab294cfa3f	European Fall 2023 Tour	2023-11-19	09ddc8804dd5908fef3c8c0c474ad238	0	37.30	2	\N	f	\N
+26c07de9d3c6e80d7fdaefec9a7dcdc5	50 Jahre Geisler of Hell Festival	2024-01-12	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2	\N	f	\N
+57c286b274d23dc513ddfd16dd21281e	Laud as Fuck Fest	2022-11-04	9f629f2265000ff7abf380b363b2de49	0	21.69	2	\N	f	\N
+edccf96997e63c09109beba94633a44c	REVEL IN FLESH support: TORMENT OF SOULS	2022-11-18	9f629f2265000ff7abf380b363b2de49	0	18.02	2	\N	f	\N
+bc1f2650c6129b22a2cc63f2a90b5597	Black Thunder Tour	2022-11-24	69e2a1bbdd4b334d3da05ae012836b18	0	36.85	2	\N	f	\N
+183863a44c8750e908c83bd2d1c194f8	Slice Me Nice 2022	2022-12-03	69bdcf616a03acef49e3697d73adcbb3	0	37.22	2	\N	f	\N
+86615675838b48d2003175dd7665fba3	Rumble of thunder	2023-06-27	779076573cef469faf694cd40d92f40a	0	38.85	2	\N	f	\N
+99e73f7baf95258d1a2f27df6c67294f	Thrash Metal Fest - 05.2024	2024-05-16	f3a90318abb3e16166d96055fd6f9096	0	30.0	2	\N	f	\N
+f56f7353a648997c6f5bc4a952cd1bd2	EMP Persistence Tour 2016	2016-01-22	588671317bf1864e5a95445ec51aac65	0	31.20	2	\N	f	\N
+08a5c6dec5d631fe995935fd38f389be	"The Tide of Death and fractured Dreams" European Tour 2024	2024-05-15	588671317bf1864e5a95445ec51aac65	0	36.0	2	\N	f	\N
+e26bcb0f8a28cd2229ce77a95d0baf9e	Eskalation im Oberhaus 2024	2024-02-03	b00bae5a5f8ff8830d486747e78d7d8d	0	22.00	2	\N	f	\N
+dcad795c824cf4d6337fc9f745e5645f	The young meatal attack	2024-03-02	9ca0396f7fce5729940fcef7383728b3	0	12.00	2	\N	f	\N
+e4ee5ac5d137718d0eeb4d310b97d837	Noche de los Muertos - 2017	2017-10-31	f0f0e638999829b846be6e20b5591898	0	15	2	\N	f	\N
+0a7d68cf2a103e1c99f7e6d04f1940da	Necromanteum EU/UK Tour 2024	2024-03-30	051fa36efd99a2ae24d56b198e7b1992	0	43.55	2	\N	f	\N
+2d5e1a99b20d1be28ef40573c37eb0a0	Thrash Attack - 06.04.2024	2024-04-06	5515ceaeca4b8b62ee5275de54ea77ad	0	16.52	2	\N	f	\N
+2c6ed5b74b30541da64fdbbda4a8bbe3	Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show	2024-04-12	cccce7f0011bc27dee7c60945cd5f962	0	22.0	2	\N	f	\N
+71de5246c2f4ac4766041831e93f001a	New live rituals a COVID proof celebration of audial darkness	2021-07-23	e248bb7c1164a44fa358593e28769a23	0	23.20	2	\N	f	\N
+57e44259dc61f23bef42517695d645f1	Ravaging Europe 2023	2023-03-29	e248bb7c1164a44fa358593e28769a23	0	28.70	2	\N	f	\N
+3fe511194113f53322ccac8a75e6b4ab	Gutcity Deathfest 2024	2024-05-11	2dd00779b7dd00b6cbbc574779ba1f40	0	30.60	2	\N	f	\N
+6fa3e357c27d47966023568346d51a09	Metallergrillen 2017	2017-09-01	3264a9d4fedca758f18391ecca28f0e5	1	33.0	2	\N	t	Metallergrillen
+1a2f8d593b063eccd9b1dc3431e01081	Metal Embrace Festival XIII	2019-09-06	05be609ce9831967baa4f12664dc4d73	1	25.0	2	\N	t	Metal Embrace Festival
+9f07b2ac339c32524557ba186f68b2ef	Metal Embrace Festival XIV	2022-09-09	05be609ce9831967baa4f12664dc4d73	1	37.50	2	\N	t	Metal Embrace Festival
+1edc35fdd229698b0eeaaa43e7a9c7c5	NOAF XII	2016-08-26	6c33b0a7db1a4982d74edfe98239cec5	1	35.00	2	\N	t	NOAF
+b3622323dbe3bef2319de978869871ad	NOAF XIV	2018-08-24	6c33b0a7db1a4982d74edfe98239cec5	1	42.00	2	\N	t	NOAF
+cfd1317abaf4002e4a091746008541cc	NOAF XV	2019-08-23	6c33b0a7db1a4982d74edfe98239cec5	1	42.0	2	\N	t	NOAF
+87ba4cfe4768f0efa1a69dacb770810c	Rockfield Open Air 2017	2017-08-18	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N	t	Rockfield Open Air
+208af572d4212c8b20492f11ca9b8b54	Rockfield Open Air 2019	2019-08-09	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N	t	Rockfield Open Air
+0704b2bfdcfaed5225554f023a7fbf48	Rockfield Open Air 2022	2022-08-13	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N	t	Rockfield Open Air
+169be8981eff6a53b1bcae79e2f06a05	Rockfield Open Air 2023	2023-08-11	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N	t	Rockfield Open Air
+fb57c18df776961bb734a1fa3db6a6d1	Taunus Metal Festival XIV	2024-04-05	990c04bd6b40c3ca7352a838e2208dac	0	30.00	2	\N	t	Taunus Metal Festival
+9946f5f348ac677113592c05b1b3905b	Taunus Metal Festival XI	2019-04-12	990c04bd6b40c3ca7352a838e2208dac	1	25.00	2	\N	t	Taunus Metal Festival
+8de89ad5eef951fd87bd3e013c63a6c4	Slaugther Feast 2023	2023-11-10	6032938ceb573d952fdae1a40ef39837	1	29.00	2	\N	t	Slaugther Feast
+1fef5be89b79c6e282d1af946a3bd662	Mahlstrom Open Air 2024	2024-06-14	b77734e4928596fac1db05cab7b39710	1	78.99	2	\N	t	Mahlstrom Open Air
+01e90040938d8415a8b98f0d80fceb06	Tattoo Titans in Hamburg 2024	2024-08-31	625d260d98326f7dfffd0dd49ebbfc8e	1	110.0	2	\N	t	Tattoo Titans in Hamburg
+75fea12b82439420d1f400a4fcf3386b	Völkerball	2016-05-05	15f10194f67b967b0f0b5a22561a7c95	0	23.50	2	\N	f	\N
+70ba638a78552630591ba5c7ff92b93a	Sepultura - Quadra Summer Tour - Europe 2022	2022-07-05	968e5509ddd33538eec4fff752bda4ff	0	37.31	2	\N	f	\N
+69d2999875a1e6d7c09bbf157d18a27e	Summer in the City 2023	2023-06-30	692fc1deabc4b9afa9387af15c02b19a	0	0.00	2	\N	f	\N
+42a2eedac863bd01b14540a71331ec65	Summer in the City 2018	2018-07-08	692fc1deabc4b9afa9387af15c02b19a	0	0.00	2	\N	f	\N
+4ba1c22d76444426b678b142977aa084	Breakdown4Tolerance Vol.1 Festival	2023-09-30	10effefa9cc583f38ff0518dcaa72ef5	0	25.00	2	\N	f	\N
+db92681077141614e2ee9a01df968334	Death and Gore over Frankfurt	2023-10-28	fc36c84b02e473bec246e5d2cfc513ef	0	9.00	2	\N	f	\N
+f5cd4263f2cbb5e459306b35cef72e9d	European Miserere 2023	2023-07-03	5948b7ac21c1697473de19197df1f172	0	15.00	2	\N	f	\N
+d1b30328ab686d050b6c107154d6aef8	Paganische Nacht - 2023	2023-11-24	b13f71a1a5f7e89c2603d5241c2aca25	0	29.00	2	\N	f	\N
+4e22c7f7fe57d94f85bf89a469627ba1	Hell over Aschaffenburg - 2023	2023-11-25	b13f71a1a5f7e89c2603d5241c2aca25	0	35.00	2	\N	f	\N
+9d0ac9b8cb657a5f09f81d6bea3e1798	Slice Me Nice 2023	2023-12-02	817974aa11f84c9ebc640d3de92737f5	0	33.91	2	\N	f	\N
+efdb143af86d5a0af148b7847e721e55	15 Jahre live im GMZ Georg-Buch-Haus Wiesbaden	2014-10-04	738af31c1a528baa30e7df31384e550b	0	9.00	2	\N	f	\N
+b8f41d89b2d67b4b86379d236b2492aa	Europe Summer 2024	2024-06-17	588671317bf1864e5a95445ec51aac65	0	29.30	2	\N	f	\N
+f8aec5c8465f9b8649a99873c0a44443	Asinhell Live 2024	2024-06-19	62a758afc72d2e3f7933fa4b917944c8	0	33.45	2	\N	f	\N
+a685e40a5c47edcf3a7c9c9f38155fc8	Throw them in the Van European Summer Tour 2024	2024-06-27	f3a90318abb3e16166d96055fd6f9096	0	34	2	\N	f	\N
+f4ab1c6777711952be2adceed22d7fc5	The Exloited - Das Bett - 2024	2024-06-29	83b0fe992121ae7d39f6bcc58a48160c	0	0	2	\N	f	\N
+31702e4b76bb69f9630a227d403c4ca0	Hellripper + Cloak + Sarcator	2024-07-26	67bac16ced3de0e99516cf21505718a1	0	24.80	2	\N	f	\N
+abe69e5488f1be295baa8bbf1995c657	Deicide - European Tour 2024	2024-07-29	e248bb7c1164a44fa358593e28769a23	0	34.20	2	\N	f	\N
+332be9c531b1ec341c13e5a676962820	Rock for Hille Benefiz	2018-10-27	6dde0719f779b373e62a7283e717d384	0	25.00	2	\N	f	\N
+b3d8150933aa73cc2b3ba1fc39b1651c	Vader - 40 Years of the Apocalypse Tour 2024	2024-06-28	49d6cee27482319877690f7d0409abbd	0	28.60	2	\N	f	\N
+f7787eb77e709474505db860a00edd2d	Asomvel, Warfield	2024-07-18	f3a90318abb3e16166d96055fd6f9096	0	0.0	2	\N	f	\N
+a20ba10650527a8e646bd528e4f2428e	Kreator + Havok + Crisix	2024-08-17	968e5509ddd33538eec4fff752bda4ff	0	50.55	2	\N	f	\N
+c0e1ed6923fbe4194174ad87f11179cd	Open Stage - 23.05.2024	2024-05-23	17648f3308a5acb119d9aee1b5eafceb	0	15.0	2	\N	f	\N
+83bd23b786ae4d9b16f52ed2661611e9	Motörblast Play Motörhead - 2023	2023-12-27	eca8fc96e027328005753be360587de2	0	18.60	2	\N	f	\N
+d84c3f96813116b09480c0572fa45636	Motörblast Play Motörhead - 2018	2018-12-27	eca8fc96e027328005753be360587de2	0	16.40	2	\N	f	\N
+de9415f38659fd6225ddf8734a7b0ff7	Swords into Flesh Europe Tour 2023	2023-11-07	f3a90318abb3e16166d96055fd6f9096	0	27.50	2	\N	f	\N
+be31669251922949ee5efe5447a119d1	Latin American Massacre	2023-10-20	a91bcaf7db7d174ee2966d9c293fd575	0	9.60	2	\N	f	\N
+cac02becf783662df9a61439ed515d75	The Path of Death 10	2023-10-14	a91bcaf7db7d174ee2966d9c293fd575	0	39.00	2	\N	f	\N
+f0c7879002501eddcb68564fe19b77fc	Metal im M8 - 12.2023	2023-12-09	a91bcaf7db7d174ee2966d9c293fd575	0	8.00	2	\N	f	\N
+dabaf9fe7459d022af9bf8afc729631a	Hutkonzert - 01.08.2024	2024-08-01	17648f3308a5acb119d9aee1b5eafceb	0	7.5	2	\N	f	\N
+fa92cfeec372b54d5551e5fb9aaa55af	Hutkonzert - 29.08.2024	2024-08-29	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2	\N	f	\N
+f6fbabd4858c55fea0dce0d32db9dcf5	Hutkonzert - 19.10.2023	2023-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2	\N	f	\N
+c4133d7e05b0f42aedd762785de80b70	Dread Reaver Europe 2024	2024-01-20	c72b4173a6a7131bf31a711212305fd3	0	39.50	2	\N	f	\N
+586a67dc71b225f23047ff369fce7451	Hell over Aschaffenburg - 2019	2019-11-30	b10506e85b6bf48eace09359fb36d5e0	0	30.00	2	\N	f	\N
+c6b227c4855621d0654142f2a3cad0ee	Hessian Underground Brutality 2024	2024-09-14	c792b3f05ce40f0ff54fcf79573c89b4	0	15.0	2	\N	f	\N
+099346085ef9364171db5f639475194e	Underworld Europe Tour 2024	2024-09-15	49d6cee27482319877690f7d0409abbd	0	34.0	2	\N	f	\N
+5d7e58efe4f97f6abc7174574843abbc	In Chambers of Europe 2024	2024-09-20	f3a90318abb3e16166d96055fd6f9096	0	26.0	2	\N	f	\N
+99467125829a5b728cfe913f88f19db8	20 Years New Evil Music Festival	2024-09-28	c72b4173a6a7131bf31a711212305fd3	0	66.60	2	\N	f	\N
+8e625852da508feb3e973eedd98b3a6e	A Heaven you may create. European Tour 2024 - Part 1	2024-09-29	f3a90318abb3e16166d96055fd6f9096	0	30.80	2	\N	f	\N
+e6af11cd729e7b81d4f40453fff9c7f2	Halloween mit Hängerbänd und Hellbent on Rocking	2023-10-31	17648f3308a5acb119d9aee1b5eafceb	0	11.00	2	\N	f	\N
+c724b600052083fae4765a6a7702ee5f	In Flammen Open Air 2023	2023-07-13	cb6036cdf8009fc4b41eb0e56eab553d	2	86.90	2	\N	t	In Flammen Open Air
+a601420442e567507a31586d3508e901	Black Hole Fest Germania II	2024-10-04	4dac5916befa9f4e29989cd5f717beb4	1	148.12	2	\N	t	Black Hole Fest Germania
+f869730b71701b478d8d44e485d96b96	Exhume the Metal Festival VIII	2025-01-31	4e1c34ddafa9b33187fb34b43ceb2010	1	30.0	2	\N	t	Exhume the Metal Festival
+c4e2844bff82087c924ad104bdfb6580	Exorcised Gods/Harvest their Bodies/Call of Charon/Trennjaeger	2019-11-15	a91bcaf7db7d174ee2966d9c293fd575	0	9	2	\N	f	\N
+cf1c6716920400a1d8ade1584c726f0c	Morbide Klänge III	2024-05-24	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N	f	\N
+a1127140db632705cffe06456b478fa8	Evil Obsession 2023	2023-12-28	c72b4173a6a7131bf31a711212305fd3	0	48.50	2	\N	f	\N
+ebaeb9fa7d6d4de00d7573942a9f9e78	Brutality Unleashed Tour 2022	2022-09-05	0280c9c3b98763f5a8d2ce7e97ce1b05	0	15.00	2	\N	f	\N
+22be8d2b712105db37cc765fae61323e	"Morbid Devastation"-Tour	2023-11-17	588671317bf1864e5a95445ec51aac65	0	39.80	2	\N	f	\N
+94c9c5cc90aa696fcef2944a63f182e9	European Tour 2024	2024-10-01	c72b4173a6a7131bf31a711212305fd3	0	48.95	2	\N	f	\N
+e2cc1ec7e3f092bf9acff95c49b4601f	Apocalyptica Plays Metallica Vol. 2 Tour 2024	2024-10-07	588671317bf1864e5a95445ec51aac65	0	55.40	2	\N	f	\N
+f91e581750aef0db0551fafb15367bd9	Rising from the North Tour 2024	2024-10-09	c8f566954fe846be7d35f707901d7bf5	0	69.0	1	\N	f	\N
+0b050e993c77bc785f1a5ee9dd0c0cca	Milking the Goatmachine + Craving + Call of the Void	2024-10-12	9891ba35bb7474ae750bdbf62a4eee4f	0	25.73	1	\N	f	\N
+aa32f037a3d1ff9264faa5c3f0f65079	Feed the Goat Tour 2024	2024-10-25	b9a697f7f6fe15cad76add1dd64b688f	0	20.0	2	\N	f	\N
+0b3f22fe9047dc47a984a062c17d5777	The Blackest Path II	2024-10-26	a91bcaf7db7d174ee2966d9c293fd575	0	35.0	2	\N	f	\N
+f311f7681e474c2937481923ae6a0445	Modern primitive Tour 2024	2024-10-29	c72b4173a6a7131bf31a711212305fd3	0	31.50	2	\N	f	\N
+701771f4cfec0fee38bf370d6af6f8cc	40 Years Farewell Tour	2024-10-31	76f9a958c2ebbd2f42456523d749fb5e	0	58.45	2	\N	f	\N
+ec1c30e91a0ca3f4d0a786488e6ad70f	Unleash the Gr*n Tour 2024	2024-11-01	09ddc8804dd5908fef3c8c0c474ad238	0	33.10	2	\N	f	\N
+43a5261d50cad6c92b073e23d789dc68	Last Blast - 02.11.24	2024-11-02	a91bcaf7db7d174ee2966d9c293fd575	0	9.0	2	\N	f	\N
+98fbe07eebe68a529f12602e94d37b62	Dark Superstition European Tour 2024	2024-11-04	588671317bf1864e5a95445ec51aac65	0	31.50	2	\N	f	\N
+9317da510080ab43b1cf8e89f890554b	Burning Burrito Fest Vol.8 - The Burn is Real	2024-11-09	fa5218c9167a20e6b9f6bf2a139433ce	0	22.0	2	\N	f	\N
+7bf774533c7117c4e139f1cb58cbedbe	The Imperium Tour	2024-11-16	d90ac22c4f2291b68cb07746d0472dbf	0	0.0	2	\N	f	\N
+5a1a238b946013e16ff5db077b9f5ae6	Beast agaist Beast European Tour 2024	2024-11-22	09ddc8804dd5908fef3c8c0c474ad238	0	30.9	2	\N	f	\N
+f9b4f5ba6cb5f7721ce1e55d68a918b8	Hell over Aschaffenburg - 2024	2024-11-23	b13f71a1a5f7e89c2603d5241c2aca25	0	32.5	2	\N	f	\N
+95fea685e14cf598f5a22e82371ebaac	European Tour Fall 2024	2024-11-25	051fa36efd99a2ae24d56b198e7b1992	0	40.70	2	\N	f	\N
+9cfee73dcb4ebeba48366c0fd1d4fe3a	Metal Mainz III	2024-12-20	a91bcaf7db7d174ee2966d9c293fd575	0	11.0	2	\N	f	\N
+aa8eed75496c33d578cfad09e49bc803	Krøterverg til Europa 2024	2025-02-27	588671317bf1864e5a95445ec51aac65	0	42.1	2	\N	f	\N
+48b3e4e082a150ee45ac1229b6c556bc	Live on Stage - 23.03.2024	2024-03-23	17648f3308a5acb119d9aee1b5eafceb	0	15	2	\N	f	\N
+a53dce25b80bd1caf2f1aa7ea602ed63	Live on Stage - 16.09.2023	2023-09-16	17648f3308a5acb119d9aee1b5eafceb	0	14	2	\N	f	\N
+ca3f4984b3956024054e62665febcc6a	Live on Stage - 21.12.2024	2024-12-21	17648f3308a5acb119d9aee1b5eafceb	0	12.0	2	\N	f	\N
+85da33004945be2270c841e38d7d7be4	The Ides of March	2025-03-07	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N	f	\N
+c65ee59c92bf87259bb6081ac1066701	Rocken im Winter Festival 2024	2024-12-28	2dd00779b7dd00b6cbbc574779ba1f40	0	23.20	2	\N	f	\N
+2b23c45d7b18dfccde35439462716807	Hier ist kein Licht Tour	2025-01-11	a91bcaf7db7d174ee2966d9c293fd575	0	14.45	2	\N	f	\N
+27eb08ae0128e38418359de5030cba15	Asagraum & Helleruin	2025-01-17	09ddc8804dd5908fef3c8c0c474ad238	0	28.50	2	\N	f	\N
+dc3e783425dbba6bb13a0b09e3d8a473	Pagan Metal Matinee	2025-01-19	f3a90318abb3e16166d96055fd6f9096	0	16.5	2	\N	f	\N
+33fc414b35e2153721f8e19b5b2aa1eb	Die letzte Open Stage im ATG	2025-01-18	17648f3308a5acb119d9aee1b5eafceb	0	0.0	2	\N	f	\N
+50870ec5cfc0a18f40002a123c288af6	The Terrasitic Reconquest Tour 2025	2025-01-26	588671317bf1864e5a95445ec51aac65	0	42.0	2	\N	f	\N
+87e221b0a60c5938389dcc7d10b93bdb	Contest 2025	2025-02-07	9c26f60f17bb584dff3b85695fd2b284	0	5.0	2	\N	f	\N
+011099caab06f3d2db53743ae5957c7a	Texas Cornflake Massacre + Magefa + Gefrierbrand + Crossbreaker	2025-02-15	5948b7ac21c1697473de19197df1f172	0	16.0	2	\N	f	\N
+792b6818a251bf73eba4fa85d61ede60	XIV Dark Centuries + Blood Fire Death + Apostasie + Kryss	2025-03-08	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2	\N	f	\N
+ca5f18706516d234e9451661a60dfc42	Motörhead Tribute Night - ATG Mainz	2024-12-27	17648f3308a5acb119d9aee1b5eafceb	0	3.0	2	DJ Serkan	f	\N
+ae82bb9482568660cddc425beb03eff5	The Art of Destruction	2025-03-12	de64de56f43ca599fc450a9e0dc4ff25	0	14.3	2	Kinoabend - Destruction Film	f	\N
+72281605945dfd768083800bc06c5946	Heidelberg Deathfest VIII	2025-03-15	c72b4173a6a7131bf31a711212305fd3	0	63.0	2	\N	f	\N
+c6a597721969cadfa790ad9ad3ed0864	All its Grace + Desdemonia + Failed Star	2025-03-14	a91bcaf7db7d174ee2966d9c293fd575	0	14.0	2	\N	f	\N
+3aef806ce4cb250c0043ec647bcf564f	Pinch Black + Greh	2025-03-22	0280c9c3b98763f5a8d2ce7e97ce1b05	0	16.32	2	\N	f	\N
+d869f28f4e7a04e5f9254884229d8321	WARFIELD "With The Old Breed" Album-Release-Show	2025-03-28	09ddc8804dd5908fef3c8c0c474ad238	0	20.8	2	\N	f	\N
+ba4f16ee383be93dc3910799dddf825f	Slashing Europe Tour 2025	2025-04-24	67bac16ced3de0e99516cf21505718a1	0	28.3	2	\N	f	\N
+14fe51ec33ca22dc325984acbdbf993b	Within the Viscera - Tour 2025	2025-04-25	70e3be15841015765ac6faf4000cba1b	0	20.3	2	\N	f	\N
+d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-26	5153224699fbab6022955f5aac79e68f	0	28.0	2	\N	f	\N
+45741da54cd02bf8b9c209acbf2ff2ae	Veins of Fire Tour 2025	2025-05-01	588671317bf1864e5a95445ec51aac65	0	29.35	2	\N	f	\N
+856a9c4ee67dd6bc538f83f783d19997	Hymns for a Downfall	2025-05-02	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N	f	\N
+95e6dc1125e477e58c9f5bdb1bdd53ac	Grabbenacht Festival 2023	2023-06-09	010c9e9e86100e63919a6051b399d662	1	45.00	2	\N	t	Grabbenacht Festival
+a8a45074ca24548875765e3388541cb5	The Unholy Trinity Tour 2025	2025-04-16	588671317bf1864e5a95445ec51aac65	0	66.6	2	\N	f	\N
+0d833b14e1535c06601ef6a143deec65	Pälzer Hell Version 6.66	2025-04-12	b5c6ef76dd3784cc976d507c890973c3	0	40.0	2	\N	f	\N
+872789acfd93b013e7120139be311a9b	Circle Pitournium Tour 2025	2025-04-21	f3a90318abb3e16166d96055fd6f9096	0	28.50	2	\N	f	\N
+39e647252a3660f128e1db434425a6b5	Landkrieg Tour 2025	2025-04-19	0280c9c3b98763f5a8d2ce7e97ce1b05	0	19.47	2	\N	f	\N
+6fdd99079a021b528ade2eeb7bccf557	Beyond the Black Tour 2025	2025-04-23	f3a90318abb3e16166d96055fd6f9096	0	38.40	2	\N	f	\N
+9be905c75a23a8d26b4bd718fc72511a	Blutsäge des Todes und Witchkrieg	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
+965b7e5dbed14563dd9ffce3a3e76dcb	Morbide Klänge V	2025-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	20.0	2	\N	f	\N
+89cb1695cd3dd558ca007bd73f47581e	Mayhem in the Arches - 09.2025	2025-09-20	e018b197f3176d2a85fdad95d9b1e8ba	0	15.0	2	\N	f	\N
+9580f7346eefe8ceb1c81a9023f1d43a	Summers's here... 2025	2025-07-04	8edfaa1884ddd9e289e61aea465d6077	0	10.0	2	\N	f	\N
+e4797c9ad639098b7e8146199220807f	Butcher Fest IX	2025-07-25	bb70894bd8b00178cf29116a060ea1ca	0	13.0	2	\N	f	\N
+876f7642806d01481e51632141b1f89c	Steel Rust and Disgust - European Tour 2025	2025-07-27	f3a90318abb3e16166d96055fd6f9096	0	32.30	2	\N	f	\N
+b39fbc8a057b87e9355e3e2846a93c7a	Europe/UK Summer 2025	2025-08-04	588671317bf1864e5a95445ec51aac65	0	23.85	2	\N	f	\N
+077973565f39e9fab2bb87e1660b6261	In the other Side European Summer Tour 2025	2025-08-12	eca8fc96e027328005753be360587de2	0	35.0	2	\N	f	\N
+c9de0ba86f9340234a0d1e7fc5d2464f	Europe Summer 2025	2025-08-14	cbe111af36bc52e4f7eca7b90b00f859	0	47.75	2	\N	f	\N
+ba90695c1c818d06413d702123cebc70	Infernal Bloodshed over Europe 2025	2025-06-03	83b0fe992121ae7d39f6bcc58a48160c	0	39.75	2	\N	f	\N
+57a334acb665ebc52057791d107149f4	57. Wernigeröder Rathausfest	2023-06-16	a7f15733dd688dee75571597f8636ba7	0	0	2	\N	f	\N
+8a48b001d26cf3023ac469d68bfba185	NOAF XIII	2017-08-25	6c33b0a7db1a4982d74edfe98239cec5	1	38.00	2	\N	t	NOAF
+dc19b6ddc47a55bc9401384b0ff66260	29. Wave-Gotik-Treffen	2022-06-05	efeaa516107a31ce2d1217e055b767f7	1	130.00	2	\N	t	Wave-Gotik-Treffen
+55446132347a3c2e38997d77b7641eff	28. Wave-Gotik-Treffen	2019-06-08	efeaa516107a31ce2d1217e055b767f7	1	130.00	2	\N	t	Wave-Gotik-Treffen
+7dc88a28ee5d7dbd7a1011fd098cd6ab	Way of Darkness 2019	2019-10-04	a04166db1f1c6d75ab79b04756750bf5	1	62.00	2	\N	t	Way of Darkness
+e669a39d1453acd6aefc84913a985f51	Matapaloz Festival 2017	2017-06-16	0dbca791a775eab280cc7766794627cb	1	170.99	2	\N	t	Matapaloz Festival
+f64440cda54890f13a4506f88aa21cd2	Rockharz Open Air 2019	2019-07-03	ed2c8a76cc01eeb645011e8154737a49	2	112.75	2	\N	t	Rockharz Open Air
+94154f6cf17963a299f6902ae9c7f3d5	Braincrusher in Hell 2020	2022-05-20	ca7fb13a9cd0887dfabbb573c070fb2e	1	70.40	2	\N	t	Braincrusher in Hell
+f8bb8ae77ca110cf00ebb5af1d495203	Heavy metal gegen Mikroplastik	2019-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2	\N	f	\N
+759144a13dee6936c81d0fce2eaaba06	Jomsviking European Tour 2016	2016-11-17	76f9a958c2ebbd2f42456523d749fb5e	0	40.40	2	\N	f	\N
+6c7cfe3af936c1590949350fc7d912d3	Fintroll + Metsatöll + Suotana Tour 2024	2024-04-22	eca8fc96e027328005753be360587de2	0	34.00	2	\N	f	\N
+9952e1e08fb8f493c66f5cf386ba7e06	Night on the Living Thrash Tour 2023	2023-11-09	eca8fc96e027328005753be360587de2	0	39.50	2	\N	f	\N
+91f86c2abd4b3c5f884c3947c424f70a	Cannibal Corpse, European Summer Tour 2019	2019-06-30	eca8fc96e027328005753be360587de2	0	30.00	2	\N	f	\N
+d4dafcc2060475c01e6b4f6f3cb5c488	"Still Cyco Punk" World Wide Tour 2018	2018-11-04	eca8fc96e027328005753be360587de2	0	34.00	2	\N	f	\N
+0601414fd50328355d256db5037bc430	Celebrating the music of Jimi Hendrix	2024-05-01	f3a90318abb3e16166d96055fd6f9096	0	24.20	2	\N	f	\N
+8b3c931e31a2c5dbb3155dab7dade775	Shades of Sorrow European Tour 2024	2024-05-04	f3a90318abb3e16166d96055fd6f9096	0	27.30	2	\N	f	\N
+bf65ac5101f339e8c8d756e99c49a829	Angelus Apatrida - Tour 2022	2022-07-28	f3a90318abb3e16166d96055fd6f9096	0	16.50	2	\N	f	\N
+2dac37a155782e0b3d86fc00d42b53d0	Hate, Keep of Kalessin	2024-05-02	f3a90318abb3e16166d96055fd6f9096	0	25.30	2	\N	f	\N
+cbe2729e13ce90825f88f2fc3a0bce55	Slamming Annihilation European Tour 2018	2018-05-21	f3a90318abb3e16166d96055fd6f9096	0	18.00	2	\N	f	\N
+08f8c67c20c4ba43e8ba6fa771039c94	Debauchery's Balgeroth	2018-11-03	f3a90318abb3e16166d96055fd6f9096	0	18.00	2	\N	f	\N
+11a728ed9e3a6aac1b46277a7302b15f	Hell over Europe II	2018-11-24	f3a90318abb3e16166d96055fd6f9096	0	24.00	2	\N	f	\N
+1b76db5ef5f13c3451dcc06344fae248	Warfield - Café Central	2022-02-05	f3a90318abb3e16166d96055fd6f9096	0	0.00	2	\N	f	\N
+d3bda1e9de8bc6d585f37b739264d649	Crisix, Insanity Alert	2021-09-16	f3a90318abb3e16166d96055fd6f9096	0	19.70	2	\N	f	\N
+a01b8b09fc0dea9192cb02b077bfae9f	Pagan Metal Festival	2019-11-03	f3a90318abb3e16166d96055fd6f9096	0	26.30	2	\N	f	\N
+74b2dd70f761e31a1e0860fe18f8cb55	Ektomorf - The legion of fury tour 2019	2019-04-25	f3a90318abb3e16166d96055fd6f9096	0	26.40	2	\N	f	\N
+3b23d8e33c40737f5ca4b3a0fbb54542	Eis und Nacht Tour 2020	2020-01-24	f3a90318abb3e16166d96055fd6f9096	0	24.10	2	\N	f	\N
+7459412d1907ec1a87e7a5246b27cd00	Wild Boar Wars III	2021-08-28	83b0fe992121ae7d39f6bcc58a48160c	1	30.00	2	\N	t	Wild Boar Wars
+3690ae1230c2503d3ef6f4e74f439e72	M.I.S.E Open Air 2025	2025-06-19	41b20797850d51214c644327e1a3826f	2	106.0	2	\N	t	M.I.S.E Open Air
+43c6971608bff5d18bba661e896e832c	Green Hell Festival 2025	2025-07-05	78ca2ff75416369e990d7412de969084	0	42.0	2	\N	t	Green Hell Festival
+4d8ee2ccf5245c3a3c2de724849e0687	Damned Days 2025	2025-07-11	05be609ce9831967baa4f12664dc4d73	1	0.0	2	\N	t	Damned Days
+11ea4424d878e567abfa1ee13d33d9f5	Break Out Open Air 2025	2025-09-05	5047e616d4875f9deadaa881bdcb331f	1	128.0	2	\N	t	Break Out Open Air
+33314b620ad609dc87d035654068d01e	30. Wave-Gotik-Treffen	2023-05-26	efeaa516107a31ce2d1217e055b767f7	3	170.00	2	\N	t	Wave-Gotik-Treffen
+b39ff9f6960957839c401d45abdc3cae	Boarstream Open Air 2023	2023-07-21	cf1c12d42f59db3667fc162556aab169	1	66.60	2	\N	t	Boarstream Open Air
+ddf663d64f6daaeb9c8eb11fe3396ffb	Boarstream Open Air 2024	2024-06-21	cf1c12d42f59db3667fc162556aab169	1	75.00	2	\N	t	Boarstream Open Air
+6913ee1b0bbb41d6779f02caabda5021	Boarstream Open Air 2025	2025-07-18	cf1c12d42f59db3667fc162556aab169	1	75.0	2	\N	t	Boarstream Open Air
+2c5cad7b6d76825edcfbd5d077e7a5ee	Death Feast Open Air 2024	2024-08-22	6a21939c14c8f6030de787b05d66c3ef	2	82.5	2	\N	t	Death Feast Open Air
+99da45a952123aae33e4d916a261bb51	Death Feast Open Air 2025	2025-08-21	6a21939c14c8f6030de787b05d66c3ef	2	97.90	2	\N	t	Death Feast Open Air
+7320993a151875af6faf0e958b1d77db	Grabbenacht Festival 2025	2025-05-30	010c9e9e86100e63919a6051b399d662	1	59.0	1	\N	t	Grabbenacht Festival
+05ffebda2d583b6081ffaa8dd7ba0788	Metal Embrace Festival XVI	2024-09-06	05be609ce9831967baa4f12664dc4d73	1	55.5	2	\N	t	Metal Embrace Festival
+e723d4328c7df53576419235b92f4a13	Heretic Hordes I	2024-05-03	e248bb7c1164a44fa358593e28769a23	0	35.00	2	\N	f	\N
+b4435108ce3cef02600464daf3cb5f7f	Metal Embrace Festival XV	2023-09-08	05be609ce9831967baa4f12664dc4d73	1	48.50	2	\N	t	Metal Embrace Festival
+daaa95ecaf12ed9872a1f2fee19068d6	Metal Embrace Festival XVII	2025-09-12	05be609ce9831967baa4f12664dc4d73	1	55.5	2	\N	t	Metal Embrace Festival
+20a697b57317f75ad33eb50f166d6b00	NOAF XI	2015-08-28	6c33b0a7db1a4982d74edfe98239cec5	1	15.0	2	\N	t	NOAF
+9fe5ff8e93ce19ca4b27d5267ad7bfb3	In Flammen Open Air 2024	2024-07-11	cb6036cdf8009fc4b41eb0e56eab553d	2	86.9	2	\N	t	In Flammen Open Air
+6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	85683aa688e302e1de7ec78dc4440dff	1	79	2	\N	t	Dortmund Deathfest
+b416282ede3488bc54fdbbef22651a42	Dortmund Deathfest 2025	2025-08-01	9be6de3bc5073483dcbbcbc1b40af4d8	1	108.90	2	\N	t	Dortmund Deathfest
+8ad5ac467b3776d28a12742decf00657	Rockfield Open Air 2018	2018-08-17	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N	t	Rockfield Open Air
+d5bd359a19abc00f202bb19255675651	Party San Open Air 2024	2024-08-08	b27e07993299ee0b2ecd26dabd77eaf8	2	0.0	2	\N	t	Party San Open Air
+3a3eff448d9ea1da199b2f0f0f0d3ce3	Party San Open Air 2025	2025-08-07	b27e07993299ee0b2ecd26dabd77eaf8	2	149.99	2	\N	t	Party San Open Air
+16a83f971efce095272378a2a594e49f	Open air Hamm 47.	2017-07-07	7590124802ade834dbe9e7c0d2c1a897	1	25	2	\N	t	Open air Hamm
+ce017dda4d3b82cf8e75f648a7b9b390	Open air Hamm 43.	2013-06-14	7590124802ade834dbe9e7c0d2c1a897	1	22.0	2	\N	t	Open air Hamm
+000869859299617fd93133d3f65fd85b	Open air Hamm 45.	2015-06-12	7590124802ade834dbe9e7c0d2c1a897	1	22.0	2	\N	t	Open air Hamm
+e800a85ef2816cf0606a97a268be0e51	Autumn Carnage vol 2	2025-09-26	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N	f	\N
 \.
 
 
@@ -8096,24 +8123,6 @@ b8aeca8f6e48cd4246d77a3645bb6adc	Melodic Doom Metal
 
 
 --
--- Data for Name: next_events_with_tickets; Type: TABLE DATA; Schema: music; Owner: -
---
-
-COPY music.next_events_with_tickets (id_event, event, date_event, id_place, duration, price, persons) FROM stdin;
-72281605945dfd768083800bc06c5946	Heidelberg Deathfest VIII	2025-03-15	c72b4173a6a7131bf31a711212305fd3	0	63.0	2
-c56598c23355f774b43e42e55fe94cb8	Pinch Black + Greh + Roots of Unrest	2025-03-22	0280c9c3b98763f5a8d2ce7e97ce1b05	0	16.0	2
-02bf8e0e12d25be045c3c12355af1664	"With the old Breed" - Album Release-Show	2025-03-28	09ddc8804dd5908fef3c8c0c474ad238	0	20.80	2
-872789acfd93b013e7120139be311a9b	Circle Pitournium Tour 2025	2025-04-21	f3a90318abb3e16166d96055fd6f9096	0	28.5	2
-45741da54cd02bf8b9c209acbf2ff2ae	Veins of Fire Tour 2025	2025-05-01	588671317bf1864e5a95445ec51aac65	0	29.35	2
-7320993a151875af6faf0e958b1d77db	Grabbenacht Festival 2025	2025-05-01	010c9e9e86100e63919a6051b399d662	1	59.0	2
-74b195b8a5febdcaca93bb4d7a20b0ce	Slashing Europe	2025-04-24	67bac16ced3de0e99516cf21505718a1	0	25.0	2
-28630f95cb7c87f6ba4f40bd5094ae7f	Infernal Bloodshed over Europe	2025-06-25	83b0fe992121ae7d39f6bcc58a48160c	0	39.75	2
-ce5649089736affc844695973913e736	Boarstresm Open Air 2025	2025-07-18	cf1c12d42f59db3667fc162556aab169	1	75.0	2
-d500fda7a1f356d4e44f27a37a95aab0	March of the Unbending - Europe 2025	2025-04-15	f3a90318abb3e16166d96055fd6f9096	0	33.4	2
-\.
-
-
---
 -- Data for Name: test_country; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -8303,14 +8312,6 @@ ALTER TABLE ONLY music.genres
 
 
 --
--- Name: next_events_with_tickets next_events_with_tickets_pkey; Type: CONSTRAINT; Schema: music; Owner: -
---
-
-ALTER TABLE ONLY music.next_events_with_tickets
-    ADD CONSTRAINT next_events_with_tickets_pkey PRIMARY KEY (id_event);
-
-
---
 -- Name: v_events _RETURN; Type: RULE; Schema: music; Owner: -
 --
 
@@ -8412,5 +8413,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict QZAWFymGLrXNYPLXhWqCd5FpPoKTGzsPsnOiCF1K6IXOC36ggbY2a8vYrLOyK84
+\unrestrict xG6TrCigBBX9nQSSKojaD0hWHuzXKcavNzetHVOvNqjZwPaRE240EsGmoIf3hMa
 
