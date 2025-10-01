@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict xG6TrCigBBX9nQSSKojaD0hWHuzXKcavNzetHVOvNqjZwPaRE240EsGmoIf3hMa
+\restrict 5coC6Oe9ktTJ1jLei7GtijS1Rqa2NRrWtF3Uy4MCPS548PgiJhLgsKloxet55Fu
 
 -- Dumped from database version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
 -- Dumped by pg_dump version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
@@ -7560,6 +7560,8 @@ fdcd424f4f03fb3bd6e0a58368ce191a	0a8a13bf87abe8696fbae4efe2b7f874
 9699fb1aee16ac0d8f1c81ee188bab0c	9e7315413ae31a070ccae5c580dd1b19
 d70d57d99f1741cb9807f367eb36dfb9	3593526a5f465ed766bafb4fb45748a2
 4aecf3f7b2946fb510f5b185d8062888	b54875674f7d2d5be9737b0d4c021a21
+5637bae1665ae86050cb41fb1cdcc3ee	0a8a13bf87abe8696fbae4efe2b7f874
+5637bae1665ae86050cb41fb1cdcc3ee	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -8413,5 +8415,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict xG6TrCigBBX9nQSSKojaD0hWHuzXKcavNzetHVOvNqjZwPaRE240EsGmoIf3hMa
+\unrestrict 5coC6Oe9ktTJ1jLei7GtijS1Rqa2NRrWtF3Uy4MCPS548PgiJhLgsKloxet55Fu
 
