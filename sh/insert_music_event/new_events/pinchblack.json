@@ -12,7 +12,7 @@
     {
       "name": "Barbaric Oath",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Black Metal", "Death Metal"],
@@ -21,7 +21,7 @@
     {
       "name": "Unholy Altar",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Black Metal"],

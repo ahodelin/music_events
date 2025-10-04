@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict eN8Yfgj2gCRNVNPv1i2y2ReB16gCSn9CjJgaOWoQ5mRQAjO22Juz3CGbWg39wNU
+\restrict 3yay4Lq2UefSbbDocyZ3Vp5Oxxsldj1BAaU7IZxGYZculwIyZUgCzwZMtGLGRyi
 
 -- Dumped from database version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
 -- Dumped by pg_dump version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
@@ -1322,6 +1322,7 @@ bb70894bd8b00178cf29116a060ea1ca	Troisdorf (Jugendkulturcafé e.V. Troisdorf)
 cbe111af36bc52e4f7eca7b90b00f859	Köln (Essigfabrik)
 5047e616d4875f9deadaa881bdcb331f	Schleiz (Ferienland Crispendorf)
 e018b197f3176d2a85fdad95d9b1e8ba	Bad Kreuznach (AJK Kulturzentrum)
+60a813acedaeaedc4325cdc636dbcb72	Wiesbaden (Kreativfabrik)
 \.
 
 
@@ -2536,6 +2537,8 @@ fdcd424f4f03fb3bd6e0a58368ce191a	Sic Zone	y	t	\N
 9699fb1aee16ac0d8f1c81ee188bab0c	Hellforce	y	t	\N
 d70d57d99f1741cb9807f367eb36dfb9	Silence to the Fallen	y	t	\N
 4aecf3f7b2946fb510f5b185d8062888	Flærken	m	t	\N
+a12ab666a6f4cf0e60f6159ef253b394	Barbaric Oath	y	t	\N
+a707aee66491ee4d17b1c64c378d280f	Unholy Altar	y	t	\N
 \.
 
 
@@ -3748,6 +3751,8 @@ fdcd424f4f03fb3bd6e0a58368ce191a	DEU
 9699fb1aee16ac0d8f1c81ee188bab0c	DEU
 d70d57d99f1741cb9807f367eb36dfb9	DEU
 4aecf3f7b2946fb510f5b185d8062888	DEU
+a12ab666a6f4cf0e60f6159ef253b394	DEU
+a707aee66491ee4d17b1c64c378d280f	USA
 \.
 
 
@@ -5623,6 +5628,9 @@ e039d55ed63a723001867bc4eb842c00	82f1168c655507bf46e63fd9b2350782
 06c1680c65972c4332be73e726de9e74	82f1168c655507bf46e63fd9b2350782
 20db933d4ddd11d5eff99a441e081550	82f1168c655507bf46e63fd9b2350782
 58e42b779d54e174aad9a9fb79e7ebbc	82f1168c655507bf46e63fd9b2350782
+a12ab666a6f4cf0e60f6159ef253b394	db859bb156210688ff7434ca4abd00bb
+a707aee66491ee4d17b1c64c378d280f	db859bb156210688ff7434ca4abd00bb
+92e1aca33d97fa75c1e81a9db61454bb	db859bb156210688ff7434ca4abd00bb
 \.
 
 
@@ -7566,6 +7574,9 @@ d70d57d99f1741cb9807f367eb36dfb9	3593526a5f465ed766bafb4fb45748a2
 4aecf3f7b2946fb510f5b185d8062888	b54875674f7d2d5be9737b0d4c021a21
 5637bae1665ae86050cb41fb1cdcc3ee	0a8a13bf87abe8696fbae4efe2b7f874
 5637bae1665ae86050cb41fb1cdcc3ee	3593526a5f465ed766bafb4fb45748a2
+a12ab666a6f4cf0e60f6159ef253b394	2db87892408abd4d82eb39b78c50c27b
+a12ab666a6f4cf0e60f6159ef253b394	3593526a5f465ed766bafb4fb45748a2
+a707aee66491ee4d17b1c64c378d280f	2db87892408abd4d82eb39b78c50c27b
 \.
 
 
@@ -7887,6 +7898,7 @@ ce017dda4d3b82cf8e75f648a7b9b390	Open air Hamm 43.	2013-06-14	7590124802ade834db
 000869859299617fd93133d3f65fd85b	Open air Hamm 45.	2015-06-12	7590124802ade834dbe9e7c0d2c1a897	1	22.0	2	\N	t	Open air Hamm
 e800a85ef2816cf0606a97a268be0e51	Autumn Carnage vol 2	2025-09-26	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N	f	\N
 82f1168c655507bf46e63fd9b2350782	Monster Kill EU Tour 2025	2025-10-02	f3a90318abb3e16166d96055fd6f9096	0	22.0	2	\N	f	\N
+db859bb156210688ff7434ca4abd00bb	Europe Tour 2025	2025-10-03	60a813acedaeaedc4325cdc636dbcb72	0	15.4	2	\N	f	\N
 \.
 
 
@@ -8420,5 +8432,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict eN8Yfgj2gCRNVNPv1i2y2ReB16gCSn9CjJgaOWoQ5mRQAjO22Juz3CGbWg39wNU
+\unrestrict 3yay4Lq2UefSbbDocyZ3Vp5Oxxsldj1BAaU7IZxGYZculwIyZUgCzwZMtGLGRyi
 
