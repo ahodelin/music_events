@@ -1,0 +1,33 @@
+{
+  "event": {
+    "name": "Thrash of the Titans", 
+    "date": "2025-10-17",
+    "placeName": "Wiesbaden (Schlachthof)",
+    "persons": 2,
+    "price": 69.95,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Testament",
+      "isNew": false
+    },
+    {
+      "name": "Nervosa",
+      "isNew": false
+    },
+    {
+      "name": "Destruction",
+      "isNew": false
+    },
+    {
+      "name": "Obituary",
+      "isNew": false
+    },
+    {
+      "name": "",
+      "isNew": false
+    }
+  ]
+}

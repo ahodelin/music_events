@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 3yay4Lq2UefSbbDocyZ3Vp5Oxxsldj1BAaU7IZxGYZculwIyZUgCzwZMtGLGRyi
+\restrict znVk907dncSGiQT7RQdTzReMu9hXwl0jufEzjxPLjtS6aTFjEEXuXPXTDkpQ3Hb
 
 -- Dumped from database version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
 -- Dumped by pg_dump version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
@@ -2539,6 +2539,8 @@ d70d57d99f1741cb9807f367eb36dfb9	Silence to the Fallen	y	t	\N
 4aecf3f7b2946fb510f5b185d8062888	Flærken	m	t	\N
 a12ab666a6f4cf0e60f6159ef253b394	Barbaric Oath	y	t	\N
 a707aee66491ee4d17b1c64c378d280f	Unholy Altar	y	t	\N
+faf2209e6eddc15e5eb3f9e3c44adce9	Ancst	y	t	\N
+565c388f0e7240bc8ae9e76327baee73	Suel	y	t	\N
 \.
 
 
@@ -3753,6 +3755,8 @@ d70d57d99f1741cb9807f367eb36dfb9	DEU
 4aecf3f7b2946fb510f5b185d8062888	DEU
 a12ab666a6f4cf0e60f6159ef253b394	DEU
 a707aee66491ee4d17b1c64c378d280f	USA
+faf2209e6eddc15e5eb3f9e3c44adce9	DEU
+565c388f0e7240bc8ae9e76327baee73	DEU
 \.
 
 
@@ -5631,6 +5635,11 @@ e039d55ed63a723001867bc4eb842c00	82f1168c655507bf46e63fd9b2350782
 a12ab666a6f4cf0e60f6159ef253b394	db859bb156210688ff7434ca4abd00bb
 a707aee66491ee4d17b1c64c378d280f	db859bb156210688ff7434ca4abd00bb
 92e1aca33d97fa75c1e81a9db61454bb	db859bb156210688ff7434ca4abd00bb
+faf2209e6eddc15e5eb3f9e3c44adce9	566e28311cf3b41f33a623eeb407179d
+8734f7ff367f59fc11ad736e63e818f9	566e28311cf3b41f33a623eeb407179d
+565c388f0e7240bc8ae9e76327baee73	566e28311cf3b41f33a623eeb407179d
+b02ba5a5e65487122c2c1c67351c3ea0	566e28311cf3b41f33a623eeb407179d
+54ca3eeff0994926cb7944cca0797474	566e28311cf3b41f33a623eeb407179d
 \.
 
 
@@ -7577,6 +7586,11 @@ d70d57d99f1741cb9807f367eb36dfb9	3593526a5f465ed766bafb4fb45748a2
 a12ab666a6f4cf0e60f6159ef253b394	2db87892408abd4d82eb39b78c50c27b
 a12ab666a6f4cf0e60f6159ef253b394	3593526a5f465ed766bafb4fb45748a2
 a707aee66491ee4d17b1c64c378d280f	2db87892408abd4d82eb39b78c50c27b
+faf2209e6eddc15e5eb3f9e3c44adce9	2db87892408abd4d82eb39b78c50c27b
+faf2209e6eddc15e5eb3f9e3c44adce9	ba08853dd62a1b1d7cbf6ca8a1b4a14b
+faf2209e6eddc15e5eb3f9e3c44adce9	d30be26d66f0448359f54d923aab2bb9
+faf2209e6eddc15e5eb3f9e3c44adce9	d105e06556aa9db8dd49e6c8bac1cc58
+565c388f0e7240bc8ae9e76327baee73	2db87892408abd4d82eb39b78c50c27b
 \.
 
 
@@ -7898,7 +7912,8 @@ ce017dda4d3b82cf8e75f648a7b9b390	Open air Hamm 43.	2013-06-14	7590124802ade834db
 000869859299617fd93133d3f65fd85b	Open air Hamm 45.	2015-06-12	7590124802ade834dbe9e7c0d2c1a897	1	22.0	2	\N	t	Open air Hamm
 e800a85ef2816cf0606a97a268be0e51	Autumn Carnage vol 2	2025-09-26	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N	f	\N
 82f1168c655507bf46e63fd9b2350782	Monster Kill EU Tour 2025	2025-10-02	f3a90318abb3e16166d96055fd6f9096	0	22.0	2	\N	f	\N
-db859bb156210688ff7434ca4abd00bb	Europe Tour 2025	2025-10-03	60a813acedaeaedc4325cdc636dbcb72	0	15.4	2	\N	f	\N
+db859bb156210688ff7434ca4abd00bb	Europe Tour 2025	2025-10-03	60a813acedaeaedc4325cdc636dbcb72	0	15.4	1	\N	f	\N
+566e28311cf3b41f33a623eeb407179d	Blackest Phath III	2025-10-11	a91bcaf7db7d174ee2966d9c293fd575	0	35	2	\N	f	\N
 \.
 
 
@@ -8138,6 +8153,7 @@ d724f45ecf63d17dcd6d076a1c1a6902	Extrem Metal
 5f9177933e84988582f5a09a76825ca9	Thechnical Black Metal
 8c050a234c2e40121cbd4749134a0435	Death Rock
 b8aeca8f6e48cd4246d77a3645bb6adc	Melodic Doom Metal
+d105e06556aa9db8dd49e6c8bac1cc58	Dark Ambient
 \.
 
 
@@ -8432,5 +8448,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 3yay4Lq2UefSbbDocyZ3Vp5Oxxsldj1BAaU7IZxGYZculwIyZUgCzwZMtGLGRyi
+\unrestrict znVk907dncSGiQT7RQdTzReMu9hXwl0jufEzjxPLjtS6aTFjEEXuXPXTDkpQ3Hb
 
