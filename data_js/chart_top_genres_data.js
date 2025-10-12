@@ -1,1 +1,1 @@
-const musicData_ChartTopGenres = [{"genre": "Death Metal", "band_count": 315}, {"genre": "Thrash Metal", "band_count": 173}, {"genre": "Black Metal", "band_count": 166}, {"genre": "Brutal Death Metal", "band_count": 115}, {"genre": "Melodic Death Metal", "band_count": 71}];
+const musicData_ChartTopGenres = [{"genre": "Death Metal", "band_count": 316}, {"genre": "Thrash Metal", "band_count": 173}, {"genre": "Black Metal", "band_count": 170}, {"genre": "Brutal Death Metal", "band_count": 115}, {"genre": "Melodic Death Metal", "band_count": 71}];
