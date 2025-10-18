@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict znVk907dncSGiQT7RQdTzReMu9hXwl0jufEzjxPLjtS6aTFjEEXuXPXTDkpQ3Hb
+\restrict hbTq39ng5yGhJjVQnziMYVU7eSIoEnGJZhDgWC2E4YRZ2JIUfUXu3uUbr0frvrW
 
 -- Dumped from database version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
 -- Dumped by pg_dump version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
@@ -5640,6 +5640,10 @@ faf2209e6eddc15e5eb3f9e3c44adce9	566e28311cf3b41f33a623eeb407179d
 565c388f0e7240bc8ae9e76327baee73	566e28311cf3b41f33a623eeb407179d
 b02ba5a5e65487122c2c1c67351c3ea0	566e28311cf3b41f33a623eeb407179d
 54ca3eeff0994926cb7944cca0797474	566e28311cf3b41f33a623eeb407179d
+e3c8afbeb0ec4736db977d18e7e37020	fc5f4302bb98601cc920228c2886fb41
+07d82d98170ab334bc66554bafa673cf	fc5f4302bb98601cc920228c2886fb41
+a0d3b444bd04cd165b4e076c9fc18bee	fc5f4302bb98601cc920228c2886fb41
+00a616d5caaf94d82a47275101e3fa22	fc5f4302bb98601cc920228c2886fb41
 \.
 
 
@@ -7914,6 +7918,7 @@ e800a85ef2816cf0606a97a268be0e51	Autumn Carnage vol 2	2025-09-26	a91bcaf7db7d174
 82f1168c655507bf46e63fd9b2350782	Monster Kill EU Tour 2025	2025-10-02	f3a90318abb3e16166d96055fd6f9096	0	22.0	2	\N	f	\N
 db859bb156210688ff7434ca4abd00bb	Europe Tour 2025	2025-10-03	60a813acedaeaedc4325cdc636dbcb72	0	15.4	1	\N	f	\N
 566e28311cf3b41f33a623eeb407179d	Blackest Phath III	2025-10-11	a91bcaf7db7d174ee2966d9c293fd575	0	35	2	\N	f	\N
+fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864e5a95445ec51aac65	0	69.95	2	\N	f	\N
 \.
 
 
@@ -8448,5 +8453,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict znVk907dncSGiQT7RQdTzReMu9hXwl0jufEzjxPLjtS6aTFjEEXuXPXTDkpQ3Hb
+\unrestrict hbTq39ng5yGhJjVQnziMYVU7eSIoEnGJZhDgWC2E4YRZ2JIUfUXu3uUbr0frvrW
 
