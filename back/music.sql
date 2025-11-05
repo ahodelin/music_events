@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict hbTq39ng5yGhJjVQnziMYVU7eSIoEnGJZhDgWC2E4YRZ2JIUfUXu3uUbr0frvrW
+\restrict BmSCwmQxlAc8ghtX7d4yF9mbMpWCIYptVPGDaoG4idFByahuyLhPgB4sxcSRwIr
 
 -- Dumped from database version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
 -- Dumped by pg_dump version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
@@ -1039,6 +1039,46 @@ CREATE VIEW music.v_visited_festivals AS
 
 
 --
+-- Name: rolling_time_windows; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.rolling_time_windows (
+    mo character(3),
+    sa numeric
+);
+
+
+--
+-- Name: students; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.students (
+    id_student integer NOT NULL,
+    note numeric NOT NULL
+);
+
+
+--
+-- Name: students_id_student_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.students_id_student_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: students_id_student_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.students_id_student_seq OWNED BY public.students.id_student;
+
+
+--
 -- Name: test_country; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1059,6 +1099,50 @@ CREATE VIEW public.v_events_by_months AS
    FROM music.events
   GROUP BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date)
   ORDER BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date);
+
+
+--
+-- Name: workers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.workers (
+    id_worker integer NOT NULL,
+    years_working integer NOT NULL
+);
+
+
+--
+-- Name: workers_id_worker_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.workers_id_worker_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: workers_id_worker_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.workers_id_worker_seq OWNED BY public.workers.id_worker;
+
+
+--
+-- Name: students id_student; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.students ALTER COLUMN id_student SET DEFAULT nextval('public.students_id_student_seq'::regclass);
+
+
+--
+-- Name: workers id_worker; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workers ALTER COLUMN id_worker SET DEFAULT nextval('public.workers_id_worker_seq'::regclass);
 
 
 --
@@ -1323,6 +1407,7 @@ cbe111af36bc52e4f7eca7b90b00f859	Köln (Essigfabrik)
 5047e616d4875f9deadaa881bdcb331f	Schleiz (Ferienland Crispendorf)
 e018b197f3176d2a85fdad95d9b1e8ba	Bad Kreuznach (AJK Kulturzentrum)
 60a813acedaeaedc4325cdc636dbcb72	Wiesbaden (Kreativfabrik)
+fc9a9408cf2f87745054c3756c707750	Ahrensburg (JuKI 42)
 \.
 
 
@@ -1442,7 +1527,6 @@ e8ead85c87ecdab1738db48a10cae6da	Ultima Necat	y	t	\N
 2a67e4bd1ef39d36123c84cad0b3f974	Sabbat	m	t	\N
 20db933d4ddd11d5eff99a441e081550	Dehumanizing Itatrain Worship	y	t	\N
 a54196a4ae23c424c6c01a508f4c9dfb	Maximize Bestiality	y	t	\N
-d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 65f24dbd08671d51fda7de723afc41d9	Vorga	y	t	\N
 7a43dd4c2bb9bea14a95ff3acd4dfb18	Creeping Death	y	t	\N
 c8bc4f15477ea3131abb1a3f0649fac2	Dropdead	y	t	\N
@@ -2541,6 +2625,8 @@ a12ab666a6f4cf0e60f6159ef253b394	Barbaric Oath	y	t	\N
 a707aee66491ee4d17b1c64c378d280f	Unholy Altar	y	t	\N
 faf2209e6eddc15e5eb3f9e3c44adce9	Ancst	y	t	\N
 565c388f0e7240bc8ae9e76327baee73	Suel	y	t	\N
+f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
+d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 \.
 
 
@@ -3757,6 +3843,7 @@ a12ab666a6f4cf0e60f6159ef253b394	DEU
 a707aee66491ee4d17b1c64c378d280f	USA
 faf2209e6eddc15e5eb3f9e3c44adce9	DEU
 565c388f0e7240bc8ae9e76327baee73	DEU
+f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
 
@@ -5644,6 +5731,12 @@ e3c8afbeb0ec4736db977d18e7e37020	fc5f4302bb98601cc920228c2886fb41
 07d82d98170ab334bc66554bafa673cf	fc5f4302bb98601cc920228c2886fb41
 a0d3b444bd04cd165b4e076c9fc18bee	fc5f4302bb98601cc920228c2886fb41
 00a616d5caaf94d82a47275101e3fa22	fc5f4302bb98601cc920228c2886fb41
+f89f75d0702ca67b85e1ed0b6dc0ef9e	28ea9ec9e906f2f3eefa85255a1dfadc
+d0dc5a2eab283511301b75090afe11ab	28ea9ec9e906f2f3eefa85255a1dfadc
+134a3bbedd12bc313d57aa4cc781ddf9	28ea9ec9e906f2f3eefa85255a1dfadc
+28d6c39ac0305b5de02a5b02c047a411	28ea9ec9e906f2f3eefa85255a1dfadc
+cd0bc2c8738b2fef2d78d197223b17d5	28ea9ec9e906f2f3eefa85255a1dfadc
+7a78e9ce32da3202ac0ca91ec4247086	28ea9ec9e906f2f3eefa85255a1dfadc
 \.
 
 
@@ -7595,6 +7688,7 @@ faf2209e6eddc15e5eb3f9e3c44adce9	ba08853dd62a1b1d7cbf6ca8a1b4a14b
 faf2209e6eddc15e5eb3f9e3c44adce9	d30be26d66f0448359f54d923aab2bb9
 faf2209e6eddc15e5eb3f9e3c44adce9	d105e06556aa9db8dd49e6c8bac1cc58
 565c388f0e7240bc8ae9e76327baee73	2db87892408abd4d82eb39b78c50c27b
+f89f75d0702ca67b85e1ed0b6dc0ef9e	9e7315413ae31a070ccae5c580dd1b19
 \.
 
 
@@ -7832,7 +7926,6 @@ c65ee59c92bf87259bb6081ac1066701	Rocken im Winter Festival 2024	2024-12-28	2dd00
 dc3e783425dbba6bb13a0b09e3d8a473	Pagan Metal Matinee	2025-01-19	f3a90318abb3e16166d96055fd6f9096	0	16.5	2	\N	f	\N
 33fc414b35e2153721f8e19b5b2aa1eb	Die letzte Open Stage im ATG	2025-01-18	17648f3308a5acb119d9aee1b5eafceb	0	0.0	2	\N	f	\N
 50870ec5cfc0a18f40002a123c288af6	The Terrasitic Reconquest Tour 2025	2025-01-26	588671317bf1864e5a95445ec51aac65	0	42.0	2	\N	f	\N
-87e221b0a60c5938389dcc7d10b93bdb	Contest 2025	2025-02-07	9c26f60f17bb584dff3b85695fd2b284	0	5.0	2	\N	f	\N
 011099caab06f3d2db53743ae5957c7a	Texas Cornflake Massacre + Magefa + Gefrierbrand + Crossbreaker	2025-02-15	5948b7ac21c1697473de19197df1f172	0	16.0	2	\N	f	\N
 792b6818a251bf73eba4fa85d61ede60	XIV Dark Centuries + Blood Fire Death + Apostasie + Kryss	2025-03-08	09ddc8804dd5908fef3c8c0c474ad238	0	28.70	2	\N	f	\N
 ca5f18706516d234e9451661a60dfc42	Motörhead Tribute Night - ATG Mainz	2024-12-27	17648f3308a5acb119d9aee1b5eafceb	0	3.0	2	DJ Serkan	f	\N
@@ -7864,6 +7957,7 @@ c9de0ba86f9340234a0d1e7fc5d2464f	Europe Summer 2025	2025-08-14	cbe111af36bc52e4f
 ba90695c1c818d06413d702123cebc70	Infernal Bloodshed over Europe 2025	2025-06-03	83b0fe992121ae7d39f6bcc58a48160c	0	39.75	2	\N	f	\N
 57a334acb665ebc52057791d107149f4	57. Wernigeröder Rathausfest	2023-06-16	a7f15733dd688dee75571597f8636ba7	0	0	2	\N	f	\N
 8a48b001d26cf3023ac469d68bfba185	NOAF XIII	2017-08-25	6c33b0a7db1a4982d74edfe98239cec5	1	38.00	2	\N	t	NOAF
+87e221b0a60c5938389dcc7d10b93bdb	Contest 2025	2025-02-07	9c26f60f17bb584dff3b85695fd2b284	0	10.0	2	\N	f	\N
 dc19b6ddc47a55bc9401384b0ff66260	29. Wave-Gotik-Treffen	2022-06-05	efeaa516107a31ce2d1217e055b767f7	1	130.00	2	\N	t	Wave-Gotik-Treffen
 55446132347a3c2e38997d77b7641eff	28. Wave-Gotik-Treffen	2019-06-08	efeaa516107a31ce2d1217e055b767f7	1	130.00	2	\N	t	Wave-Gotik-Treffen
 7dc88a28ee5d7dbd7a1011fd098cd6ab	Way of Darkness 2019	2019-10-04	a04166db1f1c6d75ab79b04756750bf5	1	62.00	2	\N	t	Way of Darkness
@@ -7919,6 +8013,7 @@ e800a85ef2816cf0606a97a268be0e51	Autumn Carnage vol 2	2025-09-26	a91bcaf7db7d174
 db859bb156210688ff7434ca4abd00bb	Europe Tour 2025	2025-10-03	60a813acedaeaedc4325cdc636dbcb72	0	15.4	1	\N	f	\N
 566e28311cf3b41f33a623eeb407179d	Blackest Phath III	2025-10-11	a91bcaf7db7d174ee2966d9c293fd575	0	35	2	\N	f	\N
 fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864e5a95445ec51aac65	0	69.95	2	\N	f	\N
+28ea9ec9e906f2f3eefa85255a1dfadc	Unleash the Kraken Festival 2025	2025-11-01	fc9a9408cf2f87745054c3756c707750	0	27.5	2	\N	f	\N
 \.
 
 
@@ -8163,6 +8258,134 @@ d105e06556aa9db8dd49e6c8bac1cc58	Dark Ambient
 
 
 --
+-- Data for Name: rolling_time_windows; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.rolling_time_windows (mo, sa) FROM stdin;
+Nov	100
+Dec	110
+Jan	95
+Feb	85
+Mar	90
+Apr	90
+May	95
+Jun	100
+Jul	105
+Aug	110
+Sep	120
+Oct	130
+\.
+
+
+--
+-- Data for Name: students; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.students (id_student, note) FROM stdin;
+1	100
+2	87
+3	54
+4	82
+5	93
+6	47
+7	40
+8	53
+9	88
+10	58
+11	84
+12	65
+13	57
+14	66
+15	25
+16	70
+17	85
+18	36
+19	61
+20	34
+21	33
+22	33
+23	100
+24	69
+25	77
+26	88
+27	63
+28	17
+29	42
+30	55
+31	98
+32	70
+33	68
+34	70
+35	65
+36	70
+37	84
+38	52
+39	60
+40	54
+41	57
+42	47
+43	57
+44	86
+45	25
+46	66
+47	40
+48	100
+49	32
+50	39
+51	90
+52	83
+53	64
+54	95
+55	85
+56	100
+57	67
+58	60
+59	42
+60	65
+61	82
+62	85
+63	62
+64	72
+65	65
+66	76
+67	23
+68	96
+69	30
+70	45
+71	77
+72	55
+73	100
+74	80
+75	55
+76	52
+77	85
+78	68
+79	53
+80	82
+81	55
+82	51
+83	47
+84	47
+85	64
+86	75
+87	65
+88	60
+89	45
+90	75
+91	62
+92	93
+93	98
+94	58
+95	95
+96	83
+97	33
+98	70
+99	51
+100	60
+\.
+
+
+--
 -- Data for Name: test_country; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -8229,6 +8452,78 @@ AUS                             	Australia	au
 NZL                             	New Zealand	nz
 SVK                             	Slovakia	sk
 \.
+
+
+--
+-- Data for Name: workers; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.workers (id_worker, years_working) FROM stdin;
+1	4
+2	5
+3	4
+4	6
+5	7
+6	9
+7	7
+8	7
+9	5
+10	8
+11	8
+12	7
+13	6
+14	7
+15	7
+16	4
+17	6
+18	8
+19	8
+20	9
+21	6
+22	8
+23	9
+24	5
+25	6
+26	5
+27	4
+28	7
+29	9
+30	6
+31	7
+32	6
+33	5
+34	4
+35	4
+36	4
+37	6
+38	8
+39	8
+40	7
+41	8
+42	9
+43	5
+44	5
+45	4
+46	6
+47	7
+48	9
+49	5
+50	4
+\.
+
+
+--
+-- Name: students_id_student_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.students_id_student_seq', 100, true);
+
+
+--
+-- Name: workers_id_worker_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.workers_id_worker_seq', 50, true);
 
 
 --
@@ -8352,6 +8647,22 @@ ALTER TABLE ONLY music.genres
 
 
 --
+-- Name: students students_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.students
+    ADD CONSTRAINT students_pkey PRIMARY KEY (id_student);
+
+
+--
+-- Name: workers workers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workers
+    ADD CONSTRAINT workers_pkey PRIMARY KEY (id_worker);
+
+
+--
 -- Name: v_events _RETURN; Type: RULE; Schema: music; Owner: -
 --
 
@@ -8453,5 +8764,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict hbTq39ng5yGhJjVQnziMYVU7eSIoEnGJZhDgWC2E4YRZ2JIUfUXu3uUbr0frvrW
+\unrestrict BmSCwmQxlAc8ghtX7d4yF9mbMpWCIYptVPGDaoG4idFByahuyLhPgB4sxcSRwIr
 
