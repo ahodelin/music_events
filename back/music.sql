@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict BmSCwmQxlAc8ghtX7d4yF9mbMpWCIYptVPGDaoG4idFByahuyLhPgB4sxcSRwIr
+\restrict XQc180HfjYZTBO2XR0g40hDSRhY7FThbLrOQzr7zlldN0MWPQ29ZXbl9rRipvt5
 
--- Dumped from database version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
--- Dumped by pg_dump version 18.0 (Ubuntu 18.0-1.pgdg24.04+3)
+-- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
+-- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -31,6 +31,20 @@ CREATE SCHEMA geo;
 --
 
 CREATE SCHEMA music;
+
+
+--
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 
 
 --
@@ -455,6 +469,27 @@ BEGIN
 
     END LOOP; -- Fin del loop de bandas
 
+END;
+$$;
+
+
+--
+-- Name: sum_char_ascii(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.sum_char_ascii(input_string text) RETURNS integer
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    total_sum INTEGER := 0;
+    i INTEGER;
+    char_val TEXT;
+BEGIN
+    FOR i IN 1..LENGTH(input_string) LOOP
+        char_val := SUBSTRING(input_string FROM i FOR 1);
+        total_sum := total_sum + ASCII(char_val) * i;
+    END LOOP;
+    RETURN total_sum;
 END;
 $$;
 
@@ -1408,6 +1443,7 @@ cbe111af36bc52e4f7eca7b90b00f859	Köln (Essigfabrik)
 e018b197f3176d2a85fdad95d9b1e8ba	Bad Kreuznach (AJK Kulturzentrum)
 60a813acedaeaedc4325cdc636dbcb72	Wiesbaden (Kreativfabrik)
 fc9a9408cf2f87745054c3756c707750	Ahrensburg (JuKI 42)
+3964b1de7b615d6c453ad3c6f7700251	Mannheim (Jugendklubzentrum forum Mannheim)
 \.
 
 
@@ -5737,6 +5773,8 @@ d0dc5a2eab283511301b75090afe11ab	28ea9ec9e906f2f3eefa85255a1dfadc
 28d6c39ac0305b5de02a5b02c047a411	28ea9ec9e906f2f3eefa85255a1dfadc
 cd0bc2c8738b2fef2d78d197223b17d5	28ea9ec9e906f2f3eefa85255a1dfadc
 7a78e9ce32da3202ac0ca91ec4247086	28ea9ec9e906f2f3eefa85255a1dfadc
+bf2c8729bf5c149067d8e978ea3dcd32	51c2dc31d090f73b8bd302c7dd37ecb9
+07db432236189fe6057ed228bf54069b	51c2dc31d090f73b8bd302c7dd37ecb9
 \.
 
 
@@ -8013,7 +8051,8 @@ e800a85ef2816cf0606a97a268be0e51	Autumn Carnage vol 2	2025-09-26	a91bcaf7db7d174
 db859bb156210688ff7434ca4abd00bb	Europe Tour 2025	2025-10-03	60a813acedaeaedc4325cdc636dbcb72	0	15.4	1	\N	f	\N
 566e28311cf3b41f33a623eeb407179d	Blackest Phath III	2025-10-11	a91bcaf7db7d174ee2966d9c293fd575	0	35	2	\N	f	\N
 fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864e5a95445ec51aac65	0	69.95	2	\N	f	\N
-28ea9ec9e906f2f3eefa85255a1dfadc	Unleash the Kraken Festival 2025	2025-11-01	fc9a9408cf2f87745054c3756c707750	0	27.5	2	\N	f	\N
+51c2dc31d090f73b8bd302c7dd37ecb9	Mantar Tour 2025	2025-11-14	3964b1de7b615d6c453ad3c6f7700251	0	33.70	2	\N	f	\N
+28ea9ec9e906f2f3eefa85255a1dfadc	Unleash the Kraken Festival 2025	2025-11-01	fc9a9408cf2f87745054c3756c707750	0	27.5	1	\N	f	\N
 \.
 
 
@@ -8764,5 +8803,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict BmSCwmQxlAc8ghtX7d4yF9mbMpWCIYptVPGDaoG4idFByahuyLhPgB4sxcSRwIr
+\unrestrict XQc180HfjYZTBO2XR0g40hDSRhY7FThbLrOQzr7zlldN0MWPQ29ZXbl9rRipvt5
 
