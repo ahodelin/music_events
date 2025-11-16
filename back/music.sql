@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict XQc180HfjYZTBO2XR0g40hDSRhY7FThbLrOQzr7zlldN0MWPQ29ZXbl9rRipvt5
+\restrict Ysx2We0svKPV3JurDQ4QEDtWzqw6V2erD7SN61aGt0CcNz2dewe8eHS5wkyib0b
 
 -- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
@@ -5775,6 +5775,13 @@ cd0bc2c8738b2fef2d78d197223b17d5	28ea9ec9e906f2f3eefa85255a1dfadc
 7a78e9ce32da3202ac0ca91ec4247086	28ea9ec9e906f2f3eefa85255a1dfadc
 bf2c8729bf5c149067d8e978ea3dcd32	51c2dc31d090f73b8bd302c7dd37ecb9
 07db432236189fe6057ed228bf54069b	51c2dc31d090f73b8bd302c7dd37ecb9
+eb0a191797624dd3a48fa681d3061212	6c1e77ba1a130109c3665113ab2c9cde
+c21fe390daecee9e70b8f4b091ae316f	6c1e77ba1a130109c3665113ab2c9cde
+c2ab38206dce633f15d66048ad744f03	6c1e77ba1a130109c3665113ab2c9cde
+5c3278fb76fa2676984396d33ba90613	6c1e77ba1a130109c3665113ab2c9cde
+42085fca2ddb606f4284e718074d5561	6c1e77ba1a130109c3665113ab2c9cde
+3e6141409efd871b4a87deacfbf31c28	6c1e77ba1a130109c3665113ab2c9cde
+ec29a7f3c6a4588ef5067ea12a19e4e1	6c1e77ba1a130109c3665113ab2c9cde
 \.
 
 
@@ -8053,6 +8060,7 @@ db859bb156210688ff7434ca4abd00bb	Europe Tour 2025	2025-10-03	60a813acedaeaedc432
 fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864e5a95445ec51aac65	0	69.95	2	\N	f	\N
 51c2dc31d090f73b8bd302c7dd37ecb9	Mantar Tour 2025	2025-11-14	3964b1de7b615d6c453ad3c6f7700251	0	33.70	2	\N	f	\N
 28ea9ec9e906f2f3eefa85255a1dfadc	Unleash the Kraken Festival 2025	2025-11-01	fc9a9408cf2f87745054c3756c707750	0	27.5	1	\N	f	\N
+6c1e77ba1a130109c3665113ab2c9cde	Hell over Aschaffenburg - 2025	2025-11-15	b13f71a1a5f7e89c2603d5241c2aca25	0	39.0	2	\N	f	\N
 \.
 
 
@@ -8803,5 +8811,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict XQc180HfjYZTBO2XR0g40hDSRhY7FThbLrOQzr7zlldN0MWPQ29ZXbl9rRipvt5
+\unrestrict Ysx2We0svKPV3JurDQ4QEDtWzqw6V2erD7SN61aGt0CcNz2dewe8eHS5wkyib0b
 
