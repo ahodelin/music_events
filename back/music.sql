@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Ysx2We0svKPV3JurDQ4QEDtWzqw6V2erD7SN61aGt0CcNz2dewe8eHS5wkyib0b
+\restrict EJb9VaGkWtMISDzM75b1Hw34QVMuL7CK4ENRqExcfsSTWwEb2CD7THTuKQ7yP9v
 
 -- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
@@ -2511,7 +2511,6 @@ cfe9861e2a347cc7b50506ea46fdaf4f	Greh	y	t	\N
 e27728342f660d53bd12ab14e5005903	Disstorture	y	t	\N
 afe4451c0c33641e67241bfe39f339ff	High Striker	m	t	\N
 3e6141409efd871b4a87deacfbf31c28	Wilt	y	t	\N
-e84900ed85812327945c9e72f173f8cc	Apallic Decay	y	t	\N
 c3ce3cf87341cea762a1fb5d26d7d361	Gomorrha	y	t	\N
 11ac50031c60fb29e5e1ee475be05412	Mercyless	y	t	\N
 bd9b8bf7d35d3bd278b5c300bc011d86	Rotting Christ	y	t	\N
@@ -2661,8 +2660,11 @@ a12ab666a6f4cf0e60f6159ef253b394	Barbaric Oath	y	t	\N
 a707aee66491ee4d17b1c64c378d280f	Unholy Altar	y	t	\N
 faf2209e6eddc15e5eb3f9e3c44adce9	Ancst	y	t	\N
 565c388f0e7240bc8ae9e76327baee73	Suel	y	t	\N
+c03d577e664030fa00df8aad35d10574	Nocturnal Silence	m	t	\N
+2487acdc7cf3b1442999e4dae1cf82ec	Black Aeons	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
+e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
 \.
 
 
@@ -3879,6 +3881,8 @@ a12ab666a6f4cf0e60f6159ef253b394	DEU
 a707aee66491ee4d17b1c64c378d280f	USA
 faf2209e6eddc15e5eb3f9e3c44adce9	DEU
 565c388f0e7240bc8ae9e76327baee73	DEU
+c03d577e664030fa00df8aad35d10574	DEU
+2487acdc7cf3b1442999e4dae1cf82ec	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5782,6 +5786,9 @@ c2ab38206dce633f15d66048ad744f03	6c1e77ba1a130109c3665113ab2c9cde
 42085fca2ddb606f4284e718074d5561	6c1e77ba1a130109c3665113ab2c9cde
 3e6141409efd871b4a87deacfbf31c28	6c1e77ba1a130109c3665113ab2c9cde
 ec29a7f3c6a4588ef5067ea12a19e4e1	6c1e77ba1a130109c3665113ab2c9cde
+c03d577e664030fa00df8aad35d10574	7219495f8610b9b76da4b735abf1bc10
+2487acdc7cf3b1442999e4dae1cf82ec	7219495f8610b9b76da4b735abf1bc10
+e84900ed85812327945c9e72f173f8cc	7219495f8610b9b76da4b735abf1bc10
 \.
 
 
@@ -7734,6 +7741,11 @@ faf2209e6eddc15e5eb3f9e3c44adce9	d30be26d66f0448359f54d923aab2bb9
 faf2209e6eddc15e5eb3f9e3c44adce9	d105e06556aa9db8dd49e6c8bac1cc58
 565c388f0e7240bc8ae9e76327baee73	2db87892408abd4d82eb39b78c50c27b
 f89f75d0702ca67b85e1ed0b6dc0ef9e	9e7315413ae31a070ccae5c580dd1b19
+c03d577e664030fa00df8aad35d10574	8a2b4ea408069c31034103e85799dbd2
+c03d577e664030fa00df8aad35d10574	0a8a13bf87abe8696fbae4efe2b7f874
+c03d577e664030fa00df8aad35d10574	0c7fde545c06c2bc7383c0430c95fb78
+2487acdc7cf3b1442999e4dae1cf82ec	8dbf2602d350002b61aeb50d7b1f5823
+2487acdc7cf3b1442999e4dae1cf82ec	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -8061,6 +8073,7 @@ fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864
 51c2dc31d090f73b8bd302c7dd37ecb9	Mantar Tour 2025	2025-11-14	3964b1de7b615d6c453ad3c6f7700251	0	33.70	2	\N	f	\N
 28ea9ec9e906f2f3eefa85255a1dfadc	Unleash the Kraken Festival 2025	2025-11-01	fc9a9408cf2f87745054c3756c707750	0	27.5	1	\N	f	\N
 6c1e77ba1a130109c3665113ab2c9cde	Hell over Aschaffenburg - 2025	2025-11-15	b13f71a1a5f7e89c2603d5241c2aca25	0	39.0	2	\N	f	\N
+7219495f8610b9b76da4b735abf1bc10	Extreme Metal Invasion Vol.2	2025-11-21	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N	f	\N
 \.
 
 
@@ -8301,6 +8314,7 @@ d724f45ecf63d17dcd6d076a1c1a6902	Extrem Metal
 8c050a234c2e40121cbd4749134a0435	Death Rock
 b8aeca8f6e48cd4246d77a3645bb6adc	Melodic Doom Metal
 d105e06556aa9db8dd49e6c8bac1cc58	Dark Ambient
+8a2b4ea408069c31034103e85799dbd2	Heavy Meetal
 \.
 
 
@@ -8811,5 +8825,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Ysx2We0svKPV3JurDQ4QEDtWzqw6V2erD7SN61aGt0CcNz2dewe8eHS5wkyib0b
+\unrestrict EJb9VaGkWtMISDzM75b1Hw34QVMuL7CK4ENRqExcfsSTWwEb2CD7THTuKQ7yP9v
 
