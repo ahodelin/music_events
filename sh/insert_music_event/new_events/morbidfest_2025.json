@@ -1,0 +1,38 @@
+{
+  "event": {
+    "name": "Morbidfest 2025", 
+    "date": "2025-12-14",
+    "placeName": "Weinheim (Café Central)",
+    "persons": 2,
+    "price": 43.45,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Possessed",
+      "isNew": false
+    },
+    {
+      "name": "Suicidal Angels",
+      "isNew": false
+    },
+    {
+      "name": "Ater",
+      "isNew": false
+    },
+    {
+      "name": "Nightfall",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["GRC"],
+      "genres": ["Melodic Black Metal", "Death Metal", "Doom Metal", "Gothic Metal"],
+      "note": null
+    },
+    {
+      "name": "Terrorizer",
+      "isNew": false
+    }
+  ]
+}

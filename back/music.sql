@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict EJb9VaGkWtMISDzM75b1Hw34QVMuL7CK4ENRqExcfsSTWwEb2CD7THTuKQ7yP9v
+\restrict ec8GYNI66bUPvUCdaVoygKNMnUyCZYaWpgG5FzTprgOhW8MhnGCcyAeRZZn7Xx1
 
 -- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
@@ -2662,6 +2662,7 @@ faf2209e6eddc15e5eb3f9e3c44adce9	Ancst	y	t	\N
 565c388f0e7240bc8ae9e76327baee73	Suel	y	t	\N
 c03d577e664030fa00df8aad35d10574	Nocturnal Silence	m	t	\N
 2487acdc7cf3b1442999e4dae1cf82ec	Black Aeons	y	t	\N
+09dd1a521e2166f35896cbd300bb8d1e	Antikvlt	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3883,6 +3884,7 @@ faf2209e6eddc15e5eb3f9e3c44adce9	DEU
 565c388f0e7240bc8ae9e76327baee73	DEU
 c03d577e664030fa00df8aad35d10574	DEU
 2487acdc7cf3b1442999e4dae1cf82ec	DEU
+09dd1a521e2166f35896cbd300bb8d1e	150
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5789,6 +5791,10 @@ ec29a7f3c6a4588ef5067ea12a19e4e1	6c1e77ba1a130109c3665113ab2c9cde
 c03d577e664030fa00df8aad35d10574	7219495f8610b9b76da4b735abf1bc10
 2487acdc7cf3b1442999e4dae1cf82ec	7219495f8610b9b76da4b735abf1bc10
 e84900ed85812327945c9e72f173f8cc	7219495f8610b9b76da4b735abf1bc10
+7022f6b60d9642d91eebba98185cd9ba	d59ba563f299c3da949c7c3d22cf785a
+4e74055927fd771c2084c92ca2ae56a7	d59ba563f299c3da949c7c3d22cf785a
+b9a8e0db7a17a92bae876284d35e3021	d59ba563f299c3da949c7c3d22cf785a
+09dd1a521e2166f35896cbd300bb8d1e	d59ba563f299c3da949c7c3d22cf785a
 \.
 
 
@@ -7746,6 +7752,7 @@ c03d577e664030fa00df8aad35d10574	0a8a13bf87abe8696fbae4efe2b7f874
 c03d577e664030fa00df8aad35d10574	0c7fde545c06c2bc7383c0430c95fb78
 2487acdc7cf3b1442999e4dae1cf82ec	8dbf2602d350002b61aeb50d7b1f5823
 2487acdc7cf3b1442999e4dae1cf82ec	3593526a5f465ed766bafb4fb45748a2
+09dd1a521e2166f35896cbd300bb8d1e	2db87892408abd4d82eb39b78c50c27b
 \.
 
 
@@ -8074,6 +8081,7 @@ fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864
 28ea9ec9e906f2f3eefa85255a1dfadc	Unleash the Kraken Festival 2025	2025-11-01	fc9a9408cf2f87745054c3756c707750	0	27.5	1	\N	f	\N
 6c1e77ba1a130109c3665113ab2c9cde	Hell over Aschaffenburg - 2025	2025-11-15	b13f71a1a5f7e89c2603d5241c2aca25	0	39.0	2	\N	f	\N
 7219495f8610b9b76da4b735abf1bc10	Extreme Metal Invasion Vol.2	2025-11-21	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N	f	\N
+d59ba563f299c3da949c7c3d22cf785a	Nadir over Europe Tour 2025	2025-11-28	09ddc8804dd5908fef3c8c0c474ad238	0	34.0	2	\N	f	\N
 \.
 
 
@@ -8825,5 +8833,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict EJb9VaGkWtMISDzM75b1Hw34QVMuL7CK4ENRqExcfsSTWwEb2CD7THTuKQ7yP9v
+\unrestrict ec8GYNI66bUPvUCdaVoygKNMnUyCZYaWpgG5FzTprgOhW8MhnGCcyAeRZZn7Xx1
 
