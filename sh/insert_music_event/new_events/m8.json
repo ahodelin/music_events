@@ -1,0 +1,30 @@
+{
+  "event": {
+    "name": "Winter of Darkness - Metal Mainz IV", 
+    "date": "2025-12-13",
+    "placeName": "Mainz (M8 im Haus der Jugend)",
+    "persons": 2,
+    "price": 12.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Mania",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Metal", "Rock"],
+      "note": null
+    },
+    {
+      "name": "Witchkrieg",
+      "isNew": false
+    },
+    {
+      "name": "Devil's Hours",
+      "isNew": false
+    }
+  ]
+}

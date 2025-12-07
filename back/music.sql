@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict ec8GYNI66bUPvUCdaVoygKNMnUyCZYaWpgG5FzTprgOhW8MhnGCcyAeRZZn7Xx1
+\restrict SO1ERG6GkmVH6Qxl3CbKxBQ1jAsa624fhgaWNMoCyFjvvclhaJaRHPanQO37SfC
 
 -- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
@@ -2663,6 +2663,8 @@ faf2209e6eddc15e5eb3f9e3c44adce9	Ancst	y	t	\N
 c03d577e664030fa00df8aad35d10574	Nocturnal Silence	m	t	\N
 2487acdc7cf3b1442999e4dae1cf82ec	Black Aeons	y	t	\N
 09dd1a521e2166f35896cbd300bb8d1e	Antikvlt	y	t	\N
+f2bd220a4d461ad191b951908541b7ca	Stigmatized	y	t	\N
+0421a98335cbaedb54a0392f478928e8	Paranoiac	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3885,6 +3887,8 @@ faf2209e6eddc15e5eb3f9e3c44adce9	DEU
 c03d577e664030fa00df8aad35d10574	DEU
 2487acdc7cf3b1442999e4dae1cf82ec	DEU
 09dd1a521e2166f35896cbd300bb8d1e	150
+f2bd220a4d461ad191b951908541b7ca	DEU
+0421a98335cbaedb54a0392f478928e8	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5795,6 +5799,9 @@ e84900ed85812327945c9e72f173f8cc	7219495f8610b9b76da4b735abf1bc10
 4e74055927fd771c2084c92ca2ae56a7	d59ba563f299c3da949c7c3d22cf785a
 b9a8e0db7a17a92bae876284d35e3021	d59ba563f299c3da949c7c3d22cf785a
 09dd1a521e2166f35896cbd300bb8d1e	d59ba563f299c3da949c7c3d22cf785a
+c3ce3cf87341cea762a1fb5d26d7d361	bb3826c368b9daece78ad1da31564fc4
+f2bd220a4d461ad191b951908541b7ca	bb3826c368b9daece78ad1da31564fc4
+0421a98335cbaedb54a0392f478928e8	bb3826c368b9daece78ad1da31564fc4
 \.
 
 
@@ -7753,6 +7760,10 @@ c03d577e664030fa00df8aad35d10574	0c7fde545c06c2bc7383c0430c95fb78
 2487acdc7cf3b1442999e4dae1cf82ec	8dbf2602d350002b61aeb50d7b1f5823
 2487acdc7cf3b1442999e4dae1cf82ec	3593526a5f465ed766bafb4fb45748a2
 09dd1a521e2166f35896cbd300bb8d1e	2db87892408abd4d82eb39b78c50c27b
+f2bd220a4d461ad191b951908541b7ca	3593526a5f465ed766bafb4fb45748a2
+0421a98335cbaedb54a0392f478928e8	3593526a5f465ed766bafb4fb45748a2
+0421a98335cbaedb54a0392f478928e8	0a8a13bf87abe8696fbae4efe2b7f874
+0421a98335cbaedb54a0392f478928e8	bffc2611a2cf652247f6aa664dfe9381
 \.
 
 
@@ -8082,6 +8093,7 @@ fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864
 6c1e77ba1a130109c3665113ab2c9cde	Hell over Aschaffenburg - 2025	2025-11-15	b13f71a1a5f7e89c2603d5241c2aca25	0	39.0	2	\N	f	\N
 7219495f8610b9b76da4b735abf1bc10	Extreme Metal Invasion Vol.2	2025-11-21	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N	f	\N
 d59ba563f299c3da949c7c3d22cf785a	Nadir over Europe Tour 2025	2025-11-28	09ddc8804dd5908fef3c8c0c474ad238	0	34.0	2	\N	f	\N
+bb3826c368b9daece78ad1da31564fc4	Mayhem in the Arches - 12.2025	2025-12-06	e018b197f3176d2a85fdad95d9b1e8ba	0	12.5	2	\N	f	\N
 \.
 
 
@@ -8323,6 +8335,7 @@ d724f45ecf63d17dcd6d076a1c1a6902	Extrem Metal
 b8aeca8f6e48cd4246d77a3645bb6adc	Melodic Doom Metal
 d105e06556aa9db8dd49e6c8bac1cc58	Dark Ambient
 8a2b4ea408069c31034103e85799dbd2	Heavy Meetal
+bffc2611a2cf652247f6aa664dfe9381	Thrah Metal
 \.
 
 
@@ -8833,5 +8846,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict ec8GYNI66bUPvUCdaVoygKNMnUyCZYaWpgG5FzTprgOhW8MhnGCcyAeRZZn7Xx1
+\unrestrict SO1ERG6GkmVH6Qxl3CbKxBQ1jAsa624fhgaWNMoCyFjvvclhaJaRHPanQO37SfC
 
