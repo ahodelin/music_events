@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 3a7LXfFzWAdgjVndrWKhgANGuF9TsE33soSweJEcDngxY2v2yQXubuSWxkMCBbO
+\restrict f5j2a56v24G3d6PbvHyfD4kDXRtqLBJBr7Qf1hfS4i1iIytCuYC8Mn47qir2v5w
 
 -- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
@@ -2666,6 +2666,7 @@ c03d577e664030fa00df8aad35d10574	Nocturnal Silence	m	t	\N
 f2bd220a4d461ad191b951908541b7ca	Stigmatized	y	t	\N
 0421a98335cbaedb54a0392f478928e8	Paranoiac	y	t	\N
 5bed6943b6051edb8b9ffc3c76da8c32	Mania	n	t	\N
+cb734061bae7ee860a4e57d8f9c29b1d	Nightfall	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3891,6 +3892,7 @@ c03d577e664030fa00df8aad35d10574	DEU
 f2bd220a4d461ad191b951908541b7ca	DEU
 0421a98335cbaedb54a0392f478928e8	DEU
 5bed6943b6051edb8b9ffc3c76da8c32	DEU
+cb734061bae7ee860a4e57d8f9c29b1d	GRC
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5807,6 +5809,11 @@ f2bd220a4d461ad191b951908541b7ca	bb3826c368b9daece78ad1da31564fc4
 5bed6943b6051edb8b9ffc3c76da8c32	cb43856f374876b6caffc2f708d18a04
 087c643d95880c5a89fc13f3246bebae	cb43856f374876b6caffc2f708d18a04
 41e744bdf3114b14f5873dfb46921dc4	cb43856f374876b6caffc2f708d18a04
+96390e27bc7e2980e044791420612545	a7fb6b23ccb0ef29baeb2e4655bb33ef
+01bcfac216d2a08cd25930234e59f1a1	a7fb6b23ccb0ef29baeb2e4655bb33ef
+190be8d96f6374f8ba7741cbb6aabb5f	a7fb6b23ccb0ef29baeb2e4655bb33ef
+cb734061bae7ee860a4e57d8f9c29b1d	a7fb6b23ccb0ef29baeb2e4655bb33ef
+3757709518b67fddd9ae5a368d219334	a7fb6b23ccb0ef29baeb2e4655bb33ef
 \.
 
 
@@ -7771,6 +7778,10 @@ f2bd220a4d461ad191b951908541b7ca	3593526a5f465ed766bafb4fb45748a2
 0421a98335cbaedb54a0392f478928e8	bffc2611a2cf652247f6aa664dfe9381
 5bed6943b6051edb8b9ffc3c76da8c32	86094b61cb9f63b77f982ceae03e95f0
 5bed6943b6051edb8b9ffc3c76da8c32	9a1f30943126974075dbd4d13c8018ac
+cb734061bae7ee860a4e57d8f9c29b1d	8dbf2602d350002b61aeb50d7b1f5823
+cb734061bae7ee860a4e57d8f9c29b1d	3593526a5f465ed766bafb4fb45748a2
+cb734061bae7ee860a4e57d8f9c29b1d	0c7fde545c06c2bc7383c0430c95fb78
+cb734061bae7ee860a4e57d8f9c29b1d	73d0749820562452b33d4e0f4891efcd
 \.
 
 
@@ -8102,6 +8113,7 @@ fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864
 d59ba563f299c3da949c7c3d22cf785a	Nadir over Europe Tour 2025	2025-11-28	09ddc8804dd5908fef3c8c0c474ad238	0	34.0	2	\N	f	\N
 bb3826c368b9daece78ad1da31564fc4	Mayhem in the Arches - 12.2025	2025-12-06	e018b197f3176d2a85fdad95d9b1e8ba	0	12.5	2	\N	f	\N
 cb43856f374876b6caffc2f708d18a04	Winter of Darkness - Metal Mainz IV	2025-12-13	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N	f	\N
+a7fb6b23ccb0ef29baeb2e4655bb33ef	Morbidfest 2025	2025-12-14	f3a90318abb3e16166d96055fd6f9096	0	43.45	2	\N	f	\N
 \.
 
 
@@ -8854,5 +8866,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 3a7LXfFzWAdgjVndrWKhgANGuF9TsE33soSweJEcDngxY2v2yQXubuSWxkMCBbO
+\unrestrict f5j2a56v24G3d6PbvHyfD4kDXRtqLBJBr7Qf1hfS4i1iIytCuYC8Mn47qir2v5w
 
