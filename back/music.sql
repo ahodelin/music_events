@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict i0nSdCinKeQGdHKpRo9xMIWloXu88BRJCa3QSsUUcHyzeIbYHGv5SKX7M1aIUQc
+\restrict Wfv6FL1Ux63TKhpmw4pHz2zRhBEW94LZOJ1FjlKWktP5Vh0YHyz9w1XZ8pYmdJp
 
 -- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
@@ -2667,6 +2667,7 @@ f2bd220a4d461ad191b951908541b7ca	Stigmatized	y	t	\N
 0421a98335cbaedb54a0392f478928e8	Paranoiac	y	t	\N
 5bed6943b6051edb8b9ffc3c76da8c32	Mania	n	t	\N
 cb734061bae7ee860a4e57d8f9c29b1d	Nightfall	y	t	\N
+aa24738909cd9e85aa43d7e5df7e4ecb	Lucifer's Child	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3893,6 +3894,7 @@ f2bd220a4d461ad191b951908541b7ca	DEU
 0421a98335cbaedb54a0392f478928e8	DEU
 5bed6943b6051edb8b9ffc3c76da8c32	DEU
 cb734061bae7ee860a4e57d8f9c29b1d	GRC
+aa24738909cd9e85aa43d7e5df7e4ecb	GRC
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5813,6 +5815,8 @@ f2bd220a4d461ad191b951908541b7ca	bb3826c368b9daece78ad1da31564fc4
 190be8d96f6374f8ba7741cbb6aabb5f	a7fb6b23ccb0ef29baeb2e4655bb33ef
 cb734061bae7ee860a4e57d8f9c29b1d	a7fb6b23ccb0ef29baeb2e4655bb33ef
 3757709518b67fddd9ae5a368d219334	a7fb6b23ccb0ef29baeb2e4655bb33ef
+aa24738909cd9e85aa43d7e5df7e4ecb	8179741a0d1c9f7322a49a67b2ea0dc9
+41dabe0c59a3233e3691f3c893eb789e	8179741a0d1c9f7322a49a67b2ea0dc9
 \.
 
 
@@ -7781,6 +7785,7 @@ cb734061bae7ee860a4e57d8f9c29b1d	8dbf2602d350002b61aeb50d7b1f5823
 cb734061bae7ee860a4e57d8f9c29b1d	3593526a5f465ed766bafb4fb45748a2
 cb734061bae7ee860a4e57d8f9c29b1d	0c7fde545c06c2bc7383c0430c95fb78
 cb734061bae7ee860a4e57d8f9c29b1d	73d0749820562452b33d4e0f4891efcd
+aa24738909cd9e85aa43d7e5df7e4ecb	2db87892408abd4d82eb39b78c50c27b
 \.
 
 
@@ -8113,6 +8118,7 @@ d59ba563f299c3da949c7c3d22cf785a	Nadir over Europe Tour 2025	2025-11-28	09ddc880
 bb3826c368b9daece78ad1da31564fc4	Mayhem in the Arches - 12.2025	2025-12-06	e018b197f3176d2a85fdad95d9b1e8ba	0	12.5	2	\N	f	\N
 cb43856f374876b6caffc2f708d18a04	Winter of Darkness - Metal Mainz IV	2025-12-13	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N	f	\N
 a7fb6b23ccb0ef29baeb2e4655bb33ef	Morbidfest 2025	2025-12-14	f3a90318abb3e16166d96055fd6f9096	0	43.45	2	\N	f	\N
+8179741a0d1c9f7322a49a67b2ea0dc9	Ascensions of Fire Tour 2026	2026-01-20	0280c9c3b98763f5a8d2ce7e97ce1b05	0	23.00	2	\N	f	\N
 \.
 
 
@@ -8865,5 +8871,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict i0nSdCinKeQGdHKpRo9xMIWloXu88BRJCa3QSsUUcHyzeIbYHGv5SKX7M1aIUQc
+\unrestrict Wfv6FL1Ux63TKhpmw4pHz2zRhBEW94LZOJ1FjlKWktP5Vh0YHyz9w1XZ8pYmdJp
 
