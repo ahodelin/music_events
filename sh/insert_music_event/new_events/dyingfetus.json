@@ -1,0 +1,35 @@
+{
+  "event": {
+    "name": "The Grizzly Winter Tour 2026", 
+    "date": "2026-02-02",
+    "placeName": "Frankfurt am Main (Jahrhunderthalle)",
+    "persons": 2,
+    "price": 62.75,
+    "duration": 1,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Suicide Silence",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Deathcore", "Alternative Metal"],
+      "note": null
+    },
+    {
+      "name": "Dying Fetus",
+      "isNew": false
+    },
+    {
+      "name": "Slaughter to Prevail",
+      "isNew": true,
+      "likes": "m",
+      "active": true,
+      "countryIds": ["RUS"],
+      "genres": ["Deathcore"],
+      "note": null
+    }
+  ]
+}
