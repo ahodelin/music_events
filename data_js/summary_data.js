@@ -1,1 +1,1 @@
-const musicData_Summary = {"total_events":327,"total_bands_seen":1227,"total_money_spent":21013.25};
+const musicData_Summary = {"total_events":328,"total_bands_seen":1229,"total_money_spent":21043.25};

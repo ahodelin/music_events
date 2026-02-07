@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Fje6Ar98U5Iqevlhq6US4Cln8NEiCq0gZnnbXeupx98dME3qQtFw0WUkd7wWapY
+\restrict wMbA38Yuc7ghzRNMBf7gs5c0RbDNSLgesgZ1CbqcN1BvUA00Y2qtIqUVXfibBmC
 
 -- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
@@ -2677,6 +2677,8 @@ ca88300692619ab76a003d687b73e085	Unbirth	y	t	\N
 3c12626dda626618e12a3ca16060e2af	Grog	y	t	\N
 69e6b4afeee41ae209833dc4457a4377	Suicide Silence	y	t	\N
 ec4bcceb8ed55a27993f59540268feb8	Slaughter to Prevail	m	t	\N
+e7a31b59ed82dc0b56a43fc89e147a54	The Wright Valley Trio	y	t	\N
+4eb1adbe6867a2ed8acf05223d515346	Hemocult	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3913,6 +3915,8 @@ ca88300692619ab76a003d687b73e085	ITA
 3c12626dda626618e12a3ca16060e2af	PRT
 69e6b4afeee41ae209833dc4457a4377	USA
 ec4bcceb8ed55a27993f59540268feb8	RUS
+e7a31b59ed82dc0b56a43fc89e147a54	DEU
+4eb1adbe6867a2ed8acf05223d515346	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5850,6 +5854,9 @@ ca88300692619ab76a003d687b73e085	ec775df729e86d0a4e9083059d6ae470
 69e6b4afeee41ae209833dc4457a4377	c6084517dc1a048b101521212e5d1dc4
 3cb5ffaba5b396de828bc06683b5e058	c6084517dc1a048b101521212e5d1dc4
 ec4bcceb8ed55a27993f59540268feb8	c6084517dc1a048b101521212e5d1dc4
+e7a31b59ed82dc0b56a43fc89e147a54	a789e826b0a9839de9d77ce9ea153ec6
+0fa4e99a2451478f3870e930d263cfd4	a789e826b0a9839de9d77ce9ea153ec6
+4eb1adbe6867a2ed8acf05223d515346	a789e826b0a9839de9d77ce9ea153ec6
 \.
 
 
@@ -7833,6 +7840,11 @@ ca88300692619ab76a003d687b73e085	6072e357ce0ffc85924d07f3f59fde6d
 69e6b4afeee41ae209833dc4457a4377	8bb92c3b9b1b949524aac3b578a052b6
 69e6b4afeee41ae209833dc4457a4377	917d78ef1f9ba5451bcd9735606e9215
 ec4bcceb8ed55a27993f59540268feb8	8bb92c3b9b1b949524aac3b578a052b6
+e7a31b59ed82dc0b56a43fc89e147a54	5446a9fcc158ea011aeb9892ba2dfb15
+e7a31b59ed82dc0b56a43fc89e147a54	8a743590316d1519ab5ecc8d142415a2
+e7a31b59ed82dc0b56a43fc89e147a54	ee60af40e997568c6a81ba7ea93c2d01
+e7a31b59ed82dc0b56a43fc89e147a54	0c7fde545c06c2bc7383c0430c95fb78
+4eb1adbe6867a2ed8acf05223d515346	b9d93d1a014743df713103a89d6dfab5
 \.
 
 
@@ -8168,6 +8180,7 @@ a7fb6b23ccb0ef29baeb2e4655bb33ef	Morbidfest 2025	2025-12-14	f3a90318abb3e16166d9
 8179741a0d1c9f7322a49a67b2ea0dc9	Ascensions of Fire Tour 2026	2026-01-20	0280c9c3b98763f5a8d2ce7e97ce1b05	0	23.00	2	\N	f	\N
 ec775df729e86d0a4e9083059d6ae470	Exhume the Metal Festival XI	2026-01-30	4e1c34ddafa9b33187fb34b43ceb2010	1	30.00	2	\N	f	\N
 c6084517dc1a048b101521212e5d1dc4	The Grizzly Winter Tour 2026	2026-02-02	400c46fc5f22decc791a97c27363df40	0	62.75	2	\N	f	\N
+a789e826b0a9839de9d77ce9ea153ec6	Winters Dominion	2026-02-06	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N	f	\N
 \.
 
 
@@ -8411,6 +8424,7 @@ d105e06556aa9db8dd49e6c8bac1cc58	Dark Ambient
 8a2b4ea408069c31034103e85799dbd2	Heavy Meetal
 bffc2611a2cf652247f6aa664dfe9381	Thrah Metal
 be5512f53cb88abb7fcd7dafe20cfb04	Tribute to Death
+ee60af40e997568c6a81ba7ea93c2d01	Drone Metal
 \.
 
 
@@ -8921,5 +8935,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Fje6Ar98U5Iqevlhq6US4Cln8NEiCq0gZnnbXeupx98dME3qQtFw0WUkd7wWapY
+\unrestrict wMbA38Yuc7ghzRNMBf7gs5c0RbDNSLgesgZ1CbqcN1BvUA00Y2qtIqUVXfibBmC
 

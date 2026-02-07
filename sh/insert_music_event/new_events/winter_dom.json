@@ -1,0 +1,35 @@
+{
+  "event": {
+    "name": "Winters Dominion", 
+    "date": "2026-02-06",
+    "placeName": "Mainz (M8 im Haus der Jugend)",
+    "persons": 2,
+    "price": 15.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "The Wright Valley Trio",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Sludge Metal", "Post-Metal", "Drone Metal", "Doom Metal"],
+      "note": null
+    },
+    {
+      "name": "Blakylle",
+      "isNew": false
+    },
+    {
+      "name": "Hemocult",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black''n''Roll"],
+      "note": null
+    }
+  ]
+}
