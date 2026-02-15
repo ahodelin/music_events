@@ -1,0 +1,26 @@
+{
+  "event": {
+    "name": "Harken the Waves Tour",
+    "date": "2026-02-19",
+    "placeName": "Wiesbaden (Schlachthof)",
+    "persons": 2,
+    "price": 30.45,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Urne",
+      "isNew": false
+    },
+    {
+      "name": "Devastated",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Groove Metal"],
+      "note": null
+    }
+  ]
+}

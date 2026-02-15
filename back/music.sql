@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict wMbA38Yuc7ghzRNMBf7gs5c0RbDNSLgesgZ1CbqcN1BvUA00Y2qtIqUVXfibBmC
+\restrict T2zcojyAY46NS32F32GsNlkqEvxCgXQmOrbjc6i2yrQhwXXP0xwSxDafTSTRyfh
 
--- Dumped from database version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
--- Dumped by pg_dump version 18.1 (Ubuntu 18.1-1.pgdg24.04+2)
+-- Dumped from database version 18.2 (Ubuntu 18.2-1.pgdg24.04+1)
+-- Dumped by pg_dump version 18.2 (Ubuntu 18.2-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -5857,6 +5857,9 @@ ec4bcceb8ed55a27993f59540268feb8	c6084517dc1a048b101521212e5d1dc4
 e7a31b59ed82dc0b56a43fc89e147a54	a789e826b0a9839de9d77ce9ea153ec6
 0fa4e99a2451478f3870e930d263cfd4	a789e826b0a9839de9d77ce9ea153ec6
 4eb1adbe6867a2ed8acf05223d515346	a789e826b0a9839de9d77ce9ea153ec6
+04d53bc45dc1343f266585b52dbe09b0	b2a3c8158cecaada134406976aa5a66d
+d908b6b9019639bced6d1e31463eea85	b2a3c8158cecaada134406976aa5a66d
+89b5ac8fb4c102c174adf2fed752a970	b2a3c8158cecaada134406976aa5a66d
 \.
 
 
@@ -8181,6 +8184,7 @@ a7fb6b23ccb0ef29baeb2e4655bb33ef	Morbidfest 2025	2025-12-14	f3a90318abb3e16166d9
 ec775df729e86d0a4e9083059d6ae470	Exhume the Metal Festival XI	2026-01-30	4e1c34ddafa9b33187fb34b43ceb2010	1	30.00	2	\N	f	\N
 c6084517dc1a048b101521212e5d1dc4	The Grizzly Winter Tour 2026	2026-02-02	400c46fc5f22decc791a97c27363df40	0	62.75	2	\N	f	\N
 a789e826b0a9839de9d77ce9ea153ec6	Winters Dominion	2026-02-06	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N	f	\N
+b2a3c8158cecaada134406976aa5a66d	Kilminister / Groundville Bastards / Hängerband	2026-02-14	588671317bf1864e5a95445ec51aac65	0	20.65	2	\N	f	\N
 \.
 
 
@@ -8935,5 +8939,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict wMbA38Yuc7ghzRNMBf7gs5c0RbDNSLgesgZ1CbqcN1BvUA00Y2qtIqUVXfibBmC
+\unrestrict T2zcojyAY46NS32F32GsNlkqEvxCgXQmOrbjc6i2yrQhwXXP0xwSxDafTSTRyfh
 
