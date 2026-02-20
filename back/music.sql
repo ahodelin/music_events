@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict T2zcojyAY46NS32F32GsNlkqEvxCgXQmOrbjc6i2yrQhwXXP0xwSxDafTSTRyfh
+\restrict mY2a2e0jJuAJd7CXbdVGPDIxlKHlceRhjWjrM0wleA6JCGXgtY5vO6aTYmjwIHu
 
 -- Dumped from database version 18.2 (Ubuntu 18.2-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.2 (Ubuntu 18.2-1.pgdg24.04+1)
@@ -1690,7 +1690,6 @@ c9dc004fc3d039ad7fb49456e5902b01	Conan	m	t	\N
 f00bbb7747929fafa9d1afd071dba78e	Converge	m	t	\N
 9a6c0d8ea613c5b002ff958275318b08	Corpsessed	y	t	\N
 67cc86339b2654a35fcc57da8fc9d33d	Counterparts	m	t	\N
-6916ed9292a811c895e259c542af0e8a	Critical Mess	y	t	\N
 fd401865b6db200e5eb8a1ac1b1fbab1	Crossplane	y	t	\N
 218d618a041c057d0e05799670e7e2c8	Crusher	y	t	\N
 a4bcd57d5cda816e4ffd1f83031a36ca	Cryptopsy	y	t	\N
@@ -1824,7 +1823,6 @@ e4f13074d445d798488cb00fa0c5fbd4	Indian Nightmare	n	t	\N
 5dd5b236a364c53feb6db53d1a6a5ab9	Infected World	m	t	\N
 486bf23406dec9844b97f966f4636c9b	In Flames	y	t	\N
 1fd7fc9c73539bee88e1ec137b5f9ad2	Ingested	y	t	\N
-ef3c0bf190876fd31d5132848e99df61	Inhumate	y	t	\N
 2569a68a03a04a2cd73197d2cc546ff2	Insanity Alert	m	t	\N
 05c87189f6c230c90bb1693567233100	Insulter	m	t	\N
 77bfe8d21f1ecc592062f91c9253d8ab	In the Woods	n	t	\N
@@ -1892,7 +1890,6 @@ a9ef9373c9051dc4a3e2f2118537bb2d	Of Colours	y	t	\N
 009f51181eb8c6bb5bb792af9a2fdd07	Omnium Gatherum	y	t	\N
 e63a014f1310b8c7cbe5e2b0fd66f638	Omophagia	y	t	\N
 55b6aa6562faa9381e43ea82a4991079	Orbit Culture	y	t	\N
-1dc7d7d977193974deaa993eb373e714	Orcus Patera	y	t	\N
 5ab944fac5f6a0d98dc248a879ec70ff	Orden Ogan	y	t	\N
 0a0f6b88354de7afe84b8a07dfadcc26	Overkill	m	t	\N
 240e556541427d81f4ed1eda86f33ad3	Pain City	y	t	\N
@@ -2679,9 +2676,13 @@ ca88300692619ab76a003d687b73e085	Unbirth	y	t	\N
 ec4bcceb8ed55a27993f59540268feb8	Slaughter to Prevail	m	t	\N
 e7a31b59ed82dc0b56a43fc89e147a54	The Wright Valley Trio	y	t	\N
 4eb1adbe6867a2ed8acf05223d515346	Hemocult	y	t	\N
+eb3801a3063ef8b9664b1b4d1f6aaada	Devastated	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
+6916ed9292a811c895e259c542af0e8a	Critical Mess	y	f	\N
+ef3c0bf190876fd31d5132848e99df61	Inhumate	y	f	\N
+1dc7d7d977193974deaa993eb373e714	Orcus Patera	y	f	\N
 \.
 
 
@@ -3917,6 +3918,7 @@ ca88300692619ab76a003d687b73e085	ITA
 ec4bcceb8ed55a27993f59540268feb8	RUS
 e7a31b59ed82dc0b56a43fc89e147a54	DEU
 4eb1adbe6867a2ed8acf05223d515346	DEU
+eb3801a3063ef8b9664b1b4d1f6aaada	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5860,6 +5862,8 @@ e7a31b59ed82dc0b56a43fc89e147a54	a789e826b0a9839de9d77ce9ea153ec6
 04d53bc45dc1343f266585b52dbe09b0	b2a3c8158cecaada134406976aa5a66d
 d908b6b9019639bced6d1e31463eea85	b2a3c8158cecaada134406976aa5a66d
 89b5ac8fb4c102c174adf2fed752a970	b2a3c8158cecaada134406976aa5a66d
+2918f3b4f699f80bcafb2607065451e1	e9d55117304463aa628bcef6b5257feb
+eb3801a3063ef8b9664b1b4d1f6aaada	e9d55117304463aa628bcef6b5257feb
 \.
 
 
@@ -7848,6 +7852,7 @@ e7a31b59ed82dc0b56a43fc89e147a54	8a743590316d1519ab5ecc8d142415a2
 e7a31b59ed82dc0b56a43fc89e147a54	ee60af40e997568c6a81ba7ea93c2d01
 e7a31b59ed82dc0b56a43fc89e147a54	0c7fde545c06c2bc7383c0430c95fb78
 4eb1adbe6867a2ed8acf05223d515346	b9d93d1a014743df713103a89d6dfab5
+eb3801a3063ef8b9664b1b4d1f6aaada	0a8a13bf87abe8696fbae4efe2b7f874
 \.
 
 
@@ -8185,6 +8190,7 @@ ec775df729e86d0a4e9083059d6ae470	Exhume the Metal Festival XI	2026-01-30	4e1c34d
 c6084517dc1a048b101521212e5d1dc4	The Grizzly Winter Tour 2026	2026-02-02	400c46fc5f22decc791a97c27363df40	0	62.75	2	\N	f	\N
 a789e826b0a9839de9d77ce9ea153ec6	Winters Dominion	2026-02-06	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N	f	\N
 b2a3c8158cecaada134406976aa5a66d	Kilminister / Groundville Bastards / Hängerband	2026-02-14	588671317bf1864e5a95445ec51aac65	0	20.65	2	\N	f	\N
+e9d55117304463aa628bcef6b5257feb	Harken the Waves Tour	2026-02-19	588671317bf1864e5a95445ec51aac65	0	30.45	2	\N	f	\N
 \.
 
 
@@ -8939,5 +8945,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict T2zcojyAY46NS32F32GsNlkqEvxCgXQmOrbjc6i2yrQhwXXP0xwSxDafTSTRyfh
+\unrestrict mY2a2e0jJuAJd7CXbdVGPDIxlKHlceRhjWjrM0wleA6JCGXgtY5vO6aTYmjwIHu
 
