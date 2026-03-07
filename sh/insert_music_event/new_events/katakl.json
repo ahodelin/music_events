@@ -1,0 +1,39 @@
+{
+  "event": {
+    "name": "N.F.S.N",
+    "date": "2026-03-06",
+    "placeName": "Wiesbaden (Kulturpalast Wiesbaden)",
+    "persons": 2,
+    "price": 13.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Witchkrieg",
+      "isNew": false
+    },
+    {
+      "name": "Blutsäge des Todes",
+      "isNew": false
+    },
+    {
+      "name": "Cold Spot",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Hardcore Punk"],
+      "note": null
+    },
+    {
+      "name": "Menschen,rest",
+      "isNew": true,
+      "likes": "m",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Punk"],
+      "note": null
+    }
+  ]
+}

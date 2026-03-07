@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict mY2a2e0jJuAJd7CXbdVGPDIxlKHlceRhjWjrM0wleA6JCGXgtY5vO6aTYmjwIHu
+\restrict 4UkHShrtIA8F0IhXXOwHJhKmkczHPgSk5TfCW3Z04Qh1SPpJhxrfQtRl9BqmTAr
 
--- Dumped from database version 18.2 (Ubuntu 18.2-1.pgdg24.04+1)
--- Dumped by pg_dump version 18.2 (Ubuntu 18.2-1.pgdg24.04+1)
+-- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
+-- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2525,7 +2525,6 @@ c1d55c7054d1b34cfbe7af0a270a7a7e	Venom Inc	m	t	\N
 c003d8f984043c0ebcf639c313bc64cd	Messticator	y	t	\N
 d6fa1cbba3b41d789ab0bc67bb924c42	Third Wave	m	t	\N
 61edfff4f85f27db59faa5ece9982feb	Joyride	m	t	\N
-5515cbc2b012e448be74482074453087	Blutsäge des Todes	y	t	\N
 98a6b9a14569929690029b15d16080ba	Dipygus	y	t	\N
 d21e9413261b61e2dc34703506f781e2	Traumatomy	y	t	\N
 a736577e40819a07f289fa8deaaf4141	Dissecting a Horrid Mind	y	t	\N
@@ -2569,6 +2568,7 @@ b9a8e0db7a17a92bae876284d35e3021	Nornír	y	t	\N
 eda6c94657b059cb43134ca43448c497	Boiled	y	t	\N
 52e0818e1e6933a8840b963eb8dc2cc7	DeadSquad	y	t	\N
 52eb2cd819dbb066e9c747854677de42	Stuhlgäng	m	t	\N
+5515cbc2b012e448be74482074453087	Blutsäge des Todes	m	t	\N
 29d7fded0020f9daf1665c65b9034c37	Zeugen eines Niedergangs	y	t	\N
 daf3b9b921ce7b22ed08ea4e30821454	Grime Pack	y	t	\N
 1a1dfac16f1667a8cd21e4885ec3af72	Yoth Iria	y	t	\N
@@ -2677,6 +2677,8 @@ ec4bcceb8ed55a27993f59540268feb8	Slaughter to Prevail	m	t	\N
 e7a31b59ed82dc0b56a43fc89e147a54	The Wright Valley Trio	y	t	\N
 4eb1adbe6867a2ed8acf05223d515346	Hemocult	y	t	\N
 eb3801a3063ef8b9664b1b4d1f6aaada	Devastated	y	t	\N
+ccab9c86df92ebd5d268319d515e793a	Cold Spot	y	t	\N
+8a760136e1ae9d83235d8243671c4725	Menschen,rest	m	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3919,6 +3921,8 @@ ec4bcceb8ed55a27993f59540268feb8	RUS
 e7a31b59ed82dc0b56a43fc89e147a54	DEU
 4eb1adbe6867a2ed8acf05223d515346	DEU
 eb3801a3063ef8b9664b1b4d1f6aaada	DEU
+ccab9c86df92ebd5d268319d515e793a	DEU
+8a760136e1ae9d83235d8243671c4725	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5531,8 +5535,6 @@ c003d8f984043c0ebcf639c313bc64cd	45741da54cd02bf8b9c209acbf2ff2ae
 d6fa1cbba3b41d789ab0bc67bb924c42	856a9c4ee67dd6bc538f83f783d19997
 ee36fdf153967a0b99d3340aadeb4720	856a9c4ee67dd6bc538f83f783d19997
 61edfff4f85f27db59faa5ece9982feb	856a9c4ee67dd6bc538f83f783d19997
-5515cbc2b012e448be74482074453087	9be905c75a23a8d26b4bd718fc72511a
-087c643d95880c5a89fc13f3246bebae	9be905c75a23a8d26b4bd718fc72511a
 98a6b9a14569929690029b15d16080ba	965b7e5dbed14563dd9ffce3a3e76dcb
 191bab5800bd381ecf16485f91e85bc3	965b7e5dbed14563dd9ffce3a3e76dcb
 89d60b9528242c8c53ecbfde131eba21	965b7e5dbed14563dd9ffce3a3e76dcb
@@ -5864,6 +5866,12 @@ d908b6b9019639bced6d1e31463eea85	b2a3c8158cecaada134406976aa5a66d
 89b5ac8fb4c102c174adf2fed752a970	b2a3c8158cecaada134406976aa5a66d
 2918f3b4f699f80bcafb2607065451e1	e9d55117304463aa628bcef6b5257feb
 eb3801a3063ef8b9664b1b4d1f6aaada	e9d55117304463aa628bcef6b5257feb
+087c643d95880c5a89fc13f3246bebae	b2b73f2080395e6987f788a1500713c8
+5515cbc2b012e448be74482074453087	b2b73f2080395e6987f788a1500713c8
+ccab9c86df92ebd5d268319d515e793a	b2b73f2080395e6987f788a1500713c8
+8a760136e1ae9d83235d8243671c4725	b2b73f2080395e6987f788a1500713c8
+5515cbc2b012e448be74482074453087	0f8a1bfa92b4edb3e415b6b51532ebaa
+087c643d95880c5a89fc13f3246bebae	0f8a1bfa92b4edb3e415b6b51532ebaa
 \.
 
 
@@ -7853,6 +7861,8 @@ e7a31b59ed82dc0b56a43fc89e147a54	ee60af40e997568c6a81ba7ea93c2d01
 e7a31b59ed82dc0b56a43fc89e147a54	0c7fde545c06c2bc7383c0430c95fb78
 4eb1adbe6867a2ed8acf05223d515346	b9d93d1a014743df713103a89d6dfab5
 eb3801a3063ef8b9664b1b4d1f6aaada	0a8a13bf87abe8696fbae4efe2b7f874
+ccab9c86df92ebd5d268319d515e793a	f3dcdca4cd0c83a5e855c5434ce98673
+8a760136e1ae9d83235d8243671c4725	f72e9105795af04cd4da64414d9968ad
 \.
 
 
@@ -8109,7 +8119,6 @@ a8a45074ca24548875765e3388541cb5	The Unholy Trinity Tour 2025	2025-04-16	5886713
 872789acfd93b013e7120139be311a9b	Circle Pitournium Tour 2025	2025-04-21	f3a90318abb3e16166d96055fd6f9096	0	28.50	2	\N	f	\N
 39e647252a3660f128e1db434425a6b5	Landkrieg Tour 2025	2025-04-19	0280c9c3b98763f5a8d2ce7e97ce1b05	0	19.47	2	\N	f	\N
 6fdd99079a021b528ade2eeb7bccf557	Beyond the Black Tour 2025	2025-04-23	f3a90318abb3e16166d96055fd6f9096	0	38.40	2	\N	f	\N
-9be905c75a23a8d26b4bd718fc72511a	Blutsäge des Todes und Witchkrieg	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
 965b7e5dbed14563dd9ffce3a3e76dcb	Morbide Klänge V	2025-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	20.0	2	\N	f	\N
 89cb1695cd3dd558ca007bd73f47581e	Mayhem in the Arches - 09.2025	2025-09-20	e018b197f3176d2a85fdad95d9b1e8ba	0	15.0	2	\N	f	\N
 9580f7346eefe8ceb1c81a9023f1d43a	Summers's here... 2025	2025-07-04	8edfaa1884ddd9e289e61aea465d6077	0	10.0	2	\N	f	\N
@@ -8191,6 +8200,8 @@ c6084517dc1a048b101521212e5d1dc4	The Grizzly Winter Tour 2026	2026-02-02	400c46f
 a789e826b0a9839de9d77ce9ea153ec6	Winters Dominion	2026-02-06	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N	f	\N
 b2a3c8158cecaada134406976aa5a66d	Kilminister / Groundville Bastards / Hängerband	2026-02-14	588671317bf1864e5a95445ec51aac65	0	20.65	2	\N	f	\N
 e9d55117304463aa628bcef6b5257feb	Harken the Waves Tour	2026-02-19	588671317bf1864e5a95445ec51aac65	0	30.45	2	\N	f	\N
+b2b73f2080395e6987f788a1500713c8	N.F.S.N (nix für schwache nerven) Vol 2	2026-03-06	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
+0f8a1bfa92b4edb3e415b6b51532ebaa	N.F.S.N (nix für schwache nerven) Vol 1	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
 \.
 
 
@@ -8945,5 +8956,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict mY2a2e0jJuAJd7CXbdVGPDIxlKHlceRhjWjrM0wleA6JCGXgtY5vO6aTYmjwIHu
+\unrestrict 4UkHShrtIA8F0IhXXOwHJhKmkczHPgSk5TfCW3Z04Qh1SPpJhxrfQtRl9BqmTAr
 
