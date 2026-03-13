@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 4UkHShrtIA8F0IhXXOwHJhKmkczHPgSk5TfCW3Z04Qh1SPpJhxrfQtRl9BqmTAr
+\restrict u6wNAazUcNlM37aHjCcENo8ho5DSpqwk3fjriPRbmesciagSTYUuKWsnmmZCWd5
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -5872,6 +5872,9 @@ ccab9c86df92ebd5d268319d515e793a	b2b73f2080395e6987f788a1500713c8
 8a760136e1ae9d83235d8243671c4725	b2b73f2080395e6987f788a1500713c8
 5515cbc2b012e448be74482074453087	0f8a1bfa92b4edb3e415b6b51532ebaa
 087c643d95880c5a89fc13f3246bebae	0f8a1bfa92b4edb3e415b6b51532ebaa
+5637bae1665ae86050cb41fb1cdcc3ee	435171b1197abe2df109310f8d191782
+2db1850a4fe292bd2706ffd78dbe44b9	435171b1197abe2df109310f8d191782
+333ca835f34af241fe46af8e7a037e17	435171b1197abe2df109310f8d191782
 \.
 
 
@@ -8202,6 +8205,7 @@ b2a3c8158cecaada134406976aa5a66d	Kilminister / Groundville Bastards / Hängerban
 e9d55117304463aa628bcef6b5257feb	Harken the Waves Tour	2026-02-19	588671317bf1864e5a95445ec51aac65	0	30.45	2	\N	f	\N
 b2b73f2080395e6987f788a1500713c8	N.F.S.N (nix für schwache nerven) Vol 2	2026-03-06	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
 0f8a1bfa92b4edb3e415b6b51532ebaa	N.F.S.N (nix für schwache nerven) Vol 1	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
+435171b1197abe2df109310f8d191782	Freedom or Death Tour 2026	2026-03-12	c72b4173a6a7131bf31a711212305fd3	0	47.55	2	\N	f	\N
 \.
 
 
@@ -8956,5 +8960,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 4UkHShrtIA8F0IhXXOwHJhKmkczHPgSk5TfCW3Z04Qh1SPpJhxrfQtRl9BqmTAr
+\unrestrict u6wNAazUcNlM37aHjCcENo8ho5DSpqwk3fjriPRbmesciagSTYUuKWsnmmZCWd5
 
