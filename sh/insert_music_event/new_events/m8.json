@@ -1,0 +1,39 @@
+{
+  "event": {
+    "name": "Metalcore & Hardcore im M8",
+    "date": "2026-03-14",
+    "placeName": "Mainz (M8 im Haus der Jugend)",
+    "persons": 2,
+    "price": 15.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "All its Grace",
+      "isNew": false
+    },
+    {
+      "name": "Silence to the Fallen",
+      "isNew": false
+    },
+    {
+      "name": "Deadweight",
+      "isNew": true,
+      "likes": "y",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Metalcore"],
+      "note": null
+    },
+    {
+      "name": "Spillflower",
+      "isNew": true,
+      "likes": "n",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Metalcore"],
+      "note": null
+    }
+  ]
+}

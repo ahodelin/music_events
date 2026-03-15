@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict u6wNAazUcNlM37aHjCcENo8ho5DSpqwk3fjriPRbmesciagSTYUuKWsnmmZCWd5
+\restrict Pa4P79nLCqbdh03Q0uUPSaDfRxFgIaiuqgC3gT4roFBbX1vhHCdCwJ9Hl4Iw2A2
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -2679,6 +2679,8 @@ e7a31b59ed82dc0b56a43fc89e147a54	The Wright Valley Trio	y	t	\N
 eb3801a3063ef8b9664b1b4d1f6aaada	Devastated	y	t	\N
 ccab9c86df92ebd5d268319d515e793a	Cold Spot	y	t	\N
 8a760136e1ae9d83235d8243671c4725	Menschen,rest	m	t	\N
+4a019692a644ea9604fdbec9f6108d08	Deadweight	y	t	\N
+b0483ba028a23f0161a9635ba252fa17	Spillflower	n	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3923,6 +3925,8 @@ e7a31b59ed82dc0b56a43fc89e147a54	DEU
 eb3801a3063ef8b9664b1b4d1f6aaada	DEU
 ccab9c86df92ebd5d268319d515e793a	DEU
 8a760136e1ae9d83235d8243671c4725	DEU
+4a019692a644ea9604fdbec9f6108d08	DEU
+b0483ba028a23f0161a9635ba252fa17	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5875,6 +5879,10 @@ ccab9c86df92ebd5d268319d515e793a	b2b73f2080395e6987f788a1500713c8
 5637bae1665ae86050cb41fb1cdcc3ee	435171b1197abe2df109310f8d191782
 2db1850a4fe292bd2706ffd78dbe44b9	435171b1197abe2df109310f8d191782
 333ca835f34af241fe46af8e7a037e17	435171b1197abe2df109310f8d191782
+eb999c99126a456f9db3c5d3b449fa7f	a8f3209ff6179df5c6f601acb45ba4c0
+d70d57d99f1741cb9807f367eb36dfb9	a8f3209ff6179df5c6f601acb45ba4c0
+4a019692a644ea9604fdbec9f6108d08	a8f3209ff6179df5c6f601acb45ba4c0
+b0483ba028a23f0161a9635ba252fa17	a8f3209ff6179df5c6f601acb45ba4c0
 \.
 
 
@@ -7866,6 +7874,8 @@ e7a31b59ed82dc0b56a43fc89e147a54	0c7fde545c06c2bc7383c0430c95fb78
 eb3801a3063ef8b9664b1b4d1f6aaada	0a8a13bf87abe8696fbae4efe2b7f874
 ccab9c86df92ebd5d268319d515e793a	f3dcdca4cd0c83a5e855c5434ce98673
 8a760136e1ae9d83235d8243671c4725	f72e9105795af04cd4da64414d9968ad
+4a019692a644ea9604fdbec9f6108d08	d30be26d66f0448359f54d923aab2bb9
+b0483ba028a23f0161a9635ba252fa17	d30be26d66f0448359f54d923aab2bb9
 \.
 
 
@@ -8206,6 +8216,7 @@ e9d55117304463aa628bcef6b5257feb	Harken the Waves Tour	2026-02-19	588671317bf186
 b2b73f2080395e6987f788a1500713c8	N.F.S.N (nix für schwache nerven) Vol 2	2026-03-06	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
 0f8a1bfa92b4edb3e415b6b51532ebaa	N.F.S.N (nix für schwache nerven) Vol 1	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
 435171b1197abe2df109310f8d191782	Freedom or Death Tour 2026	2026-03-12	c72b4173a6a7131bf31a711212305fd3	0	47.55	2	\N	f	\N
+a8f3209ff6179df5c6f601acb45ba4c0	Metalcore & Hardcore im M8	2026-03-14	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N	f	\N
 \.
 
 
@@ -8960,5 +8971,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict u6wNAazUcNlM37aHjCcENo8ho5DSpqwk3fjriPRbmesciagSTYUuKWsnmmZCWd5
+\unrestrict Pa4P79nLCqbdh03Q0uUPSaDfRxFgIaiuqgC3gT4roFBbX1vhHCdCwJ9Hl4Iw2A2
 
