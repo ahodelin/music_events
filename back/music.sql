@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Pa4P79nLCqbdh03Q0uUPSaDfRxFgIaiuqgC3gT4roFBbX1vhHCdCwJ9Hl4Iw2A2
+\restrict jgMQmMNU9aoeA5R9bfmG5Kk3fpuskKDCADS24iieUcfZj88phjmzDj3XnCUnnSY
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -1444,6 +1444,7 @@ e018b197f3176d2a85fdad95d9b1e8ba	Bad Kreuznach (AJK Kulturzentrum)
 60a813acedaeaedc4325cdc636dbcb72	Wiesbaden (Kreativfabrik)
 fc9a9408cf2f87745054c3756c707750	Ahrensburg (JuKI 42)
 3964b1de7b615d6c453ad3c6f7700251	Mannheim (Jugendklubzentrum forum Mannheim)
+638a858e2c5c28f1ce98341f90c106c9	Frankfurt am Main (Sossenheim)
 \.
 
 
@@ -2681,6 +2682,8 @@ ccab9c86df92ebd5d268319d515e793a	Cold Spot	y	t	\N
 8a760136e1ae9d83235d8243671c4725	Menschen,rest	m	t	\N
 4a019692a644ea9604fdbec9f6108d08	Deadweight	y	t	\N
 b0483ba028a23f0161a9635ba252fa17	Spillflower	n	t	\N
+cf014029e7b64306ef8e82a5d5f1fd93	Gravial	y	t	\N
+32aa079d69d6aff9aea8c5580b42f30a	Maeror	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3927,6 +3930,8 @@ ccab9c86df92ebd5d268319d515e793a	DEU
 8a760136e1ae9d83235d8243671c4725	DEU
 4a019692a644ea9604fdbec9f6108d08	DEU
 b0483ba028a23f0161a9635ba252fa17	DEU
+cf014029e7b64306ef8e82a5d5f1fd93	DEU
+32aa079d69d6aff9aea8c5580b42f30a	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 \.
 
@@ -5883,6 +5888,9 @@ eb999c99126a456f9db3c5d3b449fa7f	a8f3209ff6179df5c6f601acb45ba4c0
 d70d57d99f1741cb9807f367eb36dfb9	a8f3209ff6179df5c6f601acb45ba4c0
 4a019692a644ea9604fdbec9f6108d08	a8f3209ff6179df5c6f601acb45ba4c0
 b0483ba028a23f0161a9635ba252fa17	a8f3209ff6179df5c6f601acb45ba4c0
+d70d57d99f1741cb9807f367eb36dfb9	7e1ab8fd223a659c4516e613d409a061
+cf014029e7b64306ef8e82a5d5f1fd93	7e1ab8fd223a659c4516e613d409a061
+32aa079d69d6aff9aea8c5580b42f30a	7e1ab8fd223a659c4516e613d409a061
 \.
 
 
@@ -7876,6 +7884,9 @@ ccab9c86df92ebd5d268319d515e793a	f3dcdca4cd0c83a5e855c5434ce98673
 8a760136e1ae9d83235d8243671c4725	f72e9105795af04cd4da64414d9968ad
 4a019692a644ea9604fdbec9f6108d08	d30be26d66f0448359f54d923aab2bb9
 b0483ba028a23f0161a9635ba252fa17	d30be26d66f0448359f54d923aab2bb9
+cf014029e7b64306ef8e82a5d5f1fd93	b54875674f7d2d5be9737b0d4c021a21
+32aa079d69d6aff9aea8c5580b42f30a	d469fec5c6f2fe96b8dbcb84b47245d8
+32aa079d69d6aff9aea8c5580b42f30a	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -8217,6 +8228,7 @@ b2b73f2080395e6987f788a1500713c8	N.F.S.N (nix für schwache nerven) Vol 2	2026-0
 0f8a1bfa92b4edb3e415b6b51532ebaa	N.F.S.N (nix für schwache nerven) Vol 1	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	\N
 435171b1197abe2df109310f8d191782	Freedom or Death Tour 2026	2026-03-12	c72b4173a6a7131bf31a711212305fd3	0	47.55	2	\N	f	\N
 a8f3209ff6179df5c6f601acb45ba4c0	Metalcore & Hardcore im M8	2026-03-14	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N	f	\N
+7e1ab8fd223a659c4516e613d409a061	Kirchengeballer Vol. II	2026-03-21	638a858e2c5c28f1ce98341f90c106c9	0	0.0	2	\N	f	\N
 \.
 
 
@@ -8461,6 +8473,7 @@ d105e06556aa9db8dd49e6c8bac1cc58	Dark Ambient
 bffc2611a2cf652247f6aa664dfe9381	Thrah Metal
 be5512f53cb88abb7fcd7dafe20cfb04	Tribute to Death
 ee60af40e997568c6a81ba7ea93c2d01	Drone Metal
+d469fec5c6f2fe96b8dbcb84b47245d8	Melodic Black
 \.
 
 
@@ -8971,5 +8984,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Pa4P79nLCqbdh03Q0uUPSaDfRxFgIaiuqgC3gT4roFBbX1vhHCdCwJ9Hl4Iw2A2
+\unrestrict jgMQmMNU9aoeA5R9bfmG5Kk3fpuskKDCADS24iieUcfZj88phjmzDj3XnCUnnSY
 

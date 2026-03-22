@@ -1,38 +1,34 @@
 {
   "event": {
-    "name": "Metalcore & Hardcore im M8",
-    "date": "2026-03-14",
-    "placeName": "Mainz (M8 im Haus der Jugend)",
+    "name": "Kirchengeballer Vol. II",
+    "date": "2026-03-21",
+    "placeName": "Frankfurt am Main (Sossenheim)",
     "persons": 2,
-    "price": 15.0,
+    "price": 0.0,
     "duration": 0,
     "note": null
   },
   "bands": [
     {
-      "name": "All its Grace",
-      "isNew": false
-    },
-    {
       "name": "Silence to the Fallen",
       "isNew": false
     },
     {
-      "name": "Deadweight",
+      "name": "Gravial",
       "isNew": true,
       "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
-      "genres": ["Metalcore"],
+      "genres": ["Melodic Death Metal"],
       "note": null
     },
     {
-      "name": "Spillflower",
+      "name": "Maeror",
       "isNew": true,
-      "likes": "n",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
-      "genres": ["Metalcore"],
+      "genres": ["Melodic Black", "Death Metal"],
       "note": null
     }
   ]
