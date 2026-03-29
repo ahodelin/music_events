@@ -1,0 +1,29 @@
+{
+  "event": {
+    "name": "Veil of Darkness Tour 2026",
+    "date": "2026-04-09",
+    "placeName": "Weinheim (Café Central)",
+    "persons": 2,
+    "price": 28.5,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Asagraum",
+      "isNew": false
+    },
+    {
+      "name": "Enisum",
+      "isNew": false
+    },
+    {
+      "name": "Waldgeflüster",
+      "isNew": false
+    },
+    {
+      "name": "Convictive",
+      "isNew": false
+    }
+  ]
+}
