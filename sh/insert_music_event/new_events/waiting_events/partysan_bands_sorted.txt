@@ -1,0 +1,137 @@
+{
+  "event": {
+    "name": "Party San Open Air 2026", 
+    "date": "2026-08-06",
+    "placeName": "Schlotheim",
+    "persons": 2,
+    "price": ,
+    "duration": 2,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    },
+    {
+      "name": "200 Stab Wounds",
+      "isNew": false
+    },
+    {
+      "name": "Amorphis",
+      "isNew": false
+    },
+    {
+      "name": "Asagraum",
+      "isNew": false
+    },
+    {
+      "name": "Begging For Incest",
+      "isNew": false
+    },
+    {
+      "name": "Desaster",
+      "isNew": false
+    },
+    {
+      "name": "Bloody Vengeance",
+      "isNew": false
+    },
+    {
+      "name": "In The Woods...",
+      "isNew": false
+    },
+    {
+      "name": "Fleshcrawl",
+      "isNew": false
+    },
+    {
+      "name": "Schirenc Plays Pungent Stench",
+      "isNew": false
+    },
+    {
+      "name": "Testament",
+      "isNew": false
+    },
+    {
+      "name": "Jungle Rot",
+      "isNew": false
+    },
+    {
+      "name": "Impurity",
+      "isNew": false
+    },
+    {
+      "name": "Hypocrisy",
+      "isNew": false
+    },
+    {
+      "name": "Guttural Slug",
+      "isNew": false
+    },
+    {
+      "name": "Gut",
+      "isNew": false
+    },
+    {
+      "name": "Groza",
+      "isNew": false
+    },
+    {
+      "name": "Endonomos",
+      "isNew": false
+    },
+    {
+      "name": "Misery Index",
+      "isNew": false
+    },
+    {
+      "name": "Hexvessel",
+      "isNew": false
+    },
+A Canorous Quintet
+Alcest
+Baxaxaxa
+Celeste
+Crawl
+Dark Funeral
+Death Worship
+Deceased
+Devourment
+Evoken
+Firespawn
+For Victory
+Gates Of Ishtar
+Gorefunest
+------------
+Internal Bleeding
+Iotunn
+Lucifer'S Child
+Mammoth Grinder
+Marduk
+Messticator
+Misery Index
+Moonspell
+Morbus Dei
+Murder Squad
+Nail By Nail
+Panzerfaust
+Rats Of Gomorrah
+Sacred Reich
+Sadistic Intent
+Sarcator
+Sear Bliss
+Sorcerer
+Sunken
+Sventevith
+Temple Of Dread
+Todomal
+Tulus
+Wolfbrigade
+Wolves In The Throne Room
+Wormed
