@@ -1,0 +1,384 @@
+{
+  "event": {
+    "name": "Party San Open Air 2026", 
+    "date": "2026-08-06",
+    "placeName": "Schlotheim",
+    "persons": 2,
+    "price": ,
+    "duration": 2,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "A Canorous Quintet",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Melodic Death Metal"],
+      "note": null
+    },
+    {
+      "name": "200 Stab Wounds",
+      "isNew": false
+    },
+    {
+      "name": "Amorphis",
+      "isNew": false
+    },
+    {
+      "name": "Asagraum",
+      "isNew": false
+    },
+    {
+      "name": "Begging For Incest",
+      "isNew": false
+    },
+    {
+      "name": "Desaster",
+      "isNew": false
+    },
+    {
+      "name": "Bloody Vengeance",
+      "isNew": false
+    },
+    {
+      "name": "In the Woods...",
+      "isNew": false
+    },
+    {
+      "name": "Fleshcrawl",
+      "isNew": false
+    },
+    {
+      "name": "Schirenc Plays Pungent Stench",
+      "isNew": false
+    },
+    {
+      "name": "Testament",
+      "isNew": false
+    },
+    {
+      "name": "Jungle Rot",
+      "isNew": false
+    },
+    {
+      "name": "Impurity",
+      "isNew": false
+    },
+    {
+      "name": "Hypocrisy",
+      "isNew": false
+    },
+    {
+      "name": "Guttural Slug",
+      "isNew": false
+    },
+    {
+      "name": "Gut",
+      "isNew": false
+    },
+    {
+      "name": "Groza",
+      "isNew": false
+    },
+    {
+      "name": "Endonomos",
+      "isNew": false
+    },
+    {
+      "name": "Misery Index",
+      "isNew": false
+    },
+    {
+      "name": "Hexvessel",
+      "isNew": false
+    },
+    {
+      "name": "Lucifer''s Child",
+      "isNew": false
+    },
+    {
+      "name": "Mammoth Grinder",
+      "isNew": false
+    },
+    {
+      "name": "Marduk",
+      "isNew": false
+    },
+    {
+      "name": "Messticator",
+      "isNew": false
+    },
+    {
+      "name": "Misery Index",
+      "isNew": false
+    },
+    {
+      "name": "Moonspell",
+      "isNew": false
+    },
+    {
+      "name": "Morbus Dei",
+      "isNew": false
+    },
+    {
+      "name": "Nail by Nail",
+      "isNew": false
+    },
+    {
+      "name": "Rats of Gomorrah",
+      "isNew": false
+    },
+    {
+      "name": "Sacred Reich",
+      "isNew": false
+    },
+    {
+      "name": "Sarcator",
+      "isNew": false
+    },
+    {
+      "name": "Sear Bliss",
+      "isNew": false
+    },
+    {
+      "name": "Wormed",
+      "isNew": false
+    },
+    {
+      "name": "Alcest",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["FRA"],
+      "genres": ["Post-Black Metal", "Shoegaze"],
+      "note": null
+    },
+   {
+      "name": "Baxaxaxa",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+   {
+      "name": "Celeste",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["FRA"],
+      "genres": ["Black Metal", "Sludge Metal", "Post-Hardcore"],
+      "note": null
+    },
+   {
+      "name": "Crawl",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Dark Funeral",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+   {
+      "name": "Death Worship",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CAN"],
+      "genres": ["Black Metal", "Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Deceased",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Death Metal", "Thrash Metal", "Heavy Metal"],
+      "note": null
+    },
+   {
+      "name": "Devourment",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Slam Metal", "Brutal Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Evoken",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Funeral Doom Metal", "Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Firespawn",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+   {
+      "name": "For Victory",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Tribute to Bolt Thrower"],
+      "note": null
+    },
+   {
+      "name": "Gates of Ishtar",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Melodic Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Gorefunest",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["NDL"],
+      "genres": ["Tribute to Gorefest"],
+      "note": null
+    },
+   {
+      "name": "Internal Bleeding",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Slam Metal", "Brutal Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Iotunn",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DNK"],
+      "genres": ["Progressive Power Metal", "Progressive Melodic Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Murder Squad",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Panzerfaust",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CAN"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+   {
+      "name": "Sadistic Intent",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+   {
+      "name": "Sorcerer",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Epic Doom Metal"],
+      "note": null
+    },
+   {
+      "name": "Sunken",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DNK"],
+      "genres": ["Atmospheric Black Metal"],
+      "note": null
+    },
+   {
+      "name": "Sventevith (Storming Near the Baltic)",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["150"],
+      "genres": ["Black Metal"],
+      "note": "Misþyrming (ISL) & Negral (POL)"
+    },
+   {
+      "name": "Temple of Dread",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+   {
+      "name": "TodoMal",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["ESP"],
+      "genres": ["Atmospheric Doom Metal"],
+      "note": null
+    },
+   {
+      "name": "Tulus",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["NOR"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+   {
+      "name": "Wolfbrigade",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SWE"],
+      "genres": ["Crust", "Hardcore Punk"],
+      "note": null
+    },
+   {
+      "name": "Wolves in the Throne Room",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Atmospheric Black Metal"],
+      "note": null
+    }
+  ]
+}

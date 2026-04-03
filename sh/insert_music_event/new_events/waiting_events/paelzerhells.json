@@ -1,0 +1,70 @@
+{
+  "event": {
+    "name": "Pälzer Hell - 7 Deadly Sins", 
+    "date": "2026-04-11", 
+    "placeName": "Schneckenhausen (Festhalle)",
+    "persons": 2,
+    "price": 35.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Organic",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["ITL"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Pentacle",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["NLD"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Massacra Legacy",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["FRA"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Blood Bringer",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Disfuneral",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["FRA"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Abrasive",
+      "isNew": false
+    },
+   {
+      "name": "Discreation",
+      "isNew": false
+    },
+   {
+      "name": "Dead Chasm",
+      "isNew": false
+    }
+  ]
+}

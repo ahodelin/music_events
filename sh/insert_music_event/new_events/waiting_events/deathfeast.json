@@ -1,0 +1,241 @@
+{
+  "event": {
+    "name": "Death Feast Open Air 2026",
+    "date": "2026-08-20",
+    "placeName": "Andernach",
+    "persons": 2,
+    "price": ,
+    "duration": 2,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Brutal Sphincter",
+      "isNew": false
+    },
+    {
+      "name": "Cytotoxin",
+      "isNew": false
+    },
+    {
+      "name": "Home Reared Meat",
+      "isNew": false
+    },
+    {
+      "name": "Condemned",
+      "isNew": false
+    },
+    {
+      "name": "Darkall Slaves",
+      "isNew": false
+    },
+    {
+      "name": "DeadSquad",
+      "isNew": false
+    },
+    {
+      "name": "Extermination Dismemberment",
+      "isNew": false
+    },
+    {
+      "name": "Gutrectomy",
+      "isNew": false
+    },
+    {
+      "name": "Hour of Penance",
+      "isNew": false
+    },
+    {
+      "name": "Revocation",
+      "isNew": false
+    },
+    {
+      "name": "Signs of the Swarm",
+      "isNew": false
+    },
+    {
+      "name": "Vulvodynia",
+      "isNew": false
+    },
+    {
+      "name": "Cerebral Incubation",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Slam Metal", "Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Sperm of Mankind",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["SVK"],
+      "genres": ["Goregrind", "Porngoregrind"],
+      "note": null
+    },
+    {
+      "name": "Scatology Secretion",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["100"],
+      "genres": ["Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Pikodeath",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CZE"],
+      "genres": ["Death Metal", "Thrash Metal"],
+      "note": null
+    },
+    {
+      "name": "Molested Divinity",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["TUR"],
+      "genres": ["Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Kakothanasy",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CHE"],
+      "genres": ["Technical Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Jasad",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["IDN"],
+      "genres": ["Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Internal Suffering",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["COL"],
+      "genres": ["Technial Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Internal Bleeding",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Slam Metal", "Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Imperial Execration",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["150"],
+      "genres": ["Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Human Mass Extermination",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CRC"],
+      "genres": ["Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Guttural Disgorge",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DNK"],
+      "genres": ["Slam Metal", "Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Filth",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Deathcore"],
+      "note": null
+    },
+    {
+      "name": "Fatuous Rump",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["TWN"],
+      "genres": ["Slam Metal", "Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Emasculated Vituperation",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["TWN"],
+      "genres": ["Slam Metal", "Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Despondency",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Death Vomit",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["IDN"],
+      "genres": ["Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Cutterred Flesh",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CZE"],
+      "genres": ["Brutal Death Metal", "Death Metal", "Deathcore"],
+      "note": null
+    },
+    {
+      "name": "Coprocephalic Mutation",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["GBR"],
+      "genres": ["Slam Metal", "Brutal Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Suffer",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIDs": ["GBR"],
+      "genres": ["Deathcore"],
+      "note": null 
+    }
+  ]
+}
