@@ -1,0 +1,26 @@
+{
+  "event": {
+    "name": "Neue Welt - Alte Sünden", 
+    "date": "2026-05-14",
+    "placeName": "Wiesbaden (Schlachthof)",
+    "persons": 2,
+    "price": ,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Antrisch",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Atmospheric Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Non est Deus",
+      "isNew": false
+    }
+  ]
+}

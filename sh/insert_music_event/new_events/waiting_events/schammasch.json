@@ -1,0 +1,26 @@
+{
+  "event": {
+    "name": "Triangle 10th Anniversary", 
+    "date": "2026-05-09",
+    "placeName": "Basel (Kuppel)",
+    "persons": 2,
+    "price": ,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Sum of R",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CHE"],
+      "genres": ["Avangarde Metal"],
+      "note": null
+    },
+    {
+      "name": "Schammasch",
+      "isNew": false
+    }
+  ]
+}

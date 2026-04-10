@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict aPv9UR61hPmiOfaZ3jMI8LtrylAwJ8onbYNKQnpdoKlwSkF6Kdwa8NskVHJhHEk
+\restrict 2gJ1pvW6D2uBfXZoFTiX8Fl34PymQ62Gjj0beHQXxYRocKlHZJxsaCklmBYULCW
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -584,6 +584,15 @@ CREATE TABLE music.bands_genres (
 
 
 --
+-- Name: bands_tmp; Type: TABLE; Schema: music; Owner: -
+--
+
+CREATE TABLE music.bands_tmp (
+    bands_name character varying NOT NULL
+);
+
+
+--
 -- Name: events; Type: TABLE; Schema: music; Owner: -
 --
 
@@ -722,6 +731,25 @@ CREATE VIEW music.v_bands_likes AS
    FROM music.bands
   GROUP BY likes
   ORDER BY (count(id_band)) DESC;
+
+
+--
+-- Name: v_bands_of_next_event; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_bands_of_next_event AS
+ SELECT bt.bands_name,
+        CASE
+            WHEN (b.id_band IS NULL) THEN 'j'::text
+            ELSE 'n'::text
+        END AS isnew
+   FROM (music.bands_tmp bt
+     LEFT JOIN music.bands b ON (((b.id_band)::text = md5(lower(regexp_replace((bt.bands_name)::text, '\W|\s'::text, ''::text, 'g'::text))))))
+  ORDER BY
+        CASE
+            WHEN (b.id_band IS NULL) THEN 'j'::text
+            ELSE 'n'::text
+        END, bt.bands_name;
 
 
 --
@@ -5928,6 +5956,10 @@ fe40439f0e1ca9aa9b457e10f2163f4d	df00c4637b8d1725ea750109fbd44601
 1113ac67f70157df8b51ada452408e85	df00c4637b8d1725ea750109fbd44601
 9f545a8b964c87963d9fc70eab5e4af1	df00c4637b8d1725ea750109fbd44601
 e3f01568540a26c1afefa3d6c4cd0407	df00c4637b8d1725ea750109fbd44601
+8e38937886f365bb96aa1c189c63c5ea	cf1796f40012036c339f6a937b8aef1b
+647dadd75e050b230269e43a4fe351e2	cf1796f40012036c339f6a937b8aef1b
+0ab7d3a541204a9cab0d2d569c5b173f	cf1796f40012036c339f6a937b8aef1b
+31e2d1e0b364475375cb17ad76aa71f2	cf1796f40012036c339f6a937b8aef1b
 \.
 
 
@@ -7942,6 +7974,31 @@ bd4ca3a838ce3972af46b6e2d85985f2	d25334037d936d3257f794a10bb3030f
 
 
 --
+-- Data for Name: bands_tmp; Type: TABLE DATA; Schema: music; Owner: -
+--
+
+COPY music.bands_tmp (bands_name) FROM stdin;
+DESTRUCTION
+DESASTER
+REIL OF VIOLENCE
+EXUMER
+URGEHAL
+MORTEM
+WARHAMMER
+GRAVEN
+SVARTTJERN
+HEXER
+TSATTHOGGUA
+CHEMICIDE
+ANTIPEEWEE
+WARFIELD
+PAXTILENCE
+GRAVE DOGGER
+SIRENS
+\.
+
+
+--
 -- Data for Name: events; Type: TABLE DATA; Schema: music; Owner: -
 --
 
@@ -8281,6 +8338,7 @@ b2b73f2080395e6987f788a1500713c8	N.F.S.N (nix für schwache nerven) Vol 2	2026-0
 a8f3209ff6179df5c6f601acb45ba4c0	Metalcore & Hardcore im M8	2026-03-14	a91bcaf7db7d174ee2966d9c293fd575	0	15.0	2	\N	f	\N
 7e1ab8fd223a659c4516e613d409a061	Kirchengeballer Vol. II	2026-03-21	638a858e2c5c28f1ce98341f90c106c9	0	0.0	2	\N	f	\N
 df00c4637b8d1725ea750109fbd44601	Braincrusher in Hell 2026	2026-03-27	ca7fb13a9cd0887dfabbb573c070fb2e	1	145.00	2	\N	f	\N
+cf1796f40012036c339f6a937b8aef1b	Veil of Darkness Tour 2026	2026-04-09	09ddc8804dd5908fef3c8c0c474ad238	0	28.5	2	\N	f	\N
 \.
 
 
@@ -8896,6 +8954,14 @@ ALTER TABLE ONLY music.bands
 
 
 --
+-- Name: bands_tmp bands_tmp_bands_name_key; Type: CONSTRAINT; Schema: music; Owner: -
+--
+
+ALTER TABLE ONLY music.bands_tmp
+    ADD CONSTRAINT bands_tmp_bands_name_key UNIQUE (bands_name);
+
+
+--
 -- Name: events events_pkey; Type: CONSTRAINT; Schema: music; Owner: -
 --
 
@@ -9037,5 +9103,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict aPv9UR61hPmiOfaZ3jMI8LtrylAwJ8onbYNKQnpdoKlwSkF6Kdwa8NskVHJhHEk
+\unrestrict 2gJ1pvW6D2uBfXZoFTiX8Fl34PymQ62Gjj0beHQXxYRocKlHZJxsaCklmBYULCW
 

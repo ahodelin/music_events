@@ -1,0 +1,127 @@
+{
+"event": {
+  "name": "", 
+  "date": "2026-10-23",
+  "placeName": "",
+  "persons": 2,
+  "price": ,
+  "duration": 1,
+  "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Grave Dogger",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Graven",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Hexer",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Mortem",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Reil of Violence",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Sirens",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Tsatthoggua",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Urgehal",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Warhammer",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Antipeewee",
+      "isNew": false
+    },
+    {
+      "name": "Chemicide",
+      "isNew": false
+    },
+    {
+      "name": "Desaster",
+      "isNew": false
+    },
+    {
+      "name": "Destruction",
+      "isNew": false
+    },
+    {
+      "name": "Exumer",
+      "isNew": false
+    },
+    {
+      "name": "Paxtilence",
+      "isNew": false
+    },
+    {
+      "name": "Svarttjern",
+      "isNew": false
+    },
+    {
+      "name": "Warfield",
+      "isNew": false
+    }
+  ]
+}

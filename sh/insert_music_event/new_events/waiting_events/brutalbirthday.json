@@ -1,0 +1,115 @@
+{
+    "event": {
+    "name": "Brutal Birthday Feast II", 
+    "date": "2026-05-01",
+    "placeName": "Ostfildern (Zentrum Zinsholz)",
+    "persons": 2,
+    "price": 85.0,
+    "duration": 1,
+    "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Wormed",
+      "isNew": false
+    },
+    {
+      "name": "Vomit the Soul",
+      "isNew": false
+    },
+    {
+      "name": "Goath",
+      "isNew": false
+    },
+    {
+      "name": "Imperious Mortality",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Goreputation",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Post Natal Abortion",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Haunted Cemetery",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Brodequin",
+      "isNew": false
+    },
+    {
+      "name": "Devangelic",
+      "isNew": false
+    },
+    {
+      "name": "Celestial Scourge",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Escarnium",
+      "isNew": false
+    },
+    {
+      "name": "Ingrowing",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Unbirth",
+      "isNew": false
+    },
+    {
+      "name": "Pusboil",
+      "isNew": false
+    },
+    {
+      "name": "Digest",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+    }
+  ]
+}

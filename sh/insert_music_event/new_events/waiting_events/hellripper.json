@@ -1,0 +1,26 @@
+{
+    "event": {
+    "name": "Goatkraft & Granite Tour 2026", 
+    "date": "2026-04-17",
+    "placeName": "Mannheim (7er Club)",
+    "persons": 2,
+    "price": ,
+    "duration": 0,
+    "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Hellripper",
+      "isNew": false
+    },
+    {
+      "name": "Schizophrenia",
+      "isNew": false
+    },
+    {
+      "name": "Sarcator",
+      "isNew": false
+    }
+  ]
+}

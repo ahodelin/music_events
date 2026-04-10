@@ -1,0 +1,164 @@
+{
+    "event": {
+    "name": "", 
+    "date": "",
+    "placeName": "",
+    "persons": 2,
+    "price": ,
+    "duration": 1,
+    "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Harakiri for the Sky",
+      "isNew": false
+    },
+    {
+      "name": "Servant",
+      "isNew": false
+    },
+    {
+      "name": "Agrypnie",
+      "isNew": false
+    },
+    {
+      "name": "Vogelfrey",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Wesen",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Aephanemer",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "All Will Know & Friend''s",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Antikvlt",
+      "isNew": false
+    },
+    {
+      "name": "Afsky",
+      "isNew": false
+    },
+    {
+      "name": "Yoth Iria",
+      "isNew": false
+    },
+    {
+      "name": "Pentarium",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Tabernis",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Stillbirth",
+      "isNew": false
+    },
+    {
+      "name": "Desaster",
+      "isNew": false
+    },
+    {
+      "name": "Blakylle",
+      "isNew": false
+    },
+    {
+      "name": "Mythemia",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Old Ruins",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Astral Spectre",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Waldläufer",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    },
+    {
+      "name": "Magefa",
+      "isNew": false
+    },
+    {
+      "name": "Ūkanose",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [""],
+      "note": null
+          
+    }
+  ]
+}
