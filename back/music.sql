@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict MEfpiUemI4HB8wo9M5Fvp5BhzE67uhyRbsJMar7hc9znygTjfLOToZwGhE5xwUQ
+\restrict YkpaTll2HnZthcwfwk1gfXJWpOqC7AEi94KdH7KcHtCWrW1iIvug93cxHvRJcIl
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -2730,6 +2730,11 @@ e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
 6916ed9292a811c895e259c542af0e8a	Critical Mess	y	f	\N
 ef3c0bf190876fd31d5132848e99df61	Inhumate	y	f	\N
 1dc7d7d977193974deaa993eb373e714	Orcus Patera	y	f	\N
+92247aa9766c9c6deebb28f078f75b83	Organic	y	t	\N
+6ba49b112eb429b59a85ee94da9c2ccb	Pentacle	y	t	\N
+142f22987823335370be80a3869cba26	Massacra Legacy	y	t	\N
+08f3442ba3c1afe44f4e058aadbb69b7	Blood Bringer	y	t	\N
+f18a16f6c6668fdffa95ad537e863ba5	Disfuneral	y	t	\N
 \.
 
 
@@ -3983,6 +3988,11 @@ fe40439f0e1ca9aa9b457e10f2163f4d	DEU
 e3f01568540a26c1afefa3d6c4cd0407	SWE
 bfea14c1a300fd72e3c7871c9c2d8a66	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
+92247aa9766c9c6deebb28f078f75b83	ITA
+6ba49b112eb429b59a85ee94da9c2ccb	NLD
+142f22987823335370be80a3869cba26	FRA
+08f3442ba3c1afe44f4e058aadbb69b7	DEU
+f18a16f6c6668fdffa95ad537e863ba5	FRA
 \.
 
 
@@ -5964,6 +5974,14 @@ e3f01568540a26c1afefa3d6c4cd0407	df00c4637b8d1725ea750109fbd44601
 31e2d1e0b364475375cb17ad76aa71f2	cf1796f40012036c339f6a937b8aef1b
 087c643d95880c5a89fc13f3246bebae	f16c13f0f2dace407c8995e7d7225805
 bfea14c1a300fd72e3c7871c9c2d8a66	f16c13f0f2dace407c8995e7d7225805
+92247aa9766c9c6deebb28f078f75b83	a922ca9c4282dfd67db66f5da8736d84
+6ba49b112eb429b59a85ee94da9c2ccb	a922ca9c4282dfd67db66f5da8736d84
+142f22987823335370be80a3869cba26	a922ca9c4282dfd67db66f5da8736d84
+08f3442ba3c1afe44f4e058aadbb69b7	a922ca9c4282dfd67db66f5da8736d84
+f18a16f6c6668fdffa95ad537e863ba5	a922ca9c4282dfd67db66f5da8736d84
+98dd2a77f081989a185cb652662eea41	a922ca9c4282dfd67db66f5da8736d84
+630500eabc48c986552cb01798a31746	a922ca9c4282dfd67db66f5da8736d84
+dac6032bdce48b416fa3cd1d93dc83b8	a922ca9c4282dfd67db66f5da8736d84
 \.
 
 
@@ -7977,6 +7995,11 @@ bd4ca3a838ce3972af46b6e2d85985f2	d25334037d936d3257f794a10bb3030f
 bfea14c1a300fd72e3c7871c9c2d8a66	9e7315413ae31a070ccae5c580dd1b19
 bfea14c1a300fd72e3c7871c9c2d8a66	f3dcdca4cd0c83a5e855c5434ce98673
 bfea14c1a300fd72e3c7871c9c2d8a66	c7fb67368c25c29b9c10ca91b2d97488
+92247aa9766c9c6deebb28f078f75b83	3593526a5f465ed766bafb4fb45748a2
+6ba49b112eb429b59a85ee94da9c2ccb	3593526a5f465ed766bafb4fb45748a2
+142f22987823335370be80a3869cba26	3593526a5f465ed766bafb4fb45748a2
+08f3442ba3c1afe44f4e058aadbb69b7	3593526a5f465ed766bafb4fb45748a2
+f18a16f6c6668fdffa95ad537e863ba5	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -8347,6 +8370,7 @@ a8f3209ff6179df5c6f601acb45ba4c0	Metalcore & Hardcore im M8	2026-03-14	a91bcaf7d
 df00c4637b8d1725ea750109fbd44601	Braincrusher in Hell 2026	2026-03-27	ca7fb13a9cd0887dfabbb573c070fb2e	1	145.00	2	\N	f	\N
 cf1796f40012036c339f6a937b8aef1b	Veil of Darkness Tour 2026	2026-04-09	09ddc8804dd5908fef3c8c0c474ad238	0	28.5	2	\N	f	\N
 f16c13f0f2dace407c8995e7d7225805	Zerre, Witchkrieg - 2026	2026-04-10	cccce7f0011bc27dee7c60945cd5f962	0	19.80	2	\N	f	\N
+a922ca9c4282dfd67db66f5da8736d84	Pälzer Hell - 7 Deadly Sins	2026-04-11	b5c6ef76dd3784cc976d507c890973c3	0	35.0	2	\N	f	\N
 \.
 
 
@@ -9111,5 +9135,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict MEfpiUemI4HB8wo9M5Fvp5BhzE67uhyRbsJMar7hc9znygTjfLOToZwGhE5xwUQ
+\unrestrict YkpaTll2HnZthcwfwk1gfXJWpOqC7AEi94KdH7KcHtCWrW1iIvug93cxHvRJcIl
 
