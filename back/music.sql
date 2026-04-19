@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict YkpaTll2HnZthcwfwk1gfXJWpOqC7AEi94KdH7KcHtCWrW1iIvug93cxHvRJcIl
+\restrict av9cSBr90zHfu4yPA6IKix2y9Pmqu4llgEqpgLM62XNimwG5zV5Rs4ZuJ8XuFDq
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -1475,6 +1475,7 @@ e018b197f3176d2a85fdad95d9b1e8ba	Bad Kreuznach (AJK Kulturzentrum)
 fc9a9408cf2f87745054c3756c707750	Ahrensburg (JuKI 42)
 3964b1de7b615d6c453ad3c6f7700251	Mannheim (Jugendklubzentrum forum Mannheim)
 638a858e2c5c28f1ce98341f90c106c9	Frankfurt am Main (Sossenheim)
+289e2d3fc0a8435d80b040a6c2d50bf1	Wilferdingen (Kulturhalle Remchingen)
 \.
 
 
@@ -2724,6 +2725,11 @@ fe40439f0e1ca9aa9b457e10f2163f4d	Aimless Death	y	t	\N
 e3f01568540a26c1afefa3d6c4cd0407	Vinterland	y	t	\N
 77bfe8d21f1ecc592062f91c9253d8ab	In the Woods...	n	t	\N
 bfea14c1a300fd72e3c7871c9c2d8a66	Zerre	y	t	\N
+2377c7d8c51c95e75901ff40d0bb4002	Frank Blackfire	y	t	\N
+6008df7dfc5820de76ef5750644cba63	Herman Frank Legacy	n	t	\N
+79715384e1d1f9137a95a03b7a0f0e3c	Hailsteel	m	t	\N
+975ecb719692fa2bc7255b0c2dd2f3a4	Defender	m	t	\N
+aafe56ead2914faf714dd476b96b8a8c	Warsenal	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3987,6 +3993,11 @@ fe40439f0e1ca9aa9b457e10f2163f4d	DEU
 9f545a8b964c87963d9fc70eab5e4af1	150
 e3f01568540a26c1afefa3d6c4cd0407	SWE
 bfea14c1a300fd72e3c7871c9c2d8a66	DEU
+2377c7d8c51c95e75901ff40d0bb4002	DEU
+6008df7dfc5820de76ef5750644cba63	DEU
+79715384e1d1f9137a95a03b7a0f0e3c	GRC
+975ecb719692fa2bc7255b0c2dd2f3a4	DEU
+aafe56ead2914faf714dd476b96b8a8c	CAN
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -5982,6 +5993,16 @@ f18a16f6c6668fdffa95ad537e863ba5	a922ca9c4282dfd67db66f5da8736d84
 98dd2a77f081989a185cb652662eea41	a922ca9c4282dfd67db66f5da8736d84
 630500eabc48c986552cb01798a31746	a922ca9c4282dfd67db66f5da8736d84
 dac6032bdce48b416fa3cd1d93dc83b8	a922ca9c4282dfd67db66f5da8736d84
+dfa61d19b62369a37743b38215836df9	80595182a7df6cdf47673a75d11117c6
+182a1e726ac1c8ae851194cea6df0393	80595182a7df6cdf47673a75d11117c6
+16ff0968c682d98cb29b42c793066f29	80595182a7df6cdf47673a75d11117c6
+2377c7d8c51c95e75901ff40d0bb4002	5fddcd7a924048d39c2311ff8a14c54d
+6008df7dfc5820de76ef5750644cba63	5fddcd7a924048d39c2311ff8a14c54d
+79715384e1d1f9137a95a03b7a0f0e3c	5fddcd7a924048d39c2311ff8a14c54d
+975ecb719692fa2bc7255b0c2dd2f3a4	5fddcd7a924048d39c2311ff8a14c54d
+aafe56ead2914faf714dd476b96b8a8c	5fddcd7a924048d39c2311ff8a14c54d
+a7111b594249d6a038281deb74ef0d04	5fddcd7a924048d39c2311ff8a14c54d
+01bcfac216d2a08cd25930234e59f1a1	5fddcd7a924048d39c2311ff8a14c54d
 \.
 
 
@@ -8000,6 +8021,13 @@ bfea14c1a300fd72e3c7871c9c2d8a66	c7fb67368c25c29b9c10ca91b2d97488
 142f22987823335370be80a3869cba26	3593526a5f465ed766bafb4fb45748a2
 08f3442ba3c1afe44f4e058aadbb69b7	3593526a5f465ed766bafb4fb45748a2
 f18a16f6c6668fdffa95ad537e863ba5	3593526a5f465ed766bafb4fb45748a2
+2377c7d8c51c95e75901ff40d0bb4002	9e7315413ae31a070ccae5c580dd1b19
+6008df7dfc5820de76ef5750644cba63	d725d2ec3a5cfa9f6384d9870df72400
+79715384e1d1f9137a95a03b7a0f0e3c	d725d2ec3a5cfa9f6384d9870df72400
+79715384e1d1f9137a95a03b7a0f0e3c	a88070859e86a8fb44267f7c6d91d381
+975ecb719692fa2bc7255b0c2dd2f3a4	d725d2ec3a5cfa9f6384d9870df72400
+aafe56ead2914faf714dd476b96b8a8c	9e7315413ae31a070ccae5c580dd1b19
+aafe56ead2914faf714dd476b96b8a8c	a88070859e86a8fb44267f7c6d91d381
 \.
 
 
@@ -8008,23 +8036,19 @@ f18a16f6c6668fdffa95ad537e863ba5	3593526a5f465ed766bafb4fb45748a2
 --
 
 COPY music.bands_tmp (bands_name) FROM stdin;
-DESTRUCTION
-DESASTER
-REIL OF VIOLENCE
-EXUMER
-URGEHAL
-MORTEM
-WARHAMMER
-GRAVEN
-SVARTTJERN
-HEXER
-TSATTHOGGUA
-CHEMICIDE
-ANTIPEEWEE
-WARFIELD
-PAXTILENCE
-GRAVE DOGGER
-SIRENS
+Regnum Norikum
+Mýdral
+Malthusian
+Hail Spirit Noir
+Grá
+Fen
+Sarcastic Terror
+Bohemyst
+Zatokrev
+Nornír
+Esoteric
+Schammasch
+Ellereve
 \.
 
 
@@ -8371,6 +8395,8 @@ df00c4637b8d1725ea750109fbd44601	Braincrusher in Hell 2026	2026-03-27	ca7fb13a9c
 cf1796f40012036c339f6a937b8aef1b	Veil of Darkness Tour 2026	2026-04-09	09ddc8804dd5908fef3c8c0c474ad238	0	28.5	2	\N	f	\N
 f16c13f0f2dace407c8995e7d7225805	Zerre, Witchkrieg - 2026	2026-04-10	cccce7f0011bc27dee7c60945cd5f962	0	19.80	2	\N	f	\N
 a922ca9c4282dfd67db66f5da8736d84	Pälzer Hell - 7 Deadly Sins	2026-04-11	b5c6ef76dd3784cc976d507c890973c3	0	35.0	2	\N	f	\N
+80595182a7df6cdf47673a75d11117c6	Goatkraft & Granite Tour 2026	2026-04-17	e248bb7c1164a44fa358593e28769a23	0	29.3	2	\N	f	\N
+5fddcd7a924048d39c2311ff8a14c54d	No Playback Festival 2026	2026-04-18	289e2d3fc0a8435d80b040a6c2d50bf1	0	66.1	2	\N	f	\N
 \.
 
 
@@ -9135,5 +9161,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict YkpaTll2HnZthcwfwk1gfXJWpOqC7AEi94KdH7KcHtCWrW1iIvug93cxHvRJcIl
+\unrestrict av9cSBr90zHfu4yPA6IKix2y9Pmqu4llgEqpgLM62XNimwG5zV5Rs4ZuJ8XuFDq
 

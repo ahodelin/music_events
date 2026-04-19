@@ -1,0 +1,116 @@
+{
+"event": {
+  "name": "Teifljågd Open Air 2026", 
+  "date": "2026-05-29",
+  "placeName": "Piberstein (Burg Piberstein)",
+  "persons": 2,
+  "price": ,
+  "duration": 1,
+  "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Bohemyst",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Ellereve",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Esoteric",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Fen",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Grá",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Hail Spirit Noir",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Malthusian",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Regnum Norikum",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Sarcastic Terror",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Zatokrev",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": [" Metal"],
+      "note": null 
+    },
+    {
+      "name": "Mýdral",
+      "isNew": false
+    },
+    {
+      "name": "Nornír",
+      "isNew": false
+    },
+    {
+      "name": "Schammasch",
+      "isNew": false
+    }
+  ]
+}
