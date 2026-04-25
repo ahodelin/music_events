@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict XFhQgICgrFbEMvqFWFWBaNfAszfddZIKBZNFchOVYrbDhqZ53uUEWgKMegTPaZc
+\restrict N0ZKzUEddQwF5yTDTyzkQWUDDtzYrCVvTFWgwpbP21CsKsOjPbdSPCcFUhFyloN
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -2730,6 +2730,7 @@ bfea14c1a300fd72e3c7871c9c2d8a66	Zerre	y	t	\N
 79715384e1d1f9137a95a03b7a0f0e3c	Hailsteel	m	t	\N
 975ecb719692fa2bc7255b0c2dd2f3a4	Defender	m	t	\N
 aafe56ead2914faf714dd476b96b8a8c	Warsenal	y	t	\N
+6eee17440ce8c3fa7ac12607ef35752d	Sapiency	m	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3998,6 +3999,7 @@ bfea14c1a300fd72e3c7871c9c2d8a66	DEU
 79715384e1d1f9137a95a03b7a0f0e3c	GRC
 975ecb719692fa2bc7255b0c2dd2f3a4	DEU
 aafe56ead2914faf714dd476b96b8a8c	CAN
+6eee17440ce8c3fa7ac12607ef35752d	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -6003,6 +6005,8 @@ dfa61d19b62369a37743b38215836df9	80595182a7df6cdf47673a75d11117c6
 aafe56ead2914faf714dd476b96b8a8c	5fddcd7a924048d39c2311ff8a14c54d
 a7111b594249d6a038281deb74ef0d04	5fddcd7a924048d39c2311ff8a14c54d
 01bcfac216d2a08cd25930234e59f1a1	5fddcd7a924048d39c2311ff8a14c54d
+7a78e9ce32da3202ac0ca91ec4247086	1b971aa323c7199aaced87c7495bba69
+6eee17440ce8c3fa7ac12607ef35752d	1b971aa323c7199aaced87c7495bba69
 \.
 
 
@@ -8028,6 +8032,7 @@ f18a16f6c6668fdffa95ad537e863ba5	3593526a5f465ed766bafb4fb45748a2
 975ecb719692fa2bc7255b0c2dd2f3a4	d725d2ec3a5cfa9f6384d9870df72400
 aafe56ead2914faf714dd476b96b8a8c	9e7315413ae31a070ccae5c580dd1b19
 aafe56ead2914faf714dd476b96b8a8c	a88070859e86a8fb44267f7c6d91d381
+6eee17440ce8c3fa7ac12607ef35752d	b54875674f7d2d5be9737b0d4c021a21
 \.
 
 
@@ -8397,6 +8402,7 @@ f16c13f0f2dace407c8995e7d7225805	Zerre, Witchkrieg - 2026	2026-04-10	cccce7f0011
 a922ca9c4282dfd67db66f5da8736d84	Pälzer Hell - 7 Deadly Sins	2026-04-11	b5c6ef76dd3784cc976d507c890973c3	0	35.0	2	\N	f	\N
 80595182a7df6cdf47673a75d11117c6	Goatkraft & Granite Tour 2026	2026-04-17	e248bb7c1164a44fa358593e28769a23	0	29.3	2	\N	f	\N
 5fddcd7a924048d39c2311ff8a14c54d	No Playback Festival 2026	2026-04-18	289e2d3fc0a8435d80b040a6c2d50bf1	0	66.1	2	\N	f	\N
+1b971aa323c7199aaced87c7495bba69	Slaves of Time 2026	2026-04-24	5948b7ac21c1697473de19197df1f172	0	20.0	2	\N	f	\N
 \.
 
 
@@ -9161,5 +9167,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict XFhQgICgrFbEMvqFWFWBaNfAszfddZIKBZNFchOVYrbDhqZ53uUEWgKMegTPaZc
+\unrestrict N0ZKzUEddQwF5yTDTyzkQWUDDtzYrCVvTFWgwpbP21CsKsOjPbdSPCcFUhFyloN
 
