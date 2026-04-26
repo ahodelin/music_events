@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict N0ZKzUEddQwF5yTDTyzkQWUDDtzYrCVvTFWgwpbP21CsKsOjPbdSPCcFUhFyloN
+\restrict Dw8LA657LEZPFJB2fFylKPh6yokAjFokYbRdddl6NW6F7a3hmQCdtejqtoN4hCJ
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -1909,7 +1909,6 @@ e6624ef1aeab84f521056a142b5b2d12	Napalm Death	y	t	\N
 3ddbf46000c2fbd44759f3b4672b64db	Nasty	m	t	\N
 33f03dd57f667d41ac77c6baec352a81	need2destroy	y	t	\N
 38b2886223461f15d65ff861921932b5	Nekrovault	y	t	\N
-dfca36a68db327258a2b0d5e3abe86af	Nepumuc	m	t	\N
 07d82d98170ab334bc66554bafa673cf	Nervosa	y	t	\N
 42f6dd3a6e21d6df71db509662d19ca4	Nifelheim	y	t	\N
 118c9af69a42383387e8ce6ab22867d7	Nile	y	t	\N
@@ -1990,6 +1989,7 @@ e039d55ed63a723001867bc4eb842c00	Stillbirth	y	t	\N
 010fb41a1a7714387391d5ea1ecdfaf7	Still Patient?	m	t	\N
 3123e3df482127074cdd5f830072c898	Stonefall	y	t	\N
 849c829d658baaeff512d766b0db3cce	Storm	y	t	\N
+dfca36a68db327258a2b0d5e3abe86af	Nepumuc	m	f	\N
 3b8d2a5ff1b16509377ce52a92255ffe	Street Dogs	y	t	\N
 01bcfac216d2a08cd25930234e59f1a1	Suicidal Angels	y	t	\N
 c63b6261b8bb8145bc0fd094b9732c24	Suicidal Tendencies	y	t	\N
@@ -2383,7 +2383,6 @@ b14521c0461b445a7ac2425e922c72df	Cavalera Conspiracy	y	t	\N
 31da4ab7750e057e56224eff51bce705	Cliteater	y	f	\N
 6fa204dccaff0ec60f96db5fb5e69b33	Uburen	y	t	\N
 2587d892c1261be043d443d06bd5b220	Kanonenfieber	y	t	\N
-b9fd9676338e36e6493489ec5dc041fe	Rats of Gomorrah (Divide)	y	t	Change name from Divide to Rats of Gomorrah
 61a6502cfdff1a1668892f52c7a00669	Arkuum	y	t	\N
 d69462bef6601bb8d6e3ffda067399d9	Gernotshagen	y	t	\N
 04728a6272117e0dc4ec29b0f7202ad8	Soul Grinder	y	t	\N
@@ -8041,19 +8040,6 @@ aafe56ead2914faf714dd476b96b8a8c	a88070859e86a8fb44267f7c6d91d381
 --
 
 COPY music.bands_tmp (bands_name) FROM stdin;
-Regnum Norikum
-Mýdral
-Malthusian
-Hail Spirit Noir
-Grá
-Fen
-Sarcastic Terror
-Bohemyst
-Zatokrev
-Nornír
-Esoteric
-Schammasch
-Ellereve
 \.
 
 
@@ -9167,5 +9153,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict N0ZKzUEddQwF5yTDTyzkQWUDDtzYrCVvTFWgwpbP21CsKsOjPbdSPCcFUhFyloN
+\unrestrict Dw8LA657LEZPFJB2fFylKPh6yokAjFokYbRdddl6NW6F7a3hmQCdtejqtoN4hCJ
 

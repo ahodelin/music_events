@@ -27,8 +27,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DNK"],
+      "genres": ["Brutal Death Metal"],
       "note": null
           
     },
@@ -37,8 +37,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Brutal Death Metal"],
       "note": null
           
     },
@@ -47,20 +47,14 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Technical Brutal Death Metal"],
       "note": null
           
     },
     {
       "name": "Haunted Cemetery",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": [""],
-      "genres": [""],
-      "note": null
-          
+      "isNew": false
     },
     {
       "name": "Brodequin",
@@ -75,8 +69,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["NOR"],
+      "genres": ["Brutalt Death Metal", "Technical Death Metal"],
       "note": null
           
     },
@@ -89,8 +83,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["CZE"],
+      "genres": ["Death Metal", "Grindcore"],
       "note": null
           
     },
@@ -103,12 +97,12 @@
       "isNew": false
     },
     {
-      "name": "Digest",
+      "name": "Digest!",
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal", "Crust", "Grindcore"],
       "note": null
     }
   ]

@@ -1,0 +1,113 @@
+{
+"event": {
+  "name": "Metal Embrace Festival XVII", 
+  "date": "2026-09-11",
+  "placeName": "Barleben",
+  "persons": 2,
+  "price": ,
+  "duration": 1,
+  "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Aran Angmar",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["150"],
+      "genres": ["Black Metal"],
+      "note": null 
+    },
+    {
+      "name": "Headshot",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Thrash Metal"],
+      "note": null 
+    },
+    {
+      "name": "Mystic Circle",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Melodic Black Metal", "Melodic Death Metal"],
+      "note": null 
+    },
+    {
+      "name": "Rotting Demise",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null 
+    },
+    {
+      "name": "Saturnus",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DNK"],
+      "genres": ["Melodic Doom Metal", "Death Metal"],
+      "note": null 
+    },
+    {
+      "name": "Temple of Dread",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null 
+    },
+    {
+      "name": "Universe Raises Nothingness",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null 
+    },
+    {
+      "name": "Abrogation",
+      "isNew": false
+    },
+    {
+      "name": "Äera",
+      "isNew": false
+    },
+    {
+      "name": "Demonical",
+      "isNew": false
+    },
+    {
+      "name": "Graceless",
+      "isNew": false
+    },
+    {
+      "name": "Obscurity",
+      "isNew": false
+    },
+    {
+      "name": "Schizophrenia",
+      "isNew": false
+    },
+    {
+      "name": "Slaughterday",
+      "isNew": false
+    },
+    {
+      "name": "Soul Grinder",
+      "isNew": false
+    },
+    {
+      "name": "Thron",
+      "isNew": false
+    }
+  ]
+}
