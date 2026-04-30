@@ -1,0 +1,33 @@
+{
+    "event": {
+    "name": "Profaning Creation over Europe 2026", 
+    "date": "2026-04-30",
+    "placeName": "Wiesbaden (Kreativfabrik)",
+    "persons": 2,
+    "price": 17.60,
+    "duration": 1,
+    "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Warp Chamber",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Death Metal"],
+      "note": null
+          
+    },
+    {
+      "name": "Degraved",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Death Metal"],
+      "note": null
+    }
+  ]
+}
