@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Dw8LA657LEZPFJB2fFylKPh6yokAjFokYbRdddl6NW6F7a3hmQCdtejqtoN4hCJ
+\restrict JJgZLnDS2pb1Ffer1erBcM8cBiwD4YzuG2x1ChypSSfPffHIVYFWyUd4ty0Qd9b
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -1476,6 +1476,7 @@ fc9a9408cf2f87745054c3756c707750	Ahrensburg (JuKI 42)
 3964b1de7b615d6c453ad3c6f7700251	Mannheim (Jugendklubzentrum forum Mannheim)
 638a858e2c5c28f1ce98341f90c106c9	Frankfurt am Main (Sossenheim)
 289e2d3fc0a8435d80b040a6c2d50bf1	Wilferdingen (Kulturhalle Remchingen)
+96d32b516614a13451e51c8c8ca458ff	Mainz (Weintorklause)
 \.
 
 
@@ -2730,6 +2731,7 @@ bfea14c1a300fd72e3c7871c9c2d8a66	Zerre	y	t	\N
 975ecb719692fa2bc7255b0c2dd2f3a4	Defender	m	t	\N
 aafe56ead2914faf714dd476b96b8a8c	Warsenal	y	t	\N
 6eee17440ce8c3fa7ac12607ef35752d	Sapiency	m	t	\N
+f7ac8f7ef92ca5a7603167f7c0ee23b4	Jerry K. Reed	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -3999,6 +4001,7 @@ bfea14c1a300fd72e3c7871c9c2d8a66	DEU
 975ecb719692fa2bc7255b0c2dd2f3a4	DEU
 aafe56ead2914faf714dd476b96b8a8c	CAN
 6eee17440ce8c3fa7ac12607ef35752d	DEU
+f7ac8f7ef92ca5a7603167f7c0ee23b4	DEU
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -6006,6 +6009,7 @@ a7111b594249d6a038281deb74ef0d04	5fddcd7a924048d39c2311ff8a14c54d
 01bcfac216d2a08cd25930234e59f1a1	5fddcd7a924048d39c2311ff8a14c54d
 7a78e9ce32da3202ac0ca91ec4247086	1b971aa323c7199aaced87c7495bba69
 6eee17440ce8c3fa7ac12607ef35752d	1b971aa323c7199aaced87c7495bba69
+f7ac8f7ef92ca5a7603167f7c0ee23b4	14134a15299e59a8259a18f433df2bb2
 \.
 
 
@@ -8032,6 +8036,8 @@ f18a16f6c6668fdffa95ad537e863ba5	3593526a5f465ed766bafb4fb45748a2
 aafe56ead2914faf714dd476b96b8a8c	9e7315413ae31a070ccae5c580dd1b19
 aafe56ead2914faf714dd476b96b8a8c	a88070859e86a8fb44267f7c6d91d381
 6eee17440ce8c3fa7ac12607ef35752d	b54875674f7d2d5be9737b0d4c021a21
+f7ac8f7ef92ca5a7603167f7c0ee23b4	3a61b71b271203a633e10c5b3fa9f258
+f7ac8f7ef92ca5a7603167f7c0ee23b4	765ae843192a0f1b071f4446ee4c5fa3
 \.
 
 
@@ -8389,6 +8395,7 @@ a922ca9c4282dfd67db66f5da8736d84	Pälzer Hell - 7 Deadly Sins	2026-04-11	b5c6ef7
 80595182a7df6cdf47673a75d11117c6	Goatkraft & Granite Tour 2026	2026-04-17	e248bb7c1164a44fa358593e28769a23	0	29.3	2	\N	f	\N
 5fddcd7a924048d39c2311ff8a14c54d	No Playback Festival 2026	2026-04-18	289e2d3fc0a8435d80b040a6c2d50bf1	0	66.1	2	\N	f	\N
 1b971aa323c7199aaced87c7495bba69	Slaves of Time 2026	2026-04-24	5948b7ac21c1697473de19197df1f172	0	20.0	2	\N	f	\N
+14134a15299e59a8259a18f433df2bb2	Jerry K. Reed - 04.2026	2026-04-29	96d32b516614a13451e51c8c8ca458ff	0	0.0	2	\N	f	\N
 \.
 
 
@@ -8635,6 +8642,7 @@ be5512f53cb88abb7fcd7dafe20cfb04	Tribute to Death
 ee60af40e997568c6a81ba7ea93c2d01	Drone Metal
 d469fec5c6f2fe96b8dbcb84b47245d8	Melodic Black
 4173aa7133e1e2f7dde65d03e9b0863e	Avangarde Metal
+765ae843192a0f1b071f4446ee4c5fa3	Soul
 \.
 
 
@@ -9153,5 +9161,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Dw8LA657LEZPFJB2fFylKPh6yokAjFokYbRdddl6NW6F7a3hmQCdtejqtoN4hCJ
+\unrestrict JJgZLnDS2pb1Ffer1erBcM8cBiwD4YzuG2x1ChypSSfPffHIVYFWyUd4ty0Qd9b
 
