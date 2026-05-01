@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict JJgZLnDS2pb1Ffer1erBcM8cBiwD4YzuG2x1ChypSSfPffHIVYFWyUd4ty0Qd9b
+\restrict odmlp0c3f38cxUiSc0DX2LZ8XHy74HaC8NMXUBDY91sctArjszo6WyPo93z9efh
 
 -- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
@@ -2732,6 +2732,8 @@ bfea14c1a300fd72e3c7871c9c2d8a66	Zerre	y	t	\N
 aafe56ead2914faf714dd476b96b8a8c	Warsenal	y	t	\N
 6eee17440ce8c3fa7ac12607ef35752d	Sapiency	m	t	\N
 f7ac8f7ef92ca5a7603167f7c0ee23b4	Jerry K. Reed	y	t	\N
+c47466b93963f301ab0d0a39d7333140	Warp Chamber	y	t	\N
+831c6ef8b2cc620dba17f3de22912b20	Degraved	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -4002,6 +4004,8 @@ bfea14c1a300fd72e3c7871c9c2d8a66	DEU
 aafe56ead2914faf714dd476b96b8a8c	CAN
 6eee17440ce8c3fa7ac12607ef35752d	DEU
 f7ac8f7ef92ca5a7603167f7c0ee23b4	DEU
+c47466b93963f301ab0d0a39d7333140	USA
+831c6ef8b2cc620dba17f3de22912b20	USA
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -6010,6 +6014,8 @@ a7111b594249d6a038281deb74ef0d04	5fddcd7a924048d39c2311ff8a14c54d
 7a78e9ce32da3202ac0ca91ec4247086	1b971aa323c7199aaced87c7495bba69
 6eee17440ce8c3fa7ac12607ef35752d	1b971aa323c7199aaced87c7495bba69
 f7ac8f7ef92ca5a7603167f7c0ee23b4	14134a15299e59a8259a18f433df2bb2
+c47466b93963f301ab0d0a39d7333140	6b5a94de81a235496db94416229eaf69
+831c6ef8b2cc620dba17f3de22912b20	6b5a94de81a235496db94416229eaf69
 \.
 
 
@@ -8038,6 +8044,8 @@ aafe56ead2914faf714dd476b96b8a8c	a88070859e86a8fb44267f7c6d91d381
 6eee17440ce8c3fa7ac12607ef35752d	b54875674f7d2d5be9737b0d4c021a21
 f7ac8f7ef92ca5a7603167f7c0ee23b4	3a61b71b271203a633e10c5b3fa9f258
 f7ac8f7ef92ca5a7603167f7c0ee23b4	765ae843192a0f1b071f4446ee4c5fa3
+c47466b93963f301ab0d0a39d7333140	3593526a5f465ed766bafb4fb45748a2
+831c6ef8b2cc620dba17f3de22912b20	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -8396,6 +8404,7 @@ a922ca9c4282dfd67db66f5da8736d84	Pälzer Hell - 7 Deadly Sins	2026-04-11	b5c6ef7
 5fddcd7a924048d39c2311ff8a14c54d	No Playback Festival 2026	2026-04-18	289e2d3fc0a8435d80b040a6c2d50bf1	0	66.1	2	\N	f	\N
 1b971aa323c7199aaced87c7495bba69	Slaves of Time 2026	2026-04-24	5948b7ac21c1697473de19197df1f172	0	20.0	2	\N	f	\N
 14134a15299e59a8259a18f433df2bb2	Jerry K. Reed - 04.2026	2026-04-29	96d32b516614a13451e51c8c8ca458ff	0	0.0	2	\N	f	\N
+6b5a94de81a235496db94416229eaf69	Profaning Creation over Europe 2026	2026-04-30	60a813acedaeaedc4325cdc636dbcb72	0	17.60	2	\N	f	\N
 \.
 
 
@@ -9161,5 +9170,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict JJgZLnDS2pb1Ffer1erBcM8cBiwD4YzuG2x1ChypSSfPffHIVYFWyUd4ty0Qd9b
+\unrestrict odmlp0c3f38cxUiSc0DX2LZ8XHy74HaC8NMXUBDY91sctArjszo6WyPo93z9efh
 
