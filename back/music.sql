@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict E2qaEsvM7LoL9OHcE2vHdm7MMXZCIHaRetOKReUtd5afNaufZsbtOz9M1xkPkAO
+\restrict 5G5fB1vApbls7NaSdiAScNlbsMXfh0jgoPxlQJb0duSZSQzXfqD1zHr1slHjJ81
 
--- Dumped from database version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
--- Dumped by pg_dump version 18.3 (Ubuntu 18.3-1.pgdg24.04+1)
+-- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
+-- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -535,7 +535,8 @@ CREATE TABLE geo.countries_continents (
 
 CREATE TABLE geo.places (
     id_place character(32) NOT NULL,
-    place character varying(100) NOT NULL
+    place character varying(100) NOT NULL,
+    id_country character varying(4) DEFAULT 'DEU'::character varying NOT NULL
 );
 
 
@@ -1370,114 +1371,113 @@ TWN	142
 -- Data for Name: places; Type: TABLE DATA; Schema: geo; Owner: -
 --
 
-COPY geo.places (id_place, place) FROM stdin;
-b77734e4928596fac1db05cab7b39710	Holzappel
-62a758afc72d2e3f7933fa4b917944c8	Frankfurt am Main (Zoom)
-67bac16ced3de0e99516cf21505718a1	Tilburg (013 Poppodium)
-b27e07993299ee0b2ecd26dabd77eaf8	Schlotheim
-625d260d98326f7dfffd0dd49ebbfc8e	Hamburg (Messe Halle Schnelsen)
-6dde0719f779b373e62a7283e717d384	Landau (Gloria Kulturpalast)
-17648f3308a5acb119d9aee1b5eafceb	Mainz (Alexander the Great)
-76f9a958c2ebbd2f42456523d749fb5e	Offenbach (Stadthalle)
-eca8fc96e027328005753be360587de2	Aschaffenburg (Colos-Saal)
-05be609ce9831967baa4f12664dc4d73	Barleben
-f3a90318abb3e16166d96055fd6f9096	Weinheim (Café Central)
-a91bcaf7db7d174ee2966d9c293fd575	Mainz (M8 im Haus der Jugend)
-fc9917fb6f46c0eb12f1e429a33ba66b	Worms (Schwarzer Bär)
-c72b4173a6a7131bf31a711212305fd3	Heidelberg (halle 02)
-b10506e85b6bf48eace09359fb36d5e0	Aschaffenburg (JUKUZ)
-1b90e6739989e49dd0c81f338b61c134	Mainz (Rheinhufer)
-5208c9de2f1b498a350984d55bcbc314	Frankfurt am Main (Nachtleben)
-3a98149817a5aafba14c1b822db056fa	Mainz (Alte Ziegelei)
-990c04bd6b40c3ca7352a838e2208dac	Oberursel
-f7f2bc012754bd5d77de32e5c2674553	Offenbach (Capitol)
-6e763e01d71c71e3b53502c35bfbb98c	Rüsselsheim (Das Rind)
-0dbca791a775eab280cc7766794627cb	Hockenheim (Hockenheim-Ring)
-010c9e9e86100e63919a6051b399d662	Schriesheim
-588671317bf1864e5a95445ec51aac65	Wiesbaden (Schlachthof)
-99b522e44d05813118dcf562022b4a2a	Mainz (KUZ - Kulturzentrum)
-49d6cee27482319877690f7d0409abbd	Mannheim (MS Connexion Complex)
-3264a9d4fedca758f18391ecca28f0e5	Rockenhausen
-539960fca282c1966cfa15e15aca1d84	Magdeburg (Factory)
-ed2c8a76cc01eeb645011e8154737a49	Ballenstedt
-d5a4559236ce011e72312e02aafc05d0	Mainz-Kastel (Reduit)
-6c33b0a7db1a4982d74edfe98239cec5	Neuborn
-f17fc1362e3637ae8ede170a2a5d6bea	Mannheim (Maimarkt)
-29935ed69008b59e8758afcf7eeb7d7b	Neckargemünd (Metal Club Odinwald)
-840b0d06d6be5d714e2228a4be26cbcc	Mannheim (SAP Arena)
-15f10194f67b967b0f0b5a22561a7c95	Bad Kreuznach (Jakob-Kiefer-Halle)
-406b32caecad16e87606fa84a77f4e35	Havana (Sala Maxim Rock)
-d61cb6460de2df9d1d64dc35cb293f6a	Ulm (Hexenhaus)
-6c55ed753e5b2355307bf2b494f2384a	Mainz (Kulturcafé auf dem Campus)
-44ab9f5977e8956f9dd15003efc8743b	Kaiserslautern (Irish House)
-eb83e6da9292e995b44f789c42bb7e65	Bonn (Bla)
-6ddb911ae1e79899c2d90067b761d6b4	Darmstadt (Goldene Krone)
-ca7fb13a9cd0887dfabbb573c070fb2e	Hirschaid
-968e5509ddd33538eec4fff752bda4ff	Lindau (Club Vaudeville)
-481c1aef68fb3531c92c85ccf1e8643d	Wacken
-6a21939c14c8f6030de787b05d66c3ef	Andernach
-4806febaa9c494fdd030ee4163e33c8c	Büchold
-0280c9c3b98763f5a8d2ce7e97ce1b05	Frankfurt am Main (Ponyhof Club)
-83b0fe992121ae7d39f6bcc58a48160c	Frankfurt am Main (Das Bett)
-50eb9f93583f844e0684af399dc7fc3c	Frankfurt am Main (Festhalle)
-400c46fc5f22decc791a97c27363df40	Frankfurt am Main (Jahrhunderthalle)
-09ddc8804dd5908fef3c8c0c474ad238	Mörlenbach (LIVE MUSIC HALL Weiher)
-9f629f2265000ff7abf380b363b2de49	Kusel (Kinett)
-69e2a1bbdd4b334d3da05ae012836b18	Köln (Live Music Hall)
-69bdcf616a03acef49e3697d73adcbb3	Frankfurt am Main (Haus Sindlingen)
-efeaa516107a31ce2d1217e055b767f7	Leipzig
-a7f15733dd688dee75571597f8636ba7	Wernigerode
-779076573cef469faf694cd40d92f40a	Frankfurt am Main (Batschkapp)
-692fc1deabc4b9afa9387af15c02b19a	Mainz (Volkspark)
-cb6036cdf8009fc4b41eb0e56eab553d	Turgau/Entenfang
-cf1c12d42f59db3667fc162556aab169	Buchenbach
-85683aa688e302e1de7ec78dc4440dff	Dotmund (JunkYard)
-10effefa9cc583f38ff0518dcaa72ef5	Weilburg-Kubach (Bürgerhalle)
-fc36c84b02e473bec246e5d2cfc513ef	Frankfurt am Main (Schöppche-Keller)
-6032938ceb573d952fdae1a40ef39837	Bechtheim (Gasthaus Bechtheimer Hof)
-b13f71a1a5f7e89c2603d5241c2aca25	Weibersbrunn (Mehrzweckhalle)
-817974aa11f84c9ebc640d3de92737f5	Hofheim (Jazzkeller)
-738af31c1a528baa30e7df31384e550b	Wiesbaden (GMZ Georg-Buch-Haus)
-b00bae5a5f8ff8830d486747e78d7d8d	Alzey (Oberhaus)
-9ca0396f7fce5729940fcef7383728b3	Ludwigshafen am Rhein (Bon Scott Rock Cafe)
-f0f0e638999829b846be6e20b5591898	Mainz (Zitadelle - Die Kulturei)
-7590124802ade834dbe9e7c0d2c1a897	Hamm
-051fa36efd99a2ae24d56b198e7b1992	Karlsruhe (Alter Schlachthof - Substage)
-5515ceaeca4b8b62ee5275de54ea77ad	Ludwigshafen (Kulturzentrum dasHaus)
-cccce7f0011bc27dee7c60945cd5f962	Mainz (Kulturclub schon schön)
-e248bb7c1164a44fa358593e28769a23	Mannheim (7er Club)
-2dd00779b7dd00b6cbbc574779ba1f40	Mühltal (Steinbruch Theater)
-c792b3f05ce40f0ff54fcf79573c89b4	Darmstadt (Radrennbahn)
-4dac5916befa9f4e29989cd5f717beb4	Balver Höhle
-c8f566954fe846be7d35f707901d7bf5	Luxemburg (Rockhal)
-9891ba35bb7474ae750bdbf62a4eee4f	Marburg (Kulturzentrum KFZ)
-b9a697f7f6fe15cad76add1dd64b688f	Kassel (Goldgrube)
-a04166db1f1c6d75ab79b04756750bf5	Lichtenfels (Stadthalle)
-fa5218c9167a20e6b9f6bf2a139433ce	Flörsheim (Moshpit)
-d90ac22c4f2291b68cb07746d0472dbf	Karlsruhe (AKK)
-4e1c34ddafa9b33187fb34b43ceb2010	Ostfildern (Zentrum Zinsholz)
-9c26f60f17bb584dff3b85695fd2b284	Mainz (Caveau)
-5948b7ac21c1697473de19197df1f172	Frankfurt am Main (Elfer Club)
-de64de56f43ca599fc450a9e0dc4ff25	Mainz (Capitol)
-b5c6ef76dd3784cc976d507c890973c3	Schneckenhausen (Festhalle)
-70e3be15841015765ac6faf4000cba1b	Tilburg (Little Devil)
-5153224699fbab6022955f5aac79e68f	Bochum (RuhrCongress Bochum)
-ab474bb83a3eb3ffa50e42d4a83127e0	Wiesbaden (Kulturpalast Wiesbaden)
-41b20797850d51214c644327e1a3826f	Büßfeld
-8edfaa1884ddd9e289e61aea465d6077	Mainz (Haus Mainusch)
-78ca2ff75416369e990d7412de969084	Lindenberg
-bb70894bd8b00178cf29116a060ea1ca	Troisdorf (Jugendkulturcafé e.V. Troisdorf)
-9be6de3bc5073483dcbbcbc1b40af4d8	Dortmund (JunkYard)
-cbe111af36bc52e4f7eca7b90b00f859	Köln (Essigfabrik)
-5047e616d4875f9deadaa881bdcb331f	Schleiz (Ferienland Crispendorf)
-e018b197f3176d2a85fdad95d9b1e8ba	Bad Kreuznach (AJK Kulturzentrum)
-60a813acedaeaedc4325cdc636dbcb72	Wiesbaden (Kreativfabrik)
-fc9a9408cf2f87745054c3756c707750	Ahrensburg (JuKI 42)
-3964b1de7b615d6c453ad3c6f7700251	Mannheim (Jugendklubzentrum forum Mannheim)
-638a858e2c5c28f1ce98341f90c106c9	Frankfurt am Main (Sossenheim)
-289e2d3fc0a8435d80b040a6c2d50bf1	Wilferdingen (Kulturhalle Remchingen)
-96d32b516614a13451e51c8c8ca458ff	Mainz (Weintorklause)
-f36d12db5b507669b5d9190be7d05155	Basel (Kuppel)
+COPY geo.places (id_place, place, id_country) FROM stdin;
+b77734e4928596fac1db05cab7b39710	Holzappel	DEU
+62a758afc72d2e3f7933fa4b917944c8	Frankfurt am Main (Zoom)	DEU
+b27e07993299ee0b2ecd26dabd77eaf8	Schlotheim	DEU
+625d260d98326f7dfffd0dd49ebbfc8e	Hamburg (Messe Halle Schnelsen)	DEU
+6dde0719f779b373e62a7283e717d384	Landau (Gloria Kulturpalast)	DEU
+17648f3308a5acb119d9aee1b5eafceb	Mainz (Alexander the Great)	DEU
+76f9a958c2ebbd2f42456523d749fb5e	Offenbach (Stadthalle)	DEU
+eca8fc96e027328005753be360587de2	Aschaffenburg (Colos-Saal)	DEU
+05be609ce9831967baa4f12664dc4d73	Barleben	DEU
+f3a90318abb3e16166d96055fd6f9096	Weinheim (Café Central)	DEU
+a91bcaf7db7d174ee2966d9c293fd575	Mainz (M8 im Haus der Jugend)	DEU
+fc9917fb6f46c0eb12f1e429a33ba66b	Worms (Schwarzer Bär)	DEU
+c72b4173a6a7131bf31a711212305fd3	Heidelberg (halle 02)	DEU
+b10506e85b6bf48eace09359fb36d5e0	Aschaffenburg (JUKUZ)	DEU
+1b90e6739989e49dd0c81f338b61c134	Mainz (Rheinhufer)	DEU
+5208c9de2f1b498a350984d55bcbc314	Frankfurt am Main (Nachtleben)	DEU
+3a98149817a5aafba14c1b822db056fa	Mainz (Alte Ziegelei)	DEU
+990c04bd6b40c3ca7352a838e2208dac	Oberursel	DEU
+f7f2bc012754bd5d77de32e5c2674553	Offenbach (Capitol)	DEU
+6e763e01d71c71e3b53502c35bfbb98c	Rüsselsheim (Das Rind)	DEU
+0dbca791a775eab280cc7766794627cb	Hockenheim (Hockenheim-Ring)	DEU
+010c9e9e86100e63919a6051b399d662	Schriesheim	DEU
+588671317bf1864e5a95445ec51aac65	Wiesbaden (Schlachthof)	DEU
+99b522e44d05813118dcf562022b4a2a	Mainz (KUZ - Kulturzentrum)	DEU
+49d6cee27482319877690f7d0409abbd	Mannheim (MS Connexion Complex)	DEU
+3264a9d4fedca758f18391ecca28f0e5	Rockenhausen	DEU
+539960fca282c1966cfa15e15aca1d84	Magdeburg (Factory)	DEU
+ed2c8a76cc01eeb645011e8154737a49	Ballenstedt	DEU
+d5a4559236ce011e72312e02aafc05d0	Mainz-Kastel (Reduit)	DEU
+6c33b0a7db1a4982d74edfe98239cec5	Neuborn	DEU
+f17fc1362e3637ae8ede170a2a5d6bea	Mannheim (Maimarkt)	DEU
+29935ed69008b59e8758afcf7eeb7d7b	Neckargemünd (Metal Club Odinwald)	DEU
+840b0d06d6be5d714e2228a4be26cbcc	Mannheim (SAP Arena)	DEU
+15f10194f67b967b0f0b5a22561a7c95	Bad Kreuznach (Jakob-Kiefer-Halle)	DEU
+d61cb6460de2df9d1d64dc35cb293f6a	Ulm (Hexenhaus)	DEU
+6c55ed753e5b2355307bf2b494f2384a	Mainz (Kulturcafé auf dem Campus)	DEU
+44ab9f5977e8956f9dd15003efc8743b	Kaiserslautern (Irish House)	DEU
+eb83e6da9292e995b44f789c42bb7e65	Bonn (Bla)	DEU
+6ddb911ae1e79899c2d90067b761d6b4	Darmstadt (Goldene Krone)	DEU
+ca7fb13a9cd0887dfabbb573c070fb2e	Hirschaid	DEU
+968e5509ddd33538eec4fff752bda4ff	Lindau (Club Vaudeville)	DEU
+481c1aef68fb3531c92c85ccf1e8643d	Wacken	DEU
+6a21939c14c8f6030de787b05d66c3ef	Andernach	DEU
+4806febaa9c494fdd030ee4163e33c8c	Büchold	DEU
+0280c9c3b98763f5a8d2ce7e97ce1b05	Frankfurt am Main (Ponyhof Club)	DEU
+83b0fe992121ae7d39f6bcc58a48160c	Frankfurt am Main (Das Bett)	DEU
+50eb9f93583f844e0684af399dc7fc3c	Frankfurt am Main (Festhalle)	DEU
+400c46fc5f22decc791a97c27363df40	Frankfurt am Main (Jahrhunderthalle)	DEU
+09ddc8804dd5908fef3c8c0c474ad238	Mörlenbach (LIVE MUSIC HALL Weiher)	DEU
+9f629f2265000ff7abf380b363b2de49	Kusel (Kinett)	DEU
+69e2a1bbdd4b334d3da05ae012836b18	Köln (Live Music Hall)	DEU
+69bdcf616a03acef49e3697d73adcbb3	Frankfurt am Main (Haus Sindlingen)	DEU
+efeaa516107a31ce2d1217e055b767f7	Leipzig	DEU
+a7f15733dd688dee75571597f8636ba7	Wernigerode	DEU
+779076573cef469faf694cd40d92f40a	Frankfurt am Main (Batschkapp)	DEU
+692fc1deabc4b9afa9387af15c02b19a	Mainz (Volkspark)	DEU
+cb6036cdf8009fc4b41eb0e56eab553d	Turgau/Entenfang	DEU
+cf1c12d42f59db3667fc162556aab169	Buchenbach	DEU
+10effefa9cc583f38ff0518dcaa72ef5	Weilburg-Kubach (Bürgerhalle)	DEU
+fc36c84b02e473bec246e5d2cfc513ef	Frankfurt am Main (Schöppche-Keller)	DEU
+6032938ceb573d952fdae1a40ef39837	Bechtheim (Gasthaus Bechtheimer Hof)	DEU
+b13f71a1a5f7e89c2603d5241c2aca25	Weibersbrunn (Mehrzweckhalle)	DEU
+817974aa11f84c9ebc640d3de92737f5	Hofheim (Jazzkeller)	DEU
+738af31c1a528baa30e7df31384e550b	Wiesbaden (GMZ Georg-Buch-Haus)	DEU
+b00bae5a5f8ff8830d486747e78d7d8d	Alzey (Oberhaus)	DEU
+9ca0396f7fce5729940fcef7383728b3	Ludwigshafen am Rhein (Bon Scott Rock Cafe)	DEU
+f0f0e638999829b846be6e20b5591898	Mainz (Zitadelle - Die Kulturei)	DEU
+7590124802ade834dbe9e7c0d2c1a897	Hamm	DEU
+051fa36efd99a2ae24d56b198e7b1992	Karlsruhe (Alter Schlachthof - Substage)	DEU
+cccce7f0011bc27dee7c60945cd5f962	Mainz (Kulturclub schon schön)	DEU
+e248bb7c1164a44fa358593e28769a23	Mannheim (7er Club)	DEU
+2dd00779b7dd00b6cbbc574779ba1f40	Mühltal (Steinbruch Theater)	DEU
+c792b3f05ce40f0ff54fcf79573c89b4	Darmstadt (Radrennbahn)	DEU
+4dac5916befa9f4e29989cd5f717beb4	Balver Höhle	DEU
+9891ba35bb7474ae750bdbf62a4eee4f	Marburg (Kulturzentrum KFZ)	DEU
+b9a697f7f6fe15cad76add1dd64b688f	Kassel (Goldgrube)	DEU
+a04166db1f1c6d75ab79b04756750bf5	Lichtenfels (Stadthalle)	DEU
+fa5218c9167a20e6b9f6bf2a139433ce	Flörsheim (Moshpit)	DEU
+d90ac22c4f2291b68cb07746d0472dbf	Karlsruhe (AKK)	DEU
+4e1c34ddafa9b33187fb34b43ceb2010	Ostfildern (Zentrum Zinsholz)	DEU
+9c26f60f17bb584dff3b85695fd2b284	Mainz (Caveau)	DEU
+5948b7ac21c1697473de19197df1f172	Frankfurt am Main (Elfer Club)	DEU
+de64de56f43ca599fc450a9e0dc4ff25	Mainz (Capitol)	DEU
+b5c6ef76dd3784cc976d507c890973c3	Schneckenhausen (Festhalle)	DEU
+5153224699fbab6022955f5aac79e68f	Bochum (RuhrCongress Bochum)	DEU
+ab474bb83a3eb3ffa50e42d4a83127e0	Wiesbaden (Kulturpalast Wiesbaden)	DEU
+406b32caecad16e87606fa84a77f4e35	Havana (Sala Maxim Rock)	CUB
+67bac16ced3de0e99516cf21505718a1	Tilburg (013 Poppodium)	NLD
+c8f566954fe846be7d35f707901d7bf5	Luxemburg (Rockhal)	LUX
+41b20797850d51214c644327e1a3826f	Büßfeld	DEU
+8edfaa1884ddd9e289e61aea465d6077	Mainz (Haus Mainusch)	DEU
+78ca2ff75416369e990d7412de969084	Lindenberg	DEU
+bb70894bd8b00178cf29116a060ea1ca	Troisdorf (Jugendkulturcafé e.V. Troisdorf)	DEU
+9be6de3bc5073483dcbbcbc1b40af4d8	Dortmund (JunkYard)	DEU
+cbe111af36bc52e4f7eca7b90b00f859	Köln (Essigfabrik)	DEU
+5047e616d4875f9deadaa881bdcb331f	Schleiz (Ferienland Crispendorf)	DEU
+e018b197f3176d2a85fdad95d9b1e8ba	Bad Kreuznach (AJK Kulturzentrum)	DEU
+60a813acedaeaedc4325cdc636dbcb72	Wiesbaden (Kreativfabrik)	DEU
+fc9a9408cf2f87745054c3756c707750	Ahrensburg (JuKI 42)	DEU
+3964b1de7b615d6c453ad3c6f7700251	Mannheim (Jugendklubzentrum forum Mannheim)	DEU
+638a858e2c5c28f1ce98341f90c106c9	Frankfurt am Main (Sossenheim)	DEU
+289e2d3fc0a8435d80b040a6c2d50bf1	Wilferdingen (Kulturhalle Remchingen)	DEU
+96d32b516614a13451e51c8c8ca458ff	Mainz (Weintorklause)	DEU
+70e3be15841015765ac6faf4000cba1b	Tilburg (Little Devil)	NLD
+f36d12db5b507669b5d9190be7d05155	Basel (Kuppel)	CHE
+6995ea012d82169aae31a88d03aca88e	Ludwigshafen am Rhein (Kulturzentrum dasHaus)	DEU
 \.
 
 
@@ -8228,7 +8228,6 @@ e26bcb0f8a28cd2229ce77a95d0baf9e	Eskalation im Oberhaus 2024	2024-02-03	b00bae5a
 dcad795c824cf4d6337fc9f745e5645f	The young meatal attack	2024-03-02	9ca0396f7fce5729940fcef7383728b3	0	12.00	2	\N	f	\N
 e4ee5ac5d137718d0eeb4d310b97d837	Noche de los Muertos - 2017	2017-10-31	f0f0e638999829b846be6e20b5591898	0	15	2	\N	f	\N
 0a7d68cf2a103e1c99f7e6d04f1940da	Necromanteum EU/UK Tour 2024	2024-03-30	051fa36efd99a2ae24d56b198e7b1992	0	43.55	2	\N	f	\N
-2d5e1a99b20d1be28ef40573c37eb0a0	Thrash Attack - 06.04.2024	2024-04-06	5515ceaeca4b8b62ee5275de54ea77ad	0	16.52	2	\N	f	\N
 2c6ed5b74b30541da64fdbbda4a8bbe3	Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show	2024-04-12	cccce7f0011bc27dee7c60945cd5f962	0	22.0	2	\N	f	\N
 71de5246c2f4ac4766041831e93f001a	New live rituals a COVID proof celebration of audial darkness	2021-07-23	e248bb7c1164a44fa358593e28769a23	0	23.20	2	\N	f	\N
 57e44259dc61f23bef42517695d645f1	Ravaging Europe 2023	2023-03-29	e248bb7c1164a44fa358593e28769a23	0	28.70	2	\N	f	\N
@@ -8240,6 +8239,7 @@ f56f7353a648997c6f5bc4a952cd1bd2	EMP Persistence Tour 2016	2016-01-22	588671317b
 943f6abbf24d69a145fbac5cc30c1a5c	World needs mosh (Bonn)	2021-11-21	eb83e6da9292e995b44f789c42bb7e65	0	14.90	2	\N	f	World needs mosh
 69d2999875a1e6d7c09bbf157d18a27e	Summer in the City 2023	2023-06-30	692fc1deabc4b9afa9387af15c02b19a	0	0.00	2	\N	f	Summer in the City
 183863a44c8750e908c83bd2d1c194f8	Slice Me Nice 2022	2022-12-03	69bdcf616a03acef49e3697d73adcbb3	0	37.22	2	\N	f	Slice Me Nice
+2d5e1a99b20d1be28ef40573c37eb0a0	Thrash Attack - 06.04.2024	2024-04-06	6995ea012d82169aae31a88d03aca88e	0	16.52	2	\N	f	\N
 4ba1c22d76444426b678b142977aa084	Breakdown4Tolerance Vol.1 Festival	2023-09-30	10effefa9cc583f38ff0518dcaa72ef5	0	25.00	2	\N	f	\N
 db92681077141614e2ee9a01df968334	Death and Gore over Frankfurt	2023-10-28	fc36c84b02e473bec246e5d2cfc513ef	0	9.00	2	\N	f	\N
 f5cd4263f2cbb5e459306b35cef72e9d	European Miserere 2023	2023-07-03	5948b7ac21c1697473de19197df1f172	0	15.00	2	\N	f	\N
@@ -8437,7 +8437,6 @@ b4435108ce3cef02600464daf3cb5f7f	Metal Embrace Festival XV	2023-09-08	05be609ce9
 daaa95ecaf12ed9872a1f2fee19068d6	Metal Embrace Festival XVII	2025-09-12	05be609ce9831967baa4f12664dc4d73	1	55.5	2	\N	t	Metal Embrace Festival
 20a697b57317f75ad33eb50f166d6b00	NOAF XI	2015-08-28	6c33b0a7db1a4982d74edfe98239cec5	1	15.0	2	\N	t	NOAF
 9fe5ff8e93ce19ca4b27d5267ad7bfb3	In Flammen Open Air 2024	2024-07-11	cb6036cdf8009fc4b41eb0e56eab553d	2	86.9	2	\N	t	In Flammen Open Air
-6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	85683aa688e302e1de7ec78dc4440dff	1	79	2	\N	t	Dortmund Deathfest
 b416282ede3488bc54fdbbef22651a42	Dortmund Deathfest 2025	2025-08-01	9be6de3bc5073483dcbbcbc1b40af4d8	1	108.90	2	\N	t	Dortmund Deathfest
 8ad5ac467b3776d28a12742decf00657	Rockfield Open Air 2018	2018-08-17	d5a4559236ce011e72312e02aafc05d0	2	0.00	2	\N	t	Rockfield Open Air
 d5bd359a19abc00f202bb19255675651	Party San Open Air 2024	2024-08-08	b27e07993299ee0b2ecd26dabd77eaf8	2	0.0	2	\N	t	Party San Open Air
@@ -8456,6 +8455,7 @@ add0fa9da3d7d94a1fe1653ea8128e0b	The Blackest Path III	2025-10-11	a91bcaf7db7d17
 2b3f09881e379b498e698088489d8c6f	Morbidfest 2022	2022-04-19	f3a90318abb3e16166d96055fd6f9096	0	33	2	\N	f	Morbidfest
 7bb9f9e964e27aa2ab8246519417b6c7	Triangle 10th Anniversary	2026-05-09	f36d12db5b507669b5d9190be7d05155	0	40.105	2	\N	f	\N
 459008fdb7ba68bcc0352da411590d0b	Neue Welt - Alte Sünden	2026-05-14	588671317bf1864e5a95445ec51aac65	0	27.15	2	\N	f	\N
+6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	9be6de3bc5073483dcbbcbc1b40af4d8	1	79	2	\N	t	Dortmund Deathfest
 \.
 
 
@@ -9156,6 +9156,14 @@ ALTER TABLE ONLY geo.countries_continents
 
 
 --
+-- Name: places places_id_country_fkey; Type: FK CONSTRAINT; Schema: geo; Owner: -
+--
+
+ALTER TABLE ONLY geo.places
+    ADD CONSTRAINT places_id_country_fkey FOREIGN KEY (id_country) REFERENCES geo.countries(id_country);
+
+
+--
 -- Name: bands_countries bands_countries_id_band_fkey; Type: FK CONSTRAINT; Schema: music; Owner: -
 --
 
@@ -9222,5 +9230,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict E2qaEsvM7LoL9OHcE2vHdm7MMXZCIHaRetOKReUtd5afNaufZsbtOz9M1xkPkAO
+\unrestrict 5G5fB1vApbls7NaSdiAScNlbsMXfh0jgoPxlQJb0duSZSQzXfqD1zHr1slHjJ81
 
