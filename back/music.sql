@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 5G5fB1vApbls7NaSdiAScNlbsMXfh0jgoPxlQJb0duSZSQzXfqD1zHr1slHjJ81
+\restrict iGNnvRhWuxWK56KYudrMTbbA82Gz6irilb7Bn7tfn6bFmdtyV1NzWuGgLSOuCrR
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -8610,7 +8610,6 @@ e909c2d7067ea37437cf97fe11d91bd0	Country
 a3e345c35eed0ed54daf356c68904785	Vaudeville
 498059d42123bacbded45916a8636d8c	Skiffle
 a4ce5a98a8950c04a3d34a2e2cb8c89f	Ska
-6a1f771fc024994f9c170ab5dc6c5bb0	Folkrock
 525f9a6e460f7ea2c6f932a2dc42ef67	Plitrock
 7bd49e2e64f65e2ee987be9709a176bd	Protopunk
 2da31ada27f1ba5acc3403440650870a	Punk'n'Roll
@@ -8667,6 +8666,7 @@ fbe6bca8488a519965b8d63d5d7270c5	Experimental Metal
 0bb2ac8dea4da36597a8d9dc88f0ed64	Atmospheric Black Metal
 c960a78b4d3e0ce6a4a67f9094ffb446	Melodic Gothic Metal
 a8feea8bc8e568f5829eeec3fba8fc29	Neue Deutsche Härte
+6a1f771fc024994f9c170ab5dc6c5bb0	Folk Rock
 b80e9df4d9b290518ee42ad01df931f9	Metal with Electronic influences
 eff28181bc16f9980300231c2831cfed	Psychedelic Folk Rock
 646b7096ac40bf3b76f46527bf50607a	Atmospheric Doom Metal
@@ -9230,5 +9230,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 5G5fB1vApbls7NaSdiAScNlbsMXfh0jgoPxlQJb0duSZSQzXfqD1zHr1slHjJ81
+\unrestrict iGNnvRhWuxWK56KYudrMTbbA82Gz6irilb7Bn7tfn6bFmdtyV1NzWuGgLSOuCrR
 

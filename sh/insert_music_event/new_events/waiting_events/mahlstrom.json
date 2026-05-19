@@ -1,8 +1,8 @@
 {
     "event": {
-    "name": "", 
-    "date": "",
-    "placeName": "",
+    "name": "Mahlstrom Open Air 2026", 
+    "date": "2026-06-12",
+    "placeName": "Holzappel",
     "persons": 2,
     "price": ,
     "duration": 1,
@@ -27,8 +27,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Folk Rock", "Folk Metal"],
       "note": null
           
     },
@@ -37,8 +37,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["AUT"],
+      "genres": ["Melodic Post-Black Metal"],
       "note": null
           
     },
@@ -47,18 +47,18 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["FRA"],
+      "genres": ["Symphonic Death Metal", "Melodic Death Metal"],
       "note": null
           
     },
     {
-      "name": "All Will Know & Friend''s",
+      "name": "All Will Know",
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Melodic Death Metal", "Metalcore"],
       "note": null
           
     },
@@ -79,8 +79,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Melodic Death Metal"],
       "note": null
           
     },
@@ -89,8 +89,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Folk Metal"],
       "note": null
           
     },
@@ -111,8 +111,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Folk Rock"],
       "note": null
           
     },
@@ -121,8 +121,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Heavy Metal", "Post-Black Metal"],
       "note": null
           
     },
@@ -131,8 +131,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["DEU"],
+      "genres": ["Blackened Heavy Metal"],
       "note": null
           
     },
@@ -141,8 +141,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["ITA"],
+      "genres": ["Atmospheric Black Metal"],
       "note": null
           
     },
@@ -155,8 +155,8 @@
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": [""],
-      "genres": [""],
+      "countryIds": ["LTU"],
+      "genres": ["Folk Metal"],
       "note": null
           
     }

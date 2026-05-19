@@ -1,0 +1,22 @@
+{
+  "event": {
+    "name": "Huldler - Europe Summer 2026", 
+    "date": "2026-06-11",
+    "placeName": "Wiesbaden (Schlachthof)",
+    "persons": 2,
+    "price": 29.95,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Hulder",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["USA"],
+      "genres": ["Black Metal"],
+      "note": null
+    }
+  ]
+}
