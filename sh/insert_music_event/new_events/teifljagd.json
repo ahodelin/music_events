@@ -13,7 +13,7 @@
     {
       "name": "Bohemyst",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["CZE"],
       "genres": ["Black Metal", "Death Metal", "Doom Metal"],
@@ -22,7 +22,7 @@
     {
       "name": "Ellereve",
       "isNew": true,
-      "likes": "",
+      "likes": "n",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Doom Metal", "Post-Metal"],
@@ -31,7 +31,7 @@
     {
       "name": "Esoteric",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["GBR"],
       "genres": ["Funeral Doom Metal", "Death Metal"],
@@ -40,7 +40,7 @@
     {
       "name": "Fen",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["GBR"],
       "genres": ["Atmospheric Black Metal", "Post-Rock"],
@@ -49,7 +49,7 @@
     {
       "name": "Grá",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Black Metal"],
@@ -58,7 +58,7 @@
     {
       "name": "Hail Spirit Noir",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["GRC"],
       "genres": ["Progressive Metal", "Pschedelic Rock", "Black Metal"],
@@ -67,7 +67,7 @@
     {
       "name": "Malthusian",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["IRL"],
       "genres": ["Black Metal", "Death Metal"],
@@ -76,7 +76,7 @@
     {
       "name": "Regnum Noricum",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["AUT"],
       "genres": ["Black Metal", "Death Metal"],
@@ -85,7 +85,7 @@
     {
       "name": "Sarcastic Terror",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["AUT"],
       "genres": ["Death Metal"],
@@ -94,7 +94,7 @@
     {
       "name": "Zatokrev",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["CHE"],
       "genres": ["Doom Metal", "Death Metal", "Sludge Metal"],

@@ -24,13 +24,7 @@
     },
     {
       "name": "Vogelfrey",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["DEU"],
-      "genres": ["Folk Rock", "Folk Metal"],
-      "note": null
-          
+      "isNew": false
     },
     {
       "name": "Wesen",
@@ -86,13 +80,7 @@
     },
     {
       "name": "Tabernis",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["DEU"],
-      "genres": ["Folk Metal"],
-      "note": null
-          
+      "isNew": false
     },
     {
       "name": "Stillbirth",
