@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict hBdAsMIjyyOou9YqAW3AZW4cbb7Yrs3SNceTW0I63U8ZNQNxAyPwnsjpVnqNnJL
+\restrict ZlhbrbwZGgl3BnpVjxHmzWDbFX0pzkhmbTgSZEqThI0W2ovdTOKSXskATPWhxWM
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -1478,7 +1478,7 @@ fc9a9408cf2f87745054c3756c707750	Ahrensburg (JuKI 42)	DEU
 70e3be15841015765ac6faf4000cba1b	Tilburg (Little Devil)	NLD
 f36d12db5b507669b5d9190be7d05155	Basel (Kuppel)	CHE
 6995ea012d82169aae31a88d03aca88e	Ludwigshafen am Rhein (Kulturzentrum dasHaus)	DEU
-fca80790e0db1079b69a2f116d86b0c1	Piberstein (Burg Piberstein)	DEU
+fca80790e0db1079b69a2f116d86b0c1	Piberstein (Burg Piberstein)	AUT
 \.
 
 
@@ -1510,7 +1510,6 @@ d7a97c2ff91f7aa07fa9e2f8265ceab6	Gorod	y	t	\N
 dfb7069bfc6e0064a6c667626eca07b4	Aborted	y	t	\N
 58bbd6135961e3d837bacceb3338f082	Mourning Wood	y	t	\N
 0ab7d3a541204a9cab0d2d569c5b173f	Waldgeflüster	y	t	\N
-a7eda23a9421a074fe5ec966810018d7	Revel in Flesh	y	f	\N
 20aba645df0b3292c63f0f08b993966e	Anheim	y	t	\N
 31897528a567059ed581f119a0e1e516	Fragments of Unbecoming	y	t	\N
 41f062d8603a9705974083360fb69892	Hot Action Waxing	y	t	\N
@@ -2488,7 +2487,6 @@ b5067ff7f533848af0c9d1f3e6c5b204	Authorist	n	t	\N
 553adf4c48f103e61a3ee7a94e7ea17b	Axit	y	t	\N
 134a3bbedd12bc313d57aa4cc781ddf9	Violent Vortex	n	t	\N
 576fea4a0c5425ba382fff5f593a33f1	Sepultura	y	f	\N
-852c0b6d5b315c823cdf0382ca78e47f	Crisix	y	f	\N
 ab9ca8ecf42a92840c674cde665fbdd3	Sunczar	y	t	\N
 d4192d77ea0e14c40efe4dc9f08fdfb8	Denomination	y	t	\N
 5fac4291bc9c25864604c4a6be9e0b4a	New World Depression	y	t	\N
@@ -2748,6 +2746,8 @@ de6fdc74d54bbc5e1738c3b2ea64715a	Antrisch	y	t	\N
 441fc0e9c865769ff0c1541abf446630	Hindarfjäll	y	t	\N
 b33c98977e9d992e604a9df0502042c2	Heidelfolk	m	t	\N
 5d65287ca1f23d47e9ed5b165a758fa5	Vogelfrey	m	t	\N
+a7eda23a9421a074fe5ec966810018d7	Revel in Flesh	y	t	\N
+852c0b6d5b315c823cdf0382ca78e47f	Crisix	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -9295,5 +9295,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict hBdAsMIjyyOou9YqAW3AZW4cbb7Yrs3SNceTW0I63U8ZNQNxAyPwnsjpVnqNnJL
+\unrestrict ZlhbrbwZGgl3BnpVjxHmzWDbFX0pzkhmbTgSZEqThI0W2ovdTOKSXskATPWhxWM
 
