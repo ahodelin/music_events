@@ -10,13 +10,17 @@
   },
   "bands": [
     {
-      "name": "Hulder",
+      "name": "Godskill",
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": ["USA"],
-      "genres": ["Black Metal"],
+      "countryIds": ["DEU"],
+      "genres": ["Blackened Death Metal", "Death Metal", "Deathcore"],
       "note": null
+    },
+    {
+      "name": "Hulder",
+      "isNew": false
     }
   ]
 }
