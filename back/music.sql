@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 7pJ1BB2PSFuuZeW1s8RRm0HVyaDeVEqpYfXStyIAiPqTZ3LDRUECZyOwjrq5uAN
+\restrict UH1UtJ6aUnmmlFwOyYNCMOHYCc00UhH7aXw7FcfedTN0A45nw1004ycUuJx3Fje
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -1812,7 +1812,6 @@ e6793169497d66ac959a7beb35d6d497	Funeral Whore	y	t	\N
 71144850f4fb4cc55fc0ee6935badddf	Ghost	y	t	\N
 eed35187b83d0f2e0042cf221905163c	Gingerpig	m	t	\N
 b615ea28d44d2e863a911ed76386b52a	God Dethroned	y	t	\N
-bda66e37bf0bfbca66f8c78c5c8032b8	GodSkill	y	t	\N
 2799b4abf06a5ec5e262d81949e2d18c	Godslave	y	t	\N
 a20050efc491a9784b5cced21116ba68	Grabak	y	t	\N
 05fcf330d8fafb0a1f17ce30ff60b924	Grand Magus	y	t	\N
@@ -1891,6 +1890,7 @@ bf2c8729bf5c149067d8e978ea3dcd32	Mantar	y	t	\N
 5cc06303f490f3c34a464dfdc1bfb120	Membaris	m	t	\N
 cbf6de82cf77ca17d17d293d6d29a2b2	Metal Inquisitor	n	t	\N
 3c2234a7ce973bc1700e0c743d6a819c	Metallica	y	t	\N
+bda66e37bf0bfbca66f8c78c5c8032b8	GodSkill	y	t	\N
 cd0bc2c8738b2fef2d78d197223b17d5	Milking the Goatmachine	y	t	\N
 2c5705766131b389fa1d88088f1bb8a8	Mindflair	y	t	\N
 3e98ecfa6a4c765c5522f897a4a8de23	Ministry	y	t	\N
@@ -6127,6 +6127,8 @@ b615ea28d44d2e863a911ed76386b52a	3ca7e80b84be941d877fd945f94dde2a
 630500eabc48c986552cb01798a31746	3ca7e80b84be941d877fd945f94dde2a
 e59e6f8db16d579612beadab32944f4a	3ca7e80b84be941d877fd945f94dde2a
 8decb730fed886117e8fca326cd0a7e8	3ca7e80b84be941d877fd945f94dde2a
+bda66e37bf0bfbca66f8c78c5c8032b8	748e792d3c8d1c84e8dddd5efcfa7616
+afb28f446543eabf5cc686ccad79d610	748e792d3c8d1c84e8dddd5efcfa7616
 \.
 
 
@@ -8212,6 +8214,7 @@ f62d3d85ee6bdb2c9597abd57747349a	2db87892408abd4d82eb39b78c50c27b
 e59e6f8db16d579612beadab32944f4a	f54c3ccedc098d37a4e7f7a455f5731e
 e59e6f8db16d579612beadab32944f4a	3593526a5f465ed766bafb4fb45748a2
 e59e6f8db16d579612beadab32944f4a	0a8a13bf87abe8696fbae4efe2b7f874
+bda66e37bf0bfbca66f8c78c5c8032b8	afb45735b54991094a6734f53c375faf
 \.
 
 
@@ -8577,6 +8580,7 @@ add0fa9da3d7d94a1fe1653ea8128e0b	The Blackest Path III	2025-10-11	a91bcaf7db7d17
 8745a32a30e4cbb8c6d7cbcb59c791fe	33. Wave-Gotik-Treffen	2026-05-23	efeaa516107a31ce2d1217e055b767f7	2	75.0	2	\N	t	Wave-Gotik-Treffen
 6fc586b744f8710236940d01f808e46d	Teifljågd Open Air 2026	2026-05-29	fca80790e0db1079b69a2f116d86b0c1	1	80.0	2	\N	t	Teifljågd Open Air
 3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	f	\N
+748e792d3c8d1c84e8dddd5efcfa7616	Huldler - Europe Summer 2026	2026-06-11	588671317bf1864e5a95445ec51aac65	0	29.95	2	\N	f	\N
 \.
 
 
@@ -9338,5 +9342,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 7pJ1BB2PSFuuZeW1s8RRm0HVyaDeVEqpYfXStyIAiPqTZ3LDRUECZyOwjrq5uAN
+\unrestrict UH1UtJ6aUnmmlFwOyYNCMOHYCc00UhH7aXw7FcfedTN0A45nw1004ycUuJx3Fje
 
