@@ -23,13 +23,9 @@
       "isNew": false
     },
     {
-      "name": "Vogelfrey",
-      "isNew": false
-    },
-    {
       "name": "Wesen",
       "isNew": true,
-      "likes": "",
+      "likes": "n",
       "active": true,
       "countryIds": ["AUT"],
       "genres": ["Melodic Post-Black Metal"],
@@ -39,20 +35,10 @@
     {
       "name": "Aephanemer",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["FRA"],
       "genres": ["Symphonic Death Metal", "Melodic Death Metal"],
-      "note": null
-          
-    },
-    {
-      "name": "All Will Know",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["DEU"],
-      "genres": ["Melodic Death Metal", "Metalcore"],
       "note": null
           
     },
@@ -71,7 +57,7 @@
     {
       "name": "Pentarium",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Melodic Death Metal"],
@@ -91,23 +77,9 @@
       "isNew": false
     },
     {
-      "name": "Blakylle",
-      "isNew": false
-    },
-    {
-      "name": "Mythemia",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["DEU"],
-      "genres": ["Folk Rock"],
-      "note": null
-          
-    },
-    {
       "name": "Old Ruins",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Heavy Metal", "Post-Black Metal"],
@@ -117,20 +89,10 @@
     {
       "name": "Astral Spectre",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Blackened Heavy Metal"],
-      "note": null
-          
-    },
-    {
-      "name": "Waldläufer",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["ITA"],
-      "genres": ["Atmospheric Black Metal"],
       "note": null
           
     },
@@ -141,7 +103,7 @@
     {
       "name": "Ūkanose",
       "isNew": true,
-      "likes": "",
+      "likes": "n",
       "active": true,
       "countryIds": ["LTU"],
       "genres": ["Folk Metal"],
