@@ -1,0 +1,28 @@
+{
+    "event": {
+    "name": "", 
+    "date": "2026-06-19",
+    "placeName": "Aschaffenburg (Colos-Saal)",
+    "persons": 2,
+    "price": ,
+    "duration": 0,
+    "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "",
+      "isNew": false
+    },
+    {
+      "name": "",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": [""],
+      "genres": ["Metal", "Metal"],
+      "note": null
+          
+    }
+  ]
+}

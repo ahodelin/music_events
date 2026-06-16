@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict cQNap1sNF1iWIdfNHc4mEBR0GC3Mq6YlsFUlLTnGYKAR89DheUzl4XaRxVd0aIm
+\restrict zWXMISkUKEgqeReJ1eoTTnCa59rhfe8i7dlH2Z4wBDaCQZETfCc47VLxY6JPBsC
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -2761,6 +2761,8 @@ fda3a2e5d5f178a1a45f8f3ed1e0e3dc	Aephanemer	y	t	\N
 62257d6fc62a2f62f5ac8dee12c6e987	Old Ruins	y	t	\N
 d18ba3d9148ac3ede79d38a9664b7ea9	Astral Spectre	m	t	\N
 b872fb0cf4a260ad2215b44fcdfa38ba	Ūkanose	n	t	\N
+d01872b313a06a6a04c04b5a7417d945	Cro-Mags	m	t	\N
+1d05ba8ed993bd938863db5489bc6915	Torture Squad	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -4068,6 +4070,8 @@ fda3a2e5d5f178a1a45f8f3ed1e0e3dc	FRA
 62257d6fc62a2f62f5ac8dee12c6e987	DEU
 d18ba3d9148ac3ede79d38a9664b7ea9	DEU
 b872fb0cf4a260ad2215b44fcdfa38ba	LTU
+d01872b313a06a6a04c04b5a7417d945	USA
+1d05ba8ed993bd938863db5489bc6915	BRA
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -6157,6 +6161,9 @@ c08567e9006dc768bdb72bb7b14e53a1	7d48036f766afbb9f6b668cd251ef0dc
 d18ba3d9148ac3ede79d38a9664b7ea9	7d48036f766afbb9f6b668cd251ef0dc
 42085fca2ddb606f4284e718074d5561	7d48036f766afbb9f6b668cd251ef0dc
 b872fb0cf4a260ad2215b44fcdfa38ba	7d48036f766afbb9f6b668cd251ef0dc
+576fea4a0c5425ba382fff5f593a33f1	fd600efdc16138ee33074091f51775fd
+d01872b313a06a6a04c04b5a7417d945	fd600efdc16138ee33074091f51775fd
+1d05ba8ed993bd938863db5489bc6915	fd600efdc16138ee33074091f51775fd
 \.
 
 
@@ -8251,6 +8258,11 @@ fda3a2e5d5f178a1a45f8f3ed1e0e3dc	b54875674f7d2d5be9737b0d4c021a21
 62257d6fc62a2f62f5ac8dee12c6e987	a94bc9e378c8007c95406059d09bb4f3
 d18ba3d9148ac3ede79d38a9664b7ea9	fe648f5afb4d8e15cc3e9e1ebb682f14
 b872fb0cf4a260ad2215b44fcdfa38ba	f54c3ccedc098d37a4e7f7a455f5731e
+d01872b313a06a6a04c04b5a7417d945	b3412a542c856d851d554e29aa16d4b6
+d01872b313a06a6a04c04b5a7417d945	c7fb67368c25c29b9c10ca91b2d97488
+d01872b313a06a6a04c04b5a7417d945	f3dcdca4cd0c83a5e855c5434ce98673
+1d05ba8ed993bd938863db5489bc6915	9e7315413ae31a070ccae5c580dd1b19
+1d05ba8ed993bd938863db5489bc6915	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -8618,6 +8630,7 @@ add0fa9da3d7d94a1fe1653ea8128e0b	The Blackest Path III	2025-10-11	a91bcaf7db7d17
 3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	f	\N
 748e792d3c8d1c84e8dddd5efcfa7616	Huldler - Europe Summer 2026	2026-06-11	588671317bf1864e5a95445ec51aac65	0	29.95	2	\N	f	\N
 7d48036f766afbb9f6b668cd251ef0dc	Mahlstrom Open Air 2026	2026-06-12	b77734e4928596fac1db05cab7b39710	1	100.0	2	\N	f	\N
+fd600efdc16138ee33074091f51775fd	Celebrating Life Through Death	2026-06-15	c72b4173a6a7131bf31a711212305fd3	0	57.40	1	\N	f	\N
 \.
 
 
@@ -8855,6 +8868,7 @@ dda5b3dc66be32a4606af84df99f5fe4	Slam Hardcore Death
 ff576dbd21cede2c9547a783361a68cb	Technical Black Metal
 833d19410c6a5dc8612251106d6d0194	Melodic Post-Black Metal
 fe648f5afb4d8e15cc3e9e1ebb682f14	Blackened Heavy Metal
+b3412a542c856d851d554e29aa16d4b6	Thras Metal
 \.
 
 
@@ -9381,5 +9395,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict cQNap1sNF1iWIdfNHc4mEBR0GC3Mq6YlsFUlLTnGYKAR89DheUzl4XaRxVd0aIm
+\unrestrict zWXMISkUKEgqeReJ1eoTTnCa59rhfe8i7dlH2Z4wBDaCQZETfCc47VLxY6JPBsC
 
