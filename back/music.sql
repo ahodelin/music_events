@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict zWXMISkUKEgqeReJ1eoTTnCa59rhfe8i7dlH2Z4wBDaCQZETfCc47VLxY6JPBsC
+\restrict V065PDFkPUW3paoiHFuKc5ujrzvaYHGMbjzFZnn2F3k6DtrFomCmhqu6Yk8bbQB
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -2761,6 +2761,7 @@ fda3a2e5d5f178a1a45f8f3ed1e0e3dc	Aephanemer	y	t	\N
 62257d6fc62a2f62f5ac8dee12c6e987	Old Ruins	y	t	\N
 d18ba3d9148ac3ede79d38a9664b7ea9	Astral Spectre	m	t	\N
 b872fb0cf4a260ad2215b44fcdfa38ba	Ūkanose	n	t	\N
+62cd59258bcbbf55e4f5c652f4708a03	Evergrey	n	t	\N
 d01872b313a06a6a04c04b5a7417d945	Cro-Mags	m	t	\N
 1d05ba8ed993bd938863db5489bc6915	Torture Squad	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
@@ -4072,6 +4073,7 @@ d18ba3d9148ac3ede79d38a9664b7ea9	DEU
 b872fb0cf4a260ad2215b44fcdfa38ba	LTU
 d01872b313a06a6a04c04b5a7417d945	USA
 1d05ba8ed993bd938863db5489bc6915	BRA
+62cd59258bcbbf55e4f5c652f4708a03	SWE
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -6164,6 +6166,8 @@ b872fb0cf4a260ad2215b44fcdfa38ba	7d48036f766afbb9f6b668cd251ef0dc
 576fea4a0c5425ba382fff5f593a33f1	fd600efdc16138ee33074091f51775fd
 d01872b313a06a6a04c04b5a7417d945	fd600efdc16138ee33074091f51775fd
 1d05ba8ed993bd938863db5489bc6915	fd600efdc16138ee33074091f51775fd
+3577f7160794aa4ba4d79d0381aefdb1	1185ca67cf530fad7922cc08bcaaf2f6
+62cd59258bcbbf55e4f5c652f4708a03	1185ca67cf530fad7922cc08bcaaf2f6
 \.
 
 
@@ -8263,6 +8267,8 @@ d01872b313a06a6a04c04b5a7417d945	c7fb67368c25c29b9c10ca91b2d97488
 d01872b313a06a6a04c04b5a7417d945	f3dcdca4cd0c83a5e855c5434ce98673
 1d05ba8ed993bd938863db5489bc6915	9e7315413ae31a070ccae5c580dd1b19
 1d05ba8ed993bd938863db5489bc6915	3593526a5f465ed766bafb4fb45748a2
+62cd59258bcbbf55e4f5c652f4708a03	bd1340d19723308d52dcf7c3a6b1ea87
+62cd59258bcbbf55e4f5c652f4708a03	be2f0af59429129793d751e4316ec81c
 \.
 
 
@@ -8532,7 +8538,6 @@ e800a85ef2816cf0606a97a268be0e51	Autumn Carnage vol 2	2025-09-26	a91bcaf7db7d174
 db859bb156210688ff7434ca4abd00bb	Europe Tour 2025	2025-10-03	60a813acedaeaedc4325cdc636dbcb72	0	15.4	1	\N	f	\N
 fc5f4302bb98601cc920228c2886fb41	Thrash of the Titans	2025-10-17	588671317bf1864e5a95445ec51aac65	0	69.95	2	\N	f	\N
 51c2dc31d090f73b8bd302c7dd37ecb9	Mantar Tour 2025	2025-11-14	3964b1de7b615d6c453ad3c6f7700251	0	33.70	2	\N	f	\N
-5fddcd7a924048d39c2311ff8a14c54d	No Playback Festival 2026	2026-04-18	289e2d3fc0a8435d80b040a6c2d50bf1	0	66.1	2	\N	f	No Playback Festival
 7219495f8610b9b76da4b735abf1bc10	Extreme Metal Invasion Vol.2	2025-11-21	a91bcaf7db7d174ee2966d9c293fd575	0	10.0	2	\N	f	\N
 d59ba563f299c3da949c7c3d22cf785a	Nadir over Europe Tour 2025	2025-11-28	09ddc8804dd5908fef3c8c0c474ad238	0	34.0	2	\N	f	\N
 cb43856f374876b6caffc2f708d18a04	Winter of Darkness - Metal Mainz IV	2025-12-13	a91bcaf7db7d174ee2966d9c293fd575	0	12.0	2	\N	f	\N
@@ -8568,6 +8573,7 @@ b2b73f2080395e6987f788a1500713c8	N.F.S.N (nix für schwache nerven) Vol 2	2026-0
 bb3826c368b9daece78ad1da31564fc4	Mayhem in the Arches - 12.2025	2025-12-06	e018b197f3176d2a85fdad95d9b1e8ba	0	12.5	2	\N	f	Mayhem in the Arches
 0f8a1bfa92b4edb3e415b6b51532ebaa	N.F.S.N (nix für schwache nerven) Vol 1	2025-05-03	ab474bb83a3eb3ffa50e42d4a83127e0	0	13.0	2	\N	f	N.F.S.N (nix für schwache nerven)
 a922ca9c4282dfd67db66f5da8736d84	Pälzer Hell - 7 Deadly Sins	2026-04-11	b5c6ef76dd3784cc976d507c890973c3	0	35.0	2	\N	f	Pälzer Hell
+5fddcd7a924048d39c2311ff8a14c54d	No Playback Festival 2026	2026-04-18	289e2d3fc0a8435d80b040a6c2d50bf1	0	66.1	2	\N	t	No Playback Festival
 6fa3e357c27d47966023568346d51a09	Metallergrillen 2017	2017-09-01	3264a9d4fedca758f18391ecca28f0e5	1	33.0	2	\N	t	Metallergrillen
 1a2f8d593b063eccd9b1dc3431e01081	Metal Embrace Festival XIII	2019-09-06	05be609ce9831967baa4f12664dc4d73	1	25.0	2	\N	t	Metal Embrace Festival
 9f07b2ac339c32524557ba186f68b2ef	Metal Embrace Festival XIV	2022-09-09	05be609ce9831967baa4f12664dc4d73	1	37.50	2	\N	t	Metal Embrace Festival
@@ -8627,10 +8633,11 @@ add0fa9da3d7d94a1fe1653ea8128e0b	The Blackest Path III	2025-10-11	a91bcaf7db7d17
 6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	9be6de3bc5073483dcbbcbc1b40af4d8	1	79	2	\N	t	Dortmund Deathfest
 8745a32a30e4cbb8c6d7cbcb59c791fe	33. Wave-Gotik-Treffen	2026-05-23	efeaa516107a31ce2d1217e055b767f7	2	75.0	2	\N	t	Wave-Gotik-Treffen
 6fc586b744f8710236940d01f808e46d	Teifljågd Open Air 2026	2026-05-29	fca80790e0db1079b69a2f116d86b0c1	1	80.0	2	\N	t	Teifljågd Open Air
-3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	f	\N
 748e792d3c8d1c84e8dddd5efcfa7616	Huldler - Europe Summer 2026	2026-06-11	588671317bf1864e5a95445ec51aac65	0	29.95	2	\N	f	\N
-7d48036f766afbb9f6b668cd251ef0dc	Mahlstrom Open Air 2026	2026-06-12	b77734e4928596fac1db05cab7b39710	1	100.0	2	\N	f	\N
-fd600efdc16138ee33074091f51775fd	Celebrating Life Through Death	2026-06-15	c72b4173a6a7131bf31a711212305fd3	0	57.40	1	\N	f	\N
+fd600efdc16138ee33074091f51775fd	Celebrating Life Through Death	2026-06-15	c72b4173a6a7131bf31a711212305fd3	0	57.40	2	\N	f	\N
+7d48036f766afbb9f6b668cd251ef0dc	Mahlstrom Open Air 2026	2026-06-12	b77734e4928596fac1db05cab7b39710	1	100.0	2	\N	f	Mahlstrom Open Air
+3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	f	Boarstream Open Air
+1185ca67cf530fad7922cc08bcaaf2f6	Decapitated 30th Anniversary Tour 2026	2026-06-17	e248bb7c1164a44fa358593e28769a23	0	40.95	2	\N	f	\N
 \.
 
 
@@ -9395,5 +9402,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict zWXMISkUKEgqeReJ1eoTTnCa59rhfe8i7dlH2Z4wBDaCQZETfCc47VLxY6JPBsC
+\unrestrict V065PDFkPUW3paoiHFuKc5ujrzvaYHGMbjzFZnn2F3k6DtrFomCmhqu6Yk8bbQB
 
