@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict V065PDFkPUW3paoiHFuKc5ujrzvaYHGMbjzFZnn2F3k6DtrFomCmhqu6Yk8bbQB
+\restrict KLneLbUBt6FcuE8uH8vSEYxJJaEbO2pp4zvh1OjSWj8xulclUUIKGs2vMGfyH6b
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -1969,7 +1969,6 @@ eb4558fa99c7f8d548cbcb32a14d469c	Shores of Null	y	t	\N
 d76db99cdd16bd0e53d5e07bcf6225c8	Siberian Meat Grinder	y	t	\N
 4c576d921b99dad80e4bcf9b068c2377	Sick of it all	y	t	\N
 2e4e6a5f485b2c7e22f9974633c2b900	Phantom Winter	m	t	\N
-13c8bd3a0d92bd186fc5162eded4431d	Six Feet Under	m	t	\N
 50026a2dff40e4194e184b756a7ed319	Skeleton Pit	y	t	\N
 92edfbaa71b7361a3081991627b0e583	Skeletonwitch	y	t	\N
 062c44f03dce5bf39f81d0bf953926fc	Skinned Alive	y	t	\N
@@ -1992,6 +1991,7 @@ e039d55ed63a723001867bc4eb842c00	Stillbirth	y	t	\N
 3123e3df482127074cdd5f830072c898	Stonefall	y	t	\N
 849c829d658baaeff512d766b0db3cce	Storm	y	t	\N
 dfca36a68db327258a2b0d5e3abe86af	Nepumuc	m	f	\N
+13c8bd3a0d92bd186fc5162eded4431d	Six Feet Under	y	t	\N
 3b8d2a5ff1b16509377ce52a92255ffe	Street Dogs	y	t	\N
 01bcfac216d2a08cd25930234e59f1a1	Suicidal Angels	y	t	\N
 c63b6261b8bb8145bc0fd094b9732c24	Suicidal Tendencies	y	t	\N
@@ -2764,6 +2764,7 @@ b872fb0cf4a260ad2215b44fcdfa38ba	Ūkanose	n	t	\N
 62cd59258bcbbf55e4f5c652f4708a03	Evergrey	n	t	\N
 d01872b313a06a6a04c04b5a7417d945	Cro-Mags	m	t	\N
 1d05ba8ed993bd938863db5489bc6915	Torture Squad	y	t	\N
+5e3f2b07c709290567a820e695007797	Embryonic Autopsy	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -4074,6 +4075,7 @@ b872fb0cf4a260ad2215b44fcdfa38ba	LTU
 d01872b313a06a6a04c04b5a7417d945	USA
 1d05ba8ed993bd938863db5489bc6915	BRA
 62cd59258bcbbf55e4f5c652f4708a03	SWE
+5e3f2b07c709290567a820e695007797	USA
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -6168,6 +6170,8 @@ d01872b313a06a6a04c04b5a7417d945	fd600efdc16138ee33074091f51775fd
 1d05ba8ed993bd938863db5489bc6915	fd600efdc16138ee33074091f51775fd
 3577f7160794aa4ba4d79d0381aefdb1	1185ca67cf530fad7922cc08bcaaf2f6
 62cd59258bcbbf55e4f5c652f4708a03	1185ca67cf530fad7922cc08bcaaf2f6
+13c8bd3a0d92bd186fc5162eded4431d	cd5b85fa819ef66d95c2d6ad359ab36d
+5e3f2b07c709290567a820e695007797	cd5b85fa819ef66d95c2d6ad359ab36d
 \.
 
 
@@ -8269,6 +8273,7 @@ d01872b313a06a6a04c04b5a7417d945	f3dcdca4cd0c83a5e855c5434ce98673
 1d05ba8ed993bd938863db5489bc6915	3593526a5f465ed766bafb4fb45748a2
 62cd59258bcbbf55e4f5c652f4708a03	bd1340d19723308d52dcf7c3a6b1ea87
 62cd59258bcbbf55e4f5c652f4708a03	be2f0af59429129793d751e4316ec81c
+5e3f2b07c709290567a820e695007797	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -8638,6 +8643,7 @@ fd600efdc16138ee33074091f51775fd	Celebrating Life Through Death	2026-06-15	c72b4
 7d48036f766afbb9f6b668cd251ef0dc	Mahlstrom Open Air 2026	2026-06-12	b77734e4928596fac1db05cab7b39710	1	100.0	2	\N	f	Mahlstrom Open Air
 3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	f	Boarstream Open Air
 1185ca67cf530fad7922cc08bcaaf2f6	Decapitated 30th Anniversary Tour 2026	2026-06-17	e248bb7c1164a44fa358593e28769a23	0	40.95	2	\N	f	\N
+cd5b85fa819ef66d95c2d6ad359ab36d	Next to Die Europe Tour 2026	2026-06-19	eca8fc96e027328005753be360587de2	0	38.15	2	\N	f	\N
 \.
 
 
@@ -9402,5 +9408,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict V065PDFkPUW3paoiHFuKc5ujrzvaYHGMbjzFZnn2F3k6DtrFomCmhqu6Yk8bbQB
+\unrestrict KLneLbUBt6FcuE8uH8vSEYxJJaEbO2pp4zvh1OjSWj8xulclUUIKGs2vMGfyH6b
 
