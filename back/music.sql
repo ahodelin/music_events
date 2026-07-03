@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict KLneLbUBt6FcuE8uH8vSEYxJJaEbO2pp4zvh1OjSWj8xulclUUIKGs2vMGfyH6b
+\restrict AD9VaBnrHaVld4BAENvri63EHelhY2f1BeZ3gyJCFdfCCCf56V2mIkEtJw7Nkhc
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -961,18 +961,6 @@ SELECT
 
 
 --
--- Name: v_events_by_months; Type: VIEW; Schema: music; Owner: -
---
-
-CREATE VIEW music.v_events_by_months AS
- SELECT count(id_event) AS "Events",
-    (date_trunc('month'::text, (date_event)::timestamp with time zone))::date AS "Monat"
-   FROM music.events
-  GROUP BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date)
-  ORDER BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date);
-
-
---
 -- Name: v_events_price; Type: VIEW; Schema: music; Owner: -
 --
 
@@ -1100,113 +1088,6 @@ CREATE VIEW music.v_visited_festivals AS
   WHERE is_festival
   GROUP BY popular_name
   ORDER BY (count(id_event)), popular_name DESC;
-
-
---
--- Name: rolling_time_windows; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.rolling_time_windows (
-    mo character(3),
-    sa numeric
-);
-
-
---
--- Name: students; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.students (
-    id_student integer NOT NULL,
-    note numeric NOT NULL
-);
-
-
---
--- Name: students_id_student_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.students_id_student_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: students_id_student_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.students_id_student_seq OWNED BY public.students.id_student;
-
-
---
--- Name: test_country; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.test_country (
-    id_country character(32),
-    country character varying(100),
-    flag character(2)
-);
-
-
---
--- Name: v_events_by_months; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.v_events_by_months AS
- SELECT count(id_event) AS "Events",
-    (date_trunc('month'::text, (date_event)::timestamp with time zone))::date AS "Monat"
-   FROM music.events
-  GROUP BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date)
-  ORDER BY ((date_trunc('month'::text, (date_event)::timestamp with time zone))::date);
-
-
---
--- Name: workers; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.workers (
-    id_worker integer NOT NULL,
-    years_working integer NOT NULL
-);
-
-
---
--- Name: workers_id_worker_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.workers_id_worker_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: workers_id_worker_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.workers_id_worker_seq OWNED BY public.workers.id_worker;
-
-
---
--- Name: students id_student; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.students ALTER COLUMN id_student SET DEFAULT nextval('public.students_id_student_seq'::regclass);
-
-
---
--- Name: workers id_worker; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.workers ALTER COLUMN id_worker SET DEFAULT nextval('public.workers_id_worker_seq'::regclass);
 
 
 --
@@ -2765,6 +2646,8 @@ b872fb0cf4a260ad2215b44fcdfa38ba	Ūkanose	n	t	\N
 d01872b313a06a6a04c04b5a7417d945	Cro-Mags	m	t	\N
 1d05ba8ed993bd938863db5489bc6915	Torture Squad	y	t	\N
 5e3f2b07c709290567a820e695007797	Embryonic Autopsy	y	t	\N
+89a13233f2747286e13231d6fe284a06	Masacre	y	t	\N
+16d557675e1aae76def70f8ed4e06f90	Damnation	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
 d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
@@ -4076,6 +3959,8 @@ d01872b313a06a6a04c04b5a7417d945	USA
 1d05ba8ed993bd938863db5489bc6915	BRA
 62cd59258bcbbf55e4f5c652f4708a03	SWE
 5e3f2b07c709290567a820e695007797	USA
+89a13233f2747286e13231d6fe284a06	COL
+16d557675e1aae76def70f8ed4e06f90	NLD
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -6172,6 +6057,8 @@ d01872b313a06a6a04c04b5a7417d945	fd600efdc16138ee33074091f51775fd
 62cd59258bcbbf55e4f5c652f4708a03	1185ca67cf530fad7922cc08bcaaf2f6
 13c8bd3a0d92bd186fc5162eded4431d	cd5b85fa819ef66d95c2d6ad359ab36d
 5e3f2b07c709290567a820e695007797	cd5b85fa819ef66d95c2d6ad359ab36d
+89a13233f2747286e13231d6fe284a06	c12743740482314a43f515a8a5d6ccf1
+16d557675e1aae76def70f8ed4e06f90	c12743740482314a43f515a8a5d6ccf1
 \.
 
 
@@ -8274,6 +8161,8 @@ d01872b313a06a6a04c04b5a7417d945	f3dcdca4cd0c83a5e855c5434ce98673
 62cd59258bcbbf55e4f5c652f4708a03	bd1340d19723308d52dcf7c3a6b1ea87
 62cd59258bcbbf55e4f5c652f4708a03	be2f0af59429129793d751e4316ec81c
 5e3f2b07c709290567a820e695007797	3593526a5f465ed766bafb4fb45748a2
+89a13233f2747286e13231d6fe284a06	3593526a5f465ed766bafb4fb45748a2
+16d557675e1aae76def70f8ed4e06f90	3593526a5f465ed766bafb4fb45748a2
 \.
 
 
@@ -8337,7 +8226,6 @@ cb4c2743c35bb374ab32d475ce8cfafe	Morbide Klänge II	2023-05-12	a91bcaf7db7d174ee
 e70608c5455336dfc61d221e145f51cd	Rock-N-Pop Youngsters 2019	2019-03-15	a91bcaf7db7d174ee2966d9c293fd575	0	0.00	2	\N	f	Rock-N-Pop Youngsters
 486bf23406dec9844b97f966f4636c9b	In Flames	2017-03-24	f7f2bc012754bd5d77de32e5c2674553	0	57.45	2	\N	f	\N
 c0f93075617b7dd9db214f46876fb39d	Knife, Exorcised Gods, World of Tomorrow, When Plages Collide	2018-09-15	6e763e01d71c71e3b53502c35bfbb98c	0	7.60	2	\N	f	\N
-3e55fe6e09f2f7eaacd4052a76bcfb01	Download Germany	2022-06-24	0dbca791a775eab280cc7766794627cb	0	139.00	2	\N	f	\N
 21913ca002c17ce3cf8a0331b2dad1c8	Winter Hostilities 2019-Tour	2019-12-04	588671317bf1864e5a95445ec51aac65	0	23.70	2	\N	f	\N
 cb14876022caa93cf2a4a934fad74fe9	Descend into Madness Tour 2020	2020-03-11	588671317bf1864e5a95445ec51aac65	0	19.20	1	\N	f	\N
 c4c0e84be1600267ea2bd626c25dc626	The Gidim European Tour 2020	2020-03-05	588671317bf1864e5a95445ec51aac65	0	25.90	2	\N	f	\N
@@ -8382,6 +8270,7 @@ cb091aafa00685c4b29954ca13e93bad	EMP Persistence Tour 2019	2019-01-24	588671317b
 e6273b4e07720dbd6ed7870371b86d24	World needs mosh (Wiesbaden)	2021-11-19	588671317bf1864e5a95445ec51aac65	0	14.90	2	\N	f	World needs mosh
 fe36a187902de9cf1aa5f42477fa1318	Grill' Em All 2022	2022-07-02	3a98149817a5aafba14c1b822db056fa	0	0.00	2	\N	f	Grill' Em All
 d988ef331f5b477753be3bae8b18412f	MTV's Headbangers Ball Tour 2019	2019-12-14	588671317bf1864e5a95445ec51aac65	0	40.75	2	\N	f	MTV's Headbangers Ball Tour
+3e55fe6e09f2f7eaacd4052a76bcfb01	Download Germany	2022-06-24	0dbca791a775eab280cc7766794627cb	0	139.00	2	\N	f	Download
 9bbe76536451d9ad44018b24d51c58aa	Rockbahnhof 2019	2019-05-18	6c33b0a7db1a4982d74edfe98239cec5	0	0	2	\N	f	\N
 3e8d7d577a332fc33e2f332ad7311e1e	Worldwired Tour 2019	2019-08-25	f17fc1362e3637ae8ede170a2a5d6bea	0	98.65	2	\N	f	\N
 be5ea4556ea2b3db3607b8e2887c9dd3	Metal Club Odinwald meets Ultimate Ruination Tour	2019-04-27	29935ed69008b59e8758afcf7eeb7d7b	0	9.00	2	\N	f	\N
@@ -8411,7 +8300,6 @@ e4ee5ac5d137718d0eeb4d310b97d837	Noche de los Muertos - 2017	2017-10-31	f0f0e638
 2c6ed5b74b30541da64fdbbda4a8bbe3	Agrypnie 20 Jahre Jubiläums Set & Horresque Album Release Show	2024-04-12	cccce7f0011bc27dee7c60945cd5f962	0	22.0	2	\N	f	\N
 71de5246c2f4ac4766041831e93f001a	New live rituals a COVID proof celebration of audial darkness	2021-07-23	e248bb7c1164a44fa358593e28769a23	0	23.20	2	\N	f	\N
 57e44259dc61f23bef42517695d645f1	Ravaging Europe 2023	2023-03-29	e248bb7c1164a44fa358593e28769a23	0	28.70	2	\N	f	\N
-3fe511194113f53322ccac8a75e6b4ab	Gutcity Deathfest 2024	2024-05-11	2dd00779b7dd00b6cbbc574779ba1f40	0	30.60	2	\N	f	\N
 fb57c18df776961bb734a1fa3db6a6d1	Taunus Metal Festival XIV	2024-04-05	990c04bd6b40c3ca7352a838e2208dac	0	30.00	2	\N	t	Taunus Metal Festival
 75fea12b82439420d1f400a4fcf3386b	Völkerball	2016-05-05	15f10194f67b967b0f0b5a22561a7c95	0	23.50	2	\N	f	\N
 70ba638a78552630591ba5c7ff92b93a	Sepultura - Quadra Summer Tour - Europe 2022	2022-07-05	968e5509ddd33538eec4fff752bda4ff	0	37.31	2	\N	f	\N
@@ -8420,6 +8308,7 @@ f56f7353a648997c6f5bc4a952cd1bd2	EMP Persistence Tour 2016	2016-01-22	588671317b
 69d2999875a1e6d7c09bbf157d18a27e	Summer in the City 2023	2023-06-30	692fc1deabc4b9afa9387af15c02b19a	0	0.00	2	\N	f	Summer in the City
 183863a44c8750e908c83bd2d1c194f8	Slice Me Nice 2022	2022-12-03	69bdcf616a03acef49e3697d73adcbb3	0	37.22	2	\N	f	Slice Me Nice
 2d5e1a99b20d1be28ef40573c37eb0a0	Thrash Attack - 06.04.2024	2024-04-06	6995ea012d82169aae31a88d03aca88e	0	16.52	2	\N	f	\N
+3fe511194113f53322ccac8a75e6b4ab	Gutcity Deathfest 2024	2024-05-11	2dd00779b7dd00b6cbbc574779ba1f40	0	30.60	2	\N	f	Gutcity Deathfest
 4ba1c22d76444426b678b142977aa084	Breakdown4Tolerance Vol.1 Festival	2023-09-30	10effefa9cc583f38ff0518dcaa72ef5	0	25.00	2	\N	f	\N
 db92681077141614e2ee9a01df968334	Death and Gore over Frankfurt	2023-10-28	fc36c84b02e473bec246e5d2cfc513ef	0	9.00	2	\N	f	\N
 f5cd4263f2cbb5e459306b35cef72e9d	European Miserere 2023	2023-07-03	5948b7ac21c1697473de19197df1f172	0	15.00	2	\N	f	\N
@@ -8640,10 +8529,11 @@ add0fa9da3d7d94a1fe1653ea8128e0b	The Blackest Path III	2025-10-11	a91bcaf7db7d17
 6fc586b744f8710236940d01f808e46d	Teifljågd Open Air 2026	2026-05-29	fca80790e0db1079b69a2f116d86b0c1	1	80.0	2	\N	t	Teifljågd Open Air
 748e792d3c8d1c84e8dddd5efcfa7616	Huldler - Europe Summer 2026	2026-06-11	588671317bf1864e5a95445ec51aac65	0	29.95	2	\N	f	\N
 fd600efdc16138ee33074091f51775fd	Celebrating Life Through Death	2026-06-15	c72b4173a6a7131bf31a711212305fd3	0	57.40	2	\N	f	\N
-7d48036f766afbb9f6b668cd251ef0dc	Mahlstrom Open Air 2026	2026-06-12	b77734e4928596fac1db05cab7b39710	1	100.0	2	\N	f	Mahlstrom Open Air
-3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	f	Boarstream Open Air
 1185ca67cf530fad7922cc08bcaaf2f6	Decapitated 30th Anniversary Tour 2026	2026-06-17	e248bb7c1164a44fa358593e28769a23	0	40.95	2	\N	f	\N
 cd5b85fa819ef66d95c2d6ad359ab36d	Next to Die Europe Tour 2026	2026-06-19	eca8fc96e027328005753be360587de2	0	38.15	2	\N	f	\N
+7d48036f766afbb9f6b668cd251ef0dc	Mahlstrom Open Air 2026	2026-06-12	b77734e4928596fac1db05cab7b39710	1	100.0	2	\N	t	Mahlstrom Open Air
+3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	t	Boarstream Open Air
+c12743740482314a43f515a8a5d6ccf1	From the South of Hell European Tour 2026	2026-07-02	0280c9c3b98763f5a8d2ce7e97ce1b05	0	18.00	2	\N	f	\N
 \.
 
 
@@ -8886,275 +8776,6 @@ b3412a542c856d851d554e29aa16d4b6	Thras Metal
 
 
 --
--- Data for Name: rolling_time_windows; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.rolling_time_windows (mo, sa) FROM stdin;
-Nov	100
-Dec	110
-Jan	95
-Feb	85
-Mar	90
-Apr	90
-May	95
-Jun	100
-Jul	105
-Aug	110
-Sep	120
-Oct	130
-\.
-
-
---
--- Data for Name: students; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.students (id_student, note) FROM stdin;
-1	100
-2	87
-3	54
-4	82
-5	93
-6	47
-7	40
-8	53
-9	88
-10	58
-11	84
-12	65
-13	57
-14	66
-15	25
-16	70
-17	85
-18	36
-19	61
-20	34
-21	33
-22	33
-23	100
-24	69
-25	77
-26	88
-27	63
-28	17
-29	42
-30	55
-31	98
-32	70
-33	68
-34	70
-35	65
-36	70
-37	84
-38	52
-39	60
-40	54
-41	57
-42	47
-43	57
-44	86
-45	25
-46	66
-47	40
-48	100
-49	32
-50	39
-51	90
-52	83
-53	64
-54	95
-55	85
-56	100
-57	67
-58	60
-59	42
-60	65
-61	82
-62	85
-63	62
-64	72
-65	65
-66	76
-67	23
-68	96
-69	30
-70	45
-71	77
-72	55
-73	100
-74	80
-75	55
-76	52
-77	85
-78	68
-79	53
-80	82
-81	55
-82	51
-83	47
-84	47
-85	64
-86	75
-87	65
-88	60
-89	45
-90	75
-91	62
-92	93
-93	98
-94	58
-95	95
-96	83
-97	33
-98	70
-99	51
-100	60
-\.
-
-
---
--- Data for Name: test_country; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.test_country (id_country, country, flag) FROM stdin;
-NLD                             	Netherlands	nl
-RUS                             	Russian Federation	ru
-IRN                             	Iran	ir
-ARE                             	United Arab Emirates	ae
-CZE                             	Czechia	cz
-001                             	International	un
-LTU                             	Lithuania	lt
-MYS                             	Malaysia	my
-150                             	Europe	eu
-EGY                             	Egypt	eg
-ZAF                             	South Africa	za
-CUB                             	Cuba	cu
-JAM                             	Jamaica	jm
-CRI                             	Costa Rica	cr
-MEX                             	Mexico	mx
-PAN                             	Panama	pa
-ARG                             	Argentina	ar
-BRA                             	Brazil	br
-CHL                             	Chile	cl
-COL                             	Colombia	co
-CAN                             	Canada	ca
-USA                             	United States of America	us
-CHN                             	China	cn
-JPN                             	Japan	jp
-MNG                             	Mongolia	mn
-IDN                             	Indonesia	id
-PHL                             	Philippines	ph
-IND                             	India	in
-ISR                             	Israel	il
-TUR                             	Türkiye	tr
-BLR                             	Belarus	by
-HUN                             	Hungary	hu
-POL                             	Poland	pl
-ROU                             	Romania	ro
-UKR                             	Ukraine	ua
-DNK                             	Denmark	dk
-EST                             	Estonia	ee
-FRO                             	Faroe Islands	fo
-FIN                             	Finland	fi
-ISL                             	Iceland	is
-IRL                             	Ireland	ie
-NOR                             	Norway	no
-SWE                             	Sweden	se
-HRV                             	Croatia	hr
-GBR                             	United Kingdom of Great Britain and Northern Ireland	gb
-GRC                             	Greece	gr
-ITA                             	Italy	it
-MLT                             	Malta	mt
-PRT                             	Portugal	pt
-SRB                             	Serbia	rs
-SVN                             	Slovenia	si
-ESP                             	Spain	es
-AUT                             	Austria	at
-BEL                             	Belgium	be
-FRA                             	France	fr
-DEU                             	Germany	de
-LUX                             	Luxembourg	lu
-CHE                             	Switzerland	ch
-AUS                             	Australia	au
-NZL                             	New Zealand	nz
-SVK                             	Slovakia	sk
-\.
-
-
---
--- Data for Name: workers; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.workers (id_worker, years_working) FROM stdin;
-1	4
-2	5
-3	4
-4	6
-5	7
-6	9
-7	7
-8	7
-9	5
-10	8
-11	8
-12	7
-13	6
-14	7
-15	7
-16	4
-17	6
-18	8
-19	8
-20	9
-21	6
-22	8
-23	9
-24	5
-25	6
-26	5
-27	4
-28	7
-29	9
-30	6
-31	7
-32	6
-33	5
-34	4
-35	4
-36	4
-37	6
-38	8
-39	8
-40	7
-41	8
-42	9
-43	5
-44	5
-45	4
-46	6
-47	7
-48	9
-49	5
-50	4
-\.
-
-
---
--- Name: students_id_student_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.students_id_student_seq', 100, true);
-
-
---
--- Name: workers_id_worker_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.workers_id_worker_seq', 50, true);
-
-
---
 -- Name: continents continents_continent_key; Type: CONSTRAINT; Schema: geo; Owner: -
 --
 
@@ -9283,22 +8904,6 @@ ALTER TABLE ONLY music.genres
 
 
 --
--- Name: students students_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.students
-    ADD CONSTRAINT students_pkey PRIMARY KEY (id_student);
-
-
---
--- Name: workers workers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.workers
-    ADD CONSTRAINT workers_pkey PRIMARY KEY (id_worker);
-
-
---
 -- Name: v_events _RETURN; Type: RULE; Schema: music; Owner: -
 --
 
@@ -9408,5 +9013,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict KLneLbUBt6FcuE8uH8vSEYxJJaEbO2pp4zvh1OjSWj8xulclUUIKGs2vMGfyH6b
+\unrestrict AD9VaBnrHaVld4BAENvri63EHelhY2f1BeZ3gyJCFdfCCCf56V2mIkEtJw7Nkhc
 

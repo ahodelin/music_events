@@ -1,21 +1,25 @@
 {
     "event": {
-    "name": "From the South of Hell European Tour 2026", 
-    "date": "2026-07-02",
-    "placeName": "Frankfurt am Main (Ponyhof Club)",
+    "name": "",
+    "date": "2026-07-11",
+    "placeName": "Mainz ()",
     "persons": 2,
-    "price": 18.00,
+    "price": ...,
     "duration": 0,
     "note": null
   },
   "bands": 
   [
     {
-      "name": "Masacre",
+      "name": "Wichkrieg",
+      "isNew": false
+    },
+    {
+      "name": "",
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": ["COL"],
+      "countryIds": ["NLD"],
       "genres": ["Death Metal"],
       "note": null
     }
