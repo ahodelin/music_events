@@ -1,27 +1,30 @@
 {
     "event": {
-    "name": "",
+    "name": "A Day at the Beach Open Air",
     "date": "2026-07-11",
-    "placeName": "Mainz ()",
+    "placeName": "Mainz (Haus Mainusch)",
     "persons": 2,
-    "price": ...,
+    "price": 15.0,
     "duration": 0,
     "note": null
   },
   "bands": 
   [
     {
-      "name": "Wichkrieg",
+      "name": "Witchkrieg",
       "isNew": false
     },
     {
-      "name": "",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["NLD"],
-      "genres": ["Death Metal"],
-      "note": null
+      "name": "Urisk",
+      "isNew": false
+    },
+    {
+      "name": "Hemocult",
+      "isNew": false
+    },
+    {
+      "name": "Devil''s Hours",
+      "isNew": false
     }
   ]
 }
