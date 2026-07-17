@@ -1,0 +1,100 @@
+{
+"event": {
+  "name": "Hell over Aschaffenburg - 2026", 
+  "date": "2026-09-25",
+  "placeName": "Heinrichsthal (Sportgelände)",
+  "persons": 2,
+  "price": 79.0,
+  "duration": 1,
+  "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Accu§er",
+      "isNew": false
+    },
+    {
+      "name": "Argash",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal", "Death Metal"],
+      "note": null 
+    },
+    {
+      "name": "Blutgott",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Heavy Metal", "Hard Rock"],
+      "note": null 
+    },
+    {
+      "name": "Izegrim",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["NLD"],
+      "genres": ["Death Metal", "Thrash Metal"],
+      "note": null 
+    },
+    {
+      "name": "Mellom",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null 
+    },
+    {
+      "name": "The Flesh Trading Company",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Heavy Metal", "Thrash Metal", "Death Metal"],
+      "note": null 
+    },
+    {
+      "name": "Vomitheist",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["CHE"],
+      "genres": ["Death Metal"],
+      "note": null 
+    },
+    {
+      "name": "Crypts",
+      "isNew": false
+    },
+    {
+      "name": "Desaster",
+      "isNew": false
+    },
+    {
+      "name": "Discreation",
+      "isNew": false
+    },
+    {
+      "name": "Hellknife",
+      "isNew": false
+    },
+    {
+      "name": "Illdisposed",
+      "isNew": false
+    },
+    {
+      "name": "Traitor",
+      "isNew": false
+    },
+    {
+      "name": "Warfield",
+      "isNew": false
+    }
+  ]
+}

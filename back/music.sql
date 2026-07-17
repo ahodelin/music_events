@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict ZROord4mVUguCCahxdqrYx3dqPHkcT4N6Dkc0p90amyVZtfo8vmjwwRT3kcXdC9
+\restrict qAuTyWegYxThXUdSjReBt23vTxJpVUgYuHTDkChpfzEUel4algsRPP3CxiYNkp5
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -6063,6 +6063,8 @@ d01872b313a06a6a04c04b5a7417d945	fd600efdc16138ee33074091f51775fd
 c15e63a5504762a9211b691a7242c368	c0ad225ce1e4b634b92c0501caedd366
 4eb1adbe6867a2ed8acf05223d515346	c0ad225ce1e4b634b92c0501caedd366
 41e744bdf3114b14f5873dfb46921dc4	c0ad225ce1e4b634b92c0501caedd366
+ad7de486b34143f00a56127a95787e78	727b3b0fe3ed0947656f3c3c9a3bcbc3
+28d6c39ac0305b5de02a5b02c047a411	727b3b0fe3ed0947656f3c3c9a3bcbc3
 \.
 
 
@@ -8175,6 +8177,20 @@ d01872b313a06a6a04c04b5a7417d945	f3dcdca4cd0c83a5e855c5434ce98673
 --
 
 COPY music.bands_tmp (bands_name) FROM stdin;
+Desaster
+Traitor
+Warfield
+Mellom
+The Flesh Trading Company
+Blutgott
+Illdisposed
+Izegrim
+Hellknife
+Argash
+Discreation
+Vomitheist
+Crypts
+Accu§er
 \.
 
 
@@ -8539,6 +8555,7 @@ cd5b85fa819ef66d95c2d6ad359ab36d	Next to Die Europe Tour 2026	2026-06-19	eca8fc9
 3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	t	Boarstream Open Air
 c12743740482314a43f515a8a5d6ccf1	From the South of Hell European Tour 2026	2026-07-02	0280c9c3b98763f5a8d2ce7e97ce1b05	0	18.00	2	\N	f	\N
 c0ad225ce1e4b634b92c0501caedd366	A Day at the Beach Open Air	2026-07-11	8edfaa1884ddd9e289e61aea465d6077	0	15.0	2	\N	f	\N
+727b3b0fe3ed0947656f3c3c9a3bcbc3	Back to the Old School Tour 2026	2026-07-16	f3a90318abb3e16166d96055fd6f9096	0	25.30	2	\N	f	\N
 \.
 
 
@@ -9018,5 +9035,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict ZROord4mVUguCCahxdqrYx3dqPHkcT4N6Dkc0p90amyVZtfo8vmjwwRT3kcXdC9
+\unrestrict qAuTyWegYxThXUdSjReBt23vTxJpVUgYuHTDkChpfzEUel4algsRPP3CxiYNkp5
 

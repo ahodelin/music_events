@@ -1,0 +1,22 @@
+{
+    "event": {
+    "name": "Back to the Old School Tour 2026",
+    "date": "2026-07-16",
+    "placeName": "Weinheim (Café Central)",
+    "persons": 2,
+    "price": 25.30,
+    "duration": 0,
+    "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Jungle Rot",
+      "isNew": false
+    },
+    {
+      "name": "Rats of Gomorrah",
+      "isNew": false
+    }
+  ]
+}

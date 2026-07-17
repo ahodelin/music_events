@@ -99,10 +99,6 @@
       "isNew": false
     },
     {
-      "name": "Mammoth Grinder",
-      "isNew": false
-    },
-    {
       "name": "Marduk",
       "isNew": false
     },
@@ -144,6 +140,10 @@
     },
     {
       "name": "Wormed",
+      "isNew": false
+    },
+    {
+      "name": "Acranius",
       "isNew": false
     },
     {
@@ -210,13 +210,8 @@
       "note": null
     },
    {
-      "name": "Devourment",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["USA"],
-      "genres": ["Slam Metal", "Brutal Death Metal"],
-      "note": null
+      "name": "Afsky",
+      "isNew": false
     },
    {
       "name": "Evoken",
@@ -291,12 +286,12 @@
       "note": null
     },
    {
-      "name": "Panzerfaust",
+      "name": "",
       "isNew": true,
       "likes": "",
       "active": true,
-      "countryIds": ["CAN"],
-      "genres": ["Black Metal"],
+      "countryIds": [""],
+      "genres": [" Metal"],
       "note": null
     },
    {
