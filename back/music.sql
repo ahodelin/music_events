@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict QGuouPEzMMiXRcf5XeMBaaVuDVOt3z9GNVgzg2LUGRqefV4aXb9BP2tbipJnk4r
+\restrict hJfamYpDMcYitPIdjfKYdOfQQSQMqzl71VRKqsYCvD8Kb9NGeb1eScSqrHYyxew
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -1026,6 +1026,26 @@ CREATE VIEW music.v_last_event AS
   WHERE (to_date(date, 'DD.MM.YYYY'::text) < (now())::date)
   ORDER BY (to_date(date, 'DD.MM.YYYY'::text)) DESC
  LIMIT 1;
+
+
+--
+-- Name: v_new_bands_by_years; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_new_bands_by_years AS
+ WITH first_time AS (
+         SELECT b.band,
+            EXTRACT(year FROM min(e.date_event)) AS years
+           FROM ((music.bands_events be
+             JOIN music.events e ON ((be.id_event = e.id_event)))
+             JOIN music.bands b ON ((b.id_band = be.id_band)))
+          GROUP BY b.band
+        )
+ SELECT years,
+    count(band) AS bands
+   FROM first_time
+  GROUP BY years
+  ORDER BY years DESC;
 
 
 --
@@ -9051,5 +9071,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict QGuouPEzMMiXRcf5XeMBaaVuDVOt3z9GNVgzg2LUGRqefV4aXb9BP2tbipJnk4r
+\unrestrict hJfamYpDMcYitPIdjfKYdOfQQSQMqzl71VRKqsYCvD8Kb9NGeb1eScSqrHYyxew
 
