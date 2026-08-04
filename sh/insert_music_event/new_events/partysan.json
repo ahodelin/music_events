@@ -35,8 +35,13 @@
       "isNew": false
     },
     {
-      "name": "Desaster",
-      "isNew": false
+      "name": "Lamp of Murmuur",
+      "isNew": true,
+      "active": true,
+      "genres": ["Black Metal"],
+      "note": null,
+      "countryIds": ["001"],
+      "likes": ""
     },
     {
       "name": "Bloody Vengeance",
