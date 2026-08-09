@@ -3,7 +3,7 @@
     "name": "Party San Open Air 2026", 
     "date": "2026-08-06",
     "placeName": "Schlotheim",
-    "persons": 2,
+    "persons": 3,
     "price": 150.0,
     "duration": 2,
     "note": null
@@ -12,7 +12,7 @@
     {
       "name": "A Canorous Quintet",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Melodic Death Metal"],
@@ -20,10 +20,6 @@
     },
     {
       "name": "200 Stab Wounds",
-      "isNew": false
-    },
-    {
-      "name": "Amorphis",
       "isNew": false
     },
     {
@@ -41,14 +37,10 @@
       "genres": ["Black Metal"],
       "note": null,
       "countryIds": ["001"],
-      "likes": ""
+      "likes": "y"
     },
     {
       "name": "Bloody Vengeance",
-      "isNew": false
-    },
-    {
-      "name": "In the Woods...",
       "isNew": false
     },
     {
@@ -57,10 +49,6 @@
     },
     {
       "name": "Schirenc Plays Pungent Stench",
-      "isNew": false
-    },
-    {
-      "name": "Testament",
       "isNew": false
     },
     {
@@ -88,18 +76,6 @@
       "isNew": false
     },
     {
-      "name": "Endonomos",
-      "isNew": false
-    },
-    {
-      "name": "Misery Index",
-      "isNew": false
-    },
-    {
-      "name": "Hexvessel",
-      "isNew": false
-    },
-    {
       "name": "Lucifer''s Child",
       "isNew": false
     },
@@ -113,10 +89,6 @@
     },
     {
       "name": "Misery Index",
-      "isNew": false
-    },
-    {
-      "name": "Moonspell",
       "isNew": false
     },
     {
@@ -154,7 +126,7 @@
     {
       "name": "Alcest",
       "isNew": true,
-      "likes": "",
+      "likes": "n",
       "active": true,
       "countryIds": ["FRA"],
       "genres": ["Post-Black Metal", "Shoegaze"],
@@ -163,7 +135,7 @@
    {
       "name": "Baxaxaxa",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Black Metal"],
@@ -172,7 +144,7 @@
    {
       "name": "Celeste",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["FRA"],
       "genres": ["Black Metal", "Sludge Metal", "Post-Hardcore"],
@@ -181,7 +153,7 @@
    {
       "name": "Crawl",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Death Metal"],
@@ -190,7 +162,7 @@
    {
       "name": "Dark Funeral",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Black Metal"],
@@ -199,16 +171,16 @@
    {
       "name": "Death Worship",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
-      "countryIds": ["CAN"],
+      "countryIds": ["001"],
       "genres": ["Black Metal", "Death Metal"],
       "note": null
     },
    {
-      "name": "Deceased",
+      "name": "Deceased...",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Death Metal", "Thrash Metal", "Heavy Metal"],
@@ -221,7 +193,7 @@
    {
       "name": "Evoken",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Funeral Doom Metal", "Death Metal"],
@@ -230,25 +202,16 @@
    {
       "name": "Firespawn",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Death Metal"],
       "note": null
     },
    {
-      "name": "For Victory",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["DEU"],
-      "genres": ["Tribute to Bolt Thrower"],
-      "note": null
-    },
-   {
       "name": "Gates of Ishtar",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Melodic Death Metal"],
@@ -257,52 +220,34 @@
    {
       "name": "Gorefunest",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
-      "countryIds": ["NDL"],
+      "countryIds": ["NLD"],
       "genres": ["Tribute to Gorefest"],
       "note": null
     },
    {
       "name": "Internal Bleeding",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Slam Metal", "Brutal Death Metal"],
       "note": null
     },
    {
-      "name": "Iotunn",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["DNK"],
-      "genres": ["Progressive Power Metal", "Progressive Melodic Death Metal"],
-      "note": null
-    },
-   {
       "name": "Murder Squad",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Death Metal"],
       "note": null
     },
    {
-      "name": "",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": [""],
-      "genres": [" Metal"],
-      "note": null
-    },
-   {
       "name": "Sadistic Intent",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Death Metal"],
@@ -311,7 +256,7 @@
    {
       "name": "Sorcerer",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["SWE"],
       "genres": ["Epic Doom Metal"],
@@ -320,7 +265,7 @@
    {
       "name": "Sunken",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DNK"],
       "genres": ["Atmospheric Black Metal"],
@@ -329,7 +274,7 @@
    {
       "name": "Sventevith (Storming Near the Baltic)",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["150"],
       "genres": ["Black Metal"],
@@ -338,43 +283,25 @@
    {
       "name": "Temple of Dread",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["DEU"],
       "genres": ["Death Metal"],
       "note": null
     },
    {
-      "name": "TodoMal",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["ESP"],
-      "genres": ["Atmospheric Doom Metal"],
-      "note": null
-    },
-   {
       "name": "Tulus",
       "isNew": true,
-      "likes": "",
+      "likes": "y",
       "active": true,
       "countryIds": ["NOR"],
       "genres": ["Black Metal"],
       "note": null
     },
    {
-      "name": "Wolfbrigade",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["SWE"],
-      "genres": ["Crust", "Hardcore Punk"],
-      "note": null
-    },
-   {
       "name": "Wolves in the Throne Room",
       "isNew": true,
-      "likes": "",
+      "likes": "m",
       "active": true,
       "countryIds": ["USA"],
       "genres": ["Atmospheric Black Metal"],
