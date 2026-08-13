@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict hFX9IMg0eZi5LbJbBoQksGxI05d0ulmRRcXNVVPis1Vkgv0FVGhGoK8g4E8uciM
+\restrict 2uAdm0KmDktfqLsyezCn5Bab47TBbqKEhwfLNwDbOtLUtzDHlo0Z1nXPHfMlmRa
 
--- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
--- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
+-- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
+-- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2437,7 +2437,6 @@ ec41b630150c89b30041d46b03f1da42	Slaughterday	y	t	\N
 cb3a240c27ebf12e17f9efe44fa4a7a8	Fuming Mouth	y	t	\N
 cfe9861e2a347cc7b50506ea46fdaf4f	Greh	y	t	\N
 926811886f475151c52dd365c90a7efc	Traitor	y	t	\N
-e27728342f660d53bd12ab14e5005903	Disstorture	y	t	\N
 afe4451c0c33641e67241bfe39f339ff	High Striker	m	t	\N
 3e6141409efd871b4a87deacfbf31c28	Wilt	y	t	\N
 c3ce3cf87341cea762a1fb5d26d7d361	Gomorrha	y	t	\N
@@ -2501,6 +2500,7 @@ eda6c94657b059cb43134ca43448c497	Boiled	y	t	\N
 52e0818e1e6933a8840b963eb8dc2cc7	DeadSquad	y	t	\N
 52eb2cd819dbb066e9c747854677de42	Stuhlgäng	m	t	\N
 5515cbc2b012e448be74482074453087	Blutsäge des Todes	m	t	\N
+e27728342f660d53bd12ab14e5005903	Disstorture	n	t	\N
 29d7fded0020f9daf1665c65b9034c37	Zeugen eines Niedergangs	y	t	\N
 daf3b9b921ce7b22ed08ea4e30821454	Grime Pack	y	t	\N
 1a1dfac16f1667a8cd21e4885ec3af72	Yoth Iria	y	t	\N
@@ -2714,6 +2714,9 @@ d58f7db371928d4a9d818bd1683d1cb6	Sorcerer	m	t	\N
 e11f08b0527995fe0d6d9c065853075b	Temple of Dread	y	t	\N
 351977b0753cb6ac2867e6124e5c0400	Tulus	y	t	\N
 a20c545cb5d8f492a59148e0dd57eea5	Wolves in the Throne Room	m	t	\N
+40c1ba18fe542118d9b970837a3f295d	Thy Art is Murder	y	t	\N
+539ae25607eaa1e605a49083f52add30	Sun Eater	y	t	\N
+1ed92a5cfb7d5e3709c087a306cf6501	Fit for an Autopsy	y	t	\N
 \.
 
 
@@ -4047,6 +4050,9 @@ d58f7db371928d4a9d818bd1683d1cb6	SWE
 e11f08b0527995fe0d6d9c065853075b	DEU
 351977b0753cb6ac2867e6124e5c0400	NOR
 a20c545cb5d8f492a59148e0dd57eea5	USA
+40c1ba18fe542118d9b970837a3f295d	AUS
+539ae25607eaa1e605a49083f52add30	DEU
+1ed92a5cfb7d5e3709c087a306cf6501	USA
 \.
 
 
@@ -6186,6 +6192,12 @@ d58f7db371928d4a9d818bd1683d1cb6	3008de96157b89b36c6062fbdee977ab
 e11f08b0527995fe0d6d9c065853075b	3008de96157b89b36c6062fbdee977ab
 351977b0753cb6ac2867e6124e5c0400	3008de96157b89b36c6062fbdee977ab
 a20c545cb5d8f492a59148e0dd57eea5	3008de96157b89b36c6062fbdee977ab
+37b43a655dec0e3504142003fce04a07	d1689d0949859abef94606b494e74f08
+e27728342f660d53bd12ab14e5005903	d1689d0949859abef94606b494e74f08
+40c1ba18fe542118d9b970837a3f295d	211345ec592e0f5b5d131040d29847c2
+bd555d95b1ccba75afca868636b1b931	211345ec592e0f5b5d131040d29847c2
+539ae25607eaa1e605a49083f52add30	211345ec592e0f5b5d131040d29847c2
+1ed92a5cfb7d5e3709c087a306cf6501	211345ec592e0f5b5d131040d29847c2
 \.
 
 
@@ -8325,6 +8337,9 @@ d58f7db371928d4a9d818bd1683d1cb6	1545b040d61dc2d236ca4dea7e2cff46
 e11f08b0527995fe0d6d9c065853075b	3593526a5f465ed766bafb4fb45748a2
 351977b0753cb6ac2867e6124e5c0400	2db87892408abd4d82eb39b78c50c27b
 a20c545cb5d8f492a59148e0dd57eea5	0bb2ac8dea4da36597a8d9dc88f0ed64
+40c1ba18fe542118d9b970837a3f295d	8bb92c3b9b1b949524aac3b578a052b6
+539ae25607eaa1e605a49083f52add30	8bb92c3b9b1b949524aac3b578a052b6
+1ed92a5cfb7d5e3709c087a306cf6501	8bb92c3b9b1b949524aac3b578a052b6
 \.
 
 
@@ -8714,6 +8729,8 @@ c0ad225ce1e4b634b92c0501caedd366	A Day at the Beach Open Air	2026-07-11	8edfaa18
 727b3b0fe3ed0947656f3c3c9a3bcbc3	Back to the Old School Tour 2026	2026-07-16	f3a90318abb3e16166d96055fd6f9096	0	25.30	2	\N	f	\N
 88663264467e2cd08613041c8d3284bc	Morbide Klänge VII	2026-07-25	60a813acedaeaedc4325cdc636dbcb72	0	20.0	2	\N	f	\N
 3008de96157b89b36c6062fbdee977ab	Party San Open Air 2026	2026-08-06	b27e07993299ee0b2ecd26dabd77eaf8	2	150.0	3	\N	t	Party San Open Air
+d1689d0949859abef94606b494e74f08	Deicide - Live 2026	2026-08-11	e248bb7c1164a44fa358593e28769a23	0	39.7	2	\N	f	\N
+211345ec592e0f5b5d131040d29847c2	European Summer Tour 2026	2026-08-12	588671317bf1864e5a95445ec51aac65	0	43.0	2	\N	f	\N
 \.
 
 
@@ -9194,5 +9211,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict hFX9IMg0eZi5LbJbBoQksGxI05d0ulmRRcXNVVPis1Vkgv0FVGhGoK8g4E8uciM
+\unrestrict 2uAdm0KmDktfqLsyezCn5Bab47TBbqKEhwfLNwDbOtLUtzDHlo0Z1nXPHfMlmRa
 
