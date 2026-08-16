@@ -4,7 +4,7 @@
     "date": "2026-08-20",
     "placeName": "Andernach",
     "persons": 2,
-    "price": ,
+    "price": 130.9,
     "duration": 2,
     "note": null
   },
@@ -34,10 +34,6 @@
       "isNew": false
     },
     {
-      "name": "Extermination Dismemberment",
-      "isNew": false
-    },
-    {
       "name": "Gutrectomy",
       "isNew": false
     },
@@ -54,8 +50,17 @@
       "isNew": false
     },
     {
-      "name": "Vulvodynia",
+      "name": "Coffin Feeder",
       "isNew": false
+    },
+    {
+      "name": "Annotation of an Autopsy",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["GBR"],
+      "genres": ["Deathcore"],
+      "note": null
     },
     {
       "name": "Cerebral Incubation",
@@ -131,12 +136,7 @@
     },
     {
       "name": "Internal Bleeding",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["USA"],
-      "genres": ["Slam Metal", "Brutal Death Metal"],
-      "note": null
+      "isNew": false
     },
     {
       "name": "Imperial Execration",

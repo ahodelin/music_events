@@ -1,0 +1,143 @@
+{
+  "event": {
+    "name": "Breack Out Open Air 2026", 
+    "date": "2026-09-03",
+    "placeName": "Schleiz (Ferienland Crispendorf)",
+    "persons": 2,
+    "price": ,
+    "duration": 2,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Candlemass",
+      "isNew": false
+    },
+    {
+      "name": "Psychonaut 4",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["GEO"],
+      "genres": ["Depresive Black Metal", "Depresive Black Rock"],
+      "note": null
+    },
+    {
+      "name": "Cytotoxin",
+      "isNew": false
+    },
+    {
+      "name": "Senntus",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["AUT"],
+      "genres": ["Melodic Black Metal", "Gothic Metal"],
+      "note": null
+    },
+    {
+      "name": "Hangatyr",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Melechesh",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["001"],
+      "genres": ["Black Metal", "Middle Eastern Folk Metal"],
+      "note": null
+    },
+    {
+      "name": "Servant",
+      "isNew": false
+    },
+    {
+      "name": "Fleshless",
+      "isNew": false
+    },
+    {
+      "name": "Borknagar",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["NOR"],
+      "genres": ["Progressive Viking Metal", "Folk Metal", "Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Bodyfarm",
+      "isNew": false
+    },
+    {
+      "name": "Graceless",
+      "isNew": false
+    },
+    {
+      "name": "Agathodaimon",
+      "isNew": false
+    },
+    {
+      "name": "Imperium Dekadenz",
+      "isNew": false
+    },
+    {
+      "name": "Horresque",
+      "isNew": false
+    },
+    {
+      "name": "Soul Grinder",
+      "isNew": false
+    },
+    {
+      "name": "Victim",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Thras Metal"],
+      "note": null
+    },
+    {
+      "name": "Thronecult",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Mærer",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Experimantal Black Metal", "Doom Metal", "Post-Metal"],
+      "note": null
+    },
+    {
+      "name": "Seconddeath",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    },
+    {
+      "name": "Brachlant",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null
+    }
+  ]
+}
