@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict PcwfidzRVz3dv8LIr93tMI8uetZ4SiMitS8bjAqagvUiNfDcPru3vZi3E7WYVsO
+\restrict web3F6L7banFwOeyTn4p8Qt3Fn0D6xONYwdvJ5KBe2IcxIpsqZ32mqCM5gf8uVX
 
 -- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
@@ -2722,6 +2722,8 @@ e31e6cce2b9bcb27bf2c6d6df4dfe1f5	Izegrim	y	t	\N
 d55e87d39d53583840c4d249aae4d61a	The Flesh Trading Company	y	t	\N
 a1b443a789fdb74cf61725793bdd51b6	Vomitheist	y	t	\N
 e774175857e19c563177879e879bb91a	Blutgott	y	t	Debauchery's Balgeroth
+66f39ce8b8bfddcbb8b58e6a66c1cca5	Soreption	y	t	\N
+de405e9740fbf6c3b48a5579eae81e02	Disembodied Tyrant	y	t	\N
 40c1ba18fe542118d9b970837a3f295d	Thy Art is Murder	y	t	\N
 539ae25607eaa1e605a49083f52add30	Sun Eater	y	t	\N
 1ed92a5cfb7d5e3709c087a306cf6501	Fit for an Autopsy	y	t	\N
@@ -4062,6 +4064,8 @@ e31e6cce2b9bcb27bf2c6d6df4dfe1f5	NLD
 97875f24ba3f16c50dcb071d7d405865	DEU
 d55e87d39d53583840c4d249aae4d61a	DEU
 a1b443a789fdb74cf61725793bdd51b6	CHE
+66f39ce8b8bfddcbb8b58e6a66c1cca5	SWE
+de405e9740fbf6c3b48a5579eae81e02	USA
 f89f75d0702ca67b85e1ed0b6dc0ef9e	DEU
 92247aa9766c9c6deebb28f078f75b83	ITA
 6ba49b112eb429b59a85ee94da9c2ccb	NLD
@@ -6369,6 +6373,10 @@ e774175857e19c563177879e879bb91a	08f8c67c20c4ba43e8ba6fa771039c94
 e774175857e19c563177879e879bb91a	5e38483d273e5a8b6f777f8017bedf62
 e774175857e19c563177879e879bb91a	10c5ac379805443742025d6cf619891e
 e774175857e19c563177879e879bb91a	b4435108ce3cef02600464daf3cb5f7f
+dfb7069bfc6e0064a6c667626eca07b4	e8f28681ca84b347e2849c02064b7b97
+66f39ce8b8bfddcbb8b58e6a66c1cca5	e8f28681ca84b347e2849c02064b7b97
+de405e9740fbf6c3b48a5579eae81e02	e8f28681ca84b347e2849c02064b7b97
+cdd21eba97ee010129f5d1e7a80494cb	e8f28681ca84b347e2849c02064b7b97
 \.
 
 
@@ -8580,6 +8588,10 @@ d55e87d39d53583840c4d249aae4d61a	3593526a5f465ed766bafb4fb45748a2
 a1b443a789fdb74cf61725793bdd51b6	3593526a5f465ed766bafb4fb45748a2
 e774175857e19c563177879e879bb91a	2af415a2174b122c80e901297f2d114e
 e774175857e19c563177879e879bb91a	3593526a5f465ed766bafb4fb45748a2
+66f39ce8b8bfddcbb8b58e6a66c1cca5	0c5544f60e058b8cbf571044aaa6115f
+de405e9740fbf6c3b48a5579eae81e02	8bb92c3b9b1b949524aac3b578a052b6
+de405e9740fbf6c3b48a5579eae81e02	0c5544f60e058b8cbf571044aaa6115f
+de405e9740fbf6c3b48a5579eae81e02	93cf908c24c1663d03d67facc359acc2
 \.
 
 
@@ -8948,6 +8960,7 @@ add0fa9da3d7d94a1fe1653ea8128e0b	The Blackest Path III	2025-10-11	a91bcaf7db7d17
 459008fdb7ba68bcc0352da411590d0b	Neue Welt - Alte Sünden	2026-05-14	588671317bf1864e5a95445ec51aac65	0	27.15	2	\N	f	\N
 6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	9be6de3bc5073483dcbbcbc1b40af4d8	1	79	2	\N	t	Dortmund Deathfest
 d671c0963a6b1e1501d855c51589d00d	Hell over Aschaffenburg - 2026	2026-09-25	10c159c6d0e7cf04eae6696250d0b8bc	1	79.0	2	\N	f	\N
+e8f28681ca84b347e2849c02064b7b97	"Imperium Delirium" European Tour 2026	2026-09-27	051fa36efd99a2ae24d56b198e7b1992	0	46.5	2	\N	f	\N
 748e792d3c8d1c84e8dddd5efcfa7616	Huldler - Europe Summer 2026	2026-06-11	588671317bf1864e5a95445ec51aac65	0	29.95	2	\N	f	\N
 fd600efdc16138ee33074091f51775fd	Celebrating Life Through Death	2026-06-15	c72b4173a6a7131bf31a711212305fd3	0	57.40	2	\N	f	\N
 1185ca67cf530fad7922cc08bcaaf2f6	Decapitated 30th Anniversary Tour 2026	2026-06-17	e248bb7c1164a44fa358593e28769a23	0	40.95	2	\N	f	\N
@@ -9462,5 +9475,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict PcwfidzRVz3dv8LIr93tMI8uetZ4SiMitS8bjAqagvUiNfDcPru3vZi3E7WYVsO
+\unrestrict web3F6L7banFwOeyTn4p8Qt3Fn0D6xONYwdvJ5KBe2IcxIpsqZ32mqCM5gf8uVX
 

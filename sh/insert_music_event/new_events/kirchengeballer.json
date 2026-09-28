@@ -1,0 +1,31 @@
+{
+"event": {
+  "name": "Kirchengeballer Vol. III", 
+  "date": "2026-10-03",
+  "placeName": "Frankfurt am Main (Sossenheim)",
+  "persons": 2,
+  "price": 0.0,
+  "duration": 0,
+  "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Gravial",
+      "isNew": false
+    },
+    {
+      "name": "need2destroy",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Crossover", "Groove Metal"],
+      "note": null 
+    },
+    {
+      "name": "Spreading Miasma",
+      "isNew": false
+    }
+  ]
+}
