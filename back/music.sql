@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict web3F6L7banFwOeyTn4p8Qt3Fn0D6xONYwdvJ5KBe2IcxIpsqZ32mqCM5gf8uVX
+\restrict glHjdiGBYk8OpAayF6eJm76CoxfLLfnSjQBOYOzuzcZMXa6oytSWF2D0r3l1H4h
 
 -- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
@@ -1812,7 +1812,6 @@ c82b23ed65bb8e8229c54e9e94ba1479	Mr. Irish Bastard	y	t	\N
 91abd5e520ec0a40ce4360bfd7c5d573	Nailed to Obscurity	y	t	\N
 e6624ef1aeab84f521056a142b5b2d12	Napalm Death	y	t	\N
 3ddbf46000c2fbd44759f3b4672b64db	Nasty	m	t	\N
-33f03dd57f667d41ac77c6baec352a81	need2destroy	y	t	\N
 38b2886223461f15d65ff861921932b5	Nekrovault	y	t	\N
 07d82d98170ab334bc66554bafa673cf	Nervosa	y	t	\N
 42f6dd3a6e21d6df71db509662d19ca4	Nifelheim	y	t	\N
@@ -1895,6 +1894,7 @@ e039d55ed63a723001867bc4eb842c00	Stillbirth	y	t	\N
 849c829d658baaeff512d766b0db3cce	Storm	y	t	\N
 dfca36a68db327258a2b0d5e3abe86af	Nepumuc	m	f	\N
 13c8bd3a0d92bd186fc5162eded4431d	Six Feet Under	y	t	\N
+33f03dd57f667d41ac77c6baec352a81	need2destroy	m	t	\N
 3b8d2a5ff1b16509377ce52a92255ffe	Street Dogs	y	t	\N
 01bcfac216d2a08cd25930234e59f1a1	Suicidal Angels	y	t	\N
 c63b6261b8bb8145bc0fd094b9732c24	Suicidal Tendencies	y	t	\N
@@ -6377,6 +6377,9 @@ dfb7069bfc6e0064a6c667626eca07b4	e8f28681ca84b347e2849c02064b7b97
 66f39ce8b8bfddcbb8b58e6a66c1cca5	e8f28681ca84b347e2849c02064b7b97
 de405e9740fbf6c3b48a5579eae81e02	e8f28681ca84b347e2849c02064b7b97
 cdd21eba97ee010129f5d1e7a80494cb	e8f28681ca84b347e2849c02064b7b97
+cf014029e7b64306ef8e82a5d5f1fd93	01521be29892559aed9f7e3bd584334c
+33f03dd57f667d41ac77c6baec352a81	01521be29892559aed9f7e3bd584334c
+f999abbe163f001f55134273441f35c0	01521be29892559aed9f7e3bd584334c
 \.
 
 
@@ -8961,6 +8964,7 @@ add0fa9da3d7d94a1fe1653ea8128e0b	The Blackest Path III	2025-10-11	a91bcaf7db7d17
 6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	9be6de3bc5073483dcbbcbc1b40af4d8	1	79	2	\N	t	Dortmund Deathfest
 d671c0963a6b1e1501d855c51589d00d	Hell over Aschaffenburg - 2026	2026-09-25	10c159c6d0e7cf04eae6696250d0b8bc	1	79.0	2	\N	f	\N
 e8f28681ca84b347e2849c02064b7b97	"Imperium Delirium" European Tour 2026	2026-09-27	051fa36efd99a2ae24d56b198e7b1992	0	46.5	2	\N	f	\N
+01521be29892559aed9f7e3bd584334c	Kirchengeballer Vol. III	2026-10-03	638a858e2c5c28f1ce98341f90c106c9	0	0.0	2	\N	f	\N
 748e792d3c8d1c84e8dddd5efcfa7616	Huldler - Europe Summer 2026	2026-06-11	588671317bf1864e5a95445ec51aac65	0	29.95	2	\N	f	\N
 fd600efdc16138ee33074091f51775fd	Celebrating Life Through Death	2026-06-15	c72b4173a6a7131bf31a711212305fd3	0	57.40	2	\N	f	\N
 1185ca67cf530fad7922cc08bcaaf2f6	Decapitated 30th Anniversary Tour 2026	2026-06-17	e248bb7c1164a44fa358593e28769a23	0	40.95	2	\N	f	\N
@@ -9475,5 +9479,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict web3F6L7banFwOeyTn4p8Qt3Fn0D6xONYwdvJ5KBe2IcxIpsqZ32mqCM5gf8uVX
+\unrestrict glHjdiGBYk8OpAayF6eJm76CoxfLLfnSjQBOYOzuzcZMXa6oytSWF2D0r3l1H4h
 
