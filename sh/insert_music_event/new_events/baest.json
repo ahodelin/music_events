@@ -1,0 +1,38 @@
+{
+"event": {
+  "name": "Colossal European Headline Tour 2026", 
+  "date": "2026-10-12",
+  "placeName": "Wiesbaden (Schlachthof)",
+  "persons": 2,
+  "price": 29.45,
+  "duration": 0,
+  "note": null
+  },
+  "bands": 
+  [
+    {
+      "name": "Baest",
+      "isNew": false
+    },
+    {
+      "name": "Deadnate",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DNK"],
+      "genres": ["Progressive Groove Metal"],
+      "note": null
+
+    },
+    {
+      "name": "Nocturnis",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null
+
+    }
+  ]
+}
