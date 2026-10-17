@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Ws1KWC40PJN8IbqvhsXN4qfNBbv9qt2bIOKedaEeT2tqDdjsf0of5iSeaiG5HYs
+\restrict hb11IG12Efodn5SxFYHFgYM4AWOi2H7jnyefnDS3q3AcBP1Ib0Dv33GD3lowCCQ
 
 -- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
@@ -2674,7 +2674,6 @@ d01872b313a06a6a04c04b5a7417d945	Cro-Mags	m	t	\N
 8fa310f417c2df42b28f25a0560918d9	Ch'ahom	y	t	\N
 e22933ff616069b4bfdd5e93f497d13d	Gateway to Selfdestruction	y	t	\N
 f89f75d0702ca67b85e1ed0b6dc0ef9e	Extinct	m	t	\N
-d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	y	t	\N
 e84900ed85812327945c9e72f173f8cc	Apallic Decay	m	t	\N
 6916ed9292a811c895e259c542af0e8a	Critical Mess	y	f	\N
 ef3c0bf190876fd31d5132848e99df61	Inhumate	y	f	\N
@@ -2694,6 +2693,7 @@ dbc6486d9c1788ccce2f4ece3e498fb3	Esoteric	y	t	\N
 28c97c8d9509e69ccb13de9b43927f3c	Regnum Noricum	y	t	\N
 3283801737bb85b6baa072d824e7b948	Sarcastic Terror	m	t	\N
 097f9e188f379f60c825cfb5521638d1	Zatokrev	y	t	\N
+d0dc5a2eab283511301b75090afe11ab	Deliver the Galaxy	m	t	\N
 285e4396ba55c3acc167225e474d4ccd	A Canorous Quintet	m	t	\N
 69d21b39a490feeccc1098e94cd35a32	Lamp of Murmuur	y	t	\N
 c23769ac87f5b00a4ac576d62dd6a240	Alcest	n	t	\N
@@ -2726,6 +2726,7 @@ e774175857e19c563177879e879bb91a	Blutgott	y	t	Debauchery's Balgeroth
 de405e9740fbf6c3b48a5579eae81e02	Disembodied Tyrant	y	t	\N
 8fe03cd9190022e23453ca2b7c5049d6	Deadnate	y	t	\N
 3a4965c1e57d1ad7261cfb17177b6ea5	Nocturnis	y	t	\N
+6797506c85689e770638670633c5f849	Ayahuasca	m	t	\N
 40c1ba18fe542118d9b970837a3f295d	Thy Art is Murder	y	t	\N
 539ae25607eaa1e605a49083f52add30	Sun Eater	y	t	\N
 1ed92a5cfb7d5e3709c087a306cf6501	Fit for an Autopsy	y	t	\N
@@ -4140,6 +4141,7 @@ b78d8fc3883e3d11945e903fa6141a4a	NOR
 c785d597ec8381809a81b16294c9e929	DEU
 cdf553a5d1108b062105306cb022ef11	DEU
 38aa95813c3112cb1f41c2d82ec910ad	DEU
+6797506c85689e770638670633c5f849	DEU
 0a0cd16c0edb6be739db32c730a30487	DEU
 745a02903f2a8e15f6bb833830d064e6	DEU
 3286eab31d1e862cbea656da176112f0	DEU
@@ -6387,6 +6389,10 @@ f999abbe163f001f55134273441f35c0	01521be29892559aed9f7e3bd584334c
 f2856ad30734c5f838185cc08f71b1e4	e631c5e6add448a083412c792185ccea
 8fe03cd9190022e23453ca2b7c5049d6	e631c5e6add448a083412c792185ccea
 3a4965c1e57d1ad7261cfb17177b6ea5	e631c5e6add448a083412c792185ccea
+67cd9b4b7b33511f30e85e21b2d3b204	d79e9cdbcd96291c349e74f376301b76
+04728a6272117e0dc4ec29b0f7202ad8	d79e9cdbcd96291c349e74f376301b76
+d0dc5a2eab283511301b75090afe11ab	d79e9cdbcd96291c349e74f376301b76
+6797506c85689e770638670633c5f849	d79e9cdbcd96291c349e74f376301b76
 \.
 
 
@@ -8604,6 +8610,7 @@ de405e9740fbf6c3b48a5579eae81e02	0c5544f60e058b8cbf571044aaa6115f
 de405e9740fbf6c3b48a5579eae81e02	93cf908c24c1663d03d67facc359acc2
 8fe03cd9190022e23453ca2b7c5049d6	57974b0a845d1d72601a3a49433e01a1
 3a4965c1e57d1ad7261cfb17177b6ea5	2db87892408abd4d82eb39b78c50c27b
+6797506c85689e770638670633c5f849	6fa675606729b1ccf2c9f118afab1a78
 \.
 
 
@@ -8965,6 +8972,7 @@ fd600efdc16138ee33074091f51775fd	Celebrating Life Through Death	2026-06-15	c72b4
 e631c5e6add448a083412c792185ccea	Colossal European Headline Tour 2026	2026-10-12	588671317bf1864e5a95445ec51aac65	0	29.45	2	\N	f	\N
 1185ca67cf530fad7922cc08bcaaf2f6	Decapitated 30th Anniversary Tour 2026	2026-06-17	e248bb7c1164a44fa358593e28769a23	0	40.95	2	\N	f	\N
 cd5b85fa819ef66d95c2d6ad359ab36d	Next to Die Europe Tour 2026	2026-06-19	eca8fc96e027328005753be360587de2	0	38.15	2	\N	f	\N
+d79e9cdbcd96291c349e74f376301b76	Those who came from Heaven Tour 2026	2026-10-16	09ddc8804dd5908fef3c8c0c474ad238	0	34.0	2	\N	f	\N
 c12743740482314a43f515a8a5d6ccf1	From the South of Hell European Tour 2026	2026-07-02	0280c9c3b98763f5a8d2ce7e97ce1b05	0	18.00	2	\N	f	\N
 c0ad225ce1e4b634b92c0501caedd366	A Day at the Beach Open Air	2026-07-11	8edfaa1884ddd9e289e61aea465d6077	0	15.0	2	\N	f	\N
 727b3b0fe3ed0947656f3c3c9a3bcbc3	Back to the Old School Tour 2026	2026-07-16	f3a90318abb3e16166d96055fd6f9096	0	25.30	2	\N	f	\N
@@ -9475,5 +9483,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Ws1KWC40PJN8IbqvhsXN4qfNBbv9qt2bIOKedaEeT2tqDdjsf0of5iSeaiG5HYs
+\unrestrict hb11IG12Efodn5SxFYHFgYM4AWOi2H7jnyefnDS3q3AcBP1Ib0Dv33GD3lowCCQ
 
