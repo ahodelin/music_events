@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 4LQUL3srfLfgNFl4fxzJJ1lFdaYVikKdSw81HbbFGev7PDmRLesJTXpeYRyFrDd
+\restrict 8oAQVqXghFxObK7j2fxAiVHBwzXKkdMytUWvyJiGksIE1IOQcG0dvmggGfZ7Trj
 
 -- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
@@ -2033,7 +2033,6 @@ e4f74be13850fc65559a3ed855bf35a8	Typhus	m	t	\N
 2859f0ed0630ecc1589b6868fd1dde41	Gaerea	y	t	\N
 fc239fd89fd7c9edbf2bf27d1d894bc0	Implore	y	t	\N
 24701da4bd9d3ae0e64d263b72ad20e8	Mythraeum	y	t	\N
-031d6cc33621c51283322daf69e799f5	The Risen Dread	y	t	\N
 a8ace0f003d8249d012c27fe27b258b5	Pestilence	y	t	\N
 255661921f4ad57d02b1de9062eb6421	Onslaught	y	t	\N
 5d53b2be2fe7e27daa27b94724c3b6de	Blood Incantation	y	t	\N
@@ -2731,6 +2730,9 @@ de405e9740fbf6c3b48a5579eae81e02	Disembodied Tyrant	y	t	\N
 79a48cfefcddde087e3d512f3317cc51	Hangover in Minsk	n	t	\N
 075fc9513f6a767e8fae1ad48d993c95	Lijkschouwer	y	t	\N
 cf57228b16412fa1a93b8e7c1d6f27ba	Celestielle	m	t	\N
+031d6cc33621c51283322daf69e799f5	The Risen Dread	y	t	\N
+b8bbe839159efb7450db12a9e95824f8	Syridas	y	t	\N
+2897e31bd4ed0f01c23e3790a1cb9c69	Mähthräsher	y	t	\N
 40c1ba18fe542118d9b970837a3f295d	Thy Art is Murder	y	t	\N
 539ae25607eaa1e605a49083f52add30	Sun Eater	y	t	\N
 1ed92a5cfb7d5e3709c087a306cf6501	Fit for an Autopsy	y	t	\N
@@ -4150,6 +4152,8 @@ cdf553a5d1108b062105306cb022ef11	DEU
 79a48cfefcddde087e3d512f3317cc51	POL
 075fc9513f6a767e8fae1ad48d993c95	NLD
 cf57228b16412fa1a93b8e7c1d6f27ba	DEU
+b8bbe839159efb7450db12a9e95824f8	CZE
+2897e31bd4ed0f01c23e3790a1cb9c69	DEU
 0a0cd16c0edb6be739db32c730a30487	DEU
 745a02903f2a8e15f6bb833830d064e6	DEU
 3286eab31d1e862cbea656da176112f0	DEU
@@ -6407,6 +6411,9 @@ d0dc5a2eab283511301b75090afe11ab	d79e9cdbcd96291c349e74f376301b76
 79a48cfefcddde087e3d512f3317cc51	9d6c06a9b4b02048fbafbc78ca2792ea
 075fc9513f6a767e8fae1ad48d993c95	9d6c06a9b4b02048fbafbc78ca2792ea
 cf57228b16412fa1a93b8e7c1d6f27ba	9d6c06a9b4b02048fbafbc78ca2792ea
+031d6cc33621c51283322daf69e799f5	f4875dcec2b3c5c4818bac8f58ba2061
+b8bbe839159efb7450db12a9e95824f8	f4875dcec2b3c5c4818bac8f58ba2061
+2897e31bd4ed0f01c23e3790a1cb9c69	f4875dcec2b3c5c4818bac8f58ba2061
 \.
 
 
@@ -8633,6 +8640,7 @@ de405e9740fbf6c3b48a5579eae81e02	93cf908c24c1663d03d67facc359acc2
 79a48cfefcddde087e3d512f3317cc51	a94bc9e378c8007c95406059d09bb4f3
 075fc9513f6a767e8fae1ad48d993c95	2db87892408abd4d82eb39b78c50c27b
 cf57228b16412fa1a93b8e7c1d6f27ba	cc1f5998f5537db85d2397094192f581
+b8bbe839159efb7450db12a9e95824f8	b54875674f7d2d5be9737b0d4c021a21
 \.
 
 
@@ -9000,6 +9008,7 @@ c12743740482314a43f515a8a5d6ccf1	From the South of Hell European Tour 2026	2026-
 c0ad225ce1e4b634b92c0501caedd366	A Day at the Beach Open Air	2026-07-11	8edfaa1884ddd9e289e61aea465d6077	0	15.0	2	\N	f	\N
 727b3b0fe3ed0947656f3c3c9a3bcbc3	Back to the Old School Tour 2026	2026-07-16	f3a90318abb3e16166d96055fd6f9096	0	25.30	2	\N	f	\N
 88663264467e2cd08613041c8d3284bc	Morbide Klänge VII	2026-07-25	60a813acedaeaedc4325cdc636dbcb72	0	20.0	2	\N	f	\N
+f4875dcec2b3c5c4818bac8f58ba2061	When Death Comes from avobe Tour	2026-10-21	0280c9c3b98763f5a8d2ce7e97ce1b05	0	15.0	2	\N	f	\N
 d1689d0949859abef94606b494e74f08	Deicide - Live 2026	2026-08-11	e248bb7c1164a44fa358593e28769a23	0	39.7	2	\N	f	\N
 211345ec592e0f5b5d131040d29847c2	European Summer Tour 2026	2026-08-12	588671317bf1864e5a95445ec51aac65	0	43.0	2	\N	f	\N
 4d8ee2ccf5245c3a3c2de724849e0687	Damned Days 2025	2025-07-11	05be609ce9831967baa4f12664dc4d73	1	0.0	2	\N	t	Damned Days
@@ -9508,5 +9517,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 4LQUL3srfLfgNFl4fxzJJ1lFdaYVikKdSw81HbbFGev7PDmRLesJTXpeYRyFrDd
+\unrestrict 8oAQVqXghFxObK7j2fxAiVHBwzXKkdMytUWvyJiGksIE1IOQcG0dvmggGfZ7Trj
 
