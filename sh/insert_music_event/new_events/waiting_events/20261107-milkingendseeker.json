@@ -1,0 +1,25 @@
+{
+  "event": {
+    "name": "The Goathseeker Tour",
+    "date": "2026-11-07",
+    "placeName": "Mörlenbach (LIVE MUSIC HALL Weiher)",
+    "persons": 2,
+    "price": 34.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Milking the Goatmachine",
+      "isNew": false
+    },
+    {
+      "name": "Endseeker",
+      "isNew": false
+    },
+    {
+      "name": "Acrid Death",
+      "isNew": false
+    }
+  ]
+}

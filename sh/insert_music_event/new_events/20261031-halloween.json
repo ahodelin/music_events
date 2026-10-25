@@ -1,0 +1,25 @@
+{
+  "event": {
+    "name": "Extreme Metal Invasion - Halloween Edition 2026", 
+    "date": "2026-10-31",
+    "placeName": "Mainz (M8 im Haus der Jugend)",
+    "persons": 2,
+    "price": 13.32,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Gomorrha",
+      "isNew": false
+    },
+    {
+      "name": "Apallic Decay",
+      "isNew": false
+    },
+    {
+      "name": "Demorphed",
+      "isNew": false
+    }
+  ]
+}
