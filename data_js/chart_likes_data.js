@@ -1,1 +1,1 @@
-const musicData_ChartLikes = [{"likes": "y", "band_count": 1092, "preference": "Ja"}, {"likes": "m", "band_count": 216, "preference": "Neutral"}, {"likes": "n", "band_count": 74, "preference": "Nein"}];
+const musicData_ChartLikes = [{"likes": "y", "band_count": 1096, "preference": "Ja"}, {"likes": "m", "band_count": 219, "preference": "Neutral"}, {"likes": "n", "band_count": 76, "preference": "Nein"}];
