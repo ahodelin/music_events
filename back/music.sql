@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Nz2dlcEJ0gI6pwrW8SssRnUGEaSRiG2ROwGth4F8GlO1mxy8tNo6n09bO34NpM6
+\restrict BycQ82CFvHdYDUREPJHclKafWwjy3wZBA8VALfXPLlJRi5GS2iEZVNDR2hlMNLH
 
 -- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
@@ -6449,6 +6449,9 @@ a0d3b444bd04cd165b4e076c9fc18bee	362690529e69ffd8db00e8e9f05f3ab2
 1e71013b49bbd3b2aaa276623203453f	362690529e69ffd8db00e8e9f05f3ab2
 f68e5e7b745ade835ef3029794b4b0b2	362690529e69ffd8db00e8e9f05f3ab2
 a7111b594249d6a038281deb74ef0d04	362690529e69ffd8db00e8e9f05f3ab2
+c3ce3cf87341cea762a1fb5d26d7d361	10deefe4286395590988ab5e2116805e
+e84900ed85812327945c9e72f173f8cc	10deefe4286395590988ab5e2116805e
+ab3ca496cbc01a5a9ed650c4d0e26168	10deefe4286395590988ab5e2116805e
 \.
 
 
@@ -9079,6 +9082,7 @@ c4f0245bd0c24fbc9115e3facfc14c33	Break Out Open Air 2026	2026-09-03	5047e616d487
 3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	t	Boarstream Open Air
 3008de96157b89b36c6062fbdee977ab	Party San Open Air 2026	2026-08-06	b27e07993299ee0b2ecd26dabd77eaf8	2	150.0	3	\N	t	Party San Open Air
 362690529e69ffd8db00e8e9f05f3ab2	Braincrusher Nuclear Winter Festival 2026	2026-10-23	568db232427a827c11f56b123ef95fdb	1	140.0	2	\N	f	\N
+10deefe4286395590988ab5e2116805e	Extreme Metal Invasion - Halloween Edition 2026	2026-10-31	a91bcaf7db7d174ee2966d9c293fd575	0	13.32	2	\N	f	\N
 \.
 
 
@@ -9568,5 +9572,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Nz2dlcEJ0gI6pwrW8SssRnUGEaSRiG2ROwGth4F8GlO1mxy8tNo6n09bO34NpM6
+\unrestrict BycQ82CFvHdYDUREPJHclKafWwjy3wZBA8VALfXPLlJRi5GS2iEZVNDR2hlMNLH
 
