@@ -1,0 +1,39 @@
+{
+  "event": {
+    "name": "Horresque Chasms III Release Show",
+    "date": "2026-11-14",
+    "placeName": "Wiesbaden (Kreativfabrik)",
+    "persons": 2,
+    "price": 20.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Rană",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal", "Post-Metal", "Crust Punk"],
+      "note": null
+    },
+    {
+      "name": "Wandar",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Black Metal"],
+      "note": null
+    },
+    {
+      "name": "Horresque",
+      "isNew": false
+    },
+    {
+      "name": "Noose",
+      "isNew": false
+    }
+  ]
+}

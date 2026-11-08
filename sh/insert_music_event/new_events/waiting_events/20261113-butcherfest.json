@@ -1,0 +1,34 @@
+{
+  "event": {
+    "name": "Butcher Fest XII",
+    "date": "2026-11-13",
+    "placeName": "Troisdorf (Jugendkulturcafé e.V. Troisdorf)",
+    "persons": 2,
+    "price": 19.0,
+    "duration": 0,
+    "note": null
+  },
+  "bands": [
+    {
+      "name": "Acranius",
+      "isNew": false
+    },
+    {
+      "name": "Kanine",
+      "isNew": false
+    },
+    {
+      "name": "Gutrectomy",
+      "isNew": false
+    },
+    {
+      "name": "Noose",
+      "isNew": true,
+      "likes": "",
+      "active": true,
+      "countryIds": ["DEU"],
+      "genres": ["Death Metal"],
+      "note": null
+    }
+  ]
+}

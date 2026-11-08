@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict BycQ82CFvHdYDUREPJHclKafWwjy3wZBA8VALfXPLlJRi5GS2iEZVNDR2hlMNLH
+\restrict WnRelb3TXQEQgL4hmROLq9a0sCDzvk1B9dBcgqJCFfXhFNfHI40prp33KJQJSRA
 
 -- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
@@ -6452,6 +6452,9 @@ a7111b594249d6a038281deb74ef0d04	362690529e69ffd8db00e8e9f05f3ab2
 c3ce3cf87341cea762a1fb5d26d7d361	10deefe4286395590988ab5e2116805e
 e84900ed85812327945c9e72f173f8cc	10deefe4286395590988ab5e2116805e
 ab3ca496cbc01a5a9ed650c4d0e26168	10deefe4286395590988ab5e2116805e
+cd0bc2c8738b2fef2d78d197223b17d5	31e0ef732b275789134199fae8937284
+e7a227585002db9fee2f0ed56ee5a59f	31e0ef732b275789134199fae8937284
+b37f157dbf4d80c21a0df31df0363b59	31e0ef732b275789134199fae8937284
 \.
 
 
@@ -8921,7 +8924,6 @@ a8a45074ca24548875765e3388541cb5	The Unholy Trinity Tour 2025	2025-04-16	5886713
 39e647252a3660f128e1db434425a6b5	Landkrieg Tour 2025	2025-04-19	0280c9c3b98763f5a8d2ce7e97ce1b05	0	19.47	2	\N	f	\N
 6fdd99079a021b528ade2eeb7bccf557	Beyond the Black Tour 2025	2025-04-23	f3a90318abb3e16166d96055fd6f9096	0	38.40	2	\N	f	\N
 9580f7346eefe8ceb1c81a9023f1d43a	Summers's here... 2025	2025-07-04	8edfaa1884ddd9e289e61aea465d6077	0	10.0	2	\N	f	\N
-e4797c9ad639098b7e8146199220807f	Butcher Fest IX	2025-07-25	bb70894bd8b00178cf29116a060ea1ca	0	13.0	2	\N	f	\N
 876f7642806d01481e51632141b1f89c	Steel Rust and Disgust - European Tour 2025	2025-07-27	f3a90318abb3e16166d96055fd6f9096	0	32.30	2	\N	f	\N
 b39fbc8a057b87e9355e3e2846a93c7a	Europe/UK Summer 2025	2025-08-04	588671317bf1864e5a95445ec51aac65	0	23.85	2	\N	f	\N
 077973565f39e9fab2bb87e1660b6261	In the other Side European Summer Tour 2025	2025-08-12	eca8fc96e027328005753be360587de2	0	35.0	2	\N	f	\N
@@ -8938,6 +8940,7 @@ f9b4f5ba6cb5f7721ce1e55d68a918b8	Hell over Aschaffenburg - 2024	2024-11-23	b13f7
 965b7e5dbed14563dd9ffce3a3e76dcb	Morbide Klänge V	2025-05-10	a91bcaf7db7d174ee2966d9c293fd575	0	20.0	2	\N	f	Morbide Klänge
 0d833b14e1535c06601ef6a143deec65	Pälzer Hell Version 6.66	2025-04-12	b5c6ef76dd3784cc976d507c890973c3	0	40.0	2	\N	f	Pälzer Hell
 57a334acb665ebc52057791d107149f4	57. Wernigeröder Rathausfest	2023-06-16	a7f15733dd688dee75571597f8636ba7	0	0	2	\N	f	Wernigeröder Rathausfest
+e4797c9ad639098b7e8146199220807f	Butcher Fest IX	2025-07-25	bb70894bd8b00178cf29116a060ea1ca	0	13.0	2	\N	f	Butcher Fest
 f8bb8ae77ca110cf00ebb5af1d495203	Heavy metal gegen Mikroplastik	2019-10-19	17648f3308a5acb119d9aee1b5eafceb	0	10.0	2	\N	f	\N
 759144a13dee6936c81d0fce2eaaba06	Jomsviking European Tour 2016	2016-11-17	76f9a958c2ebbd2f42456523d749fb5e	0	40.40	2	\N	f	\N
 6c7cfe3af936c1590949350fc7d912d3	Fintroll + Metsatöll + Suotana Tour 2024	2024-04-22	eca8fc96e027328005753be360587de2	0	34.00	2	\N	f	\N
@@ -9047,7 +9050,6 @@ add0fa9da3d7d94a1fe1653ea8128e0b	The Blackest Path III	2025-10-11	a91bcaf7db7d17
 7bb9f9e964e27aa2ab8246519417b6c7	Triangle 10th Anniversary	2026-05-09	f36d12db5b507669b5d9190be7d05155	0	40.105	2	\N	f	\N
 459008fdb7ba68bcc0352da411590d0b	Neue Welt - Alte Sünden	2026-05-14	588671317bf1864e5a95445ec51aac65	0	27.15	2	\N	f	\N
 6439e93ac57a8784706d3155d0fe651f	Dortmund Deathfest 2023	2023-08-04	9be6de3bc5073483dcbbcbc1b40af4d8	1	79	2	\N	t	Dortmund Deathfest
-d671c0963a6b1e1501d855c51589d00d	Hell over Aschaffenburg - 2026	2026-09-25	10c159c6d0e7cf04eae6696250d0b8bc	1	79.0	2	\N	f	\N
 e8f28681ca84b347e2849c02064b7b97	"Imperium Delirium" European Tour 2026	2026-09-27	051fa36efd99a2ae24d56b198e7b1992	0	46.5	2	\N	f	\N
 01521be29892559aed9f7e3bd584334c	Kirchengeballer Vol. III	2026-10-03	638a858e2c5c28f1ce98341f90c106c9	0	0.0	2	\N	f	\N
 748e792d3c8d1c84e8dddd5efcfa7616	Huldler - Europe Summer 2026	2026-06-11	588671317bf1864e5a95445ec51aac65	0	29.95	2	\N	f	\N
@@ -9060,7 +9062,6 @@ d79e9cdbcd96291c349e74f376301b76	Those who came from Heaven Tour 2026	2026-10-16
 c12743740482314a43f515a8a5d6ccf1	From the South of Hell European Tour 2026	2026-07-02	0280c9c3b98763f5a8d2ce7e97ce1b05	0	18.00	2	\N	f	\N
 c0ad225ce1e4b634b92c0501caedd366	A Day at the Beach Open Air	2026-07-11	8edfaa1884ddd9e289e61aea465d6077	0	15.0	2	\N	f	\N
 727b3b0fe3ed0947656f3c3c9a3bcbc3	Back to the Old School Tour 2026	2026-07-16	f3a90318abb3e16166d96055fd6f9096	0	25.30	2	\N	f	\N
-88663264467e2cd08613041c8d3284bc	Morbide Klänge VII	2026-07-25	60a813acedaeaedc4325cdc636dbcb72	0	20.0	2	\N	f	\N
 f4875dcec2b3c5c4818bac8f58ba2061	When Death Comes from avobe Tour	2026-10-21	0280c9c3b98763f5a8d2ce7e97ce1b05	0	15.0	2	\N	f	\N
 d1689d0949859abef94606b494e74f08	Deicide - Live 2026	2026-08-11	e248bb7c1164a44fa358593e28769a23	0	39.7	2	\N	f	\N
 211345ec592e0f5b5d131040d29847c2	European Summer Tour 2026	2026-08-12	588671317bf1864e5a95445ec51aac65	0	43.0	2	\N	f	\N
@@ -9081,8 +9082,11 @@ c4f0245bd0c24fbc9115e3facfc14c33	Break Out Open Air 2026	2026-09-03	5047e616d487
 7d48036f766afbb9f6b668cd251ef0dc	Mahlstrom Open Air 2026	2026-06-12	b77734e4928596fac1db05cab7b39710	1	100.0	2	\N	t	Mahlstrom Open Air
 3ca7e80b84be941d877fd945f94dde2a	Boarstream Open Air 2026	2026-06-05	cf1c12d42f59db3667fc162556aab169	1	79.50	2	\N	t	Boarstream Open Air
 3008de96157b89b36c6062fbdee977ab	Party San Open Air 2026	2026-08-06	b27e07993299ee0b2ecd26dabd77eaf8	2	150.0	3	\N	t	Party San Open Air
-362690529e69ffd8db00e8e9f05f3ab2	Braincrusher Nuclear Winter Festival 2026	2026-10-23	568db232427a827c11f56b123ef95fdb	1	140.0	2	\N	f	\N
 10deefe4286395590988ab5e2116805e	Extreme Metal Invasion - Halloween Edition 2026	2026-10-31	a91bcaf7db7d174ee2966d9c293fd575	0	13.32	2	\N	f	\N
+362690529e69ffd8db00e8e9f05f3ab2	Braincrusher Nuclear Winter Festival 2026	2026-10-23	568db232427a827c11f56b123ef95fdb	1	140.0	2	\N	t	Braincrusher Nuclear Winter Festival
+31e0ef732b275789134199fae8937284	The Goathseeker Tour	2026-11-07	09ddc8804dd5908fef3c8c0c474ad238	0	34.0	2	\N	f	\N
+d671c0963a6b1e1501d855c51589d00d	Hell over Aschaffenburg - 2026	2026-09-25	10c159c6d0e7cf04eae6696250d0b8bc	1	79.0	2	\N	t	Hell over Aschaffenburg
+88663264467e2cd08613041c8d3284bc	Morbide Klänge VII	2026-07-25	60a813acedaeaedc4325cdc636dbcb72	0	20.0	2	\N	f	Morbide Klänge
 \.
 
 
@@ -9572,5 +9576,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict BycQ82CFvHdYDUREPJHclKafWwjy3wZBA8VALfXPLlJRi5GS2iEZVNDR2hlMNLH
+\unrestrict WnRelb3TXQEQgL4hmROLq9a0sCDzvk1B9dBcgqJCFfXhFNfHI40prp33KJQJSRA
 
