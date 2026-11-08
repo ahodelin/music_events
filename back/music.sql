@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict WnRelb3TXQEQgL4hmROLq9a0sCDzvk1B9dBcgqJCFfXhFNfHI40prp33KJQJSRA
+\restrict pgopUVOLcejg7OADSdmSdNynFq7TGsYgBpTNPOUt5Y1WrSBCiPnednW9IGxN00g
 
 -- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
@@ -994,6 +994,19 @@ CREATE VIEW music.v_festivals AS
    FROM music.events e
   WHERE is_festival
   ORDER BY date_event;
+
+
+--
+-- Name: v_festivals_years; Type: VIEW; Schema: music; Owner: -
+--
+
+CREATE VIEW music.v_festivals_years AS
+ SELECT date_part('year'::text, date_event) AS years,
+    count(id_event) AS events
+   FROM music.events
+  WHERE (duration > 0)
+  GROUP BY (date_part('year'::text, date_event))
+  ORDER BY (date_part('year'::text, date_event));
 
 
 --
@@ -9576,5 +9589,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict WnRelb3TXQEQgL4hmROLq9a0sCDzvk1B9dBcgqJCFfXhFNfHI40prp33KJQJSRA
+\unrestrict pgopUVOLcejg7OADSdmSdNynFq7TGsYgBpTNPOUt5Y1WrSBCiPnednW9IGxN00g
 
