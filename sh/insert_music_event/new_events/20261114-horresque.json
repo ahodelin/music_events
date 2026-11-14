@@ -10,15 +10,6 @@
   },
   "bands": [
     {
-      "name": "Rană",
-      "isNew": true,
-      "likes": "",
-      "active": true,
-      "countryIds": ["DEU"],
-      "genres": ["Black Metal", "Post-Metal", "Crust Punk"],
-      "note": null
-    },
-    {
       "name": "Wandar",
       "isNew": true,
       "likes": "",
