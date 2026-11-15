@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict N7SPUVyGL4p1OsQ585FawUnpni8nWvSZ3zo0KMnru8TkxYkAiUHrms4PFdGsepZ
+\restrict bpRbBw4xhofnQqyfM24VBU2tCCZsLhdSgJJGwBNCa1j9conxw3qZ5aNEdqLuTnu
 
 -- Dumped from database version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
 -- Dumped by pg_dump version 18.6 (Ubuntu 18.6-1.pgdg24.04+2)
@@ -2759,6 +2759,7 @@ a987285de0bf8e2a36b4a83ba61ae9de	Graven	y	t	\N
 b85de440ea4f340a0121c824344690b8	Archspire	y	t	Técnicamente buenos pero con muchas mamadas en vivo
 c76d1591e74fd4b0462e4442cf378678	Crown Magnetar	y	t	\N
 2ac92a0cf683078c891078b2606f585a	Noose	y	t	\N
+5627523a95ed4ba13a2704cbd01d2981	Wandar	y	t	\N
 40c1ba18fe542118d9b970837a3f295d	Thy Art is Murder	y	t	\N
 539ae25607eaa1e605a49083f52add30	Sun Eater	y	t	\N
 1ed92a5cfb7d5e3709c087a306cf6501	Fit for an Autopsy	y	t	\N
@@ -4192,6 +4193,7 @@ a987285de0bf8e2a36b4a83ba61ae9de	DEU
 b85de440ea4f340a0121c824344690b8	CAN
 c76d1591e74fd4b0462e4442cf378678	USA
 2ac92a0cf683078c891078b2606f585a	DEU
+5627523a95ed4ba13a2704cbd01d2981	DEU
 0a0cd16c0edb6be739db32c730a30487	DEU
 745a02903f2a8e15f6bb833830d064e6	DEU
 3286eab31d1e862cbea656da176112f0	DEU
@@ -6482,6 +6484,9 @@ dd3e531c469005b17115dbf611b01c88	fa32840c7df40feaac6f3948d1f21fdf
 29891bf2e4eff9763aef15dc862c373f	fa32840c7df40feaac6f3948d1f21fdf
 d0e551d6887e0657952b3c5beb7fed74	fa32840c7df40feaac6f3948d1f21fdf
 2ac92a0cf683078c891078b2606f585a	fa32840c7df40feaac6f3948d1f21fdf
+5627523a95ed4ba13a2704cbd01d2981	6dc81e2abcdbce4caf20632e8123608b
+b02ba5a5e65487122c2c1c67351c3ea0	6dc81e2abcdbce4caf20632e8123608b
+2ac92a0cf683078c891078b2606f585a	6dc81e2abcdbce4caf20632e8123608b
 \.
 
 
@@ -8728,6 +8733,7 @@ b85de440ea4f340a0121c824344690b8	0c5544f60e058b8cbf571044aaa6115f
 c76d1591e74fd4b0462e4442cf378678	8bb92c3b9b1b949524aac3b578a052b6
 c76d1591e74fd4b0462e4442cf378678	9e9cce9be25a7f0972590e519d967b9c
 2ac92a0cf683078c891078b2606f585a	3593526a5f465ed766bafb4fb45748a2
+5627523a95ed4ba13a2704cbd01d2981	2db87892408abd4d82eb39b78c50c27b
 \.
 
 
@@ -9120,6 +9126,7 @@ d671c0963a6b1e1501d855c51589d00d	Hell over Aschaffenburg - 2026	2026-09-25	10c15
 88663264467e2cd08613041c8d3284bc	Morbide Klänge VII	2026-07-25	60a813acedaeaedc4325cdc636dbcb72	0	20.0	2	\N	f	Morbide Klänge
 bd9cf13626fb2b51e085c7d81fdb8c2f	European Vacation Tour 2026	2026-11-11	051fa36efd99a2ae24d56b198e7b1992	0	41.0	2	\N	f	\N
 fa32840c7df40feaac6f3948d1f21fdf	Butcher Fest XII	2026-11-13	bb70894bd8b00178cf29116a060ea1ca	0	19.0	2	\N	f	\N
+6dc81e2abcdbce4caf20632e8123608b	The Dread Unvelied	2026-11-14	60a813acedaeaedc4325cdc636dbcb72	0	20.0	2	\N	f	\N
 \.
 
 
@@ -9609,5 +9616,5 @@ REFRESH MATERIALIZED VIEW music.mv_musical_info;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict N7SPUVyGL4p1OsQ585FawUnpni8nWvSZ3zo0KMnru8TkxYkAiUHrms4PFdGsepZ
+\unrestrict bpRbBw4xhofnQqyfM24VBU2tCCZsLhdSgJJGwBNCa1j9conxw3qZ5aNEdqLuTnu
 
